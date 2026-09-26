@@ -1,0 +1,8 @@
+__pycache__/
+*.pyc
+work/
+out/
+*.mp4
+*.wav
+*.part
+.venv/

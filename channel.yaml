@@ -1,0 +1,66 @@
+# ═══════════════════════════════════════════════════════════════════
+#  MOONBERRY TALES — the Forever Factory configuration
+#  One channel. One machine. Runs daily on GitHub Actions, forever.
+#  External services touched: YouTube Data API v3 (upload) + GitHub.
+#  Everything else (stories, art, voice, music) is generated offline.
+# ═══════════════════════════════════════════════════════════════════
+
+channel:
+  display_name: "Moonberry Tales"
+  handle: "@MoonberryTales"
+  niche: bedtime                    # original calm bedtime stories
+  audience: "children ages 5-8 (parents choose the video)"
+  promise: "Gentle 10-minute original bedtime tales, one calm voice, no scary parts."
+  description: >-
+    Original calm bedtime stories for children. New gentle tales every day,
+    made to help little listeners drift off to sleep.
+
+schedule:                           # publishAt slots (Africa/Cairo)
+  timezone: "Africa/Cairo"
+  long_slots:  ["19:30", "21:00"]   # bedtime peaks for full stories
+  short_slots: ["13:00", "17:30", "20:30"]
+
+daily:                              # what the factory produces each day
+  long_videos: 2                    # ~11-minute original stories
+  shorts: 3                         # auto-cut from the longs
+  quota_budget: 10000               # YouTube daily units (default)
+  upload_cost_per_video: 1600       # videos.insert cost
+
+story:
+  target_words: 1500                # ~11 minutes at bedtime pace
+  scenes: 16                        # narrative beats
+  safety_max_attempts: 6            # audit gate regeneration attempts
+
+voice:
+  model: "assets/voice/en_US-lessac-medium.onnx"
+  length_scale: 1.7                 # ≈130 wpm — guide's bedtime pace
+  sentence_pause: 0.45              # seconds between sentences
+  paragraph_pause: 0.85             # seconds between scenes
+  sample_rate: 22050
+
+video:
+  width: 1920
+  height: 1080
+  fps: 30
+  overscan: 1.25                    # Ken Burns headroom
+  crf: 21
+  preset: veryfast
+  title_card_seconds: 6
+  end_card_seconds: 12
+
+shorts:
+  width: 1080
+  height: 1920
+  max_seconds: 57
+  count: 3
+
+music:
+  volume_db: -21                    # bed level under the narration
+  sample_rate: 44100
+
+youtube:
+  category_id: "24"                 # Entertainment
+  default_language: "en"
+  made_for_kids: true               # child-directed bedtime content
+  synthetic_media_disclosure: true  # honest AI-assisted disclosure
+  privacy: "public"                 # final visibility (publishAt schedules it)
