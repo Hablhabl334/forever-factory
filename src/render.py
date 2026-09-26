@@ -324,47 +324,66 @@ def render_episode(story: dict, narration: dict, work_dir: Path,
 def _build_master_audio(work_dir: Path, narration: dict, title_s: float,
                         end_s: float, total: float, seed: int,
                         music_db: float) -> Path:
-    """Mix narration + music into master.wav (44.1 kHz stereo int16)."""
-    from . import music as music_mod
+    """Mix narration + music into master.wav (44.1 kHz stereo int16).
+
+    Memory-lean: mono float32 buffers, block-wise final write, in-place
+    ops — a 13-minute episode mixes in well under 1 GB.
+    """
+    import wave
+
+    from . import music as M
     from .tts import read_wav, SR as NARR_SR
 
     narr = read_wav(work_dir / "narration.wav")
-    narr_np = np.frombuffer(narr.tobytes(), dtype=np.int16).astype(np.float64) / 32768.0
-    # resample 22050 -> 44100 (exactly 2x)
-    narr_44 = np.repeat(narr_np, 2)
+    narr_np = np.frombuffer(narr.tobytes(), dtype=np.int16).astype(np.float32) / 32768.0
+    narr_44 = np.repeat(narr_np, 2)  # 22050 -> 44100, exactly 2x
 
-    from . import music as M
+    n = int(total * M.SR)
     music = M.synth_music(seed, total)
 
-    n = music.shape[0]
-    voice = np.zeros(n)
+    voice = np.zeros(n, dtype=np.float32)
     start_i = int(title_s * M.SR)
     end_i = min(n, start_i + len(narr_44))
     voice[start_i:end_i] = narr_44[: end_i - start_i]
-    voice = np.stack([voice, voice], axis=1)
 
     # ducking envelope: full music in title/end, music_db under narration
-    gain_loud = 0.9
-    gain_quiet = 10 ** (music_db / 20)  # e.g. -21 dB -> 0.089
-    env = np.full(n, gain_quiet)
+    gain_loud = np.float32(0.9)
+    gain_quiet = np.float32(10 ** (music_db / 20))
+    env = np.full(n, gain_quiet, dtype=np.float32)
     voice_end = start_i + int(narration["total"] * M.SR)
     env[:start_i] = gain_loud
-    env[voice_end:] = gain_loud
-    # 1.5 s smooth ramps
+    if voice_end <= n:
+        env[voice_end:] = gain_loud
     ramp = int(1.5 * M.SR)
-    for k in range(ramp):
-        if k < n:
-            env[start_i - ramp + k] = gain_loud + (gain_quiet - gain_loud) * k / ramp if start_i - ramp + k >= 0 else gain_quiet
-            if voice_end + k < n:
-                env[voice_end + k] = gain_quiet + (gain_loud - gain_quiet) * k / ramp
+    i0, i1 = max(0, start_i - ramp), start_i
+    env[i0:i1] = np.linspace(gain_loud, gain_quiet, i1 - i0, dtype=np.float32)
+    j0, j1 = voice_end, min(n, voice_end + ramp)
+    env[j0:j1] = np.linspace(gain_quiet, gain_loud, j1 - j0, dtype=np.float32)
 
-    stereo = voice + music * env[:, None]
-    peak = np.max(np.abs(stereo)) or 1.0
-    if peak > 0.89:
-        stereo = stereo / peak * 0.89
+    # in-place mix on the music buffer
+    music *= env
+    music += voice
 
-    pcm = (np.clip(stereo, -1, 1) * 32767).astype(np.int16)
-    import wave
+    # peak normalize (block-wise abs-max to avoid a giant temp)
+    peak = np.float32(0.0)
+    for k in range(0, n, 1_000_000):
+        peak = max(peak, np.max(np.abs(music[k:k + 1_000_000])))
+    if peak > np.float32(0.89):
+        music *= np.float32(0.89) / peak
+
+    # stereo write with a 12 ms delayed right channel for warmth,
+    # block-wise to keep memory flat
+    delay = int(0.012 * M.SR)
+    pcm = np.empty((n, 2), dtype=np.int16)
+    for k in range(0, n, 1_000_000):
+        blk = music[k:k + 1_000_000]
+        left = (blk * 32767).astype(np.int16)
+        rsrc = music[max(0, k - delay): k + 1_000_000 - delay] if k >= delay else \
+            np.concatenate([np.zeros(min(delay, 1_000_000), dtype=np.float32), blk[:max(0, 1_000_000 - delay)]])
+        right = (rsrc[: len(blk)] * 32767).astype(np.int16)
+        pcm[k:k + len(blk), 0] = left
+        pcm[k:k + len(blk), 1] = right
+
     with wave.open(str(work_dir / "master.wav"), "wb") as w:
         w.setnchannels(2)
         w.setsampwidth(2)

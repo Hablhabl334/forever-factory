@@ -103,6 +103,8 @@ def draw_character(draw, base: str, cx: float, cy: float, size: float,
 # ── individual animals ──────────────────────────────────────────────
 
 def _eyes(draw, x, y, r, line, sleep=False):
+    r = max(1, int(r))
+    x, y = int(x), int(y)
     if sleep:
         draw.arc((x - r, y - r // 2, x + r, y + r), 200, 340, fill=line, width=max(2, r // 3))
     else:

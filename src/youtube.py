@@ -1,0 +1,242 @@
+"""YouTube upload — hand-rolled OAuth2 + resumable upload over urllib.
+
+Zero Google client libraries: nothing to rot, nothing to version-pin,
+nothing to break for a decade. The only credentials are three GitHub
+secrets (YT_CLIENT_ID, YT_CLIENT_SECRET, YT_REFRESH_TOKEN).
+
+Every upload:
+  * Made-for-Kids designation (bedtime content is child-directed)
+  * honest AI-assistance disclosure (containsSyntheticMedia, with a
+    graceful retry if the API ever drops the field)
+  * scheduled publish at Cairo peak bedtime slots via publishAt
+  * quota-aware (1,600 + 50 units per video, ledgered in state)
+"""
+from __future__ import annotations
+
+import json
+import os
+import time
+import urllib.error
+import urllib.request
+from datetime import datetime, timedelta
+from pathlib import Path
+from urllib.parse import urlencode
+
+from . import ledger
+from .config import cfg
+
+TOKEN_URL = "https://oauth2.googleapis.com/token"
+UPLOAD_URL = "https://www.googleapis.com/upload/youtube/v3/videos"
+API_BASE = "https://www.googleapis.com/youtube/v3"
+CHUNK = 8 * 1024 * 1024  # 8 MB resumable chunks
+UPLOAD_UNITS = 1600
+THUMB_UNITS = 50
+
+
+class AuthError(RuntimeError):
+    pass
+
+
+def _creds() -> dict:
+    cid = os.environ.get("YT_CLIENT_ID", "")
+    csec = os.environ.get("YT_CLIENT_SECRET", "")
+    refresh = os.environ.get("YT_REFRESH_TOKEN", "")
+    if not (cid and csec and refresh):
+        raise AuthError(
+            "YouTube credentials missing. Set YT_CLIENT_ID, YT_CLIENT_SECRET, "
+            "YT_REFRESH_TOKEN (GitHub repo secrets). See RUNBOOK.md."
+        )
+    return {"client_id": cid, "client_secret": csec, "refresh_token": refresh}
+
+
+def _post(url: str, data: bytes, headers: dict) -> tuple[int, dict, bytes]:
+    req = urllib.request.Request(url, data=data, headers=headers, method="POST")
+    try:
+        with urllib.request.urlopen(req, timeout=60) as resp:
+            return resp.status, dict(resp.headers), resp.read()
+    except urllib.error.HTTPError as e:
+        return e.code, dict(e.headers or {}), e.read()
+
+
+def get_access_token() -> str:
+    c = _creds()
+    body = urlencode({
+        "client_id": c["client_id"],
+        "client_secret": c["client_secret"],
+        "refresh_token": c["refresh_token"],
+        "grant_type": "refresh_token",
+    }).encode()
+    status, _, raw = _post(TOKEN_URL, body, {"Content-Type": "application/x-www-form-urlencoded"})
+    if status != 200:
+        raise AuthError(f"token refresh failed ({status}): {raw.decode()[:400]}")
+    return json.loads(raw)["access_token"]
+
+
+def verify_credentials() -> dict:
+    """Sanity check: refresh a token and read our own channel."""
+    token = get_access_token()
+    req = urllib.request.Request(
+        f"{API_BASE}/channels?part=snippet&mine=true",
+        headers={"Authorization": f"Bearer {token}"},
+    )
+    with urllib.request.urlopen(req, timeout=30) as resp:
+        data = json.loads(resp.read())
+    items = data.get("items", [])
+    if not items:
+        return {"ok": False, "error": "token works but no channel found"}
+    ch = items[0]["snippet"]
+    return {"ok": True, "channel": ch.get("title"), "channel_id": items[0]["id"]}
+
+
+# ── scheduling ───────────────────────────────────────────────────────
+
+def next_slot(kind: str, used: set[str] | None = None) -> str:
+    """Next publishAt (ISO) in the configured timezone, skipping used slots."""
+    from zoneinfo import ZoneInfo
+    tz = ZoneInfo(cfg()["schedule"]["timezone"])
+    slots = cfg()["schedule"][f"{kind}_slots"]
+    used = used or set()
+    now = datetime.now(tz)
+    for day_offset in (0, 1, 2):
+        base = (now + timedelta(days=day_offset)).date()
+        for hhmm in slots:
+            hh, mm = map(int, hhmm.split(":"))
+            slot_dt = datetime(base.year, base.month, base.day, hh, mm, tzinfo=tz)
+            if slot_dt > now + timedelta(minutes=25) and slot_dt.isoformat() not in used:
+                return slot_dt.isoformat()
+    return (now + timedelta(hours=6)).isoformat()
+
+
+# ── resumable upload ─────────────────────────────────────────────────
+
+def _upload_video(token: str, filepath: Path, meta: dict, status: dict,
+                  max_retries: int = 4) -> str:
+    body = {"snippet": meta, "status": status}
+    init_headers = {
+        "Authorization": f"Bearer {token}",
+        "Content-Type": "application/json",
+        "X-Upload-Content-Length": str(filepath.stat().st_size),
+    }
+    qs = urlencode({"uploadType": "resumable", "part": "snippet,status"})
+    status_code, headers, raw = _post(f"{UPLOAD_URL}?{qs}",
+                                      json.dumps(body).encode(), init_headers)
+    if status_code not in (200, 201):
+        raise RuntimeError(f"upload init failed ({status_code}): {raw.decode()[:400]}")
+    location = headers.get("Location") or headers.get("location")
+    if not location:
+        raise RuntimeError("no resumable session URL returned")
+
+    size = filepath.stat().st_size
+    offset = 0
+    with open(filepath, "rb") as f:
+        while offset < size:
+            f.seek(offset)
+            block = f.read(CHUNK)
+            end = offset + len(block) - 1
+            req = urllib.request.Request(location, data=block, method="PUT", headers={
+                "Content-Length": str(len(block)),
+                "Content-Range": f"bytes {offset}-{end}/{size}",
+            })
+            try:
+                with urllib.request.urlopen(req, timeout=300) as resp:
+                    resp.read()
+                    vid = json.loads(resp.read() or b"{}").get("id")
+                    if not vid:
+                        vid = _poll_video_id(token)
+                    return vid
+            except urllib.error.HTTPError as e:
+                if e.code == 308:
+                    rng = e.headers.get("Range", "")
+                    try:
+                        offset = int(rng.split("-")[-1]) + 1
+                    except (ValueError, IndexError):
+                        offset = end + 1
+                    continue
+                raw = e.read()
+                if e.code in (500, 502, 503, 429) and max_retries:
+                    time.sleep(8 * (5 - max_retries))
+                    max_retries -= 1
+                    continue
+                raise RuntimeError(f"upload failed ({e.code}): {raw.decode()[:400]}")
+    raise RuntimeError("upload ended without completion response")
+
+
+def _poll_video_id(token: str) -> str:
+    req = urllib.request.Request(
+        f"{API_BASE}/videos?part=id&mine=true&maxResults=1",
+        headers={"Authorization": f"Bearer {token}"},
+    )
+    with urllib.request.urlopen(req, timeout=30) as resp:
+        items = json.loads(resp.read()).get("items", [])
+    return items[0]["id"] if items else ""
+
+
+def _set_thumbnail(token: str, video_id: str, thumb: Path) -> bool:
+    req = urllib.request.Request(
+        f"{API_BASE}/thumbnails/set?videoId={video_id}",
+        data=thumb.read_bytes(),
+        headers={"Authorization": f"Bearer {token}",
+                 "Content-Type": "image/png"},
+        method="POST",
+    )
+    try:
+        with urllib.request.urlopen(req, timeout=120) as resp:
+            return resp.status in (200, 201)
+    except urllib.error.HTTPError as e:
+        e.read()
+        return False
+
+
+def upload_video(filepath: Path, meta: dict, publish_at: str | None,
+                 episode_n: int, kind: str) -> str | None:
+    """Full upload flow with quota gate + ledger. Returns video id."""
+    state = ledger.load()
+    remaining = ledger.quota_remaining(state)
+    need = UPLOAD_UNITS + THUMB_UNITS
+    if remaining < need:
+        print(f"  [quota] {remaining} units left, need {need} — deferring")
+        return None
+
+    yconf = cfg()["youtube"]
+    token = get_access_token()
+
+    status = {
+        "privacyStatus": "private",
+        "madeForKids": bool(yconf.get("made_for_kids", True)),
+        "selfDeclaredMadeForKids": bool(yconf.get("made_for_kids", True)),
+    }
+    if publish_at:
+        status["privacyStatus"] = "private"
+        status["publishAt"] = publish_at
+    else:
+        status["privacyStatus"] = yconf.get("privacy", "public")
+    if yconf.get("synthetic_media_disclosure", True):
+        status["containsSyntheticMedia"] = True
+
+    meta = dict(meta)
+    meta.setdefault("categoryId", str(yconf.get("category_id", "24")))
+    meta.setdefault("defaultLanguage", yconf.get("default_language", "en"))
+
+    try:
+        video_id = _upload_video(token, filepath, meta, status)
+    except RuntimeError as e:
+        if "containsSyntheticMedia" in str(e) or "invalid" in str(e).lower():
+            status.pop("containsSyntheticMedia", None)
+            token = get_access_token()
+            video_id = _upload_video(token, filepath, meta, status)
+        else:
+            raise
+    print(f"  [youtube] uploaded {kind}: {video_id} "
+          f"(publishAt {publish_at or 'now'})")
+
+    thumb = filepath.with_name("thumbnail.png")
+    if thumb.exists():
+        if _set_thumbnail(token, video_id, thumb):
+            print("  [youtube] thumbnail set")
+        else:
+            print("  [youtube] thumbnail set failed (non-fatal)")
+
+    ledger.mark_uploaded(state, episode_n, kind, video_id, need)
+    state["stats"]["videos_published"] = state["stats"].get("videos_published", 0) + 1
+    ledger.save(state)
+    return video_id
