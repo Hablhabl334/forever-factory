@@ -25,8 +25,8 @@ class FactoryRNG:
         k = min(k, len(seq))
         return self._rng.sample(seq, k)
 
-    def below(self, n: int) -> int:
-        return self._rng.randrange(max(1, n))
+    def below(self, n) -> int:
+        return self._rng.randrange(max(1, int(n)))
 
     def chance(self, p: float) -> bool:
         return self._rng.random() < p
