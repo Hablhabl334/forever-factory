@@ -1,0 +1,17 @@
+[0;93m2026-09-27 12:12:26.213255832 [W:onnxruntime:Default, device_discovery.cc:146 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
+[2] story: Puddle and the Missing Echo (1453 words, hash 20b3eac4fa)
+[2] narration: 750s, 168 caption chunks
+[2] long video: 768s, 67.8MB
+[2] thumbnail + 2 shorts ready
+[2] DRY-RUN: would upload long at 2026-09-27T19:30:00+03:00
+[2] DRY-RUN: would upload short 1 at 2026-09-27T17:30:00+03:00
+[2] DRY-RUN: would upload short 2 at 2026-09-27T20:30:00+03:00
+[2] story: The Thimble Windmill and the Sleepy Duskhollow (1461 words, hash 4dbcfd5ae3)
+[2] narration: 790s, 172 caption chunks
+[2] long video: 808s, 69.9MB
+[2] thumbnail + 1 shorts ready
+[2] DRY-RUN: would upload long at 2026-09-27T21:00:00+03:00
+[2] DRY-RUN: would upload short 1 at 2026-09-28T13:00:00+03:00
+  ✓ episode 2: Puddle and the Missing Echo
+  ✓ episode 2: The Thimble Windmill and the Sleepy Duskhollow
+combination space: 4,970,310,669,434,880 stories — the factory never repeats
