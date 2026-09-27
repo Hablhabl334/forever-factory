@@ -38,9 +38,19 @@ itself daily and you never touch GitHub settings again.
      do not.
 6. **APIs & Services → Credentials → Create credentials →
    OAuth client ID**:
-   - Application type: **Desktop app**
+   - Application type: **Web application**
+   - Authorized JavaScript origins:
+     `https://hablhabl334.github.io`
+   - Authorized redirect URIs:
+     `https://hablhabl334.github.io/oauth/callback`
+     *(this page is already live on your website — it shows your
+     authorization code with a copy button)*
    - Create → **Download JSON** (the little download icon).
    - The JSON contains your `client_id` and `client_secret`.
+
+> NOTE: use **Web application**, not "Desktop app". Google killed the
+> old out-of-band (OOB) flow, and the callback page on your website is
+> the modern replacement — already deployed for you.
 
 ## Part 2 — Get the forever refresh token (~2 min)
 
@@ -55,7 +65,8 @@ python tools/auth.py
 1. Paste `client_id` and `client_secret` when asked.
 2. Open the printed link, sign in with the channel's Google account,
    click **Allow**.
-3. Copy the code the page shows, paste it back.
+3. You land on `hablhabl334.github.io/oauth/callback` — press
+   **Copy code** and paste it back.
 4. The tool prints your **refresh token** — a long string starting
    with `1//`.
 
