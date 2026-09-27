@@ -20,7 +20,20 @@
    "hash": "4dbcfd5ae3a11df216f608b9",
    "seed": 178181624776488,
    "date": "2026-09-27",
-   "status": "in_progress",
+   "status": "done",
+   "ids": {
+    "long": null,
+    "shorts": [],
+    "thumbnail": null
+   }
+  },
+  {
+   "n": 3,
+   "title": "The Spider and the Sleepy Clock",
+   "hash": "b07d4611e141e4ebe617dca0",
+   "seed": 234009768072309,
+   "date": "2026-09-27",
+   "status": "done",
    "ids": {
     "long": null,
     "shorts": [],
@@ -30,7 +43,8 @@
  ],
  "story_hashes": [
   "32e253bf58627da20ba0543b",
-  "4dbcfd5ae3a11df216f608b9"
+  "4dbcfd5ae3a11df216f608b9",
+  "b07d4611e141e4ebe617dca0"
  ],
  "quota": {
   "date": null,
