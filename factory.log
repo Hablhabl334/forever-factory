@@ -1,17 +1,64 @@
-[0;93m2026-09-27 12:12:26.213255832 [W:onnxruntime:Default, device_discovery.cc:146 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
-[2] story: Puddle and the Missing Echo (1453 words, hash 20b3eac4fa)
-[2] narration: 750s, 168 caption chunks
-[2] long video: 768s, 67.8MB
-[2] thumbnail + 2 shorts ready
-[2] DRY-RUN: would upload long at 2026-09-27T19:30:00+03:00
-[2] DRY-RUN: would upload short 1 at 2026-09-27T17:30:00+03:00
-[2] DRY-RUN: would upload short 2 at 2026-09-27T20:30:00+03:00
+[0;93m2026-09-27 13:33:09.400620144 [W:onnxruntime:Default, device_discovery.cc:146 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
+Traceback (most recent call last):
+  File "/home/runner/work/forever-factory/forever-factory/src/youtube.py", line 145, in _upload_video
+    vid = _poll_video_id(token)
+          ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/forever-factory/forever-factory/src/youtube.py", line 169, in _poll_video_id
+    with urllib.request.urlopen(req, timeout=30) as resp:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.12.14/x64/lib/python3.12/urllib/request.py", line 215, in urlopen
+    return opener.open(url, data, timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.12.14/x64/lib/python3.12/urllib/request.py", line 521, in open
+    response = meth(req, response)
+               ^^^^^^^^^^^^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.12.14/x64/lib/python3.12/urllib/request.py", line 630, in http_response
+    response = self.parent.error(
+               ^^^^^^^^^^^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.12.14/x64/lib/python3.12/urllib/request.py", line 559, in error
+    return self._call_chain(*args)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.12.14/x64/lib/python3.12/urllib/request.py", line 492, in _call_chain
+    result = func(*args)
+             ^^^^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.12.14/x64/lib/python3.12/urllib/request.py", line 639, in http_error_default
+    raise HTTPError(req.full_url, code, msg, hdrs, fp)
+urllib.error.HTTPError: HTTP Error 400: Bad Request
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/runner/work/forever-factory/forever-factory/src/orchestrator.py", line 223, in main
+    results = run_daily(dry_run=args.dry_run, longs=args.longs,
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/forever-factory/forever-factory/src/orchestrator.py", line 191, in run_daily
+    result = produce_episode(story, n, dry_run, n_shorts, used_slots)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/forever-factory/forever-factory/src/orchestrator.py", line 115, in produce_episode
+    long_id = youtube.upload_video(final, long_meta, long_slot, episode_n, "long")
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/forever-factory/forever-factory/src/youtube.py", line 221, in upload_video
+    video_id = _upload_video(token, filepath, meta, status)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/forever-factory/forever-factory/src/youtube.py", line 160, in _upload_video
+    raise RuntimeError(f"upload failed ({e.code}): {raw.decode()[:400]}")
+RuntimeError: upload failed (400): {
+  "error": {
+    "code": 400,
+    "message": "No filter selected. Expected one of: myRating, chart, id",
+    "errors": [
+      {
+        "message": "No filter selected. Expected one of: myRating, chart, id",
+        "domain": "youtube.parameter",
+        "reason": "missingRequiredParameter",
+        "location": "parameters.",
+        "locationType": "other"
+      }
+    ]
+  }
+}
+
 [2] story: The Thimble Windmill and the Sleepy Duskhollow (1461 words, hash 4dbcfd5ae3)
 [2] narration: 790s, 172 caption chunks
-[2] long video: 808s, 69.9MB
-[2] thumbnail + 1 shorts ready
-[2] DRY-RUN: would upload long at 2026-09-27T21:00:00+03:00
-[2] DRY-RUN: would upload short 1 at 2026-09-28T13:00:00+03:00
-  ✓ episode 2: Puddle and the Missing Echo
-  ✓ episode 2: The Thimble Windmill and the Sleepy Duskhollow
-combination space: 4,970,310,669,434,880 stories — the factory never repeats
+[2] long video: 808s, 70.0MB
+[2] thumbnail + 2 shorts ready
