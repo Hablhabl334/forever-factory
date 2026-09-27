@@ -1,21 +1,7 @@
 [thumbs] 2 long video(s) missing custom thumbnails
 [thumbs] channel: Moonberry Tales (UCg-ZEQJiqXYC8y9xUomaEBQ)
-  [youtube] thumbnail set failed: HTTP 400 {
-  "error": {
-    "code": 400,
-    "message": "The request does not include the image content.",
-    "errors": [
-      {
-        "message": "The request does not include the image content.",
-        
-  [thumbs] set rejected — retrying next cycle
-  [youtube] thumbnail set failed: HTTP 400 {
-  "error": {
-    "code": 400,
-    "message": "The request does not include the image content.",
-    "errors": [
-      {
-        "message": "The request does not include the image content.",
-        
-  [thumbs] set rejected — retrying next cycle
-[thumbs] backfill complete: 0 set
+  [youtube] setting thumbnail thumbnail.png (281 KB) on _oF4dTUGy24
+  [thumbs] ep2 thumbnail set (_oF4dTUGy24)
+  [youtube] setting thumbnail thumbnail.png (311 KB) on UG4z7_XQkjM
+  [thumbs] ep3 thumbnail set (UG4z7_XQkjM)
+[thumbs] backfill complete: 2 set
