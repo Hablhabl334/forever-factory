@@ -17,7 +17,8 @@ import traceback
 from datetime import date
 from pathlib import Path
 
-from . import ledger, render, shorts as shorts_mod, thumbnails, tts, youtube
+from . import art_engine, ledger, render, shorts as shorts_mod, \
+    thumbnails, tts, youtube
 from .config import cfg, ROOT
 from .story_engine import generate_story, combination_space
 
@@ -25,11 +26,16 @@ WORK_ROOT = ROOT / "work"
 OUT_ROOT = ROOT / "out"
 
 
+def _dated_seed(day: str, episode_n: int) -> int:
+    """Deterministic per (date, episode) — the seed a fresh episode
+    was born with, reconstructible from the ledger record forever."""
+    digest = hashlib.sha256(f"moonberry|{day}|ep{episode_n}".encode()).hexdigest()
+    return int(digest[:12], 16)
+
+
 def _daily_seed(episode_n: int) -> int:
     """Deterministic per (date, episode) — rebuildable after a crash."""
-    today = date.today().isoformat()
-    digest = hashlib.sha256(f"moonberry|{today}|ep{episode_n}".encode()).hexdigest()
-    return int(digest[:12], 16)
+    return _dated_seed(date.today().isoformat(), episode_n)
 
 
 def _resume_episode(state: dict) -> tuple[int, int] | None:
@@ -55,6 +61,91 @@ def _ensure_clean(work: Path, out: Path, story: dict) -> None:
         work.mkdir(parents=True, exist_ok=True)
         out.mkdir(parents=True, exist_ok=True)
         marker.write_text(story["hash"])
+
+
+def _rebuild_thumb(record: dict, state: dict) -> Path | None:
+    """Deterministically rebuild an episode's thumbnail PNG from its
+    ledger record. The story is a pure function of the seed, the art a
+    pure function of the story — no stored assets needed, on any
+    machine, forever.
+
+    Seed subtlety: generate_story drifts its seed internally on retry
+    (safety gate / hash collision), and the record holds the FINAL
+    (post-drift) seed — which replays exactly only if the story
+    succeeded on attempt 0. The ORIGINAL pre-drift seed is always
+    reconstructible from (date, episode number), and replaying from it
+    reproduces the drift chain exactly, because story hashes are
+    append-only and collision-free across episodes. We try both and
+    hash-check the result — a drift can never silently repackage a
+    different story."""
+    candidates = []
+    for cand in (record.get("seed"),
+                 _dated_seed(record.get("date", ""), record.get("n", 0))):
+        if cand is not None and cand not in candidates:
+            candidates.append(cand)
+    used = ledger.used_hashes(state) - {record.get("hash")}
+    story = None
+    for cand in candidates:
+        try:
+            s = generate_story(cand, used)
+        except RuntimeError:
+            continue
+        if s["hash"] == record.get("hash") and s["title"] == record.get("title"):
+            story = s
+            break
+    if story is None:
+        print(f"  [thumbs] ep{record['n']}: no seed candidate replays the "
+              f"recorded story — skipping (ledger safety)")
+        return None
+    turn_scene = next((s for s in story["scenes"] if s["id"] == "turn"),
+                      story["scenes"][7])
+    out_dir = OUT_ROOT / f"episode_{record['n']:03d}"
+    out_dir.mkdir(parents=True, exist_ok=True)
+    thumb = out_dir / "thumbnail.png"
+    if thumb.exists():
+        return thumb
+    art_dir = WORK_ROOT / f"episode_{record['n']:03d}" / "art"
+    art_dir.mkdir(parents=True, exist_ok=True)
+    scene_png = art_dir / f"scene_{turn_scene['n']:02d}.png"
+    if not scene_png.exists():
+        art_engine.save_scene(turn_scene, story["seed"] + turn_scene["n"] * 13,
+                              scene_png,
+                              story["scenes"][0]["image"].get("time_mood"))
+    return thumbnails.make_thumbnail(scene_png, story["title"], thumb)
+
+
+def backfill_thumbnails(state: dict) -> list[str]:
+    """Set custom thumbnails for any uploaded long video missing one.
+
+    Self-healing by design: a channel that was not yet phone-verified
+    (youtube.com/verify) rejects thumbnails.set with 403 — this runs
+    at the top of EVERY daily cycle and retries cheaply (50 units per
+    attempt) until it succeeds once, then never touches that video
+    again (flagged in the ledger)."""
+    todo = [e for e in state.get("episodes", [])
+            if e.get("ids", {}).get("long") and not e.get("ids", {}).get("thumbnail")]
+    done: list[str] = []
+    if not todo:
+        return done
+    print(f"[thumbs] {len(todo)} long video(s) missing custom thumbnails")
+    token = youtube.get_access_token()
+    ch = youtube.verify_credentials()
+    print(f"[thumbs] channel: {ch.get('channel')} ({ch.get('channel_id')})")
+    for rec in todo:
+        if ledger.quota_remaining(state) < youtube.THUMB_UNITS:
+            print("  [thumbs] quota low — retrying next cycle")
+            break
+        png = _rebuild_thumb(rec, state)
+        if png is None or not png.exists():
+            continue
+        if youtube.set_thumbnail(token, rec["ids"]["long"], png):
+            ledger.mark_thumbnail(state, rec["n"], youtube.THUMB_UNITS)
+            print(f"  [thumbs] ep{rec['n']} thumbnail set "
+                  f"({rec['ids']['long']})")
+            done.append(rec["ids"]["long"])
+        else:
+            print("  [thumbs] set rejected — retrying next cycle")
+    return done
 
 
 def produce_episode(story: dict, episode_n: int, dry_run: bool,
@@ -138,6 +229,16 @@ def run_daily(dry_run: bool = False, longs: int | None = None,
               only_episode: int | None = None) -> list[dict]:
     """The daily cycle. Returns summary dicts for each episode."""
     state = ledger.load()
+
+    # self-healing pass first: thumbnails that failed earlier (e.g. the
+    # channel was not yet verified) are rebuilt deterministically and
+    # retried — a backfill hiccup must never block the day's episodes
+    if not dry_run:
+        try:
+            backfill_thumbnails(state)
+        except Exception as e:
+            print(f"[thumbs] backfill skipped: {e}")
+
     target = int(longs or cfg()["daily"]["long_videos"])
     total_shorts = int(cfg()["shorts"]["count"])
     results: list[dict] = []
@@ -216,6 +317,8 @@ def main() -> int:
     ap.add_argument("--dry-run", action="store_true", help="produce + plan, no upload")
     ap.add_argument("--longs", type=int, default=None, help="override daily long count")
     ap.add_argument("--episode", type=int, default=None, help="produce only this episode number")
+    ap.add_argument("--backfill-thumbs", action="store_true",
+                    help="only set missing custom thumbnails, then exit")
     ap.add_argument("--verify-token", action="store_true", help="check YouTube credentials only")
     args = ap.parse_args()
 
@@ -223,6 +326,12 @@ def main() -> int:
         out = youtube.verify_credentials()
         print(out)
         return 0 if out.get("ok") else 1
+
+    if args.backfill_thumbs:
+        state = ledger.load()
+        done = backfill_thumbnails(state)
+        print(f"[thumbs] backfill complete: {len(done)} set")
+        return 0
 
     try:
         results = run_daily(dry_run=args.dry_run, longs=args.longs,

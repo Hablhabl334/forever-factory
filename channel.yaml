@@ -64,3 +64,12 @@ youtube:
   made_for_kids: true               # child-directed bedtime content
   synthetic_media_disclosure: true  # honest AI-assisted disclosure
   privacy: "public"                 # final visibility (publishAt schedules it)
+
+  # COMMENTS POLICY — off, by design, and it is not a trade:
+  #   YouTube force-disables comments on every made-for-kids video
+  #   (COPPA). Turning them on would require marking this content
+  #   "not made for kids", which is false for bedtime stories aimed at
+  #   ages 5-8 — an FTC mislabeling + channel-termination risk.
+  #   Growth for sleep content is driven by average view duration,
+  #   nightly repeat views, and playlist adds — not comment counts.
+  #   Do NOT flip this to farm engagement.

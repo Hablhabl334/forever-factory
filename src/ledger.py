@@ -91,6 +91,20 @@ def mark_uploaded(state: dict, episode_n: int, kind: str, video_id: str,
     save(state)
 
 
+def mark_thumbnail(state: dict, episode_n: int, units: int = 0) -> None:
+    """Record that the episode's long video has a custom thumbnail set.
+    Idempotent (a re-run never resets it) — this is the flag the daily
+    backfill checks, so a thumbnail is attempted exactly once in the
+    video's lifetime, forever."""
+    for e in state.get("episodes", []):
+        if e["n"] == episode_n:
+            e.setdefault("ids", {})["thumbnail"] = date.today().isoformat()
+            break
+    if units:
+        spend_quota(state, units)
+    save(state)
+
+
 def spend_quota(state: dict, units: int) -> None:
     q = state["quota"]
     today = date.today().isoformat()

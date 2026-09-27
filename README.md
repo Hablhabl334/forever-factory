@@ -71,6 +71,25 @@ publishing a risky draft. Every story is 100% original: the grammar
 atom bank contains no copyrighted characters, franchises, or existing
 tales.
 
+**Comments are off — and that is the right state, not a limitation.**
+YouTube itself disables comments on every made-for-kids video (COPPA
+rule), so there is no "kids flag + comments on" combination to choose.
+Enabling them would mean declaring this content *not* made for kids —
+false for bedtime stories aimed at 5–8-year-olds, and a real
+FTC-mislabeling and channel-termination risk. It would also buy
+nothing: sleep content is played at lights-out by parents; its growth
+engines are average view duration, nightly repeat views, and playlist
+adds, while comment sections on bedtime videos stay empty. Likes,
+subscribes, and playlist adds all still work — those are the signals
+to watch in YouTube Studio.
+
+Custom thumbnails are phone-verification-gated by YouTube: until the
+channel is verified (`youtube.com/verify`) `thumbnails.set` fails with
+403. The factory treats that as non-fatal and retries every daily
+cycle until it succeeds once per video (deterministic rebuild from the
+episode seed, 50 quota units per attempt, flagged in the ledger so a
+video is never touched twice).
+
 ## Repo layout
 
 ```

@@ -228,6 +228,12 @@ def _set_thumbnail(token: str, video_id: str, thumb: Path) -> bool:
         return False
 
 
+def set_thumbnail(token: str, video_id: str, thumb: Path) -> bool:
+    """Public wrapper: set a custom thumbnail (50 quota units at the
+    API). Used by the upload flow and the daily self-healing backfill."""
+    return _set_thumbnail(token, video_id, thumb)
+
+
 def upload_video(filepath: Path, meta: dict, publish_at: str | None,
                  episode_n: int, kind: str, state: dict | None = None) -> str | None:
     """Full upload flow with quota gate + ledger. Returns video id.
@@ -290,12 +296,17 @@ def upload_video(filepath: Path, meta: dict, publish_at: str | None,
     print(f"  [youtube] uploaded {kind}: {video_id} "
           f"(publishAt {publish_at or 'now'})")
 
-    thumb = filepath.with_name("thumbnail.png")
-    if thumb.exists():
-        if _set_thumbnail(token, video_id, thumb):
+    # custom thumbnail for longs only — shorts sit in the same output
+    # directory as thumbnail.png, but use their auto frame by design
+    thumb = filepath.with_name("thumbnail.png") if kind == "long" else None
+    if thumb and thumb.exists():
+        if set_thumbnail(token, video_id, thumb):
             print("  [youtube] thumbnail set")
+            # record it so the daily backfill never retries this video
+            ledger.mark_thumbnail(state, episode_n)
         else:
-            print("  [youtube] thumbnail set failed (non-fatal)")
+            print("  [youtube] thumbnail set failed (non-fatal — daily "
+                  "backfill retries until the channel is verified)")
 
     ledger.mark_uploaded(state, episode_n, kind, video_id, need)
     state["stats"]["videos_published"] = state["stats"].get("videos_published", 0) + 1

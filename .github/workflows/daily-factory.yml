@@ -9,6 +9,10 @@ on:
         description: "Produce videos and print the upload plan without uploading"
         type: boolean
         default: false
+      backfill_only:
+        description: "Only set missing custom thumbnails (no new episodes)"
+        type: boolean
+        default: false
 
 permissions:
   contents: write   # commit the factory memory (data/state.json)
@@ -50,7 +54,9 @@ jobs:
           set -o pipefail   # a python failure must fail the workflow (and fire the alert), not be swallowed by tee
           DRY=""
           if [ "${{ inputs.dry_run }}" = "true" ]; then DRY="--dry-run"; fi
-          python main.py $DRY 2>&1 | tee factory.log
+          MODE=""
+          if [ "${{ inputs.backfill_only }}" = "true" ]; then MODE="--backfill-thumbs"; fi
+          python main.py $DRY $MODE 2>&1 | tee factory.log
 
       - name: Commit the factory memory
         if: always()
