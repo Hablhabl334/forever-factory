@@ -263,10 +263,17 @@ def upload_video(filepath: Path, meta: dict, publish_at: str | None,
     try:
         video_id = _upload_video(token, filepath, meta, status)
     except RuntimeError as e:
-        if "containsSyntheticMedia" in str(e) or "invalid" in str(e).lower():
+        msg = str(e)
+        if "containsSyntheticMedia" in msg:
             status.pop("containsSyntheticMedia", None)
             token = get_access_token()
             video_id = _upload_video(token, filepath, meta, status)
+        elif "quota" in msg.lower() or "exceeded" in msg.lower():
+            # YouTube's real (server-side) quota says stop — defer to
+            # tomorrow instead of failing the day. The episode stays
+            # in_progress and resumes (adopted, never duplicated).
+            print(f"  [quota] YouTube quota hit during {kind} upload — deferring")
+            return None
         else:
             raise
     print(f"  [youtube] uploaded {kind}: {video_id} "
