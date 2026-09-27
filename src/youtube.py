@@ -28,6 +28,11 @@ from .config import cfg
 TOKEN_URL = "https://oauth2.googleapis.com/token"
 UPLOAD_URL = "https://www.googleapis.com/upload/youtube/v3/videos"
 API_BASE = "https://www.googleapis.com/youtube/v3"
+# thumbnails.set is a MEDIA UPLOAD: it must go through the /upload/ path.
+# The bare /youtube/v3/thumbnails/set endpoint permission-checks fine but
+# then rejects the image bytes ("The request does not include the image
+# content") — the classic YouTube API trap.
+THUMB_SET_URL = "https://www.googleapis.com/upload/youtube/v3/thumbnails/set"
 CHUNK = 8 * 1024 * 1024  # 8 MB resumable chunks
 UPLOAD_UNITS = 1600
 THUMB_UNITS = 50
@@ -206,9 +211,12 @@ def _find_video_by_title(token: str, title: str) -> str | None:
 
 
 def _set_thumbnail(token: str, video_id: str, thumb: Path) -> bool:
+    data = thumb.read_bytes()
+    print(f"  [youtube] setting thumbnail {thumb.name} "
+          f"({len(data) // 1024} KB) on {video_id}")
     req = urllib.request.Request(
-        f"{API_BASE}/thumbnails/set?videoId={video_id}",
-        data=thumb.read_bytes(),
+        f"{THUMB_SET_URL}?videoId={video_id}",
+        data=data,
         headers={"Authorization": f"Bearer {token}",
                  "Content-Type": "image/png"},
         method="POST",
