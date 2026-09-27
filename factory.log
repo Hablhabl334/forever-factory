@@ -1,21 +1,21 @@
-[0;93m2026-09-27 13:47:14.241835278 [W:onnxruntime:Default, device_discovery.cc:146 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
-[2] story: The Thimble Windmill and the Sleepy Duskhollow (1461 words, hash 4dbcfd5ae3)
-[2] narration: 790s, 172 caption chunks
-[2] long video: 808s, 69.8MB
-[2] thumbnail + 2 shorts ready
-  [youtube] long already on channel (_oF4dTUGy24) — adopting, no re-upload
-  [youtube] uploaded short: TRY0QZfgjBE (publishAt 2026-09-27T17:30:00+03:00)
-  [youtube] thumbnail set failed (non-fatal)
-  [youtube] uploaded short: Iocf2nxJuOY (publishAt 2026-09-27T20:30:00+03:00)
-  [youtube] thumbnail set failed (non-fatal)
-[3] story: The Spider and the Sleepy Clock (1456 words, hash b07d4611e1)
-[3] narration: 767s, 171 caption chunks
-[3] long video: 785s, 66.0MB
-[3] thumbnail + 1 shorts ready
-  [youtube] uploaded long: UG4z7_XQkjM (publishAt 2026-09-27T21:00:00+03:00)
-  [youtube] thumbnail set failed (non-fatal)
-  [youtube] uploaded short: 4tbBV--cTsI (publishAt 2026-09-28T13:00:00+03:00)
-  [youtube] thumbnail set failed (non-fatal)
-  ✓ episode 2: The Thimble Windmill and the Sleepy Duskhollow
-  ✓ episode 3: The Spider and the Sleepy Clock
-combination space: 4,970,310,669,434,880 stories — the factory never repeats
+[thumbs] 2 long video(s) missing custom thumbnails
+[thumbs] channel: Moonberry Tales (UCg-ZEQJiqXYC8y9xUomaEBQ)
+  [youtube] thumbnail set failed: HTTP 400 {
+  "error": {
+    "code": 400,
+    "message": "The request does not include the image content.",
+    "errors": [
+      {
+        "message": "The request does not include the image content.",
+        
+  [thumbs] set rejected — retrying next cycle
+  [youtube] thumbnail set failed: HTTP 400 {
+  "error": {
+    "code": 400,
+    "message": "The request does not include the image content.",
+    "errors": [
+      {
+        "message": "The request does not include the image content.",
+        
+  [thumbs] set rejected — retrying next cycle
+[thumbs] backfill complete: 0 set
