@@ -217,14 +217,25 @@ def _set_thumbnail(token: str, video_id: str, thumb: Path) -> bool:
         with urllib.request.urlopen(req, timeout=120) as resp:
             return resp.status in (200, 201)
     except urllib.error.HTTPError as e:
-        e.read()
+        # Log the real reason — custom thumbnails are blocked for
+        # unverified API projects/channels (403) until phone-verified:
+        # https://www.youtube.com/verify
+        try:
+            detail = e.read().decode()[:200]
+        except Exception:
+            detail = ""
+        print(f"  [youtube] thumbnail set failed: HTTP {e.code} {detail}")
         return False
 
 
 def upload_video(filepath: Path, meta: dict, publish_at: str | None,
-                 episode_n: int, kind: str) -> str | None:
-    """Full upload flow with quota gate + ledger. Returns video id."""
-    state = ledger.load()
+                 episode_n: int, kind: str, state: dict | None = None) -> str | None:
+    """Full upload flow with quota gate + ledger. Returns video id.
+
+    Pass the caller's state (single source of truth) — if omitted a
+    local one is loaded (tools, tests)."""
+    if state is None:
+        state = ledger.load()
     remaining = ledger.quota_remaining(state)
     need = UPLOAD_UNITS + THUMB_UNITS
     if remaining < need:

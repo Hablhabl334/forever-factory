@@ -7,7 +7,7 @@
    "hash": "32e253bf58627da20ba0543b",
    "seed": 259564837848902,
    "date": "2026-09-26",
-   "status": "in_progress",
+   "status": "abandoned",
    "ids": {
     "long": null,
     "shorts": [],
@@ -22,8 +22,11 @@
    "date": "2026-09-27",
    "status": "done",
    "ids": {
-    "long": null,
-    "shorts": [],
+    "long": "_oF4dTUGy24",
+    "shorts": [
+     "TRY0QZfgjBE",
+     "Iocf2nxJuOY"
+    ],
     "thumbnail": null
    }
   },
@@ -35,8 +38,10 @@
    "date": "2026-09-27",
    "status": "done",
    "ids": {
-    "long": null,
-    "shorts": [],
+    "long": "UG4z7_XQkjM",
+    "shorts": [
+     "4tbBV--cTsI"
+    ],
     "thumbnail": null
    }
   }
@@ -47,12 +52,12 @@
   "b07d4611e141e4ebe617dca0"
  ],
  "quota": {
-  "date": null,
-  "units_used": 0
+  "date": "2026-09-27",
+  "units_used": 8051
  },
  "last_run": "2026-09-27",
  "stats": {
-  "videos_published": 0,
+  "videos_published": 5,
   "days_active": 2
  },
  "_last_days_active": "2026-09-27"

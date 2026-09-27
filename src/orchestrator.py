@@ -58,8 +58,13 @@ def _ensure_clean(work: Path, out: Path, story: dict) -> None:
 
 
 def produce_episode(story: dict, episode_n: int, dry_run: bool,
-                     n_shorts: int, used_slots: dict) -> dict:
-    """Art -> narration -> render -> shorts -> thumbs -> metadata -> upload."""
+                     n_shorts: int, used_slots: dict,
+                     state: dict | None = None) -> dict:
+    """Art -> narration -> render -> shorts -> thumbs -> metadata -> upload.
+    state is passed through so uploads mark the SAME ledger the
+    orchestrator saves (single source of truth — ids never lost)."""
+    if state is None:
+        state = ledger.load()
     work = WORK_ROOT / f"episode_{episode_n:03d}"
     out = OUT_ROOT / f"episode_{episode_n:03d}"
     work.mkdir(parents=True, exist_ok=True)
@@ -112,7 +117,7 @@ def produce_episode(story: dict, episode_n: int, dry_run: bool,
 
     long_slot = youtube.next_slot("long", used_slots["long"])
     used_slots["long"].add(long_slot)
-    long_id = youtube.upload_video(final, long_meta, long_slot, episode_n, "long")
+    long_id = youtube.upload_video(final, long_meta, long_slot, episode_n, "long", state)
 
     for sf in short_files:
         n = int(sf.stem.split("scene")[-1])
@@ -121,7 +126,7 @@ def produce_episode(story: dict, episode_n: int, dry_run: bool,
         short_slot = youtube.next_slot("short", used_slots["short"])
         used_slots["short"].add(short_slot)
         # thumbnails not set for shorts (auto frame is fine; quota discipline)
-        sid = youtube.upload_video(sf, short_meta, short_slot, episode_n, "short")
+        sid = youtube.upload_video(sf, short_meta, short_slot, episode_n, "short", state)
         if sid is None:
             break  # quota exhausted — stop uploading for today
 
@@ -188,7 +193,7 @@ def run_daily(dry_run: bool = False, longs: int | None = None,
         # distribute the day's shorts: first episode takes the extra one
         n_shorts = (total_shorts + target - 1 - made) // target if target > 1 else total_shorts
 
-        result = produce_episode(story, n, dry_run, n_shorts, used_slots)
+        result = produce_episode(story, n, dry_run, n_shorts, used_slots, state)
         results.append(result)
         made += 1
 
