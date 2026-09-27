@@ -61,7 +61,12 @@ jobs:
             echo "nothing new to remember"
           else
             git commit -m "factory memory: $(date -u +%F) cycle"
-            git push
+            # The remote may have advanced while this run was rendering
+            # (manual pushes, web edits). Rebase first so the memory
+            # commit always lands cleanly — never a non-fast-forward.
+            git fetch origin main
+            git rebase --autostash origin/main
+            git push origin main
           fi
 
       - name: Alert on failure
