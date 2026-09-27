@@ -137,13 +137,10 @@ def _upload_video(token: str, filepath: Path, meta: dict, status: dict,
                 "Content-Length": str(len(block)),
                 "Content-Range": f"bytes {offset}-{end}/{size}",
             })
+            body = b""
             try:
                 with urllib.request.urlopen(req, timeout=300) as resp:
-                    resp.read()
-                    vid = json.loads(resp.read() or b"{}").get("id")
-                    if not vid:
-                        vid = _poll_video_id(token)
-                    return vid
+                    body = resp.read()
             except urllib.error.HTTPError as e:
                 if e.code == 308:
                     rng = e.headers.get("Range", "")
@@ -158,17 +155,54 @@ def _upload_video(token: str, filepath: Path, meta: dict, status: dict,
                     max_retries -= 1
                     continue
                 raise RuntimeError(f"upload failed ({e.code}): {raw.decode()[:400]}")
+            # 2xx: the resumable session is complete and the response body
+            # IS the video resource. Parse it OUTSIDE the except block so
+            # a poll failure can never masquerade as an upload failure.
+            vid = json.loads(body or b"{}").get("id")
+            if not vid:
+                vid = _poll_video_id(token)
+            return vid
     raise RuntimeError("upload ended without completion response")
 
 
 def _poll_video_id(token: str) -> str:
+    """Fallback if the final upload response lacks an id: our newest
+    video. NOTE: videos.list has no 'mine' filter (valid filters: id,
+    chart, myRating) — search.list with forMine is the correct call."""
     req = urllib.request.Request(
-        f"{API_BASE}/videos?part=id&mine=true&maxResults=1",
+        f"{API_BASE}/search?part=snippet&forMine=true&type=video"
+        f"&order=date&maxResults=1",
         headers={"Authorization": f"Bearer {token}"},
     )
     with urllib.request.urlopen(req, timeout=30) as resp:
         items = json.loads(resp.read()).get("items", [])
-    return items[0]["id"] if items else ""
+    return items[0]["id"]["videoId"] if items else ""
+
+
+def _find_video_by_title(token: str, title: str) -> str | None:
+    """Crash-safety reconcile: a previous run may have finished the API
+    upload but died before recording the video id (sandbox reset, bug,
+    runner eviction...). Exact-title match against our own uploads —
+    1 quota unit. Prevents duplicate uploads after any crash."""
+    try:
+        req = urllib.request.Request(
+            f"{API_BASE}/channels?part=contentDetails&mine=true",
+            headers={"Authorization": f"Bearer {token}"})
+        with urllib.request.urlopen(req, timeout=30) as resp:
+            ch = json.loads(resp.read())["items"][0]
+        uploads_id = ch["contentDetails"]["relatedPlaylists"]["uploads"]
+        req = urllib.request.Request(
+            f"{API_BASE}/playlistItems?part=snippet&playlistId={uploads_id}"
+            f"&maxResults=50",
+            headers={"Authorization": f"Bearer {token}"})
+        with urllib.request.urlopen(req, timeout=30) as resp:
+            items = json.loads(resp.read()).get("items", [])
+        for it in items:
+            if it["snippet"]["title"] == title:
+                return it["snippet"]["resourceId"]["videoId"]
+    except Exception:
+        return None
+    return None
 
 
 def _set_thumbnail(token: str, video_id: str, thumb: Path) -> bool:
@@ -199,6 +233,15 @@ def upload_video(filepath: Path, meta: dict, publish_at: str | None,
 
     yconf = cfg()["youtube"]
     token = get_access_token()
+
+    # crash-safety: if this exact title is already on the channel (a past
+    # run uploaded it but crashed before recording the id), adopt it —
+    # never upload the same video twice.
+    existing = _find_video_by_title(token, meta["title"])
+    if existing:
+        print(f"  [youtube] {kind} already on channel ({existing}) — adopting, no re-upload")
+        ledger.mark_uploaded(state, episode_n, kind, existing, 1)
+        return existing
 
     status = {
         "privacyStatus": "private",
