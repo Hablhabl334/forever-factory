@@ -2,7 +2,13 @@ name: daily-factory
 
 on:
   schedule:
-    - cron: "0 10 * * *"   # 10:00 UTC daily — uploads land in Cairo evening peaks
+    # Two off-the-hour chances daily: GitHub's scheduler is best-effort
+    # and starves on-the-hour crons under load (both slots missed on
+    # 2026-09-27 and 2026-09-28). 10:23 / 10:41 UTC = 13:23 / 13:41
+    # Cairo — still hours before the evening publishAt slots. A double
+    # fire is harmless: the quota gate defers the second run.
+    - cron: "23 10 * * *"
+    - cron: "41 10 * * *"
   workflow_dispatch:
     inputs:
       dry_run:

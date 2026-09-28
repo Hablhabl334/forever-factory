@@ -52,8 +52,10 @@ refresh token last forever) and the three GitHub secrets.
 
 ## Run it
 
-The schedule runs itself daily at 10:00 UTC (uploads land in the Cairo
-evening peaks). Manual runs:
+The schedule runs itself daily at 10:23 UTC with a backup trigger at
+10:41 UTC (uploads land in the Cairo evening peaks). GitHub's cron is
+best-effort — the machine is idempotent, so a double fire is harmless
+(the quota gate defers the second run) and a manual run works anytime.
 
 - **Actions → daily-factory → Run workflow** — full cycle now
   (tick *dry_run* to preview without uploading)
