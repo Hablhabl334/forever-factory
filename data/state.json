@@ -44,21 +44,54 @@
     ],
     "thumbnail": "2026-09-27"
    }
+  },
+  {
+   "n": 4,
+   "title": "Tuft's Great Mending",
+   "hash": "e5b33a7cc2a72129b828b1e5",
+   "seed": 240233018701378,
+   "date": "2026-09-28",
+   "status": "uploaded",
+   "ids": {
+    "long": "h4B5GXfmjLg",
+    "shorts": [
+     "kvFpuUEz8QA",
+     "TnJJf_3-Zg8"
+    ],
+    "thumbnail": "2026-09-28"
+   }
+  },
+  {
+   "n": 5,
+   "title": "The Owl and the Silk Thread",
+   "hash": "5f09494e0ca24921071c9270",
+   "seed": 186761732715992,
+   "date": "2026-09-28",
+   "status": "uploaded",
+   "ids": {
+    "long": "3ZR4l08XxyE",
+    "shorts": [
+     "Zjf7Ne2z_4U"
+    ],
+    "thumbnail": "2026-09-28"
+   }
   }
  ],
  "story_hashes": [
   "32e253bf58627da20ba0543b",
   "4dbcfd5ae3a11df216f608b9",
-  "b07d4611e141e4ebe617dca0"
+  "b07d4611e141e4ebe617dca0",
+  "e5b33a7cc2a72129b828b1e5",
+  "5f09494e0ca24921071c9270"
  ],
  "quota": {
-  "date": "2026-09-27",
-  "units_used": 8151
+  "date": "2026-09-28",
+  "units_used": 8250
  },
- "last_run": "2026-09-27",
+ "last_run": "2026-09-28",
  "stats": {
-  "videos_published": 5,
-  "days_active": 2
+  "videos_published": 10,
+  "days_active": 3
  },
- "_last_days_active": "2026-09-27"
+ "_last_days_active": "2026-09-28"
 }

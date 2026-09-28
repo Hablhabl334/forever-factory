@@ -1,7 +1,21 @@
-[thumbs] 2 long video(s) missing custom thumbnails
-[thumbs] channel: Moonberry Tales (UCg-ZEQJiqXYC8y9xUomaEBQ)
-  [youtube] setting thumbnail thumbnail.png (281 KB) on _oF4dTUGy24
-  [thumbs] ep2 thumbnail set (_oF4dTUGy24)
-  [youtube] setting thumbnail thumbnail.png (311 KB) on UG4z7_XQkjM
-  [thumbs] ep3 thumbnail set (UG4z7_XQkjM)
-[thumbs] backfill complete: 2 set
+[0;93m2026-09-28 12:45:37.704288620 [W:onnxruntime:Default, device_discovery.cc:146 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
+[4] story: Tuft's Great Mending (1452 words, hash e5b33a7cc2)
+[4] narration: 771s, 170 caption chunks
+[4] long video: 789s, 67.7MB
+[4] thumbnail + 2 shorts ready
+  [youtube] uploaded long: h4B5GXfmjLg (publishAt 2026-09-28T19:30:00+03:00)
+  [youtube] setting thumbnail thumbnail.png (242 KB) on h4B5GXfmjLg
+  [youtube] thumbnail set
+  [youtube] uploaded short: kvFpuUEz8QA (publishAt 2026-09-28T17:30:00+03:00)
+  [youtube] uploaded short: TnJJf_3-Zg8 (publishAt 2026-09-28T20:30:00+03:00)
+[5] story: The Owl and the Silk Thread (1460 words, hash 5f09494e0c)
+[5] narration: 777s, 177 caption chunks
+[5] long video: 795s, 64.8MB
+[5] thumbnail + 1 shorts ready
+  [youtube] uploaded long: 3ZR4l08XxyE (publishAt 2026-09-28T21:00:00+03:00)
+  [youtube] setting thumbnail thumbnail.png (327 KB) on 3ZR4l08XxyE
+  [youtube] thumbnail set
+  [youtube] uploaded short: Zjf7Ne2z_4U (publishAt 2026-09-29T13:00:00+03:00)
+  ✓ episode 4: Tuft's Great Mending
+  ✓ episode 5: The Owl and the Silk Thread
+combination space: 4,970,310,669,434,880 stories — the factory never repeats
