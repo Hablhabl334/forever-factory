@@ -1,0 +1,53 @@
+name: watchdog
+
+# The scheduler bodyguard. GitHub's cron queue starves new repos (three
+# days in a row for us), so daily-factory now carries 9 of its own
+# staggered slots — and this workflow adds 5 MORE independent chances
+# (08:49, 11:49, 14:49, 17:49, 20:49 UTC). Each heartbeat asks the
+# same gate: "did the factory produce today?" If not, it DISPATCHES
+# daily-factory immediately. workflow_dispatch events are not subject
+# to the starved schedule queue, so one healthy heartbeat = the day
+# is made — and the gate + factory concurrency group make double
+# fires free (SKIP) and safe (queue, never overlap).
+on:
+  schedule:
+    - cron: "49 8-21/3 * * *"
+  workflow_dispatch:
+
+permissions:
+  actions: write   # kick daily-factory via GITHUB_TOKEN
+  contents: read
+
+concurrency:
+  group: watchdog
+  cancel-in-progress: false
+
+jobs:
+  heartbeat:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Does today still need a cycle?
+        id: gate
+        run: |
+          VERDICT=$(python tools/gate.py --event schedule --actor watchdog)
+          echo "$VERDICT"
+          case "$VERDICT" in
+            RUN*) echo "run=true"  >> "$GITHUB_OUTPUT" ;;
+            *)    echo "run=false" >> "$GITHUB_OUTPUT" ;;
+          esac
+
+      - name: Kick the factory
+        if: steps.gate.outputs.run == 'true'
+        run: |
+          echo "factory has not produced today — dispatching daily-factory"
+          gh workflow run daily-factory.yml --ref main -f gated=true
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: All quiet
+        if: steps.gate.outputs.run == 'false'
+        run: echo "today's cycle already done — going back to sleep"

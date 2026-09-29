@@ -19,7 +19,12 @@ import re
 import urllib.parse
 import urllib.request
 
-SCOPES = "https://www.googleapis.com/auth/youtube.upload https://www.googleapis.com/auth/youtube.readonly"
+SCOPES = (
+    "https://www.googleapis.com/auth/youtube.upload "
+    "https://www.googleapis.com/auth/youtube.readonly "
+    "https://www.googleapis.com/auth/youtube.force-ssl "
+    "https://www.googleapis.com/auth/yt-analytics.readonly"
+)
 REDIRECT_URI = "https://hablhabl334.github.io/oauth/callback"
 
 

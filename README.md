@@ -52,15 +52,44 @@ refresh token last forever) and the three GitHub secrets.
 
 ## Run it
 
-The schedule runs itself daily at 10:23 UTC with a backup trigger at
-10:41 UTC (uploads land in the Cairo evening peaks). GitHub's cron is
-best-effort — the machine is idempotent, so a double fire is harmless
-(the quota gate defers the second run) and a manual run works anytime.
+The schedule defends itself: **9 staggered cron slots** (09:23–20:31
+UTC, all off-the-hour — GitHub starves on-the-hour crons and dropped
+ours three days straight) **plus a watchdog** workflow with 5 more
+heartbeats that dispatches the factory whenever the day hasn't been
+produced yet. Every extra trigger is caught by a cheap gate job
+(~15 s, zero quota) that skips the run if today's work is done — so
+14 daily chances, one production. A late trigger finds the evening
+gone? Videos publish immediately instead of waiting a day — search
+indexing beats perfect timing for made-for-kids content.
 
 - **Actions → daily-factory → Run workflow** — full cycle now
-  (tick *dry_run* to preview without uploading)
+  (tick *dry_run* to preview without uploading — fully
+  side-effect-free, never touches the memory)
 - **Actions → verify-token → Run workflow** — check YouTube credentials
 - Locally: `python main.py --dry-run`
+
+## How it gets found (the discovery layer)
+
+Views in this niche come from **search + playlist autoplay**, not
+feeds — so every upload ships with:
+
+- **Search-first titles**: the phrase parents actually type leads the
+  title ("Bedtime Story for Kids 🌙 …"), rotated across five long-tail
+  frames so the catalog casts a wider net instead of five videos
+  fighting over one phrase.
+- **A keyword-loaded description** (first 150 chars carry the terms,
+  then the story hook, real chapters, the binge line, the AI
+  disclosure, three hashtags).
+- **A ~480-character tag set** (broad + long-tail + age-terms +
+  story-specific + common misspelling).
+- **The bedtime playlist** — every long lands in a public "Bedtime
+  Stories for Kids to Fall Asleep" playlist (needs the optional
+  re-consent, RUNBOOK Part 5; until then it's skipped gracefully).
+- **Channel keywords** — set once via the API (same re-consent).
+- **A daily growth report** — view counts for every video, with
+  day-over-day deltas, printed into `factory.log` and stored in the
+  factory memory (read-only scope — works from day one). This is the
+  *research* half of the research → create → improve loop.
 
 ## Made for Kids — by design
 

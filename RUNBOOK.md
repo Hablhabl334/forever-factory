@@ -94,9 +94,29 @@ New repository secret** (three times):
    evening peak slot).
 2. **Actions → verify-token → Run workflow** — green = credentials
    healthy.
-3. Done. Every day at 10:00 UTC the factory runs. Videos appear on
-   your channel at 19:30 / 21:00 Cairo time (13:00 / 17:30 / 20:30
-   for Shorts).
+3. Done. Every day the factory runs (9 staggered cron slots + a
+   watchdog with 5 more chances — see `.github/workflows/`). Videos
+   appear on your channel at 19:30 / 21:00 Cairo time (13:00 / 17:30 /
+   20:30 for Shorts); a late run publishes immediately instead of
+   waiting.
+
+## Part 5 — Optional: unlock playlists + channel keywords (1 click)
+
+The original consent covers uploads + reads. Two growth features —
+the **bedtime playlist** (the binge loop) and **channel keywords**
+(channel-level search index) — need one broader scope. The factory
+skips them gracefully (a one-line note in the daily log, uploads
+unaffected) until you re-consent:
+
+1. Run `python tools/gen_auth_url.py` (or ask me for the link), open
+   it, click Allow — same flow as Part 2, same callback page.
+2. Send me the code (or run `python tools/auth.py`) — the new
+   refresh token replaces the `YT_REFRESH_TOKEN` secret.
+3. From the next cycle on, every long lands in the public
+   "Bedtime Stories for Kids to Fall Asleep" playlist automatically.
+
+The consent also grants read-only YouTube Analytics — the future
+improve-loop (impressions, CTR, watch time per video, not just views).
 
 ---
 

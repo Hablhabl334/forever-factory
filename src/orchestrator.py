@@ -17,7 +17,7 @@ import traceback
 from datetime import date
 from pathlib import Path
 
-from . import art_engine, ledger, render, shorts as shorts_mod, \
+from . import art_engine, discovery, ledger, render, shorts as shorts_mod, \
     thumbnails, tts, youtube
 from .config import cfg, ROOT
 from .story_engine import generate_story, combination_space
@@ -198,11 +198,13 @@ def produce_episode(story: dict, episode_n: int, dry_run: bool,
     if dry_run:
         long_slot = youtube.next_slot("long", used_slots["long"])
         used_slots["long"].add(long_slot)
-        print(f"[{episode_n}] DRY-RUN: would upload long at {long_slot}")
+        when = long_slot or "now (evening slots passed — publish immediately)"
+        print(f"[{episode_n}] DRY-RUN: would upload long at {when}")
         for i, sf in enumerate(short_files):
             short_slot = youtube.next_slot("short", used_slots["short"])
             used_slots["short"].add(short_slot)
-            print(f"[{episode_n}] DRY-RUN: would upload short {i+1} at {short_slot}")
+            when = short_slot or "now (evening slots passed — publish immediately)"
+            print(f"[{episode_n}] DRY-RUN: would upload short {i+1} at {when}")
         return {"episode": episode_n, "title": story["title"], "dry_run": True,
                 "long_seconds": dur, "shorts": len(short_files)}
 
@@ -227,7 +229,23 @@ def produce_episode(story: dict, episode_n: int, dry_run: bool,
 
 def run_daily(dry_run: bool = False, longs: int | None = None,
               only_episode: int | None = None) -> list[dict]:
-    """The daily cycle. Returns summary dicts for each episode."""
+    """The daily cycle. Returns summary dicts for each episode.
+
+    A dry run is fully side-effect-free: the ledger is read-locked
+    (nothing persists), last_run is never stamped, and the episode
+    bookkeeping stays in memory — a --dry-run must never make the
+    gate think the day was produced."""
+    if dry_run:
+        ledger.set_read_only(True)
+    try:
+        return _run_daily_inner(dry_run, longs, only_episode)
+    finally:
+        if dry_run:
+            ledger.set_read_only(False)
+
+
+def _run_daily_inner(dry_run: bool, longs: int | None,
+                     only_episode: int | None) -> list[dict]:
     state = ledger.load()
 
     # self-healing pass first: thumbnails that failed earlier (e.g. the
@@ -238,6 +256,11 @@ def run_daily(dry_run: bool = False, longs: int | None = None,
             backfill_thumbnails(state)
         except Exception as e:
             print(f"[thumbs] backfill skipped: {e}")
+
+    # numbers before work: how did yesterday's stories actually do?
+    # (read-only scope — works from day one; failures never block)
+    if not dry_run:
+        discovery.morning_report(state)
 
     target = int(longs or cfg()["daily"]["long_videos"])
     total_shorts = int(cfg()["shorts"]["count"])
@@ -298,16 +321,25 @@ def run_daily(dry_run: bool = False, longs: int | None = None,
         results.append(result)
         made += 1
 
-        if not dry_run:
-            for e in state["episodes"]:
-                if e["n"] == n and e["status"] == "in_progress":
-                    e["status"] = "done"
-            ledger.save(state)
+        # flip to done ALWAYS (even dry-run): an episode left
+        # in_progress would make the loop resume the SAME episode
+        # instead of advancing to the next one
+        for e in state["episodes"]:
+            if e["n"] == n and e["status"] == "in_progress":
+                e["status"] = "done"
+        ledger.save(state)
 
-    state["last_run"] = date.today().isoformat()
-    state["stats"]["days_active"] += 1 if state.get("_last_days_active") != state["last_run"] else 0
-    state["_last_days_active"] = state["last_run"]
-    ledger.save(state)
+    if not dry_run:
+        state["last_run"] = date.today().isoformat()
+        state["stats"]["days_active"] += 1 if state.get("_last_days_active") != state["last_run"] else 0
+        state["_last_days_active"] = state["last_run"]
+
+        # end-of-day discovery pass: every long (today's + any stragglers)
+        # into the bedtime playlist, channel keywords set once — all
+        # scope-aware and quota-gated, never blocking, never repeating
+        discovery.evening_pass(state)
+
+        ledger.save(state)
     return results
 
 

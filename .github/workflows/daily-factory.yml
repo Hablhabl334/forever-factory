@@ -2,13 +2,22 @@ name: daily-factory
 
 on:
   schedule:
-    # Two off-the-hour chances daily: GitHub's scheduler is best-effort
-    # and starves on-the-hour crons under load (both slots missed on
-    # 2026-09-27 and 2026-09-28). 10:23 / 10:41 UTC = 13:23 / 13:41
-    # Cairo — still hours before the evening publishAt slots. A double
-    # fire is harmless: the quota gate defers the second run.
-    - cron: "23 10 * * *"
+    # GitHub's scheduler is best-effort and starves new repos hard:
+    # 2026-09-27, 09-28 AND 09-29 — every scheduled slot was dropped,
+    # only manual dispatches ever ran. Two slots were not enough.
+    # Strategy: 9 staggered, off-the-hour chances spread across the
+    # production window (09:23-20:31 UTC = 12:23-23:31 Cairo). The
+    # gate job makes every extra fire cost ~15 seconds and ZERO quota:
+    # the first successful trigger produces, the rest SKIP instantly.
+    - cron: "23 9 * * *"
     - cron: "41 10 * * *"
+    - cron: "07 12 * * *"
+    - cron: "29 13 * * *"
+    - cron: "53 14 * * *"
+    - cron: "11 16 * * *"
+    - cron: "37 17 * * *"
+    - cron: "03 19 * * *"
+    - cron: "31 20 * * *"
   workflow_dispatch:
     inputs:
       dry_run:
@@ -19,17 +28,55 @@ on:
         description: "Only set missing custom thumbnails (no new episodes)"
         type: boolean
         default: false
+      gated:
+        description: "Respect the daily gate even though this is a dispatch (set automatically by the watchdog)"
+        type: boolean
+        default: false
 
 permissions:
   contents: write   # commit the factory memory (data/state.json)
   issues: write     # auto-open an Issue if the day fails
 
+# Workflow-level: a queued duplicate waits for the WHOLE run (gate
+# included), so it re-reads the fresh state and SKIPs cheaply instead
+# of double-rendering the day.
 concurrency:
   group: factory
   cancel-in-progress: false
 
 jobs:
+  gate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    outputs:
+      run: ${{ steps.gate.outputs.run }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Has today's cycle already run?
+        id: gate
+        run: |
+          if [ "${{ inputs.backfill_only }}" = "true" ] || [ "${{ inputs.dry_run }}" = "true" ]; then
+            echo "run=true" >> "$GITHUB_OUTPUT"
+            echo "explicit mode (backfill/dry-run) - gate bypassed"
+            exit 0
+          fi
+          EVENT="${{ github.event_name }}"
+          if [ "${{ inputs.gated }}" = "true" ]; then
+            # watchdog dispatch: subject to the state gate, never a free pass
+            EVENT="schedule"
+          fi
+          VERDICT=$(python tools/gate.py --event "$EVENT" --actor "${{ github.actor }}")
+          echo "$VERDICT"
+          case "$VERDICT" in
+            RUN*) echo "run=true"  >> "$GITHUB_OUTPUT" ;;
+            *)    echo "run=false" >> "$GITHUB_OUTPUT" ;;
+          esac
+
   build-and-publish:
+    needs: gate
+    if: needs.gate.outputs.run == 'true'
     runs-on: ubuntu-latest
     timeout-minutes: 120
     steps:

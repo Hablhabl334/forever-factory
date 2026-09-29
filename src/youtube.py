@@ -95,21 +95,26 @@ def verify_credentials() -> dict:
 
 # ── scheduling ───────────────────────────────────────────────────────
 
-def next_slot(kind: str, used: set[str] | None = None) -> str:
-    """Next publishAt (ISO) in the configured timezone, skipping used slots."""
+def next_slot(kind: str, used: set[str] | None = None) -> str | None:
+    """Next publishAt (ISO) in the configured timezone, skipping used slots.
+
+    Evening slots land the video public during bedtime hours. If the
+    day's slots are already behind us, return None = publish
+    IMMEDIATELY: made-for-kids discovery is search-driven (no
+    notifications, no personalized feeds), and every hour a new
+    video sits private is an hour of lost search indexing."""
     from zoneinfo import ZoneInfo
     tz = ZoneInfo(cfg()["schedule"]["timezone"])
     slots = cfg()["schedule"][f"{kind}_slots"]
     used = used or set()
     now = datetime.now(tz)
-    for day_offset in (0, 1, 2):
-        base = (now + timedelta(days=day_offset)).date()
-        for hhmm in slots:
-            hh, mm = map(int, hhmm.split(":"))
-            slot_dt = datetime(base.year, base.month, base.day, hh, mm, tzinfo=tz)
-            if slot_dt > now + timedelta(minutes=25) and slot_dt.isoformat() not in used:
-                return slot_dt.isoformat()
-    return (now + timedelta(hours=6)).isoformat()
+    base = now.date()
+    for hhmm in slots:
+        hh, mm = map(int, hhmm.split(":"))
+        slot_dt = datetime(base.year, base.month, base.day, hh, mm, tzinfo=tz)
+        if slot_dt > now + timedelta(minutes=25) and slot_dt.isoformat() not in used:
+            return slot_dt.isoformat()
+    return None  # evening is gone — go public now, indexing starts now
 
 
 # ── resumable upload ─────────────────────────────────────────────────
@@ -284,6 +289,7 @@ def upload_video(filepath: Path, meta: dict, publish_at: str | None,
     meta = dict(meta)
     meta.setdefault("categoryId", str(yconf.get("category_id", "24")))
     meta.setdefault("defaultLanguage", yconf.get("default_language", "en"))
+    meta.setdefault("defaultAudioLanguage", yconf.get("default_language", "en"))
 
     try:
         video_id = _upload_video(token, filepath, meta, status)

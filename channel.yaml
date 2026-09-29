@@ -19,6 +19,32 @@ schedule:                           # publishAt slots (Africa/Cairo)
   timezone: "Africa/Cairo"
   long_slots:  ["19:30", "21:00"]   # bedtime peaks for full stories
   short_slots: ["13:00", "17:30", "20:30"]
+  # If a late trigger finds the evening already gone, videos publish
+  # immediately instead of waiting a day (search indexing > timing).
+
+# Discoverability — how the catalog gets FOUND. Titles lead with the
+# search phrase parents actually type; tags fill the 500-char budget;
+# the playlist is the binge loop that racks up bedtime watch time;
+# channel keywords feed YouTube's channel-level search index.
+discovery:
+  playlist_title: "Bedtime Stories for Kids to Fall Asleep 🌙"
+  playlist_description: >-
+    Calm original bedtime stories for kids — one gentle voice, soft
+    music, no scary parts. A brand-new sleep story every evening.
+    Press play at bedtime and let the queue carry the night.
+  channel_keywords:
+    - "bedtime stories for kids"
+    - "sleep stories for children"
+    - "calm bedtime story"
+    - "bedtime story to fall asleep"
+    - "kids bedtime stories"
+    - "stories for kids"
+    - "original bedtime stories"
+    - "moonberry tales"
+  channel_description: >-
+    Original calm bedtime stories for children ages 5-8. A brand-new
+    gentle sleep story every evening — one calm voice, soft music, no
+    scary parts. Press play at bedtime and let the queue carry the night.
 
 daily:                              # what the factory produces each day
   long_videos: 2                    # ~11-minute original stories

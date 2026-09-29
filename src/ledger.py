@@ -18,6 +18,16 @@ from .config import cfg, ROOT
 LOCK = threading.Lock()
 STATE_PATH = ROOT / "data" / "state.json"
 
+# Dry-run protection: when read-only, save() is a no-op so a --dry-run
+# can never pollute the real memory (the daily gate reads last_run —
+# a dry-run that stamped today would make the real cycle skip).
+_READ_ONLY = False
+
+
+def set_read_only(v: bool) -> None:
+    global _READ_ONLY
+    _READ_ONLY = v
+
 DEFAULT = {
     "version": 1,
     "episodes": [],          # [{n, title, hash, seed, date, status, ids}]
@@ -42,6 +52,8 @@ def load() -> dict:
 
 
 def save(state: dict) -> None:
+    if _READ_ONLY:
+        return
     with LOCK:
         STATE_PATH.parent.mkdir(parents=True, exist_ok=True)
         tmp = STATE_PATH.with_suffix(".tmp")
