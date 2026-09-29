@@ -1,0 +1,61 @@
+name: reconsent
+
+# The one-click YouTube re-consent (RUNBOOK Part 3/5).
+#
+# Phase 1 (no inputs): print the OAuth consent URL built from the
+#   YT_CLIENT_ID secret. The URL contains only public information
+#   (client id, scopes, redirect uri) — the same URL the user sees
+#   in their browser — so printing it to the log is safe.
+#
+# Phase 2 (code + pubkey inputs): exchange the authorization code for
+#   a fresh refresh token with the EXTENDED scope set (force-ssl for
+#   playlists/branding + yt-analytics.readonly). The new refresh
+#   token is returned ONLY as a PyNaCl sealed box encrypted to a
+#   public key provided by the operator in the dispatch — the private
+#   key never leaves the operator's machine. Nothing sensitive is
+#   ever printed or committed.
+
+on:
+  workflow_dispatch:
+    inputs:
+      code:
+        description: "Authorization code from the callback page (leave empty for link-only)"
+        default: ""
+        type: string
+      pubkey:
+        description: "Base64 X25519 public key to seal the new refresh token to"
+        default: ""
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: reconsent
+  cancel-in-progress: false
+
+jobs:
+  reconsent:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Print the consent link
+        if: ${{ inputs.code == '' }}
+        env:
+          YT_CLIENT_ID: ${{ secrets.YT_CLIENT_ID }}
+        run: python tools/gen_auth_url.py "$YT_CLIENT_ID"
+
+      - name: Exchange the code and seal the new token
+        if: ${{ inputs.code != '' }}
+        env:
+          CODE: ${{ inputs.code }}
+          PUBKEY: ${{ inputs.pubkey }}
+          YT_CLIENT_ID: ${{ secrets.YT_CLIENT_ID }}
+          YT_CLIENT_SECRET: ${{ secrets.YT_CLIENT_SECRET }}
+        run: |
+          pip install --quiet pynacl
+          python tools/reconsent_exchange.py "$CODE" "$PUBKEY"

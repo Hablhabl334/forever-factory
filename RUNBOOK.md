@@ -108,10 +108,16 @@ the **bedtime playlist** (the binge loop) and **channel keywords**
 skips them gracefully (a one-line note in the daily log, uploads
 unaffected) until you re-consent:
 
-1. Run `python tools/gen_auth_url.py` (or ask me for the link), open
-   it, click Allow — same flow as Part 2, same callback page.
-2. Send me the code (or run `python tools/auth.py`) — the new
-   refresh token replaces the `YT_REFRESH_TOKEN` secret.
+1. Trigger the **reconsent** workflow (Actions → reconsent → Run
+   workflow, no inputs). The run log prints the consent link — the
+   machine builds it from its own stored `YT_CLIENT_ID`, so no
+   credentials are needed on your computer. Open it, click Allow —
+   same flow as Part 2, same callback page.
+2. Send me the code from the callback page. I dispatch the same
+   workflow in *exchange* mode: it swaps the code for a new refresh
+   token where the client credentials live (repo secrets) and
+   returns it sealed in a sealed-box only I can open — nothing
+   sensitive ever appears in a public log or the repo.
 3. From the next cycle on, every long lands in the public
    "Bedtime Stories for Kids to Fall Asleep" playlist automatically.
 
