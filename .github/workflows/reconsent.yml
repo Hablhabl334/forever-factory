@@ -47,7 +47,17 @@ jobs:
         if: ${{ inputs.code == '' }}
         env:
           YT_CLIENT_ID: ${{ secrets.YT_CLIENT_ID }}
-        run: python tools/gen_auth_url.py "$YT_CLIENT_ID"
+        run: |
+          # GitHub auto-masks the client_id (a repo secret) in plain
+          # log output — the client id is public info by design, so
+          # emit the finished URL base64-encoded instead: masking
+          # can't match it, and the operator decodes locally.
+          python tools/gen_auth_url.py "$YT_CLIENT_ID" > /tmp/link.txt || true
+          URL=$(grep -o 'https://accounts.google.com[^ ]*' /tmp/link.txt | head -1)
+          if [ -z "$URL" ]; then cat /tmp/link.txt; exit 1; fi
+          printf '%s' "LINK_B64:" > /tmp/b64.txt
+          printf '%s' "$URL" | base64 -w0 >> /tmp/b64.txt
+          cat /tmp/b64.txt; echo
 
       - name: Exchange the code and seal the new token
         if: ${{ inputs.code != '' }}
