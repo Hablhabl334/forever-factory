@@ -75,6 +75,37 @@
     ],
     "thumbnail": "2026-09-28"
    }
+  },
+  {
+   "n": 6,
+   "title": "Onda and the Sleepy Stars",
+   "hash": "aa2aadb3db4839ee68fc8554",
+   "seed": 129223649586447,
+   "date": "2026-09-29",
+   "status": "uploaded",
+   "ids": {
+    "long": "pSRPxXnyAZg",
+    "shorts": [
+     "Mir11YcoWAw",
+     "WSM7pIy8kdE"
+    ],
+    "thumbnail": "2026-09-29"
+   }
+  },
+  {
+   "n": 7,
+   "title": "The Mist Slippers of Lullaby Loch",
+   "hash": "c4d2888bfd7d45487f4dfa5d",
+   "seed": 69012307855694,
+   "date": "2026-09-29",
+   "status": "uploaded",
+   "ids": {
+    "long": "DA0tiB7QrlY",
+    "shorts": [
+     "DVAoVnK5FtA"
+    ],
+    "thumbnail": "2026-09-29"
+   }
   }
  ],
  "story_hashes": [
@@ -82,16 +113,37 @@
   "4dbcfd5ae3a11df216f608b9",
   "b07d4611e141e4ebe617dca0",
   "e5b33a7cc2a72129b828b1e5",
-  "5f09494e0ca24921071c9270"
+  "5f09494e0ca24921071c9270",
+  "aa2aadb3db4839ee68fc8554",
+  "c4d2888bfd7d45487f4dfa5d"
  ],
  "quota": {
-  "date": "2026-09-28",
-  "units_used": 8250
+  "date": "2026-09-29",
+  "units_used": 8251
  },
- "last_run": "2026-09-28",
+ "last_run": "2026-09-29",
  "stats": {
-  "videos_published": 10,
-  "days_active": 3
+  "videos_published": 15,
+  "days_active": 4
  },
- "_last_days_active": "2026-09-28"
+ "_last_days_active": "2026-09-29",
+ "analytics": [
+  {
+   "date": "2026-09-29",
+   "total_views": 25,
+   "videos": {
+    "_oF4dTUGy24": 3,
+    "TRY0QZfgjBE": 5,
+    "Iocf2nxJuOY": 7,
+    "UG4z7_XQkjM": 2,
+    "4tbBV--cTsI": 7,
+    "h4B5GXfmjLg": 0,
+    "kvFpuUEz8QA": 0,
+    "TnJJf_3-Zg8": 0,
+    "3ZR4l08XxyE": 1,
+    "Zjf7Ne2z_4U": 0
+   }
+  }
+ ],
+ "discovery": {}
 }
