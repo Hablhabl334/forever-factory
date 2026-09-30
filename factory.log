@@ -1,28 +1,51 @@
-[0;93m2026-09-29 12:39:20.052531562 [W:onnxruntime:Default, device_discovery.cc:146 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
-[stats] growth report 2026-09-29
-[stats]   baseline: 25 view(s) across 10 video(s)
+[0;93m2026-09-30 10:32:22.388640588 [W:onnxruntime:Default, device_discovery.cc:146 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
+[stats] growth report 2026-09-30
+[stats]   total: 30 views  (+5 since last report)
 [stats]        7 views  ·  The Thimble Windmill and the Sleepy Duskhollow — The Magic W
 [stats]        7 views  ·  The Spider and the Sleepy Clock — The Bravest Part 🌙 #shorts
 [stats]        5 views  ·  The Thimble Windmill and the Sleepy Duskhollow — The Bravest
-[6] story: Onda and the Sleepy Stars (1462 words, hash aa2aadb3db)
-[6] narration: 770s, 173 caption chunks
-[6] long video: 788s, 67.1MB
-[6] thumbnail + 2 shorts ready
-  [youtube] uploaded long: pSRPxXnyAZg (publishAt 2026-09-29T19:30:00+03:00)
-  [youtube] setting thumbnail thumbnail.png (248 KB) on pSRPxXnyAZg
+[8] story: The Night of the Forgotten Lullaby (1458 words, hash 1a6b5f0afe)
+[8] narration: 762s, 174 caption chunks
+[8] long video: 780s, 67.5MB
+[8] thumbnail + 2 shorts ready
+  [youtube] uploaded long: git-4p8E9xY (publishAt 2026-09-30T19:30:00+03:00)
+  [youtube] setting thumbnail thumbnail.png (263 KB) on git-4p8E9xY
   [youtube] thumbnail set
-  [youtube] uploaded short: Mir11YcoWAw (publishAt 2026-09-29T17:30:00+03:00)
-  [youtube] uploaded short: WSM7pIy8kdE (publishAt 2026-09-29T20:30:00+03:00)
-[7] story: The Mist Slippers of Lullaby Loch (1464 words, hash c4d2888bfd)
-[7] narration: 780s, 170 caption chunks
-[7] long video: 798s, 72.6MB
-[7] thumbnail + 1 shorts ready
-  [youtube] uploaded long: DA0tiB7QrlY (publishAt 2026-09-29T21:00:00+03:00)
-  [youtube] setting thumbnail thumbnail.png (267 KB) on DA0tiB7QrlY
+  [youtube] uploaded short: fkFhtGfsx_0 (publishAt 2026-09-30T17:30:00+03:00)
+  [youtube] uploaded short: n_GOahvID_Y (publishAt 2026-09-30T20:30:00+03:00)
+[9] story: Tansy and the Tuneless Nightingales (1456 words, hash b9df00fc21)
+[9] narration: 767s, 167 caption chunks
+[9] long video: 785s, 70.0MB
+[9] thumbnail + 1 shorts ready
+  [youtube] uploaded long: 8m3PZ44NW2c (publishAt 2026-09-30T21:00:00+03:00)
+  [youtube] setting thumbnail thumbnail.png (259 KB) on 8m3PZ44NW2c
   [youtube] thumbnail set
-  [youtube] uploaded short: DVAoVnK5FtA (publishAt now)
-[playlist] needs the one-click re-consent (RUNBOOK Part 3) — playlists skipped for now, uploads unaffected
-[branding] needs the one-click re-consent (RUNBOOK Part 3) — channel keywords skipped for now, uploads unaffected
-  ✓ episode 6: Onda and the Sleepy Stars
-  ✓ episode 7: The Mist Slippers of Lullaby Loch
+  [youtube] uploaded short: k8PzqtNVynI (publishAt now)
+[playlist] created: Bedtime Stories for Kids to Fall Asleep 🌙 (PLTAWxio953Qk)
+[playlist] 8 long video(s) not in the playlist yet
+[playlist] ep2 long added (_oF4dTUGy24)
+[playlist] ep3 long added (UG4z7_XQkjM)
+[playlist] ep4 long added (h4B5GXfmjLg)
+[playlist] ep5 long added (3ZR4l08XxyE)
+[playlist] ep6 long added (pSRPxXnyAZg)
+[playlist] ep7 long added (DA0tiB7QrlY)
+[playlist] ep8 long added (git-4p8E9xY)
+[playlist] ep9 long added (8m3PZ44NW2c)
+[branding] update failed: HTTP 400: {
+  "error": {
+    "code": 400,
+    "message": "Request contains an invalid argument.",
+    "errors": [
+      {
+        "message": "Id required.",
+        "domain": "youtube.CoreErrorDomain",
+        "reason": "SERVICE_UNAVAILABLE"
+      }
+    ],
+    "status": "INVALID_ARGUMENT"
+  }
+}
+
+  ✓ episode 8: The Night of the Forgotten Lullaby
+  ✓ episode 9: Tansy and the Tuneless Nightingales
 combination space: 4,970,310,669,434,880 stories — the factory never repeats

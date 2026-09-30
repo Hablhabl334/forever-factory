@@ -27,7 +27,8 @@
      "TRY0QZfgjBE",
      "Iocf2nxJuOY"
     ],
-    "thumbnail": "2026-09-27"
+    "thumbnail": "2026-09-27",
+    "playlist": "2026-09-30"
    }
   },
   {
@@ -42,7 +43,8 @@
     "shorts": [
      "4tbBV--cTsI"
     ],
-    "thumbnail": "2026-09-27"
+    "thumbnail": "2026-09-27",
+    "playlist": "2026-09-30"
    }
   },
   {
@@ -58,7 +60,8 @@
      "kvFpuUEz8QA",
      "TnJJf_3-Zg8"
     ],
-    "thumbnail": "2026-09-28"
+    "thumbnail": "2026-09-28",
+    "playlist": "2026-09-30"
    }
   },
   {
@@ -73,7 +76,8 @@
     "shorts": [
      "Zjf7Ne2z_4U"
     ],
-    "thumbnail": "2026-09-28"
+    "thumbnail": "2026-09-28",
+    "playlist": "2026-09-30"
    }
   },
   {
@@ -89,7 +93,8 @@
      "Mir11YcoWAw",
      "WSM7pIy8kdE"
     ],
-    "thumbnail": "2026-09-29"
+    "thumbnail": "2026-09-29",
+    "playlist": "2026-09-30"
    }
   },
   {
@@ -104,7 +109,41 @@
     "shorts": [
      "DVAoVnK5FtA"
     ],
-    "thumbnail": "2026-09-29"
+    "thumbnail": "2026-09-29",
+    "playlist": "2026-09-30"
+   }
+  },
+  {
+   "n": 8,
+   "title": "The Night of the Forgotten Lullaby",
+   "hash": "1a6b5f0afecbe11c05c581d3",
+   "seed": 63870008393090,
+   "date": "2026-09-30",
+   "status": "uploaded",
+   "ids": {
+    "long": "git-4p8E9xY",
+    "shorts": [
+     "fkFhtGfsx_0",
+     "n_GOahvID_Y"
+    ],
+    "thumbnail": "2026-09-30",
+    "playlist": "2026-09-30"
+   }
+  },
+  {
+   "n": 9,
+   "title": "Tansy and the Tuneless Nightingales",
+   "hash": "b9df00fc21026fc41d8b209d",
+   "seed": 238837321345256,
+   "date": "2026-09-30",
+   "status": "uploaded",
+   "ids": {
+    "long": "8m3PZ44NW2c",
+    "shorts": [
+     "k8PzqtNVynI"
+    ],
+    "thumbnail": "2026-09-30",
+    "playlist": "2026-09-30"
    }
   }
  ],
@@ -115,18 +154,20 @@
   "e5b33a7cc2a72129b828b1e5",
   "5f09494e0ca24921071c9270",
   "aa2aadb3db4839ee68fc8554",
-  "c4d2888bfd7d45487f4dfa5d"
+  "c4d2888bfd7d45487f4dfa5d",
+  "1a6b5f0afecbe11c05c581d3",
+  "b9df00fc21026fc41d8b209d"
  ],
  "quota": {
-  "date": "2026-09-29",
-  "units_used": 8251
+  "date": "2026-09-30",
+  "units_used": 8701
  },
- "last_run": "2026-09-29",
+ "last_run": "2026-09-30",
  "stats": {
-  "videos_published": 15,
-  "days_active": 4
+  "videos_published": 20,
+  "days_active": 5
  },
- "_last_days_active": "2026-09-29",
+ "_last_days_active": "2026-09-30",
  "analytics": [
   {
    "date": "2026-09-29",
@@ -143,7 +184,30 @@
     "3ZR4l08XxyE": 1,
     "Zjf7Ne2z_4U": 0
    }
+  },
+  {
+   "date": "2026-09-30",
+   "total_views": 30,
+   "videos": {
+    "_oF4dTUGy24": 4,
+    "TRY0QZfgjBE": 5,
+    "Iocf2nxJuOY": 7,
+    "UG4z7_XQkjM": 2,
+    "4tbBV--cTsI": 7,
+    "h4B5GXfmjLg": 0,
+    "kvFpuUEz8QA": 0,
+    "TnJJf_3-Zg8": 1,
+    "3ZR4l08XxyE": 2,
+    "Zjf7Ne2z_4U": 0,
+    "pSRPxXnyAZg": 0,
+    "Mir11YcoWAw": 0,
+    "WSM7pIy8kdE": 1,
+    "DA0tiB7QrlY": 1,
+    "DVAoVnK5FtA": 0
+   }
   }
  ],
- "discovery": {}
+ "discovery": {
+  "playlist_id": "PLTAWxio953Qk"
+ }
 }
