@@ -29,9 +29,9 @@ on:
         type: boolean
         default: false
       gated:
-        description: "Respect the daily gate even though this is a dispatch (set automatically by the watchdog)"
+        description: "Respect the daily gate (default ON: API dispatches like the external pinger or watchdog are quota-safe; untick only to force a re-run of an already-produced day)"
         type: boolean
-        default: false
+        default: true
 
 permissions:
   contents: write   # commit the factory memory (data/state.json)

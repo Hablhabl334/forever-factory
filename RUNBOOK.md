@@ -140,3 +140,50 @@ improve-loop (impressions, CTR, watch time per video, not just views).
 - **Keep the schedule alive** → nothing to do: the workflow commits
   `data/state.json` every day, which keeps the repo (and the cron
   schedule) permanently active.
+
+---
+
+## Part 6 — The forever clock (external pinger, ~5 min once)
+
+GitHub's own scheduler is *best-effort by design* — it can delay or
+skip runs (new repos are starved hardest). The 9 staggered cron slots
++ watchdog already catch most days, but if you want **100%
+deterministic daily starts**, put the clock outside GitHub. Free
+forever with cron-job.org:
+
+**Step 1 — a minimal-scope token (2 min)**
+1. GitHub → click your avatar → **Settings** → Developer settings
+   (bottom of the left menu) → **Fine-grained tokens** →
+   "Generate new token".
+2. Name it `factory-pinger`. Expiration: **No expiration** (or 1 year
+   and put a reminder to rotate it). Repository access:
+   **Only select repositories** → `forever-factory`.
+3. Permissions → **Actions → Read and write**. Nothing else — this
+   token can ONLY start workflows, it cannot read secrets, edit
+   files, or touch any other repo.
+4. Generate, copy the `github_pat_...` value.
+
+**Step 2 — the external clock (3 min)**
+1. Create a free account at **cron-job.org** (email + password).
+2. Add job, exactly:
+   - **URL:** `https://api.github.com/repos/Hablhabl334/forever-factory/actions/workflows/daily-factory.yml/dispatches`
+   - **Method:** POST
+   - **Headers:** `Authorization: Bearer github_pat_YOUR_TOKEN` and
+     `Accept: application/vnd.github+json` and
+     `Content-Type: application/json`
+   - **Body:** `{"ref":"main"}`
+   - **Schedule:** every day at **09:05 UTC** (11:05 Cairo in summer
+     — just before the first GitHub slot, so it wins the race and
+     the GitHub slots become pure backup).
+3. Save. Done — the day now starts on an external clock that never
+   starves.
+
+Why this is safe: the dispatch is **gated by default** — if the day
+was already produced, a duplicate ping costs one 9-second skipped
+run and zero YouTube quota. Even if the token leaked, the worst
+case is someone *starting* a workflow that immediately skips.
+
+**Belt and suspenders, the full stack:** external pinger (09:05 UTC)
+→ 9 GitHub cron slots (09:23–20:31 UTC) → watchdog heartbeats
+(5×/day) → auto-Issue if a day is ever missed. Four independent
+layers; a day can only be missed if all four fail on the same day.
