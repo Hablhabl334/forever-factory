@@ -296,13 +296,18 @@ def ensure_channel_branding(token: str, state: dict) -> bool:
     if ledger.quota_remaining(state) < UNITS_BRANDING:
         print("[branding] quota low — retrying next cycle")
         return False
+    channel_id = items[0].get("id")
     new_branding = {"channel": dict(branding)}  # preserve everything else
     new_branding["channel"]["keywords"] = kw
     if description:
         new_branding["channel"]["description"] = description
     try:
+        # channels.update REQUIRES the channel id in the body — the
+        # GET above used mine=true, but the PUT does not accept it
+        # ("Id required.", HTTP 400) — learned on the first live run.
         _send(token, f"{API_BASE}/channels?part=brandingSettings",
-              {"brandingSettings": new_branding}, method="PUT")
+              {"id": channel_id, "brandingSettings": new_branding},
+              method="PUT")
     except ScopeBlocked:
         print("[branding] needs the one-click re-consent (RUNBOOK Part 3) "
               "— channel keywords skipped for now, uploads unaffected")
