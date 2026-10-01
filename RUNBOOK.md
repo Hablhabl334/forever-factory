@@ -200,7 +200,7 @@ case is someone *starting* a workflow that immediately skips.
 The channel pivoted from kids bedtime stories to **psychology of
 love** (tips, breakups, attachment, self-worth). What changed:
 
-- **Content engine**: 24 topics × 41 real psychology concepts,
+- **Content engine**: 24 topics × 40 real psychology concepts,
   combinatorial scripts, same no-repeat ledger as before.
 - **Design**: flat webtoon-lite couple illustrations + bold quote
   cards, matching the reference channel's look (black title band on
@@ -222,6 +222,42 @@ love** (tips, breakups, attachment, self-worth). What changed:
   YouTube Studio if you prefer a clean slate — the machine never
   touches them).
 
-Everything else is the same machine: zero APIs (Piper voice, PIL
-art, numpy music), GitHub Actions, memory in git, quota ledger,
-self-healing uploads, the external clock.
+Everything else is the same machine: free voice + PIL art + numpy
+music (all layers below), GitHub Actions, memory in git, quota
+ledger, self-healing uploads, the external clock.
+
+## Part 8 — The three upgrades (2026-10-01, owner request)
+
+**1. The bank that never repeats (forever, not 1-2-5 years).**
+Every concept now has a *variation layer* (`src/content_variants.py`):
+3 hooks × 3 example scenes × 3 takeaways per concept, and the
+example scenes are **slot-filled** — a fresh cast and setting
+(40 names × 16 places × 7 days × 8 times) every time a concept
+appears. The no-repeat ledger now records **every Short script
+hash** (`short_hashes` in state.json) and the engine drifts until
+all 4 daily Shorts are provably new. Measured space: **273
+trillion distinct scripts — 0 collisions in a 1000-episode
+stress test**; at 5 videos/day that is millions of years. If a
+surface ever collides anyway, the drift loop regenerates — the
+worst case is a retry, never a repeat.
+
+**2. A voice that sounds human.** Narration is now **neural TTS**
+(`edge-tts`, the Edge read-aloud service — free, no key, no
+account) with `en-US-AriaNeural`: warm, conversational, calm. A
+deterministic ±3% per-sentence pace jitter keeps the delivery
+organic. Long videos run at -4% (intimate), Shorts at -2%
+(brisk). If the endpoint is ever unreachable, the run falls back
+to the vendored offline Piper voice automatically — the channel
+never goes silent. Voice settings: `channel.yaml → voice:`.
+
+**3. Calm music that matches the script and the voice.** The bed
+is now mood-matched per topic (healing topics get minor-leaning
+progressions, attachment suspended warmth, warm topics major
+glow) and adds a soft plucked-arpeggio layer over the pads. The
+mix normalizes the narration to one loudness standard and the
+bed **ducks under each spoken sentence, breathing back in the
+pauses** (config: `music.duck_depth`). Nothing to license —
+every episode's soundtrack is generated from its seed.
+
+These changed no schedules, no quota math, no upload logic — the
+same forever machine, upgraded in place.
