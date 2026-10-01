@@ -301,6 +301,8 @@ def ensure_channel_branding(token: str, state: dict) -> bool:
     new_branding["channel"]["keywords"] = kw
     if description:
         new_branding["channel"]["description"] = description
+    # retitle the channel to the new niche (once, with the branding pass)
+    new_branding["channel"]["title"] = cfg()["channel"]["display_name"]
     try:
         # channels.update REQUIRES the channel id in the body — the
         # GET above used mine=true, but the PUT does not accept it

@@ -1,87 +1,57 @@
-"""Per-video YouTube metadata — built for SEARCH, not just branding.
+"""Per-video YouTube metadata for the love-psychology channel.
 
-Two hard lessons baked into this module:
+The Short rules come straight from the channel owner and are FIXED:
+  * every Short title  = "Subscribe for more tips like this"
+  * every Short tags   = #psychology #relationship #love #relationshipgoals
+  (fixed titles are a deliberate growth strategy in this niche — the
+  Shorts feed sells the hook, not the title; the identical title turns
+  every Short into a subscription funnel.)
 
-1. Nobody searches for an invented story title. "The Wind Flute of
-   Sleepy Dunes" is beautiful branding and invisible in search. So the
-   SEARCH PHRASE leads the title ("Bedtime Story for Kids 🌙 ...") and
-   the story title rides behind it — the exact pattern used by every
-   channel that actually ranks in this niche.
-
-2. Each video targets a slightly different long-tail (rotating title
-   frames + rotating tag emphasis), so five uploads don't cannibalize
-   each other for one phrase — the catalog casts a wider net.
-
-Titles: <=100 codepoints (YouTube's hard limit). Tags: filled toward
-the 500-character budget (broad -> long-tail -> story-specific ->
-misspelling variants). Descriptions: the first ~150 characters carry
-the keywords (search snippet + preview weight), then the story hook,
-real chapters, the binge line, the honest AI disclosure, and exactly
-three hashtags (more than three and YouTube shows none).
+Long videos stay SEO-driven (search-first heads, rotating long-tails,
+keyword-loaded first 150 description chars, chapter lists from the
+script's concept structure, ~500-char tag budgets).
 """
 from __future__ import annotations
 
-import json
-from pathlib import Path
-
 from .config import cfg
+from .content_data import CTA_LINE
 
-BEAT_LABELS = {
-    "hook": "The Story Begins",
-    "setup_home": "A Cozy Little Home",
-    "setup_problem": "The Night Calls",
-    "challenge_1": "First Steps Into the Woods",
-    "challenge_2": "The Long Climb",
-    "helper_gift": "A Helper's Lesson",
-    "challenge_3": "The Bravest Part",
-    "turn": "The Magic Wakes",
-    "resolve": "The Night Mends",
-    "twist": "A Gentle Secret",
-    "moral": "What {name} Learned",
-    "return": "Walking Home",
-    "tuck_in": "Snug in Bed",
-    "sleep_a": "Time to Get Sleepy",
-    "sleep_b": "Drifting Off",
-    "goodnight": "Goodnight",
-}
+SHORT_TITLE = CTA_LINE.rstrip(".")               # fixed, exactly as specified
+SHORT_TAGS = ["#psychology", "#relationship", "#love", "#relationshipgoals"]
+SHORT_HASHTAGS = "#psychology #relationship #love #relationshipgoals"
 
-# Rotating (search-phrase, long-tail) pairs for long titles. The head
-# is what parents actually type; the tail widens each video's net.
 TITLE_FRAMES = [
-    ("Bedtime Story for Kids", "Calm Sleep Story"),
-    ("Sleep Story for Kids", "Bedtime Story to Fall Asleep"),
-    ("Calm Bedtime Story", "Story for Kids to Sleep"),
-    ("Kids Bedtime Story", "Gentle Sleep Story"),
-    ("Bedtime Story for Children", "Fall Asleep Bedtime Story"),
+    ("Psychology of Love", "Love Psychology Tips"),
+    ("Relationship Psychology", "Love Tips That Work"),
+    ("Love Psychology", "Relationship Advice"),
+    ("Psychology Facts About Love", "Dating Psychology"),
+    ("Relationship Tips", "Psychology of Love"),
 ]
 
-# Broad terms every video should compete for; ordered by priority and
-# packed into the 500-char tag budget after the story-specific ones.
 TAG_POOL = [
-    "bedtime stories for kids",
-    "bedtime story for kids",
-    "bedtime stories",
-    "sleep story for kids",
-    "story to fall asleep",
-    "calm bedtime story",
-    "kids bedtime stories",
-    "sleep stories for children",
-    "bedtime story to fall asleep",
-    "bedtime stories for 5 year olds",
-    "bedtime story for 6 year old",
-    "stories for kids",
-    "kids stories",
-    "night story for kids",
-    "toddler bedtime story",
-    "storytime for kids",
-    "read aloud story",
-    "relaxing sleep story",
-    "original bedtime story",
-    "bed time story",
-    "moonberry tales",
+    "psychology of love",
+    "love psychology",
+    "relationship psychology",
+    "relationship tips",
+    "love tips",
+    "psychology facts",
+    "relationship advice",
+    "breakup advice",
+    "how to get over a breakup",
+    "love advice",
+    "dating psychology",
+    "attachment styles",
+    "self love",
+    "relationship goals",
+    "psychology facts about love",
+    "why we fall in love",
+    "signs of love",
+    "emotional intelligence",
+    "green flags relationship",
+    "red flags relationship",
+    "love brain science",
+    "relationship psychology facts",
 ]
-
-HASHTAGS = ["#BedtimeStories", "#SleepStory", "#StoriesForKids"]
 
 
 def _fmt_ts(t: float) -> str:
@@ -90,49 +60,36 @@ def _fmt_ts(t: float) -> str:
 
 
 def _frame(story: dict) -> tuple[str, str]:
-    """Deterministic per-episode frame rotation (seeded by story hash,
-    so a rebuild produces the identical title)."""
+    """Deterministic per-episode rotation (seeded by script hash)."""
     frames = cfg().get("discovery", {}).get("title_frames") or TITLE_FRAMES
     pick = int(story["hash"][:6], 16) % len(frames)
     return frames[pick]
 
 
 def _clip(text: str, limit: int) -> str:
-    """Truncate on a codepoint boundary — never mid-emoji."""
-    return text if len(text) <= limit else text[:limit].rstrip(" |—-,·🌙")
+    return text if len(text) <= limit else text[:limit].rstrip(" |—-,·")
 
 
 def long_title(story: dict) -> str:
     head, tail = _frame(story)
-    full = f"{head} 🌙 {story['title']} | {tail}"
+    n = len(story["atoms"]["concepts"])
+    full = f"{head}: {story['title']} | {tail}"
     if len(full) <= 100:
         return full
-    mid = f"{head} 🌙 {story['title']}"
+    mid = f"{head}: {story['title']}"
     if len(mid) <= 100:
         return mid
     return _clip(mid, 100)
 
 
-def _tag_list(story: dict, frame: tuple[str, str]) -> list[str]:
-    atoms = story["atoms"]
-    hero = atoms["hero"].split()[-1].lower()
-    specific = [
-        frame[0].lower(),
-        frame[1].lower(),
-        f"{hero} story",
-        f"{hero} bedtime story",
-        f"{hero} story for kids",
-        atoms["setting"].lower(),
-        atoms["motif"].lower(),
-        f"{atoms['moral'].split(',')[0].strip().lower()} story for kids",
-    ]
+def _tag_list(story: dict) -> list[str]:
+    specific = [t.lower() for t in story["atoms"]["concepts"]]
     pool = cfg().get("discovery", {}).get("tag_pool") or TAG_POOL
     out: list[str] = []
     for t in specific + list(pool):
         t = t.strip()
         if t and t not in out:
             out.append(t)
-    # pack toward the 500-char budget (comma+space separators)
     packed: list[str] = []
     used = 0
     for t in out:
@@ -148,64 +105,49 @@ def long_metadata(story: dict, narration: dict) -> dict:
     vconf = cfg()["video"]
     title_s = float(vconf.get("title_card_seconds", 6))
     channel = cfg()["channel"]
+    n = len(story["atoms"]["concepts"])
 
-    # chapters from scene timings (first must be 0:00 or YouTube
-    # ignores the whole list)
-    chapters = [f"{_fmt_ts(0)} Tonight's Story: {story['title']}"]
+    # chapters: title card at 0:00, then each concept's card scene
+    chapters = [f"{_fmt_ts(0)} {story['title']} — {n} psychology lessons"]
     t = title_s
-    for scene in story["scenes"]:
-        label = BEAT_LABELS.get(scene["id"], "The Story Continues").format(name=story["atoms"]["name"])
-        chapters.append(f"{_fmt_ts(t)} {label}")
-        t += narration["scene_durations"][scene["n"] - 1]
-    chapters.append(f"{_fmt_ts(t)} Sleep well")
+    tip = 0
+    for i, scene in enumerate(story["scenes"]):
+        if scene["id"].startswith("tip") and scene["id"].endswith("_card"):
+            tip += 1
+            term = story["atoms"]["concepts"][tip - 1]
+            chapters.append(f"{_fmt_ts(t)} Tip {tip}: {term}")
+        t += narration["scene_durations"][i]
 
-    atoms = story["atoms"]
-    frame = _frame(story)
-    story_line = (
-        f"{atoms['hero'].title()} named {atoms['name']} sets out to {atoms['quest']} — "
-        f"a gentle adventure about {atoms['moral'].lower()}."
-    )
     desc = (
-        # first ~150 chars: the keywords (search snippet weight)
-        f"A calm bedtime story for kids to fall asleep to — soft music, one gentle "
-        f"voice, no scary parts. Perfect sleep story for children ages 5-8.\n\n"
-        f"\U0001f319 \"{story['hook']}.\"\n\n"
-        f"{story_line} A brand-new original {frame[0].lower()}, told once — "
-        f"our stories never repeat.\n\n"
-        f"\u23f1 Chapters\n{chr(10).join(chapters)}\n\n"
-        f"\U0001f319 ABOUT {channel['display_name']}\n"
-        f"A new original bedtime story for kids every evening — calm, kind, and "
-        f"just long enough for little listeners to drift off. Play our stories in "
-        f"a row at bedtime for a full night of gentle tales.\n\n"
-        f"\U0001f916 This story, artwork, narration, and music are created with AI "
-        f"assistance and reviewed before publishing — disclosed to YouTube per the "
-        f"synthetic-media policy. Made for kids.\n\n"
-        + " ".join(HASHTAGS)
+        # first ~150 chars carry the search keywords
+        f"Psychology of love explained in plain words — {n} lessons on "
+        f"{story['title'].lower()}. Relationship tips that actually change "
+        f"how you love.\n\n"
+        f"\"{story['hook']}\"\n\n"
+        f"What you'll learn:\n"
+        + "\n".join(f"  {i+1}. {term}" for i, term in enumerate(story["atoms"]["concepts"]))
+        + "\n\n"
+        f"New love psychology videos every day — attraction, attachment, "
+        f"breakups, self-worth and the science behind how we love.\n\n"
+        f"\U0001f9ea ABOUT {channel['display_name'].upper()}\n"
+        f"Real psychology, plain language. One new video every day about "
+        f"love, relationships and the mind behind them.\n\n"
+        f"\U0001f916 Narration, artwork and music are AI-assisted and "
+        f"reviewed before publishing — disclosed per YouTube's synthetic "
+        f"media policy. Not made for kids.\n\n"
+        f"#psychology #love #relationship"
     )
-
-    tags = _tag_list(story, frame)
     return {"title": long_title(story), "description": desc[:4900],
-            "tags": tags, "chapters": chapters}
+            "tags": _tag_list(story), "chapters": chapters}
 
 
-def short_metadata(story: dict, window: dict) -> dict:
-    n = window["scene"]
-    scene = next(s for s in story["scenes"] if s["n"] == n)
-    label = BEAT_LABELS.get(scene["id"], "A Gentle Moment").format(name=story["atoms"]["name"])
-    hero = story["atoms"]["hero"].split()[-1].lower()
-    # the shorts feed truncates hard — keyword first, always
-    title = _clip(f"Bedtime Story for Kids \U0001f319 {hero.title()} — {story['title']}", 100)
+def short_metadata(story: dict, short: dict) -> dict:
+    """FIXED title + FIXED tags (the owner's growth strategy)."""
     desc = (
-        f"A calm moment from tonight's full bedtime story for kids \U0001f319\n"
-        f"\"{story['title']}\" — the complete sleep story is on our channel, "
-        f"told in one gentle voice with no scary parts.\n\n"
-        f"New original {hero} tales for kids every evening \u00b7 ages 5-8.\n"
-        f"AI-assisted, human-reviewed before publishing.\n"
-        f"#BedtimeStories #Shorts #SleepStory"
+        f"{SHORT_HASHTAGS}\n\n"
+        f"New love psychology shorts every day — {story['topic_label']}.\n"
+        f"The full video is on the channel.\n\n"
+        f"{SHORT_HASHTAGS}"
     )
-    tags = [
-        "bedtime story", "sleep story", "bedtime shorts", "story for kids",
-        "calm story", "kids story", "kids shorts", "stories for kids",
-        f"{hero} story", "bedtime story for kids", "moonberry tales",
-    ]
-    return {"title": title, "description": desc[:4900], "tags": tags}
+    return {"title": SHORT_TITLE, "description": desc[:4900],
+            "tags": list(SHORT_TAGS)}

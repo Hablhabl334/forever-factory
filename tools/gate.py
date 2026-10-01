@@ -8,24 +8,29 @@ gate job) and watchdog.yml (to decide whether to kick the factory).
 Prints RUN or SKIP (a single line) and exits 0 either way — a SKIP is a
 healthy, cheap outcome, not a failure.
 
-Rules:
-  * A human workflow_dispatch always RUNS (explicit intent).
-  * A dispatch by github-actions[bot] (the watchdog kicking us) is
-    treated like a schedule: subject to the gate.
-  * RUN if today's cycle has not completed yet (last_run != today).
-  * RUN if an episode from today is in_progress (resume a crash).
-  * SKIP if last_run == today (the work is done; a later trigger
-    would only burn runner minutes — quota stays untouched).
+Window logic (evening cycle model):
+  The cycle runs ~22:00 Cairo and fills tomorrow's 6-hour slot grid,
+  so "the day is produced" is NOT a calendar-date question — a
+  morning-after trigger must NOT double-produce. SKIP if the last
+  successful cycle finished less than WINDOW_HOURS ago (20h: enough
+  tolerance to catch a missed evening slot same-day via the backup
+  triggers, without letting the next evening fire twice).
+
+  * A human workflow_dispatch (gated=false) always RUNS (force).
+  * RUN if the window has elapsed (last cycle too old).
+  * RUN if an episode is in_progress (resume a crash).
+  * SKIP if last success is inside the window.
 """
 from __future__ import annotations
 
 import argparse
 import json
 import sys
-from datetime import date
+import time
 from pathlib import Path
 
 STATE = Path(__file__).resolve().parent.parent / "data" / "state.json"
+WINDOW_HOURS = 20.0
 
 
 def main() -> int:
@@ -49,17 +54,22 @@ def main() -> int:
         except json.JSONDecodeError:
             pass
 
-    today = date.today().isoformat()
-    already_done = state.get("last_run") == today
-    resuming = any(
-        e.get("status") == "in_progress" and e.get("date") == today
-        for e in state.get("episodes", [])
-    )
+    # last successful cycle -> epoch seconds. Records written by the
+    # window system carry last_run_ts; legacy date-only records are
+    # pre-window (treat as STALE so the first deployed cycle runs —
+    # the concurrency group + a fresh stamp keep duplicates cheap).
+    last_ts = state.get("last_run_ts")
+    age_h = (time.time() - last_ts) / 3600.0 if last_ts else None
+    resuming = any(e.get("status") == "in_progress"
+                   for e in state.get("episodes", []))
 
-    if already_done and not resuming:
-        print(f"SKIP  # last_run={today}, nothing to do")
+    if last_ts and age_h < WINDOW_HOURS and not resuming:
+        print(f"SKIP  # last cycle {age_h:.1f}h ago (< {WINDOW_HOURS:.0f}h window)")
     else:
-        print("RUN")
+        why = "no successful cycle yet" if not last_ts else f"last cycle {age_h:.1f}h ago"
+        if resuming:
+            why += " + in-progress episode to resume"
+        print(f"RUN   # {why}")
     return 0
 
 

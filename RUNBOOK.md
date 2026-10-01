@@ -91,14 +91,14 @@ New repository secret** (three times):
 
 1. Repo → **Actions → daily-factory → Run workflow** — first run
    produces a full episode and uploads it (scheduled for the next
-   evening peak slot).
+   publish slot).
 2. **Actions → verify-token → Run workflow** — green = credentials
    healthy.
-3. Done. Every day the factory runs (9 staggered cron slots + a
-   watchdog with 5 more chances — see `.github/workflows/`). Videos
-   appear on your channel at 19:30 / 21:00 Cairo time (13:00 / 17:30 /
-   20:30 for Shorts); a late run publishes immediately instead of
-   waiting.
+3. Done. Every day the cycle runs at **19:00 UTC (22:00 Cairo)** —
+   two hours before the day's first Short goes public at midnight
+   Cairo. Videos appear on the channel at **00:00 / 06:00 / 12:00 /
+   18:00 Cairo (the four Shorts)** and **20:00 Cairo (the long)**;
+   a late trigger takes the next slot instead of waiting.
 
 ## Part 5 — Optional: unlock playlists + channel keywords (1 click)
 
@@ -172,18 +172,56 @@ forever with cron-job.org:
      `Accept: application/vnd.github+json` and
      `Content-Type: application/json`
    - **Body:** `{"ref":"main"}`
-   - **Schedule:** every day at **09:05 UTC** (11:05 Cairo in summer
-     — just before the first GitHub slot, so it wins the race and
-     the GitHub slots become pure backup).
+   - **Schedule:** every day at **19:00 UTC** (22:00 Cairo in summer
+     — two hours before the first Short of the new day goes public
+     at midnight, so the machine finishes producing with headroom).
 3. Save. Done — the day now starts on an external clock that never
    starves.
+
+> Already set up for you (2026-09-30): the two live jobs fire at
+> **19:00 UTC** (primary) and **19:25 UTC** (backup). If you rebuild
+> them by hand, those are the times.
 
 Why this is safe: the dispatch is **gated by default** — if the day
 was already produced, a duplicate ping costs one 9-second skipped
 run and zero YouTube quota. Even if the token leaked, the worst
 case is someone *starting* a workflow that immediately skips.
 
-**Belt and suspenders, the full stack:** external pinger (09:05 UTC)
-→ 9 GitHub cron slots (09:23–20:31 UTC) → watchdog heartbeats
-(5×/day) → auto-Issue if a day is ever missed. Four independent
-layers; a day can only be missed if all four fail on the same day.
+**Belt and suspenders, the full stack:** external pinger (19:00 UTC)
++ external backup ping (19:25 UTC) → 9 GitHub cron slots (evening
+  window + morning recovery) → watchdog heartbeats → auto-Issue if a
+  cycle ever fails. Five independent layers; a day can only be missed
+  if all of them fail on the same day.
+
+---
+
+## Part 7 — The niche change (2026-10-01, done)
+
+The channel pivoted from kids bedtime stories to **psychology of
+love** (tips, breakups, attachment, self-worth). What changed:
+
+- **Content engine**: 24 topics × 41 real psychology concepts,
+  combinatorial scripts, same no-repeat ledger as before.
+- **Design**: flat webtoon-lite couple illustrations + bold quote
+  cards, matching the reference channel's look (black title band on
+  Shorts, bold stroked text overlays, #9B59B6 brand purple).
+- **Daily output**: **1 long (~9 min) + 4 native vertical Shorts**
+  (was 2 longs + 3 cut Shorts).
+- **Publish grid (Cairo)**: Shorts at **00:00 / 06:00 / 12:00 / 18:00**
+  (every 6 hours), the long at **20:00**. The cycle runs at **22:00
+  Cairo**, 2 hours before the first Short.
+- **Shorts carry a FIXED title** — `Subscribe for more tips like this`
+  — and fixed tags `#psychology #relationship #love
+  #relationshipgoals` (the owner's growth strategy).
+- **Not made for kids → comments open** (channel defaults; flip in
+  Studio → Settings → Community if any video ever shows them off).
+- **Channel rebrand**: the first cycle after the change sets the
+  channel title to *Psychology of Love* + new keywords + the
+  *Love Psychology Tips 💜* playlist.
+- The 22 kids videos stay on the channel as history (delete them in
+  YouTube Studio if you prefer a clean slate — the machine never
+  touches them).
+
+Everything else is the same machine: zero APIs (Piper voice, PIL
+art, numpy music), GitHub Actions, memory in git, quota ledger,
+self-healing uploads, the external clock.

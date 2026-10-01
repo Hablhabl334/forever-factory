@@ -73,10 +73,14 @@ def read_wav(path: Path) -> array.array:
     return frames
 
 
-def narrate(story: dict, work_dir: Path, model_path: Path | None = None) -> dict:
-    """Synthesize the whole story narration. Idempotent & resumable:
+def narrate(story: dict, work_dir: Path, model_path: Path | None = None,
+            sent_pause: float | None = None,
+            scene_pause: float | None = None) -> dict:
+    """Synthesize the whole narration. Idempotent & resumable:
     each chunk is cached as work/chunks/chunk_NNN.wav; a completed run
     writes work/narration.json which short-circuits re-runs.
+
+    Optional pause overrides (shorts use tighter pacing).
 
     Returns {"chunks": [...], "scene_durations": [...], "total": float}.
     """
@@ -96,9 +100,9 @@ def narrate(story: dict, work_dir: Path, model_path: Path | None = None) -> dict
             pass
 
     vconf = cfg()["voice"]
-    length_scale = float(vconf.get("length_scale", 1.7))
-    sent_pause = float(vconf.get("sentence_pause", 0.45))
-    scene_pause = float(vconf.get("paragraph_pause", 0.85))
+    length_scale = float(vconf.get("length_scale", 1.45))
+    sent_pause = float(vconf.get("sentence_pause", 0.4)) if sent_pause is None else sent_pause
+    scene_pause = float(vconf.get("paragraph_pause", 0.7)) if scene_pause is None else scene_pause
 
     model_path = Path(model_path or repo_path("assets", "voice", "en_US-lessac-medium.onnx"))
     if not model_path.exists():

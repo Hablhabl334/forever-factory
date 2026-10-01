@@ -1,17 +1,18 @@
 name: watchdog
 
-# The scheduler bodyguard. GitHub's cron queue starves new repos (three
-# days in a row for us), so daily-factory now carries 9 of its own
-# staggered slots — and this workflow adds 5 MORE independent chances
-# (08:49, 11:49, 14:49, 17:49, 20:49 UTC). Each heartbeat asks the
-# same gate: "did the factory produce today?" If not, it DISPATCHES
-# daily-factory immediately. workflow_dispatch events are not subject
-# to the starved schedule queue, so one healthy heartbeat = the day
-# is made — and the gate + factory concurrency group make double
-# fires free (SKIP) and safe (queue, never overlap).
+# The scheduler bodyguard. The external pinger fires at 19:00 UTC
+# (22:00 Cairo) and daily-factory carries 9 of its own staggered
+# slots — this workflow adds MORE independent chances, concentrated
+# right after the cycle window and in the morning-after recovery
+# zone. Each heartbeat asks the same 20h-window gate: "did the
+# factory produce recently?" If not, it DISPATCHES daily-factory
+# immediately (workflow_dispatch events skip the starved schedule
+# queue). The gate + factory concurrency group make double fires
+# free (SKIP) and safe (queue, never overlap).
 on:
   schedule:
-    - cron: "49 8-21/3 * * *"
+    - cron: "49 19-23 * * *"   # 19:49-23:49 UTC — post-cycle window
+    - cron: "23 5,8,11,14 * * *"  # morning/afternoon recovery beats
   workflow_dispatch:
 
 permissions:
@@ -50,4 +51,4 @@ jobs:
 
       - name: All quiet
         if: steps.gate.outputs.run == 'false'
-        run: echo "today's cycle already done — going back to sleep"
+        run: echo "cycle window satisfied — going back to sleep"

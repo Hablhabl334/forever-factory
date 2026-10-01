@@ -13,16 +13,19 @@ import numpy as np
 
 SR = 44_100
 
-# gentle pentatonic-ish chord sets (Hz built from A3=220)
+# warm soulful progression (Hz built from A3=220) — gentle, modern,
+# a touch bittersweet: right for love psychology
 CHORDS = [
-    (174.6, 220.0, 261.6, 329.6),    # Fmaj7-ish
-    (146.8, 220.0, 293.7, 349.2),    # Dmin add
-    (130.8, 196.0, 261.6, 329.6),    # C add9
-    (155.6, 233.1, 311.1, 389.9),    # Eb maj7-ish
-    (164.8, 220.0, 277.2, 329.6),    # E-ish soft
-    (146.8, 220.0, 246.9, 311.1),    # Dmin9-ish
+    (174.6, 220.0, 261.6, 329.6),    # Fmaj7
+    (130.8, 196.0, 246.9, 293.7),    # Cmaj9
+    (146.8, 220.0, 261.6, 349.2),    # Dmin9
+    (155.6, 233.1, 293.7, 311.1),    # Ebmaj7-ish
+    (164.8, 207.7, 246.9, 311.1),    # Emin7
+    (130.8, 220.0, 261.6, 329.6),    # Cadd9
+    (146.8, 185.0, 220.0, 277.2),    # Dsus-ish
+    (174.6, 220.0, 261.6, 329.6),    # Fmaj7 (return)
 ]
-BELLS = [523.3, 587.3, 659.3, 784.0, 880.0, 1046.5, 1174.7]
+BELLS = [523.3, 587.3, 659.3, 698.5, 784.0, 880.0, 1046.5]
 
 
 def _moving_average(x: np.ndarray, k: int) -> np.ndarray:

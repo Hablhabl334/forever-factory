@@ -1,67 +1,68 @@
 # ═══════════════════════════════════════════════════════════════════
-#  MOONBERRY TALES — the Forever Factory configuration
+#  PSYCHOLOGY OF LOVE — the Forever Factory configuration
 #  One channel. One machine. Runs daily on GitHub Actions, forever.
 #  External services touched: YouTube Data API v3 (upload) + GitHub.
-#  Everything else (stories, art, voice, music) is generated offline.
+#  Everything else (scripts, art, voice, music) is generated offline.
 # ═══════════════════════════════════════════════════════════════════
 
 channel:
-  display_name: "Moonberry Tales"
-  handle: "@MoonberryTales"
-  niche: bedtime                    # original calm bedtime stories
-  audience: "children ages 5-8 (parents choose the video)"
-  promise: "Gentle 10-minute original bedtime tales, one calm voice, no scary parts."
+  display_name: "Psychology of Love"
+  handle: "@PsychologyOfLove"
+  niche: love-psychology           # tips, breakups, attraction, self-worth
+  audience: "adults interested in relationships, psychology and healing"
+  promise: "One real psychology lesson about love every day — plain words, relatable scenes."
   description: >-
-    Original calm bedtime stories for children. New gentle tales every day,
-    made to help little listeners drift off to sleep.
+    Love psychology explained in plain words. Daily videos about
+    attraction, attachment, breakups, and the science of how we love.
 
 schedule:                           # publishAt slots (Africa/Cairo)
   timezone: "Africa/Cairo"
-  long_slots:  ["19:30", "21:00"]   # bedtime peaks for full stories
-  short_slots: ["13:00", "17:30", "20:30"]
-  # If a late trigger finds the evening already gone, videos publish
-  # immediately instead of waiting a day (search indexing > timing).
+  # The 6-hour shorts grid: a Short goes public every 6 hours, exactly.
+  short_slots: ["00:00", "06:00", "12:00", "18:00"]
+  # The one long-form video of the day, evening prime time.
+  long_slots: ["20:00"]
+  # The cycle runs at 22:00 Cairo (19:00 UTC) — two hours before the
+  # first Short of the new day goes public at midnight.
 
-# Discoverability — how the catalog gets FOUND. Titles lead with the
-# search phrase parents actually type; tags fill the 500-char budget;
-# the playlist is the binge loop that racks up bedtime watch time;
-# channel keywords feed YouTube's channel-level search index.
+# Discoverability — shorts carry a FIXED title (the subscription funnel);
+# longs are search-first; the playlist is the binge loop.
 discovery:
-  playlist_title: "Bedtime Stories for Kids to Fall Asleep 🌙"
+  playlist_title: "Love Psychology Tips 💜"
   playlist_description: >-
-    Calm original bedtime stories for kids — one gentle voice, soft
-    music, no scary parts. A brand-new sleep story every evening.
-    Press play at bedtime and let the queue carry the night.
+    Real psychology about love, attachment and heartbreak — explained
+    in plain words. A new lesson every day. Press play and let the
+    queue teach you something about your own heart.
   channel_keywords:
-    - "bedtime stories for kids"
-    - "sleep stories for children"
-    - "calm bedtime story"
-    - "bedtime story to fall asleep"
-    - "kids bedtime stories"
-    - "stories for kids"
-    - "original bedtime stories"
-    - "moonberry tales"
+    - "psychology of love"
+    - "love psychology"
+    - "relationship psychology"
+    - "relationship tips"
+    - "love tips"
+    - "breakup advice"
+    - "attachment styles"
+    - "psychology facts"
+    - "self love"
+    - "relationship advice"
   channel_description: >-
-    Original calm bedtime stories for children ages 5-8. A brand-new
-    gentle sleep story every evening — one calm voice, soft music, no
-    scary parts. Press play at bedtime and let the queue carry the night.
+    Love psychology explained in plain words — attraction, attachment
+    styles, breakups, self-worth and the science of how we love. One
+    new video every day. Subscribe for more tips like this.
 
 daily:                              # what the factory produces each day
-  long_videos: 2                    # ~11-minute original stories
-  shorts: 3                         # auto-cut from the longs
+  long_videos: 1                    # ~9-minute psychology deep-dive
+  shorts: 4                         # native vertical, every 6 hours
   quota_budget: 10000               # YouTube daily units (default)
   upload_cost_per_video: 1600       # videos.insert cost
 
 story:
-  target_words: 1500                # ~11 minutes at bedtime pace
-  scenes: 16                        # narrative beats
-  safety_max_attempts: 6            # audit gate regeneration attempts
+  segments: 8                       # psychology concepts per long video
+  safety_max_attempts: 8            # audit gate regeneration attempts
 
 voice:
   model: "assets/voice/en_US-lessac-medium.onnx"
-  length_scale: 1.7                 # ≈130 wpm — guide's bedtime pace
-  sentence_pause: 0.45              # seconds between sentences
-  paragraph_pause: 0.85             # seconds between scenes
+  length_scale: 1.45                # ≈150 wpm — engaging tips pace
+  sentence_pause: 0.40              # seconds between sentences
+  paragraph_pause: 0.70             # seconds between scenes
   sample_rate: 22050
 
 video:
@@ -78,24 +79,25 @@ shorts:
   width: 1080
   height: 1920
   max_seconds: 57
-  count: 3
+  count: 4
+  fixed_title: "Subscribe for more tips like this"
+  fixed_tags: ["#psychology", "#relationship", "#love", "#relationshipgoals"]
 
 music:
-  volume_db: -21                    # bed level under the narration
+  volume_db: -23                    # bed level under the narration
   sample_rate: 44100
 
 youtube:
   category_id: "24"                 # Entertainment
   default_language: "en"
-  made_for_kids: true               # child-directed bedtime content
-  synthetic_media_disclosure: true  # honest AI-assisted disclosure
+  made_for_kids: false              # general-audience relationship content
+  synthetic_media_disclosure: true  # honest AI-assistance disclosure
   privacy: "public"                 # final visibility (publishAt schedules it)
 
-  # COMMENTS POLICY — off, by design, and it is not a trade:
-  #   YouTube force-disables comments on every made-for-kids video
-  #   (COPPA). Turning them on would require marking this content
-  #   "not made for kids", which is false for bedtime stories aimed at
-  #   ages 5-8 — an FTC mislabeling + channel-termination risk.
-  #   Growth for sleep content is driven by average view duration,
-  #   nightly repeat views, and playlist adds — not comment counts.
-  #   Do NOT flip this to farm engagement.
+  # COMMENTS POLICY — OPEN, by design:
+  #   This is NOT child-directed content anymore, so the COPPA comment
+  #   freeze no longer applies. With made_for_kids: false, comments
+  #   follow the channel's default settings (open for a standard
+  #   channel). If any upload ever shows comments off, flip it once:
+  #   YouTube Studio → Settings → Community → Defaults → "On".
+  #   Comments are the growth engine of this niche — keep them on.

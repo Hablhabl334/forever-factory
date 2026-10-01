@@ -1,74 +1,91 @@
-"""Auto thumbnails — truthful packaging per the guide: clear character
-emotion, a bedtime cue, short text, zero clickbait."""
+"""Auto thumbnails for the long videos — the niche's proven look:
+near-black card, huge bold promise text, one purple accent word,
+brand wordmark. Short, punchy, zero clutter.
+"""
 from __future__ import annotations
 
 from pathlib import Path
 
-from PIL import Image, ImageDraw, ImageEnhance, ImageFilter, ImageFont
+from PIL import Image, ImageDraw, ImageFilter, ImageFont
 
+from . import art_engine
 from .config import ROOT
 
 
-def _font(size: float, weight=700):
-    font = ImageFont.truetype(str(ROOT / "assets/fonts/Baloo2.ttf"), int(size))
-    try:
-        font.set_variation_by_axes([weight])
-    except Exception:
-        pass
-    return font
+def _font(kind: str, size: int) -> ImageFont.FreeTypeFont:
+    return art_engine.font(kind, size)
 
 
-def make_thumbnail(scene_png: Path, title: str, out: Path) -> Path:
-    """1280x720 thumbnail from a scene image + short title text."""
-    img = Image.open(scene_png).convert("RGB")
-    img = img.resize((1280, 720), Image.LANCZOS)
+def _wrap(d: ImageDraw.ImageDraw, text: str, f: ImageFont.FreeTypeFont,
+          max_w: float) -> list[str]:
+    return art_engine._wrap(d, text, f, max_w)
 
-    # gentle pop: +saturation, +contrast
-    img = ImageEnhance.Color(img).enhance(1.18)
-    img = ImageEnhance.Contrast(img).enhance(1.06)
 
-    # bottom gradient for text legibility
-    overlay = Image.new("L", (1, 340))
-    for y in range(340):
-        overlay.putpixel((0, y), int(235 * (y / 340) ** 1.35))
-    overlay = overlay.resize((1280, 340))
-    black = Image.new("RGB", (1280, 340), (12, 8, 28))
-    img = Image.composite(black, img, overlay.point(lambda v: v))
+def _pick_promise(story: dict) -> str:
+    """Short punchy thumbnail text: the strongest 4-8 words available."""
+    n = len(story["atoms"]["concepts"])
+    title = story["title"]
+    # prefer "N lessons" framing when the title is long
+    if len(title.split()) > 6:
+        return f"{n} psychology lessons"
+    return title
 
+
+def make_thumbnail(story: dict, out: Path, seed: int | None = None) -> Path:
+    """1280x720 dark bold thumbnail from the story spec."""
+    img = Image.new("RGB", (1280, 720), art_engine.INK)
+    glow = art_engine._glow((1280, 720), (640, 380), 250, art_engine.PURPLE, 30)
+    img = Image.alpha_composite(img.convert("RGBA"), glow).convert("RGB")
     d = ImageDraw.Draw(img)
-    # title text: short words, max 2 lines, chunky
-    words = [w for w in title.split() if w.lower() not in ("a", "an", "the", "of", "and")]
-    text = " ".join(words)
-    font = _font(110, 700)
-    lines, cur = [], ""
-    for w in text.split():
-        trial = (cur + " " + w).strip()
-        if d.textlength(trial, font=font) > 1100 and cur:
-            lines.append(cur)
-            cur = w
+
+    # topic band top
+    band_f = _font("card", 40)
+    label = story.get("topic_label", "psychology of love").upper()
+    while d.textlength(label, font=band_f) > 1050:
+        label = label[:-1]
+    art_engine._center(d, 640, 52, label, band_f, art_engine.WHITE)
+    d.rectangle([560, 112, 720, 118], fill=art_engine.PURPLE)
+
+    # the promise: huge, white, one accent word
+    f = _font("card", 92)
+    text = _pick_promise(story).upper()
+    words = text.split()
+    acc = max(words, key=len) if words else ""
+    lines, cur, cur_acc = [], [], False
+    for wd in words:
+        trial = cur + [wd]
+        if d.textlength(" ".join(trial), font=f) > 1120 and cur:
+            lines.append((" ".join(cur), cur_acc))
+            cur, cur_acc = [wd], wd == acc
         else:
             cur = trial
-    lines.append(cur)
-    lines = lines[:2]
-    if lines:
-        font = _font(110 if len(lines) == 1 else 92, 700)
-        y = 720 - 120 - (len(lines) - 1) * (110 if len(lines) == 1 else 98)
-        for line in lines:
-            tw = d.textlength(line, font=font)
-            # soft shadow stack then cream text
-            for dx, dy, a in ((0, 8, 90), (0, 4, 120)):
-                d.text((640 - tw / 2 + dx, y + dy), line, font=font, fill=(14, 10, 32, a))
-            d.text((640 - tw / 2, y), line, font=font, fill=(255, 248, 232))
-            y += 112 if len(lines) == 1 else 100
+            cur_acc = cur_acc or wd == acc
+    if cur:
+        lines.append((" ".join(cur), cur_acc))
+    lines = lines[:3]
 
-    # moonberry mark top-left: crescent + berry
-    mx, my, r = 74, 64, 30
-    d.ellipse((mx - r - 12, my - r - 12, mx + r + 12, my + r + 12), fill=(255, 236, 200))
-    d.ellipse((mx - r, my - r, mx + r, my + r), fill=(16, 20, 44))
-    d.ellipse((mx - r * 0.55, my - r * 1.05, mx + r * 0.75, my + r * 0.5), fill=(255, 244, 216))
-    d.ellipse((mx + r * 1.05, my + r * 0.25, mx + r * 1.45, my + r * 0.65), fill=(200, 106, 138))
-    tag = _font(34, 600)
-    d.text((mx + 52, my - 20), "Moonberry Tales", font=tag, fill=(255, 236, 200))
+    y = 210
+    for text, has_acc in lines:
+        tw_line = d.textlength(text, font=f)
+        x = 640 - tw_line / 2
+        if has_acc and acc in text:
+            pre, _, post = text.partition(acc)
+            d.text((x, y), pre, font=f, fill=art_engine.WHITE)
+            x2 = x + d.textlength(pre, font=f)
+            d.text((x2, y), acc, font=f, fill=art_engine.PURPLE_SOFT)
+            d.text((x2 + d.textlength(acc, font=f), y), post, font=f, fill=art_engine.WHITE)
+        else:
+            d.text((x, y), text, font=f, fill=art_engine.WHITE)
+        y += 112
+
+    # silhouettes bottom (subtle depth)
+    art_engine._mono_pair(d, 1280, 700, 0.5,
+                          {"emotion_a": "neutral", "pose_a": "stand",
+                           "emotion_b": "neutral", "pose_b": "stand"},
+                          (seed or story["seed"]) + 5)
+
+    # wordmark
+    art_engine._wordmark(d, 640, 660, 34)
 
     out.parent.mkdir(parents=True, exist_ok=True)
     img.save(out, "PNG")

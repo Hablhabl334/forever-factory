@@ -83,7 +83,7 @@ ScaledBorderAndShadow: yes
 
 [V4+ Styles]
 Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
-Style: Cap,Baloo 2,56,&H00FFFFFF,&H00FFFFFF,&H00181028,&H96000000,-1,0,0,0,100,100,0,0,1,2.8,1.4,2,80,80,64,1
+Style: Cap,Archivo Black,44,&H00FFFFFF,&H00FFFFFF,&H00101014,&H96000000,0,0,0,0,100,100,0,0,1,3.0,1.2,2,90,90,58,1
 
 [Events]
 Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
@@ -164,37 +164,41 @@ def _parse_ass_time(s: str) -> float:
 
 # ── Ken Burns motions ────────────────────────────────────────────────
 
-def _zoompan_expr(motion: str, frames: int) -> str:
+def _zoompan_expr(motion: str, frames: int, size: str = "1920x1080") -> str:
     d = max(2, frames)
     if motion == "zoom_in":
-        z = f"1+0.10*on/{d}"
+        z = f"1+0.08*on/{d}"
         x = "iw/2-(iw/zoom/2)"
         y = "ih/2-(ih/zoom/2)"
     elif motion == "zoom_out":
-        z = f"1.10-0.10*on/{d}"
+        z = f"1.08-0.08*on/{d}"
         x = "iw/2-(iw/zoom/2)"
         y = "ih/2-(ih/zoom/2)"
     elif motion == "pan_right":
-        z = "1.08"
+        z = "1.06"
         x = f"(iw-iw/zoom)*on/{d}"
         y = "ih/2-(ih/zoom/2)"
     else:  # pan_left
-        z = "1.08"
+        z = "1.06"
         x = f"(iw-iw/zoom)*(1-on/{d})"
         y = "ih/2-(ih/zoom/2)"
-    return f"zoompan=z='{z}':x='{x}':y='{y}':d={d}:s=1920x1080:fps=30"
+    return f"zoompan=z='{z}':x='{x}':y='{y}':d={d}:s={size}:fps=30"
 
 
 MOTIONS = ["zoom_in", "pan_right", "zoom_out", "pan_left"]
 
 
 def render_clip(png: Path, out: Path, dur: float, motion: str,
-                ass_file: Path | None = None, crf: int = 21) -> None:
-    """Render one scene clip with Ken Burns + burned captions. Atomic."""
+                ass_file: Path | None = None, crf: int = 21,
+                size: tuple[int, int] | None = None) -> None:
+    """Render one scene clip with Ken Burns + burned captions. Atomic.
+    size=(w,h) renders a vertical clip (shorts); default from config."""
     vconf = cfg()["video"]
     fps = int(vconf.get("fps", 30))
+    if size is None:
+        size = (int(vconf["width"]), int(vconf["height"]))
     frames = int(round(dur * fps))
-    filters = [_zoompan_expr(motion, frames)]
+    filters = [_zoompan_expr(motion, frames, f"{size[0]}x{size[1]}")]
     if ass_file is not None:
         fontsdir = ROOT / "assets" / "fonts"
         filters.append(f"ass=filename='{ass_file}':fontsdir='{fontsdir}'")
@@ -246,7 +250,9 @@ def render_episode(story: dict, narration: dict, work_dir: Path,
     # 1. art
     title_png = art_dir / "title.png"
     if not title_png.exists():
-        img = art_engine.paint_title_card(story["title"], seed, story["scenes"][0]["image"].get("time_mood", "moonlit_night"))
+        img = art_engine.paint_topic_card(
+            story["title"], story.get("topic_label", ""),
+            len(story.get("atoms", {}).get("concepts", [])) or 8, seed)
         img.save(title_png, "PNG")
     end_png = art_dir / "end.png"
     if not end_png.exists():
@@ -254,10 +260,7 @@ def render_episode(story: dict, narration: dict, work_dir: Path,
     for scene in story["scenes"]:
         png = art_dir / f"scene_{scene['n']:02d}.png"
         if not png.exists():
-            art_engine.save_scene(scene, seed + scene["n"] * 13, png,
-                                  story["scenes"][0]["image"].get("time_mood"))
-            # per-scene time mood from the story's chosen mood
-    # repaint with the story's actual mood for scene 1 (title uses it already)
+            art_engine.save_scene(scene, seed + scene["n"] * 13, png)
 
     # 2. global captions
     global_ass = work_dir / "captions.ass"

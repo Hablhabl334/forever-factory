@@ -2,22 +2,22 @@ name: daily-factory
 
 on:
   schedule:
-    # GitHub's scheduler is best-effort and starves new repos hard:
-    # 2026-09-27, 09-28 AND 09-29 — every scheduled slot was dropped,
-    # only manual dispatches ever ran. Two slots were not enough.
-    # Strategy: 9 staggered, off-the-hour chances spread across the
-    # production window (09:23-20:31 UTC = 12:23-23:31 Cairo). The
-    # gate job makes every extra fire cost ~15 seconds and ZERO quota:
-    # the first successful trigger produces, the rest SKIP instantly.
-    - cron: "23 9 * * *"
-    - cron: "41 10 * * *"
-    - cron: "07 12 * * *"
-    - cron: "29 13 * * *"
-    - cron: "53 14 * * *"
-    - cron: "11 16 * * *"
-    - cron: "37 17 * * *"
-    - cron: "03 19 * * *"
-    - cron: "31 20 * * *"
+    # The cycle runs at 22:00 Cairo (19:00 UTC), two hours before the
+    # first Short of the day goes public at midnight Cairo. The external
+    # pinger fires at 19:00 UTC; these GitHub slots are the backup ring
+    # around it, plus morning-after recovery slots (a fully-missed
+    # evening still catches the day's later slots). The gate job makes
+    # every extra fire cost ~15 seconds and ZERO quota: the first
+    # successful trigger produces, the rest SKIP instantly.
+    - cron: "11 19 * * *"   # 22:11 Cairo — backup for the pinger
+    - cron: "23 19 * * *"
+    - cron: "41 19 * * *"
+    - cron: "13 20 * * *"
+    - cron: "19 21 * * *"   # 00:19 Cairo — grid already rolling
+    - cron: "31 22 * * *"   # 01:31 Cairo — last same-evening chance
+    - cron: "37 23 * * *"
+    - cron: "23 5 * * *"    # 08:23 Cairo — morning-after recovery
+    - cron: "29 12 * * *"   # 15:29 Cairo — midday recovery
   workflow_dispatch:
     inputs:
       dry_run:
@@ -114,7 +114,7 @@ jobs:
       - name: Commit the factory memory
         if: always()
         run: |
-          git config user.name "moonberry-factory"
+          git config user.name "psychlove-factory"
           git config user.email "actions@users.noreply.github.com"
           git add data/state.json factory.log 2>/dev/null || true
           if git diff --cached --quiet; then

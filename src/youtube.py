@@ -98,23 +98,27 @@ def verify_credentials() -> dict:
 def next_slot(kind: str, used: set[str] | None = None) -> str | None:
     """Next publishAt (ISO) in the configured timezone, skipping used slots.
 
-    Evening slots land the video public during bedtime hours. If the
-    day's slots are already behind us, return None = publish
-    IMMEDIATELY: made-for-kids discovery is search-driven (no
-    notifications, no personalized feeds), and every hour a new
-    video sits private is an hour of lost search indexing."""
+    The schedule is a repeating grid (shorts every 6h at 00:00/06:00/12:00/
+    18:00, the long at 20:00 Cairo), so a slot is ALWAYS findable within
+    the next ~24h — we scan today, tomorrow, and the day after. Slipping
+    a slot just means the video takes the next one; the grid self-heals.
+    """
+    from datetime import timedelta
     from zoneinfo import ZoneInfo
+
     tz = ZoneInfo(cfg()["schedule"]["timezone"])
     slots = cfg()["schedule"][f"{kind}_slots"]
     used = used or set()
     now = datetime.now(tz)
-    base = now.date()
-    for hhmm in slots:
-        hh, mm = map(int, hhmm.split(":"))
-        slot_dt = datetime(base.year, base.month, base.day, hh, mm, tzinfo=tz)
-        if slot_dt > now + timedelta(minutes=25) and slot_dt.isoformat() not in used:
-            return slot_dt.isoformat()
-    return None  # evening is gone — go public now, indexing starts now
+    for day_offset in (0, 1, 2):
+        base = (now + timedelta(days=day_offset)).date()
+        for hhmm in slots:
+            hh, mm = map(int, hhmm.split(":"))
+            slot_dt = datetime(base.year, base.month, base.day, hh, mm, tzinfo=tz)
+            if slot_dt > now + timedelta(minutes=25) and \
+                    slot_dt.isoformat() not in used:
+                return slot_dt.isoformat()
+    return None  # grid exhausted (never, with a 3-day scan) — publish now
 
 
 # ── resumable upload ─────────────────────────────────────────────────

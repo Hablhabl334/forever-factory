@@ -29,7 +29,7 @@ OUT_ROOT = ROOT / "out"
 def _dated_seed(day: str, episode_n: int) -> int:
     """Deterministic per (date, episode) — the seed a fresh episode
     was born with, reconstructible from the ledger record forever."""
-    digest = hashlib.sha256(f"moonberry|{day}|ep{episode_n}".encode()).hexdigest()
+    digest = hashlib.sha256(f"psychlove|{day}|ep{episode_n}".encode()).hexdigest()
     return int(digest[:12], 16)
 
 
@@ -39,10 +39,14 @@ def _daily_seed(episode_n: int) -> int:
 
 
 def _resume_episode(state: dict) -> tuple[int, int] | None:
-    """Return (n, seed) for an in-progress episode from today, if any."""
-    today = date.today().isoformat()
+    """Return (n, seed) for a recent in-progress episode, if any.
+    Window model: an episode from today OR yesterday can be resumed
+    (an evening cycle that crashed after midnight still completes)."""
+    from datetime import date, timedelta
+    recent = {date.today().isoformat(),
+              (date.today() - timedelta(days=1)).isoformat()}
     for e in reversed(state.get("episodes", [])):
-        if e.get("status") == "in_progress" and e.get("date") == today:
+        if e.get("status") == "in_progress" and e.get("date") in recent:
             return e["n"], e["seed"]
     return None
 
@@ -97,21 +101,12 @@ def _rebuild_thumb(record: dict, state: dict) -> Path | None:
         print(f"  [thumbs] ep{record['n']}: no seed candidate replays the "
               f"recorded story — skipping (ledger safety)")
         return None
-    turn_scene = next((s for s in story["scenes"] if s["id"] == "turn"),
-                      story["scenes"][7])
     out_dir = OUT_ROOT / f"episode_{record['n']:03d}"
     out_dir.mkdir(parents=True, exist_ok=True)
     thumb = out_dir / "thumbnail.png"
     if thumb.exists():
         return thumb
-    art_dir = WORK_ROOT / f"episode_{record['n']:03d}" / "art"
-    art_dir.mkdir(parents=True, exist_ok=True)
-    scene_png = art_dir / f"scene_{turn_scene['n']:02d}.png"
-    if not scene_png.exists():
-        art_engine.save_scene(turn_scene, story["seed"] + turn_scene["n"] * 13,
-                              scene_png,
-                              story["scenes"][0]["image"].get("time_mood"))
-    return thumbnails.make_thumbnail(scene_png, story["title"], thumb)
+    return thumbnails.make_thumbnail(story, thumb, story["seed"])
 
 
 def backfill_thumbnails(state: dict) -> list[str]:
@@ -162,7 +157,7 @@ def produce_episode(story: dict, episode_n: int, dry_run: bool,
     out.mkdir(parents=True, exist_ok=True)
     _ensure_clean(work, out, story)
 
-    print(f"[{episode_n}] story: {story['title']} ({story['words']} words, "
+    print(f"[{episode_n}] script: {story['title']} ({story['words']} words, "
           f"hash {story['hash'][:10]})")
 
     # 1. narration (idempotent, exact caption timings)
@@ -177,17 +172,14 @@ def produce_episode(story: dict, episode_n: int, dry_run: bool,
     print(f"[{episode_n}] long video: {dur:.0f}s, "
           f"{final.stat().st_size / 1e6:.1f}MB")
 
-    # 3. shorts (auto-cut)
-    short_files = shorts_mod.render_shorts(final, story, narration, work, out)
+    # 3. shorts (native vertical, per-chunk text cards)
+    short_files = shorts_mod.render_shorts(story, work, out)
     short_files = short_files[:n_shorts]
 
-    # 4. thumbnail from the "turn" scene (magic moment)
-    turn_scene = next((s for s in story["scenes"] if s["id"] == "turn"),
-                      story["scenes"][7])
+    # 4. thumbnail (dark bold card, from the story spec)
     thumb = out / "thumbnail.png"
     if not thumb.exists():
-        scene_png = work / "art" / f"scene_{turn_scene['n']:02d}.png"
-        thumbnails.make_thumbnail(scene_png, story["title"], thumb)
+        thumbnails.make_thumbnail(story, thumb, story["seed"])
     print(f"[{episode_n}] thumbnail + {len(short_files)} shorts ready")
 
     # 5. metadata
@@ -198,13 +190,13 @@ def produce_episode(story: dict, episode_n: int, dry_run: bool,
     if dry_run:
         long_slot = youtube.next_slot("long", used_slots["long"])
         used_slots["long"].add(long_slot)
-        when = long_slot or "now (evening slots passed — publish immediately)"
+        when = long_slot or "now"
         print(f"[{episode_n}] DRY-RUN: would upload long at {when}")
         for i, sf in enumerate(short_files):
             short_slot = youtube.next_slot("short", used_slots["short"])
             used_slots["short"].add(short_slot)
-            when = short_slot or "now (evening slots passed — publish immediately)"
-            print(f"[{episode_n}] DRY-RUN: would upload short {i+1} at {when}")
+            print(f"[{episode_n}] DRY-RUN: would upload short {i+1} at "
+                  f"{short_slot or 'now'}")
         return {"episode": episode_n, "title": story["title"], "dry_run": True,
                 "long_seconds": dur, "shorts": len(short_files)}
 
@@ -212,10 +204,11 @@ def produce_episode(story: dict, episode_n: int, dry_run: bool,
     used_slots["long"].add(long_slot)
     long_id = youtube.upload_video(final, long_meta, long_slot, episode_n, "long", state)
 
-    for sf in short_files:
-        n = int(sf.stem.split("scene")[-1])
-        window = {"scene": n, "id": "short"}
-        short_meta = meta_mod.short_metadata(story, window)
+    # upload the 4 shorts into the 6-hour grid (shorts first = the funnel
+    # fills before the evening long lands)
+    for i, sf in enumerate(short_files):
+        short_spec = story["shorts"][i] if i < len(story.get("shorts", [])) else {}
+        short_meta = meta_mod.short_metadata(story, short_spec)
         short_slot = youtube.next_slot("short", used_slots["short"])
         used_slots["short"].add(short_slot)
         # thumbnails not set for shorts (auto frame is fine; quota discipline)
@@ -330,13 +323,15 @@ def _run_daily_inner(dry_run: bool, longs: int | None,
         ledger.save(state)
 
     if not dry_run:
+        import time as _time
         state["last_run"] = date.today().isoformat()
+        state["last_run_ts"] = int(_time.time())
         state["stats"]["days_active"] += 1 if state.get("_last_days_active") != state["last_run"] else 0
         state["_last_days_active"] = state["last_run"]
 
         # end-of-day discovery pass: every long (today's + any stragglers)
-        # into the bedtime playlist, channel keywords set once — all
-        # scope-aware and quota-gated, never blocking, never repeating
+        # into the love-psychology playlist, channel branding set once —
+        # all scope-aware and quota-gated, never blocking, never repeating
         discovery.evening_pass(state)
 
         ledger.save(state)
@@ -345,7 +340,7 @@ def _run_daily_inner(dry_run: bool, longs: int | None,
 
 def main() -> int:
     import argparse
-    ap = argparse.ArgumentParser(description="Moonberry Tales — the Forever Factory")
+    ap = argparse.ArgumentParser(description="Psychology of Love — the Forever Factory")
     ap.add_argument("--dry-run", action="store_true", help="produce + plan, no upload")
     ap.add_argument("--longs", type=int, default=None, help="override daily long count")
     ap.add_argument("--episode", type=int, default=None, help="produce only this episode number")
