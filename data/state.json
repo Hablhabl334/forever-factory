@@ -145,6 +145,39 @@
     "thumbnail": "2026-09-30",
     "playlist": "2026-09-30"
    }
+  },
+  {
+   "n": 10,
+   "title": "Fig and the Late Moon",
+   "hash": "b3dcb2a2ba0a3892f86236c6",
+   "seed": 218307147197446,
+   "date": "2026-10-01",
+   "status": "uploaded",
+   "ids": {
+    "long": "GRna0qAiWEg",
+    "shorts": [
+     "BJrBRuMoosA",
+     "Mw2D_4ot0G8"
+    ],
+    "thumbnail": "2026-10-01",
+    "playlist": "2026-10-01"
+   }
+  },
+  {
+   "n": 11,
+   "title": "Fable and the Weary Trains",
+   "hash": "a73fa1bcc7035d68c11d853b",
+   "seed": 220229096864090,
+   "date": "2026-10-01",
+   "status": "uploaded",
+   "ids": {
+    "long": "HjkTdKjH49s",
+    "shorts": [
+     "L7DJ2Nu2uo8"
+    ],
+    "thumbnail": "2026-10-01",
+    "playlist": "2026-10-01"
+   }
   }
  ],
  "story_hashes": [
@@ -156,18 +189,20 @@
   "aa2aadb3db4839ee68fc8554",
   "c4d2888bfd7d45487f4dfa5d",
   "1a6b5f0afecbe11c05c581d3",
-  "b9df00fc21026fc41d8b209d"
+  "b9df00fc21026fc41d8b209d",
+  "b3dcb2a2ba0a3892f86236c6",
+  "a73fa1bcc7035d68c11d853b"
  ],
  "quota": {
-  "date": "2026-09-30",
-  "units_used": 8701
+  "date": "2026-10-01",
+  "units_used": 8401
  },
- "last_run": "2026-09-30",
+ "last_run": "2026-10-01",
  "stats": {
-  "videos_published": 20,
-  "days_active": 5
+  "videos_published": 25,
+  "days_active": 6
  },
- "_last_days_active": "2026-09-30",
+ "_last_days_active": "2026-10-01",
  "analytics": [
   {
    "date": "2026-09-29",
@@ -205,9 +240,36 @@
     "DA0tiB7QrlY": 1,
     "DVAoVnK5FtA": 0
    }
+  },
+  {
+   "date": "2026-10-01",
+   "total_views": 30,
+   "videos": {
+    "_oF4dTUGy24": 4,
+    "TRY0QZfgjBE": 5,
+    "Iocf2nxJuOY": 7,
+    "UG4z7_XQkjM": 2,
+    "4tbBV--cTsI": 7,
+    "h4B5GXfmjLg": 0,
+    "kvFpuUEz8QA": 0,
+    "TnJJf_3-Zg8": 1,
+    "3ZR4l08XxyE": 2,
+    "Zjf7Ne2z_4U": 0,
+    "pSRPxXnyAZg": 0,
+    "Mir11YcoWAw": 0,
+    "WSM7pIy8kdE": 1,
+    "DA0tiB7QrlY": 1,
+    "DVAoVnK5FtA": 0,
+    "git-4p8E9xY": 0,
+    "fkFhtGfsx_0": 0,
+    "n_GOahvID_Y": 0,
+    "8m3PZ44NW2c": 0,
+    "k8PzqtNVynI": 0
+   }
   }
  ],
  "discovery": {
-  "playlist_id": "PLTAWxio953Qk"
+  "playlist_id": "PLTAWxio953Qk",
+  "channel_branding": "2026-10-01"
  }
 }

@@ -1,51 +1,30 @@
-[0;93m2026-09-30 10:32:22.388640588 [W:onnxruntime:Default, device_discovery.cc:146 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
-[stats] growth report 2026-09-30
-[stats]   total: 30 views  (+5 since last report)
+[0;93m2026-10-01 00:01:54.988926978 [W:onnxruntime:Default, device_discovery.cc:146 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
+[stats] growth report 2026-10-01
+[stats]   total: 30 views  (+0 since last report)
 [stats]        7 views  ·  The Thimble Windmill and the Sleepy Duskhollow — The Magic W
 [stats]        7 views  ·  The Spider and the Sleepy Clock — The Bravest Part 🌙 #shorts
 [stats]        5 views  ·  The Thimble Windmill and the Sleepy Duskhollow — The Bravest
-[8] story: The Night of the Forgotten Lullaby (1458 words, hash 1a6b5f0afe)
-[8] narration: 762s, 174 caption chunks
-[8] long video: 780s, 67.5MB
-[8] thumbnail + 2 shorts ready
-  [youtube] uploaded long: git-4p8E9xY (publishAt 2026-09-30T19:30:00+03:00)
-  [youtube] setting thumbnail thumbnail.png (263 KB) on git-4p8E9xY
+[10] story: Fig and the Late Moon (1459 words, hash b3dcb2a2ba)
+[10] narration: 776s, 176 caption chunks
+[10] long video: 794s, 69.4MB
+[10] thumbnail + 2 shorts ready
+  [youtube] uploaded long: GRna0qAiWEg (publishAt 2026-10-01T19:30:00+03:00)
+  [youtube] setting thumbnail thumbnail.png (252 KB) on GRna0qAiWEg
   [youtube] thumbnail set
-  [youtube] uploaded short: fkFhtGfsx_0 (publishAt 2026-09-30T17:30:00+03:00)
-  [youtube] uploaded short: n_GOahvID_Y (publishAt 2026-09-30T20:30:00+03:00)
-[9] story: Tansy and the Tuneless Nightingales (1456 words, hash b9df00fc21)
-[9] narration: 767s, 167 caption chunks
-[9] long video: 785s, 70.0MB
-[9] thumbnail + 1 shorts ready
-  [youtube] uploaded long: 8m3PZ44NW2c (publishAt 2026-09-30T21:00:00+03:00)
-  [youtube] setting thumbnail thumbnail.png (259 KB) on 8m3PZ44NW2c
+  [youtube] uploaded short: BJrBRuMoosA (publishAt 2026-10-01T13:00:00+03:00)
+  [youtube] uploaded short: Mw2D_4ot0G8 (publishAt 2026-10-01T17:30:00+03:00)
+[11] story: Fable and the Weary Trains (1461 words, hash a73fa1bcc7)
+[11] narration: 791s, 173 caption chunks
+[11] long video: 808s, 69.5MB
+[11] thumbnail + 1 shorts ready
+  [youtube] uploaded long: HjkTdKjH49s (publishAt 2026-10-01T21:00:00+03:00)
+  [youtube] setting thumbnail thumbnail.png (249 KB) on HjkTdKjH49s
   [youtube] thumbnail set
-  [youtube] uploaded short: k8PzqtNVynI (publishAt now)
-[playlist] created: Bedtime Stories for Kids to Fall Asleep 🌙 (PLTAWxio953Qk)
-[playlist] 8 long video(s) not in the playlist yet
-[playlist] ep2 long added (_oF4dTUGy24)
-[playlist] ep3 long added (UG4z7_XQkjM)
-[playlist] ep4 long added (h4B5GXfmjLg)
-[playlist] ep5 long added (3ZR4l08XxyE)
-[playlist] ep6 long added (pSRPxXnyAZg)
-[playlist] ep7 long added (DA0tiB7QrlY)
-[playlist] ep8 long added (git-4p8E9xY)
-[playlist] ep9 long added (8m3PZ44NW2c)
-[branding] update failed: HTTP 400: {
-  "error": {
-    "code": 400,
-    "message": "Request contains an invalid argument.",
-    "errors": [
-      {
-        "message": "Id required.",
-        "domain": "youtube.CoreErrorDomain",
-        "reason": "SERVICE_UNAVAILABLE"
-      }
-    ],
-    "status": "INVALID_ARGUMENT"
-  }
-}
-
-  ✓ episode 8: The Night of the Forgotten Lullaby
-  ✓ episode 9: Tansy and the Tuneless Nightingales
+  [youtube] uploaded short: L7DJ2Nu2uo8 (publishAt 2026-10-01T20:30:00+03:00)
+[playlist] 2 long video(s) not in the playlist yet
+[playlist] ep10 long added (GRna0qAiWEg)
+[playlist] ep11 long added (HjkTdKjH49s)
+[branding] channel keywords + description set
+  ✓ episode 10: Fig and the Late Moon
+  ✓ episode 11: Fable and the Weary Trains
 combination space: 4,970,310,669,434,880 stories — the factory never repeats
