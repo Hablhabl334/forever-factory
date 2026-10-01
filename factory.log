@@ -1,30 +1,20 @@
-[0;93m2026-10-01 00:01:54.988926978 [W:onnxruntime:Default, device_discovery.cc:146 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
-[stats] growth report 2026-10-01
-[stats]   total: 30 views  (+0 since last report)
-[stats]        7 views  ·  The Thimble Windmill and the Sleepy Duskhollow — The Magic W
-[stats]        7 views  ·  The Spider and the Sleepy Clock — The Bravest Part 🌙 #shorts
-[stats]        5 views  ·  The Thimble Windmill and the Sleepy Duskhollow — The Bravest
-[10] story: Fig and the Late Moon (1459 words, hash b3dcb2a2ba)
-[10] narration: 776s, 176 caption chunks
-[10] long video: 794s, 69.4MB
-[10] thumbnail + 2 shorts ready
-  [youtube] uploaded long: GRna0qAiWEg (publishAt 2026-10-01T19:30:00+03:00)
-  [youtube] setting thumbnail thumbnail.png (252 KB) on GRna0qAiWEg
-  [youtube] thumbnail set
-  [youtube] uploaded short: BJrBRuMoosA (publishAt 2026-10-01T13:00:00+03:00)
-  [youtube] uploaded short: Mw2D_4ot0G8 (publishAt 2026-10-01T17:30:00+03:00)
-[11] story: Fable and the Weary Trains (1461 words, hash a73fa1bcc7)
-[11] narration: 791s, 173 caption chunks
-[11] long video: 808s, 69.5MB
-[11] thumbnail + 1 shorts ready
-  [youtube] uploaded long: HjkTdKjH49s (publishAt 2026-10-01T21:00:00+03:00)
-  [youtube] setting thumbnail thumbnail.png (249 KB) on HjkTdKjH49s
-  [youtube] thumbnail set
-  [youtube] uploaded short: L7DJ2Nu2uo8 (publishAt 2026-10-01T20:30:00+03:00)
-[playlist] 2 long video(s) not in the playlist yet
-[playlist] ep10 long added (GRna0qAiWEg)
-[playlist] ep11 long added (HjkTdKjH49s)
-[branding] channel keywords + description set
-  ✓ episode 10: Fig and the Late Moon
-  ✓ episode 11: Fable and the Weary Trains
-combination space: 4,970,310,669,434,880 stories — the factory never repeats
+[12] script: The Psychology of Ghosting (1066 words, hash fc39e74362)
+  [voice] neural narration: 120 chunks (en-US-AriaNeural)
+[12] narration: 549s, 120 caption chunks
+[12] long video: 567s, 29.4MB
+  [voice] neural narration: 11 chunks (en-US-AriaNeural)
+  [short 1] 47s, 11 cards, 3.2MB
+  [voice] neural narration: 11 chunks (en-US-AriaNeural)
+  [short 2] 50s, 11 cards, 3.4MB
+  [voice] neural narration: 13 chunks (en-US-AriaNeural)
+  [short 3] 49s, 13 cards, 3.4MB
+  [voice] neural narration: 12 chunks (en-US-AriaNeural)
+  [short 4] 50s, 12 cards, 3.3MB
+[12] thumbnail + 4 shorts ready
+[12] DRY-RUN: would upload long at 2026-10-02T20:00:00+03:00
+[12] DRY-RUN: would upload short 1 at 2026-10-02T00:00:00+03:00
+[12] DRY-RUN: would upload short 2 at 2026-10-02T06:00:00+03:00
+[12] DRY-RUN: would upload short 3 at 2026-10-02T12:00:00+03:00
+[12] DRY-RUN: would upload short 4 at 2026-10-02T18:00:00+03:00
+  ✓ episode 12: The Psychology of Ghosting
+combination space: 273,301,428,924,195,840 stories — the factory never repeats
