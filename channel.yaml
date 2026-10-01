@@ -59,6 +59,12 @@ story:
   safety_max_attempts: 8            # audit gate regeneration attempts
 
 voice:
+  engine: "auto"                 # auto = neural voice first, offline Piper fallback
+  edge_name: "en-US-AriaNeural"  # warm, natural female narrator (free, no key)
+  edge_rate: "-4%"               # long videos: calm, intimate delivery
+  edge_rate_shorts: "-2%"        # shorts: slightly brisker, scroll pace
+  edge_pitch: "-1Hz"
+  edge_jitter: 3.0               # per-sentence pace jitter (human prosody)
   model: "assets/voice/en_US-lessac-medium.onnx"
   length_scale: 1.45                # ≈150 wpm — engaging tips pace
   sentence_pause: 0.40              # seconds between sentences
@@ -85,6 +91,7 @@ shorts:
 
 music:
   volume_db: -23                    # bed level under the narration
+  duck_depth: 0.55                  # how deep the bed dips under speech
   sample_rate: 44100
 
 youtube:

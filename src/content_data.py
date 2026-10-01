@@ -477,7 +477,7 @@ CONCEPTS: dict[str, dict] = {
             "Negativity bias is the mind's ancient accounting: bad moments get recorded in ink, good ones in pencil. "
             "It kept our ancestors alive, but it quietly bankrupts relationships, because partners feel underpaid no matter how much they give. "
             "This is why contempt is the single strongest predictor of breakup — contempt is negativity bias with a voice. "
-            "Awareness of the bias is most of the cure."
+            "Awareness of the bias is most of the battle."
         ),
         "example": (
             "You cooked, planned, showed up all month — and one sharp comment at dinner owns the whole evening. "

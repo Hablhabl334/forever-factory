@@ -8,8 +8,9 @@ channel's format:
   * term card: "psychologists call this — {TERM}" (the signature moment)
   * CTA card: "Subscribe for more tips like this." + subscribe pill
 
-Audio: Piper narration (tighter pauses) + a quiet generated music bed.
-Everything resumable per clip, like the long pipeline.
+Audio: neural narration (brisk pace, tighter pauses) + a quiet,
+mood-matched music bed that ducks under the voice. Everything
+resumable per clip, like the long pipeline.
 """
 from __future__ import annotations
 
@@ -32,11 +33,15 @@ def _ffmpeg(args: list[str], timeout: int = 900) -> None:
         raise RuntimeError(f"ffmpeg failed: {proc.stderr.decode()[-800:]}")
 
 
-def _card_kind(text: str, idx: int) -> str:
+_REVEAL_MARKERS = ("call this", "name for this", "is called",
+                    "term for this")
+
+
+def _card_kind(text: str, idx: int, term: str | None = None) -> str:
     if idx == 0:
         return "hook"
     low = text.strip().lower()
-    if low.startswith("psychologists call this"):
+    if term and term.lower() in low and any(m in low for m in _REVEAL_MARKERS):
         return "term"
     if low == CTA_LINE.lower().rstrip("."):
         return "cta"
@@ -57,17 +62,23 @@ def _paint_card(kind: str, text: str, short: dict, seed: int, part: int) -> "Ima
     return art_engine.paint_scene_card(text, band, sc, seed)
 
 
-def _mix_audio(short_work: Path, narration: dict, seed: int) -> Path:
-    """narration + low music bed -> master.wav (44.1k stereo)."""
+def _mix_audio(short_work: Path, narration: dict, seed: int,
+               mood: str = "warm") -> Path:
+    """narration + mood-matched ducking music bed -> master.wav."""
     import wave
+
+    depth = float(cfg()["music"].get("duck_depth", 0.55))
 
     narr = tts.read_wav(short_work / "narration.wav")
     narr_np = np.frombuffer(narr.tobytes(), dtype=np.int16).astype(np.float32) / 32768.0
+    narr_np = music.normalize_speech(narr_np)
     narr_44 = np.repeat(narr_np, 2)  # 22050 -> 44100
 
     total = narration["total"]
     n = int(total * music.SR)
-    music_bed = music.synth_music(seed + 700, total) * 0.16
+    music_bed = music.synth_music(seed + 700, total, mood=mood)
+    music_bed *= music.duck_envelope(narr_44, n, music.SR, depth)
+    music_bed *= np.float32(0.16)
 
     mix = np.zeros(n, dtype=np.float32)
     end_i = min(n, len(narr_44))
@@ -119,10 +130,14 @@ def render_shorts(story: dict, work_dir: Path, out_dir: Path) -> list[Path]:
         art_dir.mkdir(exist_ok=True)
         clips_dir.mkdir(exist_ok=True)
 
-        # 1. narration (cached; tighter pauses than the long videos)
-        mini = {"hash": f"{story['hash']}-s{n}",
+        # 1. narration (cached; brisk pace + tighter pauses for shorts).
+        # The cache key includes the script hash: if the script ever
+        # changes underneath, the narration re-renders (never stale).
+        mini = {"hash": f"{story['hash']}-{short['shash'][:10]}",
                 "scenes": [{"n": 1, "id": "short", "narration": short["script"]}]}
-        narration = tts.narrate(mini, sw, sent_pause=0.30, scene_pause=0.30)
+        rate = cfg()["voice"].get("edge_rate_shorts")
+        narration = tts.narrate(mini, sw, sent_pause=0.30, scene_pause=0.30,
+                                rate_pct=rate)
         chunks = narration["chunks"]
         total = narration["total"]
 
@@ -133,7 +148,7 @@ def render_shorts(story: dict, work_dir: Path, out_dir: Path) -> list[Path]:
             start = ch["start"]
             end = chunks[i + 1]["start"] if i + 1 < len(chunks) else total
             dur = max(0.8, end - start)
-            kind = _card_kind(ch["text"], i)
+            kind = _card_kind(ch["text"], i, short.get("term"))
             png = art_dir / f"card_{i:02d}.png"
             if not png.exists():
                 img = _paint_card(kind, ch["text"], short, seed, n)
@@ -155,7 +170,8 @@ def render_shorts(story: dict, work_dir: Path, out_dir: Path) -> list[Path]:
 
         master = sw / "master.wav"
         if not master.exists():
-            master = _mix_audio(sw, narration, seed)
+            master = _mix_audio(sw, narration, seed,
+                                mood=story.get("mood", "warm"))
 
         _ffmpeg(["-i", str(silent), "-i", str(master),
                  "-map", "0:v", "-map", "1:a",

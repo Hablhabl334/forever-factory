@@ -88,10 +88,11 @@ def _rebuild_thumb(record: dict, state: dict) -> Path | None:
         if cand is not None and cand not in candidates:
             candidates.append(cand)
     used = ledger.used_hashes(state) - {record.get("hash")}
+    used_short = ledger.used_short_hashes(state) - set(record.get("shashes", []))
     story = None
     for cand in candidates:
         try:
-            s = generate_story(cand, used)
+            s = generate_story(cand, used, used_short)
         except RuntimeError:
             continue
         if s["hash"] == record.get("hash") and s["title"] == record.get("title"):
@@ -283,15 +284,17 @@ def _run_daily_inner(dry_run: bool, longs: int | None,
             n = ledger.next_episode_number(state)
             seed = _daily_seed(n)
 
-        # when resuming, exclude the episode's own hash from the no-repeat
+        # when resuming, exclude the episode's own hashes from the no-repeat
         # ledger so the deterministic regeneration reproduces the exact
         # same story instead of colliding with its own record
         record = next((e for e in state["episodes"] if e["n"] == n), None)
         used = ledger.used_hashes(state)
+        used_short = ledger.used_short_hashes(state)
         if record:
             used = used - {record.get("hash")}
+            used_short = used_short - set(record.get("shashes", []))
 
-        story = generate_story(seed, used)
+        story = generate_story(seed, used, used_short)
         if record is None:
             ledger.register_story(state, story, n, date.today().isoformat())
         else:
@@ -305,6 +308,15 @@ def _run_daily_inner(dry_run: bool, longs: int | None,
                 record["hash"] = story["hash"]
                 record["title"] = story["title"]
                 record["seed"] = story["seed"]
+            if record.get("shashes") != story.get("short_hashes"):
+                sh = state.setdefault("short_hashes", [])
+                for old in record.get("shashes", []):
+                    if old in sh:
+                        sh.remove(old)
+                for new in story.get("short_hashes", []):
+                    if new not in sh:
+                        sh.append(new)
+                record["shashes"] = list(story.get("short_hashes", []))
             ledger.save(state)
 
         # distribute the day's shorts: first episode takes the extra one

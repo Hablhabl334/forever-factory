@@ -30,8 +30,9 @@ def set_read_only(v: bool) -> None:
 
 DEFAULT = {
     "version": 1,
-    "episodes": [],          # [{n, title, hash, seed, date, status, ids}]
-    "story_hashes": [],      # no-repeat ledger
+    "episodes": [],          # [{n, title, hash, seed, date, status, ids, shashes}]
+    "story_hashes": [],      # no-repeat ledger (long scripts)
+    "short_hashes": [],      # no-repeat ledger (Short scripts — the forever bank)
     "quota": {"date": None, "units_used": 0},
     "last_run": None,
     "stats": {"videos_published": 0, "days_active": 0},
@@ -70,6 +71,12 @@ def used_hashes(state: dict) -> set[str]:
     return set(state.get("story_hashes", []))
 
 
+def used_short_hashes(state: dict) -> set[str]:
+    """Every Short script ever produced — the anti-repeat set that
+    keeps the daily Shorts fresh for decades, not days."""
+    return set(state.get("short_hashes", []))
+
+
 def register_story(state: dict, story: dict, episode_n: int, today: str) -> dict:
     """Record the episode BEFORE work begins (crash-safe ordering —
     the story is a pure function of its seed, so it can always be
@@ -82,9 +89,14 @@ def register_story(state: dict, story: dict, episode_n: int, today: str) -> dict
         "date": today,
         "status": "in_progress",
         "ids": {"long": None, "shorts": [], "thumbnail": None},
+        "shashes": list(story.get("short_hashes", [])),
     }
     state.setdefault("episodes", []).append(ep)
     state.setdefault("story_hashes", []).append(story["hash"])
+    sh = state.setdefault("short_hashes", [])
+    for h in story.get("short_hashes", []):
+        if h not in sh:
+            sh.append(h)
     save(state)
     return ep
 

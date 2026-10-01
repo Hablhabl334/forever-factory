@@ -307,11 +307,13 @@ def render_episode(story: dict, narration: dict, work_dir: Path,
     _ffmpeg(["-f", "concat", "-safe", "0", "-i", str(concat_list),
              "-c", "copy", str(silent)], timeout=120)
 
-    # 5. master audio (narration + music bed with ducking envelope)
+    # 5. master audio (narration + mood-matched music bed with ducking)
     master_wav = work_dir / "master.wav"
     if not master_wav.exists():
-        master_wav = _build_master_audio(work_dir, narration, title_s, end_s,
-                                         total, seed, float(mconf.get("volume_db", -21)))
+        master_wav = _build_master_audio(
+            work_dir, narration, title_s, end_s, total, seed,
+            float(mconf.get("volume_db", -21)),
+            mood=story.get("mood", "warm"))
 
     # 6. mux
     _ffmpeg(["-i", str(silent), "-i", str(master_wav),
@@ -326,8 +328,12 @@ def render_episode(story: dict, narration: dict, work_dir: Path,
 
 def _build_master_audio(work_dir: Path, narration: dict, title_s: float,
                         end_s: float, total: float, seed: int,
-                        music_db: float) -> Path:
-    """Mix narration + music into master.wav (44.1 kHz stereo int16).
+                        music_db: float, mood: str = "warm") -> Path:
+    """Mix narration + mood-matched music into master.wav (44.1 kHz stereo).
+
+    The bed matches the day's topic (healing / attachment / warm),
+    sits at music_db under the narration, and ducks deeper under
+    each spoken sentence — breathing back in the pauses.
 
     Memory-lean: mono float32 buffers, block-wise final write, in-place
     ops — a 13-minute episode mixes in well under 1 GB.
@@ -339,17 +345,19 @@ def _build_master_audio(work_dir: Path, narration: dict, title_s: float,
 
     narr = read_wav(work_dir / "narration.wav")
     narr_np = np.frombuffer(narr.tobytes(), dtype=np.int16).astype(np.float32) / 32768.0
-    narr_44 = np.repeat(narr_np, 2)  # 22050 -> 44100, exactly 2x
+    narr_np = M.normalize_speech(narr_np)          # one loudness standard
+    narr_44 = np.repeat(narr_np, 2)                # 22050 -> 44100, exactly 2x
 
     n = int(total * M.SR)
-    music = M.synth_music(seed, total)
+    depth = float(cfg()["music"].get("duck_depth", 0.55))
+    music = M.synth_music(seed, total, mood=mood)
 
     voice = np.zeros(n, dtype=np.float32)
     start_i = int(title_s * M.SR)
     end_i = min(n, start_i + len(narr_44))
     voice[start_i:end_i] = narr_44[: end_i - start_i]
 
-    # ducking envelope: full music in title/end, music_db under narration
+    # coarse envelope: full music in title/end, music_db under narration
     gain_loud = np.float32(0.9)
     gain_quiet = np.float32(10 ** (music_db / 20))
     env = np.full(n, gain_quiet, dtype=np.float32)
@@ -362,6 +370,9 @@ def _build_master_audio(work_dir: Path, narration: dict, title_s: float,
     env[i0:i1] = np.linspace(gain_loud, gain_quiet, i1 - i0, dtype=np.float32)
     j0, j1 = voice_end, min(n, voice_end + ramp)
     env[j0:j1] = np.linspace(gain_quiet, gain_loud, j1 - j0, dtype=np.float32)
+
+    # fine ducking: the bed dips under each sentence, breathes in pauses
+    env *= M.duck_envelope(voice, n, M.SR, depth)
 
     # in-place mix on the music buffer
     music *= env
