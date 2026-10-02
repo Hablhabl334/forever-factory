@@ -1,33 +1,25 @@
-Traceback (most recent call last):
-  File "/home/runner/work/forever-factory/forever-factory/src/orchestrator.py", line 376, in main
-    results = run_daily(dry_run=args.dry_run, longs=args.longs,
-              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/forever-factory/forever-factory/src/orchestrator.py", line 235, in run_daily
-    return _run_daily_inner(dry_run, longs, only_episode)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/forever-factory/forever-factory/src/orchestrator.py", line 325, in _run_daily_inner
-    result = produce_episode(story, n, dry_run, n_shorts, used_slots, state)
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/forever-factory/forever-factory/src/orchestrator.py", line 170, in produce_episode
-    final = render.render_episode(story, narration, work, out, story["seed"])
-            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/forever-factory/forever-factory/src/render.py", line 354, in render_episode
-    layers = art_engine.build_scene_layers(
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/forever-factory/forever-factory/src/art_engine.py", line 978, in build_scene_layers
-    return build_couple_layers(im, seed, 1920, 1080)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/forever-factory/forever-factory/src/art_engine.py", line 711, in build_couple_layers
-    sa = render_character_sprites(a_spec, s)
-         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/forever-factory/forever-factory/src/art_engine.py", line 667, in render_character_sprites
-    draw_figure(dr, cw / 2, ch - 16, s, dict(spec, eyes=state),
-  File "/home/runner/work/forever-factory/forever-factory/src/art_engine.py", line 467, in draw_figure
-    d.rounded_rectangle(
-  File "/opt/hostedtoolcache/Python/3.12.14/x64/lib/python3.12/site-packages/PIL/ImageDraw.py", line 407, in rounded_rectangle
-    raise ValueError(msg)
-ValueError: x1 must be greater than or equal to x0
 [13] script: What Heartbreak Does to Your Brain (1137 words, hash f4526ec6a4)
   [voice] neural narration: 127 chunks (en-US-JennyNeural)
   [voice] polished: presence EQ + gentle compression
 [13] narration: 557s, 127 caption chunks
+[13] long video: 575s, 34.1MB
+  [voice] neural narration: 11 chunks (en-US-JennyNeural)
+  [voice] polished: presence EQ + gentle compression
+  [short 1] 44s, 11 cards, 2.8MB
+  [voice] neural narration: 13 chunks (en-US-JennyNeural)
+  [voice] polished: presence EQ + gentle compression
+  [short 2] 50s, 13 cards, 3.0MB
+  [voice] neural narration: 12 chunks (en-US-JennyNeural)
+  [voice] polished: presence EQ + gentle compression
+  [short 3] 48s, 12 cards, 2.9MB
+  [voice] neural narration: 10 chunks (en-US-JennyNeural)
+  [voice] polished: presence EQ + gentle compression
+  [short 4] 45s, 10 cards, 2.7MB
+[13] thumbnail + 4 shorts ready
+[13] DRY-RUN: would upload long at 2026-10-03T20:00:00+03:00
+[13] DRY-RUN: would upload short 1 at 2026-10-03T06:00:00+03:00
+[13] DRY-RUN: would upload short 2 at 2026-10-03T12:00:00+03:00
+[13] DRY-RUN: would upload short 3 at 2026-10-03T18:00:00+03:00
+[13] DRY-RUN: would upload short 4 at 2026-10-04T00:00:00+03:00
+  ✓ episode 13: What Heartbreak Does to Your Brain
+combination space: 273,301,428,924,195,840 stories — the factory never repeats
