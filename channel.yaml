@@ -60,15 +60,16 @@ story:
 
 voice:
   engine: "auto"                 # auto = neural voice first, offline Piper fallback
-  edge_name: "en-US-AriaNeural"  # warm, natural female narrator (free, no key)
-  edge_rate: "-4%"               # long videos: calm, intimate delivery
-  edge_rate_shorts: "-2%"        # shorts: slightly brisker, scroll pace
-  edge_pitch: "-1Hz"
-  edge_jitter: 3.0               # per-sentence pace jitter (human prosody)
+  edge_name: "en-US-JennyNeural"  # the most conversational free neural voice (warm, human)
+  edge_rate: "-3%"               # long videos: calm, intimate delivery
+  edge_rate_shorts: "-1%"        # shorts: slightly brisker, scroll pace
+  edge_pitch: "-2Hz"
+  edge_jitter: 4.5               # per-sentence pace jitter (human prosody)
+  edge_pitch_jitter: 3.0         # per-sentence pitch drift (human intonation)
   model: "assets/voice/en_US-lessac-medium.onnx"
   length_scale: 1.45                # ≈150 wpm — engaging tips pace
-  sentence_pause: 0.40              # seconds between sentences
-  paragraph_pause: 0.70             # seconds between scenes
+  sentence_pause: 0.42              # seconds between sentences (jittered ±28%)
+  paragraph_pause: 0.70             # seconds between scenes (jittered)
   sample_rate: 22050
 
 video:

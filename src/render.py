@@ -83,7 +83,7 @@ ScaledBorderAndShadow: yes
 
 [V4+ Styles]
 Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
-Style: Cap,Archivo Black,44,&H00FFFFFF,&H00FFFFFF,&H00101014,&H96000000,0,0,0,0,100,100,0,0,1,3.0,1.2,2,90,90,58,1
+Style: Cap,Archivo Black,64,&H00FFFFFF,&H00FFFFFF,&H00101014,&H96000000,0,0,0,0,100,100,0,0,1,3.6,1.2,2,80,80,76,1
 
 [Events]
 Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
@@ -98,7 +98,7 @@ def _ass_time(t: float) -> str:
     return f"{h}:{m:02d}:{s:05.2f}"
 
 
-def _wrap_ass(text: str, max_chars: int = 46) -> str:
+def _wrap_ass(text: str, max_chars: int = 38) -> str:
     """Wrap caption text to at most two balanced lines with \\N."""
     if len(text) <= max_chars:
         return text
@@ -188,6 +188,25 @@ def _zoompan_expr(motion: str, frames: int, size: str = "1920x1080") -> str:
 MOTIONS = ["zoom_in", "pan_right", "zoom_out", "pan_left"]
 
 
+def _drift_expr(motion: str, n_frames: int, w: int, h: int) -> str:
+    """Ken Burns for an ALREADY-ANIMATED source: progressive scale
+    (eval per frame, driven by the monotonically increasing frame count
+    `n`, so the drift glides smoothly across loop seams), then a fixed
+    output crop with per-frame x/y."""
+    N = max(2, n_frames)
+    Z = 0.07
+    if motion == "zoom_in":
+        sc, x, y = f"(1+{Z}*n/{N})", "(iw-ow)/2", "(ih-oh)/2"
+    elif motion == "zoom_out":
+        sc, x, y = f"(1+{Z}*(1-n/{N}))", "(iw-ow)/2", "(ih-oh)/2"
+    elif motion == "pan_right":
+        sc, x, y = "1.06", f"(iw-ow)*n/{N}", "(ih-oh)/2"
+    else:  # pan_left
+        sc, x, y = "1.06", f"(iw-ow)*(1-n/{N})", "(ih-oh)/2"
+    return (f"scale=w='trunc(iw*{sc}/4)*4':h=-2:eval=frame,"
+            f"crop={w}:{h}:x='{x}':y='{y}'")
+
+
 def render_clip(png: Path, out: Path, dur: float, motion: str,
                 ass_file: Path | None = None, crf: int = 21,
                 size: tuple[int, int] | None = None) -> None:
@@ -218,6 +237,54 @@ def render_clip(png: Path, out: Path, dur: float, motion: str,
     tmp.replace(out)
 
 
+def render_clip_art(layers: dict, seed: int, out: Path, dur: float,
+                    motion: str, ass_file: Path | None = None,
+                    size: tuple[int, int] | None = None,
+                    anim_style: str | None = None,
+                    card_idx: int = 0) -> None:
+    """Render one ANIMATED clip: sprites sway/breathe/blink at 30 fps
+    while the Ken Burns drift moves the whole frame. Atomic + resumable
+    (the encoded frame loop is cached next to the clip)."""
+    from . import anim
+
+    vconf = cfg()["video"]
+    fps = int(vconf.get("fps", 30))
+    if size is None:
+        size = (int(vconf["width"]), int(vconf["height"]))
+    w, h = size
+    frames = int(round(dur * fps))
+    if frames < 8:
+        frames = 8
+    style = anim_style or anim.pick_style(seed)
+
+    # 1. the unique-frame loop (cached; frame count in the name)
+    n_unique = max(60, min(150, frames))
+    n_unique -= n_unique % 2
+    loop_path = out.with_name(f"{out.stem}_loop{n_unique}.mp4")
+    anim.encode_loop(layers, seed + card_idx * 37, style, fps, n_unique,
+                     loop_path)
+
+    # 2. replay the loop for exactly `frames` frames, drifting Ken Burns
+    filters = [_drift_expr(motion, frames, w, h)]
+    if ass_file is not None:
+        fontsdir = ROOT / "assets" / "fonts"
+        filters.append(f"ass=filename='{ass_file}':fontsdir='{fontsdir}'")
+    filters.append("format=yuv420p")
+    vf = ",".join(filters)
+
+    tmp = out.with_suffix(".tmp.mp4")
+    args = [
+        "-stream_loop", "-1", "-fflags", "+genpts", "-i", str(loop_path),
+        "-vf", vf,
+        "-frames:v", str(frames), "-r", str(fps),
+        "-c:v", "libx264", "-preset", vconf.get("preset", "veryfast"),
+        "-crf", str(vconf.get("crf", 21)),
+        "-g", "60", "-an", str(tmp),
+    ]
+    _ffmpeg(args, timeout=max(120, int(frames / 2)))
+    tmp.replace(out)
+
+
 # ── episode render ───────────────────────────────────────────────────
 
 def render_episode(story: dict, narration: dict, work_dir: Path,
@@ -226,9 +293,11 @@ def render_episode(story: dict, narration: dict, work_dir: Path,
 
     Returns the final mp4 path (out_dir/final.mp4).
     """
+    from . import anim
     from . import art_engine
     from . import music as music_mod
 
+    anim_style = anim.pick_style(seed)   # one movement style per video
     vconf = cfg()["video"]
     mconf = cfg()["music"]
     fps = int(vconf.get("fps", 30))
@@ -257,10 +326,6 @@ def render_episode(story: dict, narration: dict, work_dir: Path,
     end_png = art_dir / "end.png"
     if not end_png.exists():
         art_engine.paint_end_card(seed + 5).save(end_png, "PNG")
-    for scene in story["scenes"]:
-        png = art_dir / f"scene_{scene['n']:02d}.png"
-        if not png.exists():
-            art_engine.save_scene(scene, seed + scene["n"] * 13, png)
 
     # 2. global captions
     global_ass = work_dir / "captions.ass"
@@ -278,7 +343,7 @@ def render_episode(story: dict, narration: dict, work_dir: Path,
     if not clip_ok(tc, title_s, fps):
         render_clip(title_png, tc, title_s, "zoom_in")
 
-    # scene clips
+    # scene clips (animated: characters sway, breathe and blink)
     t = title_s
     for i, scene in enumerate(story["scenes"]):
         dur = scene_durs[i]
@@ -286,8 +351,17 @@ def render_episode(story: dict, narration: dict, work_dir: Path,
         if not clip_ok(cp, dur, fps):
             cass = clips_dir / f"{scene['n']:02d}.ass"
             slice_ass(global_ass, t, t + dur, cass)
-            png = art_dir / f"scene_{scene['n']:02d}.png"
-            render_clip(png, cp, dur, motions[i], ass_file=cass)
+            layers = art_engine.build_scene_layers(
+                scene, seed + scene["n"] * 13)
+            if layers is not None:
+                render_clip_art(layers, seed, cp, dur, motions[i],
+                                ass_file=cass, anim_style=anim_style,
+                                card_idx=i)
+            else:   # static card (outro) — classic single-PNG path
+                png = art_dir / f"scene_{scene['n']:02d}.png"
+                if not png.exists():
+                    art_engine.save_scene(scene, seed + scene["n"] * 13, png)
+                render_clip(png, cp, dur, motions[i], ass_file=cass)
         t += dur
 
     # end card: no captions

@@ -2,13 +2,15 @@
 
 Each Short is one psychology concept delivered in the reference
 channel's format:
-  * hook card: the scene + huge stroked text (the scroll-stopper)
-  * body cards: the scene + the current narration line baked in as a
+  * hook card: the couple + huge stroked text (the scroll-stopper)
+  * body cards: the couple + the current narration line baked in as a
     bold overlay (karaoke-style, chunk by chunk)
   * term card: "psychologists call this — {TERM}" (the signature moment)
   * CTA card: "Subscribe for more tips like this." + subscribe pill
 
-Audio: neural narration (brisk pace, tighter pauses) + a quiet,
+The couple now ANIMATES: subtle sway, breathing bob and blinks at
+30 fps (a different movement style every video), rendered from art
+layers by the animator. Audio: neural narration + a quiet,
 mood-matched music bed that ducks under the voice. Everything
 resumable per clip, like the long pipeline.
 """
@@ -19,10 +21,10 @@ from pathlib import Path
 
 import numpy as np
 
-from . import art_engine, music, tts
+from . import anim, art_engine, music, tts
 from .config import cfg
 from .content_data import CTA_LINE
-from .render import probe
+from .render import probe, render_clip_art
 
 
 def _ffmpeg(args: list[str], timeout: int = 900) -> None:
@@ -50,16 +52,16 @@ def _card_kind(text: str, idx: int, term: str | None = None) -> str:
     return "scene"
 
 
-def _paint_card(kind: str, text: str, short: dict, seed: int, part: int) -> "Image":
-    from PIL import Image
+def _build_card_layers(kind: str, text: str, short: dict, seed: int,
+                       part: int) -> dict:
     band, sc = short["band"], short["scene"]
     if kind == "hook":
-        return art_engine.paint_hook_card(short["hook"], band, part, sc, seed)
+        return art_engine.build_hook_layers(short["hook"], band, part, sc, seed)
     if kind == "term":
-        return art_engine.paint_term_card(short["term"], band, sc, seed)
+        return art_engine.build_term_layers(short["term"], band, sc, seed)
     if kind == "cta":
-        return art_engine.paint_cta_card(band, sc, seed)
-    return art_engine.paint_scene_card(text, band, sc, seed)
+        return art_engine.build_cta_layers(band, sc, seed)
+    return art_engine.build_scene_card_layers(text, band, sc, seed)
 
 
 def _mix_audio(short_work: Path, narration: dict, seed: int,
@@ -106,12 +108,11 @@ def _mix_audio(short_work: Path, narration: dict, seed: int,
 
 def render_shorts(story: dict, work_dir: Path, out_dir: Path) -> list[Path]:
     """Render the day's 4 native shorts. Idempotent per short."""
-    from .render import render_clip, MOTIONS
+    from .render import MOTIONS
 
     work_dir.mkdir(parents=True, exist_ok=True)
     out_dir.mkdir(parents=True, exist_ok=True)
     sconf = cfg()["shorts"]
-    max_s = float(sconf.get("max_seconds", 57))
 
     outputs: list[Path] = []
     for short in story["shorts"]:
@@ -125,9 +126,7 @@ def render_shorts(story: dict, work_dir: Path, out_dir: Path) -> list[Path]:
 
         sw = work_dir / f"short_{n:02d}"
         sw.mkdir(parents=True, exist_ok=True)
-        art_dir = sw / "art"
         clips_dir = sw / "clips"
-        art_dir.mkdir(exist_ok=True)
         clips_dir.mkdir(exist_ok=True)
 
         # 1. narration (cached; brisk pace + tighter pauses for shorts).
@@ -141,22 +140,22 @@ def render_shorts(story: dict, work_dir: Path, out_dir: Path) -> list[Path]:
         chunks = narration["chunks"]
         total = narration["total"]
 
-        # 2. one card per caption chunk (text baked in, karaoke-style)
+        # 2. one animated card per caption chunk (karaoke-style)
         seed = story["seed"] + n * 131
+        style = anim.pick_style(story["seed"])   # one style per video
         clips: list[Path] = []
         for i, ch in enumerate(chunks):
             start = ch["start"]
             end = chunks[i + 1]["start"] if i + 1 < len(chunks) else total
             dur = max(0.8, end - start)
             kind = _card_kind(ch["text"], i, short.get("term"))
-            png = art_dir / f"card_{i:02d}.png"
-            if not png.exists():
-                img = _paint_card(kind, ch["text"], short, seed, n)
-                img.save(png, "PNG")
             cp = clips_dir / f"{i:02d}.mp4"
             if not cp.exists() or float(probe(cp).get("format", {}).get("duration", 0)) < dur - 0.4:
                 motion = MOTIONS[(seed + i) % 4]
-                render_clip(png, cp, dur, motion, size=(1080, 1920))
+                layers = _build_card_layers(kind, ch["text"], short, seed, n)
+                render_clip_art(layers, seed, cp, dur, motion,
+                                size=(1080, 1920), anim_style=style,
+                                card_idx=i)
             clips.append(cp)
 
         # 3. concat + audio

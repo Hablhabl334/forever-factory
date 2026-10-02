@@ -79,12 +79,69 @@ def _jitter_pct(text: str, jitter: float) -> float:
     return (val * 2.0 - 1.0) * jitter
 
 
+def _pause_for(text: str, idx: int, base: float) -> float:
+    """Deterministic per-sentence pause: humans never pause like a
+    metronome — every breath is a little different."""
+    digest = hashlib.md5(f"{idx}:{text}".encode()).hexdigest()
+    val = (int(digest[:8], 16) % 10_000) / 10_000.0     # [0, 1)
+    return base * (0.72 + 0.56 * val)
+
+
 def _parse_pct(s: str) -> float:
     return float(str(s).replace("%", "").strip() or 0)
 
 
 def _fmt_pct(v: float) -> str:
     return f"{int(round(v)):+d}%"
+
+
+def _parse_hz(s: str) -> float:
+    m = re.match(r"([+-]?\d+(?:\.\d+)?)\s*Hz", str(s).strip())
+    return float(m.group(1)) if m else 0.0
+
+
+def _fmt_hz(v: float) -> str:
+    v = int(round(v))
+    return f"{v:+d}Hz" if v else "+0Hz"
+
+
+def _wav_duration(path: Path) -> float:
+    out = subprocess.run(
+        ["ffprobe", "-v", "quiet", "-print_format", "json",
+         "-show_format", str(path)],
+        capture_output=True, text=True, timeout=60)
+    return float(json.loads(out.stdout)["format"]["duration"])
+
+
+def _polish_narration(wav_path: Path) -> None:
+    """Broadcast-polish pass: lift the rumble, add presence, gently
+    even out the dynamics. Every filter is strictly gain-only — the
+    duration is verified unchanged (caption sync is sacred). Best
+    effort: on any failure the raw narration is kept."""
+    tmp = wav_path.with_suffix(".polish.wav")
+    af = (
+        "highpass=f=85,lowpass=f=11500,"
+        "equalizer=f=200:t=q:w=1:g=-1.5,"
+        "equalizer=f=3200:t=q:w=1.4:g=2.5,"
+        "acompressor=threshold=-20dB:ratio=2:attack=10:release=180:makeup=1.5"
+    )
+    proc = subprocess.run(
+        ["ffmpeg", "-hide_banner", "-loglevel", "error", "-nostdin", "-y",
+         "-i", str(wav_path), "-af", af,
+         "-ar", str(SR), "-ac", "1", "-c:a", "pcm_s16le", str(tmp)],
+        stdin=subprocess.DEVNULL, capture_output=True, timeout=300)
+    if proc.returncode != 0:
+        tmp.unlink(missing_ok=True)
+        return
+    try:
+        d0, d1 = _wav_duration(wav_path), _wav_duration(tmp)
+        if abs(d1 - d0) > 0.02:          # paranoid: never drift captions
+            tmp.unlink(missing_ok=True)
+            return
+        tmp.replace(wav_path)
+        print("  [voice] polished: presence EQ + gentle compression")
+    except (json.JSONDecodeError, subprocess.TimeoutExpired, KeyError, ValueError):
+        tmp.unlink(missing_ok=True)
 
 
 # ── neural engine (edge-tts) ─────────────────────────────────────────
@@ -103,18 +160,22 @@ def _mp3_to_wav(mp3: Path, wav: Path) -> None:
 
 def _edge_synth_all(items: list[tuple[int, str]], chunks_dir: Path,
                     vconf: dict) -> None:
-    """Synthesize (idx, text) items with the neural voice, concurrent."""
+    """Synthesize (idx, text) items with the neural voice, concurrent.
+    Each sentence gets its own subtle rate AND pitch offset — humans
+    never say two sentences on exactly the same note."""
     import edge_tts
 
     voice = vconf.get("edge_name", "en-US-AriaNeural")
     base_rate = _parse_pct(vconf.get("edge_rate", "-6%"))
     jitter = float(vconf.get("edge_jitter", 3.0))
-    pitch = str(vconf.get("edge_pitch", "-1Hz"))
+    base_pitch = _parse_hz(vconf.get("edge_pitch", "-1Hz"))
+    pitch_jitter = float(vconf.get("edge_pitch_jitter", 3.0))
 
     async def one(idx: int, text: str) -> None:
         mp3 = chunks_dir / f"edge_{idx:03d}.mp3"
         wav = chunks_dir / f"chunk_{idx:03d}.wav"
         rate = _fmt_pct(base_rate + _jitter_pct(text, jitter))
+        pitch = _fmt_hz(base_pitch + _jitter_pct(text, pitch_jitter))
         last_err: Exception | None = None
         for attempt in range(3):
             try:
@@ -290,7 +351,7 @@ def narrate(story: dict, work_dir: Path, model_path: Path | None = None,
         frames = read_wav(chunks_dir / f"chunk_{p['idx']:03d}.wav")
         dur = len(frames) / SR
         if p["scene"] != last_scene:
-            t += scene_pause
+            t += _pause_for(p["text"], -p["scene"], scene_pause)
             scene_durations.append(round(t - scene_start, 3))
             scene_start = t
             last_scene = p["scene"]
@@ -300,7 +361,7 @@ def narrate(story: dict, work_dir: Path, model_path: Path | None = None,
             "start": round(t, 3),
             "end": round(t + dur, 3),
         })
-        t += dur + sent_pause
+        t += dur + _pause_for(p["text"], p["idx"], sent_pause)
     if plan:
         t += scene_pause
         scene_durations.append(round(t - scene_start, 3))
@@ -313,9 +374,10 @@ def narrate(story: dict, work_dir: Path, model_path: Path | None = None,
     last_scene = plan[0]["scene"] if plan else 1
     for p in plan:
         master.extend(read_wav(chunks_dir / f"chunk_{p['idx']:03d}.wav"))
-        master.extend(pause_frames(sent_pause))
+        master.extend(pause_frames(_pause_for(p["text"], p["idx"], sent_pause)))
         if p["scene"] != last_scene:
-            master.extend(pause_frames(scene_pause))
+            master.extend(
+                pause_frames(_pause_for(p["text"], -p["scene"], scene_pause)))
             last_scene = p["scene"]
 
     # trim/pad to exact total length
@@ -325,6 +387,7 @@ def narrate(story: dict, work_dir: Path, model_path: Path | None = None,
     elif len(master) < need:
         master.extend(array.array("h", b"\x00\x00" * (need - len(master))))
     write_wav(work_dir / "narration.wav", master)
+    _polish_narration(work_dir / "narration.wav")
 
     result = {
         "story_hash": story.get("hash"),

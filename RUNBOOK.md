@@ -261,3 +261,53 @@ every episode's soundtrack is generated from its seed.
 
 These changed no schedules, no quota math, no upload logic — the
 same forever machine, upgraded in place.
+
+## Part 9 — The living couple upgrade (2026-10-02, owner request)
+
+Viewer feedback after the first views: music is perfect, but (1) the
+text overlay is far too small, (2) the characters stand completely
+still, and (3) the voice is still slightly robotic. Fixed, in order:
+
+**1. Text you can read from across the room.** Long-video captions
+went from 44 px to **64 px Archivo Black** with a heavier outline
+(render.py ASS style; wrap width tightened to 38 chars so lines stay
+balanced). Shorts overlays: hook text **104 → 124 px**, scene/karaoke
+text **84 → 104 px**, strokes nearly doubled. Measured: the karaoke
+line now covers ~9% of the frame height — TikTok/Shorts standard.
+
+**2. The couple is alive (30 fps).** Every card is now built as
+**layers** — a static background plus the two characters as RGBA
+**sprites** — and `src/anim.py` composites unique frames at 30 fps:
+slow sinusoidal **sway**, breathing **bob**, and natural **blinks**
+(2–4 s apart, never in unison, 100–160 ms long). All motions run an
+integer number of cycles per loop, so the 2–5 s frame loop is
+seamless. Frames are piped to ffmpeg as raw video (no PNG round
+trips) and the final clip adds the Ken Burns drift via per-frame
+`scale`+`crop` (driven by the filter's own frame counter `n`, so the
+drift glides across loop seams). Render cost: ~1 s per second of
+video — the daily job budget is unaffected.
+
+**3. Six movement styles, one locked couple.** A style is seeded
+**per video** (`sync_breath`, `gentle_sway`, `counter_sway`,
+`weight_shift`, `lively`, `calm_bob`) — every day moves differently.
+But the couple's appearance is now **locked channel-wide** (one
+brunette + one dark-short-hair pair, fixed outfits, fixed iris
+colors — `art_engine.LOCKED_COUPLE`): the audience learns their
+faces the way they learn a channel's host. Faces also got a seeded
+**emotion-intensity pass** per video (sad→crying, happy→inlove,
+neutral→thinking/shy…), and the eyes are real now: white sclera +
+colored iris + pupil + specular highlight, gaze aimed at the
+partner. New expressions: shy, inlove, thinking, crying, hopeful.
+
+**4. A more human voice.** Switched to `en-US-JennyNeural` (the most
+conversational of the free neural voices), with per-sentence **pitch
+jitter ±3 Hz** in addition to the pace jitter (±4.5%), and
+**per-sentence pause jitter** (0.72–1.28×) — humans never breathe
+like a metronome. After synthesis a best-effort broadcast polish
+(high-pass, presence EQ at 3.2 kHz, gentle 2:1 compression) is
+applied with a hard duration check: if the filter chain ever changed
+the length by >20 ms, the raw take is kept — caption sync is sacred.
+All knobs: `channel.yaml → voice:`.
+
+Schedules, quota math, upload logic, the forever clock: untouched.
+Same machine, finally breathing.

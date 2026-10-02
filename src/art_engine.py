@@ -42,6 +42,47 @@ HAIRS = [(48, 44, 52), (94, 62, 42), (124, 92, 60), (32, 32, 38), (156, 114, 72)
 TOPS = [(74, 118, 124), (172, 98, 80), (126, 86, 118), (130, 126, 90), (96, 106, 130)]
 PANTS = [(72, 68, 78), (88, 80, 70), (62, 66, 86)]
 
+# ── THE LOCKED COUPLE ─────────────────────────────────────────────────
+# One pair, one design, every video, forever. The audience learns
+# their faces the way they learn a channel's host. Appearance is
+# FIXED — only emotions, poses and idle motion change per video.
+LOCKED_COUPLE = {
+    "a": {   # her — warm brunette, plum top
+        "skin": (242, 212, 178), "hair": (58, 42, 50),
+        "top": (150, 84, 118), "pants": (74, 66, 80),
+        "hair_style": "long", "iris": (96, 56, 42),
+        "blush": (246, 168, 150),
+    },
+    "b": {   # him — dark short hair, teal top
+        "skin": (226, 186, 146), "hair": (44, 36, 42),
+        "top": (84, 116, 128), "pants": (58, 62, 78),
+        "hair_style": "short", "iris": (90, 108, 130),
+        "blush": (240, 158, 138),
+    },
+}
+
+# emotion → richer peak variants (seeded per video: faces vary too)
+_PEAKS = {
+    "happy": ["happy", "inlove"],
+    "sad": ["sad", "crying"],
+    "neutral": ["neutral", "thinking", "shy"],
+    "surprised": ["surprised", "hopeful"],
+    "smug": ["smug", "thinking"],
+    "anxious": ["anxious", "shy"],
+    "detached": ["detached", "tired"],
+    "annoyed": ["annoyed"],
+    "tired": ["tired"],
+    "inlove": ["inlove"], "crying": ["crying"], "shy": ["shy"],
+    "thinking": ["thinking"], "hopeful": ["hopeful"],
+}
+
+
+def vary_emotion(seed: int, emotion: str, slot: int) -> str:
+    """Seeded emotion intensity pass — richer face variety per video."""
+    from .rng import FactoryRNG
+    opts = _PEAKS.get(emotion, [emotion])
+    return FactoryRNG(seed + slot * 977).pick(opts)
+
 FONT_DIR = ROOT / "assets" / "fonts"
 
 
@@ -128,18 +169,90 @@ def _vignette(img: Image.Image) -> Image.Image:
 # ── the flat couple illustration (webtoon-lite proportions) ──────────
 # head:body ~= 1:2.6, thick rounded limbs, arms anchored at shoulders.
 
+# emotions whose resting eyes are not wide open
+_HALF_EYES = {"tired", "detached", "shy"}
+_CLOSED_EYES = {"inlove"}
+
+
+def _eye_state(emotion: str) -> str:
+    if emotion in _CLOSED_EYES:
+        return "closed"
+    if emotion in _HALF_EYES:
+        return "half"
+    return "open"
+
+
 def _face(d: ImageDraw.ImageDraw, hx: float, hy: float, s: float,
-          emotion: str, facing: int, feature=INK) -> None:
-    """Face features; `feature` is the stroke/dot color (light on ink cards)."""
+          emotion: str, facing: int, feature=INK, iris=(96, 56, 42),
+          eyes: str = "open", skin=(242, 212, 178),
+          blush=(246, 168, 150)) -> None:
+    """Face with REAL eyes: white sclera, colored iris, pupil and a
+    specular highlight — they look toward the partner, not into the
+    void. `eyes` = "open" | "half" | "closed" (blink/lid states)."""
     fx = facing * 12 * s
     eye_y, brow_y, mouth_y = hy - 2 * s, hy - 32 * s, hy + 30 * s
     lx, rx = hx - 24 * s + fx * 0.5, hx + 24 * s + fx * 0.5
     lw = max(3, int(5 * s))
 
-    def dot(x, r=6.5):
-        d.ellipse([x - r * s, eye_y - r * s, x + r * s, eye_y + r * s], fill=feature)
+    # gaze: toward the partner; emotional offsets stack on top
+    look_x = facing * 4.2 * s
+    look_y = 0.0
+    if emotion == "shy":
+        look_y = 3.2 * s
+    elif emotion == "thinking":
+        look_x = -facing * 3.0 * s
+        look_y = -3.4 * s
+    elif emotion == "hopeful":
+        look_y = -1.6 * s
 
-    def lid(x):
+    def real_eye(x: float, big: float = 1.0) -> None:
+        ew, eh = 15 * s * big, 11.5 * s * big
+        if eyes == "closed":
+            # soft downward-curved closed lid
+            d.arc([x - 13 * s, eye_y - 7 * s, x + 13 * s, eye_y + 8 * s],
+                  195, 345, fill=feature, width=lw)
+            return
+        if eyes == "half":
+            # sclera with a heavy upper lid (sleepy / guarded / shy)
+            d.ellipse([x - ew, eye_y - eh, x + ew, eye_y + eh],
+                      fill=(250, 248, 244))
+            d.ellipse([x - ew, eye_y + eh * 0.15, x + ew, eye_y + eh],
+                      fill=skin)
+            cx, cy = x + look_x * 0.7, eye_y + look_y * 0.7 + eh * 0.25
+            r = 7.2 * s
+            d.ellipse([cx - r, cy - r, cx + r, cy + r], fill=iris)
+            d.ellipse([cx - 3.2 * s, cy - 3.2 * s, cx + 3.2 * s, cy + 3.2 * s],
+                      fill=feature)
+            d.ellipse([cx - 3.6 * s, cy - 5.2 * s, cx - 1.0 * s, cy - 2.6 * s],
+                      fill=WHITE)
+            d.line([x - 12 * s, eye_y - eh * 0.82, x + 12 * s, eye_y - eh * 0.82],
+                   fill=feature, width=lw)
+            return
+        # open: white sclera + iris + pupil + highlight
+        d.ellipse([x - ew, eye_y - eh, x + ew, eye_y + eh], fill=(250, 248, 244))
+        cx, cy = x + look_x, eye_y + look_y
+        r = 7.8 * s * big
+        d.ellipse([cx - r, cy - r, cx + r, cy + r], fill=iris)
+        d.ellipse([cx - 3.6 * s, cy - 3.6 * s, cx + 3.6 * s, cy + 3.6 * s],
+                  fill=feature)
+        # the sparkle that makes it a living eye
+        d.ellipse([cx - 3.8 * s, cy - 5.6 * s, cx - 1.0 * s, cy - 2.8 * s],
+                  fill=WHITE)
+        d.ellipse([cx + 0.6 * s, cy + 1.2 * s, cx + 2.2 * s, cy + 2.8 * s],
+                  fill=WHITE)
+        # gentle upper-lid line
+        d.arc([x - ew - 1 * s, eye_y - eh - 2 * s, x + ew + 1 * s, eye_y + eh],
+              205, 335, fill=feature, width=max(2, int(2.6 * s)))
+
+    def dot_eye(x: float, r: float = 6.5) -> None:
+        if eyes == "closed":
+            d.arc([x - 11 * s, eye_y - 6 * s, x + 11 * s, eye_y + 7 * s],
+                  195, 345, fill=feature, width=lw)
+        else:
+            d.ellipse([x - r * s, eye_y - r * s, x + r * s, eye_y + r * s],
+                      fill=feature)
+
+    def lid_line(x: float) -> None:
         d.line([x - 11 * s, eye_y, x + 11 * s, eye_y], fill=feature, width=lw)
 
     def brow(x, inner_up: float):
@@ -147,63 +260,147 @@ def _face(d: ImageDraw.ImageDraw, hx: float, hy: float, s: float,
         d.line([x - 14 * s, brow_y - (2 if inner_up > 0 else -2) * s,
                 nx, brow_y - inner_up * s], fill=feature, width=lw)
 
+    def blush_pair() -> None:
+        d.ellipse([lx - 22 * s, hy + 12 * s, lx - 6 * s, hy + 22 * s], fill=blush)
+        d.ellipse([rx + 6 * s, hy + 12 * s, rx + 22 * s, hy + 22 * s], fill=blush)
+
+    mono_eye = iris is None
+
     if emotion == "happy":
-        dot(lx), dot(rx), brow(lx, 6), brow(rx, 6)
+        if mono_eye:
+            dot_eye(lx), dot_eye(rx)
+        else:
+            real_eye(lx), real_eye(rx)
+        brow(lx, 6), brow(rx, 6)
         d.arc([hx - 16 * s + fx, mouth_y - 10 * s, hx + 16 * s + fx,
                mouth_y + 10 * s], 15, 165, fill=feature, width=lw)
-        if feature is INK:
-            d.ellipse([lx - 20 * s, hy + 12 * s, lx - 6 * s, hy + 20 * s],
-                      fill=(246, 172, 150))
-            d.ellipse([rx + 6 * s, hy + 12 * s, rx + 20 * s, hy + 20 * s],
-                      fill=(246, 172, 150))
+        blush_pair()
+    elif emotion == "inlove":
+        # happy closed-arc eyes (∩) — the smitten look
+        for x in (lx, rx):
+            d.arc([x - 12 * s, eye_y - 6 * s, x + 12 * s, eye_y + 9 * s],
+                  15, 165, fill=feature, width=lw)
+        brow(lx, 7), brow(rx, 7)
+        d.arc([hx - 17 * s + fx, mouth_y - 10 * s, hx + 17 * s + fx,
+               mouth_y + 12 * s], 10, 170, fill=feature, width=lw)
+        blush_pair()
     elif emotion == "sad":
-        dot(lx), dot(rx), brow(lx, -8), brow(rx, -8)
+        if mono_eye:
+            dot_eye(lx), dot_eye(rx)
+        else:
+            real_eye(lx), real_eye(rx)
+        brow(lx, -8), brow(rx, -8)
         d.arc([hx - 16 * s + fx, mouth_y - 2 * s, hx + 16 * s + fx,
                mouth_y + 20 * s], 195, 345, fill=feature, width=lw)
-        if feature is INK:
-            d.polygon([(lx - 18 * s, hy + 14 * s), (lx - 12 * s, hy + 14 * s),
-                       (lx - 15 * s, hy + 30 * s)], fill=(120, 160, 200))
-    elif emotion == "anxious":
+    elif emotion == "crying":
+        if mono_eye:
+            dot_eye(lx), dot_eye(rx)
+        else:
+            real_eye(lx), real_eye(rx)
+        brow(lx, -10), brow(rx, -10)
+        d.arc([hx - 16 * s + fx, mouth_y - 2 * s, hx + 16 * s + fx,
+               mouth_y + 20 * s], 195, 345, fill=feature, width=lw)
+        # tear streaks
         for x in (lx, rx):
-            dot(x, 9)
+            d.polygon([(x - 9 * s, eye_y + 10 * s), (x + 3 * s, eye_y + 10 * s),
+                       (x - 5 * s, eye_y + 26 * s)], fill=(126, 168, 208))
+            d.polygon([(x - 6 * s, eye_y + 22 * s), (x + 4 * s, eye_y + 22 * s),
+                       (x - 2 * s, eye_y + 34 * s)], fill=(150, 188, 222))
+    elif emotion == "anxious":
+        if mono_eye:
+            dot_eye(lx, 9), dot_eye(rx, 9)
+        else:
+            real_eye(lx, 1.12), real_eye(rx, 1.12)
         brow(lx, 10), brow(rx, 10)
         d.ellipse([hx - 8 * s + fx, mouth_y - 3 * s, hx + 8 * s + fx,
                    mouth_y + 11 * s], fill=feature)
     elif emotion == "detached":
-        lid(lx), lid(rx), brow(lx, 0), brow(rx, 0)
+        if mono_eye:
+            lid_line(lx), lid_line(rx)
+        else:
+            real_eye(lx), real_eye(rx)   # eyes="half" from _eye_state
+        brow(lx, 0), brow(rx, 0)
         d.line([hx - 11 * s + fx, mouth_y, hx + 11 * s + fx, mouth_y],
                fill=feature, width=lw)
     elif emotion == "annoyed":
-        dot(lx), dot(rx), brow(lx, -10), brow(rx, -10)
+        if mono_eye:
+            dot_eye(lx), dot_eye(rx)
+        else:
+            real_eye(lx), real_eye(rx)
+        brow(lx, -10), brow(rx, -10)
         d.arc([hx - 13 * s + fx, mouth_y - 5 * s, hx + 13 * s + fx,
                mouth_y + 10 * s], 200, 340, fill=feature, width=lw)
     elif emotion == "surprised":
-        for x in (lx, rx):
-            dot(x, 10)
+        if mono_eye:
+            dot_eye(lx, 10), dot_eye(rx, 10)
+        else:
+            real_eye(lx, 1.18), real_eye(rx, 1.18)
         brow(lx, 12), brow(rx, 12)
         d.ellipse([hx - 9 * s + fx, mouth_y - 4 * s, hx + 9 * s + fx,
                    mouth_y + 13 * s], fill=feature)
+    elif emotion == "hopeful":
+        if mono_eye:
+            dot_eye(lx, 9), dot_eye(rx, 9)
+        else:
+            real_eye(lx, 1.08), real_eye(rx, 1.08)
+        brow(lx, 8), brow(rx, 8)
+        d.arc([hx - 14 * s + fx, mouth_y - 8 * s, hx + 14 * s + fx,
+               mouth_y + 10 * s], 20, 160, fill=feature, width=lw)
     elif emotion == "tired":
-        lid(lx), lid(rx), brow(lx, -4), brow(rx, -4)
+        if mono_eye:
+            lid_line(lx), lid_line(rx)
+        else:
+            real_eye(lx), real_eye(rx)   # eyes="half"
+        brow(lx, -4), brow(rx, -4)
         d.line([hx - 10 * s + fx, mouth_y, hx + 10 * s + fx, mouth_y],
                fill=feature, width=lw)
     elif emotion == "smug":
-        lid(lx), lid(rx), brow(lx, 5), brow(rx, -5)
+        if mono_eye:
+            lid_line(lx), lid_line(rx)
+        else:
+            real_eye(lx), real_eye(rx)
+        brow(lx, 5), brow(rx, -5)
         d.arc([hx - 18 * s + fx, mouth_y - 12 * s, hx + 10 * s + fx,
                mouth_y + 8 * s], 20, 160, fill=feature, width=lw)
+    elif emotion == "shy":
+        if mono_eye:
+            lid_line(lx), lid_line(rx)
+        else:
+            real_eye(lx), real_eye(rx)   # eyes="half", gaze down
+        brow(lx, 3), brow(rx, 3)
+        d.arc([hx - 12 * s + fx, mouth_y - 6 * s, hx + 12 * s + fx,
+               mouth_y + 8 * s], 20, 160, fill=feature, width=lw)
+        blush_pair()
+    elif emotion == "thinking":
+        if mono_eye:
+            dot_eye(lx), dot_eye(rx)
+        else:
+            real_eye(lx), real_eye(rx)   # gaze up-side
+        brow(lx, 9), brow(rx, -2)
+        d.line([hx - 10 * s + fx, mouth_y + 2 * s, hx + 10 * s + fx,
+                mouth_y + 2 * s], fill=feature, width=lw)
     else:  # neutral
-        dot(lx), dot(rx), brow(lx, 0), brow(rx, 0)
+        if mono_eye:
+            dot_eye(lx), dot_eye(rx)
+        else:
+            real_eye(lx), real_eye(rx)
+        brow(lx, 0), brow(rx, 0)
         d.line([hx - 10 * s + fx, mouth_y, hx + 10 * s + fx, mouth_y],
                fill=feature, width=lw)
 
 
 def draw_figure(d: ImageDraw.ImageDraw, x: float, feet_y: float,
-                s: float, spec: dict) -> None:
-    """One flat character, webtoon-lite proportions (s=1 -> ~430px tall)."""
+                s: float, spec: dict, shadow: bool = True) -> None:
+    """One flat character, webtoon-lite proportions (s=1 -> ~430px tall).
+    spec["eyes"] = "open"|"half"|"closed" selects the eye state;
+    pose "away" turns the back of the head to the partner."""
     emotion, pose = spec["emotion"], spec["pose"]
     facing = spec["facing"]
     skin, hair, top, pants = spec["skin"], spec["hair"], spec["top"], spec["pants"]
     mono = spec.get("mono", False)
+    eyes = spec.get("eyes", "open")
+    if pose == "away":
+        facing = 0            # back of the head — turned away
 
     head_r = 66 * s
     hx, hy = x, feet_y - 404 * s            # head center
@@ -211,9 +408,10 @@ def draw_figure(d: ImageDraw.ImageDraw, x: float, feet_y: float,
     torso_top = hips_y - 150 * s
     torso_half = 52 * s
 
-    # ground shadow first (grounds the figure)
-    d.ellipse([x - 70 * s, feet_y - 16 * s, x + 70 * s, feet_y + 14 * s],
-              fill=(216, 210, 198) if not mono else (22, 22, 32))
+    # ground shadow (grounds the figure) — omit when baked into bg
+    if shadow:
+        d.ellipse([x - 70 * s, feet_y - 16 * s, x + 70 * s, feet_y + 14 * s],
+                  fill=(216, 210, 198) if not mono else (22, 22, 32))
 
     # legs: thick rounded limbs
     leg_w = 20 * s
@@ -305,22 +503,25 @@ def draw_figure(d: ImageDraw.ImageDraw, x: float, feet_y: float,
     # face (light feature color on ink/mono cards)
     if facing != 0:
         _face(d, hx, hy, s, emotion, facing,
-              feature=PAPER if mono else INK)
+              feature=PAPER if mono else INK,
+              iris=None if mono else spec.get("iris", (96, 56, 42)),
+              eyes=eyes, skin=skin, blush=spec.get("blush", (246, 168, 150)))
 
 
 def _figure_specs(seed: int, ea: str, pa: str, eb: str, pb: str) -> tuple[dict, dict]:
-    from .rng import FactoryRNG
-    r = FactoryRNG(seed)
-    skins = r.some(SKINS, 2)
-    hairs = r.some(HAIRS, 2)
-    tops = r.some(TOPS, 2)
-    pants = r.some(PANTS, 2)
+    """The LOCKED channel couple — appearance never changes between
+    videos (the audience learns their faces); emotions/poses do."""
+    la, lb = LOCKED_COUPLE["a"], LOCKED_COUPLE["b"]
     a = {"emotion": ea, "pose": pa, "facing": 1, "mono": False,
-         "skin": skins[0], "hair": hairs[0], "top": tops[0], "pants": pants[0],
-         "hair_style": r.pick(["long", "bun", "long"])}
+         "skin": la["skin"], "hair": la["hair"], "top": la["top"],
+         "pants": la["pants"], "hair_style": la["hair_style"],
+         "iris": la["iris"], "blush": la["blush"],
+         "eyes": _eye_state(ea)}
     b = {"emotion": eb, "pose": pb, "facing": -1, "mono": False,
-         "skin": skins[1], "hair": hairs[1], "top": tops[1], "pants": pants[1],
-         "hair_style": "short"}
+         "skin": lb["skin"], "hair": lb["hair"], "top": lb["top"],
+         "pants": lb["pants"], "hair_style": lb["hair_style"],
+         "iris": lb["iris"], "blush": lb["blush"],
+         "eyes": _eye_state(eb)}
     return a, b
 
 
@@ -398,7 +599,7 @@ def paint_couple_scene(spec: dict, seed: int, w: int = 1920, h: int = 1080,
     d = ImageDraw.Draw(img)
 
     if overlay:
-        f = font("display", int(w * 0.045))
+        f = font("display", int(w * 0.058))
         y = band_h + int(h * 0.03)
         for line in overlay[:2]:
             if not line:
@@ -448,6 +649,91 @@ def _progress_dots(d, cx: float, y: float, total: int, current: int) -> None:
             d.ellipse([x - 9, y - 9, x + 9, y + 9], fill=INK_SOFT)
 
 
+# ── sprite + layer system (the animation foundation) ─────────────────
+# Cards are now built as LAYERS: a static background (room, band, text,
+# vignette — all baked in) plus 1-2 character SPRITES. The animator
+# (src/anim.py) offsets the sprites per frame: sway, breathing bob,
+# blinks. Characters finally live instead of standing dead still.
+
+def render_character_sprites(spec: dict, s: float) -> dict:
+    """One character as three RGBA sprites (eyes open / half / closed),
+    feet anchored 16px above the canvas bottom."""
+    cw, ch = int(244 * s) + 36, int(505 * s) + 40
+    out = {"w": cw, "h": ch, "default": spec.get("eyes", "open"),
+           "anchor_x": 0.0, "feet_y": 0.0}
+    for state in ("open", "half", "closed"):
+        img = Image.new("RGBA", (cw, ch), (0, 0, 0, 0))
+        dr = ImageDraw.Draw(img)
+        draw_figure(dr, cw / 2, ch - 16, s, dict(spec, eyes=state),
+                    shadow=False)
+        out[state] = img
+    return out
+
+
+def _ground_shadow(d, x: float, feet_y: float, s: float,
+                   mono: bool = False) -> None:
+    d.ellipse([x - 70 * s, feet_y - 16 * s, x + 70 * s, feet_y + 14 * s],
+              fill=(22, 22, 32) if mono else (216, 210, 198))
+
+
+def compose_static(layers: dict) -> Image.Image:
+    """Flatten layers into one still image (frame zero — also used by
+    thumbnails and any static fallback path)."""
+    img = layers["bg"].copy()
+    for sp in layers.get("sprites", []):
+        spr = sp[sp["default"]]
+        img.paste(spr, (int(sp["anchor_x"] - sp["w"] / 2),
+                        int(sp["feet_y"] - (sp["h"] - 16))), spr)
+    tl = layers.get("text_layer")
+    if tl is not None:
+        img = Image.alpha_composite(img.convert("RGBA"), tl).convert("RGB")
+    return img
+
+
+def build_couple_layers(spec: dict, seed: int, w: int = 1920, h: int = 1080,
+                        zoom: float = 1.0) -> dict:
+    """Scene room + the locked couple as movable sprites. Faces get a
+    seeded emotion-intensity pass so expressions differ per video."""
+    ea = vary_emotion(seed, spec["emotion_a"], 1)
+    eb = vary_emotion(seed, spec["emotion_b"], 2)
+    img = Image.new("RGB", (w, h), PAPER)
+    d = ImageDraw.Draw(img)
+    floor_y = int(h * 0.885)
+    _scene_room(d, w, h, floor_y, seed + 17)
+    s = (1.02 if w >= 1600 else 1.45) * zoom
+    ax, bx = w * 0.32, w * 0.68
+    feet = floor_y + 6
+    _ground_shadow(d, ax, feet, s)
+    _ground_shadow(d, bx, feet, s)
+    img = _vignette(img)
+
+    a_spec, b_spec = _figure_specs(seed, ea, spec["pose_a"], eb, spec["pose_b"])
+    sa = render_character_sprites(a_spec, s)
+    sb = render_character_sprites(b_spec, s)
+    sa.update({"anchor_x": ax, "feet_y": feet})
+    sb.update({"anchor_x": bx, "feet_y": feet})
+    return {"bg": img, "sprites": [sa, sb], "text_layer": None,
+            "size": (w, h)}
+
+
+def build_mono_pair_layers(bg: Image.Image, spec: dict, seed: int,
+                           w: float, floor_y: float, s: float) -> dict:
+    """Attach the mono silhouette couple (ink cards) as sprites."""
+    ea = vary_emotion(seed, spec.get("emotion_a", "neutral"), 3)
+    eb = vary_emotion(seed, spec.get("emotion_b", "neutral"), 4)
+    a, b = _mono_specs(seed, ea, spec.get("pose_a", "stand"),
+                       eb, spec.get("pose_b", "stand"))
+    d = ImageDraw.Draw(bg)
+    ax, bx = w * 0.34, w * 0.66
+    _ground_shadow(d, ax, floor_y, s, mono=True)
+    _ground_shadow(d, bx, floor_y, s, mono=True)
+    sa, sb = render_character_sprites(a, s), render_character_sprites(b, s)
+    sa.update({"anchor_x": ax, "feet_y": floor_y})
+    sb.update({"anchor_x": bx, "feet_y": floor_y})
+    return {"bg": bg, "sprites": [sa, sb], "text_layer": None,
+            "size": bg.size}
+
+
 # ── long-video cards (1920x1080) ─────────────────────────────────────
 
 def paint_topic_card(title: str, band: str, count: int, seed: int) -> Image.Image:
@@ -479,8 +765,10 @@ def paint_topic_card(title: str, band: str, count: int, seed: int) -> Image.Imag
     return img
 
 
-def paint_concept_card(tip: int, total: int, term: str, headline: str,
-                       seed: int) -> Image.Image:
+def build_concept_layers(tip: int, total: int, term: str, headline: str,
+                         seed: int) -> dict:
+    """Long-video concept card: ink bg + glow + mono couple sprites,
+    with the headline on a text layer ABOVE them."""
     img = Image.new("RGB", (1920, 1080), INK)
     glow = _glow((1920, 1080), (960, 480), 330, PURPLE, 26)
     img = Image.alpha_composite(img.convert("RGBA"), glow).convert("RGB")
@@ -492,19 +780,24 @@ def paint_concept_card(tip: int, total: int, term: str, headline: str,
     d.rounded_rectangle([96, 88, 96 + tw + 64, 88 + 96], radius=20, fill=PURPLE)
     d.text((128, 112), label, font=chip, fill=WHITE)
 
-    # silhouettes anchor the bottom (BEHIND the headline, filling the glow)
-    _mono_pair(d, 1920, 1030, 0.66, {"emotion_a": "neutral", "pose_a": "stand",
-                                    "emotion_b": "neutral", "pose_b": "stand"},
-               seed + 5)
+    tf = font("card", 46)
+    _center(d, 960, 62, f"PSYCHOLOGISTS CALL THIS:  {term.upper()}", tf, GREY)
 
-    # headline with the longest word accented
+    layers = build_mono_pair_layers(
+        img, {"emotion_a": "neutral", "pose_a": "stand",
+              "emotion_b": "neutral", "pose_b": "stand"},
+        seed + 5, 1920, 1030, 0.66)
+
+    # headline on its own transparent layer (drawn OVER the silhouettes)
+    tl = Image.new("RGBA", (1920, 1080), (0, 0, 0, 0))
+    td = ImageDraw.Draw(tl)
     f = font("card", 100)
     words = headline.split()
     acc = max(words, key=len) if words else ""
     lines, cur, cur_acc = [], [], False
     for wd in words:
         trial = cur + [wd]
-        if d.textlength(" ".join(trial), font=f) > 1640 and cur:
+        if td.textlength(" ".join(trial), font=f) > 1640 and cur:
             lines.append((" ".join(cur), cur_acc))
             cur, cur_acc = [wd], wd == acc
         else:
@@ -516,21 +809,24 @@ def paint_concept_card(tip: int, total: int, term: str, headline: str,
 
     y = 330
     for text, has_acc in lines:
-        tw_line = d.textlength(text, font=f)
+        tw_line = td.textlength(text, font=f)
         x = 960 - tw_line / 2
         if has_acc and acc in text:
             pre, _, post = text.partition(acc)
-            d.text((x, y), pre, font=f, fill=WHITE)
-            x2 = x + d.textlength(pre, font=f)
-            d.text((x2, y), acc, font=f, fill=PURPLE_SOFT)
-            d.text((x2 + d.textlength(acc, font=f), y), post, font=f, fill=WHITE)
+            td.text((x, y), pre, font=f, fill=WHITE)
+            x2 = x + td.textlength(pre, font=f)
+            td.text((x2, y), acc, font=f, fill=PURPLE_SOFT)
+            td.text((x2 + td.textlength(acc, font=f), y), post, font=f, fill=WHITE)
         else:
-            d.text((x, y), text, font=f, fill=WHITE)
+            td.text((x, y), text, font=f, fill=WHITE)
         y += 124
+    layers["text_layer"] = tl
+    return layers
 
-    tf = font("card", 44)
-    _center(d, 960, 60, f"PSYCHOLOGISTS CALL THIS:  {term.upper()}", tf, GREY)
-    return img
+
+def paint_concept_card(tip: int, total: int, term: str, headline: str,
+                       seed: int) -> Image.Image:
+    return compose_static(build_concept_layers(tip, total, term, headline, seed))
 
 
 def paint_outro_card(topic: str, seed: int) -> Image.Image:
@@ -574,11 +870,8 @@ def paint_end_card(seed: int) -> Image.Image:
 
 # ── shorts cards (1080x1920) ─────────────────────────────────────────
 
-def paint_hook_card(hook: str, band: str, part: int, scene: dict,
-                    seed: int) -> Image.Image:
-    """Hook = scene + huge stroked text (the reference look)."""
-    img = paint_couple_scene(scene, seed + 91, 1080, 1920, zoom=1.0)
-    d = ImageDraw.Draw(img)
+def _shorts_band(d: ImageDraw.ImageDraw, band: str,
+                 part: int | None = None) -> None:
     band_h = 170
     d.rectangle([0, 0, 1080, band_h], fill=INK)
     f_band = font("card", 56)
@@ -586,43 +879,52 @@ def paint_hook_card(hook: str, band: str, part: int, scene: dict,
     while d.textlength(label, font=f_band) > 950:
         label = label[:-1]
     _center(d, 540, 38, label, f_band, WHITE)
-    pf = font("card", 40)
-    _center(d, 540, 104, f"PART {part}", pf, PURPLE_SOFT)
+    if part is not None:
+        pf = font("card", 40)
+        _center(d, 540, 104, f"PART {part}", pf, PURPLE_SOFT)
 
-    f = font("display", 104)
-    y = 360
-    for line in _wrap(d, hook.lower(), f, 940)[:7]:
-        y = _center(d, 540, y, line, f, WHITE,
-                    stroke=10, stroke_fill=INK)
-    return img
+
+def build_hook_layers(hook: str, band: str, part: int, scene: dict,
+                      seed: int) -> dict:
+    """Hook = couple scene + huge stroked text (the reference look)."""
+    layers = build_couple_layers(scene, seed + 91, 1080, 1920, zoom=1.0)
+    d = ImageDraw.Draw(layers["bg"])
+    _shorts_band(d, band, part)
+    f = font("display", 124)          # was 104 — readable from across the room
+    y = 330
+    for line in _wrap(d, hook.lower(), f, 930)[:7]:
+        y = _center(d, 540, y, line, f, WHITE, stroke=14, stroke_fill=INK)
+    return layers
+
+
+def paint_hook_card(hook: str, band: str, part: int, scene: dict,
+                    seed: int) -> Image.Image:
+    return compose_static(build_hook_layers(hook, band, part, scene, seed))
+
+
+def build_scene_card_layers(text: str, band: str, scene: dict,
+                            seed: int) -> dict:
+    """Body chunk: couple scene + bold stroked overlay + band."""
+    layers = build_couple_layers(scene, seed + 91, 1080, 1920, zoom=1.0)
+    d = ImageDraw.Draw(layers["bg"])
+    _shorts_band(d, band)
+    f = font("display", 104)          # was 84 — the karaoke text must POP
+    y = 290
+    for line in _wrap(d, text.lower(), f, 930)[:9]:
+        y = _center(d, 540, y, line, f, WHITE, stroke=12, stroke_fill=INK)
+    return layers
 
 
 def paint_scene_card(text: str, band: str, scene: dict, seed: int) -> Image.Image:
-    """Body chunk: scene + bold stroked overlay + band."""
-    img = paint_couple_scene(scene, seed + 91, 1080, 1920, zoom=1.0)
-    d = ImageDraw.Draw(img)
-    band_h = 170
-    d.rectangle([0, 0, 1080, band_h], fill=INK)
-    f_band = font("card", 56)
-    label = band.upper()
-    while d.textlength(label, font=f_band) > 950:
-        label = label[:-1]
-    _center(d, 540, 38, label, f_band, WHITE)
-
-    f = font("display", 84)
-    y = 300
-    for line in _wrap(d, text.lower(), f, 950)[:8]:
-        y = _center(d, 540, y, line, f, WHITE, stroke=9, stroke_fill=INK)
-    return img
+    return compose_static(build_scene_card_layers(text, band, scene, seed))
 
 
-def paint_term_card(term: str, band: str, scene: dict, seed: int) -> Image.Image:
+def build_term_layers(term: str, band: str, scene: dict, seed: int) -> dict:
     img = Image.new("RGB", (1080, 1920), INK)
     glow = _glow((1080, 1920), (540, 700), 330, PURPLE, 34)
     img = Image.alpha_composite(img.convert("RGBA"), glow).convert("RGB")
     d = ImageDraw.Draw(img)
     _band(d, 1080, band)
-    _mono_pair(d, 1080, 1780, 1.15, scene, seed + 5)
 
     f0 = font("card", 52)
     _center(d, 540, 560, "psychologists call this", f0, GREY)
@@ -631,16 +933,19 @@ def paint_term_card(term: str, band: str, scene: dict, seed: int) -> Image.Image
     for line in _wrap(d, term.upper(), f, 950)[:3]:
         y = _center(d, 540, y, line, f, PURPLE_SOFT)
     d.rectangle([440, y + 36, 640, y + 52], fill=PURPLE)
-    return img
+    return build_mono_pair_layers(img, scene, seed + 5, 1080, 1780, 1.15)
 
 
-def paint_cta_card(band: str, scene: dict, seed: int) -> Image.Image:
+def paint_term_card(term: str, band: str, scene: dict, seed: int) -> Image.Image:
+    return compose_static(build_term_layers(term, band, scene, seed))
+
+
+def build_cta_layers(band: str, scene: dict, seed: int) -> dict:
     img = Image.new("RGB", (1080, 1920), INK)
     glow = _glow((1080, 1920), (540, 720), 340, PURPLE, 32)
     img = Image.alpha_composite(img.convert("RGBA"), glow).convert("RGB")
     d = ImageDraw.Draw(img)
     _band(d, 1080, band)
-    _mono_pair(d, 1080, 1760, 1.0, scene, seed + 5)
 
     f = font("display", 112)
     y = 620
@@ -651,10 +956,28 @@ def paint_cta_card(band: str, scene: dict, seed: int) -> Image.Image:
     d.rounded_rectangle([320, y + 60, 760, y + 180], radius=56, fill=PURPLE)
     sf = font("card", 58)
     _center(d, 540, y + 104, "SUBSCRIBE", sf, WHITE)
-    return img
+    return build_mono_pair_layers(img, scene, seed + 5, 1080, 1760, 1.0)
+
+
+def paint_cta_card(band: str, scene: dict, seed: int) -> Image.Image:
+    return compose_static(build_cta_layers(band, scene, seed))
 
 
 # ── dispatcher used by the renderer ──────────────────────────────────
+
+def build_scene_layers(scene: dict, seed: int) -> dict:
+    """Layer dispatcher for the long-video renderer: animated kinds get
+    sprites, static kinds fall back to the PNG path."""
+    im = scene.get("image", {})
+    kind = im.get("kind", "couple_scene")
+    if kind == "concept_card":
+        return build_concept_layers(im["tip"], im.get("total", 8),
+                                    im.get("term", ""),
+                                    im.get("headline", ""), seed)
+    if kind == "couple_scene":
+        return build_couple_layers(im, seed, 1920, 1080)
+    return None   # static card (topic/outro/end) — use the PNG path
+
 
 def save_scene(scene: dict, seed: int, out_path: Path) -> None:
     kind = scene.get("image", {}).get("kind", "couple_scene")
