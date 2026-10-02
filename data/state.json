@@ -178,6 +178,31 @@
     "thumbnail": "2026-10-01",
     "playlist": "2026-10-01"
    }
+  },
+  {
+   "n": 12,
+   "title": "Self-Love Before Love",
+   "hash": "0d046e922d3063c2",
+   "seed": 100943425298486,
+   "date": "2026-10-02",
+   "status": "uploaded",
+   "ids": {
+    "long": "5wQ0wmS7GHQ",
+    "shorts": [
+     "ISod_uguaR8",
+     "ElMNPkRma0Q",
+     "ZwoNP3tA_zI",
+     "aC8V7uEF1zA"
+    ],
+    "thumbnail": "2026-10-02",
+    "playlist": "2026-10-02"
+   },
+   "shashes": [
+    "c49a377dc9ba2361",
+    "6aab50920930beb8",
+    "40cf301a09627fe3",
+    "b8dcb31b2968da1d"
+   ]
   }
  ],
  "story_hashes": [
@@ -191,18 +216,19 @@
   "1a6b5f0afecbe11c05c581d3",
   "b9df00fc21026fc41d8b209d",
   "b3dcb2a2ba0a3892f86236c6",
-  "a73fa1bcc7035d68c11d853b"
+  "a73fa1bcc7035d68c11d853b",
+  "0d046e922d3063c2"
  ],
  "quota": {
-  "date": "2026-10-01",
+  "date": "2026-10-02",
   "units_used": 8401
  },
- "last_run": "2026-10-01",
+ "last_run": "2026-10-02",
  "stats": {
-  "videos_published": 25,
-  "days_active": 6
+  "videos_published": 30,
+  "days_active": 7
  },
- "_last_days_active": "2026-10-01",
+ "_last_days_active": "2026-10-02",
  "analytics": [
   {
    "date": "2026-09-29",
@@ -266,9 +292,48 @@
     "8m3PZ44NW2c": 0,
     "k8PzqtNVynI": 0
    }
+  },
+  {
+   "date": "2026-10-02",
+   "total_views": 30,
+   "videos": {
+    "_oF4dTUGy24": 4,
+    "TRY0QZfgjBE": 5,
+    "Iocf2nxJuOY": 7,
+    "UG4z7_XQkjM": 2,
+    "4tbBV--cTsI": 7,
+    "h4B5GXfmjLg": 0,
+    "kvFpuUEz8QA": 0,
+    "TnJJf_3-Zg8": 1,
+    "3ZR4l08XxyE": 2,
+    "Zjf7Ne2z_4U": 0,
+    "pSRPxXnyAZg": 0,
+    "Mir11YcoWAw": 0,
+    "WSM7pIy8kdE": 1,
+    "DA0tiB7QrlY": 1,
+    "DVAoVnK5FtA": 0,
+    "git-4p8E9xY": 0,
+    "fkFhtGfsx_0": 0,
+    "n_GOahvID_Y": 0,
+    "8m3PZ44NW2c": 0,
+    "k8PzqtNVynI": 0,
+    "GRna0qAiWEg": 0,
+    "BJrBRuMoosA": 0,
+    "Mw2D_4ot0G8": 0,
+    "HjkTdKjH49s": 0,
+    "L7DJ2Nu2uo8": 0
+   }
   }
  ],
- "discovery": {},
- "short_hashes": [],
- "last_run_ts": 1790856000
+ "discovery": {
+  "playlist_id": "PLVWWhOwOS7x0",
+  "channel_branding": "2026-10-02"
+ },
+ "short_hashes": [
+  "c49a377dc9ba2361",
+  "6aab50920930beb8",
+  "40cf301a09627fe3",
+  "b8dcb31b2968da1d"
+ ],
+ "last_run_ts": 1790939744
 }
