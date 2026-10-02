@@ -462,14 +462,7 @@ def draw_figure(d: ImageDraw.ImageDraw, x: float, feet_y: float,
                        px + 26 * s, py + hy_off + 9 * s], fill=skin)
         # head tilts down a touch
         hy += 6 * s
-    elif pose == "hands_face":
-        for sgn in (-1, 1):
-            d.rounded_rectangle(
-                [x + sgn * torso_half - arm_w / 2 + sgn * 6 * s, sh_y,
-                 x + sgn * torso_half + arm_w / 2 + sgn * 46 * s, sh_y - 60 * s],
-                radius=arm_w / 2, fill=top)
-        d.ellipse([hx - 44 * s, hy + 16 * s, hx - 14 * s, hy + 42 * s], fill=skin)
-        d.ellipse([hx + 14 * s, hy + 16 * s, hx + 44 * s, hy + 42 * s], fill=skin)
+    # (hands_face arms are drawn AFTER the hair+face, below)
     else:  # relaxed stand
         for sgn in (-1, 1):
             d.rounded_rectangle(
@@ -506,6 +499,24 @@ def draw_figure(d: ImageDraw.ImageDraw, x: float, feet_y: float,
               feature=PAPER if mono else INK,
               iris=None if mono else spec.get("iris", (96, 56, 42)),
               eyes=eyes, skin=skin, blush=spec.get("blush", (246, 168, 150)))
+
+    # hands-on-face pose: arms + hands drawn LAST so long hair never
+    # covers them — the distress gesture must read instantly. The arm
+    # bends at an OUTWARD elbow (shoulder -> elbow-out -> cheek) so it
+    # reads as an arm, never as a hair strand.
+    if pose == "hands_face" and facing != 0:
+        aw = max(5, int(arm_w))
+        for sgn in (-1, 1):
+            shx = x + sgn * (torso_half - 4 * s)
+            ex, ey = x + sgn * (torso_half + 10 * s), sh_y - 42 * s
+            hax, hay = hx + sgn * 31 * s, hy + 24 * s
+            d.line([(shx, sh_y), (ex, ey), (hax, hay)], fill=top,
+                   width=aw, joint="curve")
+            for jx, jy in ((shx, sh_y), (hax, hay)):
+                d.ellipse([jx - aw / 2, jy - aw / 2, jx + aw / 2, jy + aw / 2],
+                          fill=top)
+        d.ellipse([hx - 46 * s, hy + 12 * s, hx - 16 * s, hy + 38 * s], fill=skin)
+        d.ellipse([hx + 16 * s, hy + 12 * s, hx + 46 * s, hy + 38 * s], fill=skin)
 
 
 def _figure_specs(seed: int, ea: str, pa: str, eb: str, pb: str) -> tuple[dict, dict]:
