@@ -108,7 +108,10 @@ def mark_uploaded(state: dict, episode_n: int, kind: str, video_id: str,
             if kind == "long":
                 e["ids"]["long"] = video_id
             elif kind == "short":
-                e["ids"]["shorts"].append(video_id)
+                # one record per video — an id can never legitimately
+                # appear twice in the same episode's shorts
+                if video_id not in e["ids"]["shorts"]:
+                    e["ids"]["shorts"].append(video_id)
             e["status"] = "uploaded" if e["ids"]["long"] else e["status"]
             break
     spend_quota(state, units)

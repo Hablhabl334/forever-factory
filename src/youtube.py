@@ -193,11 +193,22 @@ def _poll_video_id(token: str) -> str:
     return items[0]["id"]["videoId"] if items else ""
 
 
-def _find_video_by_title(token: str, title: str) -> str | None:
+def _find_video_by_title(token: str, title: str,
+                          exclude: set[str] | None = None) -> str | None:
     """Crash-safety reconcile: a previous run may have finished the API
     upload but died before recording the video id (sandbox reset, bug,
     runner eviction...). Exact-title match against our own uploads —
-    1 quota unit. Prevents duplicate uploads after any crash."""
+    1 quota unit. Prevents duplicate uploads after any crash.
+
+    `exclude` = video ids the LEDGER has already claimed for OTHER
+    episodes. Shorts deliberately all share one fixed title (the
+    owner's growth strategy), so a bare title match would "adopt"
+    yesterday's short and silently skip every upload after day one.
+    A match only counts as a crash orphan if the ledger does not
+    already attribute it to a different episode — an unrecorded video
+    is a true orphan (this episode's own crashed upload), a recorded
+    one belongs to another episode and must never be re-used."""
+    exclude = exclude or set()
     try:
         req = urllib.request.Request(
             f"{API_BASE}/channels?part=contentDetails&mine=true",
@@ -212,11 +223,44 @@ def _find_video_by_title(token: str, title: str) -> str | None:
         with urllib.request.urlopen(req, timeout=30) as resp:
             items = json.loads(resp.read()).get("items", [])
         for it in items:
-            if it["snippet"]["title"] == title:
-                return it["snippet"]["resourceId"]["videoId"]
+            if it["snippet"]["title"] != title:
+                continue
+            vid = it["snippet"]["resourceId"]["videoId"]
+            if vid in exclude:
+                continue  # claimed by another episode — not an orphan
+            return vid
     except Exception:
         return None
     return None
+
+
+def _foreign_ids(state: dict, episode_n: int) -> set[str]:
+    """Video ids the ledger attributes to episodes OTHER than
+    episode_n. Ids recorded for episode_n itself stay adoptable (a
+    re-run of the same episode must adopt its own earlier upload,
+    never duplicate it)."""
+    ids: set[str] = set()
+    for e in state.get("episodes", []):
+        if e.get("n") == episode_n:
+            continue
+        eids = e.get("ids") or {}
+        if eids.get("long"):
+            ids.add(eids["long"])
+        for s in eids.get("shorts") or []:
+            ids.add(s)
+    return ids
+
+
+def _recorded_short_ids(state: dict, episode_n: int) -> set[str]:
+    """Short ids already recorded for THIS episode. A short may adopt
+    only an UNCLAIMED video: once this episode has recorded a short id,
+    that video is taken — the next short of the same episode must not
+    re-adopt it (all shorts share the fixed title, so without this the
+    2nd short would grab the 1st one's freshly adopted orphan)."""
+    for e in state.get("episodes", []):
+        if e.get("n") == episode_n:
+            return set((e.get("ids") or {}).get("shorts") or [])
+    return set()
 
 
 def _set_thumbnail(token: str, video_id: str, thumb: Path) -> bool:
@@ -270,8 +314,17 @@ def upload_video(filepath: Path, meta: dict, publish_at: str | None,
 
     # crash-safety: if this exact title is already on the channel (a past
     # run uploaded it but crashed before recording the id), adopt it —
-    # never upload the same video twice.
-    existing = _find_video_by_title(token, meta["title"])
+    # never upload the same video twice. Videos the ledger already
+    # claims for a DIFFERENT episode are not orphans (shorts share a
+    # fixed title, so every day would match yesterday's) — they must
+    # not block today's fresh upload. For shorts, this episode's own
+    # recorded ids are also taken (one adoption per video, never two
+    # shorts on the same video); a long may always re-adopt its own
+    # recorded id — that is exactly the resume path.
+    exclude = _foreign_ids(state, episode_n)
+    if kind == "short":
+        exclude |= _recorded_short_ids(state, episode_n)
+    existing = _find_video_by_title(token, meta["title"], exclude=exclude)
     if existing:
         print(f"  [youtube] {kind} already on channel ({existing}) — adopting, no re-upload")
         ledger.mark_uploaded(state, episode_n, kind, existing, 1)

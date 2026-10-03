@@ -52,7 +52,15 @@ jobs:
       run: ${{ steps.gate.outputs.run }}
     steps:
       - name: Checkout
+        # ref:main, NOT the event's pinned SHA — a run promoted out of
+        # the concurrency queue may carry a SHA from BEFORE the racing
+        # run pushed its memory. Reading the pinned SHA made this gate
+        # re-read stale state and double-produce the day (Oct 3 race:
+        # dispatch + a delayed cron slot both rendered ep13). Fresh
+        # HEAD = the stamp the finished run just pushed = a clean SKIP.
         uses: actions/checkout@v4
+        with:
+          ref: main
 
       - name: Has today's cycle already run?
         id: gate
@@ -81,7 +89,12 @@ jobs:
     timeout-minutes: 120
     steps:
       - name: Checkout
+        # ref:main — same reasoning as the gate job: always render
+        # from the freshest state (a crash-resume must see the
+        # in-progress episode the previous run recorded).
         uses: actions/checkout@v4
+        with:
+          ref: main
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -125,8 +138,17 @@ jobs:
             # (manual pushes, web edits). Rebase first so the memory
             # commit always lands cleanly — never a non-fast-forward.
             git fetch origin main
-            git rebase --autostash origin/main
-            git push origin main
+            if git rebase --autostash origin/main; then
+              git push origin main
+            else
+              # Another run advanced main underneath us (e.g. a racing
+              # run that pushed its memory first). Its memory wins —
+              # ours is the redundant copy of the same work. Dropping
+              # it is strictly safer than force-applying stale state:
+              # a lost last_run_ts stamp would double-produce tomorrow.
+              git rebase --abort 2>/dev/null || true
+              echo "memory push skipped: main advanced mid-run — the other run's memory wins"
+            fi
           fi
 
       - name: Alert on failure

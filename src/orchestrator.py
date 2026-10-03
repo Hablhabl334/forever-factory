@@ -38,6 +38,53 @@ def _daily_seed(episode_n: int) -> int:
     return _dated_seed(date.today().isoformat(), episode_n)
 
 
+def _load_slots(state: dict) -> dict[str, set[str]]:
+    """The publishAt slots already booked by PAST runs, so two cycles
+    in one day (a recovery dispatch, a crash-resume) never stack two
+    videos onto the same 6-hour grid slot. Anything older than 2 days
+    is dead grid — dropped."""
+    from datetime import datetime, timedelta, timezone
+    horizon = datetime.now(timezone.utc) - timedelta(days=2)
+    out: dict[str, set[str]] = {"long": set(), "short": set()}
+    for kind in out:
+        for s in (state.get("slots") or {}).get(kind, []) or []:
+            try:
+                when = datetime.fromisoformat(s)
+            except (ValueError, TypeError):
+                continue
+            if when.tzinfo is None:
+                when = when.replace(tzinfo=timezone.utc)
+            if when >= horizon:
+                out[kind].add(s)
+    return out
+
+
+def _remember_slot(state: dict, kind: str, slot: str | None) -> None:
+    """Persist a booked slot to the ledger (crash-safe: the same save
+    that records the video id records its slot). Only slots that a
+    video actually took are remembered — a deferred upload (quota)
+    leaves the slot free for the next attempt."""
+    if not slot:
+        return
+    from datetime import datetime, timedelta, timezone
+    horizon = datetime.now(timezone.utc) - timedelta(days=2)
+
+    def _aware(s: str):
+        try:
+            d = datetime.fromisoformat(s)
+        except (ValueError, TypeError):
+            return None
+        return d if d.tzinfo else d.replace(tzinfo=timezone.utc)
+
+    slots = state.setdefault("slots", {"long": [], "short": []})
+    kept = [s for s in slots.setdefault(kind, [])
+            if (d := _aware(s)) is not None and d >= horizon]
+    if slot not in kept:
+        kept.append(slot)
+    slots[kind] = kept
+    ledger.save(state)
+
+
 def _resume_episode(state: dict) -> tuple[int, int] | None:
     """Return (n, seed) for a recent in-progress episode, if any.
     Window model: an episode from today OR yesterday can be resumed
@@ -201,21 +248,46 @@ def produce_episode(story: dict, episode_n: int, dry_run: bool,
         return {"episode": episode_n, "title": story["title"], "dry_run": True,
                 "long_seconds": dur, "shorts": len(short_files)}
 
+    # ids the ledger already attributes to THIS episode before the
+    # upload pass — a video that comes back adopted (its id was already
+    # recorded) already owns a slot in the grid from its original
+    # upload. Booking it a second slot would phantom-block the grid and
+    # push the next day's long video a day late (Oct 3 lesson).
+    rec = next((e for e in state.get("episodes", []) if e.get("n") == episode_n), None)
+    rec_ids: set[str] = set()
+    if rec:
+        eids = rec.get("ids") or {}
+        if eids.get("long"):
+            rec_ids.add(eids["long"])
+        rec_ids.update(eids.get("shorts") or [])
+
     long_slot = youtube.next_slot("long", used_slots["long"])
-    used_slots["long"].add(long_slot)
     long_id = youtube.upload_video(final, long_meta, long_slot, episode_n, "long", state)
+    if long_id is not None and long_id not in rec_ids:
+        used_slots["long"].add(long_slot)
+        _remember_slot(state, "long", long_slot)
 
     # upload the 4 shorts into the 6-hour grid (shorts first = the funnel
-    # fills before the evening long lands)
+    # fills before the evening long lands). Idempotent per index: a short
+    # whose id is already recorded (a re-run of a finished/resumed
+    # episode) is skipped — its video is on the channel with its slot.
+    recorded_shorts = list((rec.get("ids") or {}).get("shorts") or []) if rec else []
     for i, sf in enumerate(short_files):
+        if i < len(recorded_shorts):
+            print(f"  [{episode_n}] short {i+1} already uploaded "
+                  f"({recorded_shorts[i]}) — skipping")
+            continue
         short_spec = story["shorts"][i] if i < len(story.get("shorts", [])) else {}
         short_meta = meta_mod.short_metadata(story, short_spec)
         short_slot = youtube.next_slot("short", used_slots["short"])
-        used_slots["short"].add(short_slot)
         # thumbnails not set for shorts (auto frame is fine; quota discipline)
         sid = youtube.upload_video(sf, short_meta, short_slot, episode_n, "short", state)
         if sid is None:
             break  # quota exhausted — stop uploading for today
+        if sid not in rec_ids:  # fresh upload → its slot is now taken
+            used_slots["short"].add(short_slot)
+            _remember_slot(state, "short", short_slot)
+        recorded_shorts.append(sid)  # a re-run skips this one next time
 
     return {"episode": episode_n, "title": story["title"], "long_id": long_id,
             "long_seconds": dur, "shorts": len(short_files)}
@@ -270,7 +342,7 @@ def _run_daily_inner(dry_run: bool, longs: int | None,
                   f"deferring today's uploads")
             return results
 
-    used_slots = {"long": set(), "short": set()}
+    used_slots = _load_slots(state)
     made = 0
     while made < target:
         # resume an interrupted episode from today, else start a fresh one
