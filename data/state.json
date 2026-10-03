@@ -210,10 +210,15 @@
    "hash": "9185c66e7d217e6a",
    "seed": 251474475118740,
    "date": "2026-10-03",
-   "status": "in_progress",
+   "status": "uploaded",
    "ids": {
     "long": "57GaUcN6Xfo",
-    "shorts": [],
+    "shorts": [
+     "4CsBqeLACzY",
+     "8Dg8yh488N8",
+     "HpRLqiAR7ks",
+     "NEpaHpN_z2Y"
+    ],
     "thumbnail": "2026-10-03",
     "playlist": "2026-10-03"
    },
@@ -242,11 +247,11 @@
  ],
  "quota": {
   "date": "2026-10-03",
-  "units_used": 1705
+  "units_used": 8307
  },
  "last_run": "2026-10-03",
  "stats": {
-  "videos_published": 31,
+  "videos_published": 35,
   "days_active": 8
  },
  "_last_days_active": "2026-10-03",
@@ -380,6 +385,43 @@
     "ZwoNP3tA_zI": 0,
     "aC8V7uEF1zA": 0
    }
+  },
+  {
+   "date": "2026-10-03",
+   "total_views": 45,
+   "videos": {
+    "_oF4dTUGy24": 4,
+    "TRY0QZfgjBE": 5,
+    "Iocf2nxJuOY": 7,
+    "UG4z7_XQkjM": 2,
+    "4tbBV--cTsI": 7,
+    "h4B5GXfmjLg": 0,
+    "kvFpuUEz8QA": 0,
+    "TnJJf_3-Zg8": 1,
+    "3ZR4l08XxyE": 2,
+    "Zjf7Ne2z_4U": 0,
+    "pSRPxXnyAZg": 0,
+    "Mir11YcoWAw": 0,
+    "WSM7pIy8kdE": 1,
+    "DA0tiB7QrlY": 1,
+    "DVAoVnK5FtA": 0,
+    "git-4p8E9xY": 0,
+    "fkFhtGfsx_0": 0,
+    "n_GOahvID_Y": 0,
+    "8m3PZ44NW2c": 0,
+    "k8PzqtNVynI": 0,
+    "GRna0qAiWEg": 0,
+    "BJrBRuMoosA": 0,
+    "Mw2D_4ot0G8": 0,
+    "HjkTdKjH49s": 0,
+    "L7DJ2Nu2uo8": 0,
+    "5wQ0wmS7GHQ": 0,
+    "ISod_uguaR8": 11,
+    "ElMNPkRma0Q": 4,
+    "ZwoNP3tA_zI": 0,
+    "aC8V7uEF1zA": 0,
+    "57GaUcN6Xfo": 0
+   }
   }
  ],
  "discovery": {
@@ -396,5 +438,14 @@
   "90d103bb13b0e763",
   "6cafd5a5f3c9e52c"
  ],
- "last_run_ts": 1791023775
+ "last_run_ts": 1791043265,
+ "slots": {
+  "long": [],
+  "short": [
+   "2026-10-04T00:00:00+03:00",
+   "2026-10-04T06:00:00+03:00",
+   "2026-10-04T12:00:00+03:00",
+   "2026-10-04T18:00:00+03:00"
+  ]
+ }
 }
