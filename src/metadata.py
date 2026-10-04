@@ -1,7 +1,10 @@
 """Per-video YouTube metadata for the love-psychology channel.
 
 The Short rules come straight from the channel owner and are FIXED:
-  * every Short title  = "Subscribe for more tips like this"
+  * every Short title  = "Subscribe for more tips like this
+    #psychology #relationship #love #relationshipgoals"
+    (same locked title every time; the fixed tags the owner specified
+    are appended at the END of the title)
   * every Short tags   = #psychology #relationship #love #relationshipgoals
   (fixed titles are a deliberate growth strategy in this niche — the
   Shorts feed sells the hook, not the title; the identical title turns
@@ -16,9 +19,11 @@ from __future__ import annotations
 from .config import cfg
 from .content_data import CTA_LINE
 
-SHORT_TITLE = CTA_LINE.rstrip(".")               # fixed, exactly as specified
 SHORT_TAGS = ["#psychology", "#relationship", "#love", "#relationshipgoals"]
 SHORT_HASHTAGS = "#psychology #relationship #love #relationshipgoals"
+# Owner's rule: the SAME locked title every time, with the fixed tags
+# appended at the end (84 chars — well under YouTube's 100-char limit).
+SHORT_TITLE = f"{CTA_LINE.rstrip('.')} {SHORT_HASHTAGS}"
 
 TITLE_FRAMES = [
     ("Psychology of Love", "Love Psychology Tips"),
