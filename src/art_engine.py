@@ -27,6 +27,7 @@ PAPER_SHADE = (224, 219, 208)
 PAPER_DEEP = (205, 199, 186)
 WHITE = (255, 255, 255)
 GREY = (168, 168, 178)
+INK_MUTED = (108, 102, 124)
 PURPLE = (155, 89, 182)
 PURPLE_SOFT = (212, 168, 232)
 RED = (216, 72, 74)
@@ -48,7 +49,7 @@ PANTS = [(72, 68, 78), (88, 80, 70), (62, 66, 86)]
 # FIXED — only emotions, poses and idle motion change per video.
 LOCKED_COUPLE = {
     "a": {   # her — warm brunette, plum top
-        "skin": (242, 212, 178), "hair": (58, 42, 50),
+        "skin": (242, 212, 178), "hair": (99, 63, 49),
         "top": (150, 84, 118), "pants": (74, 66, 80),
         "hair_style": "long", "iris": (96, 56, 42),
         "blush": (246, 168, 150),
@@ -85,26 +86,30 @@ def vary_emotion(seed: int, emotion: str, slot: int) -> str:
 
 FONT_DIR = ROOT / "assets" / "fonts"
 
-
-def _try(path: str) -> ImageFont.FreeTypeFont | None:
-    p = FONT_DIR / path
-    if p.exists():
-        return ImageFont.truetype(str(p))
-    return None
-
-
-_DISPLAY = _try("Anton-Regular.ttf")
-_CARD = _try("ArchivoBlack-Regular.ttf")
+_FONT_FILES = {
+    "display": "Anton-Regular.ttf",
+    "card": "ArchivoBlack-Regular.ttf",
+}
 _CACHE: dict[tuple[str, int], ImageFont.FreeTypeFont] = {}
 
 
 def font(kind: str, size: int) -> ImageFont.FreeTypeFont:
+    """Load a font AT THE REQUESTED SIZE.
+
+    v1 bug (the real reason every text-overlap complaint happened):
+    the base fonts were opened with ImageFont.truetype(path) — PIL
+    defaults that to 10 px — and the size argument was never applied,
+    so EVERY string in every video rendered at 10 px no matter what
+    size the code asked for. Fixed: each (kind, size) loads the file
+    with its real size."""
     key = (kind, int(size))
     if key in _CACHE:
         return _CACHE[key]
-    base = _DISPLAY if kind == "display" else _CARD
-    f = base or ImageFont.truetype(
-        "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf", int(size))
+    name = _FONT_FILES.get(kind, _FONT_FILES["card"])
+    path = FONT_DIR / name
+    if not path.exists():
+        path = Path("/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf")
+    f = ImageFont.truetype(str(path), int(size))
     _CACHE[key] = f
     return f
 
@@ -122,6 +127,39 @@ def _wrap(d: ImageDraw.ImageDraw, text: str, f: ImageFont.FreeTypeFont,
     if cur:
         lines.append(cur)
     return lines
+
+
+def _fit_text(d: ImageDraw.ImageDraw, text: str, kind: str,
+              base: int, floor: int, max_w: float,
+              max_lines: int) -> tuple[ImageFont.FreeTypeFont, list[str]]:
+    """The BIGGEST font (>= floor) whose wrapped text fits max_lines
+    and whose longest word fits max_w. Text never overflows the card
+    and is never dropped — it shrinks gracefully instead."""
+    size = base
+    while size > floor:
+        f = font(kind, size)
+        lines = _wrap(d, text, f, max_w)
+        widest = max((d.textlength(w, font=f) for w in text.split()),
+                     default=0)
+        if len(lines) <= max_lines and widest <= max_w:
+            return f, lines
+        size -= 5
+    f = font(kind, floor)
+    return f, _wrap(d, text, f, max_w)[:max_lines]
+
+
+def _ellipsize(d: ImageDraw.ImageDraw, text: str, f: ImageFont.FreeTypeFont,
+               max_w: float) -> str:
+    """Truncate a label at a word boundary with an ellipsis."""
+    if d.textlength(text, font=f) <= max_w:
+        return text
+    out = ""
+    for w in text.split():
+        trial = (out + " " + w).strip()
+        if d.textlength(trial + "…", font=f) > max_w:
+            break
+        out = trial
+    return (out + "…") if out else (text[:1] + "…")
 
 
 def _center(d: ImageDraw.ImageDraw, cx: float, y: float, line: str,
@@ -155,6 +193,8 @@ def _glow(size: tuple[int, int], center: tuple[float, float],
 
 
 def _vignette(img: Image.Image) -> Image.Image:
+    """A whisper of warm falloff at the edges — the picture stays
+    BRIGHT end-to-end (user rule: never turn dark)."""
     w, h = img.size
     small = Image.new("L", (w // 16, h // 16), 0)
     sd = ImageDraw.Draw(small)
@@ -162,8 +202,8 @@ def _vignette(img: Image.Image) -> Image.Image:
                   small.width * 0.92, small.height * 0.92], fill=255)
     mask = small.resize((w, h), Image.BILINEAR).filter(
         ImageFilter.GaussianBlur(w // 18))
-    dark = Image.new("RGB", (w, h), (18, 16, 22))
-    return Image.composite(img, dark, mask.point(lambda v: 255 - int(v * 0.30)))
+    warm = Image.new("RGB", (w, h), (214, 209, 197))
+    return Image.composite(img, warm, mask.point(lambda v: 255 - int(v * 0.12)))
 
 
 # ── the flat couple illustration (webtoon-lite proportions) ──────────
@@ -411,7 +451,7 @@ def draw_figure(d: ImageDraw.ImageDraw, x: float, feet_y: float,
     # ground shadow (grounds the figure) — omit when baked into bg
     if shadow:
         d.ellipse([x - 70 * s, feet_y - 16 * s, x + 70 * s, feet_y + 14 * s],
-                  fill=(216, 210, 198) if not mono else (22, 22, 32))
+                  fill=(216, 210, 198) if not mono else (24, 24, 36))
 
     # legs: thick rounded limbs
     leg_w = 20 * s
@@ -470,16 +510,38 @@ def draw_figure(d: ImageDraw.ImageDraw, x: float, feet_y: float,
                  x + sgn * torso_half + arm_w / 2, sh_y + 96 * s],
                 radius=arm_w / 2, fill=top)
 
-    # hair back layer (long styles) behind the head
+    # hair — drawn like actual hair, never a solid block under the chin
+    # (the v1 long-hair rectangle read as a BEARD: the user's #1 art bug)
     style = spec.get("hair_style", "short")
     if facing == 0:
-        d.ellipse([hx - head_r - 4 * s, hy - head_r - 4 * s,
-                   hx + head_r + 4 * s, hy + head_r + 4 * s], fill=hair)
+        # back of the head — for long styles the hair pours down the back
+        if style == "long":
+            d.rounded_rectangle(
+                [hx - head_r - 6 * s, hy - head_r - 6 * s,
+                 hx + head_r + 6 * s, hy + head_r + 58 * s],
+                radius=34 * s, fill=hair)
+        else:
+            d.ellipse([hx - head_r - 4 * s, hy - head_r - 4 * s,
+                       hx + head_r + 4 * s, hy + head_r + 4 * s], fill=hair)
     elif style == "long":
-        d.rounded_rectangle([hx - head_r - 6 * s, hy - head_r,
-                             hx + head_r + 6 * s, hy + head_r + 92 * s],
-                            radius=30 * s, fill=hair)
-        d.ellipse([hx - head_r, hy - head_r, hx + head_r, hy + head_r], fill=skin)
+        # 1. a soft rim BEHIND the head — hair frames the face at the
+        #    sides but its bottom edge hides behind the chin (no beard)
+        d.ellipse([hx - head_r - 10 * s, hy - head_r - 10 * s,
+                   hx + head_r + 10 * s, hy + head_r - 8 * s], fill=hair)
+        # 2. two side curtains falling past the shoulders — the length.
+        #    They start INSIDE the face ellipse so the seam never shows,
+        #    and the face (drawn next) covers the inner overlap.
+        for sgn in (-1, 1):
+            x_in = hx + sgn * (head_r - 24 * s)
+            x_out = hx + sgn * (head_r + 18 * s)
+            d.rounded_rectangle(
+                [min(x_in, x_out), hy - head_r + 6 * s,
+                 max(x_in, x_out), hy + head_r + 82 * s],
+                radius=20 * s, fill=hair)
+        # 3. the face on top — chin and neck stay fully visible
+        d.ellipse([hx - head_r, hy - head_r, hx + head_r, hy + head_r],
+                  fill=skin)
+        # 4. bangs
         d.pieslice([hx - head_r, hy - head_r, hx + head_r, hy + head_r],
                    190, 350, fill=hair)
     elif style == "bun":
@@ -499,6 +561,18 @@ def draw_figure(d: ImageDraw.ImageDraw, x: float, feet_y: float,
               feature=PAPER if mono else INK,
               iris=None if mono else spec.get("iris", (96, 56, 42)),
               eyes=eyes, skin=skin, blush=spec.get("blush", (246, 168, 150)))
+        if style == "long":
+            # 5. face-framing front locks (drawn AFTER the face) — two
+            #    tapered strands from temple to cheek: unmistakably hair
+            for sgn in (-1, 1):
+                lx0 = hx + sgn * 62 * s
+                d.rounded_rectangle([lx0 - 11 * s, hy - 46 * s,
+                                     lx0 + 11 * s, hy + 40 * s],
+                                    radius=11 * s, fill=hair)
+            # a soft shine streak on the bangs
+            shine = tuple(min(255, c + 44) for c in hair)
+            d.ellipse([hx - 34 * s, hy - head_r + 8 * s,
+                       hx - 4 * s, hy - head_r + 22 * s], fill=shine)
 
     # hands-on-face pose: arms + hands drawn LAST so long hair never
     # covers them — the distress gesture must read instantly. The arm
@@ -610,14 +684,14 @@ def paint_couple_scene(spec: dict, seed: int, w: int = 1920, h: int = 1080,
     d = ImageDraw.Draw(img)
 
     if overlay:
-        f = font("display", int(w * 0.058))
+        f = font("display", int(w * 0.072))
         y = band_h + int(h * 0.03)
         for line in overlay[:2]:
             if not line:
                 continue
             for ln in _wrap(d, line, f, w * 0.86):
                 y = _center(d, w / 2, y, ln, f, WHITE,
-                            stroke=max(4, int(w * 0.005)), stroke_fill=INK)
+                            stroke=max(5, int(w * 0.006)), stroke_fill=INK)
 
     if band is not None:
         d.rectangle([0, 0, w, band_h], fill=INK)
@@ -683,8 +757,28 @@ def render_character_sprites(spec: dict, s: float) -> dict:
 
 def _ground_shadow(d, x: float, feet_y: float, s: float,
                    mono: bool = False) -> None:
+    # light cards get a warm shadow; dark thumbnails keep a dark one
     d.ellipse([x - 70 * s, feet_y - 16 * s, x + 70 * s, feet_y + 14 * s],
-              fill=(22, 22, 32) if mono else (216, 210, 198))
+              fill=(24, 24, 36) if mono else (216, 210, 198))
+
+
+def _attach_couple(bg: Image.Image, spec: dict, seed: int, w: float,
+                   floor_y: float, s: float) -> dict:
+    """The COLORED locked couple as sprites on any background — bright
+    cards never fall back to dark silhouettes (user rule: no dark)."""
+    ea = vary_emotion(seed, spec.get("emotion_a", "neutral"), 3)
+    eb = vary_emotion(seed, spec.get("emotion_b", "neutral"), 4)
+    a, b = _figure_specs(seed, ea, spec.get("pose_a", "stand"),
+                         eb, spec.get("pose_b", "stand"))
+    d = ImageDraw.Draw(bg)
+    ax, bx = w * 0.34, w * 0.66
+    _ground_shadow(d, ax, floor_y, s)
+    _ground_shadow(d, bx, floor_y, s)
+    sa, sb = render_character_sprites(a, s), render_character_sprites(b, s)
+    sa.update({"anchor_x": ax, "feet_y": floor_y})
+    sb.update({"anchor_x": bx, "feet_y": floor_y})
+    return {"bg": bg, "sprites": [sa, sb], "text_layer": None,
+            "size": bg.size}
 
 
 def compose_static(layers: dict) -> Image.Image:
@@ -748,8 +842,8 @@ def build_mono_pair_layers(bg: Image.Image, spec: dict, seed: int,
 # ── long-video cards (1920x1080) ─────────────────────────────────────
 
 def paint_topic_card(title: str, band: str, count: int, seed: int) -> Image.Image:
-    img = Image.new("RGB", (1920, 1080), INK)
-    glow = _glow((1920, 1080), (960, 520), 380, PURPLE, 30)
+    img = Image.new("RGB", (1920, 1080), PAPER)
+    glow = _glow((1920, 1080), (960, 520), 380, PURPLE, 22)
     img = Image.alpha_composite(img.convert("RGBA"), glow).convert("RGB")
     d = ImageDraw.Draw(img)
 
@@ -757,13 +851,13 @@ def paint_topic_card(title: str, band: str, count: int, seed: int) -> Image.Imag
     label = band.upper()
     while d.textlength(label, font=f_band) > 1500:
         label = label[:-1]
-    _center(d, 960, 150, label, f_band, WHITE)
+    _center(d, 960, 150, label, f_band, INK)
     d.rectangle([810, 250, 1110, 256], fill=PURPLE)
 
-    f = font("card", 112)
+    f = font("card", 118)
     y = 400
     for line in _wrap(d, title.upper(), f, 1620)[:2]:
-        y = _center(d, 960, y, line, f, WHITE)
+        y = _center(d, 960, y, line, f, INK)
     d.rectangle([880, y + 26, 1040, y + 40], fill=PURPLE)
 
     chip = font("card", 52)
@@ -772,16 +866,17 @@ def paint_topic_card(title: str, band: str, count: int, seed: int) -> Image.Imag
     chip_y = min(y + 90, 770)              # clear of the caption zone
     d.rounded_rectangle([960 - tw / 2 - 40, chip_y, 960 + tw / 2 + 40, chip_y + 100],
                         radius=20, outline=PURPLE, width=5)
-    d.text((960 - tw / 2, chip_y + 22), text, font=chip, fill=WHITE)
+    d.text((960 - tw / 2, chip_y + 22), text, font=chip, fill=INK)
     return img
 
 
 def build_concept_layers(tip: int, total: int, term: str, headline: str,
                          seed: int) -> dict:
-    """Long-video concept card: ink bg + glow + mono couple sprites,
-    with the headline on a text layer ABOVE them."""
-    img = Image.new("RGB", (1920, 1080), INK)
-    glow = _glow((1920, 1080), (960, 480), 330, PURPLE, 26)
+    """Long-video concept card: warm PAPER bg (never dark) + the COLORED
+    couple sprites, headline on a text layer above them with a soft
+    paper halo so it stays readable over the figures."""
+    img = Image.new("RGB", (1920, 1080), PAPER)
+    glow = _glow((1920, 1080), (960, 500), 340, PURPLE, 22)
     img = Image.alpha_composite(img.convert("RGBA"), glow).convert("RGB")
     d = ImageDraw.Draw(img)
 
@@ -792,17 +887,17 @@ def build_concept_layers(tip: int, total: int, term: str, headline: str,
     d.text((128, 112), label, font=chip, fill=WHITE)
 
     tf = font("card", 46)
-    _center(d, 960, 62, f"PSYCHOLOGISTS CALL THIS:  {term.upper()}", tf, GREY)
+    _center(d, 960, 62, f"PSYCHOLOGISTS CALL THIS:  {term.upper()}", tf, INK_MUTED)
 
-    layers = build_mono_pair_layers(
+    layers = _attach_couple(
         img, {"emotion_a": "neutral", "pose_a": "stand",
               "emotion_b": "neutral", "pose_b": "stand"},
         seed + 5, 1920, 1030, 0.66)
 
-    # headline on its own transparent layer (drawn OVER the silhouettes)
+    # headline on its own transparent layer (drawn OVER the figures)
     tl = Image.new("RGBA", (1920, 1080), (0, 0, 0, 0))
     td = ImageDraw.Draw(tl)
-    f = font("card", 100)
+    f = font("card", 108)
     words = headline.split()
     acc = max(words, key=len) if words else ""
     lines, cur, cur_acc = [], [], False
@@ -824,13 +919,17 @@ def build_concept_layers(tip: int, total: int, term: str, headline: str,
         x = 960 - tw_line / 2
         if has_acc and acc in text:
             pre, _, post = text.partition(acc)
-            td.text((x, y), pre, font=f, fill=WHITE)
+            td.text((x, y), pre, font=f, fill=INK,
+                    stroke_width=6, stroke_fill=PAPER)
             x2 = x + td.textlength(pre, font=f)
-            td.text((x2, y), acc, font=f, fill=PURPLE_SOFT)
-            td.text((x2 + td.textlength(acc, font=f), y), post, font=f, fill=WHITE)
+            td.text((x2, y), acc, font=f, fill=PURPLE,
+                    stroke_width=6, stroke_fill=PAPER)
+            td.text((x2 + td.textlength(acc, font=f), y), post, font=f,
+                    fill=INK, stroke_width=6, stroke_fill=PAPER)
         else:
-            td.text((x, y), text, font=f, fill=WHITE)
-        y += 124
+            td.text((x, y), text, font=f, fill=INK,
+                    stroke_width=6, stroke_fill=PAPER)
+        y += 134
     layers["text_layer"] = tl
     return layers
 
@@ -841,20 +940,20 @@ def paint_concept_card(tip: int, total: int, term: str, headline: str,
 
 
 def paint_outro_card(topic: str, seed: int) -> Image.Image:
-    img = Image.new("RGB", (1920, 1080), INK)
-    glow = _glow((1920, 1080), (960, 430), 360, PURPLE, 30)
+    img = Image.new("RGB", (1920, 1080), PAPER)
+    glow = _glow((1920, 1080), (960, 430), 360, PURPLE, 24)
     img = Image.alpha_composite(img.convert("RGBA"), glow).convert("RGB")
     d = ImageDraw.Draw(img)
-    f = font("card", 92)
+    f = font("card", 96)
     y = 260
     for line in _wrap(d, f"THAT'S THE PSYCHOLOGY OF {topic.upper()}",
                       f, 1560)[:3]:
-        y = _center(d, 960, y, line, f, WHITE)
+        y = _center(d, 960, y, line, f, INK)
     f2 = font("card", 56)
     y += 40
     for line in _wrap(d, "If one of these hit home, it did its job.",
                       f2, 1400)[:2]:
-        y = _center(d, 960, y, line, f2, PURPLE_SOFT)
+        y = _center(d, 960, y, line, f2, PURPLE)
     d.rounded_rectangle([770, y + 56, 1150, y + 156], radius=48, fill=PURPLE)
     sf = font("card", 50)
     _center(d, 960, y + 80, "SUBSCRIBE", sf, WHITE)
@@ -862,20 +961,20 @@ def paint_outro_card(topic: str, seed: int) -> Image.Image:
 
 
 def paint_end_card(seed: int) -> Image.Image:
-    img = Image.new("RGB", (1920, 1080), INK)
-    glow = _glow((1920, 1080), (960, 470), 360, PURPLE, 34)
+    img = Image.new("RGB", (1920, 1080), PAPER)
+    glow = _glow((1920, 1080), (960, 470), 360, PURPLE, 24)
     img = Image.alpha_composite(img.convert("RGBA"), glow).convert("RGB")
     d = ImageDraw.Draw(img)
-    f = font("card", 96)
+    f = font("card", 100)
     y = 350
     for line in _wrap(d, "Subscribe for more", f, 1520)[:2]:
-        y = _center(d, 960, y, line, f, WHITE)
+        y = _center(d, 960, y, line, f, INK)
     for line in _wrap(d, "tips like this.", f, 1520)[:1]:
-        y = _center(d, 960, y, line, f, PURPLE_SOFT)
+        y = _center(d, 960, y, line, f, PURPLE)
     d.rounded_rectangle([760, y + 60, 1160, y + 160], radius=48, fill=PURPLE)
     sf = font("card", 48)
     _center(d, 960, y + 84, "SUBSCRIBE", sf, WHITE)
-    _wordmark(d, 960, y + 230, 40)
+    _wordmark(d, 960, y + 230, 40, color=PURPLE)
     return img
 
 
@@ -883,28 +982,32 @@ def paint_end_card(seed: int) -> Image.Image:
 
 def _shorts_band(d: ImageDraw.ImageDraw, band: str,
                  part: int | None = None) -> None:
-    band_h = 170
+    band_h = 200
     d.rectangle([0, 0, 1080, band_h], fill=INK)
-    f_band = font("card", 56)
-    label = band.upper()
-    while d.textlength(label, font=f_band) > 950:
-        label = label[:-1]
-    _center(d, 540, 38, label, f_band, WHITE)
+    f_band = font("card", 68)
+    label = _ellipsize(d, band.upper(), f_band, 960)
+    _center(d, 540, 42, label, f_band, WHITE)
     if part is not None:
-        pf = font("card", 40)
-        _center(d, 540, 104, f"PART {part}", pf, PURPLE_SOFT)
+        pf = font("card", 46)
+        _center(d, 540, 122, f"PART {part}", pf, PURPLE_SOFT)
 
 
 def build_hook_layers(hook: str, band: str, part: int, scene: dict,
                       seed: int) -> dict:
-    """Hook = couple scene + huge stroked text (the reference look)."""
+    """Hook = couple scene + HUGE stroked text (the reference look).
+    The text lives on its own layer drawn OVER the sprites — the old
+    version painted it into the background, so the couple's bodies
+    hid the lower lines (why it read as tiny/unreadable)."""
     layers = build_couple_layers(scene, seed + 91, 1080, 1920, zoom=1.0)
     d = ImageDraw.Draw(layers["bg"])
     _shorts_band(d, band, part)
-    f = font("display", 124)          # was 104 — readable from across the room
-    y = 330
-    for line in _wrap(d, hook.lower(), f, 930)[:7]:
-        y = _center(d, 540, y, line, f, WHITE, stroke=14, stroke_fill=INK)
+    tl = Image.new("RGBA", (1080, 1920), (0, 0, 0, 0))
+    td = ImageDraw.Draw(tl)
+    f, lines = _fit_text(td, hook.lower(), "display", 205, 140, 980, 5)
+    y = 300
+    for line in lines:
+        y = _center(td, 540, y, line, f, WHITE, stroke=18, stroke_fill=INK)
+    layers["text_layer"] = tl
     return layers
 
 
@@ -915,14 +1018,18 @@ def paint_hook_card(hook: str, band: str, part: int, scene: dict,
 
 def build_scene_card_layers(text: str, band: str, scene: dict,
                             seed: int) -> dict:
-    """Body chunk: couple scene + bold stroked overlay + band."""
+    """Body chunk: couple scene + BIG stroked overlay on its own layer
+    OVER the sprites (never hidden behind the characters again)."""
     layers = build_couple_layers(scene, seed + 91, 1080, 1920, zoom=1.0)
     d = ImageDraw.Draw(layers["bg"])
     _shorts_band(d, band)
-    f = font("display", 104)          # was 84 — the karaoke text must POP
-    y = 290
-    for line in _wrap(d, text.lower(), f, 930)[:9]:
-        y = _center(d, 540, y, line, f, WHITE, stroke=12, stroke_fill=INK)
+    tl = Image.new("RGBA", (1080, 1920), (0, 0, 0, 0))
+    td = ImageDraw.Draw(tl)
+    f, lines = _fit_text(td, text.lower(), "display", 180, 125, 980, 6)
+    y = 310
+    for line in lines:
+        y = _center(td, 540, y, line, f, WHITE, stroke=16, stroke_fill=INK)
+    layers["text_layer"] = tl
     return layers
 
 
@@ -931,20 +1038,27 @@ def paint_scene_card(text: str, band: str, scene: dict, seed: int) -> Image.Imag
 
 
 def build_term_layers(term: str, band: str, scene: dict, seed: int) -> dict:
-    img = Image.new("RGB", (1080, 1920), INK)
-    glow = _glow((1080, 1920), (540, 700), 330, PURPLE, 34)
+    """The signature 'psychologists call this' card — BRIGHT paper
+    (never a dark screen: user rule), huge purple term, colored couple.
+    Term text sits on a text layer over the couple with a paper halo."""
+    img = Image.new("RGB", (1080, 1920), PAPER)
+    glow = _glow((1080, 1920), (540, 700), 360, PURPLE, 24)
     img = Image.alpha_composite(img.convert("RGBA"), glow).convert("RGB")
     d = ImageDraw.Draw(img)
-    _band(d, 1080, band)
+    _shorts_band(d, band)
+    layers = _attach_couple(img, scene, seed + 5, 1080, 1790, 1.05)
 
-    f0 = font("card", 52)
-    _center(d, 540, 560, "psychologists call this", f0, GREY)
-    f = font("display", 148)
-    y = 680
-    for line in _wrap(d, term.upper(), f, 950)[:3]:
-        y = _center(d, 540, y, line, f, PURPLE_SOFT)
-    d.rectangle([440, y + 36, 640, y + 52], fill=PURPLE)
-    return build_mono_pair_layers(img, scene, seed + 5, 1080, 1780, 1.15)
+    tl = Image.new("RGBA", (1080, 1920), (0, 0, 0, 0))
+    td = ImageDraw.Draw(tl)
+    f0 = font("card", 64)
+    _center(td, 540, 400, "psychologists call this", f0, INK_MUTED)
+    f, lines = _fit_text(td, term.upper(), "display", 200, 130, 950, 3)
+    y = 520
+    for line in lines:
+        y = _center(td, 540, y, line, f, PURPLE, stroke=10, stroke_fill=PAPER)
+    td.rectangle([440, y + 22, 640, y + 38], fill=PURPLE)
+    layers["text_layer"] = tl
+    return layers
 
 
 def paint_term_card(term: str, band: str, scene: dict, seed: int) -> Image.Image:
@@ -952,22 +1066,27 @@ def paint_term_card(term: str, band: str, scene: dict, seed: int) -> Image.Image
 
 
 def build_cta_layers(band: str, scene: dict, seed: int) -> dict:
-    img = Image.new("RGB", (1080, 1920), INK)
-    glow = _glow((1080, 1920), (540, 720), 340, PURPLE, 32)
+    """CTA card — BRIGHT paper, huge line-by-line type, colored couple,
+    the subscribe pill on the text layer so it sits over them."""
+    img = Image.new("RGB", (1080, 1920), PAPER)
+    glow = _glow((1080, 1920), (540, 760), 360, PURPLE, 24)
     img = Image.alpha_composite(img.convert("RGBA"), glow).convert("RGB")
     d = ImageDraw.Draw(img)
-    _band(d, 1080, band)
+    _shorts_band(d, band)
+    layers = _attach_couple(img, scene, seed + 5, 1080, 1840, 0.9)
 
-    f = font("display", 112)
-    y = 620
-    for line in _wrap(d, "subscribe for more", f, 950)[:3]:
-        y = _center(d, 540, y, line, f, WHITE)
-    for line in _wrap(d, "tips like this", f, 950)[:2]:
-        y = _center(d, 540, y, line, f, PURPLE_SOFT)
-    d.rounded_rectangle([320, y + 60, 760, y + 180], radius=56, fill=PURPLE)
-    sf = font("card", 58)
-    _center(d, 540, y + 104, "SUBSCRIBE", sf, WHITE)
-    return build_mono_pair_layers(img, scene, seed + 5, 1080, 1760, 1.0)
+    tl = Image.new("RGBA", (1080, 1920), (0, 0, 0, 0))
+    td = ImageDraw.Draw(tl)
+    y = 460
+    for txt, col in (("subscribe", INK), ("for more", INK),
+                     ("tips like this", PURPLE)):
+        f, (line,) = _fit_text(td, txt, "display", 200, 150, 980, 1)
+        y = _center(td, 540, y, line, f, col, stroke=10, stroke_fill=PAPER)
+    td.rounded_rectangle([300, y + 36, 780, y + 176], radius=56, fill=PURPLE)
+    sf = font("card", 66)
+    _center(td, 540, y + 76, "SUBSCRIBE", sf, WHITE)
+    layers["text_layer"] = tl
+    return layers
 
 
 def paint_cta_card(band: str, scene: dict, seed: int) -> Image.Image:

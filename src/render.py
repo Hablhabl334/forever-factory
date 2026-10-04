@@ -83,7 +83,7 @@ ScaledBorderAndShadow: yes
 
 [V4+ Styles]
 Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
-Style: Cap,Archivo Black,64,&H00FFFFFF,&H00FFFFFF,&H00101014,&H96000000,0,0,0,0,100,100,0,0,1,3.6,1.2,2,80,80,76,1
+Style: Cap,Archivo Black,74,&H00FFFFFF,&H00FFFFFF,&H00101014,&H96000000,0,0,0,0,100,100,0,0,1,4.4,1.4,2,70,70,92,1
 
 [Events]
 Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
