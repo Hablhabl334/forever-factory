@@ -65,12 +65,11 @@ def _build_card_layers(kind: str, text: str, short: dict, seed: int,
 
 
 def _mix_audio(short_work: Path, narration: dict, seed: int,
-               mood: str = "warm", total: float | None = None) -> Path:
+               mood: str = "warm") -> Path:
     """narration + mood-matched ducking music bed -> master.wav.
-
-    `total` overrides the narration length: the music bed is
-    synthesized for the FULL video length (>= 45s), so a padded
-    outro still has music under it."""
+    The bed is exactly as long as the narration: voice, script,
+    animation and music all END together (owner rule — never silent
+    padding at the end)."""
     import wave
 
     depth = float(cfg()["music"].get("duck_depth", 0.55))
@@ -80,7 +79,7 @@ def _mix_audio(short_work: Path, narration: dict, seed: int,
     narr_np = music.normalize_speech(narr_np)
     narr_44 = np.repeat(narr_np, 2)  # 22050 -> 44100
 
-    total = max(narration["total"], float(total or 0.0))
+    total = narration["total"]
     n = int(total * music.SR)
     music_bed = music.synth_music(seed + 700, total, mood=mood)
     music_bed *= music.duck_envelope(narr_44, n, music.SR, depth)
@@ -141,17 +140,25 @@ def render_shorts(story: dict, work_dir: Path, out_dir: Path) -> list[Path]:
         rate = cfg()["voice"].get("edge_rate_shorts")
         narration = tts.narrate(mini, sw, sent_pause=0.30, scene_pause=0.30,
                                 rate_pct=rate)
-        chunks = narration["chunks"]
-        # owner rule: a Short is NEVER shorter than min_seconds (45).
-        # Scripts are written to land 45-52s naturally (word cap 130);
-        # if the narration still runs short, the final CTA card holds
-        # the extra seconds with music under it — never a hard cut.
+        # Owner rule: the VOICE carries the whole video — no silent
+        # seconds, the script ends WITH the video. Scripts are built
+        # ~150+ words (≈55 s) so this almost never triggers; if the
+        # narration still lands under the floor, re-voice it slower
+        # with breathing pauses (stretched speech, never padding).
         min_s = float(sconf.get("min_seconds", 45))
+        for attempt in range(2):
+            if narration["total"] >= min_s:
+                break
+            stretch = min_s / max(narration["total"], 1.0)
+            slow = min(25, max(6, round((stretch - 1.0) * 100) + 5))
+            print(f"  [short {n}] narration {narration['total']:.1f}s < "
+                  f"{min_s:.0f}s floor — re-voicing slower (-{slow}%), "
+                  f"attempt {attempt + 1}")
+            mini["hash"] = f"{story['hash']}-{short['shash'][:10]}-r{attempt}"
+            narration = tts.narrate(mini, sw, sent_pause=0.45,
+                                    scene_pause=0.45, rate_pct=f"-{slow}%")
+        chunks = narration["chunks"]
         total = narration["total"]
-        if total < min_s:
-            print(f"  [short {n}] narration {total:.1f}s < {min_s:.0f}s "
-                  f"floor — holding the ending card {min_s - total:.1f}s longer")
-            total = min_s
 
         # 2. one animated card per caption chunk (karaoke-style)
         seed = story["seed"] + n * 131
@@ -183,7 +190,7 @@ def render_shorts(story: dict, work_dir: Path, out_dir: Path) -> list[Path]:
         master = sw / "master.wav"
         if not master.exists():
             master = _mix_audio(sw, narration, seed,
-                                mood=story.get("mood", "warm"), total=total)
+                                mood=story.get("mood", "warm"))
 
         _ffmpeg(["-i", str(silent), "-i", str(master),
                  "-map", "0:v", "-map", "1:a",

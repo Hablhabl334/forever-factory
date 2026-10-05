@@ -85,8 +85,8 @@ video:
 shorts:
   width: 1080
   height: 1920
-  min_seconds: 45                  # owner rule: a Short is never shorter
-  max_seconds: 57
+  min_seconds: 45                  # the VOICE must exceed 45s — never silence-padded
+  max_seconds: 90                  # owner allows up to 1:30
   count: 4
   fixed_title: "Subscribe for more tips like this"
   fixed_tags: ["#psychology", "#relationship", "#love", "#relationshipgoals"]

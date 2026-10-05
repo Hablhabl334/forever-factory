@@ -140,6 +140,90 @@ def _fact_sentence(key: str, rng: FactoryRNG) -> str:
     return rng.pick(body or _sentences(CONCEPTS[key]["explain"]))
 
 
+def _shorts_script(key: str, c: dict, rng: FactoryRNG) -> tuple[str, int, str]:
+    """Assemble a Short script whose NARRATION runs ~60-80 s of speech.
+
+    Owner rule: the VOICE itself must exceed 45 s and END with the
+    video — a Short is never padded with silent seconds. Script,
+    animation, narration and music all end together. Calibration is
+    MEASURED, not estimated: Jenny's effective pace at the shorts
+    rate is ~117 wpm (157 words -> 80.8 s in a live test), so the
+    word band is 105-160 words (~54-82 s), comfortably inside the
+    45 s floor and the 90 s (1:30) cap the owner allows.
+    Returns (script, words, hook) — the hook doubles as the Short's
+    first-card headline."""
+    surface = _render_surface(key, rng, slotted_only=True)
+    reveal = _reveal_line(c["term"], rng)
+
+    # mechanism facts: distinct sentences from the explain block
+    body = [s for s in _sentences(c["explain"])
+            if not s.lower().startswith("psychologists call")]
+    facts = rng.some(body, min(2, len(body)))
+
+    # second example beat: a DIFFERENT slot-filled scene (fresh cast)
+    pool = list(VARIANTS.get(key, {}).get("examples") or [])
+    if not pool:
+        pool = _pool(key, "example") or []
+    example2 = ""
+    for tmpl in rng.shuffle(pool):
+        cand = _fill_slots(tmpl, rng)
+        if cand != surface["example"]:
+            example2 = cand
+            break
+
+    # floor: keep appending unused mechanism sentences until the
+    # speech comfortably exceeds 45 s (~105 words at the measured
+    # 117-wpm effective pace)
+    extra: list[str] = []
+    words = (len(surface["hook"].split()) + len(reveal.split())
+             + sum(len(f.split()) for f in facts)
+             + len(surface["example"].split()) + len(example2.split())
+             + len(surface["takeaway"].split()) + len(CTA_LINE.split()))
+    for s in rng.shuffle([s for s in body if s not in facts]):
+        if words >= 105:
+            break
+        extra.append(s)
+        words += len(s.split())
+
+    parts = [surface["hook"], reveal,
+             facts[0] if facts else "",
+             surface["example"],
+             facts[1] if len(facts) > 1 else "",
+             *extra,
+             example2,
+             surface["takeaway"],
+             CTA_LINE]
+    script = " ".join(p for p in parts if p)
+
+    # ceiling (~82 s at the measured pace): shed weight — extra
+    # facts, then the second example's later beats, then the second
+    # example entirely
+    while len(script.split()) > 160:
+        if extra:
+            extra.pop()
+        elif example2:
+            sents = _sentences(example2)
+            if len(sents) > 1:
+                example2 = " ".join(sents[:len(sents) - 1])
+            else:
+                example2 = ""
+        elif len(facts) > 1:
+            facts = facts[:1]
+        else:
+            break
+        parts = [surface["hook"], reveal,
+                 facts[0] if facts else "",
+                 surface["example"],
+                 facts[1] if len(facts) > 1 else "",
+                 *extra,
+                 example2,
+                 surface["takeaway"],
+                 CTA_LINE]
+        script = " ".join(p for p in parts if p)
+    words = len(script.split())
+    return script, words, surface["hook"]
+
+
 def _short_hash(script: str) -> str:
     return hashlib.sha1(script.encode()).hexdigest()[:16]
 
@@ -205,37 +289,10 @@ def _build(seed: int) -> dict:
     for j, key in enumerate(rng.some(picked, min(N_SHORTS, len(picked))),
                             start=1):
         c = CONCEPTS[key]
-        surface = _render_surface(key, rng, slotted_only=True)
-        fact = _fact_sentence(key, rng)
-        script = (
-            f"{surface['hook']} "
-            f"{_reveal_line(c['term'], rng)} "
-            f"{fact} "
-            f"{surface['example']} "
-            f"{surface['takeaway']} "
-            f"{CTA_LINE}"
-        )
-        # length guard: scripts are written to land 45-52s of speech
-        # (owner rule: never under 45s); the renderer also enforces a
-        # hard floor, so this only shapes the natural length.
-        words = len(script.split())
-        if words > 130:                      # drop the fact sentence first
-            script = (f"{surface['hook']} "
-                      f"{_reveal_line(c['term'], rng)} "
-                      f"{surface['example']} "
-                      f"{surface['takeaway']} "
-                      f"{CTA_LINE}")
-            words = len(script.split())
-        if words > 134:                      # still long: first scene beat only
-            script = (f"{surface['hook']} "
-                      f"{_reveal_line(c['term'], rng)} "
-                      f"{_sentences(surface['example'])[0]} "
-                      f"{surface['takeaway']} "
-                      f"{CTA_LINE}")
-            words = len(script.split())
+        script, words, hook = _shorts_script(key, c, rng)
         shorts.append({
             "n": j, "concept": key, "band": topic["band"],
-            "hook": surface["hook"], "term": c["term"],
+            "hook": hook, "term": c["term"],
             "script": script, "words": words,
             "shash": _short_hash(script),
             "scene": {"emotion_a": c["scene"][0], "pose_a": c["scene"][1],
