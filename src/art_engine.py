@@ -134,7 +134,9 @@ def _fit_text(d: ImageDraw.ImageDraw, text: str, kind: str,
               max_lines: int) -> tuple[ImageFont.FreeTypeFont, list[str]]:
     """The BIGGEST font (>= floor) whose wrapped text fits max_lines
     and whose longest word fits max_w. Text never overflows the card
-    and is never dropped — it shrinks gracefully instead."""
+    and is never dropped — it shrinks gracefully instead. Fallback
+    returns EVERY line (the clear text zone is tall enough) rather
+    than truncating: no word is ever silently lost."""
     size = base
     while size > floor:
         f = font(kind, size)
@@ -145,7 +147,7 @@ def _fit_text(d: ImageDraw.ImageDraw, text: str, kind: str,
             return f, lines
         size -= 5
     f = font(kind, floor)
-    return f, _wrap(d, text, f, max_w)[:max_lines]
+    return f, _wrap(d, text, f, max_w)
 
 
 def _ellipsize(d: ImageDraw.ImageDraw, text: str, f: ImageFont.FreeTypeFont,
@@ -980,33 +982,60 @@ def paint_end_card(seed: int) -> Image.Image:
 
 # ── shorts cards (1080x1920) ─────────────────────────────────────────
 
+# The couple's heads start at y≈949 (measured from the sprite
+# geometry: feet_y 1705, sprite height 772). The text lives in the
+# OPEN ZONE between the topic label and their heads — centered as
+# one level, straight block, never on top of the characters.
+_SHORTS_TEXT_TOP = 230
+_SHORTS_TEXT_BOT = 910
+
+
 def _shorts_band(d: ImageDraw.ImageDraw, band: str,
                  part: int | None = None) -> None:
-    band_h = 200
-    d.rectangle([0, 0, 1080, band_h], fill=INK)
-    f_band = font("card", 68)
-    label = _ellipsize(d, band.upper(), f_band, 960)
-    _center(d, 540, 42, label, f_band, WHITE)
+    """Topic label — LIGHT, on the paper background. NO black band:
+    the old ink strip read as a 'black label stuck above' (worst
+    during zoom-outs) and broke the never-dark rule. Small purple
+    label + underline, matching the long-video topic card style."""
+    f_band = font("card", 54)
+    label = _ellipsize(d, band.upper(), f_band, 880)
+    _center(d, 540, 84, label, f_band, PURPLE)
+    lw = d.textlength(label, font=f_band)
     if part is not None:
-        pf = font("card", 46)
-        _center(d, 540, 122, f"PART {part}", pf, PURPLE_SOFT)
+        pf = font("card", 38)
+        _center(d, 540, 158, f"PART {part}", pf, INK_MUTED)
+    else:
+        d.rectangle([540 - lw / 2, 152, 540 + lw / 2, 157], fill=PURPLE)
+
+
+def _zone_block(td: ImageDraw.ImageDraw, text: str, kind: str,
+                base: int, floor: int, max_w: float, max_lines: int,
+                fill, stroke: int, stroke_fill) -> None:
+    """Wrap text to level centered lines and place the block in the
+    middle of the clear zone (above the couple's heads). The block
+    is vertically CENTERED in the zone so every card keeps the same
+    visual rhythm: label top, text mid, couple bottom."""
+    f, lines = _fit_text(td, text, kind, base, floor, max_w, max_lines)
+    block_h = len(lines) * f.size * 1.22
+    cy = (_SHORTS_TEXT_TOP + _SHORTS_TEXT_BOT) / 2
+    y = cy - block_h / 2
+    for line in lines:
+        y = _center(td, 540, y, line, f, fill,
+                    stroke=stroke, stroke_fill=stroke_fill)
 
 
 def build_hook_layers(hook: str, band: str, part: int, scene: dict,
                       seed: int) -> dict:
-    """Hook = couple scene + HUGE stroked text (the reference look).
-    The text lives on its own layer drawn OVER the sprites — the old
-    version painted it into the background, so the couple's bodies
-    hid the lower lines (why it read as tiny/unreadable)."""
+    """Hook card: couple scene + the hook line as a level text block
+    centered in the OPEN zone above their heads (never on top of the
+    characters), normal caption size, ink-on-paper like the long
+    video cards."""
     layers = build_couple_layers(scene, seed + 91, 1080, 1920, zoom=1.0)
     d = ImageDraw.Draw(layers["bg"])
     _shorts_band(d, band, part)
     tl = Image.new("RGBA", (1080, 1920), (0, 0, 0, 0))
     td = ImageDraw.Draw(tl)
-    f, lines = _fit_text(td, hook.lower(), "display", 205, 140, 980, 5)
-    y = 300
-    for line in lines:
-        y = _center(td, 540, y, line, f, WHITE, stroke=18, stroke_fill=INK)
+    _zone_block(td, hook.lower(), "display", 84, 58, 920, 4,
+                INK, stroke=6, stroke_fill=PAPER)
     layers["text_layer"] = tl
     return layers
 
@@ -1018,17 +1047,16 @@ def paint_hook_card(hook: str, band: str, part: int, scene: dict,
 
 def build_scene_card_layers(text: str, band: str, scene: dict,
                             seed: int) -> dict:
-    """Body chunk: couple scene + BIG stroked overlay on its own layer
-    OVER the sprites (never hidden behind the characters again)."""
+    """Body chunk: couple scene + the narration line as a level text
+    block centered in the open zone above their heads — normal
+    caption size, straight lines, never covering the characters."""
     layers = build_couple_layers(scene, seed + 91, 1080, 1920, zoom=1.0)
     d = ImageDraw.Draw(layers["bg"])
     _shorts_band(d, band)
     tl = Image.new("RGBA", (1080, 1920), (0, 0, 0, 0))
     td = ImageDraw.Draw(tl)
-    f, lines = _fit_text(td, text.lower(), "display", 180, 125, 980, 6)
-    y = 310
-    for line in lines:
-        y = _center(td, 540, y, line, f, WHITE, stroke=16, stroke_fill=INK)
+    _zone_block(td, text.lower(), "display", 78, 56, 920, 4,
+                INK, stroke=6, stroke_fill=PAPER)
     layers["text_layer"] = tl
     return layers
 
@@ -1039,24 +1067,28 @@ def paint_scene_card(text: str, band: str, scene: dict, seed: int) -> Image.Imag
 
 def build_term_layers(term: str, band: str, scene: dict, seed: int) -> dict:
     """The signature 'psychologists call this' card — BRIGHT paper
-    (never a dark screen: user rule), huge purple term, colored couple.
-    Term text sits on a text layer over the couple with a paper halo."""
+    (never a dark screen: user rule), purple term in the open zone
+    above the couple, colored couple in the SAME position as every
+    other card (one consistent layout rhythm)."""
     img = Image.new("RGB", (1080, 1920), PAPER)
     glow = _glow((1080, 1920), (540, 700), 360, PURPLE, 24)
     img = Image.alpha_composite(img.convert("RGBA"), glow).convert("RGB")
     d = ImageDraw.Draw(img)
     _shorts_band(d, band)
-    layers = _attach_couple(img, scene, seed + 5, 1080, 1790, 1.05)
+    layers = _attach_couple(img, scene, seed + 5, 1080, 1705, 1.0)
 
     tl = Image.new("RGBA", (1080, 1920), (0, 0, 0, 0))
     td = ImageDraw.Draw(tl)
-    f0 = font("card", 64)
-    _center(td, 540, 400, "psychologists call this", f0, INK_MUTED)
-    f, lines = _fit_text(td, term.upper(), "display", 200, 130, 950, 3)
-    y = 520
+    f, lines = _fit_text(td, term.upper(), "display", 110, 82, 940, 2)
+    block_h = 70 + 20 + len(lines) * f.size * 1.22 + 46
+    cy = (_SHORTS_TEXT_TOP + _SHORTS_TEXT_BOT) / 2
+    y = cy - block_h / 2
+    f0 = font("card", 54)
+    _center(td, 540, y, "psychologists call this", f0, INK_MUTED)
+    y += 70 + 20
     for line in lines:
-        y = _center(td, 540, y, line, f, PURPLE, stroke=10, stroke_fill=PAPER)
-    td.rectangle([440, y + 22, 640, y + 38], fill=PURPLE)
+        y = _center(td, 540, y, line, f, PURPLE, stroke=8, stroke_fill=PAPER)
+    td.rectangle([540 - 95, y + 18, 540 + 95, y + 32], fill=PURPLE)
     layers["text_layer"] = tl
     return layers
 
@@ -1066,25 +1098,30 @@ def paint_term_card(term: str, band: str, scene: dict, seed: int) -> Image.Image
 
 
 def build_cta_layers(band: str, scene: dict, seed: int) -> dict:
-    """CTA card — BRIGHT paper, huge line-by-line type, colored couple,
-    the subscribe pill on the text layer so it sits over them."""
+    """CTA card — BRIGHT paper, normal-size type in the open zone
+    above the couple (same layout rhythm as every other card), the
+    subscribe pill under the text."""
     img = Image.new("RGB", (1080, 1920), PAPER)
     glow = _glow((1080, 1920), (540, 760), 360, PURPLE, 24)
     img = Image.alpha_composite(img.convert("RGBA"), glow).convert("RGB")
     d = ImageDraw.Draw(img)
     _shorts_band(d, band)
-    layers = _attach_couple(img, scene, seed + 5, 1080, 1840, 0.9)
+    layers = _attach_couple(img, scene, seed + 5, 1080, 1705, 1.0)
 
     tl = Image.new("RGBA", (1080, 1920), (0, 0, 0, 0))
     td = ImageDraw.Draw(tl)
-    y = 460
-    for txt, col in (("subscribe", INK), ("for more", INK),
+    block_h = 2 * 84 * 1.22 + 44 + 120
+    cy = (_SHORTS_TEXT_TOP + _SHORTS_TEXT_BOT) / 2
+    y = cy - block_h / 2
+    for txt, col in (("subscribe for more", INK),
                      ("tips like this", PURPLE)):
-        f, (line,) = _fit_text(td, txt, "display", 200, 150, 980, 1)
-        y = _center(td, 540, y, line, f, col, stroke=10, stroke_fill=PAPER)
-    td.rounded_rectangle([300, y + 36, 780, y + 176], radius=56, fill=PURPLE)
-    sf = font("card", 66)
-    _center(td, 540, y + 76, "SUBSCRIBE", sf, WHITE)
+        f, (line,) = _fit_text(td, txt, "display", 84, 62, 940, 1)
+        y = _center(td, 540, y, line, f, col, stroke=6, stroke_fill=PAPER)
+    pill_y = y + 44
+    td.rounded_rectangle([350, pill_y, 730, pill_y + 110], radius=52,
+                         fill=PURPLE)
+    sf = font("card", 52)
+    _center(td, 540, pill_y + 30, "SUBSCRIBE", sf, WHITE)
     layers["text_layer"] = tl
     return layers
 

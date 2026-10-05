@@ -65,8 +65,12 @@ def _build_card_layers(kind: str, text: str, short: dict, seed: int,
 
 
 def _mix_audio(short_work: Path, narration: dict, seed: int,
-               mood: str = "warm") -> Path:
-    """narration + mood-matched ducking music bed -> master.wav."""
+               mood: str = "warm", total: float | None = None) -> Path:
+    """narration + mood-matched ducking music bed -> master.wav.
+
+    `total` overrides the narration length: the music bed is
+    synthesized for the FULL video length (>= 45s), so a padded
+    outro still has music under it."""
     import wave
 
     depth = float(cfg()["music"].get("duck_depth", 0.55))
@@ -76,7 +80,7 @@ def _mix_audio(short_work: Path, narration: dict, seed: int,
     narr_np = music.normalize_speech(narr_np)
     narr_44 = np.repeat(narr_np, 2)  # 22050 -> 44100
 
-    total = narration["total"]
+    total = max(narration["total"], float(total or 0.0))
     n = int(total * music.SR)
     music_bed = music.synth_music(seed + 700, total, mood=mood)
     music_bed *= music.duck_envelope(narr_44, n, music.SR, depth)
@@ -138,7 +142,16 @@ def render_shorts(story: dict, work_dir: Path, out_dir: Path) -> list[Path]:
         narration = tts.narrate(mini, sw, sent_pause=0.30, scene_pause=0.30,
                                 rate_pct=rate)
         chunks = narration["chunks"]
+        # owner rule: a Short is NEVER shorter than min_seconds (45).
+        # Scripts are written to land 45-52s naturally (word cap 130);
+        # if the narration still runs short, the final CTA card holds
+        # the extra seconds with music under it — never a hard cut.
+        min_s = float(sconf.get("min_seconds", 45))
         total = narration["total"]
+        if total < min_s:
+            print(f"  [short {n}] narration {total:.1f}s < {min_s:.0f}s "
+                  f"floor — holding the ending card {min_s - total:.1f}s longer")
+            total = min_s
 
         # 2. one animated card per caption chunk (karaoke-style)
         seed = story["seed"] + n * 131
@@ -170,7 +183,7 @@ def render_shorts(story: dict, work_dir: Path, out_dir: Path) -> list[Path]:
         master = sw / "master.wav"
         if not master.exists():
             master = _mix_audio(sw, narration, seed,
-                                mood=story.get("mood", "warm"))
+                                mood=story.get("mood", "warm"), total=total)
 
         _ffmpeg(["-i", str(silent), "-i", str(master),
                  "-map", "0:v", "-map", "1:a",

@@ -215,16 +215,18 @@ def _build(seed: int) -> dict:
             f"{surface['takeaway']} "
             f"{CTA_LINE}"
         )
-        # length guard: a Short must stay comfortably under the feed cap
+        # length guard: scripts are written to land 45-52s of speech
+        # (owner rule: never under 45s); the renderer also enforces a
+        # hard floor, so this only shapes the natural length.
         words = len(script.split())
-        if words > 112:                      # drop the fact sentence first
+        if words > 130:                      # drop the fact sentence first
             script = (f"{surface['hook']} "
                       f"{_reveal_line(c['term'], rng)} "
                       f"{surface['example']} "
                       f"{surface['takeaway']} "
                       f"{CTA_LINE}")
             words = len(script.split())
-        if words > 116:                      # still long: first scene beat only
+        if words > 134:                      # still long: first scene beat only
             script = (f"{surface['hook']} "
                       f"{_reveal_line(c['term'], rng)} "
                       f"{_sentences(surface['example'])[0]} "

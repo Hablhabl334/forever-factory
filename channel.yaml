@@ -85,6 +85,7 @@ video:
 shorts:
   width: 1080
   height: 1920
+  min_seconds: 45                  # owner rule: a Short is never shorter
   max_seconds: 57
   count: 4
   fixed_title: "Subscribe for more tips like this"
