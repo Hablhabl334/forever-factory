@@ -348,21 +348,43 @@ def upload_video(filepath: Path, meta: dict, publish_at: str | None,
     meta.setdefault("defaultLanguage", yconf.get("default_language", "en"))
     meta.setdefault("defaultAudioLanguage", yconf.get("default_language", "en"))
 
-    try:
-        video_id = _upload_video(token, filepath, meta, status)
-    except RuntimeError as e:
-        msg = str(e)
-        if "containsSyntheticMedia" in msg:
-            status.pop("containsSyntheticMedia", None)
-            token = get_access_token()
-            video_id = _upload_video(token, filepath, meta, status)
-        elif "quota" in msg.lower() or "exceeded" in msg.lower():
-            # YouTube's real (server-side) quota says stop — defer to
-            # tomorrow instead of failing the day. The episode stays
-            # in_progress and resumes (adopted, never duplicated).
-            print(f"  [quota] YouTube quota hit during {kind} upload — deferring")
-            return None
-        else:
+    # 2026-10-06 lesson (ep16): YouTube tightened snippet.tags validation
+    # mid-flight — a 26-tag/454-char list that had been fine for 15
+    # episodes came back 400 invalidTags, while the identical body with
+    # the tags field removed passed. Whatever the new rule is, a
+    # validation change on their side must never kill the day: fall
+    # back to a tags-less upload (hashtags already live in the title
+    # and description, so discoverability survives). A rejected init
+    # costs zero quota, so this fallback is free.
+    meta_variants = [meta]
+    if meta.get("tags"):
+        meta_variants.append({k: v for k, v in meta.items() if k != "tags"})
+
+    video_id = None
+    for variant in meta_variants:
+        try:
+            video_id = _upload_video(token, filepath, variant, status)
+            break
+        except RuntimeError as e:
+            msg = str(e)
+            if "containsSyntheticMedia" in msg:
+                status.pop("containsSyntheticMedia", None)
+                token = get_access_token()
+                try:
+                    video_id = _upload_video(token, filepath, variant, status)
+                    break
+                except RuntimeError as e2:
+                    e, msg = e2, str(e2)
+            if "quota" in msg.lower() or "exceeded" in msg.lower():
+                # YouTube's real (server-side) quota says stop — defer to
+                # tomorrow instead of failing the day. The episode stays
+                # in_progress and resumes (adopted, never duplicated).
+                print(f"  [quota] YouTube quota hit during {kind} upload — deferring")
+                return None
+            if "invalidTags" in msg and variant is not meta_variants[-1]:
+                print("  [youtube] tags rejected (invalidTags) — "
+                      "retrying without tags")
+                continue
             raise
     print(f"  [youtube] uploaded {kind}: {video_id} "
           f"(publishAt {publish_at or 'now'})")

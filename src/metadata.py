@@ -95,11 +95,18 @@ def _tag_list(story: dict) -> list[str]:
         t = t.strip()
         if t and t not in out:
             out.append(t)
+    # 2026-10-06: YouTube tightened tag validation — 454 packed chars
+    # (26 tags) came back invalidTags while 436 had passed the day
+    # before. Budget 350 chars / 20 tags: comfortably under both the
+    # old 500-char rule and the new, tighter one; concepts are kept
+    # first (episode-specific long-tails), pool tags fill the rest.
     packed: list[str] = []
     used = 0
     for t in out:
+        if len(packed) >= 20:
+            break
         cost = len(t) + (2 if packed else 0)
-        if used + cost > 480:
+        if used + cost > 350:
             break
         packed.append(t)
         used += cost
