@@ -85,15 +85,19 @@ def _remember_slot(state: dict, kind: str, slot: str | None) -> None:
     ledger.save(state)
 
 
-def _resume_episode(state: dict) -> tuple[int, int] | None:
+def _resume_episode(state: dict, exclude: set[int] | None = None) -> tuple[int, int] | None:
     """Return (n, seed) for a recent in-progress episode, if any.
     Window model: an episode from today OR yesterday can be resumed
-    (an evening cycle that crashed after midnight still completes)."""
+    (an evening cycle that crashed after midnight still completes).
+    `exclude` = episode numbers already attempted THIS run (a
+    multi-episode day must still advance past a deferred episode)."""
     from datetime import date, timedelta
     recent = {date.today().isoformat(),
               (date.today() - timedelta(days=1)).isoformat()}
+    exclude = exclude or set()
     for e in reversed(state.get("episodes", [])):
-        if e.get("status") == "in_progress" and e.get("date") in recent:
+        if e.get("status") == "in_progress" and e.get("date") in recent \
+                and e["n"] not in exclude:
             return e["n"], e["seed"]
     return None
 
@@ -344,9 +348,10 @@ def _run_daily_inner(dry_run: bool, longs: int | None,
 
     used_slots = _load_slots(state)
     made = 0
+    attempted: set[int] = set()
     while made < target:
         # resume an interrupted episode from today, else start a fresh one
-        resumed = _resume_episode(state)
+        resumed = _resume_episode(state, exclude=attempted)
         if resumed and only_episode is None:
             n, seed = resumed
         elif only_episode is not None:
@@ -397,14 +402,29 @@ def _run_daily_inner(dry_run: bool, longs: int | None,
         result = produce_episode(story, n, dry_run, n_shorts, used_slots, state)
         results.append(result)
         made += 1
+        attempted.add(n)
 
-        # flip to done ALWAYS (even dry-run): an episode left
-        # in_progress would make the loop resume the SAME episode
-        # instead of advancing to the next one
+        # flip to done ONLY when the episode actually completed (its
+        # long + every short recorded). A quota-deferred episode stays
+        # in_progress — that is the deferral contract upload_video
+        # promises — so the next cycle resumes and finishes it (ids
+        # already uploaded are adopted/skipped, never duplicated).
+        # Dry-runs keep the old flip so the loop advances and the
+        # rehearsal burns no real episode number.
         for e in state["episodes"]:
             if e["n"] == n and e["status"] == "in_progress":
-                e["status"] = "done"
+                rec_ids = e.get("ids") or {}
+                complete = bool(rec_ids.get("long")) and \
+                    len(rec_ids.get("shorts") or []) >= result["shorts"]
+                if complete or dry_run:
+                    e["status"] = "done"
         ledger.save(state)
+
+        if not dry_run and result.get("long_id") is None:
+            # uploads deferred (real quota exhausted) — starting another
+            # episode today would just defer it too; stop here and let
+            # the next cycle resume this one after the quota reset
+            break
 
     if not dry_run:
         import time as _time
