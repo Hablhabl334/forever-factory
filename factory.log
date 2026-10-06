@@ -1,34 +1,57 @@
-[stats] growth report 2026-10-05
-[stats]   total: 56 views  (+13 since last report)
+Traceback (most recent call last):
+  File "/home/runner/work/forever-factory/forever-factory/src/orchestrator.py", line 448, in main
+    results = run_daily(dry_run=args.dry_run, longs=args.longs,
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/forever-factory/forever-factory/src/orchestrator.py", line 307, in run_daily
+    return _run_daily_inner(dry_run, longs, only_episode)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/forever-factory/forever-factory/src/orchestrator.py", line 397, in _run_daily_inner
+    result = produce_episode(story, n, dry_run, n_shorts, used_slots, state)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/forever-factory/forever-factory/src/orchestrator.py", line 265, in produce_episode
+    long_id = youtube.upload_video(final, long_meta, long_slot, episode_n, "long", state)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/forever-factory/forever-factory/src/youtube.py", line 352, in upload_video
+    video_id = _upload_video(token, filepath, meta, status)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/forever-factory/forever-factory/src/youtube.py", line 138, in _upload_video
+    raise RuntimeError(f"upload init failed ({status_code}): {raw.decode()[:400]}")
+RuntimeError: upload init failed (400): {
+  "error": {
+    "code": 400,
+    "message": "The request metadata specifies invalid video keywords.",
+    "errors": [
+      {
+        "message": "The request metadata specifies invalid video keywords.",
+        "domain": "youtube.video",
+        "reason": "invalidTags",
+        "location": "body.snippet.tags",
+        "locationType": "other"
+      }
+    ]
+  }
+}
+
+[stats] growth report 2026-10-06
+[stats]   total: 104 views  (+48 since last report)
+[stats]       15 views  ·  Subscribe for more tips like this #psychology #relationship 
 [stats]       14 views  ·  Subscribe for more tips like this
-[stats]        7 views  ·  The Thimble Windmill and the Sleepy Duskhollow — The Magic W
-[stats]        7 views  ·  The Spider and the Sleepy Clock — The Bravest Part 🌙 #shorts
-[15] script: Why We Get Jealous (1146 words, hash 2cc70ea571)
-  [voice] neural narration: 133 chunks (en-US-JennyNeural)
+[stats]        8 views  ·  Subscribe for more tips like this
+[16] script: Green Flags Everyone Misses (1179 words, hash c287cabb25)
+  [voice] neural narration: 131 chunks (en-US-JennyNeural)
   [voice] polished: presence EQ + gentle compression
-[15] narration: 575s, 133 caption chunks
-[15] long video: 593s, 52.9MB
-  [voice] neural narration: 12 chunks (en-US-JennyNeural)
+[16] narration: 591s, 131 caption chunks
+[16] long video: 609s, 53.8MB
+  [voice] neural narration: 19 chunks (en-US-JennyNeural)
   [voice] polished: presence EQ + gentle compression
-  [short 1] 49s, 12 cards, 6.2MB
-  [voice] neural narration: 14 chunks (en-US-JennyNeural)
+  [short 1] 74s, 19 cards, 6.6MB
+  [voice] neural narration: 18 chunks (en-US-JennyNeural)
   [voice] polished: presence EQ + gentle compression
-  [short 2] 50s, 14 cards, 6.8MB
-  [voice] neural narration: 10 chunks (en-US-JennyNeural)
+  [short 2] 71s, 18 cards, 6.5MB
+  [voice] neural narration: 20 chunks (en-US-JennyNeural)
   [voice] polished: presence EQ + gentle compression
-  [short 3] 48s, 10 cards, 6.4MB
-  [voice] neural narration: 12 chunks (en-US-JennyNeural)
+  [short 3] 73s, 20 cards, 6.7MB
+  [voice] neural narration: 18 chunks (en-US-JennyNeural)
   [voice] polished: presence EQ + gentle compression
-  [short 4] 47s, 12 cards, 6.1MB
-[15] thumbnail + 4 shorts ready
-  [youtube] uploaded long: y_9VDnn9-7k (publishAt 2026-10-05T20:00:00+03:00)
-  [youtube] setting thumbnail thumbnail.png (54 KB) on y_9VDnn9-7k
-  [youtube] thumbnail set
-  [youtube] uploaded short: pFsqkgWkXEA (publishAt 2026-10-06T00:00:00+03:00)
-  [youtube] uploaded short: vhZWjuHPpws (publishAt 2026-10-06T06:00:00+03:00)
-  [youtube] uploaded short: Q9rx7zBltoQ (publishAt 2026-10-06T12:00:00+03:00)
-  [youtube] uploaded short: peGtkMIl7LI (publishAt 2026-10-06T18:00:00+03:00)
-[playlist] 1 long video(s) not in the playlist yet
-[playlist] ep15 long added (y_9VDnn9-7k)
-  ✓ episode 15: Why We Get Jealous
-combination space: 273,301,428,924,195,840 stories — the factory never repeats
+  [short 4] 77s, 18 cards, 6.8MB
+[16] thumbnail + 4 shorts ready
