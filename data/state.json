@@ -1,787 +1,786 @@
 {
- "version": 1,
- "episodes": [
-  {
-   "n": 1,
-   "title": "The Wind Flute of Sleepy Dunes",
-   "hash": "32e253bf58627da20ba0543b",
-   "seed": 259564837848902,
-   "date": "2026-09-26",
-   "status": "abandoned",
-   "ids": {
-    "long": null,
-    "shorts": [],
-    "thumbnail": null
-   }
+  "version": 1,
+  "episodes": [
+    {
+      "n": 1,
+      "title": "The Wind Flute of Sleepy Dunes",
+      "hash": "32e253bf58627da20ba0543b",
+      "seed": 259564837848902,
+      "date": "2026-09-26",
+      "status": "abandoned",
+      "ids": {
+        "long": null,
+        "shorts": [],
+        "thumbnail": null
+      }
+    },
+    {
+      "n": 2,
+      "title": "The Thimble Windmill and the Sleepy Duskhollow",
+      "hash": "4dbcfd5ae3a11df216f608b9",
+      "seed": 178181624776488,
+      "date": "2026-09-27",
+      "status": "done",
+      "ids": {
+        "long": "_oF4dTUGy24",
+        "shorts": [
+          "TRY0QZfgjBE",
+          "Iocf2nxJuOY"
+        ],
+        "thumbnail": "2026-09-27",
+        "playlist": "2026-09-30"
+      }
+    },
+    {
+      "n": 3,
+      "title": "The Spider and the Sleepy Clock",
+      "hash": "b07d4611e141e4ebe617dca0",
+      "seed": 234009768072309,
+      "date": "2026-09-27",
+      "status": "done",
+      "ids": {
+        "long": "UG4z7_XQkjM",
+        "shorts": [
+          "4tbBV--cTsI"
+        ],
+        "thumbnail": "2026-09-27",
+        "playlist": "2026-09-30"
+      }
+    },
+    {
+      "n": 4,
+      "title": "Tuft's Great Mending",
+      "hash": "e5b33a7cc2a72129b828b1e5",
+      "seed": 240233018701378,
+      "date": "2026-09-28",
+      "status": "uploaded",
+      "ids": {
+        "long": "h4B5GXfmjLg",
+        "shorts": [
+          "kvFpuUEz8QA",
+          "TnJJf_3-Zg8"
+        ],
+        "thumbnail": "2026-09-28",
+        "playlist": "2026-09-30"
+      }
+    },
+    {
+      "n": 5,
+      "title": "The Owl and the Silk Thread",
+      "hash": "5f09494e0ca24921071c9270",
+      "seed": 186761732715992,
+      "date": "2026-09-28",
+      "status": "uploaded",
+      "ids": {
+        "long": "3ZR4l08XxyE",
+        "shorts": [
+          "Zjf7Ne2z_4U"
+        ],
+        "thumbnail": "2026-09-28",
+        "playlist": "2026-09-30"
+      }
+    },
+    {
+      "n": 6,
+      "title": "Onda and the Sleepy Stars",
+      "hash": "aa2aadb3db4839ee68fc8554",
+      "seed": 129223649586447,
+      "date": "2026-09-29",
+      "status": "uploaded",
+      "ids": {
+        "long": "pSRPxXnyAZg",
+        "shorts": [
+          "Mir11YcoWAw",
+          "WSM7pIy8kdE"
+        ],
+        "thumbnail": "2026-09-29",
+        "playlist": "2026-09-30"
+      }
+    },
+    {
+      "n": 7,
+      "title": "The Mist Slippers of Lullaby Loch",
+      "hash": "c4d2888bfd7d45487f4dfa5d",
+      "seed": 69012307855694,
+      "date": "2026-09-29",
+      "status": "uploaded",
+      "ids": {
+        "long": "DA0tiB7QrlY",
+        "shorts": [
+          "DVAoVnK5FtA"
+        ],
+        "thumbnail": "2026-09-29",
+        "playlist": "2026-09-30"
+      }
+    },
+    {
+      "n": 8,
+      "title": "The Night of the Forgotten Lullaby",
+      "hash": "1a6b5f0afecbe11c05c581d3",
+      "seed": 63870008393090,
+      "date": "2026-09-30",
+      "status": "uploaded",
+      "ids": {
+        "long": "git-4p8E9xY",
+        "shorts": [
+          "fkFhtGfsx_0",
+          "n_GOahvID_Y"
+        ],
+        "thumbnail": "2026-09-30",
+        "playlist": "2026-09-30"
+      }
+    },
+    {
+      "n": 9,
+      "title": "Tansy and the Tuneless Nightingales",
+      "hash": "b9df00fc21026fc41d8b209d",
+      "seed": 238837321345256,
+      "date": "2026-09-30",
+      "status": "uploaded",
+      "ids": {
+        "long": "8m3PZ44NW2c",
+        "shorts": [
+          "k8PzqtNVynI"
+        ],
+        "thumbnail": "2026-09-30",
+        "playlist": "2026-09-30"
+      }
+    },
+    {
+      "n": 10,
+      "title": "Fig and the Late Moon",
+      "hash": "b3dcb2a2ba0a3892f86236c6",
+      "seed": 218307147197446,
+      "date": "2026-10-01",
+      "status": "uploaded",
+      "ids": {
+        "long": "GRna0qAiWEg",
+        "shorts": [
+          "BJrBRuMoosA",
+          "Mw2D_4ot0G8"
+        ],
+        "thumbnail": "2026-10-01",
+        "playlist": "2026-10-01"
+      }
+    },
+    {
+      "n": 11,
+      "title": "Fable and the Weary Trains",
+      "hash": "a73fa1bcc7035d68c11d853b",
+      "seed": 220229096864090,
+      "date": "2026-10-01",
+      "status": "uploaded",
+      "ids": {
+        "long": "HjkTdKjH49s",
+        "shorts": [
+          "L7DJ2Nu2uo8"
+        ],
+        "thumbnail": "2026-10-01",
+        "playlist": "2026-10-01"
+      }
+    },
+    {
+      "n": 12,
+      "title": "Self-Love Before Love",
+      "hash": "0d046e922d3063c2",
+      "seed": 100943425298486,
+      "date": "2026-10-02",
+      "status": "uploaded",
+      "ids": {
+        "long": "5wQ0wmS7GHQ",
+        "shorts": [
+          "ISod_uguaR8",
+          "ElMNPkRma0Q",
+          "ZwoNP3tA_zI",
+          "aC8V7uEF1zA"
+        ],
+        "thumbnail": "2026-10-02",
+        "playlist": "2026-10-02"
+      },
+      "shashes": [
+        "c49a377dc9ba2361",
+        "6aab50920930beb8",
+        "40cf301a09627fe3",
+        "b8dcb31b2968da1d"
+      ]
+    },
+    {
+      "n": 13,
+      "title": "Chemistry vs Compatibility",
+      "hash": "9185c66e7d217e6a",
+      "seed": 251474475118740,
+      "date": "2026-10-03",
+      "status": "uploaded",
+      "ids": {
+        "long": "57GaUcN6Xfo",
+        "shorts": [
+          "4CsBqeLACzY",
+          "8Dg8yh488N8",
+          "HpRLqiAR7ks",
+          "NEpaHpN_z2Y"
+        ],
+        "thumbnail": "2026-10-03",
+        "playlist": "2026-10-03"
+      },
+      "shashes": [
+        "190f728bef80bea1",
+        "62ca08e08677c2eb",
+        "90d103bb13b0e763",
+        "6cafd5a5f3c9e52c"
+      ]
+    },
+    {
+      "n": 14,
+      "title": "Why We Fall for Certain People",
+      "hash": "9e3d4429c2c2bcd0",
+      "seed": 162752872880874,
+      "date": "2026-10-04",
+      "status": "uploaded",
+      "ids": {
+        "long": "cPlgv-IXN-w",
+        "shorts": [
+          "qKXpRXZHuvs",
+          "yr5iRQg5U3o",
+          "4eYAQRFA3Uk",
+          "xRVhNWoBfn4"
+        ],
+        "thumbnail": "2026-10-04",
+        "playlist": "2026-10-04"
+      },
+      "shashes": [
+        "9452363a05e4f3ea",
+        "f1fee8787bb55764",
+        "990eaebe95f6292b",
+        "1da3cbd9d5fbdb02"
+      ]
+    },
+    {
+      "n": 15,
+      "title": "Why We Get Jealous",
+      "hash": "2cc70ea571df3f01",
+      "seed": 110413857349884,
+      "date": "2026-10-05",
+      "status": "uploaded",
+      "ids": {
+        "long": "y_9VDnn9-7k",
+        "shorts": [
+          "pFsqkgWkXEA",
+          "vhZWjuHPpws",
+          "Q9rx7zBltoQ",
+          "peGtkMIl7LI"
+        ],
+        "thumbnail": "2026-10-05",
+        "playlist": "2026-10-05"
+      },
+      "shashes": [
+        "7e0addfae7a766b4",
+        "53d89332774044df",
+        "68dc20e1f0b7759f",
+        "1a1134dd247cf15a"
+      ]
+    },
+    {
+      "n": 16,
+      "title": "Green Flags Everyone Misses",
+      "hash": "c287cabb25fc2366",
+      "seed": 50248005129956,
+      "date": "2026-10-06",
+      "status": "in_progress",
+      "ids": {
+        "long": null,
+        "shorts": [
+          "EYP4N0ZEMNo"
+        ],
+        "thumbnail": null,
+        "playlist": "2026-10-06"
+      },
+      "shashes": [
+        "fe34a34a66b84542",
+        "08b37a488e1e8fb6",
+        "b6d42a8a4da762b6",
+        "4a1e7d7187ddccbe"
+      ]
+    }
+  ],
+  "story_hashes": [
+    "32e253bf58627da20ba0543b",
+    "4dbcfd5ae3a11df216f608b9",
+    "b07d4611e141e4ebe617dca0",
+    "e5b33a7cc2a72129b828b1e5",
+    "5f09494e0ca24921071c9270",
+    "aa2aadb3db4839ee68fc8554",
+    "c4d2888bfd7d45487f4dfa5d",
+    "1a6b5f0afecbe11c05c581d3",
+    "b9df00fc21026fc41d8b209d",
+    "b3dcb2a2ba0a3892f86236c6",
+    "a73fa1bcc7035d68c11d853b",
+    "0d046e922d3063c2",
+    "9185c66e7d217e6a",
+    "9e3d4429c2c2bcd0",
+    "2cc70ea571df3f01",
+    "c287cabb25fc2366"
+  ],
+  "quota": {
+    "date": "2026-10-06",
+    "units_used": 1704
   },
-  {
-   "n": 2,
-   "title": "The Thimble Windmill and the Sleepy Duskhollow",
-   "hash": "4dbcfd5ae3a11df216f608b9",
-   "seed": 178181624776488,
-   "date": "2026-09-27",
-   "status": "done",
-   "ids": {
-    "long": "_oF4dTUGy24",
-    "shorts": [
-     "TRY0QZfgjBE",
-     "Iocf2nxJuOY"
-    ],
-    "thumbnail": "2026-09-27",
-    "playlist": "2026-09-30"
-   }
+  "last_run": "2026-10-06",
+  "stats": {
+    "videos_published": 46,
+    "days_active": 11
   },
-  {
-   "n": 3,
-   "title": "The Spider and the Sleepy Clock",
-   "hash": "b07d4611e141e4ebe617dca0",
-   "seed": 234009768072309,
-   "date": "2026-09-27",
-   "status": "done",
-   "ids": {
-    "long": "UG4z7_XQkjM",
-    "shorts": [
-     "4tbBV--cTsI"
-    ],
-    "thumbnail": "2026-09-27",
-    "playlist": "2026-09-30"
-   }
+  "_last_days_active": "2026-10-06",
+  "analytics": [
+    {
+      "date": "2026-09-29",
+      "total_views": 25,
+      "videos": {
+        "_oF4dTUGy24": 3,
+        "TRY0QZfgjBE": 5,
+        "Iocf2nxJuOY": 7,
+        "UG4z7_XQkjM": 2,
+        "4tbBV--cTsI": 7,
+        "h4B5GXfmjLg": 0,
+        "kvFpuUEz8QA": 0,
+        "TnJJf_3-Zg8": 0,
+        "3ZR4l08XxyE": 1,
+        "Zjf7Ne2z_4U": 0
+      }
+    },
+    {
+      "date": "2026-09-30",
+      "total_views": 30,
+      "videos": {
+        "_oF4dTUGy24": 4,
+        "TRY0QZfgjBE": 5,
+        "Iocf2nxJuOY": 7,
+        "UG4z7_XQkjM": 2,
+        "4tbBV--cTsI": 7,
+        "h4B5GXfmjLg": 0,
+        "kvFpuUEz8QA": 0,
+        "TnJJf_3-Zg8": 1,
+        "3ZR4l08XxyE": 2,
+        "Zjf7Ne2z_4U": 0,
+        "pSRPxXnyAZg": 0,
+        "Mir11YcoWAw": 0,
+        "WSM7pIy8kdE": 1,
+        "DA0tiB7QrlY": 1,
+        "DVAoVnK5FtA": 0
+      }
+    },
+    {
+      "date": "2026-10-01",
+      "total_views": 30,
+      "videos": {
+        "_oF4dTUGy24": 4,
+        "TRY0QZfgjBE": 5,
+        "Iocf2nxJuOY": 7,
+        "UG4z7_XQkjM": 2,
+        "4tbBV--cTsI": 7,
+        "h4B5GXfmjLg": 0,
+        "kvFpuUEz8QA": 0,
+        "TnJJf_3-Zg8": 1,
+        "3ZR4l08XxyE": 2,
+        "Zjf7Ne2z_4U": 0,
+        "pSRPxXnyAZg": 0,
+        "Mir11YcoWAw": 0,
+        "WSM7pIy8kdE": 1,
+        "DA0tiB7QrlY": 1,
+        "DVAoVnK5FtA": 0,
+        "git-4p8E9xY": 0,
+        "fkFhtGfsx_0": 0,
+        "n_GOahvID_Y": 0,
+        "8m3PZ44NW2c": 0,
+        "k8PzqtNVynI": 0
+      }
+    },
+    {
+      "date": "2026-10-02",
+      "total_views": 30,
+      "videos": {
+        "_oF4dTUGy24": 4,
+        "TRY0QZfgjBE": 5,
+        "Iocf2nxJuOY": 7,
+        "UG4z7_XQkjM": 2,
+        "4tbBV--cTsI": 7,
+        "h4B5GXfmjLg": 0,
+        "kvFpuUEz8QA": 0,
+        "TnJJf_3-Zg8": 1,
+        "3ZR4l08XxyE": 2,
+        "Zjf7Ne2z_4U": 0,
+        "pSRPxXnyAZg": 0,
+        "Mir11YcoWAw": 0,
+        "WSM7pIy8kdE": 1,
+        "DA0tiB7QrlY": 1,
+        "DVAoVnK5FtA": 0,
+        "git-4p8E9xY": 0,
+        "fkFhtGfsx_0": 0,
+        "n_GOahvID_Y": 0,
+        "8m3PZ44NW2c": 0,
+        "k8PzqtNVynI": 0,
+        "GRna0qAiWEg": 0,
+        "BJrBRuMoosA": 0,
+        "Mw2D_4ot0G8": 0,
+        "HjkTdKjH49s": 0,
+        "L7DJ2Nu2uo8": 0
+      }
+    },
+    {
+      "date": "2026-10-03",
+      "total_views": 45,
+      "videos": {
+        "_oF4dTUGy24": 4,
+        "TRY0QZfgjBE": 5,
+        "Iocf2nxJuOY": 7,
+        "UG4z7_XQkjM": 2,
+        "4tbBV--cTsI": 7,
+        "h4B5GXfmjLg": 0,
+        "kvFpuUEz8QA": 0,
+        "TnJJf_3-Zg8": 1,
+        "3ZR4l08XxyE": 2,
+        "Zjf7Ne2z_4U": 0,
+        "pSRPxXnyAZg": 0,
+        "Mir11YcoWAw": 0,
+        "WSM7pIy8kdE": 1,
+        "DA0tiB7QrlY": 1,
+        "DVAoVnK5FtA": 0,
+        "git-4p8E9xY": 0,
+        "fkFhtGfsx_0": 0,
+        "n_GOahvID_Y": 0,
+        "8m3PZ44NW2c": 0,
+        "k8PzqtNVynI": 0,
+        "GRna0qAiWEg": 0,
+        "BJrBRuMoosA": 0,
+        "Mw2D_4ot0G8": 0,
+        "HjkTdKjH49s": 0,
+        "L7DJ2Nu2uo8": 0,
+        "5wQ0wmS7GHQ": 0,
+        "ISod_uguaR8": 11,
+        "ElMNPkRma0Q": 4,
+        "ZwoNP3tA_zI": 0,
+        "aC8V7uEF1zA": 0
+      }
+    },
+    {
+      "date": "2026-10-03",
+      "total_views": 45,
+      "videos": {
+        "_oF4dTUGy24": 4,
+        "TRY0QZfgjBE": 5,
+        "Iocf2nxJuOY": 7,
+        "UG4z7_XQkjM": 2,
+        "4tbBV--cTsI": 7,
+        "h4B5GXfmjLg": 0,
+        "kvFpuUEz8QA": 0,
+        "TnJJf_3-Zg8": 1,
+        "3ZR4l08XxyE": 2,
+        "Zjf7Ne2z_4U": 0,
+        "pSRPxXnyAZg": 0,
+        "Mir11YcoWAw": 0,
+        "WSM7pIy8kdE": 1,
+        "DA0tiB7QrlY": 1,
+        "DVAoVnK5FtA": 0,
+        "git-4p8E9xY": 0,
+        "fkFhtGfsx_0": 0,
+        "n_GOahvID_Y": 0,
+        "8m3PZ44NW2c": 0,
+        "k8PzqtNVynI": 0,
+        "GRna0qAiWEg": 0,
+        "BJrBRuMoosA": 0,
+        "Mw2D_4ot0G8": 0,
+        "HjkTdKjH49s": 0,
+        "L7DJ2Nu2uo8": 0,
+        "5wQ0wmS7GHQ": 0,
+        "ISod_uguaR8": 11,
+        "ElMNPkRma0Q": 4,
+        "ZwoNP3tA_zI": 0,
+        "aC8V7uEF1zA": 0,
+        "57GaUcN6Xfo": 0
+      }
+    },
+    {
+      "date": "2026-10-04",
+      "total_views": 43,
+      "videos": {
+        "_oF4dTUGy24": 4,
+        "TRY0QZfgjBE": 5,
+        "Iocf2nxJuOY": 7,
+        "UG4z7_XQkjM": 2,
+        "4tbBV--cTsI": 7,
+        "h4B5GXfmjLg": 0,
+        "kvFpuUEz8QA": 0,
+        "TnJJf_3-Zg8": 1,
+        "3ZR4l08XxyE": 2,
+        "Zjf7Ne2z_4U": 0,
+        "pSRPxXnyAZg": 0,
+        "Mir11YcoWAw": 0,
+        "WSM7pIy8kdE": 1,
+        "DA0tiB7QrlY": 1,
+        "DVAoVnK5FtA": 0,
+        "git-4p8E9xY": 0,
+        "fkFhtGfsx_0": 0,
+        "n_GOahvID_Y": 0,
+        "8m3PZ44NW2c": 0,
+        "k8PzqtNVynI": 0,
+        "GRna0qAiWEg": 0,
+        "BJrBRuMoosA": 0,
+        "Mw2D_4ot0G8": 0,
+        "HjkTdKjH49s": 0,
+        "L7DJ2Nu2uo8": 0,
+        "5wQ0wmS7GHQ": 0,
+        "ISod_uguaR8": 11,
+        "ElMNPkRma0Q": 2,
+        "ZwoNP3tA_zI": 0,
+        "aC8V7uEF1zA": 0,
+        "57GaUcN6Xfo": 0,
+        "4CsBqeLACzY": 0,
+        "8Dg8yh488N8": 0,
+        "HpRLqiAR7ks": 0,
+        "NEpaHpN_z2Y": 0
+      }
+    },
+    {
+      "date": "2026-10-05",
+      "total_views": 56,
+      "videos": {
+        "_oF4dTUGy24": 4,
+        "TRY0QZfgjBE": 5,
+        "Iocf2nxJuOY": 7,
+        "UG4z7_XQkjM": 2,
+        "4tbBV--cTsI": 7,
+        "h4B5GXfmjLg": 0,
+        "kvFpuUEz8QA": 0,
+        "TnJJf_3-Zg8": 1,
+        "3ZR4l08XxyE": 2,
+        "Zjf7Ne2z_4U": 0,
+        "pSRPxXnyAZg": 0,
+        "Mir11YcoWAw": 0,
+        "WSM7pIy8kdE": 1,
+        "DA0tiB7QrlY": 1,
+        "DVAoVnK5FtA": 0,
+        "git-4p8E9xY": 0,
+        "fkFhtGfsx_0": 0,
+        "n_GOahvID_Y": 0,
+        "8m3PZ44NW2c": 0,
+        "k8PzqtNVynI": 0,
+        "GRna0qAiWEg": 0,
+        "BJrBRuMoosA": 0,
+        "Mw2D_4ot0G8": 0,
+        "HjkTdKjH49s": 0,
+        "L7DJ2Nu2uo8": 0,
+        "5wQ0wmS7GHQ": 0,
+        "ISod_uguaR8": 14,
+        "ElMNPkRma0Q": 3,
+        "ZwoNP3tA_zI": 0,
+        "aC8V7uEF1zA": 0,
+        "57GaUcN6Xfo": 0,
+        "4CsBqeLACzY": 2,
+        "8Dg8yh488N8": 1,
+        "HpRLqiAR7ks": 1,
+        "NEpaHpN_z2Y": 1,
+        "cPlgv-IXN-w": 0,
+        "qKXpRXZHuvs": 4,
+        "yr5iRQg5U3o": 0,
+        "4eYAQRFA3Uk": 0,
+        "xRVhNWoBfn4": 0
+      }
+    },
+    {
+      "date": "2026-10-06",
+      "total_views": 104,
+      "videos": {
+        "_oF4dTUGy24": 4,
+        "TRY0QZfgjBE": 5,
+        "Iocf2nxJuOY": 7,
+        "UG4z7_XQkjM": 2,
+        "4tbBV--cTsI": 7,
+        "h4B5GXfmjLg": 0,
+        "kvFpuUEz8QA": 0,
+        "TnJJf_3-Zg8": 1,
+        "3ZR4l08XxyE": 2,
+        "Zjf7Ne2z_4U": 0,
+        "pSRPxXnyAZg": 0,
+        "Mir11YcoWAw": 0,
+        "WSM7pIy8kdE": 1,
+        "DA0tiB7QrlY": 1,
+        "DVAoVnK5FtA": 0,
+        "git-4p8E9xY": 0,
+        "fkFhtGfsx_0": 0,
+        "n_GOahvID_Y": 0,
+        "8m3PZ44NW2c": 0,
+        "k8PzqtNVynI": 0,
+        "GRna0qAiWEg": 0,
+        "BJrBRuMoosA": 0,
+        "Mw2D_4ot0G8": 0,
+        "HjkTdKjH49s": 0,
+        "L7DJ2Nu2uo8": 0,
+        "5wQ0wmS7GHQ": 0,
+        "ISod_uguaR8": 14,
+        "ElMNPkRma0Q": 3,
+        "ZwoNP3tA_zI": 0,
+        "aC8V7uEF1zA": 0,
+        "57GaUcN6Xfo": 0,
+        "4CsBqeLACzY": 2,
+        "8Dg8yh488N8": 1,
+        "HpRLqiAR7ks": 2,
+        "NEpaHpN_z2Y": 1,
+        "cPlgv-IXN-w": 0,
+        "qKXpRXZHuvs": 7,
+        "yr5iRQg5U3o": 3,
+        "4eYAQRFA3Uk": 4,
+        "xRVhNWoBfn4": 8,
+        "y_9VDnn9-7k": 1,
+        "pFsqkgWkXEA": 15,
+        "vhZWjuHPpws": 6,
+        "Q9rx7zBltoQ": 7,
+        "peGtkMIl7LI": 0
+      }
+    },
+    {
+      "date": "2026-10-06",
+      "total_views": 104,
+      "videos": {
+        "_oF4dTUGy24": 4,
+        "TRY0QZfgjBE": 5,
+        "Iocf2nxJuOY": 7,
+        "UG4z7_XQkjM": 2,
+        "4tbBV--cTsI": 7,
+        "h4B5GXfmjLg": 0,
+        "kvFpuUEz8QA": 0,
+        "TnJJf_3-Zg8": 1,
+        "3ZR4l08XxyE": 2,
+        "Zjf7Ne2z_4U": 0,
+        "pSRPxXnyAZg": 0,
+        "Mir11YcoWAw": 0,
+        "WSM7pIy8kdE": 1,
+        "DA0tiB7QrlY": 1,
+        "DVAoVnK5FtA": 0,
+        "git-4p8E9xY": 0,
+        "fkFhtGfsx_0": 0,
+        "n_GOahvID_Y": 0,
+        "8m3PZ44NW2c": 0,
+        "k8PzqtNVynI": 0,
+        "GRna0qAiWEg": 0,
+        "BJrBRuMoosA": 0,
+        "Mw2D_4ot0G8": 0,
+        "HjkTdKjH49s": 0,
+        "L7DJ2Nu2uo8": 0,
+        "5wQ0wmS7GHQ": 0,
+        "ISod_uguaR8": 14,
+        "ElMNPkRma0Q": 3,
+        "ZwoNP3tA_zI": 0,
+        "aC8V7uEF1zA": 0,
+        "57GaUcN6Xfo": 0,
+        "4CsBqeLACzY": 2,
+        "8Dg8yh488N8": 1,
+        "HpRLqiAR7ks": 2,
+        "NEpaHpN_z2Y": 1,
+        "cPlgv-IXN-w": 0,
+        "qKXpRXZHuvs": 7,
+        "yr5iRQg5U3o": 3,
+        "4eYAQRFA3Uk": 4,
+        "xRVhNWoBfn4": 8,
+        "y_9VDnn9-7k": 1,
+        "pFsqkgWkXEA": 15,
+        "vhZWjuHPpws": 6,
+        "Q9rx7zBltoQ": 7,
+        "peGtkMIl7LI": 0
+      }
+    },
+    {
+      "date": "2026-10-06",
+      "total_views": 110,
+      "videos": {
+        "_oF4dTUGy24": 4,
+        "TRY0QZfgjBE": 5,
+        "Iocf2nxJuOY": 7,
+        "UG4z7_XQkjM": 2,
+        "4tbBV--cTsI": 7,
+        "h4B5GXfmjLg": 0,
+        "kvFpuUEz8QA": 0,
+        "TnJJf_3-Zg8": 1,
+        "3ZR4l08XxyE": 2,
+        "Zjf7Ne2z_4U": 0,
+        "pSRPxXnyAZg": 0,
+        "Mir11YcoWAw": 0,
+        "WSM7pIy8kdE": 1,
+        "DA0tiB7QrlY": 1,
+        "DVAoVnK5FtA": 0,
+        "git-4p8E9xY": 0,
+        "fkFhtGfsx_0": 0,
+        "n_GOahvID_Y": 0,
+        "8m3PZ44NW2c": 0,
+        "k8PzqtNVynI": 0,
+        "GRna0qAiWEg": 0,
+        "BJrBRuMoosA": 0,
+        "Mw2D_4ot0G8": 0,
+        "HjkTdKjH49s": 0,
+        "L7DJ2Nu2uo8": 0,
+        "5wQ0wmS7GHQ": 0,
+        "ISod_uguaR8": 14,
+        "ElMNPkRma0Q": 3,
+        "ZwoNP3tA_zI": 0,
+        "aC8V7uEF1zA": 0,
+        "57GaUcN6Xfo": 0,
+        "4CsBqeLACzY": 2,
+        "8Dg8yh488N8": 1,
+        "HpRLqiAR7ks": 2,
+        "NEpaHpN_z2Y": 1,
+        "cPlgv-IXN-w": 0,
+        "qKXpRXZHuvs": 8,
+        "yr5iRQg5U3o": 3,
+        "4eYAQRFA3Uk": 4,
+        "xRVhNWoBfn4": 8,
+        "y_9VDnn9-7k": 2,
+        "pFsqkgWkXEA": 15,
+        "vhZWjuHPpws": 9,
+        "Q9rx7zBltoQ": 8,
+        "peGtkMIl7LI": 0
+      }
+    }
+  ],
+  "discovery": {
+    "playlist_id": "PLVWWhOwOS7x0",
+    "channel_branding": "2026-10-02"
   },
-  {
-   "n": 4,
-   "title": "Tuft's Great Mending",
-   "hash": "e5b33a7cc2a72129b828b1e5",
-   "seed": 240233018701378,
-   "date": "2026-09-28",
-   "status": "uploaded",
-   "ids": {
-    "long": "h4B5GXfmjLg",
-    "shorts": [
-     "kvFpuUEz8QA",
-     "TnJJf_3-Zg8"
-    ],
-    "thumbnail": "2026-09-28",
-    "playlist": "2026-09-30"
-   }
-  },
-  {
-   "n": 5,
-   "title": "The Owl and the Silk Thread",
-   "hash": "5f09494e0ca24921071c9270",
-   "seed": 186761732715992,
-   "date": "2026-09-28",
-   "status": "uploaded",
-   "ids": {
-    "long": "3ZR4l08XxyE",
-    "shorts": [
-     "Zjf7Ne2z_4U"
-    ],
-    "thumbnail": "2026-09-28",
-    "playlist": "2026-09-30"
-   }
-  },
-  {
-   "n": 6,
-   "title": "Onda and the Sleepy Stars",
-   "hash": "aa2aadb3db4839ee68fc8554",
-   "seed": 129223649586447,
-   "date": "2026-09-29",
-   "status": "uploaded",
-   "ids": {
-    "long": "pSRPxXnyAZg",
-    "shorts": [
-     "Mir11YcoWAw",
-     "WSM7pIy8kdE"
-    ],
-    "thumbnail": "2026-09-29",
-    "playlist": "2026-09-30"
-   }
-  },
-  {
-   "n": 7,
-   "title": "The Mist Slippers of Lullaby Loch",
-   "hash": "c4d2888bfd7d45487f4dfa5d",
-   "seed": 69012307855694,
-   "date": "2026-09-29",
-   "status": "uploaded",
-   "ids": {
-    "long": "DA0tiB7QrlY",
-    "shorts": [
-     "DVAoVnK5FtA"
-    ],
-    "thumbnail": "2026-09-29",
-    "playlist": "2026-09-30"
-   }
-  },
-  {
-   "n": 8,
-   "title": "The Night of the Forgotten Lullaby",
-   "hash": "1a6b5f0afecbe11c05c581d3",
-   "seed": 63870008393090,
-   "date": "2026-09-30",
-   "status": "uploaded",
-   "ids": {
-    "long": "git-4p8E9xY",
-    "shorts": [
-     "fkFhtGfsx_0",
-     "n_GOahvID_Y"
-    ],
-    "thumbnail": "2026-09-30",
-    "playlist": "2026-09-30"
-   }
-  },
-  {
-   "n": 9,
-   "title": "Tansy and the Tuneless Nightingales",
-   "hash": "b9df00fc21026fc41d8b209d",
-   "seed": 238837321345256,
-   "date": "2026-09-30",
-   "status": "uploaded",
-   "ids": {
-    "long": "8m3PZ44NW2c",
-    "shorts": [
-     "k8PzqtNVynI"
-    ],
-    "thumbnail": "2026-09-30",
-    "playlist": "2026-09-30"
-   }
-  },
-  {
-   "n": 10,
-   "title": "Fig and the Late Moon",
-   "hash": "b3dcb2a2ba0a3892f86236c6",
-   "seed": 218307147197446,
-   "date": "2026-10-01",
-   "status": "uploaded",
-   "ids": {
-    "long": "GRna0qAiWEg",
-    "shorts": [
-     "BJrBRuMoosA",
-     "Mw2D_4ot0G8"
-    ],
-    "thumbnail": "2026-10-01",
-    "playlist": "2026-10-01"
-   }
-  },
-  {
-   "n": 11,
-   "title": "Fable and the Weary Trains",
-   "hash": "a73fa1bcc7035d68c11d853b",
-   "seed": 220229096864090,
-   "date": "2026-10-01",
-   "status": "uploaded",
-   "ids": {
-    "long": "HjkTdKjH49s",
-    "shorts": [
-     "L7DJ2Nu2uo8"
-    ],
-    "thumbnail": "2026-10-01",
-    "playlist": "2026-10-01"
-   }
-  },
-  {
-   "n": 12,
-   "title": "Self-Love Before Love",
-   "hash": "0d046e922d3063c2",
-   "seed": 100943425298486,
-   "date": "2026-10-02",
-   "status": "uploaded",
-   "ids": {
-    "long": "5wQ0wmS7GHQ",
-    "shorts": [
-     "ISod_uguaR8",
-     "ElMNPkRma0Q",
-     "ZwoNP3tA_zI",
-     "aC8V7uEF1zA"
-    ],
-    "thumbnail": "2026-10-02",
-    "playlist": "2026-10-02"
-   },
-   "shashes": [
+  "short_hashes": [
     "c49a377dc9ba2361",
     "6aab50920930beb8",
     "40cf301a09627fe3",
-    "b8dcb31b2968da1d"
-   ]
-  },
-  {
-   "n": 13,
-   "title": "Chemistry vs Compatibility",
-   "hash": "9185c66e7d217e6a",
-   "seed": 251474475118740,
-   "date": "2026-10-03",
-   "status": "uploaded",
-   "ids": {
-    "long": "57GaUcN6Xfo",
-    "shorts": [
-     "4CsBqeLACzY",
-     "8Dg8yh488N8",
-     "HpRLqiAR7ks",
-     "NEpaHpN_z2Y"
-    ],
-    "thumbnail": "2026-10-03",
-    "playlist": "2026-10-03"
-   },
-   "shashes": [
+    "b8dcb31b2968da1d",
     "190f728bef80bea1",
     "62ca08e08677c2eb",
     "90d103bb13b0e763",
-    "6cafd5a5f3c9e52c"
-   ]
-  },
-  {
-   "n": 14,
-   "title": "Why We Fall for Certain People",
-   "hash": "9e3d4429c2c2bcd0",
-   "seed": 162752872880874,
-   "date": "2026-10-04",
-   "status": "uploaded",
-   "ids": {
-    "long": "cPlgv-IXN-w",
-    "shorts": [
-     "qKXpRXZHuvs",
-     "yr5iRQg5U3o",
-     "4eYAQRFA3Uk",
-     "xRVhNWoBfn4"
-    ],
-    "thumbnail": "2026-10-04",
-    "playlist": "2026-10-04"
-   },
-   "shashes": [
+    "6cafd5a5f3c9e52c",
     "9452363a05e4f3ea",
     "f1fee8787bb55764",
     "990eaebe95f6292b",
-    "1da3cbd9d5fbdb02"
-   ]
-  },
-  {
-   "n": 15,
-   "title": "Why We Get Jealous",
-   "hash": "2cc70ea571df3f01",
-   "seed": 110413857349884,
-   "date": "2026-10-05",
-   "status": "uploaded",
-   "ids": {
-    "long": "y_9VDnn9-7k",
-    "shorts": [
-     "pFsqkgWkXEA",
-     "vhZWjuHPpws",
-     "Q9rx7zBltoQ",
-     "peGtkMIl7LI"
-    ],
-    "thumbnail": "2026-10-05",
-    "playlist": "2026-10-05"
-   },
-   "shashes": [
+    "1da3cbd9d5fbdb02",
     "7e0addfae7a766b4",
     "53d89332774044df",
     "68dc20e1f0b7759f",
-    "1a1134dd247cf15a"
-   ]
-  },
-  {
-   "n": 16,
-   "title": "Green Flags Everyone Misses",
-   "hash": "c287cabb25fc2366",
-   "seed": 50248005129956,
-   "date": "2026-10-06",
-   "status": "uploaded",
-   "ids": {
-    "long": "YDaZ_dRb5_8",
-    "shorts": [
-     "EYP4N0ZEMNo"
-    ],
-    "thumbnail": null,
-    "playlist": "2026-10-06"
-   },
-   "shashes": [
+    "1a1134dd247cf15a",
     "fe34a34a66b84542",
     "08b37a488e1e8fb6",
     "b6d42a8a4da762b6",
     "4a1e7d7187ddccbe"
-   ]
-  }
- ],
- "story_hashes": [
-  "32e253bf58627da20ba0543b",
-  "4dbcfd5ae3a11df216f608b9",
-  "b07d4611e141e4ebe617dca0",
-  "e5b33a7cc2a72129b828b1e5",
-  "5f09494e0ca24921071c9270",
-  "aa2aadb3db4839ee68fc8554",
-  "c4d2888bfd7d45487f4dfa5d",
-  "1a6b5f0afecbe11c05c581d3",
-  "b9df00fc21026fc41d8b209d",
-  "b3dcb2a2ba0a3892f86236c6",
-  "a73fa1bcc7035d68c11d853b",
-  "0d046e922d3063c2",
-  "9185c66e7d217e6a",
-  "9e3d4429c2c2bcd0",
-  "2cc70ea571df3f01",
-  "c287cabb25fc2366"
- ],
- "quota": {
-  "date": "2026-10-06",
-  "units_used": 1704
- },
- "last_run": "2026-10-06",
- "stats": {
-  "videos_published": 46,
-  "days_active": 11
- },
- "_last_days_active": "2026-10-06",
- "analytics": [
-  {
-   "date": "2026-09-29",
-   "total_views": 25,
-   "videos": {
-    "_oF4dTUGy24": 3,
-    "TRY0QZfgjBE": 5,
-    "Iocf2nxJuOY": 7,
-    "UG4z7_XQkjM": 2,
-    "4tbBV--cTsI": 7,
-    "h4B5GXfmjLg": 0,
-    "kvFpuUEz8QA": 0,
-    "TnJJf_3-Zg8": 0,
-    "3ZR4l08XxyE": 1,
-    "Zjf7Ne2z_4U": 0
-   }
-  },
-  {
-   "date": "2026-09-30",
-   "total_views": 30,
-   "videos": {
-    "_oF4dTUGy24": 4,
-    "TRY0QZfgjBE": 5,
-    "Iocf2nxJuOY": 7,
-    "UG4z7_XQkjM": 2,
-    "4tbBV--cTsI": 7,
-    "h4B5GXfmjLg": 0,
-    "kvFpuUEz8QA": 0,
-    "TnJJf_3-Zg8": 1,
-    "3ZR4l08XxyE": 2,
-    "Zjf7Ne2z_4U": 0,
-    "pSRPxXnyAZg": 0,
-    "Mir11YcoWAw": 0,
-    "WSM7pIy8kdE": 1,
-    "DA0tiB7QrlY": 1,
-    "DVAoVnK5FtA": 0
-   }
-  },
-  {
-   "date": "2026-10-01",
-   "total_views": 30,
-   "videos": {
-    "_oF4dTUGy24": 4,
-    "TRY0QZfgjBE": 5,
-    "Iocf2nxJuOY": 7,
-    "UG4z7_XQkjM": 2,
-    "4tbBV--cTsI": 7,
-    "h4B5GXfmjLg": 0,
-    "kvFpuUEz8QA": 0,
-    "TnJJf_3-Zg8": 1,
-    "3ZR4l08XxyE": 2,
-    "Zjf7Ne2z_4U": 0,
-    "pSRPxXnyAZg": 0,
-    "Mir11YcoWAw": 0,
-    "WSM7pIy8kdE": 1,
-    "DA0tiB7QrlY": 1,
-    "DVAoVnK5FtA": 0,
-    "git-4p8E9xY": 0,
-    "fkFhtGfsx_0": 0,
-    "n_GOahvID_Y": 0,
-    "8m3PZ44NW2c": 0,
-    "k8PzqtNVynI": 0
-   }
-  },
-  {
-   "date": "2026-10-02",
-   "total_views": 30,
-   "videos": {
-    "_oF4dTUGy24": 4,
-    "TRY0QZfgjBE": 5,
-    "Iocf2nxJuOY": 7,
-    "UG4z7_XQkjM": 2,
-    "4tbBV--cTsI": 7,
-    "h4B5GXfmjLg": 0,
-    "kvFpuUEz8QA": 0,
-    "TnJJf_3-Zg8": 1,
-    "3ZR4l08XxyE": 2,
-    "Zjf7Ne2z_4U": 0,
-    "pSRPxXnyAZg": 0,
-    "Mir11YcoWAw": 0,
-    "WSM7pIy8kdE": 1,
-    "DA0tiB7QrlY": 1,
-    "DVAoVnK5FtA": 0,
-    "git-4p8E9xY": 0,
-    "fkFhtGfsx_0": 0,
-    "n_GOahvID_Y": 0,
-    "8m3PZ44NW2c": 0,
-    "k8PzqtNVynI": 0,
-    "GRna0qAiWEg": 0,
-    "BJrBRuMoosA": 0,
-    "Mw2D_4ot0G8": 0,
-    "HjkTdKjH49s": 0,
-    "L7DJ2Nu2uo8": 0
-   }
-  },
-  {
-   "date": "2026-10-03",
-   "total_views": 45,
-   "videos": {
-    "_oF4dTUGy24": 4,
-    "TRY0QZfgjBE": 5,
-    "Iocf2nxJuOY": 7,
-    "UG4z7_XQkjM": 2,
-    "4tbBV--cTsI": 7,
-    "h4B5GXfmjLg": 0,
-    "kvFpuUEz8QA": 0,
-    "TnJJf_3-Zg8": 1,
-    "3ZR4l08XxyE": 2,
-    "Zjf7Ne2z_4U": 0,
-    "pSRPxXnyAZg": 0,
-    "Mir11YcoWAw": 0,
-    "WSM7pIy8kdE": 1,
-    "DA0tiB7QrlY": 1,
-    "DVAoVnK5FtA": 0,
-    "git-4p8E9xY": 0,
-    "fkFhtGfsx_0": 0,
-    "n_GOahvID_Y": 0,
-    "8m3PZ44NW2c": 0,
-    "k8PzqtNVynI": 0,
-    "GRna0qAiWEg": 0,
-    "BJrBRuMoosA": 0,
-    "Mw2D_4ot0G8": 0,
-    "HjkTdKjH49s": 0,
-    "L7DJ2Nu2uo8": 0,
-    "5wQ0wmS7GHQ": 0,
-    "ISod_uguaR8": 11,
-    "ElMNPkRma0Q": 4,
-    "ZwoNP3tA_zI": 0,
-    "aC8V7uEF1zA": 0
-   }
-  },
-  {
-   "date": "2026-10-03",
-   "total_views": 45,
-   "videos": {
-    "_oF4dTUGy24": 4,
-    "TRY0QZfgjBE": 5,
-    "Iocf2nxJuOY": 7,
-    "UG4z7_XQkjM": 2,
-    "4tbBV--cTsI": 7,
-    "h4B5GXfmjLg": 0,
-    "kvFpuUEz8QA": 0,
-    "TnJJf_3-Zg8": 1,
-    "3ZR4l08XxyE": 2,
-    "Zjf7Ne2z_4U": 0,
-    "pSRPxXnyAZg": 0,
-    "Mir11YcoWAw": 0,
-    "WSM7pIy8kdE": 1,
-    "DA0tiB7QrlY": 1,
-    "DVAoVnK5FtA": 0,
-    "git-4p8E9xY": 0,
-    "fkFhtGfsx_0": 0,
-    "n_GOahvID_Y": 0,
-    "8m3PZ44NW2c": 0,
-    "k8PzqtNVynI": 0,
-    "GRna0qAiWEg": 0,
-    "BJrBRuMoosA": 0,
-    "Mw2D_4ot0G8": 0,
-    "HjkTdKjH49s": 0,
-    "L7DJ2Nu2uo8": 0,
-    "5wQ0wmS7GHQ": 0,
-    "ISod_uguaR8": 11,
-    "ElMNPkRma0Q": 4,
-    "ZwoNP3tA_zI": 0,
-    "aC8V7uEF1zA": 0,
-    "57GaUcN6Xfo": 0
-   }
-  },
-  {
-   "date": "2026-10-04",
-   "total_views": 43,
-   "videos": {
-    "_oF4dTUGy24": 4,
-    "TRY0QZfgjBE": 5,
-    "Iocf2nxJuOY": 7,
-    "UG4z7_XQkjM": 2,
-    "4tbBV--cTsI": 7,
-    "h4B5GXfmjLg": 0,
-    "kvFpuUEz8QA": 0,
-    "TnJJf_3-Zg8": 1,
-    "3ZR4l08XxyE": 2,
-    "Zjf7Ne2z_4U": 0,
-    "pSRPxXnyAZg": 0,
-    "Mir11YcoWAw": 0,
-    "WSM7pIy8kdE": 1,
-    "DA0tiB7QrlY": 1,
-    "DVAoVnK5FtA": 0,
-    "git-4p8E9xY": 0,
-    "fkFhtGfsx_0": 0,
-    "n_GOahvID_Y": 0,
-    "8m3PZ44NW2c": 0,
-    "k8PzqtNVynI": 0,
-    "GRna0qAiWEg": 0,
-    "BJrBRuMoosA": 0,
-    "Mw2D_4ot0G8": 0,
-    "HjkTdKjH49s": 0,
-    "L7DJ2Nu2uo8": 0,
-    "5wQ0wmS7GHQ": 0,
-    "ISod_uguaR8": 11,
-    "ElMNPkRma0Q": 2,
-    "ZwoNP3tA_zI": 0,
-    "aC8V7uEF1zA": 0,
-    "57GaUcN6Xfo": 0,
-    "4CsBqeLACzY": 0,
-    "8Dg8yh488N8": 0,
-    "HpRLqiAR7ks": 0,
-    "NEpaHpN_z2Y": 0
-   }
-  },
-  {
-   "date": "2026-10-05",
-   "total_views": 56,
-   "videos": {
-    "_oF4dTUGy24": 4,
-    "TRY0QZfgjBE": 5,
-    "Iocf2nxJuOY": 7,
-    "UG4z7_XQkjM": 2,
-    "4tbBV--cTsI": 7,
-    "h4B5GXfmjLg": 0,
-    "kvFpuUEz8QA": 0,
-    "TnJJf_3-Zg8": 1,
-    "3ZR4l08XxyE": 2,
-    "Zjf7Ne2z_4U": 0,
-    "pSRPxXnyAZg": 0,
-    "Mir11YcoWAw": 0,
-    "WSM7pIy8kdE": 1,
-    "DA0tiB7QrlY": 1,
-    "DVAoVnK5FtA": 0,
-    "git-4p8E9xY": 0,
-    "fkFhtGfsx_0": 0,
-    "n_GOahvID_Y": 0,
-    "8m3PZ44NW2c": 0,
-    "k8PzqtNVynI": 0,
-    "GRna0qAiWEg": 0,
-    "BJrBRuMoosA": 0,
-    "Mw2D_4ot0G8": 0,
-    "HjkTdKjH49s": 0,
-    "L7DJ2Nu2uo8": 0,
-    "5wQ0wmS7GHQ": 0,
-    "ISod_uguaR8": 14,
-    "ElMNPkRma0Q": 3,
-    "ZwoNP3tA_zI": 0,
-    "aC8V7uEF1zA": 0,
-    "57GaUcN6Xfo": 0,
-    "4CsBqeLACzY": 2,
-    "8Dg8yh488N8": 1,
-    "HpRLqiAR7ks": 1,
-    "NEpaHpN_z2Y": 1,
-    "cPlgv-IXN-w": 0,
-    "qKXpRXZHuvs": 4,
-    "yr5iRQg5U3o": 0,
-    "4eYAQRFA3Uk": 0,
-    "xRVhNWoBfn4": 0
-   }
-  },
-  {
-   "date": "2026-10-06",
-   "total_views": 104,
-   "videos": {
-    "_oF4dTUGy24": 4,
-    "TRY0QZfgjBE": 5,
-    "Iocf2nxJuOY": 7,
-    "UG4z7_XQkjM": 2,
-    "4tbBV--cTsI": 7,
-    "h4B5GXfmjLg": 0,
-    "kvFpuUEz8QA": 0,
-    "TnJJf_3-Zg8": 1,
-    "3ZR4l08XxyE": 2,
-    "Zjf7Ne2z_4U": 0,
-    "pSRPxXnyAZg": 0,
-    "Mir11YcoWAw": 0,
-    "WSM7pIy8kdE": 1,
-    "DA0tiB7QrlY": 1,
-    "DVAoVnK5FtA": 0,
-    "git-4p8E9xY": 0,
-    "fkFhtGfsx_0": 0,
-    "n_GOahvID_Y": 0,
-    "8m3PZ44NW2c": 0,
-    "k8PzqtNVynI": 0,
-    "GRna0qAiWEg": 0,
-    "BJrBRuMoosA": 0,
-    "Mw2D_4ot0G8": 0,
-    "HjkTdKjH49s": 0,
-    "L7DJ2Nu2uo8": 0,
-    "5wQ0wmS7GHQ": 0,
-    "ISod_uguaR8": 14,
-    "ElMNPkRma0Q": 3,
-    "ZwoNP3tA_zI": 0,
-    "aC8V7uEF1zA": 0,
-    "57GaUcN6Xfo": 0,
-    "4CsBqeLACzY": 2,
-    "8Dg8yh488N8": 1,
-    "HpRLqiAR7ks": 2,
-    "NEpaHpN_z2Y": 1,
-    "cPlgv-IXN-w": 0,
-    "qKXpRXZHuvs": 7,
-    "yr5iRQg5U3o": 3,
-    "4eYAQRFA3Uk": 4,
-    "xRVhNWoBfn4": 8,
-    "y_9VDnn9-7k": 1,
-    "pFsqkgWkXEA": 15,
-    "vhZWjuHPpws": 6,
-    "Q9rx7zBltoQ": 7,
-    "peGtkMIl7LI": 0
-   }
-  },
-  {
-   "date": "2026-10-06",
-   "total_views": 104,
-   "videos": {
-    "_oF4dTUGy24": 4,
-    "TRY0QZfgjBE": 5,
-    "Iocf2nxJuOY": 7,
-    "UG4z7_XQkjM": 2,
-    "4tbBV--cTsI": 7,
-    "h4B5GXfmjLg": 0,
-    "kvFpuUEz8QA": 0,
-    "TnJJf_3-Zg8": 1,
-    "3ZR4l08XxyE": 2,
-    "Zjf7Ne2z_4U": 0,
-    "pSRPxXnyAZg": 0,
-    "Mir11YcoWAw": 0,
-    "WSM7pIy8kdE": 1,
-    "DA0tiB7QrlY": 1,
-    "DVAoVnK5FtA": 0,
-    "git-4p8E9xY": 0,
-    "fkFhtGfsx_0": 0,
-    "n_GOahvID_Y": 0,
-    "8m3PZ44NW2c": 0,
-    "k8PzqtNVynI": 0,
-    "GRna0qAiWEg": 0,
-    "BJrBRuMoosA": 0,
-    "Mw2D_4ot0G8": 0,
-    "HjkTdKjH49s": 0,
-    "L7DJ2Nu2uo8": 0,
-    "5wQ0wmS7GHQ": 0,
-    "ISod_uguaR8": 14,
-    "ElMNPkRma0Q": 3,
-    "ZwoNP3tA_zI": 0,
-    "aC8V7uEF1zA": 0,
-    "57GaUcN6Xfo": 0,
-    "4CsBqeLACzY": 2,
-    "8Dg8yh488N8": 1,
-    "HpRLqiAR7ks": 2,
-    "NEpaHpN_z2Y": 1,
-    "cPlgv-IXN-w": 0,
-    "qKXpRXZHuvs": 7,
-    "yr5iRQg5U3o": 3,
-    "4eYAQRFA3Uk": 4,
-    "xRVhNWoBfn4": 8,
-    "y_9VDnn9-7k": 1,
-    "pFsqkgWkXEA": 15,
-    "vhZWjuHPpws": 6,
-    "Q9rx7zBltoQ": 7,
-    "peGtkMIl7LI": 0
-   }
-  },
-  {
-   "date": "2026-10-06",
-   "total_views": 110,
-   "videos": {
-    "_oF4dTUGy24": 4,
-    "TRY0QZfgjBE": 5,
-    "Iocf2nxJuOY": 7,
-    "UG4z7_XQkjM": 2,
-    "4tbBV--cTsI": 7,
-    "h4B5GXfmjLg": 0,
-    "kvFpuUEz8QA": 0,
-    "TnJJf_3-Zg8": 1,
-    "3ZR4l08XxyE": 2,
-    "Zjf7Ne2z_4U": 0,
-    "pSRPxXnyAZg": 0,
-    "Mir11YcoWAw": 0,
-    "WSM7pIy8kdE": 1,
-    "DA0tiB7QrlY": 1,
-    "DVAoVnK5FtA": 0,
-    "git-4p8E9xY": 0,
-    "fkFhtGfsx_0": 0,
-    "n_GOahvID_Y": 0,
-    "8m3PZ44NW2c": 0,
-    "k8PzqtNVynI": 0,
-    "GRna0qAiWEg": 0,
-    "BJrBRuMoosA": 0,
-    "Mw2D_4ot0G8": 0,
-    "HjkTdKjH49s": 0,
-    "L7DJ2Nu2uo8": 0,
-    "5wQ0wmS7GHQ": 0,
-    "ISod_uguaR8": 14,
-    "ElMNPkRma0Q": 3,
-    "ZwoNP3tA_zI": 0,
-    "aC8V7uEF1zA": 0,
-    "57GaUcN6Xfo": 0,
-    "4CsBqeLACzY": 2,
-    "8Dg8yh488N8": 1,
-    "HpRLqiAR7ks": 2,
-    "NEpaHpN_z2Y": 1,
-    "cPlgv-IXN-w": 0,
-    "qKXpRXZHuvs": 8,
-    "yr5iRQg5U3o": 3,
-    "4eYAQRFA3Uk": 4,
-    "xRVhNWoBfn4": 8,
-    "y_9VDnn9-7k": 2,
-    "pFsqkgWkXEA": 15,
-    "vhZWjuHPpws": 9,
-    "Q9rx7zBltoQ": 8,
-    "peGtkMIl7LI": 0
-   }
-  }
- ],
- "discovery": {
-  "playlist_id": "PLVWWhOwOS7x0",
-  "channel_branding": "2026-10-02"
- },
- "short_hashes": [
-  "c49a377dc9ba2361",
-  "6aab50920930beb8",
-  "40cf301a09627fe3",
-  "b8dcb31b2968da1d",
-  "190f728bef80bea1",
-  "62ca08e08677c2eb",
-  "90d103bb13b0e763",
-  "6cafd5a5f3c9e52c",
-  "9452363a05e4f3ea",
-  "f1fee8787bb55764",
-  "990eaebe95f6292b",
-  "1da3cbd9d5fbdb02",
-  "7e0addfae7a766b4",
-  "53d89332774044df",
-  "68dc20e1f0b7759f",
-  "1a1134dd247cf15a",
-  "fe34a34a66b84542",
-  "08b37a488e1e8fb6",
-  "b6d42a8a4da762b6",
-  "4a1e7d7187ddccbe"
- ],
- "last_run_ts": 1791301895,
- "slots": {
-  "long": [
-   "2026-10-04T20:00:00+03:00",
-   "2026-10-05T20:00:00+03:00",
-   "2026-10-06T20:00:00+03:00"
   ],
-  "short": [
-   "2026-10-05T00:00:00+03:00",
-   "2026-10-05T06:00:00+03:00",
-   "2026-10-05T12:00:00+03:00",
-   "2026-10-05T18:00:00+03:00",
-   "2026-10-06T00:00:00+03:00",
-   "2026-10-06T06:00:00+03:00",
-   "2026-10-06T12:00:00+03:00",
-   "2026-10-06T18:00:00+03:00",
-   "2026-10-07T00:00:00+03:00"
-  ]
- }
+  "last_run_ts": 1791301895,
+  "slots": {
+    "long": [
+      "2026-10-04T20:00:00+03:00",
+      "2026-10-05T20:00:00+03:00"
+    ],
+    "short": [
+      "2026-10-05T00:00:00+03:00",
+      "2026-10-05T06:00:00+03:00",
+      "2026-10-05T12:00:00+03:00",
+      "2026-10-05T18:00:00+03:00",
+      "2026-10-06T00:00:00+03:00",
+      "2026-10-06T06:00:00+03:00",
+      "2026-10-06T12:00:00+03:00",
+      "2026-10-06T18:00:00+03:00",
+      "2026-10-07T00:00:00+03:00"
+    ]
+  }
 }
