@@ -10,8 +10,9 @@ from __future__ import annotations
 
 import json
 import threading
-from datetime import date
+from datetime import date, datetime
 from pathlib import Path
+from zoneinfo import ZoneInfo
 
 from .config import cfg, ROOT
 
@@ -22,6 +23,19 @@ STATE_PATH = ROOT / "data" / "state.json"
 # can never pollute the real memory (the daily gate reads last_run —
 # a dry-run that stamped today would make the real cycle skip).
 _READ_ONLY = False
+
+# YouTube's quota window resets at midnight PACIFIC time, not UTC
+# midnight. A UTC-date ledger turns "fresh" seven hours early
+# (00:00-07:00 UTC): a morning run in that gap happily renders a
+# whole episode and only learns the truth from a 403. The ledger
+# must roll over exactly when YouTube's real window does.
+# (PST/EDT shifts are handled by the zone database automatically.)
+_PT = ZoneInfo("America/Los_Angeles")
+
+
+def _quota_today() -> str:
+    """The date YouTube's real quota window is currently in."""
+    return datetime.now(_PT).date().isoformat()
 
 
 def set_read_only(v: bool) -> None:
@@ -112,7 +126,15 @@ def mark_uploaded(state: dict, episode_n: int, kind: str, video_id: str,
                 # appear twice in the same episode's shorts
                 if video_id not in e["ids"]["shorts"]:
                     e["ids"]["shorts"].append(video_id)
-            e["status"] = "uploaded" if e["ids"]["long"] else e["status"]
+            # NOTE (Oct 7 hardening): the status is deliberately NOT
+            # touched here. Flipping to "uploaded" the moment the long
+            # lands silently stranded episodes whose shorts were still
+            # pending (quota died mid-shorts): the episode left the
+            # in_progress state, so neither the resume window nor the
+            # daily gate ever looked at it again — the missing shorts
+            # were lost with no trace. The ONLY terminal transition is
+            # the orchestrator's completeness flip (long + every short
+            # recorded). "uploaded" is kept for legacy records only.
             break
     spend_quota(state, units)
     save(state)
@@ -134,7 +156,7 @@ def mark_thumbnail(state: dict, episode_n: int, units: int = 0) -> None:
 
 def spend_quota(state: dict, units: int) -> None:
     q = state["quota"]
-    today = date.today().isoformat()
+    today = _quota_today()
     if q.get("date") != today:
         q["date"] = today
         q["units_used"] = 0
@@ -143,7 +165,6 @@ def spend_quota(state: dict, units: int) -> None:
 
 def quota_remaining(state: dict) -> int:
     q = state["quota"]
-    today = date.today().isoformat()
-    if q.get("date") != today:
+    if q.get("date") != _quota_today():
         return int(cfg()["daily"]["quota_budget"])
     return int(cfg()["daily"]["quota_budget"]) - int(q.get("units_used", 0))

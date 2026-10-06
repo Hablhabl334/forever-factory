@@ -85,21 +85,62 @@ def _remember_slot(state: dict, kind: str, slot: str | None) -> None:
     ledger.save(state)
 
 
+# An episode deferred by a dead quota window (or any multi-day
+# outage) must stay resumable for long enough to survive it — but
+# not forever: a doomed episode stuck in_progress would keep the
+# daily gate in RUN mode permanently (every slot re-attempts it,
+# new episodes never start). Five days covers the worst realistic
+# outage; after that the sweep concedes its missing uploads.
+RESUME_WINDOW_DAYS = 5
+
+
 def _resume_episode(state: dict, exclude: set[int] | None = None) -> tuple[int, int] | None:
     """Return (n, seed) for a recent in-progress episode, if any.
-    Window model: an episode from today OR yesterday can be resumed
-    (an evening cycle that crashed after midnight still completes).
+    Window model: an episode born in the last RESUME_WINDOW_DAYS
+    days can be resumed (an evening cycle that crashed after
+    midnight still completes; an upload deferred by a dead quota
+    window survives a multi-day outage).
     `exclude` = episode numbers already attempted THIS run (a
     multi-episode day must still advance past a deferred episode)."""
     from datetime import date, timedelta
-    recent = {date.today().isoformat(),
-              (date.today() - timedelta(days=1)).isoformat()}
+    today = date.today()
+    recent = {(today - timedelta(days=k)).isoformat()
+              for k in range(RESUME_WINDOW_DAYS)}
     exclude = exclude or set()
     for e in reversed(state.get("episodes", [])):
         if e.get("status") == "in_progress" and e.get("date") in recent \
                 and e["n"] not in exclude:
             return e["n"], e["seed"]
     return None
+
+
+def _abandon_stale_episodes(state: dict) -> int:
+    """Concede episodes that exceeded the resume window.
+
+    Without this, an episode that can never complete (a validation
+    change its body trips, a permanently broken upload) keeps the
+    factory stuck: the gate sees in_progress forever, so every
+    scheduled slot re-attempts the doomed episode and fresh episodes
+    never start — the channel stops producing. Closing it after five
+    full days of fair retries keeps the factory moving: the
+    uploaded ids stay recorded (live videos are never touched), only
+    the missing pieces are conceded, and the story hash stays in the
+    no-repeat bank so the content is never re-generated either."""
+    from datetime import date, timedelta
+    cutoff = (date.today() - timedelta(days=RESUME_WINDOW_DAYS)).isoformat()
+    n = 0
+    for e in state.get("episodes", []):
+        if e.get("status") == "in_progress" and (e.get("date") or "") < cutoff:
+            e["status"] = "abandoned"
+            ids = e.get("ids") or {}
+            print(f"[factory] ep{e['n']} ({e.get('date')}) exceeded the "
+                  f"{RESUME_WINDOW_DAYS}-day resume window — conceding its "
+                  f"missing uploads (long={'yes' if ids.get('long') else 'no'}, "
+                  f"{len(ids.get('shorts') or [])} uploaded short(s) stay live)")
+            n += 1
+    if n:
+        ledger.save(state)
+    return n
 
 
 def _ensure_clean(work: Path, out: Path, story: dict) -> None:
@@ -317,6 +358,13 @@ def run_daily(dry_run: bool = False, longs: int | None = None,
 def _run_daily_inner(dry_run: bool, longs: int | None,
                      only_episode: int | None) -> list[dict]:
     state = ledger.load()
+
+    # stale-episode sweep first: concede anything past the resume
+    # window so a doomed episode can never wedge the factory in
+    # permanent-RUN mode (also lets the day start a fresh episode
+    # in the same run that closes the stale one).
+    if not dry_run:
+        _abandon_stale_episodes(state)
 
     # self-healing pass first: thumbnails that failed earlier (e.g. the
     # channel was not yet verified) are rebuilt deterministically and

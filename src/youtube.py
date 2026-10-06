@@ -263,6 +263,53 @@ def _recorded_short_ids(state: dict, episode_n: int) -> set[str]:
     return set()
 
 
+def _duration_seconds(iso: str) -> float:
+    """ISO-8601 duration (PT1M9S, PT10M9S, P0D, PT59S...) to seconds.
+    A placeholder video left behind by an abandoned resumable-init
+    session reports P0D / PT0S — zero seconds."""
+    import re
+    m = re.fullmatch(
+        r"P(?:(\d+)D)?(?:T(?:(\d+)H)?(?:(\d+)M)?(?:(\d+(?:\.\d+)?)S)?)?",
+        (iso or "").strip())
+    if not m:
+        return 0.0
+    d, h, mi, s = (float(x) if x else 0.0 for x in m.groups())
+    return d * 86400 + h * 3600 + mi * 60 + s
+
+
+def _adoptable(token: str, video_id: str, min_seconds: float = 30.0) -> bool:
+    """A crash orphan must be a REAL video before it can be adopted.
+
+    Oct 6 lesson (ep16): an abandoned resumable-init session leaves a
+    zero-duration placeholder (P0D) on the channel, findable by exact
+    title — run #99 adopted one as the day's long and the real upload
+    was nearly lost to it. Verify contentDetails.duration first (one
+    videos.list, 1 quota unit, rare path). Under 30 s — or anything
+    unverifiable — is rejected: a fresh upload is strictly safer than
+    a broken adoption, and our real videos are 60 s+ by construction."""
+    try:
+        req = urllib.request.Request(
+            f"{API_BASE}/videos?part=contentDetails&id={video_id}",
+            headers={"Authorization": f"Bearer {token}"})
+        with urllib.request.urlopen(req, timeout=30) as resp:
+            items = json.loads(resp.read()).get("items", [])
+        if not items:
+            print(f"  [youtube] adoption candidate {video_id} not found "
+                  f"— ignoring")
+            return False
+        dur = _duration_seconds(
+            items[0].get("contentDetails", {}).get("duration", ""))
+        if dur < min_seconds:
+            print(f"  [youtube] title match {video_id} has duration "
+                  f"{dur:.0f}s (< {min_seconds:.0f}s) — not a real "
+                  f"video, ignoring the match")
+            return False
+        return True
+    except Exception:
+        print(f"  [youtube] could not verify {video_id} — not adopting")
+        return False
+
+
 def _set_thumbnail(token: str, video_id: str, thumb: Path) -> bool:
     data = thumb.read_bytes()
     print(f"  [youtube] setting thumbnail {thumb.name} "
@@ -325,10 +372,13 @@ def upload_video(filepath: Path, meta: dict, publish_at: str | None,
     if kind == "short":
         exclude |= _recorded_short_ids(state, episode_n)
     existing = _find_video_by_title(token, meta["title"], exclude=exclude)
-    if existing:
+    if existing and _adoptable(token, existing):
         print(f"  [youtube] {kind} already on channel ({existing}) — adopting, no re-upload")
         ledger.mark_uploaded(state, episode_n, kind, existing, 1)
         return existing
+    if existing:
+        print(f"  [youtube] ignoring unverified title match {existing} — "
+              f"uploading fresh")
 
     status = {
         "privacyStatus": "private",

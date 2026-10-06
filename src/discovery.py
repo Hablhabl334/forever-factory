@@ -249,6 +249,21 @@ def add_video_to_playlist(token: str, state: dict, playlist_id: str,
 def playlist_pass(token: str, state: dict) -> None:
     """Once a day, after the uploads: make sure every long video ever
     published is in the bedtime playlist."""
+    # invariant first: a playlist flag without a long id is stale —
+    # it was left behind when a bad adoption was undone by state
+    # surgery (Oct 6: ep16's placeholder long was deleted, the flag
+    # survived). Left in place, the flag would silently skip the
+    # episode's REAL long when it finally uploads.
+    healed = False
+    for e in state.get("episodes", []):
+        ids = e.get("ids") or {}
+        if ids.get("playlist") and not ids.get("long"):
+            ids.pop("playlist", None)
+            healed = True
+            print(f"[playlist] ep{e['n']}: stale playlist flag with no "
+                  f"long id — cleared (the real long will be added)")
+    if healed:
+        ledger.save(state)
     pid = ensure_playlist(token, state)
     if not pid:
         return
