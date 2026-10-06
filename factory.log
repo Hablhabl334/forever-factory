@@ -1,42 +1,8 @@
-Traceback (most recent call last):
-  File "/home/runner/work/forever-factory/forever-factory/src/orchestrator.py", line 448, in main
-    results = run_daily(dry_run=args.dry_run, longs=args.longs,
-              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/forever-factory/forever-factory/src/orchestrator.py", line 307, in run_daily
-    return _run_daily_inner(dry_run, longs, only_episode)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/forever-factory/forever-factory/src/orchestrator.py", line 397, in _run_daily_inner
-    result = produce_episode(story, n, dry_run, n_shorts, used_slots, state)
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/forever-factory/forever-factory/src/orchestrator.py", line 265, in produce_episode
-    long_id = youtube.upload_video(final, long_meta, long_slot, episode_n, "long", state)
-              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/forever-factory/forever-factory/src/youtube.py", line 352, in upload_video
-    video_id = _upload_video(token, filepath, meta, status)
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/forever-factory/forever-factory/src/youtube.py", line 138, in _upload_video
-    raise RuntimeError(f"upload init failed ({status_code}): {raw.decode()[:400]}")
-RuntimeError: upload init failed (400): {
-  "error": {
-    "code": 400,
-    "message": "The request metadata specifies invalid video keywords.",
-    "errors": [
-      {
-        "message": "The request metadata specifies invalid video keywords.",
-        "domain": "youtube.video",
-        "reason": "invalidTags",
-        "location": "body.snippet.tags",
-        "locationType": "other"
-      }
-    ]
-  }
-}
-
 [stats] growth report 2026-10-06
-[stats]   total: 104 views  (+0 since last report)
+[stats]   total: 110 views  (+6 since last report)
 [stats]       15 views  ·  Subscribe for more tips like this #psychology #relationship 
 [stats]       14 views  ·  Subscribe for more tips like this
-[stats]        8 views  ·  Subscribe for more tips like this
+[stats]        9 views  ·  Subscribe for more tips like this #psychology #relationship 
 [16] script: Green Flags Everyone Misses (1179 words, hash c287cabb25)
   [voice] neural narration: 131 chunks (en-US-JennyNeural)
   [voice] polished: presence EQ + gentle compression
@@ -55,3 +21,10 @@ RuntimeError: upload init failed (400): {
   [voice] polished: presence EQ + gentle compression
   [short 4] 77s, 18 cards, 6.8MB
 [16] thumbnail + 4 shorts ready
+  [youtube] long already on channel (YDaZ_dRb5_8) — adopting, no re-upload
+  [youtube] uploaded short: EYP4N0ZEMNo (publishAt 2026-10-07T00:00:00+03:00)
+  [quota] YouTube quota hit during short upload — deferring
+[playlist] 1 long video(s) not in the playlist yet
+[playlist] ep16 long added (YDaZ_dRb5_8)
+  ✓ episode 16: Green Flags Everyone Misses
+combination space: 273,301,428,924,195,840 stories — the factory never repeats
