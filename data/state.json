@@ -303,6 +303,29 @@
     "b6d42a8a4da762b6",
     "4a1e7d7187ddccbe"
    ]
+  },
+  {
+   "n": 17,
+   "title": "Attachment Styles, Finally Explained",
+   "hash": "de21d94bb226e033",
+   "seed": 38472387637236,
+   "date": "2026-10-07",
+   "status": "in_progress",
+   "ids": {
+    "long": "cPHiDsx-92g",
+    "shorts": [
+     "ITMeCzxJV8I"
+    ],
+    "thumbnail": "2026-10-07"
+   },
+   "shashes": [
+    "e091557961f5659b",
+    "72fa7f49ad1033c9",
+    "8cef541fdffd57c7",
+    "a996869a7a4aa795",
+    "a344b9ece143cd37",
+    "9dd1cee908753d10"
+   ]
   }
  ],
  "story_hashes": [
@@ -321,15 +344,16 @@
   "9185c66e7d217e6a",
   "9e3d4429c2c2bcd0",
   "2cc70ea571df3f01",
-  "c287cabb25fc2366"
+  "c287cabb25fc2366",
+  "de21d94bb226e033"
  ],
  "quota": {
   "date": "2026-10-07",
-  "units_used": 6661
+  "units_used": 9966
  },
  "last_run": "2026-10-07",
  "stats": {
-  "videos_published": 50,
+  "videos_published": 52,
   "days_active": 12
  },
  "_last_days_active": "2026-10-07",
@@ -1208,6 +1232,62 @@
     "peGtkMIl7LI": 29,
     "EYP4N0ZEMNo": 31
    }
+  },
+  {
+   "date": "2026-10-07",
+   "total_views": 199,
+   "videos": {
+    "_oF4dTUGy24": 4,
+    "TRY0QZfgjBE": 5,
+    "Iocf2nxJuOY": 7,
+    "UG4z7_XQkjM": 2,
+    "4tbBV--cTsI": 7,
+    "h4B5GXfmjLg": 0,
+    "kvFpuUEz8QA": 0,
+    "TnJJf_3-Zg8": 1,
+    "3ZR4l08XxyE": 2,
+    "Zjf7Ne2z_4U": 0,
+    "pSRPxXnyAZg": 0,
+    "Mir11YcoWAw": 0,
+    "WSM7pIy8kdE": 1,
+    "DA0tiB7QrlY": 1,
+    "DVAoVnK5FtA": 0,
+    "git-4p8E9xY": 0,
+    "fkFhtGfsx_0": 0,
+    "n_GOahvID_Y": 0,
+    "8m3PZ44NW2c": 0,
+    "k8PzqtNVynI": 0,
+    "GRna0qAiWEg": 0,
+    "BJrBRuMoosA": 0,
+    "Mw2D_4ot0G8": 0,
+    "HjkTdKjH49s": 0,
+    "L7DJ2Nu2uo8": 0,
+    "5wQ0wmS7GHQ": 0,
+    "ISod_uguaR8": 14,
+    "ElMNPkRma0Q": 3,
+    "ZwoNP3tA_zI": 0,
+    "aC8V7uEF1zA": 0,
+    "57GaUcN6Xfo": 0,
+    "4CsBqeLACzY": 2,
+    "8Dg8yh488N8": 1,
+    "HpRLqiAR7ks": 1,
+    "NEpaHpN_z2Y": 1,
+    "cPlgv-IXN-w": 1,
+    "qKXpRXZHuvs": 8,
+    "yr5iRQg5U3o": 3,
+    "4eYAQRFA3Uk": 5,
+    "xRVhNWoBfn4": 8,
+    "y_9VDnn9-7k": 2,
+    "pFsqkgWkXEA": 23,
+    "vhZWjuHPpws": 20,
+    "Q9rx7zBltoQ": 17,
+    "peGtkMIl7LI": 29,
+    "wuDMgIJeUMw": 0,
+    "EYP4N0ZEMNo": 31,
+    "jOebUbltVQI": 0,
+    "7KhHlXIUN7k": 0,
+    "Xe0be2KbpWE": 0
+   }
   }
  ],
  "discovery": {
@@ -1234,22 +1314,29 @@
   "fe34a34a66b84542",
   "08b37a488e1e8fb6",
   "b6d42a8a4da762b6",
-  "4a1e7d7187ddccbe"
+  "4a1e7d7187ddccbe",
+  "e091557961f5659b",
+  "72fa7f49ad1033c9",
+  "8cef541fdffd57c7",
+  "a996869a7a4aa795",
+  "a344b9ece143cd37",
+  "9dd1cee908753d10"
  ],
- "last_run_ts": 1791402330,
+ "last_run_ts": 1791414146,
  "slots": {
   "long": [
-   "2026-10-08T20:00:00+03:00"
+   "2026-10-08T20:00:00+03:00",
+   "2026-10-09T20:00:00+03:00"
   ],
   "short": [
-   "2026-10-06T00:00:00+03:00",
    "2026-10-06T06:00:00+03:00",
    "2026-10-06T12:00:00+03:00",
    "2026-10-06T18:00:00+03:00",
    "2026-10-07T00:00:00+03:00",
    "2026-10-08T00:00:00+03:00",
    "2026-10-08T06:00:00+03:00",
-   "2026-10-08T12:00:00+03:00"
+   "2026-10-08T12:00:00+03:00",
+   "2026-10-08T18:00:00+03:00"
   ]
  }
 }
