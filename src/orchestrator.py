@@ -334,8 +334,13 @@ def produce_episode(story: dict, episode_n: int, dry_run: bool,
             _remember_slot(state, "short", short_slot)
         recorded_shorts.append(sid)  # a re-run skips this one next time
 
+    # honest result: a deferred day must NEVER look like a produced one
+    # (Oct 7: the log printed "✓ episode 16" after two quota deferrals —
+    # a reader could not tell success from "nothing published today")
+    deferred = long_id is None or len(recorded_shorts) < len(short_files)
     return {"episode": episode_n, "title": story["title"], "long_id": long_id,
-            "long_seconds": dur, "shorts": len(short_files)}
+            "long_seconds": dur, "shorts": len(short_files),
+            "deferred": deferred}
 
 
 def run_daily(dry_run: bool = False, longs: int | None = None,
@@ -365,6 +370,25 @@ def _run_daily_inner(dry_run: bool, longs: int | None,
     # in the same run that closes the stale one).
     if not dry_run:
         _abandon_stale_episodes(state)
+
+    # server-side quota back-off: YouTube itself refused an upload
+    # recently (stamped by the upload layer with the real reason).
+    # Running now would re-render the whole episode against the same
+    # dead window — Oct 7 burned three 10-minute renders that way
+    # before anyone could see why. Hold production until the marker
+    # expires; slots after it resume the episode in place.
+    if not dry_run:
+        import time as _time
+        q = state.get("quota") or {}
+        defer_until = q.get("defer_until") or 0
+        if defer_until > _time.time():
+            from datetime import datetime, timezone
+            until = datetime.fromtimestamp(defer_until, timezone.utc)
+            print(f"[quota] server-side {q.get('defer_reason', 'quota')} "
+                  f"defer active until {until:%Y-%m-%d %H:%M} UTC — "
+                  f"holding production; the next slot after that "
+                  f"resumes the episode in place")
+            return []
 
     # self-healing pass first: thumbnails that failed earlier (e.g. the
     # channel was not yet verified) are rebuilt deterministically and
@@ -516,7 +540,13 @@ def main() -> int:
         results = run_daily(dry_run=args.dry_run, longs=args.longs,
                             only_episode=args.episode)
         for r in results:
-            print(f"  ✓ episode {r['episode']}: {r['title']}")
+            if r.get("dry_run"):
+                print(f"  - episode {r['episode']}: {r['title']} (dry-run)")
+            elif r.get("deferred"):
+                print(f"  ! episode {r['episode']}: {r['title']} — uploads "
+                      f"deferred (quota); the next cycle resumes it")
+            else:
+                print(f"  ✓ episode {r['episode']}: {r['title']}")
         print(f"combination space: {combination_space():,} stories — "
               f"the factory never repeats")
         return 0

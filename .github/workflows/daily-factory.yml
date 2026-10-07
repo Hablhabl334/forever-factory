@@ -104,7 +104,15 @@ jobs:
 
       - name: Ensure ffmpeg
         run: |
-          which ffmpeg || (sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg)
+          if ! which ffmpeg; then
+            # Oct 7 19:00 UTC run: apt stalled for 25+ minutes on a
+            # slow mirror and would have burned the full 120-min job
+            # timeout. Fail fast instead — the alert fires, the next
+            # slot retries on a fresh runner. (A normal install is
+            # ~60-90s; these budgets are generous by comparison.)
+            sudo timeout 300 apt-get update -qq
+            sudo timeout 480 apt-get install -y -qq ffmpeg
+          fi
 
       - name: Install dependencies
         run: |
@@ -123,6 +131,10 @@ jobs:
           MODE=""
           if [ "${{ inputs.backfill_only }}" = "true" ]; then MODE="--backfill-thumbs"; fi
           python main.py $DRY $MODE 2>&1 | tee factory.log
+          # a deferred day must be visible in the run summary too
+          if grep -q 'uploads deferred' factory.log; then
+            echo "::warning::this cycle deferred its uploads (quota) — see factory.log"
+          fi
 
       - name: Commit the factory memory
         if: always()
@@ -133,7 +145,8 @@ jobs:
           if git diff --cached --quiet; then
             echo "nothing new to remember"
           else
-            git commit -m "factory memory: $(date -u +%F) cycle"
+            NOTE=$(python3 tools/defer_note.py 2>/dev/null || true)
+            git commit -m "factory memory: $(date -u +%F) cycle${NOTE}"
             # The remote may have advanced while this run was rendering
             # (manual pushes, web edits). Rebase first so the memory
             # commit always lands cleanly — never a non-fast-forward.
@@ -155,6 +168,14 @@ jobs:
         if: failure()
         run: |
           TITLE="Factory cycle failed — $(date -u +%F)"
+          # One issue per failure-day, not one per retry slot: a bad
+          # evening can fire many slots and issue-spam hides the real
+          # signal. The next run's comment/run link still tells the story.
+          DUPES=$(gh issue list --state open --search "in:title \"$TITLE\"" --json number --jq 'length' 2>/dev/null || echo 0)
+          if [ "$DUPES" != "0" ]; then
+            echo "an open failure issue for today already exists — not filing a duplicate"
+            exit 0
+          fi
           BODY=$(printf 'The daily run failed. Logs are committed as factory.log.\n\nThe next scheduled run retries automatically (episodes resume).\n\nSee the run: %s/actions/runs/%s\n\n- auto-filed by the factory' "$GITHUB_SERVER_URL/$GITHUB_REPOSITORY" "$GITHUB_RUN_ID")
           gh issue create --title "$TITLE" --body "$BODY" || true
         env:

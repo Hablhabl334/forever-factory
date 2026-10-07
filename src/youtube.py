@@ -37,6 +37,63 @@ CHUNK = 8 * 1024 * 1024  # 8 MB resumable chunks
 UPLOAD_UNITS = 1600
 THUMB_UNITS = 50
 
+# ── server-side quota classification ───────────────────────────────
+# YouTube's "no" comes in several shapes, and the old catch-all
+# ("quota" OR "exceeded" anywhere in the body → silently defer the
+# day) could not tell them apart. Oct 7: the midday runs deferred with
+# no logged reason — nobody could tell quotaExceeded (waits for the
+# Pacific reset) from uploadLimitExceeded (a rolling 24h upload count
+# from the Oct 6 diagnostics' 10-video burst) from a permanent error
+# that must NEVER be deferred (file size, metadata limits...). Only
+# the true quota family defers; everything else fails loudly so the
+# alert issue fires and a human sees the real body.
+QUOTA_DAY_REASONS = ("quotaExceeded", "dailyLimitExceeded")
+QUOTA_ROLLING_REASONS = ("uploadLimitExceeded",)
+
+
+def _error_reason(msg: str) -> str:
+    """YouTube's machine-readable reason from a raw error body
+    (quotaExceeded, invalidTags, uploadLimitExceeded, ...), or ''."""
+    import re
+    m = re.search(r'"reason"\s*:\s*"([^"]+)"', msg or "")
+    return m.group(1).strip() if m else ""
+
+
+def _hours_to_pacific_midnight() -> float:
+    """Hours until YouTube's quota window rolls (midnight Pacific),
+    plus a small buffer so a slot fired at midnight+epsilon never
+    beats the actual reset."""
+    from zoneinfo import ZoneInfo
+    pt = ZoneInfo("America/Los_Angeles")
+    now = datetime.now(pt)
+    tomorrow = (now + timedelta(days=1)).date()
+    midnight = datetime(tomorrow.year, tomorrow.month, tomorrow.day,
+                        tzinfo=pt)
+    return max((midnight - now).total_seconds() / 3600.0 + 0.05, 0.05)
+
+
+def _mark_server_defer(state: dict, reason: str, hours: float) -> None:
+    """Stamp a server-side quota rejection into the ledger so (a) the
+    gate can SKIP the retry slots — each would re-render the whole
+    episode against the same dead window (Oct 7 burned three
+    10-minute renders that way) — and (b) any human reading
+    state.json sees the deferral trail. Time-based: self-expires,
+    never needs cleanup; cleared the moment an upload succeeds."""
+    q = state.setdefault("quota", {})
+    q["defer_reason"] = reason
+    q["defer_until"] = int(time.time() + hours * 3600)
+    ledger.save(state)
+
+
+def _clear_server_defer(state: dict) -> None:
+    """The defer marker only ever says 'wait'; once any upload lands
+    the window is alive again — clear it so the gate stops skipping."""
+    q = state.get("quota") or {}
+    if "defer_until" in q or "defer_reason" in q:
+        q.pop("defer_until", None)
+        q.pop("defer_reason", None)
+        ledger.save(state)
+
 
 class AuthError(RuntimeError):
     pass
@@ -124,7 +181,7 @@ def next_slot(kind: str, used: set[str] | None = None) -> str | None:
 # ── resumable upload ─────────────────────────────────────────────────
 
 def _upload_video(token: str, filepath: Path, meta: dict, status: dict,
-                  max_retries: int = 4) -> str:
+                  max_retries: int = 4, state: dict | None = None) -> str:
     body = {"snippet": meta, "status": status}
     init_headers = {
         "Authorization": f"Bearer {token}",
@@ -175,6 +232,10 @@ def _upload_video(token: str, filepath: Path, meta: dict, status: dict,
             vid = json.loads(body or b"{}").get("id")
             if not vid:
                 vid = _poll_video_id(token)
+                if vid and state is not None:
+                    # search.list costs 100 units — keep the ledger honest
+                    ledger.spend_quota(state, 100)
+                    ledger.save(state)
             return vid
     raise RuntimeError("upload ended without completion response")
 
@@ -372,9 +433,14 @@ def upload_video(filepath: Path, meta: dict, publish_at: str | None,
     if kind == "short":
         exclude |= _recorded_short_ids(state, episode_n)
     existing = _find_video_by_title(token, meta["title"], exclude=exclude)
+    # the title search is 2 real units (channels.list +
+    # playlistItems.list) — ledger them so the local estimate keeps
+    # tracking the server-side truth instead of silently under-counting
+    ledger.spend_quota(state, 2)
+    ledger.save(state)
     if existing and _adoptable(token, existing):
         print(f"  [youtube] {kind} already on channel ({existing}) — adopting, no re-upload")
-        ledger.mark_uploaded(state, episode_n, kind, existing, 1)
+        ledger.mark_uploaded(state, episode_n, kind, existing, 0)
         return existing
     if existing:
         print(f"  [youtube] ignoring unverified title match {existing} — "
@@ -411,31 +477,73 @@ def upload_video(filepath: Path, meta: dict, publish_at: str | None,
         meta_variants.append({k: v for k, v in meta.items() if k != "tags"})
 
     video_id = None
+    synthetic_retried = False
+    rate_waited = False
     for variant in meta_variants:
-        try:
-            video_id = _upload_video(token, filepath, variant, status)
+        while True:
+            try:
+                video_id = _upload_video(token, filepath, variant, status,
+                                         state=state)
+                break
+            except RuntimeError as e:
+                msg = str(e)
+                reason = _error_reason(msg)
+                if "containsSyntheticMedia" in msg and not synthetic_retried:
+                    # legacy-API fallback: drop the disclosure field once
+                    synthetic_retried = True
+                    status.pop("containsSyntheticMedia", None)
+                    token = get_access_token()
+                    continue
+                if reason == "invalidTags" and variant is not meta_variants[-1]:
+                    print("  [youtube] tags rejected (invalidTags) — "
+                          "retrying without tags")
+                    break  # next variant (the tags-less one)
+                if reason == "rateLimitExceeded" and not rate_waited:
+                    # per-100-seconds throttle: transient. Wait it out and
+                    # retry the SAME variant once before deciding anything.
+                    rate_waited = True
+                    print("  [quota] rateLimitExceeded — transient, "
+                          "waiting 90s and retrying once")
+                    time.sleep(90)
+                    continue
+                if reason in QUOTA_DAY_REASONS:
+                    # The daily window is dead SERVER-side. The local
+                    # ledger is only an estimate — real usage can outrun
+                    # it (the Oct 6 diagnostics spent ~14k real units it
+                    # never ledgered, so on Oct 7 the ledger said
+                    # 2/10000 while YouTube still said no). Defer to the
+                    # next Pacific reset — the episode stays in_progress
+                    # and resumes, adopted, never duplicated.
+                    hours = _hours_to_pacific_midnight()
+                    print(f"  [quota] {reason}: server-side daily quota "
+                          f"exhausted — deferring {hours:.1f}h to the "
+                          f"Pacific reset; raw body: {msg[:200]}")
+                    _mark_server_defer(state, reason, hours)
+                    return None
+                if reason in QUOTA_ROLLING_REASONS:
+                    # Rolling 24-hour upload-count limit — clears as the
+                    # old uploads age out of the window, NOT at midnight.
+                    # (Oct 7 12:01 UTC midday runs: the Oct 6 diagnostics'
+                    # 10-video burst was still inside the window.)
+                    print(f"  [quota] {reason}: rolling 24h upload count "
+                          f"is full — deferring 2h; raw body: {msg[:200]}")
+                    _mark_server_defer(state, reason, 2.0)
+                    return None
+                if "quota" in msg.lower() or "exceeded" in msg.lower() \
+                        or reason == "rateLimitExceeded":
+                    # An exceeded-shaped error we do NOT recognize (or a
+                    # rate limit that survived its retry). A silent defer
+                    # here could mask a permanent problem — file size,
+                    # metadata limits, account standing — and the channel
+                    # would quietly stop publishing forever. Fail loudly
+                    # instead: the alert issue fires, the next slot
+                    # retries, and the real body lands in factory.log.
+                    raise RuntimeError(
+                        "unrecognized quota/exceeded-family error — NOT "
+                        f"deferring (reason={reason!r}): {msg[:400]}") from e
+                raise
+        if video_id:
             break
-        except RuntimeError as e:
-            msg = str(e)
-            if "containsSyntheticMedia" in msg:
-                status.pop("containsSyntheticMedia", None)
-                token = get_access_token()
-                try:
-                    video_id = _upload_video(token, filepath, variant, status)
-                    break
-                except RuntimeError as e2:
-                    e, msg = e2, str(e2)
-            if "quota" in msg.lower() or "exceeded" in msg.lower():
-                # YouTube's real (server-side) quota says stop — defer to
-                # tomorrow instead of failing the day. The episode stays
-                # in_progress and resumes (adopted, never duplicated).
-                print(f"  [quota] YouTube quota hit during {kind} upload — deferring")
-                return None
-            if "invalidTags" in msg and variant is not meta_variants[-1]:
-                print("  [youtube] tags rejected (invalidTags) — "
-                      "retrying without tags")
-                continue
-            raise
     print(f"  [youtube] uploaded {kind}: {video_id} "
           f"(publishAt {publish_at or 'now'})")
 
@@ -452,6 +560,7 @@ def upload_video(filepath: Path, meta: dict, publish_at: str | None,
                   "backfill retries until the channel is verified)")
 
     ledger.mark_uploaded(state, episode_n, kind, video_id, need)
+    _clear_server_defer(state)   # the window is alive again
     state["stats"]["videos_published"] = state["stats"].get("videos_published", 0) + 1
     ledger.save(state)
     return video_id

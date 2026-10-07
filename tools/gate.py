@@ -47,12 +47,23 @@ def main() -> int:
         print("RUN")
         return 0
 
-    state = {"last_run": None, "episodes": []}
+    state = {"last_run": None, "episodes": [], "quota": {}}
     if STATE.exists():
         try:
             state = json.loads(STATE.read_text())
         except json.JSONDecodeError:
             pass
+
+    # server-side quota back-off (stamped by the upload layer when
+    # YouTube itself refused an upload, with the real reason). Retry
+    # slots before the window clears would just re-render the whole
+    # episode against the same dead wall — skip them cheaply.
+    q = state.get("quota") or {}
+    defer_until = q.get("defer_until") or 0
+    if defer_until > time.time():
+        print(f"SKIP  # server-side {q.get('defer_reason', 'quota')} defer "
+              f"until {time.strftime('%Y-%m-%d %H:%M UTC', time.gmtime(defer_until))}")
+        return 0
 
     # last successful cycle -> epoch seconds. Records written by the
     # window system carry last_run_ts; legacy date-only records are
