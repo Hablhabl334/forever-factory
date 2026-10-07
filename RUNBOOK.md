@@ -311,3 +311,58 @@ All knobs: `channel.yaml → voice:`.
 
 Schedules, quota math, upload logic, the forever clock: untouched.
 Same machine, finally breathing.
+
+---
+
+## Part 10 — The self-healing grid (2026-10-08, owner request)
+
+**The contract**: every day, 4 Shorts go public at 00:00 / 06:00 /
+12:00 / 18:00 Cairo and 1 long video at 20:00. Those public times
+never move. What may move is when the machine *runs* — the owner
+explicitly okayed that.
+
+**The Oct 8 lesson** (why this exists): the Oct 6–7 quota failures
+left episode 16 with one short already public and three still owed.
+The recovery run booked those three into Oct 8's 00/06/12 slots — and
+Oct 8's 18:00 slot stayed **empty**: the only run that could claim it
+had to fire before 18:00, and the 20-hour gate window made every
+pre-evening slot SKIP. The channel published 3 shorts that day and
+nothing in the machine noticed. Three fixes, all pushed together:
+
+1. **The gate watches the grid, not just the clock**
+   (`tools/gate.py`). A publish slot that is still in the future,
+   still unbooked, and expires *before* the next 22:00 Cairo cycle
+   point is a **hole** — no future run can ever claim it. Any
+   trigger that sees a hole fires: the morning/midday recovery slots
+   and the watchdog beats now actually heal instead of SKIPping.
+   Slots closer than ~40 minutes are already lost (the render takes
+   that long) — they are not chased.
+
+2. **A cycle books what the grid owes, not a fixed 4**
+   (`src/youtube.py: free_slots`, `src/orchestrator.py`). The cycle
+   counts every free short slot in the next 24h (holes first — they
+   expire soonest) and produces that many shorts, up to 6 per
+   episode (`story_engine.N_SHORTS`). A normal evening still books
+   exactly 4; a heal day can carry 5–6. `shorts: count: 4` in
+   channel.yaml remains the daily *contract* — the healing headroom
+   is automatic and temporary.
+
+3. **Partial quota is productive** (`src/orchestrator.py`). The old
+   all-or-nothing gate ("need 8050 units or defer everything")
+   refused to start a heal run that had 3339 units left — enough for
+   the long plus a short. Now a cycle runs whenever the long (1600 +
+   50) fits; each upload checks the remaining budget itself and
+   defers only what does not fit. The deferred episode stays
+   in_progress and the next trigger resumes it into the next free
+   slot. A tight day lands 2–3 videos instead of 0.
+
+**Steady state is unchanged**: the evening cycle (22:00 Cairo, plus
+the pinger and the backup ring) books tomorrow's full grid, the
+morning slots SKIP cheaply, and the 20h window still prevents double
+production. The grid-hole rule only fires when the machine actually
+owes the channel a slot that nothing else will fill.
+
+**Known cosmetic edge**: at Egypt's DST flip (late October) a slot
+booked before the switch publishes at the old instant (one hour off)
+once; the next day self-corrects. Not engineered around — the
+6-hour cadence never breaks.

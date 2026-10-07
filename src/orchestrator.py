@@ -5,9 +5,11 @@ work begins, and every stage (story, art, narration, clips, shorts,
 metadata, upload) skips whatever is already done. A run that dies
 mid-render loses nothing; the next run completes the same episode.
 
-Daily output (default): 2 brand-new original bedtime stories (~12 min
-each) + 3 Shorts auto-cut from them, uploaded once and publishAt-
-scheduled into Cairo peak slots. Total YouTube quota: 8,100 of 10,000.
+Daily output (default): 1 long-form video + 4 Shorts, uploaded once
+and publishAt-scheduled into the Cairo grid (a short every 6h, the
+long at 20:00). When a previous day failed partway, the cycle heals
+the grid: it books every free slot in the next 24h (up to 6 shorts),
+so a missed evening costs hours, not days.
 """
 from __future__ import annotations
 
@@ -20,7 +22,7 @@ from pathlib import Path
 from . import art_engine, discovery, ledger, render, shorts as shorts_mod, \
     thumbnails, tts, youtube
 from .config import cfg, ROOT
-from .story_engine import generate_story, combination_space
+from .story_engine import generate_story, combination_space, N_SHORTS
 
 WORK_ROOT = ROOT / "work"
 OUT_ROOT = ROOT / "out"
@@ -405,20 +407,40 @@ def _run_daily_inner(dry_run: bool, longs: int | None,
         discovery.morning_report(state)
 
     target = int(longs or cfg()["daily"]["long_videos"])
-    total_shorts = int(cfg()["shorts"]["count"])
     results: list[dict] = []
 
-    # quota gate for the whole day
+    # quota gate for the day — PARTIAL production is welcome. The old
+    # all-or-nothing gate ("need 8050 or defer everything") refused to
+    # start a heal run that had 3339 units left, even though the long +
+    # a short fit comfortably — Oct 8 lost its 18:00 slot to that
+    # number. Now: run whenever the long (with its thumbnail) fits;
+    # the per-upload layer defers whatever else does not fit, the
+    # episode stays in_progress, and the next slot resumes it into the
+    # next free grid slot. Nothing is wasted, nothing is over-spent.
     if not dry_run:
         remaining = ledger.quota_remaining(state)
-        need = target * (youtube.UPLOAD_UNITS + youtube.THUMB_UNITS) + \
-               total_shorts * youtube.UPLOAD_UNITS
-        if remaining < need:
-            print(f"[quota] only {remaining} units left (need {need}) — "
-                  f"deferring today's uploads")
+        min_need = target * (youtube.UPLOAD_UNITS + youtube.THUMB_UNITS)
+        if remaining < min_need:
+            print(f"[quota] only {remaining} units left — cannot even land "
+                  f"the long (need {min_need}) — deferring today's uploads")
             return results
 
     used_slots = _load_slots(state)
+
+    # How many Shorts to produce this cycle: every FREE grid slot in
+    # the next 24h, capped at the specs a story carries (6). A normal
+    # evening cycle sees exactly tomorrow's 4 slots; a heal cycle
+    # after a failed day sees today's holes first (they expire
+    # soonest) plus tomorrow's early grid — the Oct 8 lesson: ep16's
+    # resume booked 3 shorts into 00/06/12 and left 18:00 empty
+    # forever, because the episode only had 4 shorts and the grid
+    # needed a 5th that day. Booking by FREE slots (not a fixed 4)
+    # makes the machine match the grid the channel actually owes.
+    free_short_slots = youtube.free_slots("short", used_slots["short"])
+    total_shorts = max(0, min(N_SHORTS, len(free_short_slots)))
+    if total_shorts != int(cfg()["shorts"]["count"]):
+        print(f"[grid] booking {total_shorts} short slot(s) in the next 24h "
+              f"(free: {', '.join(free_short_slots) or 'none'})")
     made = 0
     attempted: set[int] = set()
     while made < target:

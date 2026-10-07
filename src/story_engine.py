@@ -34,7 +34,16 @@ from .content_variants import (DAYS, NAMES, PLACES, TIMES, TOPIC_MOODS,
 from .rng import FactoryRNG
 
 N_SEGMENTS = 8          # concepts per long video
-N_SHORTS = 4            # shorts per day (drawn from the day's segments)
+# Shorts SPEC capacity per story. The daily grid needs 4, but a heal
+# day (a failed cycle left holes) needs up to 5-6 to refill every
+# free slot in the next 24h — the orchestrator slices what the grid
+# owes, this is only the ceiling. The extra specs' hashes join the
+# no-repeat bank even when unsliced (the shorts space is ~10^15 —
+# no practical depletion). NOTE: deterministic replay of PRE-ep17
+# stories (thumbnail backfill) uses the 4-spec draw sequence and
+# will not replay under 6 — harmless: every existing long already
+# has its thumbnail set; future episodes replay consistently.
+N_SHORTS = 6
 MAX_ATTEMPTS = 8        # audit-gate regeneration attempts
 
 # audit: medical / manipulative framing must never appear.

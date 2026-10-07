@@ -18,11 +18,15 @@ channel:
 schedule:                           # publishAt slots (Africa/Cairo)
   timezone: "Africa/Cairo"
   # The 6-hour shorts grid: a Short goes public every 6 hours, exactly.
+  # PUBLIC TIMES — the owner's contract; do not move these. When the
+  # machine runs is flexible; when the channel publishes is not.
   short_slots: ["00:00", "06:00", "12:00", "18:00"]
   # The one long-form video of the day, evening prime time.
   long_slots: ["20:00"]
   # The cycle runs at 22:00 Cairo (19:00 UTC) — two hours before the
   # first Short of the new day goes public at midnight.
+  # tools/gate.py freezes a copy of this grid (it runs before pip
+  # install, so it cannot read YAML) — keep the two in sync.
 
 # Discoverability — shorts carry a FIXED title (the subscription funnel);
 # longs are search-first; the playlist is the binge loop.

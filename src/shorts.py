@@ -110,7 +110,9 @@ def _mix_audio(short_work: Path, narration: dict, seed: int,
 
 
 def render_shorts(story: dict, work_dir: Path, out_dir: Path) -> list[Path]:
-    """Render the day's 4 native shorts. Idempotent per short."""
+    """Render the episode's native shorts (up to the 6 specs the story
+    carries; the orchestrator slices what the grid owes). Idempotent
+    per short."""
     from .render import MOTIONS
 
     work_dir.mkdir(parents=True, exist_ok=True)

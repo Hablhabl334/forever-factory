@@ -178,6 +178,39 @@ def next_slot(kind: str, used: set[str] | None = None) -> str | None:
     return None  # grid exhausted (never, with a 3-day scan) — publish now
 
 
+def free_slots(kind: str, used: set[str] | None = None,
+               hours: float = 24.0) -> list[str]:
+    """Every grid slot of `kind` in (now+25min, now+hours] not booked yet.
+
+    This is what a cycle is RESPONSIBLE for filling: the holes a failed
+    day left behind (a heal run books them first — they expire soonest)
+    and then the upcoming grid. A normal evening cycle sees exactly
+    tomorrow's 4 short slots; a morning heal run sees today's remaining
+    unbooked slots plus tomorrow's early ones. Return order is
+    chronological, so handing them out one by one (next_slot) fills
+    the soonest-expiring slot first — the correct priority under
+    recovery.
+    """
+    from datetime import timedelta
+    from zoneinfo import ZoneInfo
+
+    tz = ZoneInfo(cfg()["schedule"]["timezone"])
+    slots = cfg()["schedule"][f"{kind}_slots"]
+    used = used or set()
+    now = datetime.now(tz)
+    horizon = now + timedelta(hours=hours)
+    out: list[str] = []
+    for day_offset in (0, 1, 2):
+        base = (now + timedelta(days=day_offset)).date()
+        for hhmm in slots:
+            hh, mm = map(int, hhmm.split(":"))
+            slot_dt = datetime(base.year, base.month, base.day, hh, mm, tzinfo=tz)
+            if now + timedelta(minutes=25) < slot_dt <= horizon and \
+                    slot_dt.isoformat() not in used:
+                out.append(slot_dt.isoformat())
+    return out
+
+
 # ── resumable upload ─────────────────────────────────────────────────
 
 def _upload_video(token: str, filepath: Path, meta: dict, status: dict,
