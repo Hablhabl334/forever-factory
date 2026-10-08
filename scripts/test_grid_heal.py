@@ -199,9 +199,9 @@ for n_free, want in ((0, 0), (2, 2), (4, 4), (5, 5), (9, 6)):
           max(0, min(N_SHORTS, n_free)), want)
 
 
-# ── 4. live state: the real Oct 8 hole ───────────────────────────────
+# ── 4. live state: the real data/state.json ──────────────────────────
 
-print("\n[4] live gate verdict against the real data/state.json")
+print("\n[4] live gate smoke against the real data/state.json")
 
 import subprocess  # noqa: E402
 
@@ -211,8 +211,15 @@ r = subprocess.run(
     capture_output=True, text=True, cwd=ROOT)
 verdict = r.stdout.strip()
 print(f"       {verdict}")
-check("live gate says RUN (the 18:00 hole is real)", verdict.startswith("RUN"), True)
-check("live gate names the hole", "18:00" in verdict, True)
+# Date-agnostic (2026-10-08 hardening): the Oct 8 hole this test
+# originally asserted was healed the same day, so the live verdict
+# legitimately flips between RUN and SKIP as the real grid fills.
+# The permanent contract: the gate NEVER crashes on the live state,
+# always answers in one line, and always exits 0.
+check("live gate exits 0 (never crashes)", r.returncode, 0)
+check("live gate answers with a verdict",
+      verdict.startswith(("RUN", "SKIP")), True)
+check("live gate answers in a single line", verdict.count("\n"), 0)
 
 # import sanity: the touched modules still compile and import
 import src.orchestrator  # noqa: E402, F401

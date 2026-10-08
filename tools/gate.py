@@ -46,7 +46,25 @@ from pathlib import Path
 from zoneinfo import ZoneInfo
 
 STATE = Path(__file__).resolve().parent.parent / "data" / "state.json"
+STATE_BAK = Path(__file__).resolve().parent.parent / "data" / "state.json.bak"
 WINDOW_HOURS = 20.0
+
+
+def _load_state() -> dict:
+    """Read state.json, falling back to state.json.bak (last known
+    good, refreshed by every memory save). Corrupt-JSON resilience:
+    an unreadable file must not silently reset the gate's view of
+    the world — the .bak keeps the last_run stamp so a corrupted
+    main file cannot double-produce the day either."""
+    for path in (STATE, STATE_BAK):
+        if not path.exists():
+            continue
+        try:
+            return json.loads(path.read_text())
+        except json.JSONDecodeError:
+            print(f"# gate: {path.name} unreadable — trying next source",
+                  file=sys.stderr)
+    return {}
 
 # Keep in sync with channel.yaml `schedule` (the gate job runs before
 # pip install, so it cannot read YAML — the values are frozen here).
@@ -112,50 +130,63 @@ def main() -> int:
         print("RUN")
         return 0
 
-    state = {"last_run": None, "episodes": [], "quota": {}}
-    if STATE.exists():
-        try:
-            state = json.loads(STATE.read_text())
-        except json.JSONDecodeError:
-            pass
+    # Five-year durability (2026-10-08): the gate is the FIRST code on
+    # the critical path of every slot, before any alert exists. If it
+    # ever crashes on ANY input (weird state content, a future Python
+    # change, missing tzdata), the workflow's gate job fails, the build
+    # job never starts, and NO failure alert fires — the channel dies
+    # silently while every slot keeps failing. So: a gate crash must
+    # default to RUN (attempt production). If production is healthy it
+    # completes the day; if it is not, ITS failure alert fires. The
+    # only unforgivable verdict is a silent one.
+    try:
+        state = _load_state()
+        state.setdefault("last_run", None)
+        state.setdefault("episodes", [])
+        state.setdefault("quota", {})
 
-    # server-side quota back-off (stamped by the upload layer when
-    # YouTube itself refused an upload, with the real reason). Retry
-    # slots before the window clears would just re-render the whole
-    # episode against the same dead wall — skip them cheaply.
-    q = state.get("quota") or {}
-    defer_until = q.get("defer_until") or 0
-    if defer_until > time.time():
-        print(f"SKIP  # server-side {q.get('defer_reason', 'quota')} defer "
-              f"until {time.strftime('%Y-%m-%d %H:%M UTC', time.gmtime(defer_until))}")
+        # server-side quota back-off (stamped by the upload layer when
+        # YouTube itself refused an upload, with the real reason). Retry
+        # slots before the window clears would just re-render the whole
+        # episode against the same dead wall — skip them cheaply.
+        q = state.get("quota") or {}
+        defer_until = q.get("defer_until") or 0
+        if defer_until > time.time():
+            print(f"SKIP  # server-side {q.get('defer_reason', 'quota')} defer "
+                  f"until {time.strftime('%Y-%m-%d %H:%M UTC', time.gmtime(defer_until))}")
+            return 0
+
+        # grid holes: unbooked slots that expire before the next cycle
+        # could ever claim them — the strongest possible reason to run.
+        holes = _grid_holes(state)
+        if holes:
+            print(f"RUN   # {len(holes)} grid hole(s) before the next cycle "
+                  f"point: {', '.join(holes[:3])}"
+                  f"{' …' if len(holes) > 3 else ''}")
+            return 0
+
+        # last successful cycle -> epoch seconds. Records written by the
+        # window system carry last_run_ts; legacy date-only records are
+        # pre-window (treat as STALE so the first deployed cycle runs —
+        # the concurrency group + a fresh stamp keep duplicates cheap).
+        last_ts = state.get("last_run_ts")
+        age_h = (time.time() - last_ts) / 3600.0 if last_ts else None
+        resuming = any(e.get("status") == "in_progress"
+                       for e in state.get("episodes", []))
+
+        if last_ts and age_h < WINDOW_HOURS and not resuming:
+            print(f"SKIP  # last cycle {age_h:.1f}h ago (< {WINDOW_HOURS:.0f}h window)")
+        else:
+            why = "no successful cycle yet" if not last_ts else f"last cycle {age_h:.1f}h ago"
+            if resuming:
+                why += " + in-progress episode to resume"
+            print(f"RUN   # {why}")
         return 0
-
-    # grid holes: unbooked slots that expire before the next cycle
-    # could ever claim them — the strongest possible reason to run.
-    holes = _grid_holes(state)
-    if holes:
-        print(f"RUN   # {len(holes)} grid hole(s) before the next cycle "
-              f"point: {', '.join(holes[:3])}"
-              f"{' …' if len(holes) > 3 else ''}")
+    except Exception as e:  # noqa: BLE001 — see the comment above
+        # NEVER die, never skip silently: attempt production instead.
+        print(f"RUN   # gate internal error ({type(e).__name__}: {e}) "
+              f"— attempting production; a real failure will alert")
         return 0
-
-    # last successful cycle -> epoch seconds. Records written by the
-    # window system carry last_run_ts; legacy date-only records are
-    # pre-window (treat as STALE so the first deployed cycle runs —
-    # the concurrency group + a fresh stamp keep duplicates cheap).
-    last_ts = state.get("last_run_ts")
-    age_h = (time.time() - last_ts) / 3600.0 if last_ts else None
-    resuming = any(e.get("status") == "in_progress"
-                   for e in state.get("episodes", []))
-
-    if last_ts and age_h < WINDOW_HOURS and not resuming:
-        print(f"SKIP  # last cycle {age_h:.1f}h ago (< {WINDOW_HOURS:.0f}h window)")
-    else:
-        why = "no successful cycle yet" if not last_ts else f"last cycle {age_h:.1f}h ago"
-        if resuming:
-            why += " + in-progress episode to resume"
-        print(f"RUN   # {why}")
-    return 0
 
 
 if __name__ == "__main__":

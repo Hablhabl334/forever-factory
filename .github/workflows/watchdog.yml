@@ -18,6 +18,7 @@ on:
 permissions:
   actions: write   # kick daily-factory via GITHUB_TOKEN
   contents: read
+  issues: write    # alert when the watchdog ITSELF fails (Oct 8 audit)
 
 concurrency:
   group: watchdog
@@ -26,7 +27,8 @@ concurrency:
 jobs:
   heartbeat:
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    # 5 -> 10 min: pure headroom for slow runners/checkouts.
+    timeout-minutes: 10
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -34,7 +36,11 @@ jobs:
       - name: Does today still need a cycle?
         id: gate
         run: |
-          VERDICT=$(python tools/gate.py --event schedule --actor watchdog)
+          # python3 (survives future runner images); a gate.py crash
+          # defaults to RUN here too — the kick is then gated again by
+          # daily-factory's own gate, so a broken gate can never stop
+          # the loop silently.
+          VERDICT=$(python3 tools/gate.py --event schedule --actor watchdog || echo "RUN   # gate.py did not even run — kicking the factory anyway")
           echo "$VERDICT"
           case "$VERDICT" in
             RUN*) echo "run=true"  >> "$GITHUB_OUTPUT" ;;
@@ -52,3 +58,16 @@ jobs:
       - name: All quiet
         if: steps.gate.outputs.run == 'false'
         run: echo "cycle window satisfied — going back to sleep"
+
+      - name: Alert on watchdog failure
+        # If the bodyguard itself breaks (runner, checkout, gh), nobody
+        # is watching the watcher. One issue per failure-day, deduped.
+        if: failure() || cancelled()
+        run: |
+          TITLE="Watchdog failed — $(date -u +%F)"
+          DUPES=$(gh issue list --state open --search "in:title \"$TITLE\"" --json number --jq 'length' 2>/dev/null || echo 0)
+          if [ "$DUPES" = "0" ]; then
+            gh issue create --title "$TITLE" --body "The watchdog heartbeat job failed — the backup trigger layer is down. The primary pinger and GitHub cron slots still run, but check the run: $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID\n\n- auto-filed by the factory" || true
+          fi
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

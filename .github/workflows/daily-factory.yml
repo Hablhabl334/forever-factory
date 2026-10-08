@@ -47,7 +47,10 @@ concurrency:
 jobs:
   gate:
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    # 5 -> 10 min (2026-10-08 durability audit): a slow runner or a
+    # growing repo checkout must not kill the day at the gate. The
+    # gate itself still costs ~15 s; the budget is pure headroom.
+    timeout-minutes: 10
     outputs:
       run: ${{ steps.gate.outputs.run }}
     steps:
@@ -75,12 +78,33 @@ jobs:
             # watchdog dispatch: subject to the state gate, never a free pass
             EVENT="schedule"
           fi
-          VERDICT=$(python tools/gate.py --event "$EVENT" --actor "${{ github.actor }}")
+          # python3 (not python): this step runs BEFORE setup-python on
+          # whatever ubuntu-latest ships — python3 is the name that will
+          # still exist in 2031. A gate crash would skip the whole
+          # workflow with zero alerts, so gate.py itself is also
+          # wrapped to default to RUN on any internal error.
+          VERDICT=$(python3 tools/gate.py --event "$EVENT" --actor "${{ github.actor }}" || echo "RUN   # gate.py did not even run — attempting production")
           echo "$VERDICT"
           case "$VERDICT" in
             RUN*) echo "run=true"  >> "$GITHUB_OUTPUT" ;;
             *)    echo "run=false" >> "$GITHUB_OUTPUT" ;;
           esac
+
+      - name: Alert on gate failure
+        # THE Oct 8 audit finding: every alert lives downstream of this
+        # job. If the GATE itself fails (runner hiccup, checkout error,
+        # a gate.py bug), build never starts, no Issue is filed, and
+        # the channel dies silently while every slot keeps failing.
+        # `cancelled()` covers the job-timeout path too.
+        if: failure() || cancelled()
+        run: |
+          TITLE="Factory gate failed — $(date -u +%F)"
+          DUPES=$(gh issue list --state open --search "in:title \"$TITLE\"" --json number --jq 'length' 2>/dev/null || echo 0)
+          if [ "$DUPES" = "0" ]; then
+            gh issue create --title "$TITLE" --body "The gate job itself failed — the day CANNOT be produced until this is fixed (checkout error, runner failure, or a gate.py bug). This is the loudest possible signal: every slot is firing and failing at the gate.\n\nSee the run: $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID\n\n- auto-filed by the factory" || true
+          fi
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   build-and-publish:
     needs: gate
@@ -117,6 +141,9 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
+          # requirements.txt is EXACTLY pinned (2026-10-08 audit): a
+          # forever machine must not wake up to a repackaged world.
+          # Frozen pins also mean a stable pip-cache key forever.
           pip install -r requirements.txt
 
       - name: Run the factory
@@ -141,7 +168,12 @@ jobs:
         run: |
           git config user.name "psychlove-factory"
           git config user.email "actions@users.noreply.github.com"
+          # state.json.bak (last known good) rides along: the recovery
+          # ladder in ledger.load() reads it if state.json is ever
+          # corrupted in git or on disk. (Separate `git add` lines: a
+          # missing pathspec must never abort the whole staging.)
           git add data/state.json factory.log 2>/dev/null || true
+          git add data/state.json.bak 2>/dev/null || true
           if git diff --cached --quiet; then
             echo "nothing new to remember"
           else
@@ -163,6 +195,18 @@ jobs:
               echo "memory push skipped: main advanced mid-run — the other run's memory wins"
             fi
           fi
+
+      - name: Close resolved failure issues
+        # A failed day opens an Issue; the machine heals itself the
+        # next cycle — but the Issue used to stay open forever. After
+        # years that queue buries the one issue that needs a human.
+        # Close PAST-day failure issues after every successful cycle.
+        # Best-effort by design (tools/close_resolved_issues.py never
+        # raises), so `if: success()` alone is safe.
+        if: success()
+        run: python3 tools/close_resolved_issues.py
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Alert on failure
         if: failure()

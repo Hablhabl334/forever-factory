@@ -1,5 +1,15 @@
-numpy>=1.26
-Pillow>=10.0
-PyYAML>=6.0
-piper-tts>=1.3
-edge-tts>=7.0
+# Pinned EXACT (2026-10-08 five-year durability audit): a forever
+# machine must not wake up one morning to a repackaged world. Loosely
+# pinned deps (">=") silently track PyPI's latest — any future major
+# (numpy 3, Pillow 13, edge-tts 8...) could change an API overnight
+# and every cycle would fail until someone pins them back. These are
+# the exact versions the machine verified in production on
+# 2026-10-07/08 (full episode render + upload). To upgrade, do it
+# DELIBERATELY: bump here, run a --dry-run dispatch, watch a real
+# cycle, then commit. pip's cache key = this file's hash, so a frozen
+# file also means a warm cache and faster runs, forever.
+numpy==2.5.3
+Pillow==12.3.0
+PyYAML==6.0.3
+piper-tts==1.8.0
+edge-tts==7.2.8

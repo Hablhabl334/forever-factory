@@ -18,6 +18,7 @@ from .config import cfg, ROOT
 
 LOCK = threading.Lock()
 STATE_PATH = ROOT / "data" / "state.json"
+BAK_PATH = ROOT / "data" / "state.json.bak"
 
 # Dry-run protection: when read-only, save() is a no-op so a --dry-run
 # can never pollute the real memory (the daily gate reads last_run —
@@ -54,16 +55,36 @@ DEFAULT = {
 
 
 def load() -> dict:
+    """Load the memory, never raising, never silently forgetting.
+
+    Five-year durability (2026-10-08 audit): a truncated or corrupted
+    state.json (disk blip, git accident, half-written file) previously
+    fell back to DEFAULT — TOTAL AMNESIA. The factory would restart
+    episode numbering, lose the no-repeat banks, and could duplicate
+    content. The recovery ladder is now: state.json -> state.json.bak
+    (last known good, rewritten on every save) -> DEFAULT, with a
+    loud printed warning either way so the incident is visible in
+    factory.log and the run summary.
+    """
     with LOCK:
-        if not STATE_PATH.exists():
-            return json.loads(json.dumps(DEFAULT))
-        try:
-            state = json.loads(STATE_PATH.read_text())
-        except json.JSONDecodeError:
-            return json.loads(json.dumps(DEFAULT))
-        for k, v in DEFAULT.items():
-            state.setdefault(k, v)
-        return state
+        for path in (STATE_PATH, BAK_PATH):
+            if not path.exists():
+                continue
+            try:
+                state = json.loads(path.read_text())
+            except json.JSONDecodeError as e:
+                print(f"[memory] WARNING: {path.name} is corrupt "
+                      f"({e}) — trying the next recovery source")
+                continue
+            if path is not STATE_PATH:
+                print(f"[memory] recovered from {path.name} (state.json "
+                      f"was unreadable) — the next save rewrites both")
+            for k, v in DEFAULT.items():
+                state.setdefault(k, v)
+            return state
+        print("[memory] WARNING: no readable state — starting from the "
+              "empty default (first run, or both files corrupt)")
+        return json.loads(json.dumps(DEFAULT))
 
 
 def save(state: dict) -> None:
@@ -71,9 +92,29 @@ def save(state: dict) -> None:
         return
     with LOCK:
         STATE_PATH.parent.mkdir(parents=True, exist_ok=True)
+        # keep the last-known-good copy fresh: if the current state.json
+        # still parses, it becomes the .bak BEFORE the new write lands.
+        # (The write itself is atomic: tmp + replace — the .bak guards
+        # against corruption that happens OUTSIDE this function, e.g. a
+        # bad rebase or a runner disk fault.)
+        if STATE_PATH.exists():
+            try:
+                current = STATE_PATH.read_text()
+                json.loads(current)          # validates before promoting
+                BAK_PATH.write_text(current)
+            except (json.JSONDecodeError, OSError):
+                pass  # current file already bad — keep the older .bak
         tmp = STATE_PATH.with_suffix(".tmp")
         tmp.write_text(json.dumps(state, indent=1))
         tmp.replace(STATE_PATH)
+        # invariant: a PARSEABLE .bak always exists. If the .bak is
+        # missing or itself corrupt (e.g. both files were hit), the
+        # freshly-serialized state becomes the new baseline — one
+        # save after any double corruption fully repairs the ladder.
+        try:
+            json.loads(BAK_PATH.read_text())
+        except Exception:
+            BAK_PATH.write_text(json.dumps(state, indent=1))
 
 
 def next_episode_number(state: dict) -> int:

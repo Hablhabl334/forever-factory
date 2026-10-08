@@ -93,6 +93,32 @@ def _all_video_ids(state: dict) -> list[tuple[str, str]]:
 
 # ── 1. growth snapshot ─────────────────────────────────────────────
 
+# Five-year durability (2026-10-08 audit): the daily snapshot used to
+# persist per-video view counts for EVERY video ever uploaded. At
+# 5 videos/day that is ~9,000 videos by year five, inside 60 rolling
+# snapshots — a multi-megabyte state.json growing linearly forever.
+# The persisted detail is now BOUNDED: the RECENT_TRACK most recently
+# uploaded videos (where growth actually happens) plus the TOP_TRACK
+# all-time videos (the breakout old-timers). total_views still counts
+# the whole channel, and the printed movers report uses the full
+# in-memory numbers — only what we WRITE to git is capped.
+RECENT_TRACK = 200
+TOP_TRACK = 100
+
+
+def _cap_videos(per_video: dict[str, int], vids: list[tuple[str, str]]) -> dict[str, int]:
+    """The bounded subset of per-video stats worth persisting.
+
+    `vids` is upload-ordered (oldest first), so its tail is the recent
+    catalog. Union: recent RECENT_TRACK + top TOP_TRACK by views.
+    Bounded at 300 entries per snapshot, forever."""
+    recent = {v for v, _ in vids[-RECENT_TRACK:]}
+    top = {v for v, _ in sorted(per_video.items(),
+                                 key=lambda kv: -kv[1])[:TOP_TRACK]}
+    keep = recent | top
+    return {vid: views for vid, views in per_video.items() if vid in keep}
+
+
 def snapshot_views(token: str, state: dict) -> dict | None:
     """Pull statistics for every video we have (1 unit per 50 videos),
     store the day's snapshot, and print the growth report."""
@@ -122,11 +148,16 @@ def snapshot_views(token: str, state: dict) -> dict | None:
     total = sum(per_video.values())
     delta = total - prev["total_views"] if prev else None
 
+    persisted = _cap_videos(per_video, vids)
     history.append({
         "date": today,
         "total_views": total,
-        "videos": per_video,
+        "videos": persisted,
     })
+    if len(persisted) < len(per_video):
+        print(f"[stats] persisting detail for {len(persisted)} of "
+              f"{len(per_video)} videos (bounded memory: recent "
+              f"{RECENT_TRACK} + top {TOP_TRACK})")
     del history[:-MAX_SNAPSHOTS]
 
     print(f"[stats] growth report {today}")
@@ -342,10 +373,18 @@ def ensure_channel_branding(token: str, state: dict) -> bool:
 # ── the daily pass, wired into the orchestrator ────────────────────
 
 def morning_report(state: dict) -> None:
-    """Start-of-day: numbers first. Failures never block production."""
+    """Start-of-day: numbers first. Failures never block production —
+    but a credential rejection is not a stats failure: it means every
+    upload this cycle will die too, so it gets its own LOUD line (the
+    run still proceeds; the upload failure will fire the real alert,
+    and this line makes the root cause obvious in factory.log)."""
     try:
         token = youtube.get_access_token()
         snapshot_views(token, state)
+    except youtube.AuthError as e:
+        print(f"[auth] CREDENTIALS REJECTED — token refresh failed: {e}\n"
+              f"[auth] uploads will fail and the run will alert. Recovery: "
+              f"RUNBOOK Part 2-3 (tools/auth.py) -> new YT_REFRESH_TOKEN secret")
     except Exception as e:
         print(f"[stats] snapshot skipped: {e}")
 
@@ -356,5 +395,7 @@ def evening_pass(state: dict) -> None:
         token = youtube.get_access_token()
         playlist_pass(token, state)
         ensure_channel_branding(token, state)
+    except youtube.AuthError as e:
+        print(f"[auth] CREDENTIALS REJECTED — token refresh failed: {e}")
     except Exception as e:
         print(f"[discovery] pass skipped: {e}")

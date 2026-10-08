@@ -366,3 +366,116 @@ owes the channel a slot that nothing else will fill.
 booked before the switch publishes at the old instant (one hour off)
 once; the next day self-corrects. Not engineered around — the
 6-hour cadence never breaks.
+
+---
+
+## Part 11 — The five-year durability audit (2026-10-08)
+
+The machine was stress-tested against the question *"what could
+interrupt an unattended 5-year run?"* Six real holes were found and
+fixed; everything else checked out. This part is the owner's map of
+what was audited, what now protects itself, and the one 5-minute
+ritual per year that keeps the human-side links alive.
+
+### What was fixed in this audit
+
+1. **A gate crash could kill the channel silently** (the worst
+   finding). Every alert lived *downstream* of the gate job — if the
+   gate itself ever failed (runner hiccup, checkout error, a bug,
+   missing `python` alias on a future runner), no Issue was filed
+   and every slot kept failing quietly. Now: the gate job has its
+   own failure alert (timeouts included), and `gate.py` is wrapped
+   so ANY internal error defaults to **RUN** — attempt production;
+   if that fails, *its* alert fires. A silent skip is the only
+   unforgivable verdict. The watchdog got the same treatment (plus
+   `issues: write` permission).
+2. **Corrupted memory = total amnesia** (fixed). A truncated
+   `state.json` used to silently reset to empty — episode numbering
+   would restart, the no-repeat banks would vanish, duplicates
+   could upload. Now every save keeps a last-known-good
+   `state.json.bak` (committed to git, riding with every memory
+   commit), and the load ladder is `state.json → .bak → default`,
+   with loud `[memory]` lines when recovery engages. One save after
+   any double corruption fully repairs both files.
+3. **The analytics snapshot was an unbounded growth bomb** (fixed).
+   Each daily snapshot stored per-video view counts for EVERY video
+   ever uploaded — at 5 videos/day that is ~9,000 videos × 60
+   snapshots by year five: a multi-megabyte `state.json` and a
+   steadily heavier repo. Persisted detail is now bounded to the
+   200 most recent + top 100 all-time (≈300 entries/snapshot,
+   forever < 1 MB). Channel totals and the printed growth report
+   still use the full numbers.
+4. **A dead refresh token was invisible until upload time** (fixed).
+   The stats/playlist passes swallow all exceptions — including
+   credential rejection. `AuthError` now prints a dedicated
+   `[auth] CREDENTIALS REJECTED` banner pointing at the recovery
+   steps, while still not blocking the run.
+5. **Dependencies were unpinned** (fixed). `numpy>=1.26` etc. silently
+   track PyPI's latest — any future major could break every cycle
+   overnight. `requirements.txt` is now EXACTLY pinned to the
+   versions the machine verified in production (numpy 2.5.3,
+   Pillow 12.3.0, PyYAML 6.0.3, piper-tts 1.8.0, edge-tts 7.2.8).
+   To upgrade: bump deliberately, run a `--dry-run` dispatch, watch
+   one real cycle, then commit. (Frozen pins also keep the pip
+   cache key stable — faster runs, forever.)
+6. **Failure Issues never closed** (fixed). A failed day opened an
+   Issue; the machine healed itself the next cycle; the Issue stayed
+   open forever — after years the queue would bury the one issue
+   that needs a human. After every successful cycle the machine now
+   auto-closes PAST-day failure issues (`tools/close_resolved_issues.py`).
+
+Also verified in this audit (no action needed): the OAuth refresh
+token survives indefinitely for a published app in daily use; the
+resumable-upload adoption path is duration-gated; quota ledger dates
+roll at Pacific midnight like YouTube's real window; the story bank
+(273 trillion combinations) cannot collide in any human lifespan;
+the playlist only carries longs (~1,825 by year five, under the
+5,000-item cap); daily memory commits keep GitHub's scheduler from
+ever disabling the repo for inactivity; the memory-push rebase path
+drops redundant copies instead of force-pushing stale state; and the
+Piper offline voice fallback (the edge-tts backup) was live-tested
+against piper-tts 1.8.0 — it works.
+
+### The defense-in-depth map (what breaks → what happens)
+
+| Failure | Detection | Recovery | Human needed |
+|---|---|---|---|
+| GitHub cron starvation | watchdog beats + 9 slots + external pinger | any live trigger produces | no |
+| YouTube daily quota | server reason parsed, defer stamped | auto-resume after Pacific midnight | no |
+| Rolling upload limit (burst days) | `uploadLimitExceeded` named in log | 2h back-off, next slot retries | no |
+| One failed cycle | auto-Issue (email) + resume window | next slot completes the episode | no |
+| Gate/watchdog job crash | **new** own failure alerts | slot retry on fresh runner | no |
+| Corrupt state.json | `[memory]` warning lines | `.bak` ladder, self-repairs | no |
+| Dead refresh token | `[auth]` banner + failed-run Issue | — | **yes: Part 2–3, ~15 min** |
+| cron-job.org account dies | GitHub slots still fire (backup ring) | — | **yes: rebuild Part 6, ~5 min** |
+| Action major deprecated (some year) | gate alert fires (runs fail loudly) | — | **yes: bump @v4→@v5, ~1 min** |
+| YouTube Data API v3 sunset (unlikely) | uploads fail, Issue filed | — | **yes: migration** |
+
+### The annual 5-minute ritual (put a yearly reminder if you like)
+
+1. **Actions → verify-token → Run workflow** — green = credentials
+   healthy. (Do the same after any Google password change.)
+2. Log into **cron-job.org** once — an account you never log into is
+   an account you cannot notice is dead. Both jobs should show green
+   history.
+3. Glance at the repo's **open Issues** — with auto-close, anything
+   still open genuinely needs a human.
+4. Glance at the **Actions usage** — a healthy month is ~1,500–2,500
+   minutes (one ~25-min render + cheap gate skips).
+
+That is the whole maintenance contract for a machine designed to
+outlive its setup.
+
+### Known cosmetic edges (accepted, not bugs)
+
+- **DST flip days**: a slot booked before Egypt's DST switch
+  publishes one hour off, once, then self-corrects (grid cadence
+  never breaks). The 00:00 slot on the flip morning is the only
+  one ever affected.
+- **GitHub cron drift**: scheduled slots can fire minutes early or
+  late (observed: ±30 min), and high-load evenings can skip slots
+  entirely — the pinger + watchdog + morning recovery exist exactly
+  for this; the gate makes every extra fire free.
+- **Analytics detail is bounded**: per-video view history is kept
+  for the recent 200 + top 100 videos; older videos contribute to
+  totals but not per-video rows. Old snapshots age out at 60 days.
