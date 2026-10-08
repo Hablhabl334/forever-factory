@@ -1,9 +1,9 @@
 [stats] growth report 2026-10-08
-[stats]   total: 343 views  (+82 since last report)
-[stats]       60 views  ·  Subscribe for more tips like this #psychology #relationship 
-[stats]       45 views  ·  Subscribe for more tips like this #psychology #relationship 
-[stats]       35 views  ·  Subscribe for more tips like this #psychology #relationship 
-[grid] booking 2 short slot(s) in the next 24h (free: 2026-10-09T12:00:00+03:00, 2026-10-09T18:00:00+03:00)
+[stats]   total: 414 views  (+71 since last report)
+[stats]       66 views  ·  Subscribe for more tips like this #psychology #relationship 
+[stats]       61 views  ·  Subscribe for more tips like this #psychology #relationship 
+[stats]       47 views  ·  Subscribe for more tips like this #psychology #relationship 
+[grid] booking 2 short slot(s) in the next 24h (free: 2026-10-09T18:00:00+03:00, 2026-10-10T00:00:00+03:00)
 [18] script: Mixed Signals, Decoded (1107 words, hash 02de5818ca)
   [voice] neural narration: 123 chunks (en-US-JennyNeural)
   [voice] polished: presence EQ + gentle compression
@@ -28,18 +28,8 @@
   [voice] polished: presence EQ + gentle compression
   [short 6] 59s, 16 cards, 5.7MB
 [18] thumbnail + 2 shorts ready
-  [youtube] uploaded long: C-9pvasCZDY (publishAt 2026-10-10T20:00:00+03:00)
-  [youtube] setting thumbnail thumbnail.png (60 KB) on C-9pvasCZDY
-  [youtube] thumbnail set
-  [youtube] uploaded short: 9okYnbx-WIY (publishAt 2026-10-09T12:00:00+03:00)
-  [quota] uploadLimitExceeded: rolling 24h upload count is full — deferring 2h; raw body: upload init failed (400): {
-  "error": {
-    "code": 400,
-    "message": "The user has exceeded the number of videos they may upload.",
-    "errors": [
-      {
-        "message": "The user has exceede
-[playlist] 1 long video(s) not in the playlist yet
-[playlist] ep18 long added (C-9pvasCZDY)
-  ! episode 18: Mixed Signals, Decoded — uploads deferred (quota); the next cycle resumes it
+  [youtube] long already on channel (C-9pvasCZDY) — adopting, no re-upload
+  [18] short 1 already uploaded (9okYnbx-WIY) — skipping
+  [youtube] uploaded short: Ze0INcnm6G4 (publishAt 2026-10-09T18:00:00+03:00)
+  ✓ episode 18: Mixed Signals, Decoded
 combination space: 273,301,428,924,195,840 stories — the factory never repeats
