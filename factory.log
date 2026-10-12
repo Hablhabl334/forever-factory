@@ -1,40 +1,48 @@
-[stats] growth report 2026-10-11
-[stats]   total: 941 views  (+212 since last report)
-[stats]       86 views  ·  Subscribe for more tips like this #psychology #relationship 
+[0;93m2026-10-12 19:02:01.438595455 [W:onnxruntime:Default, device_discovery.cc:95 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
+[stats] growth report 2026-10-12
+[stats]   total: 1199 views  (+258 since last report)
+[stats]       95 views  ·  Subscribe for more tips like this #psychology #relationship 
+[stats]       90 views  ·  Subscribe for more tips like this #psychology #relationship 
 [stats]       81 views  ·  Subscribe for more tips like this #psychology #relationship 
-[stats]       73 views  ·  Subscribe for more tips like this #psychology #relationship 
-[21] script: The Psychology of Ghosting (1089 words, hash 7878e75cbc)
-  [voice] neural narration: 120 chunks (en-US-JennyNeural)
+[22] script: How to Get Over a Breakup (1141 words, hash fb61c1afa4)
+  [voice] neural endpoint unreachable — using offline Piper
+  [voice] offline Piper narration: 126 chunks
   [voice] polished: presence EQ + gentle compression
-[21] narration: 535s, 120 caption chunks
-[21] long video: 552s, 50.1MB
-  [voice] neural narration: 20 chunks (en-US-JennyNeural)
+[22] narration: 560s, 126 caption chunks
+[22] long video: 578s, 50.2MB
+  [voice] neural endpoint unreachable — using offline Piper
+  [voice] offline Piper narration: 18 chunks
   [voice] polished: presence EQ + gentle compression
-  [short 1] 74s, 20 cards, 6.9MB
-  [voice] neural narration: 17 chunks (en-US-JennyNeural)
+  [short 1] 67s, 18 cards, 5.9MB
+  [voice] neural endpoint unreachable — using offline Piper
+  [voice] offline Piper narration: 18 chunks
   [voice] polished: presence EQ + gentle compression
-  [short 2] 71s, 17 cards, 6.4MB
-  [voice] neural narration: 17 chunks (en-US-JennyNeural)
+  [short 2] 75s, 18 cards, 6.7MB
+  [voice] neural endpoint unreachable — using offline Piper
+  [voice] offline Piper narration: 18 chunks
   [voice] polished: presence EQ + gentle compression
-  [short 3] 69s, 17 cards, 6.0MB
-  [voice] neural narration: 16 chunks (en-US-JennyNeural)
+  [short 3] 67s, 18 cards, 6.0MB
+  [voice] neural endpoint unreachable — using offline Piper
+  [voice] offline Piper narration: 18 chunks
   [voice] polished: presence EQ + gentle compression
-  [short 4] 71s, 16 cards, 6.4MB
-  [voice] neural narration: 17 chunks (en-US-JennyNeural)
+  [short 4] 63s, 18 cards, 6.1MB
+  [voice] neural endpoint unreachable — using offline Piper
+  [voice] offline Piper narration: 17 chunks
   [voice] polished: presence EQ + gentle compression
-  [short 5] 73s, 17 cards, 6.4MB
-  [voice] neural narration: 17 chunks (en-US-JennyNeural)
+  [short 5] 74s, 17 cards, 6.1MB
+  [voice] neural endpoint unreachable — using offline Piper
+  [voice] offline Piper narration: 19 chunks
   [voice] polished: presence EQ + gentle compression
-  [short 6] 69s, 17 cards, 6.5MB
-[21] thumbnail + 4 shorts ready
-  [youtube] uploaded long: xJNNTbamvJk (publishAt 2026-10-13T20:00:00+03:00)
-  [youtube] setting thumbnail thumbnail.png (62 KB) on xJNNTbamvJk
+  [short 6] 71s, 19 cards, 6.2MB
+[22] thumbnail + 4 shorts ready
+  [youtube] uploaded long: 6pTMjsED0VY (publishAt 2026-10-14T20:00:00+03:00)
+  [youtube] setting thumbnail thumbnail.png (60 KB) on 6pTMjsED0VY
   [youtube] thumbnail set
-  [youtube] uploaded short: 9STiEcejZts (publishAt 2026-10-12T00:00:00+03:00)
-  [youtube] uploaded short: AEzUpgRNo24 (publishAt 2026-10-12T06:00:00+03:00)
-  [youtube] uploaded short: D0zJvuBOdUQ (publishAt 2026-10-12T12:00:00+03:00)
-  [youtube] uploaded short: uOOhcB6-YBY (publishAt 2026-10-12T18:00:00+03:00)
+  [youtube] uploaded short: qKuIhuET60Q (publishAt 2026-10-13T00:00:00+03:00)
+  [youtube] uploaded short: Kke2b8XAUrc (publishAt 2026-10-13T06:00:00+03:00)
+  [youtube] uploaded short: xoJJLIANTVk (publishAt 2026-10-13T12:00:00+03:00)
+  [youtube] uploaded short: AV4KJybKLAA (publishAt 2026-10-13T18:00:00+03:00)
 [playlist] 1 long video(s) not in the playlist yet
-[playlist] ep21 long added (xJNNTbamvJk)
-  ✓ episode 21: The Psychology of Ghosting
+[playlist] ep22 long added (6pTMjsED0VY)
+  ✓ episode 22: How to Get Over a Breakup
 combination space: 273,301,428,924,195,840 stories — the factory never repeats

@@ -435,6 +435,33 @@
     "e154befd905b401c",
     "0d8ce2e24cb2f83d"
    ]
+  },
+  {
+   "n": 22,
+   "title": "How to Get Over a Breakup",
+   "hash": "fb61c1afa4012036",
+   "seed": 29637813020724,
+   "date": "2026-10-12",
+   "status": "done",
+   "ids": {
+    "long": "6pTMjsED0VY",
+    "shorts": [
+     "qKuIhuET60Q",
+     "Kke2b8XAUrc",
+     "xoJJLIANTVk",
+     "AV4KJybKLAA"
+    ],
+    "thumbnail": "2026-10-12",
+    "playlist": "2026-10-12"
+   },
+   "shashes": [
+    "578e53dacfd8bc52",
+    "7f5a6000e02d4c7c",
+    "cf75e6054930afc7",
+    "581fc359e3a995de",
+    "095751d091092f38",
+    "df750357357130d4"
+   ]
   }
  ],
  "story_hashes": [
@@ -458,18 +485,19 @@
   "02de5818ca0e052c",
   "d99f139b7e2ce561",
   "ae4c64f46fb09dd7",
-  "7878e75cbca98d4b"
+  "7878e75cbca98d4b",
+  "fb61c1afa4012036"
  ],
  "quota": {
-  "date": "2026-10-11",
+  "date": "2026-10-12",
   "units_used": 8311
  },
- "last_run": "2026-10-11",
+ "last_run": "2026-10-12",
  "stats": {
-  "videos_published": 72,
-  "days_active": 16
+  "videos_published": 77,
+  "days_active": 17
  },
- "_last_days_active": "2026-10-11",
+ "_last_days_active": "2026-10-12",
  "analytics": [
   {
    "date": "2026-09-29",
@@ -2249,6 +2277,84 @@
     "wGBIp_obHz0": 43,
     "6gnLZ_47Bko": 20
    }
+  },
+  {
+   "date": "2026-10-12",
+   "total_views": 1199,
+   "videos": {
+    "_oF4dTUGy24": 4,
+    "TRY0QZfgjBE": 5,
+    "Iocf2nxJuOY": 7,
+    "UG4z7_XQkjM": 2,
+    "4tbBV--cTsI": 7,
+    "h4B5GXfmjLg": 0,
+    "kvFpuUEz8QA": 0,
+    "TnJJf_3-Zg8": 1,
+    "3ZR4l08XxyE": 2,
+    "Zjf7Ne2z_4U": 0,
+    "pSRPxXnyAZg": 0,
+    "Mir11YcoWAw": 0,
+    "WSM7pIy8kdE": 1,
+    "DA0tiB7QrlY": 1,
+    "DVAoVnK5FtA": 0,
+    "git-4p8E9xY": 0,
+    "fkFhtGfsx_0": 0,
+    "n_GOahvID_Y": 0,
+    "8m3PZ44NW2c": 0,
+    "k8PzqtNVynI": 0,
+    "GRna0qAiWEg": 0,
+    "BJrBRuMoosA": 0,
+    "Mw2D_4ot0G8": 0,
+    "HjkTdKjH49s": 0,
+    "L7DJ2Nu2uo8": 0,
+    "5wQ0wmS7GHQ": 0,
+    "ISod_uguaR8": 14,
+    "ElMNPkRma0Q": 3,
+    "ZwoNP3tA_zI": 0,
+    "aC8V7uEF1zA": 0,
+    "57GaUcN6Xfo": 0,
+    "4CsBqeLACzY": 2,
+    "8Dg8yh488N8": 1,
+    "HpRLqiAR7ks": 1,
+    "NEpaHpN_z2Y": 1,
+    "cPlgv-IXN-w": 1,
+    "qKXpRXZHuvs": 8,
+    "yr5iRQg5U3o": 3,
+    "4eYAQRFA3Uk": 5,
+    "xRVhNWoBfn4": 8,
+    "y_9VDnn9-7k": 4,
+    "pFsqkgWkXEA": 23,
+    "vhZWjuHPpws": 20,
+    "Q9rx7zBltoQ": 19,
+    "peGtkMIl7LI": 35,
+    "wuDMgIJeUMw": 0,
+    "EYP4N0ZEMNo": 48,
+    "jOebUbltVQI": 40,
+    "7KhHlXIUN7k": 26,
+    "Xe0be2KbpWE": 81,
+    "cPHiDsx-92g": 0,
+    "ITMeCzxJV8I": 74,
+    "IYRX-R2hRDs": 26,
+    "JwtqNVDtuLE": 64,
+    "C-9pvasCZDY": 1,
+    "9okYnbx-WIY": 36,
+    "Ze0INcnm6G4": 46,
+    "3BY2x38hY8w": 0,
+    "WY-8CRAIEpY": 40,
+    "ok5iJVUFjsg": 90,
+    "QIU2EQ99Ejg": 43,
+    "7cNLdF5VNmY": 39,
+    "vrhDMCOHeCM": 0,
+    "wnhUBSBCweg": 28,
+    "cMnefUlDjG0": 55,
+    "wGBIp_obHz0": 66,
+    "6gnLZ_47Bko": 95,
+    "xJNNTbamvJk": 0,
+    "9STiEcejZts": 70,
+    "AEzUpgRNo24": 18,
+    "D0zJvuBOdUQ": 23,
+    "uOOhcB6-YBY": 12
+   }
   }
  ],
  "discovery": {
@@ -2305,21 +2411,23 @@
   "f8ba2caa5de7cbe6",
   "37b9807d29c619e4",
   "e154befd905b401c",
-  "0d8ce2e24cb2f83d"
+  "0d8ce2e24cb2f83d",
+  "578e53dacfd8bc52",
+  "7f5a6000e02d4c7c",
+  "cf75e6054930afc7",
+  "581fc359e3a995de",
+  "095751d091092f38",
+  "df750357357130d4"
  ],
- "last_run_ts": 1791741332,
+ "last_run_ts": 1791832474,
  "slots": {
   "long": [
-   "2026-10-10T20:00:00+03:00",
    "2026-10-11T20:00:00+03:00",
    "2026-10-12T20:00:00+03:00",
-   "2026-10-13T20:00:00+03:00"
+   "2026-10-13T20:00:00+03:00",
+   "2026-10-14T20:00:00+03:00"
   ],
   "short": [
-   "2026-10-10T00:00:00+03:00",
-   "2026-10-10T06:00:00+03:00",
-   "2026-10-10T12:00:00+03:00",
-   "2026-10-10T18:00:00+03:00",
    "2026-10-11T00:00:00+03:00",
    "2026-10-11T06:00:00+03:00",
    "2026-10-11T12:00:00+03:00",
@@ -2327,7 +2435,11 @@
    "2026-10-12T00:00:00+03:00",
    "2026-10-12T06:00:00+03:00",
    "2026-10-12T12:00:00+03:00",
-   "2026-10-12T18:00:00+03:00"
+   "2026-10-12T18:00:00+03:00",
+   "2026-10-13T00:00:00+03:00",
+   "2026-10-13T06:00:00+03:00",
+   "2026-10-13T12:00:00+03:00",
+   "2026-10-13T18:00:00+03:00"
   ]
  }
 }
