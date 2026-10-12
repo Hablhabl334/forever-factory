@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Moonberry Factory — Connection</title>
+<style>
+  :root { --bg:#0b0f1a; --card:#141a2b; --txt:#e8ecf8; --mut:#93a0c2;
+          --acc1:#7c3aed; --acc2:#2dd4bf; --ok:#34d399; --err:#f87171; }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body { font-family:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+         background:var(--bg); color:var(--txt); min-height:100vh;
+         display:flex; align-items:center; justify-content:center; padding:24px; }
+  .box { background:var(--card); border:1px solid #232c47; border-radius:16px;
+         padding:32px; max-width:640px; width:100%; }
+  .moon { font-size:40px; }
+  h1 { font-size:22px; margin:10px 0 6px; letter-spacing:-.3px; }
+  h1 span { background:linear-gradient(90deg,var(--acc1),var(--acc2));
+            -webkit-background-clip:text; background-clip:text; color:transparent; }
+  p { color:var(--mut); font-size:14.5px; line-height:1.6; margin-top:8px; }
+  .code-wrap { margin-top:18px; }
+  .lbl { font-size:12px; text-transform:uppercase; letter-spacing:1.2px;
+         color:var(--acc2); margin-bottom:6px; }
+  .code { background:#0d1220; border:1px solid #2a3355; border-radius:10px;
+          padding:14px; font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+          font-size:13px; color:var(--ok); word-break:break-all; user-select:all;
+          max-height:180px; overflow:auto; }
+  button { margin-top:14px; width:100%; padding:13px; border:none; border-radius:10px;
+           background:linear-gradient(90deg,var(--acc1),#4f46e5); color:#fff;
+           font-size:15px; font-weight:600; cursor:pointer; }
+  button:hover { filter:brightness(1.12); }
+  .step { display:flex; gap:12px; margin-top:14px; align-items:flex-start; }
+  .step .n { flex:none; width:24px; height:24px; border-radius:99px;
+             background:linear-gradient(90deg,var(--acc1),var(--acc2));
+             display:flex; align-items:center; justify-content:center;
+             font-size:13px; font-weight:700; }
+  .step p { margin:2px 0 0; }
+  .errbox { border-left:3px solid var(--err); padding-left:14px; }
+  footer { margin-top:26px; color:var(--mut); font-size:12.5px; text-align:center; }
+  footer a { color:var(--acc2); text-decoration:none; }
+  .hidden { display:none; }
+</style>
+</head>
+<body>
+  <div class="box">
+    <div class="moon">🌙</div>
+    <h1 id="title">Moonberry <span>Factory</span></h1>
+    <p id="subtitle">OAuth connection page for the Moonberry Factory
+      automated bedtime-story channel.</p>
+
+    <div id="ok" class="code-wrap hidden">
+      <div class="lbl">✅ Connected — your authorization code</div>
+      <div class="code" id="code"></div>
+      <button id="copy">Copy code</button>
+      <div class="step"><div class="n">1</div><p>Press the <b>Copy code</b> button (or select the green text manually).</p></div>
+      <div class="step"><div class="n">2</div><p>Paste the code back into the chat where you requested the connection.</p></div>
+      <div class="step"><div class="n">3</div><p>That's all — the factory takes over from there.</p></div>
+    </div>
+
+    <div id="fail" class="errbox hidden">
+      <p id="failmsg" style="color:var(--err)"></p>
+      <p>The connection was not completed. Go back to the chat, tell the
+         factory what happened, and try the link again.</p>
+    </div>
+
+    <footer>Part of <a href="https://hablhabl334.github.io">hablhabl334.github.io</a>
+      &middot; automated by the
+      <a href="https://github.com/Hablhabl334/forever-factory">Forever Factory</a></footer>
+  </div>
+
+<script>
+  var q = new URLSearchParams(location.search);
+  var code = q.get("code");
+  var err  = q.get("error");
+  var ok = document.getElementById("ok"), fail = document.getElementById("fail");
+  if (code) {
+    document.getElementById("title").innerHTML = 'Connected to <span>YouTube</span> 🎉';
+    document.getElementById("subtitle").textContent = "Google authorized the Moonberry Factory. One last step:";
+    document.getElementById("code").textContent = code;
+    ok.classList.remove("hidden");
+  } else if (err) {
+    document.getElementById("failmsg").textContent =
+      "Google returned an error: " + err + (q.get("error_description") ? " — " + q.get("error_description") : "");
+    fail.classList.remove("hidden");
+  }
+  document.getElementById("copy").addEventListener("click", function () {
+    var t = document.getElementById("code").textContent;
+    if (navigator.clipboard) { navigator.clipboard.writeText(t); }
+    else { var r = document.createRange(); r.selectNodeContents(document.getElementById("code"));
+           var s = getSelection(); s.removeAllRanges(); s.addRange(r); document.execCommand("copy"); }
+    var b = this; b.textContent = "✓ Copied — now paste it in the chat"; setTimeout(function(){ b.textContent = "Copy code"; }, 4000);
+  });
+</script>
+</body>
+</html>
