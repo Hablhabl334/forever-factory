@@ -195,6 +195,17 @@ def mark_thumbnail(state: dict, episode_n: int, units: int = 0) -> None:
     save(state)
 
 
+def mark_voice_engine(state: dict, episode_n: int, engine: str) -> None:
+    """Record which narration engine produced the episode. Voice-quality
+    triage years later must not depend on expired Actions logs (the
+    2026-10-13 incident was only diagnosable from logs GitHub had
+    already deleted). In-memory only — rides the next ledger.save()."""
+    for e in state.get("episodes", []):
+        if e["n"] == episode_n:
+            e["voice_engine"] = str(engine)
+            break
+
+
 def spend_quota(state: dict, units: int) -> None:
     q = state["quota"]
     today = _quota_today()

@@ -479,3 +479,68 @@ outlive its setup.
 - **Analytics detail is bounded**: per-video view history is kept
   for the recent 200 + top 100 videos; older videos contribute to
   totals but not per-video rows. Old snapshots age out at 60 days.
+
+---
+
+## Part 12 — The voice incident (2026-10-13)
+
+**What happened.** For two evenings (Oct 12–13) every video went out
+with the offline robotic voice. The neural edge-tts endpoint silently
+refused requests coming from the GitHub runner's IP range (Microsoft
+throttles datacenter ranges intermittently — a known, recurring
+edge-tts failure mode). The fallback design treated that as SUCCESS:
+the channel never went silent, the gate never re-tried the day, no
+alert ever fired. The channel spoke robotically for two days before
+the owner heard it. (Diagnosis note: the exact-pinned edge-tts 7.2.8
+still worked fine from other IPs — the version pin was blameless that
+evening, but the same pin would have broken on Oct 13's Microsoft
+token rotation anyway. Both failure modes are now covered.)
+
+**What changed (all shipped 2026-10-13).**
+
+1. **`edge-tts` is range-pinned** (`>=7.3.1,<8` in requirements.txt).
+   Microsoft rotates its auth scheme every few months; the edge-tts
+   maintainer ships fixes within hours. The machine now picks them up
+   on its own. The four other dependencies stay exactly pinned.
+2. **The voice probe is patient.** Multiple rounds (0/10/25 s), and
+   multiple voices: Jenny → Aria → Guy → Sonia. One bad minute no
+   longer downgrades the day; a retired voice no longer downgrades
+   the day. The decision is cached process-wide, so every video of
+   one cycle shares one voice.
+3. **Voice quality is a gate, not a nice-to-have.** A narration that
+   would land on the offline voice while neural is configured FAILS
+   the cycle **before any upload** (`VoiceQualityError`), up to
+   `max_voice_retries: 4` attempts per day (counted in state.json,
+   surviving restarts). Every scheduled slot then re-attempts the day
+   on a **fresh runner — a fresh IP**. After the budget is spent, the
+   day ships with the offline voice rather than going silent.
+4. **It is never silent anymore.** A voice-degraded day writes
+   `VOICE-ALERT:` into factory.log and the workflow files the Issue
+   **"Voice degraded — offline voice used — \<date\>"**. That Issue
+   only auto-closes on a later day that narrated with the *neural*
+   voice (the issue-closer takes `--voice-ok` only when the day's log
+   has no VOICE-ALERT). Every episode also records its voice engine
+   in state.json (`voice_engine`) — triage no longer depends on
+   Actions logs GitHub expires after a day.
+
+**If a voice-degraded Issue ever appears:**
+
+1. Read the run's factory.log: `neural probe round N failed` (the
+   endpoint refused the runner) vs `neural synth failed mid-run`
+   (it answered, then died — usually transient).
+2. Dispatch a **dry-run** (Actions → daily-factory → Run workflow →
+   tick `dry_run`) and watch for `[voice] neural narration`. If the
+   neural voice answers from a fresh runner, it was IP throttling
+   and it has already self-healed — the next real cycle is fine.
+3. If the neural voice fails from everywhere for more than a day,
+   Microsoft changed the protocol: check the
+   [edge-tts releases](https://github.com/rany2/edge-tts/releases)
+   page for a new 7.x, bump the range floor in requirements.txt, run
+   a dry-run to confirm, commit.
+4. Never leave `voice.engine: piper` in channel.yaml as a "fix" —
+   that is a deliberate permanent downgrade; the retry ring exists
+   exactly so you never need it.
+
+**The one-minute check that the voice is healthy today:** the newest
+run's factory.log should contain `[voice] neural narration` and no
+`VOICE-ALERT`.

@@ -65,6 +65,18 @@ story:
 voice:
   engine: "auto"                 # auto = neural voice first, offline Piper fallback
   edge_name: "en-US-JennyNeural"  # the most conversational free neural voice (warm, human)
+  # 2026-10-13 incident hardening: if the configured voice is refused
+  # (retired, throttled), the machine narrates with the first of these
+  # that answers — a neural alternate beats an offline downgrade.
+  edge_fallback_voices:
+    - "en-US-AriaNeural"
+    - "en-US-GuyNeural"
+    - "en-GB-SoniaNeural"
+  # Voice-degraded cycles FAIL (before upload) and the next scheduled
+  # slot retries on a fresh runner IP. After this many honest attempts
+  # in one day, the day ships with the offline voice instead of going
+  # silent — loudly (a voice-degraded Issue is filed).
+  max_voice_retries: 4
   edge_rate: "-3%"               # long videos: calm, intimate delivery
   edge_rate_shorts: "-1%"        # shorts: slightly brisker, scroll pace
   edge_pitch: "-2Hz"

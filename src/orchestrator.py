@@ -14,6 +14,7 @@ so a missed evening costs hours, not days.
 from __future__ import annotations
 
 import hashlib
+import shutil
 import sys
 import traceback
 from datetime import date
@@ -26,6 +27,78 @@ from .story_engine import generate_story, combination_space, N_SHORTS
 
 WORK_ROOT = ROOT / "work"
 OUT_ROOT = ROOT / "out"
+
+
+class VoiceQualityError(RuntimeError):
+    """The neural voice is unreachable AND the day still has retry
+    budget — abort BEFORE uploading so the next scheduled slot retries
+    on a fresh runner (a fresh IP). Raised by enforce_voice_quality."""
+
+
+def voice_policy(state: dict) -> str:
+    """'retry' | 'ship' — what to do when the day's narration would
+    land on the offline voice while a neural voice is configured.
+
+    The 2026-10-13 incident: the machine silently shipped two days of
+    robotic narration, because a Piper fallback counts as SUCCESS to
+    the gate — the backup slot ring never re-tried the day and no
+    alert ever fired. Now a voice-degraded cycle FAILS (before any
+    upload), the failure alert opens an Issue, and the next slot's
+    FRESH runner retries the neural endpoint. After max_voice_retries
+    honest attempts in one day the policy flips to 'ship': a degraded
+    day still beats a silent day, and the voice-degradation Issue (and
+    the VOICE-ALERT log marker) tells the owner exactly what shipped.
+    """
+    vconf = cfg()["voice"]
+    if str(vconf.get("engine", "auto")).lower() == "piper":
+        return "ship"          # the offline voice is the deliberate config
+    max_retries = int(vconf.get("max_voice_retries", 4))
+    fb = state.get("voice_fallbacks") or {}
+    if fb.get("date") != date.today().isoformat():
+        return "retry"          # a stale budget from another day never counts
+    return "ship" if int(fb.get("attempts", 0)) >= max_retries else "retry"
+
+
+def _note_voice_retry(state: dict) -> int:
+    """Count one voice-degraded abort today. Persisted with the factory
+    memory so the NEXT slot (a fresh process) sees the budget already
+    spent — the counter survives process restarts by design."""
+    today = date.today().isoformat()
+    fb = state.get("voice_fallbacks") or {}
+    if fb.get("date") != today:
+        fb = {"date": today, "attempts": 0}
+    fb["attempts"] = int(fb.get("attempts", 0)) + 1
+    state["voice_fallbacks"] = fb
+    ledger.save(state)
+    return int(fb["attempts"])
+
+
+def _forget_narration(work: Path) -> None:
+    """Drop a Piper-rendered narration cache so the next attempt
+    re-synthesizes. narration.json would otherwise short-circuit the
+    retry into shipping the same robotic audio."""
+    (work / "narration.json").unlink(missing_ok=True)
+    shutil.rmtree(work / "chunks", ignore_errors=True)
+
+
+def enforce_voice_quality(state: dict, narration: dict, work: Path,
+                          dry_run: bool) -> None:
+    """The voice-quality gate — runs right after narration, BEFORE any
+    render or upload. Retry-able degradation fails the cycle loudly;
+    an exhausted budget ships degraded (tts.NEURAL_FALLBACK makes the
+    workflow file the voice-degraded Issue)."""
+    if dry_run:
+        return                      # a rehearsal never fails the day
+    if str(narration.get("engine", "edge")) != "piper":
+        return                      # neural voice — nothing to gate
+    if voice_policy(state) != "retry":
+        return                      # budget spent — ship degraded (loudly)
+    attempt = _note_voice_retry(state)
+    _forget_narration(work)
+    raise VoiceQualityError(
+        f"neural voice unreachable (attempt {attempt} today) — aborting "
+        f"BEFORE upload so the next scheduled slot retries on a fresh "
+        f"runner IP")
 
 
 def _dated_seed(day: str, episode_n: int) -> int:
@@ -257,6 +330,10 @@ def produce_episode(story: dict, episode_n: int, dry_run: bool,
 
     # 1. narration (idempotent, exact caption timings)
     narration = tts.narrate(story, work)
+    ledger.mark_voice_engine(state, episode_n,
+                             str(narration.get("engine", "edge")))
+    # voice-quality gate: fail BEFORE upload while retry budget remains
+    enforce_voice_quality(state, narration, work, dry_run)
     print(f"[{episode_n}] narration: {narration['total']:.0f}s, "
           f"{len(narration['chunks'])} caption chunks")
 
@@ -561,20 +638,31 @@ def main() -> int:
     try:
         results = run_daily(dry_run=args.dry_run, longs=args.longs,
                             only_episode=args.episode)
-        for r in results:
-            if r.get("dry_run"):
-                print(f"  - episode {r['episode']}: {r['title']} (dry-run)")
-            elif r.get("deferred"):
-                print(f"  ! episode {r['episode']}: {r['title']} — uploads "
-                      f"deferred (quota); the next cycle resumes it")
-            else:
-                print(f"  ✓ episode {r['episode']}: {r['title']}")
-        print(f"combination space: {combination_space():,} stories — "
-              f"the factory never repeats")
-        return 0
+    except VoiceQualityError as vq:
+        print(f"\n✗ {vq}")
+        print("  the day is NOT produced yet — the next scheduled slot "
+              "retries automatically on a fresh runner (the failure "
+              "alert has been filed by the workflow)")
+        return 1
     except Exception:
         traceback.print_exc()
         return 1
+    for r in results:
+        if r.get("dry_run"):
+            print(f"  - episode {r['episode']}: {r['title']} (dry-run)")
+        elif r.get("deferred"):
+            print(f"  ! episode {r['episode']}: {r['title']} — uploads "
+                  f"deferred (quota); the next cycle resumes it")
+        else:
+            print(f"  ✓ episode {r['episode']}: {r['title']}")
+    if getattr(tts, "NEURAL_FALLBACK", False):
+        print("VOICE-ALERT: the neural voice was unreachable — today's "
+              "narration used the offline voice (robotic). The workflow "
+              "files a voice-degraded Issue; triage lives in RUNBOOK "
+              "Part 12.")
+    print(f"combination space: {combination_space():,} stories — "
+          f"the factory never repeats")
+    return 0
 
 
 if __name__ == "__main__":

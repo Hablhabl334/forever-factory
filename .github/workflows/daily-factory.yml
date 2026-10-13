@@ -141,9 +141,11 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          # requirements.txt is EXACTLY pinned (2026-10-08 audit): a
-          # forever machine must not wake up to a repackaged world.
-          # Frozen pins also mean a stable pip-cache key forever.
+          # requirements.txt is pinned (2026-10-08 audit): four exact
+          # pins + ONE living range — edge-tts tracks the 7.x line so
+          # Microsoft token rotations heal without a human (the exact
+          # 7.2.8 pin went dark on 2026-10-13 and cost the channel two
+          # robotic days; see requirements.txt for the full story).
           pip install -r requirements.txt
 
       - name: Run the factory
@@ -201,10 +203,42 @@ jobs:
         # next cycle — but the Issue used to stay open forever. After
         # years that queue buries the one issue that needs a human.
         # Close PAST-day failure issues after every successful cycle.
+        # Voice-degraded issues only close on a NEURAL day (--voice-ok
+        # is passed only when today's narration did NOT degrade).
         # Best-effort by design (tools/close_resolved_issues.py never
         # raises), so `if: success()` alone is safe.
         if: success()
-        run: python3 tools/close_resolved_issues.py
+        run: |
+          if [ -f factory.log ] && grep -q "VOICE-ALERT:" factory.log; then
+            VOICE_FLAG=""
+            echo "today narrated with the offline voice — keeping voice issues open"
+          else
+            VOICE_FLAG="--voice-ok"
+          fi
+          python3 tools/close_resolved_issues.py $VOICE_FLAG
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Alert on voice degradation
+        # 2026-10-13 lesson: the neural TTS endpoint refused requests
+        # from the runner's IP range and the machine silently shipped
+        # the offline robotic voice for two days — a quality regression
+        # that looked like a perfectly successful cycle. The offline
+        # voice is never silent anymore: this step files a dated Issue
+        # the moment the VOICE-ALERT marker appears in factory.log.
+        if: always()
+        run: |
+          if [ ! -f factory.log ] || ! grep -q "VOICE-ALERT:" factory.log; then
+            echo "neural voice OK (or no factory.log) — no alert needed"
+            exit 0
+          fi
+          echo "::warning::neural TTS unreachable — today's narration used the offline robotic voice"
+          TITLE="Voice degraded — offline voice used — $(date -u +%F)"
+          DUPES=$(gh issue list --state open --search "in:title \"$TITLE\"" --json number --jq 'length' 2>/dev/null || echo 0)
+          if [ "$DUPES" = "0" ]; then
+            BODY=$(printf 'The neural TTS endpoint was unreachable, so the narration for today was rendered with the offline voice (noticeably robotic).\n\nThe machine retried on fresh runners before conceding (max_voice_retries), and the next cycle retries the neural voice automatically — edge-tts is range-pinned so service-side fixes install on their own.\n\nIf this repeats for more than a day, follow RUNBOOK Part 12 (voice triage).\n\nSee the run: %s/actions/runs/%s\n\n- auto-filed by the factory' "$GITHUB_SERVER_URL/$GITHUB_REPOSITORY" "$GITHUB_RUN_ID")
+            gh issue create --title "$TITLE" --body "$BODY" || true
+          fi
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 

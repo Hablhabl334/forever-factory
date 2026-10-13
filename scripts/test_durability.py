@@ -22,6 +22,9 @@ Every fix from the audit gets a regression check:
   6. pinning                 — requirements.txt pins exact versions
   7. workflow hardening     — gate alert exists, .bak is committed,
                                watchdog can write issues, python3 used
+  8. voice quality (Oct 13) — patient multi-voice probe, loud
+                               NEURAL_FALLBACK flag, fail-before-upload
+                               retry policy, voice-issue lifecycle
 
 Run: python3 scripts/test_durability.py   (from the repo root)
 """
@@ -35,6 +38,7 @@ import stat
 import subprocess
 import sys
 import tempfile
+from datetime import date
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -302,13 +306,14 @@ def _write_fake_gh(script_body: str):
 import os as _os  # noqa: E402
 orig_path = _os.environ["PATH"]
 
-# a fake gh that lists two stale issues + today's issue
+# a fake gh that lists two stale issues + today's issue + a voice issue
 _write_fake_gh(
     '#!/bin/sh\n'
     'if [ "$1" = "issue" ] && [ "$2" = "list" ]; then\n'
     '  echo \'[{"number": 11, "title": "Factory cycle failed — 2026-10-06"},'
     '{"number": 12, "title": "Factory cycle failed — 2026-10-08"},'
-    '{"number": 13, "title": "Some other issue"}]\'\n'
+    '{"number": 13, "title": "Some other issue"},'
+    '{"number": 14, "title": "Voice degraded — offline voice used — 2026-10-06"}]\'\n'
     '  exit 0\n'
     'fi\n'
     'echo "closed: $*" >> "' + str(fake_gh.parent / 'gh.log') + '"\n'
@@ -320,6 +325,9 @@ try:
     check("closes only the PAST-day issue", closed, [11])
     check("today's issue stays open", 12 not in closed, True)
     check("non-failure issues untouched", 13 not in closed, True)
+    check("voice issue waits for a NEURAL day", 14 not in closed, True)
+    closed2 = cri.close_resolved("2026-10-08", dry_run=False, close_voice=True)
+    check("on a --voice-ok day, past voice issues close too", closed2, [11, 14])
     # gh itself broken -> swallowed, returns []
     _write_fake_gh('#!/bin/sh\nexit 2\n')
     check("gh failure swallowed",
@@ -330,11 +338,14 @@ finally:
 
 # ── 6. pinning ──────────────────────────────────────────────────────
 
-section("6. requirements.txt is exactly pinned")
+section("6. requirements.txt: exact pins + the one living range")
 
 lines = [ln.strip() for ln in (ROOT / "requirements.txt").read_text().splitlines()
          if ln.strip() and not ln.strip().startswith("#")]
-check("every requirement pinned with ==", all("==" in ln for ln in lines), True)
+core = [ln for ln in lines if not ln.startswith("edge-tts")]
+check("core deps pinned with ==", all("==" in ln for ln in core), True)
+check("edge-tts range-pins the 7.x line (service rotations auto-heal)",
+      [ln for ln in lines if ln.startswith("edge-tts")], ["edge-tts>=7.3.1,<8"])
 check("the five core deps present",
       all(any(dep in ln for ln in lines)
           for dep in ("numpy", "Pillow", "PyYAML", "piper-tts", "edge-tts")), True)
@@ -368,7 +379,8 @@ check("gate verdict uses python3", "python3 tools/gate.py" in verdict_cmd, True)
 check("gate verdict has a crash fallback",
       "gate.py did not even run" in verdict_cmd, True)
 inst = " ".join(build_steps.get("Install dependencies", {}).get("run", "").split())
-check("install step mentions the exact pins", "EXACTLY pinned" in inst, True)
+check("install step documents the pin policy (exact + living range)",
+      "pinned" in inst and "edge-tts" in inst, True)
 
 wd = yaml.safe_load((ROOT / ".github/workflows/watchdog.yml").read_text())
 hb = wd["jobs"]["heartbeat"]
@@ -380,6 +392,200 @@ check("watchdog gate uses python3 + crash fallback",
       "python3 tools/gate.py" in wd_gate and "did not even run" in wd_gate, True)
 check("watchdog timeout raised to 10", wd["jobs"]["heartbeat"]["timeout-minutes"], 10)
 check("gate timeout raised to 10", gate_job["timeout-minutes"], 10)
+
+# ── 8. voice quality (the 2026-10-13 incident) ─────────────────────
+
+section("8. voice: patient probe, loud flag, fail-before-upload retries")
+
+import types  # noqa: E402
+import array as _array  # noqa: E402
+import src.tts as tts_mod  # noqa: E402
+from src import orchestrator as orch  # noqa: E402
+
+
+def _reset_voice():
+    tts_mod.NEURAL_FALLBACK = False
+    tts_mod._EDGE_DECISION = None
+
+
+# 8a. the picker: primary voice dead, alternate alive -> alternate
+_reset_voice()
+probe_calls: list[str] = []
+
+
+def _fake_probe(vconf, cd):
+    probe_calls.append(str(vconf.get("edge_name")))
+    return str(vconf.get("edge_name")) == "en-US-AriaNeural"
+
+
+_orig_probe = tts_mod._edge_probe_once
+tts_mod._edge_probe_once = _fake_probe
+try:
+    vtmp = Path(tempfile.mkdtemp())
+    picked = tts_mod._edge_pick_voice(
+        {"edge_name": "en-US-JennyNeural",
+         "edge_fallback_voices": ["en-US-AriaNeural", "en-US-GuyNeural"]},
+        vtmp, delays=(0, 0, 0))
+    check("picker switches to an alternate neural voice", picked, "en-US-AriaNeural")
+    check("primary voice was probed first", probe_calls[0], "en-US-JennyNeural")
+    n = len(probe_calls)
+    again = tts_mod._edge_pick_voice(
+        {"edge_name": "en-US-JennyNeural"}, vtmp, delays=(0, 0, 0))
+    check("decision is cached process-wide (one voice per cycle)",
+          (again, len(probe_calls)), ("en-US-AriaNeural", n))
+    _reset_voice()
+    tts_mod._edge_probe_once = lambda vconf, cd: False
+    down = tts_mod._edge_pick_voice(
+        {"edge_name": "en-US-JennyNeural"}, vtmp, delays=(0, 0, 0))
+    check("endpoint fully down -> None (fall back offline)", down, None)
+    check("DOWN decision cached too", tts_mod._EDGE_DECISION, "DOWN")
+finally:
+    tts_mod._edge_probe_once = _orig_probe
+    _reset_voice()
+    shutil.rmtree(vtmp, ignore_errors=True)
+
+# 8b. narrate(): dead endpoint -> offline engine + the LOUD flag
+_reset_voice()
+_orig_pick = tts_mod._edge_pick_voice
+tts_mod._edge_pick_voice = lambda vconf, cd, delays=(0, 10, 25): None
+
+
+class _FakeSynthConf:
+    def __init__(self, length_scale=1.0):
+        self.length_scale = length_scale
+
+
+class _FakeChunk:
+    def __init__(self):
+        self.audio_int16_array = _array.array("h", [3000] * 4410)
+
+
+class _FakeVoice:
+    def synthesize(self, text, syn_config=None):
+        return [_FakeChunk(), _FakeChunk()]
+
+
+class _FakePiperVoice:
+    @staticmethod
+    def load(path):
+        return _FakeVoice()
+
+
+_fake_piper = types.ModuleType("piper")
+_fake_piper.PiperVoice = _FakePiperVoice
+_fake_piper.SynthesisConfig = _FakeSynthConf
+sys.modules["piper"] = _fake_piper
+
+story_v = {"title": "t", "hash": "voice-test-0001",
+           "scenes": [{"n": 1, "narration": "Hello there, friend."}]}
+wv = Path(tempfile.mkdtemp())
+_real_cfg_tts = tts_mod.cfg
+try:
+    meta = tts_mod.narrate(story_v, wv)
+    check("dead endpoint narrates offline (piper)", meta.get("engine"), "piper")
+    check("NEURAL_FALLBACK flag raised", tts_mod.NEURAL_FALLBACK, True)
+
+    # 8c. a cached robotic narration still raises the flag
+    _reset_voice()
+    meta2 = tts_mod.narrate(story_v, wv)
+    check("cached narration returns intact", meta2.get("engine"), "piper")
+    check("cache path also raises the flag", tts_mod.NEURAL_FALLBACK, True)
+
+    # 8d. a deliberate offline config never flags
+    _reset_voice()
+    tts_mod.cfg = lambda: {**_real_cfg_tts(),
+                           "voice": {**_real_cfg_tts()["voice"], "engine": "piper"}}
+    meta3 = tts_mod.narrate(story_v, wv)
+    check("deliberate piper config: no flag", tts_mod.NEURAL_FALLBACK, False)
+finally:
+    tts_mod._edge_pick_voice = _orig_pick
+    tts_mod.cfg = _real_cfg_tts
+    sys.modules.pop("piper", None)
+    _reset_voice()
+    shutil.rmtree(wv, ignore_errors=True)
+
+# 8e. voice policy + the fail-BEFORE-upload gate
+st = fresh_state()
+check("fresh day -> retry", orch.voice_policy(st), "retry")
+st["voice_fallbacks"] = {"date": date.today().isoformat(), "attempts": 2}
+check("attempts under budget -> retry", orch.voice_policy(st), "retry")
+st["voice_fallbacks"] = {"date": date.today().isoformat(), "attempts": 4}
+check("budget spent -> ship degraded", orch.voice_policy(st), "ship")
+st["voice_fallbacks"] = {"date": "2020-01-01", "attempts": 99}
+check("yesterday's budget never counts", orch.voice_policy(st), "retry")
+_real_cfg_o = orch.cfg
+orch.cfg = lambda: {**_real_cfg_o(),
+                    "voice": {**_real_cfg_o()["voice"], "engine": "piper"}}
+check("deliberate offline config -> ship", orch.voice_policy(st), "ship")
+orch.cfg = _real_cfg_o
+
+tmpv = Path(tempfile.mkdtemp())
+ledger.STATE_PATH = tmpv / "state.json"
+ledger.BAK_PATH = tmpv / "state.json.bak"
+try:
+    sev = fresh_state()
+    wv2 = Path(tempfile.mkdtemp())
+    (wv2 / "narration.json").write_text('{"engine": "piper"}')
+    (wv2 / "chunks").mkdir()
+    (wv2 / "chunks" / "chunk_001.wav").write_bytes(b"\x00" * 64)
+    raised = False
+    try:
+        orch.enforce_voice_quality(sev, {"engine": "piper"}, wv2, dry_run=False)
+    except orch.VoiceQualityError:
+        raised = True
+    check("retry policy aborts BEFORE upload", raised, True)
+    check("abort counted in today's budget", sev["voice_fallbacks"]["attempts"], 1)
+    check("piper narration cache forgotten for the retry",
+          (wv2 / "narration.json").exists() or (wv2 / "chunks").exists(), False)
+
+    # dry-run rehearsals never fail the day nor spend budget
+    sev2 = fresh_state()
+    wv3 = Path(tempfile.mkdtemp())
+    (wv3 / "narration.json").write_text('{"engine": "piper"}')
+    orch.enforce_voice_quality(sev2, {"engine": "piper"}, wv3, dry_run=True)
+    check("dry-run is exempt (rehearsal)", (wv3 / "narration.json").exists(), True)
+    check("dry-run spent no retry budget", "voice_fallbacks" in sev2, False)
+
+    # exhausted budget ships degraded, cache kept
+    sev2["voice_fallbacks"] = {"date": date.today().isoformat(), "attempts": 99}
+    orch.enforce_voice_quality(sev2, {"engine": "piper"}, wv3, dry_run=False)
+    check("exhausted budget ships degraded (cache kept)",
+          (wv3 / "narration.json").exists(), True)
+
+    # neural narration passes untouched
+    orch.enforce_voice_quality(sev2, {"engine": "edge"}, wv3, dry_run=False)
+    check("neural narration passes untouched", True, True)
+finally:
+    ledger.STATE_PATH, ledger.BAK_PATH = orig_state, orig_bak
+    shutil.rmtree(tmpv, ignore_errors=True)
+
+# 8f. episodes remember their voice (triage without expired logs)
+stf = fresh_state()
+ledger.mark_voice_engine(stf, 1, "piper")
+check("episode records its voice engine",
+      stf["episodes"][0].get("voice_engine"), "piper")
+ledger.mark_voice_engine(stf, 999, "edge")
+check("unknown episode number is a no-op", True, True)
+
+# 8g. the workflow wiring: alert step, --voice-ok close, source markers
+va = build_steps.get("Alert on voice degradation", {})
+check("voice-degradation alert step exists", bool(va), True)
+check("voice alert greps the VOICE-ALERT marker",
+      "VOICE-ALERT:" in va.get("run", ""), True)
+check("voice alert fires even on failed cycles",
+      "always()" in va.get("if", ""), True)
+check("voice alert can write issues", "GH_TOKEN" in va.get("env", {}), True)
+cs = build_steps.get("Close resolved failure issues", {})
+check("issue closer passes --voice-ok only on neural days",
+      "--voice-ok" in cs.get("run", "") and "VOICE-ALERT" in cs.get("run", ""), True)
+orch_src = (ROOT / "src" / "orchestrator.py").read_text()
+check("orchestrator prints VOICE-ALERT on degraded days",
+      "VOICE-ALERT:" in orch_src, True)
+check("orchestrator fails the cycle before upload (retry ring)",
+      "VoiceQualityError" in orch_src, True)
+tts_src = (ROOT / "src" / "tts.py").read_text()
+check("tts raises the fallback flag in every degradation path",
+      tts_src.count("NEURAL_FALLBACK = True") >= 3, True)
 
 # ── summary ─────────────────────────────────────────────────────────
 

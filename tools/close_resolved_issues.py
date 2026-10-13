@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Close resolved failure Issues — the alert queue must stay clean.
+"""Close resolved alert Issues — the queue must stay clean.
 
 Every failed cycle auto-opens "Factory cycle failed — YYYY-MM-DD".
 The machine self-heals the next day, but the Issue stayed open
@@ -8,11 +8,18 @@ open issue that actually needs a human. This tool runs after every
 SUCCESSFUL cycle and closes failure issues whose date is strictly
 in the past (today's issue, if any, stays open — a same-day
 failure-recovery is still worth a glance; a clean day is the close
-signal). Pure best-effort: any gh/network error prints and exits 0
-so it can never fail the run that hosted it.
+signal).
+
+Voice-degraded issues ("Voice degraded — offline voice used — DATE",
+filed since the 2026-10-13 incident) close ONLY on a --voice-ok day:
+a day that itself narrated with the offline voice must never close
+yesterday's voice issue — the problem is still live.
+
+Pure best-effort: any gh/network error prints and exits 0 so it can
+never fail the run that hosted it.
 
 Usage (from the repo root, GH_TOKEN in the environment):
-    python3 tools/close_resolved_issues.py [--today 2026-10-08] [--dry-run]
+    python3 tools/close_resolved_issues.py [--today 2026-10-08] [--dry-run] [--voice-ok]
 """
 from __future__ import annotations
 
@@ -23,7 +30,13 @@ import subprocess
 import sys
 from datetime import date
 
-TITLE_RE = re.compile(r"Factory cycle failed — (\d{4}-\d{2}-\d{2})")
+ALERTS = (
+    # (gh search phrase, title date regex, closes on --voice-ok?)
+    ("Factory cycle failed",
+     re.compile(r"Factory cycle failed — (\d{4}-\d{2}-\d{2})"), False),
+    ("Voice degraded",
+     re.compile(r"Voice degraded — offline voice used — (\d{4}-\d{2}-\d{2})"), True),
+)
 
 
 def _gh(args: list[str]) -> str:
@@ -33,46 +46,52 @@ def _gh(args: list[str]) -> str:
     return r.stdout
 
 
-def _open_failure_issues() -> list[dict]:
+def _open_issues(phrase: str) -> list[dict]:
     out = _gh(["issue", "list", "--state", "open",
-               "--search", 'in:title "Factory cycle failed"',
+               "--search", f'in:title "{phrase}"',
                "--json", "number,title", "--limit", "100"])
     return json.loads(out or "[]")
 
 
-def close_resolved(today: str, dry_run: bool = False) -> list[int]:
-    """Close every open failure issue dated before `today`.
+def close_resolved(today: str, dry_run: bool = False,
+                   close_voice: bool = False) -> list[int]:
+    """Close every open alert issue dated before `today`.
 
+    close_voice=False (default): only failure issues close; voice
+    issues wait for a day that narrated with the neural voice.
     Returns the issue numbers it closed (empty list = nothing to do,
     or gh was unavailable — both are non-events)."""
-    try:
-        issues = _open_failure_issues()
-    except Exception as e:  # gh missing / no network / no perms
-        print(f"[issues] could not list failure issues: {e}")
-        return []
     closed: list[int] = []
-    for it in issues:
-        m = TITLE_RE.search(it.get("title", ""))
-        if not m:
-            continue
-        issue_day = m.group(1)
-        if issue_day >= today:
-            continue  # today's (or malformed) — leave it for a human
-        num = it["number"]
-        print(f"[issues] closing #{num} '{it['title']}' — the machine "
-              f"recovered (today {today})")
-        if dry_run:
-            closed.append(num)
+    for phrase, pattern, needs_voice_ok in ALERTS:
+        if needs_voice_ok and not close_voice:
             continue
         try:
-            _gh(["issue", "close", str(num), "--comment",
-                 "Auto-closed: a later cycle completed successfully — "
-                 "this failure was self-healed. (factory housekeeping)"])
-            closed.append(num)
-        except Exception as e:
-            print(f"[issues] failed to close #{num}: {e}")
+            issues = _open_issues(phrase)
+        except Exception as e:  # gh missing / no network / no perms
+            print(f"[issues] could not list '{phrase}' issues: {e}")
+            continue
+        for it in issues:
+            m = pattern.search(it.get("title", ""))
+            if not m:
+                continue
+            issue_day = m.group(1)
+            if issue_day >= today:
+                continue  # today's (or malformed) — leave it for a human
+            num = it["number"]
+            print(f"[issues] closing #{num} '{it['title']}' — the machine "
+                  f"recovered (today {today})")
+            if dry_run:
+                closed.append(num)
+                continue
+            try:
+                _gh(["issue", "close", str(num), "--comment",
+                     "Auto-closed: a later cycle completed successfully — "
+                     "this failure was self-healed. (factory housekeeping)"])
+                closed.append(num)
+            except Exception as e:
+                print(f"[issues] failed to close #{num}: {e}")
     if not closed:
-        print("[issues] no resolved failure issues to close")
+        print("[issues] no resolved alert issues to close")
     return closed
 
 
@@ -81,8 +100,11 @@ def main() -> int:
     ap.add_argument("--today", default=date.today().isoformat(),
                     help="reference date (for tests); default = today")
     ap.add_argument("--dry-run", action="store_true")
+    ap.add_argument("--voice-ok", action="store_true",
+                    help="today narrated with the neural voice — "
+                         "voice-degraded issues may close")
     args = ap.parse_args()
-    close_resolved(args.today, args.dry_run)
+    close_resolved(args.today, args.dry_run, args.voice_ok)
     return 0
 
 

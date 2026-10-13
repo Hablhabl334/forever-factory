@@ -30,6 +30,7 @@ import hashlib
 import json
 import re
 import subprocess
+import time
 import wave
 from pathlib import Path
 
@@ -42,6 +43,17 @@ SR = 22_050
 
 class EdgeSynthError(RuntimeError):
     """The neural endpoint failed after retries (caller falls back)."""
+
+
+# Voice-quality telemetry (2026-10-13 lesson): the neural endpoint can
+# refuse requests from a runner's IP range (Microsoft throttles
+# datacenter ranges intermittently), and the machine used to treat the
+# offline fallback as a perfectly successful day — two days of robotic
+# narration shipped before anyone noticed. The flag below travels with
+# the process; the orchestrator turns it into retries and alerts.
+NEURAL_FALLBACK = False            # True once a narration lands on Piper
+_EDGE_DECISION: str | None = None  # process-wide: chosen voice, or "DOWN"
+_EDGE_ALT_VOICES = ("en-US-AriaNeural", "en-US-GuyNeural", "en-GB-SoniaNeural")
 
 
 def split_chunks(text: str, max_words: int = 12) -> list[str]:
@@ -203,14 +215,63 @@ def _edge_synth_all(items: list[tuple[int, str]], chunks_dir: Path,
     asyncio.run(runner())
 
 
-def _edge_probe(vconf: dict, chunks_dir: Path) -> bool:
-    """One tiny live request decides the engine — never bet the day."""
+def _edge_probe_once(vconf: dict, chunks_dir: Path) -> bool:
+    """ONE fast live request (single try, 15 s cap): does the endpoint
+    answer for this voice right now? Cheap enough to call many times —
+    _edge_pick_voice() is the one that decides."""
+    import edge_tts
+
+    voice = vconf.get("edge_name", "en-US-AriaNeural")
+    mp3 = chunks_dir / "probe.mp3"
     try:
-        _edge_synth_all([(999_999, "Ready.")], chunks_dir, vconf)
-        (chunks_dir / "chunk_999999.wav").unlink(missing_ok=True)
-        return True
-    except EdgeSynthError:
+        async def _save() -> None:
+            com = edge_tts.Communicate("Ready.", voice)
+            await asyncio.wait_for(com.save(str(mp3)), timeout=15)
+
+        asyncio.run(_save())
+        return mp3.exists() and mp3.stat().st_size >= 200
+    except Exception:            # 403 / timeout / DNS — one bad moment, not a verdict
         return False
+    finally:
+        mp3.unlink(missing_ok=True)
+
+
+def _edge_pick_voice(vconf: dict, chunks_dir: Path,
+                     delays: tuple[float, ...] = (0.0, 10.0, 25.0)) -> str | None:
+    """Choose a WORKING neural voice: the configured voice first, then
+    known-good alternates, across a few patient rounds.
+
+    2026-10-13 lesson: the old code asked the endpoint ONCE and let a
+    single bad minute (IP throttle, service blip, voice retirement)
+    doom the whole day's voice. The picker retries across rounds and
+    voices before conceding, and its decision is cached process-wide:
+    every narration of one cycle shares ONE voice — the day never
+    switches mid-cycle, and the ladder costs its patience only once.
+
+    Returns the voice name to use, or None when the endpoint itself is
+    unreachable — the caller then falls back to offline Piper.
+    """
+    global _EDGE_DECISION
+    if _EDGE_DECISION is not None:
+        return None if _EDGE_DECISION == "DOWN" else _EDGE_DECISION
+
+    primary = str(vconf.get("edge_name", "en-US-AriaNeural"))
+    candidates: list[str] = []
+    for v in (primary, *(vconf.get("edge_fallback_voices") or _EDGE_ALT_VOICES)):
+        v = str(v)
+        if v and v not in candidates:
+            candidates.append(v)
+    for rnd, delay in enumerate(delays):
+        if delay:
+            time.sleep(delay)
+        for voice in candidates:
+            if _edge_probe_once({**vconf, "edge_name": voice}, chunks_dir):
+                _EDGE_DECISION = voice
+                return voice
+        print(f"  [voice] neural probe round {rnd + 1}/{len(delays)} failed "
+              f"— endpoint throttled or unreachable")
+    _EDGE_DECISION = "DOWN"
+    return None
 
 
 # ── offline engine (Piper) ───────────────────────────────────────────
@@ -263,10 +324,19 @@ def narrate(story: dict, work_dir: Path, model_path: Path | None = None,
     """
     work_dir.mkdir(parents=True, exist_ok=True)
     meta_file = work_dir / "narration.json"
+    vconf = dict(cfg()["voice"])
+    if rate_pct is not None:
+        vconf["edge_rate"] = rate_pct
+    engine_conf = str(vconf.get("engine", "auto")).lower()
     if meta_file.exists():
         try:
             meta = json.loads(meta_file.read_text())
             if meta.get("story_hash") == story.get("hash"):
+                # a resumed robotic narration is still a visible quality
+                # event — the flag must survive the cache short-circuit
+                if meta.get("engine") == "piper" and engine_conf != "piper":
+                    global NEURAL_FALLBACK
+                    NEURAL_FALLBACK = True
                 return meta
             # story changed underneath (audit-gate rerun) — stale cache
             chunks_dir = work_dir / "chunks"
@@ -276,9 +346,6 @@ def narrate(story: dict, work_dir: Path, model_path: Path | None = None,
         except json.JSONDecodeError:
             pass
 
-    vconf = dict(cfg()["voice"])
-    if rate_pct is not None:
-        vconf["edge_rate"] = rate_pct
     length_scale = float(vconf.get("length_scale", 1.45))
     sent_pause = float(vconf.get("sentence_pause", 0.4)) if sent_pause is None else sent_pause
     scene_pause = float(vconf.get("paragraph_pause", 0.7)) if scene_pause is None else scene_pause
@@ -299,12 +366,22 @@ def narrate(story: dict, work_dir: Path, model_path: Path | None = None,
             idx += 1
             plan.append({"scene": scene["n"], "text": text, "idx": idx})
 
-    # engine choice: config (auto/edge/piper) + live probe
-    engine_conf = str(vconf.get("engine", "auto")).lower()
+    # engine choice: config (auto/edge/piper) + the patient picker.
+    # 2026-10-13 lesson: one failed probe used to convert a single bad
+    # minute into a whole robotic day. The picker retries across rounds
+    # AND voices, and its decision is cached for the process so every
+    # narration of the cycle shares one consistent voice.
     engine = "piper" if engine_conf == "piper" else "edge"
-    if engine == "edge" and not _edge_probe(vconf, chunks_dir):
-        print("  [voice] neural endpoint unreachable — using offline Piper")
-        engine = "piper"
+    if engine == "edge":
+        voice_ok = _edge_pick_voice(vconf, chunks_dir)
+        if voice_ok is None:
+            print("  [voice] neural endpoint unreachable — using offline Piper")
+            NEURAL_FALLBACK = True
+            engine = "piper"
+        elif voice_ok != str(vconf.get("edge_name", "en-US-AriaNeural")):
+            print(f"  [voice] {vconf.get('edge_name')} unavailable — "
+                  f"narrating with {voice_ok}")
+            vconf["edge_name"] = voice_ok
 
     # engine consistency: never mix two voices in one narration
     marker = chunks_dir / "engine.txt"
@@ -327,6 +404,7 @@ def narrate(story: dict, work_dir: Path, model_path: Path | None = None,
                 if engine_conf != "piper":
                     print("  [voice] neural synth failed mid-run — "
                           "falling back to offline Piper (whole narration)")
+                    NEURAL_FALLBACK = True
                     engine = "piper"
                     _wipe_chunks(chunks_dir)
                     marker.write_text(engine)
