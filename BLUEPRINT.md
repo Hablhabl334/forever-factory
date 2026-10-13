@@ -503,7 +503,7 @@ machine look like".
 | Secrets | `YT_CLIENT_ID`, `YT_CLIENT_SECRET`, `YT_REFRESH_TOKEN` |
 | External clock | cron-job.org × 2 (19:00 + 19:25 UTC) + `factory-pinger` fine-grained PAT (Actions R/W only) |
 | Workflows | daily-factory (gate+build), watchdog, verify-token, reconsent, channel-check |
-| Deps (exact pins) | numpy 2.5.3 · Pillow 12.3.0 · PyYAML 6.0.3 · piper-tts 1.8.0 · edge-tts 7.2.8 |
+| Deps | numpy 2.5.3 · Pillow 12.3.0 · PyYAML 6.0.3 · piper-tts 1.8.0 (exact pins) · edge-tts >=7.3.1,<8 (living range — Microsoft rotates the TTS token scheme; the range self-heals) |
 | Content space | 273,301,428,924,195,840 distinct scripts, hash-ledgered |
 | Combination claim | "the factory never repeats" — mathematically for millions of years |
 | Cost | $0.00/month — free API quota + free public-repo Actions |
