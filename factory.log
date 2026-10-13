@@ -1,48 +1,28 @@
-[0;93m2026-10-13 19:02:04.631103929 [W:onnxruntime:Default, device_discovery.cc:95 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
-[stats] growth report 2026-10-13
-[stats]   total: 1324 views  (+125 since last report)
-[stats]      105 views  ·  Subscribe for more tips like this #psychology #relationship 
-[stats]       90 views  ·  Subscribe for more tips like this #psychology #relationship 
-[stats]       83 views  ·  Subscribe for more tips like this #psychology #relationship 
-[23] script: Why We Get Jealous (1130 words, hash d802aa025c)
-  [voice] neural endpoint unreachable — using offline Piper
-  [voice] offline Piper narration: 131 chunks
+[grid] booking 0 short slot(s) in the next 24h (free: none)
+[24] script: What Heartbreak Does to Your Brain (1188 words, hash 6188a5e50b)
+  [voice] neural narration: 132 chunks (en-US-JennyNeural)
   [voice] polished: presence EQ + gentle compression
-[23] narration: 569s, 131 caption chunks
-[23] long video: 587s, 53.0MB
-  [voice] neural endpoint unreachable — using offline Piper
-  [voice] offline Piper narration: 17 chunks
+[24] narration: 578s, 132 caption chunks
+[24] long video: 596s, 51.6MB
+  [voice] neural narration: 16 chunks (en-US-JennyNeural)
   [voice] polished: presence EQ + gentle compression
-  [short 1] 72s, 17 cards, 6.5MB
-  [voice] neural endpoint unreachable — using offline Piper
-  [voice] offline Piper narration: 16 chunks
+  [short 1] 66s, 16 cards, 5.7MB
+  [voice] neural narration: 18 chunks (en-US-JennyNeural)
   [voice] polished: presence EQ + gentle compression
-  [short 2] 65s, 16 cards, 6.1MB
-  [voice] neural endpoint unreachable — using offline Piper
-  [voice] offline Piper narration: 15 chunks
+  [short 2] 69s, 18 cards, 6.0MB
+  [voice] neural narration: 19 chunks (en-US-JennyNeural)
   [voice] polished: presence EQ + gentle compression
-  [short 3] 71s, 15 cards, 7.0MB
-  [voice] neural endpoint unreachable — using offline Piper
-  [voice] offline Piper narration: 17 chunks
+  [short 3] 73s, 19 cards, 6.4MB
+  [voice] neural narration: 20 chunks (en-US-JennyNeural)
   [voice] polished: presence EQ + gentle compression
-  [short 4] 70s, 17 cards, 6.7MB
-  [voice] neural endpoint unreachable — using offline Piper
-  [voice] offline Piper narration: 17 chunks
+  [short 4] 72s, 20 cards, 6.3MB
+  [voice] neural narration: 18 chunks (en-US-JennyNeural)
   [voice] polished: presence EQ + gentle compression
-  [short 5] 69s, 17 cards, 6.5MB
-  [voice] neural endpoint unreachable — using offline Piper
-  [voice] offline Piper narration: 17 chunks
+  [short 5] 68s, 18 cards, 6.2MB
+  [voice] neural narration: 19 chunks (en-US-JennyNeural)
   [voice] polished: presence EQ + gentle compression
-  [short 6] 63s, 17 cards, 6.0MB
-[23] thumbnail + 4 shorts ready
-  [youtube] uploaded long: rZmcYgpuTeY (publishAt 2026-10-15T20:00:00+03:00)
-  [youtube] setting thumbnail thumbnail.png (54 KB) on rZmcYgpuTeY
-  [youtube] thumbnail set
-  [youtube] uploaded short: QlrDJJ-5IQc (publishAt 2026-10-14T00:00:00+03:00)
-  [youtube] uploaded short: z5TxIROSwXY (publishAt 2026-10-14T06:00:00+03:00)
-  [youtube] uploaded short: FLsNtF1DBCE (publishAt 2026-10-14T12:00:00+03:00)
-  [youtube] uploaded short: sa-mzDthuJk (publishAt 2026-10-14T18:00:00+03:00)
-[playlist] 1 long video(s) not in the playlist yet
-[playlist] ep23 long added (rZmcYgpuTeY)
-  ✓ episode 23: Why We Get Jealous
+  [short 6] 70s, 19 cards, 6.3MB
+[24] thumbnail + 0 shorts ready
+[24] DRY-RUN: would upload long at now
+  - episode 24: What Heartbreak Does to Your Brain (dry-run)
 combination space: 273,301,428,924,195,840 stories — the factory never repeats
