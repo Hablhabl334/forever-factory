@@ -1,28 +1,40 @@
-[grid] booking 0 short slot(s) in the next 24h (free: none)
-[24] script: What Heartbreak Does to Your Brain (1188 words, hash 6188a5e50b)
-  [voice] neural narration: 132 chunks (en-US-JennyNeural)
+[stats] growth report 2026-10-14
+[stats]   total: 1443 views  (+119 since last report)
+[stats]      110 views  ·  Subscribe for more tips like this #psychology #relationship 
+[stats]       90 views  ·  Subscribe for more tips like this #psychology #relationship 
+[stats]       83 views  ·  Subscribe for more tips like this #psychology #relationship 
+[24] script: Attachment Styles, Finally Explained (1202 words, hash e9238cf4e2)
+  [voice] neural narration: 133 chunks (en-US-JennyNeural)
   [voice] polished: presence EQ + gentle compression
-[24] narration: 578s, 132 caption chunks
-[24] long video: 596s, 51.6MB
-  [voice] neural narration: 16 chunks (en-US-JennyNeural)
-  [voice] polished: presence EQ + gentle compression
-  [short 1] 66s, 16 cards, 5.7MB
+[24] narration: 591s, 133 caption chunks
+[24] long video: 609s, 53.7MB
   [voice] neural narration: 18 chunks (en-US-JennyNeural)
   [voice] polished: presence EQ + gentle compression
-  [short 2] 69s, 18 cards, 6.0MB
-  [voice] neural narration: 19 chunks (en-US-JennyNeural)
+  [short 1] 72s, 18 cards, 6.2MB
+  [voice] neural narration: 17 chunks (en-US-JennyNeural)
   [voice] polished: presence EQ + gentle compression
-  [short 3] 73s, 19 cards, 6.4MB
-  [voice] neural narration: 20 chunks (en-US-JennyNeural)
+  [short 2] 73s, 17 cards, 5.9MB
+  [voice] neural narration: 17 chunks (en-US-JennyNeural)
   [voice] polished: presence EQ + gentle compression
-  [short 4] 72s, 20 cards, 6.3MB
+  [short 3] 68s, 17 cards, 5.8MB
+  [voice] neural narration: 17 chunks (en-US-JennyNeural)
+  [voice] polished: presence EQ + gentle compression
+  [short 4] 69s, 17 cards, 6.0MB
+  [voice] neural narration: 15 chunks (en-US-JennyNeural)
+  [voice] polished: presence EQ + gentle compression
+  [short 5] 63s, 15 cards, 5.4MB
   [voice] neural narration: 18 chunks (en-US-JennyNeural)
   [voice] polished: presence EQ + gentle compression
-  [short 5] 68s, 18 cards, 6.2MB
-  [voice] neural narration: 19 chunks (en-US-JennyNeural)
-  [voice] polished: presence EQ + gentle compression
-  [short 6] 70s, 19 cards, 6.3MB
-[24] thumbnail + 0 shorts ready
-[24] DRY-RUN: would upload long at now
-  - episode 24: What Heartbreak Does to Your Brain (dry-run)
+  [short 6] 69s, 18 cards, 5.7MB
+[24] thumbnail + 4 shorts ready
+  [youtube] uploaded long: orbgL2cMeLg (publishAt 2026-10-16T20:00:00+03:00)
+  [youtube] setting thumbnail thumbnail.png (60 KB) on orbgL2cMeLg
+  [youtube] thumbnail set
+  [youtube] uploaded short: reUGaXNmCj0 (publishAt 2026-10-15T00:00:00+03:00)
+  [youtube] uploaded short: l-dL8a7S0n8 (publishAt 2026-10-15T06:00:00+03:00)
+  [youtube] uploaded short: zzbuQEX4mIY (publishAt 2026-10-15T12:00:00+03:00)
+  [youtube] uploaded short: a5KbqMoOxCY (publishAt 2026-10-15T18:00:00+03:00)
+[playlist] 1 long video(s) not in the playlist yet
+[playlist] ep24 long added (orbgL2cMeLg)
+  ✓ episode 24: Attachment Styles, Finally Explained
 combination space: 273,301,428,924,195,840 stories — the factory never repeats
