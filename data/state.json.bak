@@ -517,6 +517,34 @@
     "4ca02c0f73fde82a"
    ],
    "voice_engine": "edge"
+  },
+  {
+   "n": 25,
+   "title": "Becoming Emotionally Secure",
+   "hash": "fb143113fd6e796c",
+   "seed": 37319292868793,
+   "date": "2026-10-15",
+   "status": "done",
+   "ids": {
+    "long": "65eOn98dpLw",
+    "shorts": [
+     "R9EuY6Fk1SE",
+     "I_UEbRXrDmw",
+     "xmYP9w32f7o",
+     "_N20Lyredqs"
+    ],
+    "thumbnail": "2026-10-15",
+    "playlist": "2026-10-15"
+   },
+   "shashes": [
+    "f3a21293f433fbb2",
+    "4aef8022fb749bb3",
+    "2b0fa9deec5e719d",
+    "3b605956fbc6794a",
+    "6416366c7f06f02e",
+    "7f037e6327428fe8"
+   ],
+   "voice_engine": "edge"
   }
  ],
  "story_hashes": [
@@ -543,18 +571,19 @@
   "7878e75cbca98d4b",
   "fb61c1afa4012036",
   "d802aa025c356290",
-  "e9238cf4e200216b"
+  "e9238cf4e200216b",
+  "fb143113fd6e796c"
  ],
  "quota": {
-  "date": "2026-10-14",
+  "date": "2026-10-15",
   "units_used": 8311
  },
- "last_run": "2026-10-14",
+ "last_run": "2026-10-15",
  "stats": {
-  "videos_published": 87,
-  "days_active": 19
+  "videos_published": 92,
+  "days_active": 20
  },
- "_last_days_active": "2026-10-14",
+ "_last_days_active": "2026-10-15",
  "analytics": [
   {
    "date": "2026-09-29",
@@ -2583,6 +2612,99 @@
     "FLsNtF1DBCE": 12,
     "sa-mzDthuJk": 1
    }
+  },
+  {
+   "date": "2026-10-15",
+   "total_views": 1489,
+   "videos": {
+    "_oF4dTUGy24": 4,
+    "TRY0QZfgjBE": 5,
+    "Iocf2nxJuOY": 7,
+    "UG4z7_XQkjM": 2,
+    "4tbBV--cTsI": 7,
+    "h4B5GXfmjLg": 0,
+    "kvFpuUEz8QA": 0,
+    "TnJJf_3-Zg8": 1,
+    "3ZR4l08XxyE": 2,
+    "Zjf7Ne2z_4U": 0,
+    "pSRPxXnyAZg": 0,
+    "Mir11YcoWAw": 0,
+    "WSM7pIy8kdE": 1,
+    "DA0tiB7QrlY": 1,
+    "DVAoVnK5FtA": 0,
+    "git-4p8E9xY": 0,
+    "fkFhtGfsx_0": 0,
+    "n_GOahvID_Y": 0,
+    "8m3PZ44NW2c": 0,
+    "k8PzqtNVynI": 0,
+    "GRna0qAiWEg": 0,
+    "BJrBRuMoosA": 0,
+    "Mw2D_4ot0G8": 0,
+    "HjkTdKjH49s": 0,
+    "L7DJ2Nu2uo8": 0,
+    "5wQ0wmS7GHQ": 0,
+    "ISod_uguaR8": 14,
+    "ElMNPkRma0Q": 3,
+    "ZwoNP3tA_zI": 0,
+    "aC8V7uEF1zA": 0,
+    "57GaUcN6Xfo": 3,
+    "4CsBqeLACzY": 2,
+    "8Dg8yh488N8": 1,
+    "HpRLqiAR7ks": 1,
+    "NEpaHpN_z2Y": 1,
+    "cPlgv-IXN-w": 2,
+    "qKXpRXZHuvs": 8,
+    "yr5iRQg5U3o": 3,
+    "4eYAQRFA3Uk": 5,
+    "xRVhNWoBfn4": 8,
+    "y_9VDnn9-7k": 5,
+    "pFsqkgWkXEA": 23,
+    "vhZWjuHPpws": 20,
+    "Q9rx7zBltoQ": 19,
+    "peGtkMIl7LI": 35,
+    "wuDMgIJeUMw": 1,
+    "EYP4N0ZEMNo": 48,
+    "jOebUbltVQI": 39,
+    "7KhHlXIUN7k": 26,
+    "Xe0be2KbpWE": 85,
+    "cPHiDsx-92g": 0,
+    "ITMeCzxJV8I": 75,
+    "IYRX-R2hRDs": 26,
+    "JwtqNVDtuLE": 64,
+    "C-9pvasCZDY": 2,
+    "9okYnbx-WIY": 36,
+    "Ze0INcnm6G4": 46,
+    "3BY2x38hY8w": 1,
+    "WY-8CRAIEpY": 40,
+    "ok5iJVUFjsg": 90,
+    "QIU2EQ99Ejg": 43,
+    "7cNLdF5VNmY": 39,
+    "vrhDMCOHeCM": 0,
+    "wnhUBSBCweg": 28,
+    "cMnefUlDjG0": 58,
+    "wGBIp_obHz0": 67,
+    "6gnLZ_47Bko": 110,
+    "xJNNTbamvJk": 3,
+    "9STiEcejZts": 79,
+    "AEzUpgRNo24": 25,
+    "D0zJvuBOdUQ": 34,
+    "uOOhcB6-YBY": 31,
+    "6pTMjsED0VY": 1,
+    "qKuIhuET60Q": 28,
+    "Kke2b8XAUrc": 40,
+    "xoJJLIANTVk": 27,
+    "AV4KJybKLAA": 1,
+    "rZmcYgpuTeY": 0,
+    "QlrDJJ-5IQc": 39,
+    "z5TxIROSwXY": 26,
+    "FLsNtF1DBCE": 18,
+    "sa-mzDthuJk": 7,
+    "orbgL2cMeLg": 0,
+    "reUGaXNmCj0": 4,
+    "l-dL8a7S0n8": 2,
+    "zzbuQEX4mIY": 16,
+    "a5KbqMoOxCY": 1
+   }
   }
  ],
  "discovery": {
@@ -2657,22 +2779,24 @@
   "d63c4af305d44dcb",
   "5c65abdc8c6c94aa",
   "c6a71811a787fb06",
-  "4ca02c0f73fde82a"
+  "4ca02c0f73fde82a",
+  "f3a21293f433fbb2",
+  "4aef8022fb749bb3",
+  "2b0fa9deec5e719d",
+  "3b605956fbc6794a",
+  "6416366c7f06f02e",
+  "7f037e6327428fe8"
  ],
- "last_run_ts": 1791993638,
+ "last_run_ts": 1792079202,
  "slots": {
   "long": [
-   "2026-10-12T20:00:00+03:00",
    "2026-10-13T20:00:00+03:00",
    "2026-10-14T20:00:00+03:00",
    "2026-10-15T20:00:00+03:00",
-   "2026-10-16T20:00:00+03:00"
+   "2026-10-16T20:00:00+03:00",
+   "2026-10-17T20:00:00+03:00"
   ],
   "short": [
-   "2026-10-13T00:00:00+03:00",
-   "2026-10-13T06:00:00+03:00",
-   "2026-10-13T12:00:00+03:00",
-   "2026-10-13T18:00:00+03:00",
    "2026-10-14T00:00:00+03:00",
    "2026-10-14T06:00:00+03:00",
    "2026-10-14T12:00:00+03:00",
@@ -2680,7 +2804,11 @@
    "2026-10-15T00:00:00+03:00",
    "2026-10-15T06:00:00+03:00",
    "2026-10-15T12:00:00+03:00",
-   "2026-10-15T18:00:00+03:00"
+   "2026-10-15T18:00:00+03:00",
+   "2026-10-16T00:00:00+03:00",
+   "2026-10-16T06:00:00+03:00",
+   "2026-10-16T12:00:00+03:00",
+   "2026-10-16T18:00:00+03:00"
   ]
  }
 }
