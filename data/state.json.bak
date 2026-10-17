@@ -600,6 +600,30 @@
     "0891ad1f65ef7657"
    ],
    "voice_engine": "edge"
+  },
+  {
+   "n": 28,
+   "title": "How to Get Over a Breakup",
+   "hash": "ba38d4237eb44dbf",
+   "seed": 56497868203255,
+   "date": "2026-10-17",
+   "status": "done",
+   "ids": {
+    "long": "rBcCY3QpTq8",
+    "shorts": [
+     "EUk4eyrsG_A"
+    ],
+    "thumbnail": "2026-10-17"
+   },
+   "shashes": [
+    "c27252171145578f",
+    "62f57b3e9baa1da7",
+    "45d842da4d5748e6",
+    "be3721afda914602",
+    "7a358640f885cf92",
+    "473d35390874b18c"
+   ],
+   "voice_engine": "edge"
   }
  ],
  "story_hashes": [
@@ -629,15 +653,16 @@
   "e9238cf4e200216b",
   "fb143113fd6e796c",
   "32e9fd5610eb5ac2",
-  "03885cadf7703fd0"
+  "03885cadf7703fd0",
+  "ba38d4237eb44dbf"
  ],
  "quota": {
   "date": "2026-10-17",
-  "units_used": 6659
+  "units_used": 9964
  },
  "last_run": "2026-10-17",
  "stats": {
-  "videos_published": 101,
+  "videos_published": 103,
   "days_active": 22
  },
  "_last_days_active": "2026-10-17",
@@ -2963,6 +2988,113 @@
     "ey4SiEoqsFI": 112,
     "3lgFu7TlRD4": 0
    }
+  },
+  {
+   "date": "2026-10-17",
+   "total_views": 1645,
+   "videos": {
+    "_oF4dTUGy24": 4,
+    "TRY0QZfgjBE": 5,
+    "Iocf2nxJuOY": 7,
+    "UG4z7_XQkjM": 2,
+    "4tbBV--cTsI": 7,
+    "h4B5GXfmjLg": 0,
+    "kvFpuUEz8QA": 0,
+    "TnJJf_3-Zg8": 1,
+    "3ZR4l08XxyE": 2,
+    "Zjf7Ne2z_4U": 0,
+    "pSRPxXnyAZg": 0,
+    "Mir11YcoWAw": 0,
+    "WSM7pIy8kdE": 1,
+    "DA0tiB7QrlY": 1,
+    "DVAoVnK5FtA": 0,
+    "git-4p8E9xY": 0,
+    "fkFhtGfsx_0": 0,
+    "n_GOahvID_Y": 0,
+    "8m3PZ44NW2c": 0,
+    "k8PzqtNVynI": 0,
+    "GRna0qAiWEg": 0,
+    "BJrBRuMoosA": 0,
+    "Mw2D_4ot0G8": 0,
+    "HjkTdKjH49s": 0,
+    "L7DJ2Nu2uo8": 0,
+    "5wQ0wmS7GHQ": 0,
+    "ISod_uguaR8": 14,
+    "ElMNPkRma0Q": 3,
+    "ZwoNP3tA_zI": 0,
+    "aC8V7uEF1zA": 0,
+    "57GaUcN6Xfo": 3,
+    "4CsBqeLACzY": 2,
+    "8Dg8yh488N8": 1,
+    "HpRLqiAR7ks": 1,
+    "NEpaHpN_z2Y": 1,
+    "cPlgv-IXN-w": 2,
+    "qKXpRXZHuvs": 8,
+    "yr5iRQg5U3o": 3,
+    "4eYAQRFA3Uk": 5,
+    "xRVhNWoBfn4": 8,
+    "y_9VDnn9-7k": 5,
+    "pFsqkgWkXEA": 23,
+    "vhZWjuHPpws": 20,
+    "Q9rx7zBltoQ": 19,
+    "peGtkMIl7LI": 35,
+    "wuDMgIJeUMw": 1,
+    "EYP4N0ZEMNo": 48,
+    "jOebUbltVQI": 39,
+    "7KhHlXIUN7k": 26,
+    "Xe0be2KbpWE": 86,
+    "cPHiDsx-92g": 0,
+    "ITMeCzxJV8I": 75,
+    "IYRX-R2hRDs": 26,
+    "JwtqNVDtuLE": 64,
+    "C-9pvasCZDY": 2,
+    "9okYnbx-WIY": 36,
+    "Ze0INcnm6G4": 47,
+    "3BY2x38hY8w": 1,
+    "WY-8CRAIEpY": 40,
+    "ok5iJVUFjsg": 90,
+    "QIU2EQ99Ejg": 44,
+    "7cNLdF5VNmY": 40,
+    "vrhDMCOHeCM": 0,
+    "wnhUBSBCweg": 28,
+    "cMnefUlDjG0": 58,
+    "wGBIp_obHz0": 67,
+    "6gnLZ_47Bko": 110,
+    "xJNNTbamvJk": 3,
+    "9STiEcejZts": 79,
+    "AEzUpgRNo24": 25,
+    "D0zJvuBOdUQ": 34,
+    "uOOhcB6-YBY": 31,
+    "6pTMjsED0VY": 3,
+    "qKuIhuET60Q": 28,
+    "Kke2b8XAUrc": 40,
+    "xoJJLIANTVk": 27,
+    "AV4KJybKLAA": 1,
+    "rZmcYgpuTeY": 0,
+    "QlrDJJ-5IQc": 39,
+    "z5TxIROSwXY": 26,
+    "FLsNtF1DBCE": 18,
+    "sa-mzDthuJk": 6,
+    "orbgL2cMeLg": 1,
+    "reUGaXNmCj0": 2,
+    "l-dL8a7S0n8": 1,
+    "zzbuQEX4mIY": 23,
+    "a5KbqMoOxCY": 4,
+    "65eOn98dpLw": 0,
+    "R9EuY6Fk1SE": 1,
+    "I_UEbRXrDmw": 4,
+    "xmYP9w32f7o": 0,
+    "_N20Lyredqs": 1,
+    "Nwa-iPnEtW4": 0,
+    "bBCNumrSosA": 16,
+    "ZmbFvBJjBVQ": 1,
+    "ey4SiEoqsFI": 120,
+    "3lgFu7TlRD4": 0,
+    "R3tncS1qf_4": 0,
+    "XWFGj1Jqroc": 0,
+    "OUwbUOC5z50": 0,
+    "Oom5CTar8AI": 0
+   }
   }
  ],
  "discovery": {
@@ -3055,7 +3187,13 @@
   "df075e6706e1efae",
   "c5de132efa189275",
   "20d0dd0a75cf1c23",
-  "0891ad1f65ef7657"
+  "0891ad1f65ef7657",
+  "c27252171145578f",
+  "62f57b3e9baa1da7",
+  "45d842da4d5748e6",
+  "be3721afda914602",
+  "7a358640f885cf92",
+  "473d35390874b18c"
  ],
  "last_run_ts": 1792247340,
  "slots": {
@@ -3067,7 +3205,6 @@
    "2026-10-19T20:00:00+03:00"
   ],
   "short": [
-   "2026-10-15T18:00:00+03:00",
    "2026-10-16T00:00:00+03:00",
    "2026-10-16T06:00:00+03:00",
    "2026-10-16T12:00:00+03:00",
@@ -3078,7 +3215,8 @@
    "2026-10-17T18:00:00+03:00",
    "2026-10-18T00:00:00+03:00",
    "2026-10-18T06:00:00+03:00",
-   "2026-10-18T12:00:00+03:00"
+   "2026-10-18T12:00:00+03:00",
+   "2026-10-18T18:00:00+03:00"
   ]
  }
 }
