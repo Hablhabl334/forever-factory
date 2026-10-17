@@ -1,28 +1,28 @@
-[0;93m2026-10-17 21:34:05.499570910 [W:onnxruntime:Default, device_discovery.cc:95 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
+[0;93m2026-10-17 22:35:30.922156017 [W:onnxruntime:Default, device_discovery.cc:95 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
 [grid] booking 1 short slot(s) in the next 24h (free: 2026-10-19T00:00:00+03:00)
 [29] script: How Trust Is Actually Built (1187 words, hash 768ae229b1)
   [voice] local neural narration: 149 chunks (Kokoro af_heart)
   [voice] polished: presence EQ + gentle compression
 [29] narration: 489s, 149 caption chunks
-[29] long video: 507s, 48.8MB
+[29] long video: 507s, 47.5MB
   [voice] local neural narration: 26 chunks (Kokoro af_heart)
   [voice] polished: presence EQ + gentle compression
-  [short 1] 61s, 26 cards, 6.4MB
+  [short 1] 61s, 26 cards, 5.3MB
   [voice] local neural narration: 25 chunks (Kokoro af_heart)
   [voice] polished: presence EQ + gentle compression
-  [short 2] 66s, 25 cards, 6.9MB
+  [short 2] 66s, 25 cards, 5.8MB
   [voice] local neural narration: 25 chunks (Kokoro af_heart)
   [voice] polished: presence EQ + gentle compression
-  [short 3] 55s, 25 cards, 5.8MB
+  [short 3] 55s, 25 cards, 4.9MB
   [voice] local neural narration: 31 chunks (Kokoro af_heart)
   [voice] polished: presence EQ + gentle compression
-  [short 4] 70s, 31 cards, 7.1MB
+  [short 4] 70s, 31 cards, 6.2MB
   [voice] local neural narration: 26 chunks (Kokoro af_heart)
   [voice] polished: presence EQ + gentle compression
-  [short 5] 57s, 26 cards, 6.0MB
+  [short 5] 57s, 26 cards, 4.7MB
   [voice] local neural narration: 25 chunks (Kokoro af_heart)
   [voice] polished: presence EQ + gentle compression
-  [short 6] 57s, 25 cards, 5.6MB
+  [short 6] 57s, 25 cards, 4.8MB
 [29] thumbnail + 1 shorts ready
 [29] DRY-RUN: would upload long at 2026-10-20T20:00:00+03:00
 [29] DRY-RUN: would upload short 1 at 2026-10-19T00:00:00+03:00
