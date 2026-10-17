@@ -1,38 +1,30 @@
-[stats] growth report 2026-10-17
-[stats]   total: 1645 views  (+7 since last report)
-[stats]      120 views  ·  Subscribe for more tips like this #psychology #relationship 
-[stats]      110 views  ·  Subscribe for more tips like this #psychology #relationship 
-[stats]       90 views  ·  Subscribe for more tips like this #psychology #relationship 
-[grid] booking 1 short slot(s) in the next 24h (free: 2026-10-18T18:00:00+03:00)
-[28] script: How to Get Over a Breakup (1163 words, hash ba38d4237e)
-  [voice] neural narration: 126 chunks (en-US-JennyNeural)
+[0;93m2026-10-17 21:34:05.499570910 [W:onnxruntime:Default, device_discovery.cc:95 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
+[grid] booking 1 short slot(s) in the next 24h (free: 2026-10-19T00:00:00+03:00)
+[29] script: How Trust Is Actually Built (1187 words, hash 768ae229b1)
+  [voice] local neural narration: 149 chunks (Kokoro af_heart)
   [voice] polished: presence EQ + gentle compression
-[28] narration: 559s, 126 caption chunks
-[28] long video: 577s, 51.7MB
-  [voice] neural narration: 19 chunks (en-US-JennyNeural)
+[29] narration: 489s, 149 caption chunks
+[29] long video: 507s, 48.8MB
+  [voice] local neural narration: 26 chunks (Kokoro af_heart)
   [voice] polished: presence EQ + gentle compression
-  [short 1] 73s, 19 cards, 6.9MB
-  [voice] neural narration: 15 chunks (en-US-JennyNeural)
+  [short 1] 61s, 26 cards, 6.4MB
+  [voice] local neural narration: 25 chunks (Kokoro af_heart)
   [voice] polished: presence EQ + gentle compression
-  [short 2] 68s, 15 cards, 5.9MB
-  [voice] neural narration: 16 chunks (en-US-JennyNeural)
+  [short 2] 66s, 25 cards, 6.9MB
+  [voice] local neural narration: 25 chunks (Kokoro af_heart)
   [voice] polished: presence EQ + gentle compression
-  [short 3] 70s, 16 cards, 6.1MB
-  [voice] neural narration: 18 chunks (en-US-JennyNeural)
+  [short 3] 55s, 25 cards, 5.8MB
+  [voice] local neural narration: 31 chunks (Kokoro af_heart)
   [voice] polished: presence EQ + gentle compression
-  [short 4] 73s, 18 cards, 6.4MB
-  [voice] neural narration: 15 chunks (en-US-JennyNeural)
+  [short 4] 70s, 31 cards, 7.1MB
+  [voice] local neural narration: 26 chunks (Kokoro af_heart)
   [voice] polished: presence EQ + gentle compression
-  [short 5] 63s, 15 cards, 5.6MB
-  [voice] neural narration: 18 chunks (en-US-JennyNeural)
+  [short 5] 57s, 26 cards, 6.0MB
+  [voice] local neural narration: 25 chunks (Kokoro af_heart)
   [voice] polished: presence EQ + gentle compression
-  [short 6] 70s, 18 cards, 6.4MB
-[28] thumbnail + 1 shorts ready
-  [youtube] uploaded long: rBcCY3QpTq8 (publishAt now)
-  [youtube] setting thumbnail thumbnail.png (60 KB) on rBcCY3QpTq8
-  [youtube] thumbnail set
-  [youtube] uploaded short: EUk4eyrsG_A (publishAt 2026-10-18T18:00:00+03:00)
-[playlist] 1 long video(s) not in the playlist yet
-[playlist] quota low — finishing next cycle
-  ✓ episode 28: How to Get Over a Breakup
+  [short 6] 57s, 25 cards, 5.6MB
+[29] thumbnail + 1 shorts ready
+[29] DRY-RUN: would upload long at 2026-10-20T20:00:00+03:00
+[29] DRY-RUN: would upload short 1 at 2026-10-19T00:00:00+03:00
+  - episode 29: How Trust Is Actually Built (dry-run)
 combination space: 273,301,428,924,195,840 stories — the factory never repeats
