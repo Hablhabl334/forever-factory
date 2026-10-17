@@ -641,3 +641,67 @@ VARIANTS: dict[str, dict] = {
         ],
     },
 }
+
+
+# ── the viral layer (2026-10-16 upgrade) ─────────────────────────────
+# Two proven Short-form levers, generated offline like everything else:
+#
+# OPENERS: 2-5 word pattern interrupts prepended to every Short's
+# narration. The first ~2 seconds decide the swipe; a tiny bold
+# declaration buys the attention the hook needs. Drawn per-Short from
+# this pool by the seeded RNG (deterministic, no-repeat by script hash).
+OPENERS = [
+    "Read this twice.",
+    "This one will sting.",
+    "Nobody warns you about this.",
+    "You already know this feeling.",
+    "This explains everything.",
+    "Stop scrolling for this.",
+    "This is about you. Yes, you.",
+    "Remember this word.",
+    "This changed how I see love.",
+    "You needed this today.",
+    "Don't ignore this one.",
+    "This is your sign.",
+    "One truth, plain words.",
+    "This hits different at 2 a.m.",
+    "Bold statement incoming.",
+    "Careful — this is accurate.",
+    "You'll think about this later.",
+    "File this under 'oh'.",
+    "This is why you're tired.",
+    "Small sentence, heavy truth.",
+    "This is not advice. It's bigger.",
+    "You felt this before you knew it.",
+    "This will follow you today.",
+    "Proof that love has logic.",
+    "This is your brain on love.",
+    "Send this to the right person.",
+    "The internet won't say this.",
+    "This deserves 30 seconds.",
+    "Not a theory — a pattern.",
+    "This is the part nobody says.",
+]
+
+# COMMENT_QUESTIONS: engagement closers placed right before the CTA.
+# Comments are the strongest ranking signal a Short can earn — every
+# script now ends by handing the viewer a one-line reason to answer.
+# {term} slots in the concept's psychology term when it fits naturally;
+# the plain variants work for any concept.
+COMMENT_QUESTIONS = [
+    "Which one have you been — honestly? Tell me below.",
+    "Have you lived this? I read every comment.",
+    "Which side of this are you on? Say it below.",
+    "Does this hit home? Tell me I'm not the only one.",
+    "Drop a heart if this named something you felt.",
+    "Who do you know in this pattern? Tag them carefully.",
+    "Have you seen {term} up close? Tell me below.",
+    "Which one are you in this — be honest in the comments.",
+    "Did this one sting a little? Then comment 'felt'.",
+    "What's your version of this story? Tell me below.",
+    "One word in the comments: chaser or retreater?",
+    "Would you send this to them? Tell me why not.",
+    "How many times did this happen to you? Count below.",
+    "If this named your pattern, say 'same' below.",
+    "Know someone who needs this? The comments are open.",
+]

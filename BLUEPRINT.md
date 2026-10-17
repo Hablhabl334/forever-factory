@@ -74,6 +74,7 @@ Parts 1–11.)
 | Oct 8 | **The self-healing grid**: gate watches the publish grid (not just the clock) — an unbooked slot that expires before the next cycle is a HOLE that triggers a heal run; cycles book what the grid owes (up to 6 shorts) | The Oct 8 18:00 hole taught the machine to heal itself — 4 shorts + 1 long every day, guaranteed |
 | Oct 8 | **The five-year durability audit**: 6 silent-death holes found and fixed — gate-crash alerting, `.bak` memory ladder, bounded analytics, `[auth] CREDENTIALS REJECTED` banner, exactly-pinned dependencies, auto-closing failure issues | The machine is now contracted for years: every failure is loud, every alert self-heals, nothing grows unbounded |
 | Oct 13 | **The voice incident**: the neural TTS endpoint refused the runner's IP range; the offline fallback counted as SUCCESS — two robotic days shipped silently. Fixed: edge-tts range-pinned (>=7.3.1,<8), patient multi-voice probe, voice-degraded cycles FAIL before upload so backup slots retry on fresh runner IPs, and a "Voice degraded" Issue fires the moment quality drops | The blueprint's loudest lesson: **availability is not quality**. A fallback that silently succeeds is worse than a failure — make every quality regression as loud as an outage |
+| Oct 16 | **The viral upgrade**: the voice went fully LOCAL — Kokoro-82M vendored in the repo (~120 MB, MIT, CPU ~2x realtime, no API/network at all, af_heart); hooks engineered for the algorithm (every Short opens with a 2-6 word pattern interrupt + closes with a comment-bait question; longs + descriptions carry it too); shorts pacing tightened (9-word karaoke cards, ~2.5 s rhythm, word band recalibrated to the measured 150 wpm) | Three growth levers with one theme: **own the whole stack**. The voice can never go dark; the first two seconds and the comment section — the two signals the Shorts feed actually ranks on — are now scripted, offline, forever |
 | Oct 9–12 | **Clean operation**: 3+ consecutive 100%-green days, all cycles producing 4 shorts + 1 long, auto-closing old issues, memory committing nightly | The proof state — this is what "working" looks like in the Actions tab |
 
 **The five design laws** (everything above collapses into these):
@@ -494,7 +495,7 @@ machine look like".
 | Daily output | 1 long (~9 min) + 4 Shorts (45–90 s), heal capacity 6 |
 | Publish grid (Cairo) | Shorts 00:00 / 06:00 / 12:00 / 18:00 · long 20:00 |
 | Cycle time | 19:00 UTC (22:00 Cairo) + 13 backup triggers |
-| Voice | edge-tts `en-US-JennyNeural`, rate −3%/−1%, jitter on; Piper `en_US-lessac-medium` offline fallback |
+| Voice | PRIMARY: Kokoro-82M local (vendored `assets/voice_kokoro/`, af_heart, speed 0.96, jitter 4.5) · BACKUP: edge-tts `en-US-JennyNeural` · LAST RESORT: Piper `en_US-lessac-medium` (loud, retried) |
 | Music | numpy synth, −23 dB bed, 0.55 duck depth, mood-matched |
 | Video | 1080p30, CRF 21 veryfast, Ken Burns overscan 1.25 |
 | Shorts | 1080×1920, fixed title "Subscribe for more tips like this" |

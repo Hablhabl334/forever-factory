@@ -18,8 +18,17 @@
 # rotation) while still excluding a hypothetical API-breaking 8.0.
 # Voice failures are LOUD now: patient multi-voice probes, retries on
 # fresh runner IPs, then a voice-degraded GitHub Issue.
+#
+# 2026-10-16 upgrade: kokoro-onnx is the PRIMARY voice — a local,
+# offline neural TTS (models vendored in assets/voice_kokoro/, MIT
+# license, CPU ~2x realtime). It needs no network and no service, so
+# the exact pin is safe forever; its deps (onnxruntime, phonemizer,
+# dlinfo) are shared with / compatible with the piper stack already
+# pinned here. Note: phonemizer needs the libespeak-ng1 system
+# package (installed in the workflow's apt step).
 numpy==2.5.3
 Pillow==12.3.0
 PyYAML==6.0.3
 piper-tts==1.8.0
+kokoro-onnx==0.6.1
 edge-tts>=7.3.1,<8

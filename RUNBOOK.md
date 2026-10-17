@@ -544,3 +544,62 @@ token rotation anyway. Both failure modes are now covered.)
 **The one-minute check that the voice is healthy today:** the newest
 run's factory.log should contain `[voice] neural narration` and no
 `VOICE-ALERT`.
+
+## Part 13 — The viral upgrade: local human voice + hook engineering (2026-10-16)
+
+**What changed and why.** Three owner requests in one: the voice was
+"still a little robotic", the scripts "not hooking", and growth was
+flat (10 subs after a month, plus the view dip from the Oct 13
+incident's algorithmic penalty). All three answers shipped together,
+still with zero AI APIs and zero paid services.
+
+### 1. The voice: Kokoro-82M, vendored and local
+
+The primary engine is now **Kokoro-82M** (`assets/voice_kokoro/`,
+~120 MB, MIT license) — a genuinely human-class neural voice that
+runs **on the runner's CPU at ~2x realtime**, entirely offline:
+no endpoint, no key, no account, no network. The voice cannot go
+dark while the repo exists — the machine and its voice share one
+fate. Config: `voice.kokoro_voice: af_heart` (warm female; the
+sandbox audition set lives in the session's download dir).
+
+Engine ladder (`voice.engine: auto`):
+1. **kokoro** — local, primary. Never sets the degradation flag.
+2. **edge-tts** — free neural backup (if the vendored files are
+   ever missing/broken). Still patient, multi-voice, process-cached.
+3. **piper** — last resort, LOUD: cycles fail before upload and
+   retry on fresh runners; a "Voice degraded" Issue fires.
+
+One new system dependency: `libespeak-ng1` (kokoro's phonemizer
+G2P). The workflow's apt step installs it only when missing —
+same fail-fast budget as ffmpeg. `kokoro-onnx==0.6.1` is exact-
+pinned (it's a local library, not a live service — exact is safe
+forever).
+
+**Recovery**: if a future cycle logs `local Kokoro unusable`, it
+narrated via edge-tts (still neural). Only "offline Piper" lines
+are degraded days — the Part 12 playbook applies unchanged.
+
+### 2. The hooks: first 2 seconds + the comment section
+
+* Every Short script now OPENS with a 2-6 word pattern interrupt
+  drawn from `OPENERS` (30 lines, unique within an episode).
+* Every Short script now CLOSES with an engagement question from
+  `COMMENT_QUESTIONS` (15 lines) right before the CTA — comments
+  are the strongest ranking signal a Short can earn.
+* The long video's outro speaks a fresh question; every
+  description (long + shorts) opens with it. The shorts' locked
+  title rule is untouched.
+
+### 3. The pacing
+
+Shorts caption chunks went 12 -> 9 words (a card change every
+~2.5 s — a visual reset that holds retention), sentence pauses
+0.30 -> 0.26 s, and the script word band was recalibrated for the
+local voice's measured ~150 wpm: 125-205 words = 50-82 s of
+speech, inside the owner's 45 s floor / 90 s cap.
+
+**Verification** (2026-10-16): all four suites green (41 + grid
+heal + durability + 51 new viral checks); full local short render:
+53 s, 22 cards, 1080x1920@30fps, "local neural narration (Kokoro
+af_heart)".

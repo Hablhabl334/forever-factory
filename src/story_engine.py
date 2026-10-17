@@ -29,8 +29,8 @@ import hashlib
 import re
 
 from .content_data import CTA_LINE, CONCEPTS, SERIES_NAME, TOPICS
-from .content_variants import (DAYS, NAMES, PLACES, TIMES, TOPIC_MOODS,
-                               VARIANTS)
+from .content_variants import (COMMENT_QUESTIONS, DAYS, NAMES, OPENERS,
+                               PLACES, TIMES, TOPIC_MOODS, VARIANTS)
 from .rng import FactoryRNG
 
 N_SEGMENTS = 8          # concepts per long video
@@ -149,20 +149,30 @@ def _fact_sentence(key: str, rng: FactoryRNG) -> str:
     return rng.pick(body or _sentences(CONCEPTS[key]["explain"]))
 
 
-def _shorts_script(key: str, c: dict, rng: FactoryRNG) -> tuple[str, int, str]:
-    """Assemble a Short script whose NARRATION runs ~60-80 s of speech.
+def _shorts_script(key: str, c: dict, rng: FactoryRNG,
+                    opener: str | None = None) -> tuple[str, int, str]:
+    """Assemble a Short script whose NARRATION runs ~45-80 s of speech.
 
     Owner rule: the VOICE itself must exceed 45 s and END with the
     video — a Short is never padded with silent seconds. Script,
     animation, narration and music all end together. Calibration is
-    MEASURED, not estimated: Jenny's effective pace at the shorts
-    rate is ~117 wpm (157 words -> 80.8 s in a live test), so the
-    word band is 105-160 words (~54-82 s), comfortably inside the
-    45 s floor and the 90 s (1:30) cap the owner allows.
+    MEASURED, not estimated: the local neural voice's effective pace
+    is ~150 wpm (Kokoro af_heart at 0.96 speed), so the word band is
+    125-205 words (~50-82 s), comfortably inside the 45 s floor and
+    the 90 s (1:30) cap the owner allows.
+
+    Viral layer (2026-10-16): every script opens with a 2-5 word
+    pattern interrupt (OPENERS) and closes with an engagement
+    question (COMMENT_QUESTIONS) right before the CTA — the first
+    two seconds and the comment section are the two strongest
+    ranking signals a Short can earn, and both are now scripted.
+
     Returns (script, words, hook) — the hook doubles as the Short's
     first-card headline."""
     surface = _render_surface(key, rng, slotted_only=True)
     reveal = _reveal_line(c["term"], rng)
+    opener = opener or rng.pick(OPENERS)
+    question = rng.pick(COMMENT_QUESTIONS).replace("{term}", c["term"])
 
     # mechanism facts: distinct sentences from the explain block
     body = [s for s in _sentences(c["explain"])
@@ -181,33 +191,36 @@ def _shorts_script(key: str, c: dict, rng: FactoryRNG) -> tuple[str, int, str]:
             break
 
     # floor: keep appending unused mechanism sentences until the
-    # speech comfortably exceeds 45 s (~105 words at the measured
-    # 117-wpm effective pace)
+    # speech comfortably exceeds 45 s (~125 words at the measured
+    # ~150-wpm effective pace)
     extra: list[str] = []
-    words = (len(surface["hook"].split()) + len(reveal.split())
+    words = (len(opener.split()) + len(surface["hook"].split())
+             + len(reveal.split())
              + sum(len(f.split()) for f in facts)
              + len(surface["example"].split()) + len(example2.split())
-             + len(surface["takeaway"].split()) + len(CTA_LINE.split()))
+             + len(surface["takeaway"].split()) + len(question.split())
+             + len(CTA_LINE.split()))
     for s in rng.shuffle([s for s in body if s not in facts]):
-        if words >= 105:
+        if words >= 125:
             break
         extra.append(s)
         words += len(s.split())
 
-    parts = [surface["hook"], reveal,
+    parts = [opener, surface["hook"], reveal,
              facts[0] if facts else "",
              surface["example"],
              facts[1] if len(facts) > 1 else "",
              *extra,
              example2,
              surface["takeaway"],
+             question,
              CTA_LINE]
     script = " ".join(p for p in parts if p)
 
     # ceiling (~82 s at the measured pace): shed weight — extra
     # facts, then the second example's later beats, then the second
     # example entirely
-    while len(script.split()) > 160:
+    while len(script.split()) > 205:
         if extra:
             extra.pop()
         elif example2:
@@ -220,13 +233,14 @@ def _shorts_script(key: str, c: dict, rng: FactoryRNG) -> tuple[str, int, str]:
             facts = facts[:1]
         else:
             break
-        parts = [surface["hook"], reveal,
+        parts = [opener, surface["hook"], reveal,
                  facts[0] if facts else "",
                  surface["example"],
                  facts[1] if len(facts) > 1 else "",
                  *extra,
                  example2,
                  surface["takeaway"],
+                 question,
                  CTA_LINE]
         script = " ".join(p for p in parts if p)
     words = len(script.split())
@@ -284,21 +298,32 @@ def _build(seed: int) -> dict:
                       "overlay": ["psychologists call this", c["term"]]},
         })
 
-    # -- the outro (spoken CTA) ----------------------------------------
+    # the episode's engagement line (comments are a ranking signal
+    # there too) — drawn fresh per episode, spoken in the outro and
+    # surfaced in the descriptions
+    question = rng.pick(COMMENT_QUESTIONS).replace(
+        "{term}", CONCEPTS[picked[0]]["term"])
+
+    # -- the outro (spoken CTA + engagement question) ------------------
     outro = (f"That was {len(picked)} pieces of psychology about "
              f"{topic['title'].lower()}. If even one of them made your own "
              f"love life suddenly make sense, you already got your money's "
-             f"worth — this one was free. {CTA_LINE}")
+             f"worth — this one was free. {question} {CTA_LINE}")
     scenes.append({
         "n": len(scenes) + 1, "id": "outro_card", "narration": outro,
         "image": {"kind": "outro_card", "topic": topic["title"]},
     })
 
     # -- the 4 Shorts (fresh surface draws, never the long's picks) ----
+    # openers/questions draw WITHOUT replacement within an episode:
+    # same-day videos never open with the same line twice
+    opener_deck = rng.shuffle(list(OPENERS))
     for j, key in enumerate(rng.some(picked, min(N_SHORTS, len(picked))),
                             start=1):
         c = CONCEPTS[key]
-        script, words, hook = _shorts_script(key, c, rng)
+        script, words, hook = _shorts_script(
+            key, c, rng,
+            opener=opener_deck[(j - 1) % len(opener_deck)])
         shorts.append({
             "n": j, "concept": key, "band": topic["band"],
             "hook": hook, "term": c["term"],
@@ -324,6 +349,7 @@ def _build(seed: int) -> dict:
         "seed": seed,
         "atoms": {"topic": topic["title"],
                   "concepts": [CONCEPTS[k]["term"] for k in picked]},
+        "question": question,
         "scenes": scenes,
         "shorts": shorts,
         "short_hashes": [s["shash"] for s in shorts],

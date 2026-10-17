@@ -406,6 +406,18 @@ from src import orchestrator as orch  # noqa: E402
 def _reset_voice():
     tts_mod.NEURAL_FALLBACK = False
     tts_mod._EDGE_DECISION = None
+    # 2026-10-16 ladder: 'auto' prefers the LOCAL Kokoro engine. For
+    # the edge/piper fallback tests below, simulate a machine whose
+    # vendored Kokoro files are gone (the new test_viral_upgrades.py
+    # covers the kokoro-present paths).
+    tts_mod._kokoro_available_real = tts_mod.kokoro_available
+    tts_mod.kokoro_available = lambda vconf: False
+
+
+def _restore_kokoro():
+    if getattr(tts_mod, "_kokoro_available_real", None):
+        tts_mod.kokoro_available = tts_mod._kokoro_available_real
+        tts_mod._kokoro_available_real = None
 
 
 # 8a. the picker: primary voice dead, alternate alive -> alternate
@@ -502,6 +514,7 @@ finally:
     tts_mod.cfg = _real_cfg_tts
     sys.modules.pop("piper", None)
     _reset_voice()
+    _restore_kokoro()
     shutil.rmtree(wv, ignore_errors=True)
 
 # 8e. voice policy + the fail-BEFORE-upload gate

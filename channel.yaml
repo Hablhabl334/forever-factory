@@ -63,8 +63,19 @@ story:
   safety_max_attempts: 8            # audit gate regeneration attempts
 
 voice:
-  engine: "auto"                 # auto = neural voice first, offline Piper fallback
-  edge_name: "en-US-JennyNeural"  # the most conversational free neural voice (warm, human)
+  # ENGINE LADDER (auto): 1) Kokoro-82M — vendored INSIDE this repo
+  # (assets/voice_kokoro/), fully local/offline, ~2x realtime CPU,
+  # human-class neural voice, MIT license. No API, no key, no network:
+  # the voice cannot go dark while the repo exists. 2) edge-tts — free
+  # neural backup if the Kokoro files are ever missing. 3) Piper —
+  # offline last resort (loudly reported; cycles retry before shipping).
+  engine: "auto"
+  kokoro_voice: "af_heart"        # the flagship warm neural voice (local)
+  kokoro_speed: 0.96              # long videos: calm, intimate delivery
+  kokoro_jitter: 4.5              # per-sentence pace jitter (human prosody)
+  kokoro_model: "assets/voice_kokoro/kokoro-v1.0.int8.onnx"
+  kokoro_voices: "assets/voice_kokoro/voices-v1.0.bin"
+  edge_name: "en-US-JennyNeural"  # neural backup (free, no key)
   # 2026-10-13 incident hardening: if the configured voice is refused
   # (retired, throttled), the machine narrates with the first of these
   # that answers — a neural alternate beats an offline downgrade.

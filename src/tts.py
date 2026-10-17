@@ -1,27 +1,30 @@
 """Narration — a voice that sounds like a person, not a machine.
 
-PRIMARY ENGINE: edge-tts — the neural TTS service behind the Edge
-browser's read-aloud feature. No API key, no account, no cost. The
-default voice (en-US-AriaNeural) is a warm, natural human register —
-conversational pacing, real prosody, nothing robotic about it.
+PRIMARY ENGINE: Kokoro-82M (vendored, assets/voice_kokoro/) — a
+local, offline neural TTS that runs on CPU at ~2x realtime. No API,
+no key, no account, no network — the flagship open voice (af_heart)
+is genuinely human-class (TTS-Arena's top open model; MIT license).
+Because the model files live inside this repo, the voice can never
+go dark: the machine and its voice share one fate.
 
-Two naturalness tricks on top of the neural voice:
-  * per-chunk rate jitter (deterministic, seeded by the text hash):
-    every sentence gets a slightly different pace, the way humans
-    speak — no metronome cadence;
-  * the config's calm base rate (-6%) keeps the delivery intimate.
+BACKUP ENGINE: edge-tts — the neural service behind the Edge
+browser's read-aloud (also free, no key). Used if the Kokoro files
+are ever missing/broken so quality stays neural.
 
-FALLBACK ENGINE: the vendored offline Piper voice (assets/voice/).
-If the neural endpoint is ever unreachable — network hiccup, service
-retirement, a runner in a blocked region — the factory automatically
-switches mid-run, re-renders the narration with Piper, and the day
-still ships. The channel never goes silent because one service did.
+LAST-RESORT ENGINE: the vendored offline Piper voice (assets/voice/).
+Landing here is a VISIBLE quality event (NEURAL_FALLBACK -> the
+orchestrator retries the day; the workflow files a Voice-degraded
+Issue). The channel never goes silently robotic again (2026-10-13
+lesson).
 
-Both engines synthesize chunk by chunk (one sentence, or a comma-
+Human-prosody layer (all engines): per-chunk rate jitter +
+per-sentence pause jitter, deterministic from the text — every
+sentence breathes a little differently, no metronome cadence.
+
+All engines synthesize chunk by chunk (one sentence, or a comma-
 split piece of a long one), so the audio duration of every caption
-is EXACT — captions can never drift out of sync. Soft pauses are
-inserted between sentences and scenes. Each chunk is cached as
-work/chunks/chunk_NNN.wav, so runs are resumable.
+is EXACT — captions can never drift out of sync. Each chunk is
+cached as work/chunks/chunk_NNN.wav, so runs are resumable.
 """
 from __future__ import annotations
 
@@ -45,6 +48,10 @@ class EdgeSynthError(RuntimeError):
     """The neural endpoint failed after retries (caller falls back)."""
 
 
+class KokoroSynthError(RuntimeError):
+    """The local Kokoro engine failed (caller falls back to edge-tts)."""
+
+
 # Voice-quality telemetry (2026-10-13 lesson): the neural endpoint can
 # refuse requests from a runner's IP range (Microsoft throttles
 # datacenter ranges intermittently), and the machine used to treat the
@@ -57,7 +64,11 @@ _EDGE_ALT_VOICES = ("en-US-AriaNeural", "en-US-GuyNeural", "en-GB-SoniaNeural")
 
 
 def split_chunks(text: str, max_words: int = 12) -> list[str]:
-    """Split narration into caption chunks: sentences, then long ones at commas."""
+    """Split narration into caption chunks: sentences, then long ones at
+    commas, then any still-overlong comma-free clause at a word boundary
+    (shorts use max_words=9 — a hook like 'The person who chases and
+    the person who retreats always find each other' has no comma, but
+    the karaoke cards still need the faster rhythm)."""
     text = re.sub(r"\s+", " ", text).strip()
     sentences = [s.strip() for s in re.split(r"(?<=[.!?])\s+", text) if s.strip()]
     chunks: list[str] = []
@@ -71,7 +82,16 @@ def split_chunks(text: str, max_words: int = 12) -> list[str]:
         cur: list[str] = []
         for part in parts:
             pw = part.split()
-            if len(cur) + len(pw) <= max_words or not cur:
+            if len(pw) > max_words:
+                # a comma-free clause longer than the budget (first or
+                # mid-sentence): flush the group, then split it at word
+                # boundaries so every caption card stays small
+                if cur:
+                    chunks.append(" ".join(cur))
+                    cur = []
+                for k in range(0, len(pw), max_words):
+                    chunks.append(" ".join(pw[k:k + max_words]))
+            elif len(cur) + len(pw) <= max_words or not cur:
                 cur.extend(pw)
             else:
                 chunks.append(" ".join(cur))
@@ -154,6 +174,94 @@ def _polish_narration(wav_path: Path) -> None:
         print("  [voice] polished: presence EQ + gentle compression")
     except (json.JSONDecodeError, subprocess.TimeoutExpired, KeyError, ValueError):
         tmp.unlink(missing_ok=True)
+
+
+# ── primary engine (Kokoro-82M, local) ───────────────────────────────
+
+def kokoro_model_paths(vconf: dict) -> tuple[Path, Path]:
+    """Vendored model locations (config-overridable)."""
+    m = Path(vconf.get("kokoro_model") or
+             repo_path("assets", "voice_kokoro", "kokoro-v1.0.int8.onnx"))
+    v = Path(vconf.get("kokoro_voices") or
+             repo_path("assets", "voice_kokoro", "voices-v1.0.bin"))
+    return m, v
+
+
+def kokoro_available(vconf: dict) -> bool:
+    """Are the vendored Kokoro files present (and non-empty)?"""
+    m, v = kokoro_model_paths(vconf)
+    return m.exists() and m.stat().st_size > 10_000_000 \
+        and v.exists() and v.stat().st_size > 1_000_000
+
+
+def _kokoro_speed_for(vconf: dict, rate_pct: str | None) -> float:
+    """Config base speed (or an edge-style rate override) -> kokoro
+    speed factor. edge '-3%' (slower) maps to kokoro speed 0.97."""
+    if rate_pct is not None:
+        return max(0.5, min(2.0, 1.0 + _parse_pct(rate_pct) / 100.0))
+    base = float(vconf.get("kokoro_speed", 0.96))
+    return max(0.5, min(2.0, base))
+
+
+def _f32_to_wav_22050(samples, sr: int, wav: Path) -> None:
+    """float32 samples (any rate) -> 22.05 kHz 16-bit mono wav, via
+    ffmpeg (one short process per chunk, ~50 ms — resumable chunks
+    stay self-contained)."""
+    import numpy as np
+    import tempfile
+    pcm = (np.clip(samples, -1.0, 1.0) * 32767.0).astype(np.int16)
+    with tempfile.NamedTemporaryFile(suffix=".wav", delete=False) as tf:
+        tmp = Path(tf.name)
+    try:
+        with wave.open(str(tmp), "wb") as w:
+            w.setnchannels(1)
+            w.setsampwidth(2)
+            w.setframerate(sr)
+            w.writeframes(pcm.tobytes())
+        proc = subprocess.run(
+            ["ffmpeg", "-hide_banner", "-loglevel", "error", "-nostdin",
+             "-y", "-i", str(tmp), "-ar", str(SR), "-ac", "1",
+             "-c:a", "pcm_s16le", str(wav)],
+            stdin=subprocess.DEVNULL, capture_output=True, timeout=120)
+        if proc.returncode != 0:
+            raise KokoroSynthError(
+                f"kokoro chunk resample failed: {proc.stderr.decode()[-300:]}")
+    finally:
+        tmp.unlink(missing_ok=True)
+
+
+def _kokoro_synth_all(items: list[tuple[int, str]], chunks_dir: Path,
+                      vconf: dict, rate_pct: str | None = None) -> None:
+    """Synthesize (idx, text) chunks with the local neural voice.
+    Per-chunk speed jitter keeps the cadence human. Loads the model
+    once per call (~1 s) — chunks are small, so this is fast."""
+    from kokoro_onnx import Kokoro
+
+    m, v = kokoro_model_paths(vconf)
+    kokoro = Kokoro(str(m), str(v))
+    voice = str(vconf.get("kokoro_voice", "af_heart"))
+    base_speed = _kokoro_speed_for(vconf, rate_pct)
+    jitter = float(vconf.get("kokoro_jitter", 4.5))
+
+    for idx, text in items:
+        speed = base_speed * (1.0 + _jitter_pct(text, jitter) / 100.0)
+        speed = max(0.5, min(2.0, speed))
+        audio, sr = kokoro.create(
+            text, voice=voice, speed=round(speed, 4), lang="en-us")
+        _f32_to_wav_22050(audio, sr, chunks_dir / f"chunk_{idx:03d}.wav")
+
+
+def _kokoro_probe(vconf: dict) -> bool:
+    """One tiny local synthesis decides the engine — no network."""
+    try:
+        probe_dir = repo_path("work") / "_kokoro_probe"
+        probe_dir.mkdir(parents=True, exist_ok=True)
+        _kokoro_synth_all([(999_998, "Ready.")], probe_dir, vconf)
+        (probe_dir / "chunk_999998.wav").unlink(missing_ok=True)
+        return True
+    except Exception as exc:
+        print(f"  [voice] local Kokoro probe failed: {exc}")
+        return False
 
 
 # ── neural engine (edge-tts) ─────────────────────────────────────────
@@ -311,16 +419,18 @@ def _wipe_chunks(chunks_dir: Path) -> None:
 def narrate(story: dict, work_dir: Path, model_path: Path | None = None,
             sent_pause: float | None = None,
             scene_pause: float | None = None,
-            rate_pct: str | None = None) -> dict:
+            rate_pct: str | None = None,
+            chunk_words: int | None = None) -> dict:
     """Synthesize the whole narration. Idempotent & resumable:
     each chunk is cached as work/chunks/chunk_NNN.wav; a completed run
     writes work/narration.json which short-circuits re-runs.
 
-    Optional pause overrides (shorts use tighter pacing) and an
-    optional neural rate override (shorts run slightly brisker).
+    Optional pause overrides (shorts use tighter pacing), an optional
+    neural rate override (shorts run slightly brisker), and an optional
+    caption-chunk width (shorts use smaller chunks = faster cards).
 
     Returns {"chunks": [...], "scene_durations": [...], "total": float,
-             "engine": "edge"|"piper"}.
+             "engine": "kokoro"|"edge"|"piper"}.
     """
     work_dir.mkdir(parents=True, exist_ok=True)
     meta_file = work_dir / "narration.json"
@@ -361,17 +471,25 @@ def narrate(story: dict, work_dir: Path, model_path: Path | None = None,
     # plan: every caption chunk in order
     plan: list[dict] = []
     idx = 0
+    cw = int(chunk_words) if chunk_words else 12
     for scene in story["scenes"]:
-        for text in split_chunks(scene["narration"]):
+        for text in split_chunks(scene["narration"], max_words=cw):
             idx += 1
             plan.append({"scene": scene["n"], "text": text, "idx": idx})
 
-    # engine choice: config (auto/edge/piper) + the patient picker.
-    # 2026-10-13 lesson: one failed probe used to convert a single bad
-    # minute into a whole robotic day. The picker retries across rounds
-    # AND voices, and its decision is cached for the process so every
-    # narration of the cycle shares one consistent voice.
+    # engine choice: kokoro (local) -> edge (network) -> piper (last
+    # resort, loud). 2026-10-13 lesson: one failed probe used to
+    # convert a single bad minute into a whole robotic day. The
+    # patient picker retries across rounds AND voices, and its
+    # decision is cached for the process so every narration of the
+    # cycle shares one consistent voice.
     engine = "piper" if engine_conf == "piper" else "edge"
+    if engine == "edge" and engine_conf != "edge" \
+            and kokoro_available(vconf):
+        engine = "kokoro"
+    if engine == "kokoro" and not _kokoro_probe(vconf):
+        print("  [voice] local Kokoro unusable — trying edge-tts")
+        engine = "edge"
     if engine == "edge":
         voice_ok = _edge_pick_voice(vconf, chunks_dir)
         if voice_ok is None:
@@ -394,6 +512,19 @@ def narrate(story: dict, work_dir: Path, model_path: Path | None = None,
     missing = [p for p in plan
                if not (chunks_dir / f"chunk_{p['idx']:03d}.wav").exists()]
     if missing:
+        if engine == "kokoro":
+            try:
+                _kokoro_synth_all([(p["idx"], p["text"]) for p in missing],
+                                  chunks_dir, vconf, rate_pct=rate_pct)
+                print(f"  [voice] local neural narration: {len(missing)} chunks "
+                      f"(Kokoro {vconf.get('kokoro_voice', 'af_heart')})")
+            except KokoroSynthError:
+                print("  [voice] Kokoro failed mid-run — falling back to "
+                      "edge-tts (whole narration, one consistent voice)")
+                engine = "edge"
+                _wipe_chunks(chunks_dir)
+                marker.write_text(engine)
+                missing = plan
         if engine == "edge":
             try:
                 _edge_synth_all([(p["idx"], p["text"]) for p in missing],

@@ -135,6 +135,7 @@ def long_metadata(story: dict, narration: dict) -> dict:
         f"Psychology of love explained in plain words — {n} lessons on "
         f"{story['title'].lower()}. Relationship tips that actually change "
         f"how you love.\n\n"
+        f"\U0001f4ac {story.get('question', 'Which lesson hit home?')}\n\n"
         f"\"{story['hook']}\"\n\n"
         f"What you'll learn:\n"
         + "\n".join(f"  {i+1}. {term}" for i, term in enumerate(story["atoms"]["concepts"]))
@@ -155,7 +156,13 @@ def long_metadata(story: dict, narration: dict) -> dict:
 
 def short_metadata(story: dict, short: dict) -> dict:
     """FIXED title + FIXED tags (the owner's growth strategy)."""
+    # First line = the hook question: the visible fold of the
+    # description is engagement bait, not boilerplate (comments are
+    # the strongest ranking signal a Short earns).
+    from .content_variants import COMMENT_QUESTIONS
+    q = story.get("question") or COMMENT_QUESTIONS[0]
     desc = (
+        f"{q}\n\n"
         f"{SHORT_HASHTAGS}\n\n"
         f"New love psychology shorts every day — {story['topic_label']}.\n"
         f"The full video is on the channel.\n\n"

@@ -134,14 +134,16 @@ def render_shorts(story: dict, work_dir: Path, out_dir: Path) -> list[Path]:
         clips_dir = sw / "clips"
         clips_dir.mkdir(exist_ok=True)
 
-        # 1. narration (cached; brisk pace + tighter pauses for shorts).
-        # The cache key includes the script hash: if the script ever
-        # changes underneath, the narration re-renders (never stale).
+        # 1. narration (cached; brisk pace + tighter pauses + smaller
+        # caption chunks for shorts — a card change every ~2 s is a
+        # visual reset that holds retention). The cache key includes
+        # the script hash: if the script ever changes underneath, the
+        # narration re-renders (never stale).
         mini = {"hash": f"{story['hash']}-{short['shash'][:10]}",
                 "scenes": [{"n": 1, "id": "short", "narration": short["script"]}]}
         rate = cfg()["voice"].get("edge_rate_shorts")
-        narration = tts.narrate(mini, sw, sent_pause=0.30, scene_pause=0.30,
-                                rate_pct=rate)
+        narration = tts.narrate(mini, sw, sent_pause=0.26, scene_pause=0.30,
+                                rate_pct=rate, chunk_words=9)
         # Owner rule: the VOICE carries the whole video — no silent
         # seconds, the script ends WITH the video. Scripts are built
         # ~150+ words (≈55 s) so this almost never triggers; if the

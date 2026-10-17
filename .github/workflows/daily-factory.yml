@@ -126,16 +126,22 @@ jobs:
           python-version: "3.12"
           cache: pip
 
-      - name: Ensure ffmpeg
+      - name: Ensure ffmpeg + espeak-ng
         run: |
-          if ! which ffmpeg; then
-            # Oct 7 19:00 UTC run: apt stalled for 25+ minutes on a
-            # slow mirror and would have burned the full 120-min job
-            # timeout. Fail fast instead — the alert fires, the next
-            # slot retries on a fresh runner. (A normal install is
-            # ~60-90s; these budgets are generous by comparison.)
+          # ffmpeg: the render pipeline. libespeak-ng1: the shared
+          # library kokoro's phonemizer G2P links against (the PRIMARY
+          # voice is local/offline — this is its only system dep).
+          # Oct 7 19:00 UTC run: apt stalled for 25+ minutes on a
+          # slow mirror and would have burned the full 120-min job
+          # timeout. Fail fast instead — the alert fires, the next
+          # slot retries on a fresh runner. (A normal install is
+          # ~60-90s; these budgets are generous by comparison.)
+          MISSING=""
+          command -v ffmpeg >/dev/null || MISSING="ffmpeg $MISSING"
+          ldconfig -p 2>/dev/null | grep -q libespeak-ng.so.1 || MISSING="libespeak-ng1 $MISSING"
+          if [ -n "$MISSING" ]; then
             sudo timeout 300 apt-get update -qq
-            sudo timeout 480 apt-get install -y -qq ffmpeg
+            sudo timeout 480 apt-get install -y -qq $MISSING
           fi
 
       - name: Install dependencies
