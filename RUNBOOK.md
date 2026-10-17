@@ -603,3 +603,78 @@ speech, inside the owner's 45 s floor / 90 s cap.
 heal + durability + 51 new viral checks); full local short render:
 53 s, 22 cards, 1080x1920@30fps, "local neural narration (Kokoro
 af_heart)".
+
+## Part 14 — The character rig + locked camera (2026-10-18, owner request)
+
+**What changed and why.** The owner asked for the next visual leap:
+characters that BLINK and move their ARMS and LEGS as real
+animation, a background that is completely STATIC ("not zooming out
+or in and moving right or left"), more motion overall — no AI APIs,
+nothing deleted, only additions, and the text overlay of the script
+must never be touched. All shipped in the v2.1 rig upgrade.
+
+### 1. The articulated rig (src/anim.py + src/art_engine.py)
+
+Each character is now redrawn every frame (pure PIL, ~4 ms/frame)
+through `draw_figure(rig=...)`:
+
+* **planted feet** — the feet never slide; the hips sway above
+  them, so the sway reads as a real weight shift, never a float
+* **heel lift** — the free leg's heel lifts a touch at the sway
+  extreme, knee bowing forward (a half-step)
+* **breathing** — the chest compresses and rises above the hips
+* **torso lean** — the shoulders lean past the hips (a C-curve)
+* **articulated arms** — pivot at the shoulders, swing on
+  independent phases, end in real hands
+* **the reach** — once per loop the inner arm extends gently
+  toward the partner (the couple's signature almost-touch; the
+  two characters never reach at the same time)
+* **head + hair** — the head drifts on its neck and nods; the
+  hair follows automatically
+* **gaze** — the eyes glance toward and past the partner on a
+  slow cycle, on top of the emotion look
+* **blinks** — unchanged from v2.0 (2-4 s apart, never in unison)
+
+Every motion is an integer number of cycles per loop and every
+gesture envelope is exactly zero at the loop seam, so the encoded
+frame loop stays perfectly seamless. Six anim styles remain, each
+now with a rig intensity multiplier (lively gestures bigger, sad
+beats stay almost still).
+
+### 2. The locked camera (src/render.py)
+
+Scene cards render under a **static camera** by default
+(`video.camera: "static"`): no zoompan, no scale, no crop — the
+background is pixel-stable while the characters live in front of
+it. The legacy Ken Burns drift remains available at
+`video.camera: "kenburns"` (nothing deleted — a one-line restore).
+The title/end cards (no characters, no script text) keep their
+classic gentle drift so the video never has a dead-still moment.
+
+### 3. Untouched surfaces (owner's hard rules)
+
+* **The text overlay** — composited LAST from its own transparent
+  layer, after every character draw; the ASS caption burn is also
+  after the camera stage. Verified by tests: the text zone is
+  pixel-identical on every frame.
+* **The couple's locked appearance**, the art style, the schedule,
+  the voice, the story engine, the upload path — all unchanged.
+
+### 4. The kill-switches (both default ON)
+
+```yaml
+video:
+  camera: "static"   # or "kenburns" — the pre-v2.1 drift
+  rig: true          # or false — the classic whole-sprite motion
+```
+
+`rig: false` + `camera: "kenburns"` reproduces the exact pre-rig
+renderer (regression-tested to the pixel).
+
+**Verification** (2026-10-18): new 30-check suite
+`scripts/test_rig_upgrade.py` (legacy pixel-equality, seam
+exactness, static-camera proof, text-zone immutability, real clip
+render) + durability suite + viral suite all green; a full local
+production Short rendered clean (68 s, 33 cards, Kokoro af_heart,
+rig + static camera, 120 s render); VLM quality gate on the
+finished video: 8.5/10, "high-quality, publishable asset".

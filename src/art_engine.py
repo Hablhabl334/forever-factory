@@ -13,6 +13,7 @@ Everything drawn procedurally with PIL — zero APIs, zero licenses.
 """
 from __future__ import annotations
 
+import math
 from pathlib import Path
 
 from PIL import Image, ImageDraw, ImageFilter, ImageFont
@@ -227,16 +228,21 @@ def _eye_state(emotion: str) -> str:
 def _face(d: ImageDraw.ImageDraw, hx: float, hy: float, s: float,
           emotion: str, facing: int, feature=INK, iris=(96, 56, 42),
           eyes: str = "open", skin=(242, 212, 178),
-          blush=(246, 168, 150)) -> None:
+          blush=(246, 168, 150),
+          gaze: tuple[float, float] = (0.0, 0.0)) -> None:
     """Face with REAL eyes: white sclera, colored iris, pupil and a
     specular highlight — they look toward the partner, not into the
-    void. `eyes` = "open" | "half" | "closed" (blink/lid states)."""
+    void. `eyes` = "open" | "half" | "closed" (blink/lid states).
+    `gaze` = (x, y) in -1..1 units — the rig's slow eye drift (0 = the
+    classic fixed look; additive, never changes old renders)."""
     fx = facing * 12 * s
     eye_y, brow_y, mouth_y = hy - 2 * s, hy - 32 * s, hy + 30 * s
     lx, rx = hx - 24 * s + fx * 0.5, hx + 24 * s + fx * 0.5
     lw = max(3, int(5 * s))
 
-    # gaze: toward the partner; emotional offsets stack on top
+    # gaze: toward the partner; emotional offsets replace the base
+    # (classic behavior, byte-identical for legacy calls where
+    # gaze=(0,0)); the rig's living eye drift then stacks on top
     look_x = facing * 4.2 * s
     look_y = 0.0
     if emotion == "shy":
@@ -246,6 +252,8 @@ def _face(d: ImageDraw.ImageDraw, hx: float, hy: float, s: float,
         look_y = -3.4 * s
     elif emotion == "hopeful":
         look_y = -1.6 * s
+    look_x += gaze[0] * 2.6 * s        # rig drift (0 for every legacy call)
+    look_y += gaze[1] * 2.0 * s
 
     def real_eye(x: float, big: float = 1.0) -> None:
         ew, eh = 15 * s * big, 11.5 * s * big
@@ -432,10 +440,23 @@ def _face(d: ImageDraw.ImageDraw, hx: float, hy: float, s: float,
 
 
 def draw_figure(d: ImageDraw.ImageDraw, x: float, feet_y: float,
-                s: float, spec: dict, shadow: bool = True) -> None:
+                s: float, spec: dict, shadow: bool = True,
+                rig: dict | None = None) -> None:
     """One flat character, webtoon-lite proportions (s=1 -> ~430px tall).
     spec["eyes"] = "open"|"half"|"closed" selects the eye state;
-    pose "away" turns the back of the head to the partner."""
+    pose "away" turns the back of the head to the partner.
+
+    v2.1 — the ARTICULATED RIG (all offline, pure PIL): pass a rig
+    dict (built per-frame by src/anim.py) and the character stops
+    being a stiff cutout. The FEET STAY PLANTED while the hips sway
+    (a real weight shift, with the free heel lifting at the sway
+    extreme), the torso leans and breathes above the hips, the head
+    drifts on its neck (hair follows), the eyes glance, and the
+    relaxed-pose arms pivot at the shoulders with real hands —
+    including a gentle reach toward the partner. rig=None draws
+    EXACTLY the classic figure: every legacy pixel is preserved
+    (thumbnails, static cards and the kenburns fallback path).
+    """
     emotion, pose = spec["emotion"], spec["pose"]
     facing = spec["facing"]
     skin, hair, top, pants = spec["skin"], spec["hair"], spec["top"], spec["pants"]
@@ -450,49 +471,92 @@ def draw_figure(d: ImageDraw.ImageDraw, x: float, feet_y: float,
     torso_top = hips_y - 150 * s
     torso_half = 52 * s
 
+    # ── v2.1 rig offsets — every value is 0 when rig is None, so the
+    # classic figure below is byte-identical to the pre-rig renderer ──
+    rg = rig if rig is not None else {}
+    hip_dx = rg.get("hip_dx", 0.0)     # px   hips sway; feet stay planted
+    bob_dy = rg.get("bob_dy", 0.0)     # px   breathing: chest rises/falls
+    lean_dx = rg.get("lean_dx", 0.0)   # px   shoulders lean past the hips
+    head_dx = rg.get("head_dx", 0.0)   # px   head drifts on its neck
+    head_dy = rg.get("head_dy", 0.0)   # px
+    arm_l = max(-1.0, min(1.0, rg.get("arm_l", 0.0)))   # -1..1 outward swing
+    arm_r = max(-1.0, min(1.0, rg.get("arm_r", 0.0)))
+    reach = max(0.0, min(1.0, rg.get("reach", 0.0)))    # 0..1 toward partner
+    lift_l = max(0.0, min(1.0, rg.get("lift_l", 0.0)))  # 0..1 free heel lift
+    lift_r = max(0.0, min(1.0, rg.get("lift_r", 0.0)))
+    gaze = rg.get("gaze", (0.0, 0.0))
+
+    rig_on = rig is not None
+    body_dx = hip_dx + lean_dx * 0.55   # torso rides between hips/shoulders
+    sh_dx = hip_dx + lean_dx            # the shoulder line
+    hx += sh_dx + head_dx               # head follows shoulders + own drift
+    hy += bob_dy + head_dy
+    torso_top += bob_dy                 # the chest breathes; hips stay put
+
     # ground shadow (grounds the figure) — omit when baked into bg
     if shadow:
         d.ellipse([x - 70 * s, feet_y - 16 * s, x + 70 * s, feet_y + 14 * s],
                   fill=(216, 210, 198) if not mono else (24, 24, 36))
 
-    # legs: thick rounded limbs
+    # legs: thick rounded limbs. Rigged: the feet are PLANTED (they
+    # never slide) and each leg is a hip->knee->ankle limb, so the
+    # hip sway reads as a weight shift; the free heel lifts a touch
+    # at the sway extreme, knee bowing forward like a real step.
     leg_w = 20 * s
     for sgn in (-1, 1):
-        d.rounded_rectangle(
-            [x + sgn * 10 * s - leg_w / 2, hips_y - 8 * s,
-             x + sgn * 10 * s + leg_w / 2, feet_y - 8 * s],
-            radius=leg_w / 2, fill=pants)
-        d.rounded_rectangle(   # shoe
-            [x + sgn * 10 * s - 20 * s, feet_y - 14 * s,
-             x + sgn * 10 * s + 20 * s, feet_y],
-            radius=6 * s, fill=INK)
+        if rig_on:
+            lift = lift_l if sgn < 0 else lift_r
+            hip_x = x + hip_dx + sgn * 10 * s
+            hip_y = hips_y - 8 * s
+            foot_x = x + sgn * 10 * s             # the foot never slides
+            sole_y = feet_y - lift * 15 * s       # heel lifts, toe stays down
+            ankle_y = feet_y - 8 * s - lift * 15 * s
+            knee_x = (hip_x + foot_x) / 2 + (facing or 1) * lift * 9 * s
+            knee_y = (hip_y + ankle_y) / 2 - lift * 3 * s
+            d.line([(hip_x, hip_y), (knee_x, knee_y), (foot_x, ankle_y)],
+                   fill=pants, width=int(leg_w), joint="curve")
+            d.rounded_rectangle(   # shoe rides the (maybe lifted) foot
+                [foot_x - 20 * s, sole_y - 14 * s, foot_x + 20 * s, sole_y],
+                radius=6 * s, fill=INK)
+        else:
+            d.rounded_rectangle(
+                [x + sgn * 10 * s - leg_w / 2, hips_y - 8 * s,
+                 x + sgn * 10 * s + leg_w / 2, feet_y - 8 * s],
+                radius=leg_w / 2, fill=pants)
+            d.rounded_rectangle(   # shoe
+                [x + sgn * 10 * s - 20 * s, feet_y - 14 * s,
+                 x + sgn * 10 * s + 20 * s, feet_y],
+                radius=6 * s, fill=INK)
 
-    # torso
-    d.rounded_rectangle([x - torso_half, torso_top, x + torso_half, hips_y + 6 * s],
+    # torso (rigged: rides the hips + lean, breathes at the top)
+    tx = x + body_dx
+    d.rounded_rectangle([tx - torso_half, torso_top, tx + torso_half, hips_y + 6 * s],
                         radius=26 * s, fill=top)
 
-    # neck
-    d.rectangle([x - 12 * s, torso_top - 14 * s, x + 12 * s, torso_top + 6 * s],
+    # neck (rigged: bridges the breathing torso and drifting head)
+    nx = x + sh_dx + head_dx * 0.5
+    d.rectangle([nx - 12 * s, torso_top - 14 * s, nx + 12 * s, torso_top + 6 * s],
                 fill=skin)
 
     # arms — anchored at the shoulders, per pose
     sh_y = torso_top + 26 * s
     arm_w = 17 * s
     if pose == "arms_crossed":
-        d.rounded_rectangle([x - torso_half - 4 * s, sh_y + 26 * s,
-                             x + torso_half + 4 * s, sh_y + 52 * s],
+        ax = x + sh_dx
+        d.rounded_rectangle([ax - torso_half - 4 * s, sh_y + 26 * s,
+                             ax + torso_half + 4 * s, sh_y + 52 * s],
                             radius=14 * s, fill=top)
-        d.rounded_rectangle([x - 34 * s, sh_y + 32 * s, x + 34 * s, sh_y + 50 * s],
+        d.rounded_rectangle([ax - 34 * s, sh_y + 32 * s, ax + 34 * s, sh_y + 50 * s],
                             radius=11 * s, fill=MONO_SKIN if mono else PAPER_SHADE)
     elif pose == "phone":
         arm_x = torso_half - 4 * s
         for sgn in (-1, 1):   # both arms reach down toward the phone
             d.rounded_rectangle(
-                [x + sgn * arm_x - arm_w / 2, sh_y,
-                 x + sgn * arm_x + arm_w / 2, sh_y + 66 * s],
+                [x + sh_dx + sgn * arm_x - arm_w / 2, sh_y,
+                 x + sh_dx + sgn * arm_x + arm_w / 2, sh_y + 66 * s],
                 radius=arm_w / 2, fill=top)
         # phone held low-front, with visible hands gripping it
-        px, py = x + facing * 8 * s, sh_y + 64 * s
+        px, py = x + sh_dx + facing * 8 * s, sh_y + 64 * s
         d.rounded_rectangle([px - 20 * s, py - 30 * s, px + 20 * s, py + 30 * s],
                             radius=8 * s, fill=INK)
         d.rectangle([px - 14 * s, py - 22 * s, px + 14 * s, py + 20 * s],
@@ -507,10 +571,29 @@ def draw_figure(d: ImageDraw.ImageDraw, x: float, feet_y: float,
     # (hands_face arms are drawn AFTER the hair+face, below)
     else:  # relaxed stand
         for sgn in (-1, 1):
-            d.rounded_rectangle(
-                [x + sgn * torso_half - arm_w / 2, sh_y,
-                 x + sgn * torso_half + arm_w / 2, sh_y + 96 * s],
-                radius=arm_w / 2, fill=top)
+            if rig_on:
+                # ARTICULATED arm: pivots at the shoulder, ends in a
+                # real hand. The inner arm can reach toward the partner
+                # (the couple's signature almost-touch moment).
+                swing = arm_l if sgn < 0 else arm_r
+                ang = 0.10 + 0.42 * swing          # rad out from vertical
+                inner = facing != 0 and sgn == facing
+                if inner and reach > 0.0:
+                    ang = min(1.45, ang + reach * 1.05)
+                th = sgn * ang
+                length = 96 * s * (1.0 + 0.12 * (reach if inner else 0.0))
+                sh_x = x + sh_dx + sgn * torso_half
+                hax = sh_x + math.sin(th) * length
+                hay = sh_y + math.cos(th) * length
+                d.line([(sh_x, sh_y), (hax, hay)], fill=top,
+                       width=int(arm_w))
+                d.ellipse([hax - 8.5 * s, hay - 8.5 * s,   # the hand
+                           hax + 8.5 * s, hay + 8.5 * s], fill=skin)
+            else:
+                d.rounded_rectangle(
+                    [x + sgn * torso_half - arm_w / 2, sh_y,
+                     x + sgn * torso_half + arm_w / 2, sh_y + 96 * s],
+                    radius=arm_w / 2, fill=top)
 
     # hair — drawn like actual hair, never a solid block under the chin
     # (the v1 long-hair rectangle read as a BEARD: the user's #1 art bug)
@@ -562,7 +645,8 @@ def draw_figure(d: ImageDraw.ImageDraw, x: float, feet_y: float,
         _face(d, hx, hy, s, emotion, facing,
               feature=PAPER if mono else INK,
               iris=None if mono else spec.get("iris", (96, 56, 42)),
-              eyes=eyes, skin=skin, blush=spec.get("blush", (246, 168, 150)))
+              eyes=eyes, skin=skin, blush=spec.get("blush", (246, 168, 150)),
+              gaze=gaze)
         if style == "long":
             # 5. face-framing front locks (drawn AFTER the face) — two
             #    tapered strands from temple to cheek: unmistakably hair
@@ -583,8 +667,8 @@ def draw_figure(d: ImageDraw.ImageDraw, x: float, feet_y: float,
     if pose == "hands_face" and facing != 0:
         aw = max(5, int(arm_w))
         for sgn in (-1, 1):
-            shx = x + sgn * (torso_half - 4 * s)
-            ex, ey = x + sgn * (torso_half + 10 * s), sh_y - 42 * s
+            shx = x + sh_dx + sgn * (torso_half - 4 * s)
+            ex, ey = x + sh_dx + sgn * (torso_half + 10 * s), sh_y - 42 * s
             hax, hay = hx + sgn * 31 * s, hy + 24 * s
             d.line([(shx, sh_y), (ex, ey), (hax, hay)], fill=top,
                    width=aw, joint="curve")
@@ -744,10 +828,17 @@ def _progress_dots(d, cx: float, y: float, total: int, current: int) -> None:
 
 def render_character_sprites(spec: dict, s: float) -> dict:
     """One character as three RGBA sprites (eyes open / half / closed),
-    feet anchored 16px above the canvas bottom."""
+    feet anchored 16px above the canvas bottom.
+
+    v2.1: the sprite dict also carries the character's `spec` and
+    scale `s` — the articulated rig animator (src/anim.py) uses them
+    to redraw the figure per frame with moving arms/legs/head. The
+    three baked sprites remain for every legacy path (thumbnails,
+    static cards, rig disabled)."""
     cw, ch = int(244 * s) + 36, int(505 * s) + 40
     out = {"w": cw, "h": ch, "default": spec.get("eyes", "open"),
-           "anchor_x": 0.0, "feet_y": 0.0}
+           "anchor_x": 0.0, "feet_y": 0.0,
+           "spec": spec, "s": float(s)}
     for state in ("open", "half", "closed"):
         img = Image.new("RGBA", (cw, ch), (0, 0, 0, 0))
         dr = ImageDraw.Draw(img)

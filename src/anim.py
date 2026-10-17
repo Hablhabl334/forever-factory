@@ -1,23 +1,43 @@
 """The idle-animation engine — characters that are quietly ALIVE.
 
 Before this module, every card was a still painting: the couple stood
-frozen while a Ken Burns drift moved the whole frame. Now each card is
-built as LAYERS (see art_engine) and this module breathes life into
+frozen while a Ken Burns drift moved the whole frame. Then each card
+became LAYERS (see art_engine) and this module breathed life into
 the sprites at a true 30 fps:
 
   * sway — a slow sinusoidal side-to-side weight shift
   * bob  — a gentle vertical breathing rhythm
   * blink — natural eyelid drops, 2-4 s apart, never in unison
 
-Every motion is an INTEGER number of cycles per loop, so the rendered
-frame loop is seamless — the animation can cycle forever with no jump.
-The couple's APPEARANCE is locked channel-wide (same two people every
-video, forever); the ANIMATION STYLE is seeded per video, so every day
-moves differently: 6 styles x per-card parameter jitter.
+v2.1 — THE ARTICULATED RIG. The camera is now LOCKED (static
+background, no zoom, no pan — motion comes from the characters
+themselves) and each character is redrawn per frame through
+art_engine.draw_figure(rig=...) with real articulation:
+
+  * planted feet + hip sway  = an actual weight shift, never a float
+  * free heel lift at the sway extreme (a half-step, knee bowing)
+  * torso lean and breathing compression above the hips
+  * arms pivoting at the shoulders, ending in real hands
+  * a gentle REACH toward the partner — the couple's signature
+    almost-touch, once per loop, never synchronized between them
+  * head drift + nods (the hair follows automatically)
+  * living eye gaze — slow glances toward and past the partner
+  * blinks, exactly as before
+
+Every motion is an INTEGER number of cycles per loop and every
+gesture envelope is exactly zero at the loop seam, so the rendered
+frame loop stays perfectly seamless — it can cycle forever with no
+jump. The couple's APPEARANCE remains locked channel-wide; the
+ANIMATION STYLE is still seeded per video (6 styles x per-card
+parameter jitter x rig intensity per style).
+
+The TEXT OVERLAY is never touched: it is composited last, on top,
+from its own layer — characters live strictly underneath it.
 
 Frames are piped straight into ffmpeg as raw video (no PNG round-trip
 on disk) and encoded into a small loop.mp4 that the final clip render
-replays with the Ken Burns drift on top.
+replays — with a static camera (default) or the legacy Ken Burns
+drift if `video.camera: kenburns` is ever set.
 """
 from __future__ import annotations
 
@@ -25,7 +45,9 @@ import math
 import subprocess
 from pathlib import Path
 
-from PIL import Image
+from PIL import Image, ImageDraw
+
+from . import art_engine
 
 # name: (sway_px_lo, sway_px_hi, sway_cycles, bob_px_lo, bob_px_hi,
 #         bob_cycles, blink_lo_s, blink_hi_s, mirror, sync_bob, lead)
@@ -45,6 +67,29 @@ ANIM_STYLES: dict[str, tuple] = {
 }
 
 STYLE_NAMES = list(ANIM_STYLES.keys())
+
+# v2.1 — how much limb articulation each style gets (multiplier on
+# the seeded rig amplitudes). Lively styles gesture bigger; heavy,
+# sad beats stay almost still. Purely additive: styles themselves
+# are untouched.
+RIG_INTENSITY: dict[str, float] = {
+    "sync_breath": 0.85,
+    "gentle_sway": 1.00,
+    "counter_sway": 1.00,
+    "weight_shift": 1.15,
+    "lively": 1.30,
+    "calm_bob": 0.70,
+}
+
+
+def rig_enabled() -> bool:
+    """v2.1 master switch — `video.rig` in channel.yaml (default on).
+    False restores the classic whole-sprite sway/bob/blink path."""
+    try:
+        from .config import cfg
+        return bool(cfg().get("video", {}).get("rig", True))
+    except Exception:
+        return True
 
 
 def pick_style(seed: int) -> str:
@@ -77,9 +122,48 @@ def _char_params(seed: int, style: str, idx: int, T: float) -> dict:
         dur = r.between(0.10, 0.16)
         blinks.append((t, t + dur))
         t += r.between(wlo, whi)
+
+    # ── v2.1 articulated rig (additive — the legacy sprite path above
+    # simply ignores these; every cycle count is an integer and every
+    # gesture envelope is zero at the seam, so loops stay seamless) ──
+    inten = RIG_INTENSITY.get(style, 1.0) * r.between(0.85, 1.15)
+    rig = {
+        # arms: 2 micro-cycles per loop, each arm on its own phase
+        "arm_amp": r.between(0.30, 0.60) * min(1.15, inten),
+        "arm_cyc": 2,
+        "arm_phase": r.between(0.0, 2.0 * math.pi),
+        "arm2_phase": r.between(0.0, 2.0 * math.pi),
+        # the partner-reach: a squared-sine bump (exact 0 at the seam);
+        # character 0 reaches once mid-loop, character 1 twice — never
+        # synchronized. Damped on very short (fast-cut) loops.
+        "reach_amp": r.between(0.30, 0.62) * inten
+                     * min(1.0, max(0.55, T / 3.5)),
+        "reach_k": 1 + idx,
+        # hips carry the old sway amplitude (feet now stay planted)
+        "hip_amp": sway_a * 0.8,
+        "hip_cyc": int(scyc),
+        "hip_phase": phase,
+        "lean_amp": sway_a * r.between(0.22, 0.40),
+        "lean_cyc": int(scyc),
+        # head: one slow drift + a quicker nod; eyes glance on top
+        "head_amp_x": r.between(3.5, 7.5) * min(1.20, inten),
+        "head_cyc": 1,
+        "head_phase": r.between(0.0, 2.0 * math.pi),
+        "nod_amp": r.between(1.2, 2.8) * min(1.20, inten),
+        "nod_cyc": 2,
+        "nod_phase": r.between(0.0, 2.0 * math.pi),
+        "gaze_amp": r.between(0.45, 0.95),
+        "gaze_y_amp": r.between(0.15, 0.45),
+        "gaze_cyc": 1,
+        "gaze_phase": r.between(0.0, 2.0 * math.pi),
+        # free heel lift at the hip-sway extreme (the half-step)
+        "lift_max": r.between(0.35, 0.70) * min(1.20, inten),
+        # breathing moves the chest, not the feet
+        "bob_a": bob_a, "bob_cyc": int(bcyc), "bob_phase": bob_phase,
+    }
     return {"sway_a": sway_a, "sway_cyc": int(scyc), "phase": phase,
             "bob_a": bob_a, "bob_cyc": int(bcyc), "bob_phase": bob_phase,
-            "blinks": blinks}
+            "blinks": blinks, "rig": rig}
 
 
 def _eye_at(prm: dict, t: float) -> str | None:
@@ -91,13 +175,81 @@ def _eye_at(prm: dict, t: float) -> str | None:
     return None
 
 
+def _rig_at(prm: dict, t: float, T: float) -> dict:
+    """The articulated pose for one character at time t.
+
+    Every term is periodic with an INTEGER cycle count over T (and the
+    reach bump is a squared sine — exactly zero at u=0 and u=1), so
+    frame(T) == frame(0) and the encoded loop never jumps at the seam.
+    """
+    rg = prm["rig"]
+    two_pi = 2.0 * math.pi
+    u = t / T
+
+    # weight shift: hips sway, feet planted; the free heel lifts when
+    # the hips move away from that leg
+    sw = math.sin(two_pi * rg["hip_cyc"] * u + rg["hip_phase"])
+    hip_dx = rg["hip_amp"] * sw
+    lean_dx = rg["lean_amp"] * math.sin(
+        two_pi * rg["lean_cyc"] * u + rg["hip_phase"] + math.pi / 2)
+    lift_l = max(0.0, sw) * rg["lift_max"]      # hips right -> left free
+    lift_r = max(0.0, -sw) * rg["lift_max"]     # hips left -> right free
+
+    # arms: independent 2-cycle micro-swings (normalized -1..1)
+    arm_l = rg["arm_amp"] * math.sin(
+        two_pi * rg["arm_cyc"] * u + rg["arm_phase"])
+    arm_r = rg["arm_amp"] * math.sin(
+        two_pi * rg["arm_cyc"] * u + rg["arm2_phase"])
+
+    # the partner-reach gesture: one soft bump per k-th of the loop
+    reach = rg["reach_amp"] * (math.sin(math.pi * rg["reach_k"] * u) ** 2)
+
+    # head: slow drift riding the shoulders + a quicker nod; gaze
+    # drifts on its own slow cycle (the eyes look, then look away)
+    head_dx = (rg["head_amp_x"] * math.sin(
+        two_pi * rg["head_cyc"] * u + rg["head_phase"]) + hip_dx * 0.25)
+    head_dy = rg["nod_amp"] * math.sin(
+        two_pi * rg["nod_cyc"] * u + rg["nod_phase"])
+    bob_dy = rg["bob_a"] * math.sin(
+        two_pi * rg["bob_cyc"] * u + rg["bob_phase"])
+    gx = rg["gaze_amp"] * math.sin(
+        two_pi * rg["gaze_cyc"] * u + rg["gaze_phase"])
+    gy = rg["gaze_y_amp"] * math.sin(
+        two_pi * rg["gaze_cyc"] * u + rg["gaze_phase"] + 0.9)
+
+    return {"hip_dx": hip_dx, "lean_dx": lean_dx, "bob_dy": bob_dy,
+            "head_dx": head_dx, "head_dy": head_dy,
+            "arm_l": arm_l, "arm_r": arm_r, "reach": reach,
+            "lift_l": lift_l, "lift_r": lift_r, "gaze": (gx, gy)}
+
+
 def compose_frame(layers: dict, params: list[dict], t: float,
                   T: float) -> Image.Image:
-    """One frame: bg + swaying/bobbing/blinking sprites (+ text layer)."""
+    """One frame: bg + living characters (+ text layer, ALWAYS last).
+
+    v2.1: when the rig is enabled and the sprite carries its `spec`,
+    each character is redrawn through art_engine.draw_figure(rig=...)
+    with articulated limbs — feet planted, hips swaying, arms and head
+    moving, eyes glancing. Otherwise the classic whole-sprite
+    sway/bob/blink path runs, pixel-identical to the pre-rig era.
+
+    THE TEXT OVERLAY IS NEVER TOUCHED in either path: it composites
+    last, from its own transparent layer, on top of everything.
+    """
     img = layers["bg"].copy()
+    dr = None
     two_pi = 2.0 * math.pi
+    rig_on = rig_enabled()
     for sp, prm in zip(layers.get("sprites", []), params):
         state = _eye_at(prm, t)
+        if rig_on and prm.get("rig") and "spec" in sp:
+            if dr is None:
+                dr = ImageDraw.Draw(img)
+            art_engine.draw_figure(
+                dr, sp["anchor_x"], sp["feet_y"], sp["s"],
+                dict(sp["spec"], eyes=state or sp["default"]),
+                shadow=False, rig=_rig_at(prm, t, T))
+            continue
         spr = sp[state or sp["default"]]
         dx = prm["sway_a"] * math.sin(
             two_pi * prm["sway_cyc"] * t / T + prm["phase"])

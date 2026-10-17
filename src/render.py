@@ -162,7 +162,12 @@ def _parse_ass_time(s: str) -> float:
     return int(h) * 3600 + int(m) * 60 + float(sec)
 
 
-# ── Ken Burns motions ────────────────────────────────────────────────
+# ── Ken Burns motions ──────────────────────────────────────────────
+# v2.1: these drive ONLY the legacy path (video.camera: kenburns) and
+# the still-image cards without characters (title / end / outro). The
+# character scene cards run a LOCKED static camera by default — the
+# owner's spec: no zoom in, no zoom out, no pan left or right; the
+# motion budget comes from the articulated characters instead.
 
 def _zoompan_expr(motion: str, frames: int, size: str = "1920x1080") -> str:
     d = max(2, frames)
@@ -242,9 +247,17 @@ def render_clip_art(layers: dict, seed: int, out: Path, dur: float,
                     size: tuple[int, int] | None = None,
                     anim_style: str | None = None,
                     card_idx: int = 0) -> None:
-    """Render one ANIMATED clip: sprites sway/breathe/blink at 30 fps
-    while the Ken Burns drift moves the whole frame. Atomic + resumable
-    (the encoded frame loop is cached next to the clip)."""
+    """Render one ANIMATED clip: the characters live at 30 fps
+    (v2.1: articulated rig — planted feet, moving arms/legs/head,
+    blinks, glances) under a camera that is LOCKED by default: the
+    background stays perfectly static — no zoom in, no zoom out, no
+    pan left or right. All motion comes from the characters.
+
+    The legacy Ken Burns drift is one config flip away
+    (video.camera: kenburns) for anyone who ever wants it back.
+    Captions burn on top exactly as before. Atomic + resumable (the
+    encoded frame loop is cached next to the clip; its filename is
+    versioned by frame count AND rig mode)."""
     from . import anim
 
     vconf = cfg()["video"]
@@ -257,15 +270,24 @@ def render_clip_art(layers: dict, seed: int, out: Path, dur: float,
         frames = 8
     style = anim_style or anim.pick_style(seed)
 
-    # 1. the unique-frame loop (cached; frame count in the name)
+    # 1. the unique-frame loop (cached; frame count + rig in the name
+    #    so pre-rig caches can never leak into rig-era renders)
     n_unique = max(60, min(150, frames))
     n_unique -= n_unique % 2
-    loop_path = out.with_name(f"{out.stem}_loop{n_unique}.mp4")
+    rig_on = anim.rig_enabled()
+    loop_path = out.with_name(
+        f"{out.stem}_loop{n_unique}{'_rig' if rig_on else ''}.mp4")
     anim.encode_loop(layers, seed + card_idx * 37, style, fps, n_unique,
                      loop_path)
 
-    # 2. replay the loop for exactly `frames` frames, drifting Ken Burns
-    filters = [_drift_expr(motion, frames, w, h)]
+    # 2. replay the loop for exactly `frames` frames — static camera
+    #    by default (nothing but the characters move); legacy drift
+    #    only when explicitly configured
+    camera = vconf.get("camera", "static")
+    if camera == "kenburns":
+        filters = [_drift_expr(motion, frames, w, h)]
+    else:
+        filters = []
     if ass_file is not None:
         fontsdir = ROOT / "assets" / "fonts"
         filters.append(f"ass=filename='{ass_file}':fontsdir='{fontsdir}'")

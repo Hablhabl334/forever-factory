@@ -108,6 +108,18 @@ video:
   preset: veryfast
   title_card_seconds: 6
   end_card_seconds: 12
+  # ── v2.1 CHARACTER RIG UPGRADE (added 2026-10-18 — purely additive;
+  # every setting above is untouched and still authoritative) ──────
+  # LOCKED CAMERA: the scene backgrounds never move — no zoom in,
+  # no zoom out, no pan left or right. All motion now comes from the
+  # characters themselves (that is the hook). Set "kenburns" to ever
+  # restore the old whole-frame drift on scene cards.
+  camera: "static"
+  # ARTICULATED CHARACTERS: planted feet with real weight shifts and
+  # heel lifts, swinging arms with hands (plus a gentle reach toward
+  # the partner), torso lean, breathing, head drifts and nods, living
+  # eye gaze, blinks. false = classic whole-sprite sway/bob/blink.
+  rig: true
 
 shorts:
   width: 1080
