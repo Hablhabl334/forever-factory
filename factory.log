@@ -1,30 +1,42 @@
-[0;93m2026-10-17 22:35:30.922156017 [W:onnxruntime:Default, device_discovery.cc:95 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
-[grid] booking 1 short slot(s) in the next 24h (free: 2026-10-19T00:00:00+03:00)
-[29] script: How Trust Is Actually Built (1187 words, hash 768ae229b1)
-  [voice] local neural narration: 149 chunks (Kokoro af_heart)
+[0;93m2026-10-18 16:01:46.195717176 [W:onnxruntime:Default, device_discovery.cc:95 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
+[stats] growth report 2026-10-18
+[stats]   total: 1727 views  (+82 since last report)
+[stats]      120 views  ·  Subscribe for more tips like this #psychology #relationship 
+[stats]      110 views  ·  Subscribe for more tips like this #psychology #relationship 
+[stats]       90 views  ·  Subscribe for more tips like this #psychology #relationship 
+[29] script: Why We Get Jealous (1141 words, hash 74c1d11605)
+  [voice] local neural narration: 145 chunks (Kokoro af_heart)
   [voice] polished: presence EQ + gentle compression
-[29] narration: 489s, 149 caption chunks
-[29] long video: 507s, 47.5MB
+[29] narration: 468s, 145 caption chunks
+[29] long video: 486s, 46.2MB
   [voice] local neural narration: 26 chunks (Kokoro af_heart)
   [voice] polished: presence EQ + gentle compression
-  [short 1] 61s, 26 cards, 5.3MB
-  [voice] local neural narration: 25 chunks (Kokoro af_heart)
+  [short 1] 58s, 26 cards, 5.2MB
+  [voice] local neural narration: 23 chunks (Kokoro af_heart)
   [voice] polished: presence EQ + gentle compression
-  [short 2] 66s, 25 cards, 5.8MB
-  [voice] local neural narration: 25 chunks (Kokoro af_heart)
+  [short 2] 54s, 23 cards, 4.7MB
+  [voice] local neural narration: 30 chunks (Kokoro af_heart)
   [voice] polished: presence EQ + gentle compression
-  [short 3] 55s, 25 cards, 4.9MB
-  [voice] local neural narration: 31 chunks (Kokoro af_heart)
-  [voice] polished: presence EQ + gentle compression
-  [short 4] 70s, 31 cards, 6.2MB
+  [short 3] 66s, 30 cards, 5.7MB
   [voice] local neural narration: 26 chunks (Kokoro af_heart)
   [voice] polished: presence EQ + gentle compression
-  [short 5] 57s, 26 cards, 4.7MB
-  [voice] local neural narration: 25 chunks (Kokoro af_heart)
+  [short 4] 60s, 26 cards, 5.2MB
+  [voice] local neural narration: 27 chunks (Kokoro af_heart)
   [voice] polished: presence EQ + gentle compression
-  [short 6] 57s, 25 cards, 4.8MB
-[29] thumbnail + 1 shorts ready
-[29] DRY-RUN: would upload long at 2026-10-20T20:00:00+03:00
-[29] DRY-RUN: would upload short 1 at 2026-10-19T00:00:00+03:00
-  - episode 29: How Trust Is Actually Built (dry-run)
+  [short 5] 64s, 27 cards, 4.9MB
+  [voice] local neural narration: 26 chunks (Kokoro af_heart)
+  [voice] polished: presence EQ + gentle compression
+  [short 6] 61s, 26 cards, 4.9MB
+[29] thumbnail + 4 shorts ready
+  [youtube] uploaded long: 9Phpq9_BAiw (publishAt 2026-10-20T20:00:00+03:00)
+  [youtube] setting thumbnail thumbnail.png (54 KB) on 9Phpq9_BAiw
+  [youtube] thumbnail set
+  [youtube] uploaded short: paDwJgf-RJA (publishAt 2026-10-19T00:00:00+03:00)
+  [youtube] uploaded short: J8ZVtj40uLg (publishAt 2026-10-19T06:00:00+03:00)
+  [youtube] uploaded short: HXga6EY7axk (publishAt 2026-10-19T12:00:00+03:00)
+  [youtube] uploaded short: xpBpBSMHHO8 (publishAt 2026-10-19T18:00:00+03:00)
+[playlist] 2 long video(s) not in the playlist yet
+[playlist] ep28 long added (rBcCY3QpTq8)
+[playlist] ep29 long added (9Phpq9_BAiw)
+  ✓ episode 29: Why We Get Jealous
 combination space: 273,301,428,924,195,840 stories — the factory never repeats
