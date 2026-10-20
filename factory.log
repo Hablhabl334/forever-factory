@@ -1,41 +1,41 @@
-[0;93m2026-10-19 17:35:45.641732662 [W:onnxruntime:Default, device_discovery.cc:95 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
-[stats] growth report 2026-10-19
-[stats]   total: 1717 views  (-10 since last report)
+[0;93m2026-10-20 15:42:52.420472323 [W:onnxruntime:Default, device_discovery.cc:95 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
+[stats] growth report 2026-10-20
+[stats]   total: 1729 views  (+12 since last report)
 [stats]      119 views  ·  Subscribe for more tips like this #psychology #relationship 
 [stats]      110 views  ·  Subscribe for more tips like this #psychology #relationship 
 [stats]       90 views  ·  Subscribe for more tips like this #psychology #relationship 
-[30] script: How Trust Is Actually Built (1213 words, hash 9867c1cc33)
-  [voice] local neural narration: 150 chunks (Kokoro af_heart)
+[31] script: Red Flags People Ignore (1133 words, hash c3d255cc9f)
+  [voice] local neural narration: 147 chunks (Kokoro af_heart)
   [voice] polished: presence EQ + gentle compression
-[30] narration: 492s, 150 caption chunks
-[30] long video: 510s, 48.3MB
-  [voice] local neural narration: 27 chunks (Kokoro af_heart)
+[31] narration: 475s, 147 caption chunks
+[31] long video: 493s, 46.2MB
+  [voice] local neural narration: 28 chunks (Kokoro af_heart)
   [voice] polished: presence EQ + gentle compression
-  [short 1] 63s, 27 cards, 5.5MB
+  [short 1] 66s, 28 cards, 5.5MB
   [voice] local neural narration: 25 chunks (Kokoro af_heart)
   [voice] polished: presence EQ + gentle compression
-  [short 2] 64s, 25 cards, 5.5MB
-  [voice] local neural narration: 27 chunks (Kokoro af_heart)
+  [short 2] 62s, 25 cards, 5.1MB
+  [voice] local neural narration: 31 chunks (Kokoro af_heart)
   [voice] polished: presence EQ + gentle compression
-  [short 3] 58s, 27 cards, 4.7MB
+  [short 3] 66s, 31 cards, 5.9MB
+  [voice] local neural narration: 28 chunks (Kokoro af_heart)
+  [voice] polished: presence EQ + gentle compression
+  [short 4] 65s, 28 cards, 5.7MB
+  [voice] local neural narration: 28 chunks (Kokoro af_heart)
+  [voice] polished: presence EQ + gentle compression
+  [short 5] 62s, 28 cards, 5.3MB
   [voice] local neural narration: 25 chunks (Kokoro af_heart)
   [voice] polished: presence EQ + gentle compression
-  [short 4] 60s, 25 cards, 5.1MB
-  [voice] local neural narration: 26 chunks (Kokoro af_heart)
-  [voice] polished: presence EQ + gentle compression
-  [short 5] 67s, 26 cards, 4.8MB
-  [voice] local neural narration: 27 chunks (Kokoro af_heart)
-  [voice] polished: presence EQ + gentle compression
-  [short 6] 63s, 27 cards, 5.5MB
-[30] thumbnail + 4 shorts ready
-  [youtube] uploaded long: SOD5eQRXnhE (publishAt 2026-10-21T20:00:00+03:00)
-  [youtube] setting thumbnail thumbnail.png (58 KB) on SOD5eQRXnhE
+  [short 6] 61s, 25 cards, 4.6MB
+[31] thumbnail + 4 shorts ready
+  [youtube] uploaded long: -TaBXAnUPqo (publishAt 2026-10-22T20:00:00+03:00)
+  [youtube] setting thumbnail thumbnail.png (57 KB) on -TaBXAnUPqo
   [youtube] thumbnail set
-  [youtube] uploaded short: 0A9ay7PHgik (publishAt 2026-10-20T00:00:00+03:00)
-  [youtube] uploaded short: ARDgnFYpUB4 (publishAt 2026-10-20T06:00:00+03:00)
-  [youtube] uploaded short: 7FjE_HiDCpg (publishAt 2026-10-20T12:00:00+03:00)
-  [youtube] uploaded short: WPk0ESfr_XY (publishAt 2026-10-20T18:00:00+03:00)
+  [youtube] uploaded short: y_XhaC-aTgY (publishAt 2026-10-21T00:00:00+03:00)
+  [youtube] uploaded short: z4Jm-cn-LeA (publishAt 2026-10-21T06:00:00+03:00)
+  [youtube] uploaded short: CGaiyBIYsWs (publishAt 2026-10-21T12:00:00+03:00)
+  [youtube] uploaded short: b1Gd-ermBQQ (publishAt 2026-10-21T18:00:00+03:00)
 [playlist] 1 long video(s) not in the playlist yet
-[playlist] ep30 long added (SOD5eQRXnhE)
-  ✓ episode 30: How Trust Is Actually Built
+[playlist] ep31 long added (-TaBXAnUPqo)
+  ✓ episode 31: Red Flags People Ignore
 combination space: 273,301,428,924,195,840 stories — the factory never repeats

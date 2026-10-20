@@ -681,6 +681,34 @@
     "366408653878caa2"
    ],
    "voice_engine": "kokoro"
+  },
+  {
+   "n": 31,
+   "title": "Red Flags People Ignore",
+   "hash": "c3d255cc9f6bf760",
+   "seed": 3811889957828,
+   "date": "2026-10-20",
+   "status": "done",
+   "ids": {
+    "long": "-TaBXAnUPqo",
+    "shorts": [
+     "y_XhaC-aTgY",
+     "z4Jm-cn-LeA",
+     "CGaiyBIYsWs",
+     "b1Gd-ermBQQ"
+    ],
+    "thumbnail": "2026-10-20",
+    "playlist": "2026-10-20"
+   },
+   "shashes": [
+    "7122c97932bf3ef8",
+    "59776ff0979a9e58",
+    "fb2505bb3aae21e1",
+    "d0545821b5c9fc67",
+    "7fd19b1455a2b12a",
+    "99ca5c895c063c15"
+   ],
+   "voice_engine": "kokoro"
   }
  ],
  "story_hashes": [
@@ -713,18 +741,19 @@
   "03885cadf7703fd0",
   "ba38d4237eb44dbf",
   "74c1d11605075c7f",
-  "9867c1cc33be5688"
+  "9867c1cc33be5688",
+  "c3d255cc9f6bf760"
  ],
  "quota": {
-  "date": "2026-10-19",
+  "date": "2026-10-20",
   "units_used": 8311
  },
- "last_run": "2026-10-19",
+ "last_run": "2026-10-20",
  "stats": {
-  "videos_published": 113,
-  "days_active": 24
+  "videos_published": 118,
+  "days_active": 25
  },
- "_last_days_active": "2026-10-19",
+ "_last_days_active": "2026-10-20",
  "analytics": [
   {
    "date": "2026-09-29",
@@ -3377,6 +3406,125 @@
     "HXga6EY7axk": 0,
     "xpBpBSMHHO8": 0
    }
+  },
+  {
+   "date": "2026-10-20",
+   "total_views": 1729,
+   "videos": {
+    "_oF4dTUGy24": 4,
+    "TRY0QZfgjBE": 5,
+    "Iocf2nxJuOY": 7,
+    "UG4z7_XQkjM": 2,
+    "4tbBV--cTsI": 7,
+    "h4B5GXfmjLg": 0,
+    "kvFpuUEz8QA": 0,
+    "TnJJf_3-Zg8": 1,
+    "3ZR4l08XxyE": 2,
+    "Zjf7Ne2z_4U": 0,
+    "pSRPxXnyAZg": 0,
+    "Mir11YcoWAw": 0,
+    "WSM7pIy8kdE": 1,
+    "DA0tiB7QrlY": 1,
+    "DVAoVnK5FtA": 0,
+    "git-4p8E9xY": 0,
+    "fkFhtGfsx_0": 0,
+    "n_GOahvID_Y": 0,
+    "8m3PZ44NW2c": 0,
+    "k8PzqtNVynI": 0,
+    "GRna0qAiWEg": 0,
+    "BJrBRuMoosA": 0,
+    "Mw2D_4ot0G8": 0,
+    "HjkTdKjH49s": 0,
+    "L7DJ2Nu2uo8": 0,
+    "5wQ0wmS7GHQ": 0,
+    "ISod_uguaR8": 14,
+    "ElMNPkRma0Q": 3,
+    "ZwoNP3tA_zI": 0,
+    "aC8V7uEF1zA": 0,
+    "57GaUcN6Xfo": 3,
+    "4CsBqeLACzY": 2,
+    "8Dg8yh488N8": 1,
+    "HpRLqiAR7ks": 1,
+    "NEpaHpN_z2Y": 1,
+    "cPlgv-IXN-w": 2,
+    "qKXpRXZHuvs": 8,
+    "yr5iRQg5U3o": 3,
+    "4eYAQRFA3Uk": 5,
+    "xRVhNWoBfn4": 8,
+    "y_9VDnn9-7k": 5,
+    "pFsqkgWkXEA": 23,
+    "vhZWjuHPpws": 20,
+    "Q9rx7zBltoQ": 19,
+    "peGtkMIl7LI": 35,
+    "wuDMgIJeUMw": 1,
+    "EYP4N0ZEMNo": 48,
+    "jOebUbltVQI": 39,
+    "7KhHlXIUN7k": 28,
+    "Xe0be2KbpWE": 87,
+    "cPHiDsx-92g": 0,
+    "ITMeCzxJV8I": 75,
+    "IYRX-R2hRDs": 26,
+    "JwtqNVDtuLE": 64,
+    "C-9pvasCZDY": 3,
+    "9okYnbx-WIY": 36,
+    "Ze0INcnm6G4": 47,
+    "3BY2x38hY8w": 1,
+    "WY-8CRAIEpY": 40,
+    "ok5iJVUFjsg": 90,
+    "QIU2EQ99Ejg": 44,
+    "7cNLdF5VNmY": 40,
+    "vrhDMCOHeCM": 0,
+    "wnhUBSBCweg": 28,
+    "cMnefUlDjG0": 58,
+    "wGBIp_obHz0": 67,
+    "6gnLZ_47Bko": 110,
+    "xJNNTbamvJk": 5,
+    "9STiEcejZts": 79,
+    "AEzUpgRNo24": 25,
+    "D0zJvuBOdUQ": 34,
+    "uOOhcB6-YBY": 31,
+    "6pTMjsED0VY": 3,
+    "qKuIhuET60Q": 28,
+    "Kke2b8XAUrc": 40,
+    "xoJJLIANTVk": 27,
+    "AV4KJybKLAA": 1,
+    "rZmcYgpuTeY": 0,
+    "QlrDJJ-5IQc": 39,
+    "z5TxIROSwXY": 26,
+    "FLsNtF1DBCE": 18,
+    "sa-mzDthuJk": 6,
+    "orbgL2cMeLg": 1,
+    "reUGaXNmCj0": 2,
+    "l-dL8a7S0n8": 1,
+    "zzbuQEX4mIY": 23,
+    "a5KbqMoOxCY": 4,
+    "65eOn98dpLw": 0,
+    "R9EuY6Fk1SE": 1,
+    "I_UEbRXrDmw": 4,
+    "xmYP9w32f7o": 0,
+    "_N20Lyredqs": 1,
+    "Nwa-iPnEtW4": 0,
+    "bBCNumrSosA": 14,
+    "ZmbFvBJjBVQ": 0,
+    "ey4SiEoqsFI": 119,
+    "3lgFu7TlRD4": 2,
+    "R3tncS1qf_4": 0,
+    "XWFGj1Jqroc": 4,
+    "OUwbUOC5z50": 54,
+    "Oom5CTar8AI": 10,
+    "rBcCY3QpTq8": 0,
+    "EUk4eyrsG_A": 0,
+    "9Phpq9_BAiw": 0,
+    "paDwJgf-RJA": 3,
+    "J8ZVtj40uLg": 1,
+    "HXga6EY7axk": 0,
+    "xpBpBSMHHO8": 2,
+    "SOD5eQRXnhE": 0,
+    "0A9ay7PHgik": 1,
+    "ARDgnFYpUB4": 1,
+    "7FjE_HiDCpg": 4,
+    "WPk0ESfr_XY": 0
+   }
   }
  ],
  "discovery": {
@@ -3487,21 +3635,24 @@
   "830e2f026b1449dd",
   "327691ba966527fe",
   "f4b6ac719ece56a3",
-  "366408653878caa2"
+  "366408653878caa2",
+  "7122c97932bf3ef8",
+  "59776ff0979a9e58",
+  "fb2505bb3aae21e1",
+  "d0545821b5c9fc67",
+  "7fd19b1455a2b12a",
+  "99ca5c895c063c15"
  ],
- "last_run_ts": 1792432245,
+ "last_run_ts": 1792511909,
  "slots": {
   "long": [
    "2026-10-18T20:00:00+03:00",
    "2026-10-19T20:00:00+03:00",
    "2026-10-20T20:00:00+03:00",
-   "2026-10-21T20:00:00+03:00"
+   "2026-10-21T20:00:00+03:00",
+   "2026-10-22T20:00:00+03:00"
   ],
   "short": [
-   "2026-10-18T00:00:00+03:00",
-   "2026-10-18T06:00:00+03:00",
-   "2026-10-18T12:00:00+03:00",
-   "2026-10-18T18:00:00+03:00",
    "2026-10-19T00:00:00+03:00",
    "2026-10-19T06:00:00+03:00",
    "2026-10-19T12:00:00+03:00",
@@ -3509,7 +3660,11 @@
    "2026-10-20T00:00:00+03:00",
    "2026-10-20T06:00:00+03:00",
    "2026-10-20T12:00:00+03:00",
-   "2026-10-20T18:00:00+03:00"
+   "2026-10-20T18:00:00+03:00",
+   "2026-10-21T00:00:00+03:00",
+   "2026-10-21T06:00:00+03:00",
+   "2026-10-21T12:00:00+03:00",
+   "2026-10-21T18:00:00+03:00"
   ]
  }
 }
