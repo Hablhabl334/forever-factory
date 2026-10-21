@@ -83,7 +83,10 @@ def _mix_audio(short_work: Path, narration: dict, seed: int,
     n = int(total * music.SR)
     music_bed = music.synth_music(seed + 700, total, mood=mood)
     music_bed *= music.duck_envelope(narr_44, n, music.SR, depth)
-    music_bed *= np.float32(0.16)
+    # 2026-10-21 owner rule: the music is part of the first second —
+    # raised 0.16 -> 0.21 alongside synth_music's instant fade-in so
+    # the bed is audible from 0:01 (still ducked well under the voice)
+    music_bed *= np.float32(0.21)
 
     mix = np.zeros(n, dtype=np.float32)
     end_i = min(n, len(narr_44))
@@ -138,12 +141,13 @@ def render_shorts(story: dict, work_dir: Path, out_dir: Path) -> list[Path]:
         # caption chunks for shorts — a card change every ~2 s is a
         # visual reset that holds retention). The cache key includes
         # the script hash: if the script ever changes underneath, the
-        # narration re-renders (never stale).
+        # narration re-renders (never stale). at_dashes=True (2026-10-21):
+        # every em-dash becomes its own beat with a hesitation pause.
         mini = {"hash": f"{story['hash']}-{short['shash'][:10]}",
                 "scenes": [{"n": 1, "id": "short", "narration": short["script"]}]}
         rate = cfg()["voice"].get("edge_rate_shorts")
         narration = tts.narrate(mini, sw, sent_pause=0.26, scene_pause=0.30,
-                                rate_pct=rate, chunk_words=9)
+                                rate_pct=rate, chunk_words=9, at_dashes=True)
         # Owner rule: the VOICE carries the whole video — no silent
         # seconds, the script ends WITH the video. Scripts are built
         # ~150+ words (≈55 s) so this almost never triggers; if the

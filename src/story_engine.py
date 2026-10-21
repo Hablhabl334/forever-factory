@@ -29,8 +29,10 @@ import hashlib
 import re
 
 from .content_data import CTA_LINE, CONCEPTS, SERIES_NAME, TOPICS
-from .content_variants import (COMMENT_QUESTIONS, DAYS, NAMES, OPENERS,
-                               PLACES, TIMES, TOPIC_MOODS, VARIANTS)
+from .content_micros import MICROS
+from .content_variants import (COMMENT_QUESTIONS, DAYS, FEMALE_NAMES,
+                               MALE_NAMES, NAMES, OPENERS, PLACES, TIMES,
+                               TOPIC_MOODS, VARIANTS)
 from .rng import FactoryRNG
 
 N_SEGMENTS = 8          # concepts per long video
@@ -83,10 +85,18 @@ def _pool(key: str, field: str) -> list[str]:
 
 
 def _fill_slots(text: str, rng: FactoryRNG) -> str:
-    """Fill {a} {b} {day} {time} {place} with a consistent cast."""
+    """Fill {a} {b} {day} {time} {place} with a consistent cast.
+
+    2026-10-21 fix: {a}/{b} now draws one woman + one man (order
+    random), so the named couple always matches the man+woman pair
+    the episode art draws — no more Finn & Milo or Tara & Ava pairs.
+    """
     if "{" not in text:
         return text
-    a, b = rng.some(NAMES, 2)
+    if rng.chance(0.5):
+        a, b = rng.pick(FEMALE_NAMES), rng.pick(MALE_NAMES)
+    else:
+        a, b = rng.pick(MALE_NAMES), rng.pick(FEMALE_NAMES)
     day = rng.pick(DAYS)
     moment = rng.pick(TIMES)
     place = rng.pick(PLACES)
@@ -149,9 +159,167 @@ def _fact_sentence(key: str, rng: FactoryRNG) -> str:
     return rng.pick(body or _sentences(CONCEPTS[key]["explain"]))
 
 
+def _shorts_script_v2(key: str, c: dict, rng: FactoryRNG,
+                      opener: str | None = None) -> tuple[str, int, str]:
+    """Assemble a Short script (v2 arc, 2026-10-21) for ~50-82 s of
+    speech at the local neural voice's measured ~150-wpm pace.
+
+    One idea per beat, zero duplication, examples capped at ONE
+    micro-moment (a ~20-word vivid beat, never a dialogue):
+
+        opener          2-6 word pattern interrupt (scroll-stopper)
+        hook            the claim (drives the hook card)
+        micro-moment    the "that's literally me" beat, one breath
+        facts (2+)      the mechanism, distinct science sentences
+        reveal          "Psychologists call this {term}." — a LATE
+                        payoff instead of an early repetition
+        takeaway        the advice
+        question        engagement closer (comments are a ranking
+                        signal), directly before the CTA
+        CTA
+
+    Word band 125-205 (Kokoro af_heart at 0.96 speed). Anti-dup
+    rules: facts never contain the term or echo the hook/micro
+    (Jaccard > 0.45); the reveal sits late, as the payoff.
+    Returns (script, words, hook) — the hook doubles as the Short's
+    first-card headline."""
+    surface = _render_surface(key, rng, slotted_only=True)
+    hook = surface["hook"]
+    reveal = _reveal_line(c["term"], rng)
+    opener = opener or rng.pick(OPENERS)
+    question = rng.pick(COMMENT_QUESTIONS).replace("{term}", c["term"])
+    micro = _pick_micro(key, hook, rng)
+    takeaway = surface["takeaway"]
+    # echo guard: the takeaway must not parrot the micro's wording
+    if _overlap(takeaway, micro) > 0.45:
+        alts = [t for t in _pool(key, "takeaway")
+                if _overlap(t, micro) <= 0.45]
+        if alts:
+            takeaway = rng.pick(alts)
+
+    facts = _fact_candidates(key, c, hook, micro)
+    picked = rng.some(facts, min(2, len(facts)))
+    extras: list[str] = []
+    take2 = ""
+
+    def _assemble() -> str:
+        parts = [opener, hook, micro, *picked, *extras,
+                 reveal, takeaway, take2, question, CTA_LINE]
+        return " ".join(p for p in parts if p)
+
+    script = _assemble()
+    words = len(script.split())
+
+    # floor (~125 words at the measured pace): distinct facts first,
+    # then at most ONE extra micro, then a distinct second takeaway —
+    # never a second long scenario
+    if words < 125:
+        rest = [s for s in rng.shuffle(facts) if s not in picked]
+        for s in rest:
+            if words >= 125:
+                break
+            extras.append(s)
+            words += len(s.split())
+    if words < 125:
+        alt_micros = [m for m in MICROS.get(key, []) if m != micro]
+        rng.shuffle(alt_micros)
+        for m in alt_micros[:1]:
+            extras.append(m)
+            words += len(m.split())
+    if words < 125:
+        tpool = [t for t in _pool(key, "takeaway")
+                 if t != takeaway]
+        if tpool:
+            take2 = rng.pick(tpool)
+            words += len(take2.split())
+
+    # ceiling (~205 words): shed extras, then the second takeaway,
+    # then the second fact
+    while len(script.split()) > 205 \
+            and (extras or take2 or len(picked) > 1):
+        if extras:
+            extras.pop()
+        elif take2:
+            take2 = ""
+        elif len(picked) > 1:
+            picked = picked[:-1]
+        script = _assemble()
+
+    script = _assemble()
+    words = len(script.split())
+    return script, words, hook
+
+
+# ── the v2 dedup guards (2026-10-21) ──────────────────────
+_STOP = frozenset(
+    "the a an and or but is are was were you your it its to of in on at "
+    "for with that this not no they them their he she i we just like "
+    "what when because so than then be been am does did can could will "
+    "would if as from by more most one two every each".split())
+
+
+def _content_words(text: str) -> set[str]:
+    """Lowercased meaning-bearing words for overlap comparison."""
+    words = re.findall(r"[a-z']{2,}", text.lower())
+    return {w for w in words if w not in _STOP}
+
+
+def _overlap(a: str, b: str) -> float:
+    """Jaccard similarity of two texts' content words (0..1)."""
+    wa, wb = _content_words(a), _content_words(b)
+    if not wa or not wb:
+        return 0.0
+    return len(wa & wb) / len(wa | wb)
+
+
+def _pick_micro(key: str, hook: str, rng: FactoryRNG) -> str:
+    """One vivid moment for the Short — never a dialogue, never the
+    hook restated, never containing the term or a reveal marker."""
+    pool = [m for m in MICROS.get(key, [])
+            if _overlap(m, hook) <= 0.45]
+    if not pool:
+        pool = list(MICROS.get(key) or [""])
+    return rng.pick(pool)
+
+
+def _fact_candidates(key: str, c: dict, hook: str,
+                     micro: str = "") -> list[str]:
+    """Explain sentences a Short may use as mechanism facts.
+
+    Anti-duplication rules:
+      * no 'Psychologists call...' reveal-style sentences
+      * no sentence containing the TERM (would echo the reveal card)
+      * no sentence echoing the HOOK or the MICRO (Jaccard > 0.45)
+    """
+    term = c["term"].lower()
+
+    def ok(s: str) -> bool:
+        low = s.lower()
+        if low.startswith("psychologists call"):
+            return False
+        if term and term in low:
+            return False
+        if _overlap(s, hook) > 0.45:
+            return False
+        if micro and _overlap(s, micro) > 0.45:
+            return False
+        return True
+
+    out = [s for s in _sentences(c["explain"]) if ok(s)]
+    if not out:            # never strand a concept: relax the echo guards
+        out = [s for s in _sentences(c["explain"])
+               if not s.lower().startswith("psychologists call")
+               and term not in s.lower()]
+    if not out:            # last resort: any non-reveal sentence
+        out = [s for s in _sentences(c["explain"])
+               if not s.lower().startswith("psychologists call")]
+    return out
+
+
 def _shorts_script(key: str, c: dict, rng: FactoryRNG,
                     opener: str | None = None) -> tuple[str, int, str]:
-    """Assemble a Short script whose NARRATION runs ~45-80 s of speech.
+    """LEGACY (2026-10-17 viral build) — kept verbatim for rollback
+    (channel.yaml: shorts.script_v2: false).
 
     Owner rule: the VOICE itself must exceed 45 s and END with the
     video — a Short is never padded with silent seconds. Script,
@@ -316,12 +484,22 @@ def _build(seed: int) -> dict:
 
     # -- the 4 Shorts (fresh surface draws, never the long's picks) ----
     # openers/questions draw WITHOUT replacement within an episode:
-    # same-day videos never open with the same line twice
+    # same-day videos never open with the same line twice.
+    # v2 arc (2026-10-21): opener -> hook -> micro-moment -> mechanism
+    # -> LATE reveal -> takeaway -> question -> CTA. One config flag
+    # rolls the channel back to the legacy two-example assembly
+    # (shorts.script_v2: false).
+    try:
+        from .config import cfg
+        v2 = bool(cfg().get("shorts", {}).get("script_v2", True))
+    except Exception:
+        v2 = True
+    assembler = _shorts_script_v2 if v2 else _shorts_script
     opener_deck = rng.shuffle(list(OPENERS))
     for j, key in enumerate(rng.some(picked, min(N_SHORTS, len(picked))),
                             start=1):
         c = CONCEPTS[key]
-        script, words, hook = _shorts_script(
+        script, words, hook = assembler(
             key, c, rng,
             opener=opener_deck[(j - 1) % len(opener_deck)])
         shorts.append({
@@ -383,12 +561,13 @@ def generate_story(seed: int, used_hashes: set[str] | None = None,
 def combination_space() -> int:
     """Honest lower bound on distinct content the factory can produce:
     long-episode structures x per-segment surface variants, plus the
-    total distinct-Short space across all concepts (slot-filled)."""
+    total distinct-Short space across all concepts."""
     from math import perm
 
-    # slot draws shared by every slotted example scene
-    slot_draws = len(NAMES) * (len(NAMES) - 1) * len(DAYS) * len(TIMES) \
-        * len(PLACES)
+    # slot draws shared by every slotted example scene (long video):
+    # one woman x one man, either order
+    slot_draws = 2 * len(FEMALE_NAMES) * len(MALE_NAMES) \
+        * len(DAYS) * len(TIMES) * len(PLACES)
 
     shorts_space = 0
     for key in CONCEPTS:
@@ -396,11 +575,11 @@ def combination_space() -> int:
         facts = max(1, len([s for s in _sentences(CONCEPTS[key]["explain"])
                             if not s.lower().startswith("psychologists call")]))
         takeaways = len(_pool(key, "takeaway"))
-        # Shorts draw slot-filled examples only — every script carries
-        # a fresh cast/setting (the forever guarantee).
-        slotted = len(VARIANTS.get(key, {}).get("examples", [])) or 1
+        # v2 Shorts: hook x micro x fact-pair x reveal x takeaway
+        # x opener x question — the micro bank keeps examples short
+        micros = max(1, len(MICROS.get(key, [])))
         shorts_space += hooks * facts * takeaways * len(_REVEALS) \
-            * slotted * slot_draws
+            * micros * len(OPENERS) * len(COMMENT_QUESTIONS) * slot_draws
 
     structural = 0
     for topic in TOPICS.values():

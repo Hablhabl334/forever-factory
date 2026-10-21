@@ -63,14 +63,46 @@ _EDGE_DECISION: str | None = None  # process-wide: chosen voice, or "DOWN"
 _EDGE_ALT_VOICES = ("en-US-AriaNeural", "en-US-GuyNeural", "en-GB-SoniaNeural")
 
 
-def split_chunks(text: str, max_words: int = 12) -> list[str]:
+# abbreviation guard: "11 p.m." must never split mid-sentence
+# (2026-10-21: produced a 1-second "The 11 p.m." caption card)
+_ABBR = re.compile(r"\b(a\.m\.|p\.m\.|Mr\.|Mrs\.|Ms\.|Dr\.|St\.)",
+                    re.IGNORECASE)
+_DOT_MASK = "·"      # middle dot — never appears in the content banks
+
+
+def split_chunks(text: str, max_words: int = 12,
+                 at_dashes: bool = False) -> list[str]:
     """Split narration into caption chunks: sentences, then long ones at
     commas, then any still-overlong comma-free clause at a word boundary
     (shorts use max_words=9 — a hook like 'The person who chases and
     the person who retreats always find each other' has no comma, but
-    the karaoke cards still need the faster rhythm)."""
+    the karaoke cards still need the faster rhythm).
+
+    2026-10-21: abbreviated times/titles (a.m./p.m.) never break a
+    sentence, and at_dashes=True (Shorts) breaks sentences at em-dashes
+    so every beat gets its own caption + hesitation pause — the way a
+    person actually breathes mid-line. Longs keep the original chunks.
+    """
     text = re.sub(r"\s+", " ", text).strip()
-    sentences = [s.strip() for s in re.split(r"(?<=[.!?])\s+", text) if s.strip()]
+    masked = _ABBR.sub(lambda m: m.group(1).replace(".", _DOT_MASK), text)
+    sentences = [s.strip() for s in re.split(r"(?<=[.!?])\s+", masked)
+                 if s.strip()]
+    if at_dashes:
+        broken: list[str] = []
+        for sent in sentences:
+            if " — " in sent:
+                pieces = sent.split(" — ")
+                for i, piece in enumerate(pieces):
+                    piece = piece.strip()
+                    if not piece:
+                        continue
+                    if i < len(pieces) - 1:
+                        piece += " —"
+                    broken.append(piece)
+            else:
+                broken.append(sent)
+        sentences = broken
+    sentences = [s.replace(_DOT_MASK, ".") for s in sentences]
     chunks: list[str] = []
     for sent in sentences:
         words = sent.split()
@@ -80,24 +112,44 @@ def split_chunks(text: str, max_words: int = 12) -> list[str]:
         # split at commas / em-dashes, grouping to <= max_words
         parts = re.split(r"(?<=[,;—])\s+", sent)
         cur: list[str] = []
+        sent_chunks: list[str] = []
         for part in parts:
             pw = part.split()
             if len(pw) > max_words:
-                # a comma-free clause longer than the budget (first or
-                # mid-sentence): flush the group, then split it at word
-                # boundaries so every caption card stays small
+                # a comma-free clause longer than the budget: flush the
+                # group, then split it at word boundaries so every
+                # caption card stays small. 2026-10-21 guards: a
+                # trailing em-dash token never strands alone, and a
+                # tiny tail piece merges back (never a 1-2 word
+                # caption, never a term split across cards).
                 if cur:
-                    chunks.append(" ".join(cur))
+                    sent_chunks.append(" ".join(cur))
                     cur = []
-                for k in range(0, len(pw), max_words):
-                    chunks.append(" ".join(pw[k:k + max_words]))
+                tail_dash = ""
+                if pw and pw[-1] == "—":
+                    tail_dash = pw.pop()
+                sub = [" ".join(pw[k:k + max_words])
+                       for k in range(0, len(pw), max_words)]
+                if len(sub) > 1 and len(sub[-1].split()) <= 3:
+                    merged = sub[-2] + " " + sub[-1]
+                    sub = sub[:-2] + [merged]
+                if tail_dash:
+                    sub[-1] += " " + tail_dash
+                sent_chunks.extend(sub)
             elif len(cur) + len(pw) <= max_words or not cur:
                 cur.extend(pw)
             else:
-                chunks.append(" ".join(cur))
+                sent_chunks.append(" ".join(cur))
                 cur = pw
         if cur:
-            chunks.append(" ".join(cur))
+            sent_chunks.append(" ".join(cur))
+        # 2026-10-21: a trailing 1-3 word remainder ("up,",
+        # "reinforcement.") is a caption card nobody wants — merge it
+        # back into its predecessor even if that runs slightly long
+        if len(sent_chunks) >= 2 and len(sent_chunks[-1].split()) <= 3:
+            last = sent_chunks.pop()
+            sent_chunks[-1] += " " + last
+        chunks.extend(c for c in sent_chunks if c)
     return [c for c in chunks if c]
 
 
@@ -244,7 +296,13 @@ def _kokoro_synth_all(items: list[tuple[int, str]], chunks_dir: Path,
     jitter = float(vconf.get("kokoro_jitter", 4.5))
 
     for idx, text in items:
+        # question intonation (2026-10-21): real voices lean a touch
+        # slower on questions — flat delivery on "why do they do that?"
+        # was one of the last robotic tells. Kokoro has no pitch knob,
+        # so questions get a gentle speed drop instead.
         speed = base_speed * (1.0 + _jitter_pct(text, jitter) / 100.0)
+        if text.rstrip().endswith("?"):
+            speed *= 0.97
         speed = max(0.5, min(2.0, speed))
         audio, sr = kokoro.create(
             text, voice=voice, speed=round(speed, 4), lang="en-us")
@@ -294,8 +352,13 @@ def _edge_synth_all(items: list[tuple[int, str]], chunks_dir: Path,
     async def one(idx: int, text: str) -> None:
         mp3 = chunks_dir / f"edge_{idx:03d}.mp3"
         wav = chunks_dir / f"chunk_{idx:03d}.wav"
-        rate = _fmt_pct(base_rate + _jitter_pct(text, jitter))
-        pitch = _fmt_hz(base_pitch + _jitter_pct(text, pitch_jitter))
+        # question intonation (2026-10-21): lift the pitch and slow a
+        # touch on questions — flat questions were a robotic tell
+        is_question = text.rstrip().endswith("?")
+        rate = _fmt_pct(base_rate + _jitter_pct(text, jitter)
+                        + (-2.0 if is_question else 0.0))
+        pitch = _fmt_hz(base_pitch + _jitter_pct(text, pitch_jitter)
+                        + (1.0 if is_question else 0.0))
         last_err: Exception | None = None
         for attempt in range(3):
             try:
@@ -420,14 +483,16 @@ def narrate(story: dict, work_dir: Path, model_path: Path | None = None,
             sent_pause: float | None = None,
             scene_pause: float | None = None,
             rate_pct: str | None = None,
-            chunk_words: int | None = None) -> dict:
+            chunk_words: int | None = None,
+            at_dashes: bool = False) -> dict:
     """Synthesize the whole narration. Idempotent & resumable:
     each chunk is cached as work/chunks/chunk_NNN.wav; a completed run
     writes work/narration.json which short-circuits re-runs.
 
     Optional pause overrides (shorts use tighter pacing), an optional
-    neural rate override (shorts run slightly brisker), and an optional
-    caption-chunk width (shorts use smaller chunks = faster cards).
+    neural rate override (shorts run slightly brisker), an optional
+    caption-chunk width (shorts use smaller chunks = faster cards),
+    and at_dashes=True (shorts) for em-dash hesitation beats.
 
     Returns {"chunks": [...], "scene_durations": [...], "total": float,
              "engine": "kokoro"|"edge"|"piper"}.
@@ -473,7 +538,8 @@ def narrate(story: dict, work_dir: Path, model_path: Path | None = None,
     idx = 0
     cw = int(chunk_words) if chunk_words else 12
     for scene in story["scenes"]:
-        for text in split_chunks(scene["narration"], max_words=cw):
+        for text in split_chunks(scene["narration"], max_words=cw,
+                                 at_dashes=at_dashes):
             idx += 1
             plan.append({"scene": scene["n"], "text": text, "idx": idx})
 

@@ -76,9 +76,12 @@ for i, sh in enumerate(STORY["shorts"][:4], start=1):
     check(f"short {i} ends with the CTA",
           sh["script"].rstrip().endswith(CTA_LINE))
     q = sh["script"].rstrip().rsplit(CTA_LINE, 1)[0]
+    # 2026-10-21 fix: {term}-bearing templates must be REPLACED before
+    # the substring check — the raw template can never appear in a script
     check(f"short {i} carries an engagement question before the CTA",
           any(question.replace("{term}", CONCEPTS[sh["concept"]]["term"]) == q
-              or question in q for question in COMMENT_QUESTIONS))
+              or question.replace("{term}", CONCEPTS[sh["concept"]]["term"]) in q
+              for question in COMMENT_QUESTIONS))
     check(f"short {i} word band 125-205",
           125 <= sh["words"] <= 205, True)
 
@@ -210,9 +213,19 @@ if tts_mod.kokoro_available(vconf):
         import shutil as sh
         sh.rmtree(w, ignore_errors=True)
         t0 = time.time()
+        # 2026-10-21: ~80 words (~32 s of audio) — a 4 s smoke could not
+        # amortize the model load, so the factor measured cold-start
+        # overhead, not steady-state throughput (the property that
+        # matters for the daily render window)
         n = T.narrate({"hash": "smoke-kokoro", "scenes": [
             {"n": 1, "narration": "Read this twice. If they only reply "
-             "when you are about to give up, that is not bad luck."}]},
+             "when you are about to give up, that is not bad luck. "
+             "Monday you text, Thursday they answer, warm and perfect, "
+             "then a week of nothing. The uncertainty itself becomes "
+             "the hook, because a maybe demands constant attention. "
+             "That is why an inconsistent person can feel more intense "
+             "than a consistent one. Consistency is the real green "
+             "flag, and calm is a nervous system finally resting."}]},
             w, sent_pause=0.26, scene_pause=0.30, rate_pct="-1%",
             chunk_words=9)
         check("live smoke: engine kokoro", n["engine"], "kokoro")

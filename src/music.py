@@ -118,12 +118,16 @@ def synth_music(seed: int, duration: float, sr: int = SR,
             w += 0.28 * np.sin(2 * np.pi * f * 2 * det * seg_t, dtype=np.float32)
             w *= (0.55 + 0.45 * np.sin(2 * np.pi * 0.05 * seg_t + k, dtype=np.float32))
             seg += w / (k + 2.0)
-        # edges: fade in 3s (softer start for the very first chord)
+        # chord edges: 3 s crossfades keep later chord changes smooth
         fade = min(seg_n, int(3.0 * sr))
         env = np.ones(seg_n, dtype=np.float32)
-        env[:fade] = np.linspace(0, 1, fade, dtype=np.float32)
         if i == 0:
-            env[:fade] = np.linspace(0.2, 1.0, fade, dtype=np.float32)
+            # 2026-10-21 owner rule: music is audible from second one —
+            # the very first chord ramps 0.2 -> 1.0 in 0.6 s (was 3 s)
+            f0 = min(seg_n, int(0.6 * sr))
+            env[:f0] = np.linspace(0.2, 1.0, f0, dtype=np.float32)
+        else:
+            env[:fade] = np.linspace(0, 1, fade, dtype=np.float32)
         seg *= env
         pad[pos:pos + seg_n] += seg
         pos += int(step * sr)
@@ -181,11 +185,15 @@ def synth_music(seed: int, duration: float, sr: int = SR,
                                    + float(rng.uniform(0, 6)))).astype(np.float32)
     noise *= wash_env * 0.04
 
-    # ── master envelope: slow fade in 8s, fade out 10s ───────────────
+    # ── master envelope: quick fade in, slow fade out ─────────────────
+    # 2026-10-21 fix: was an 8 s fade-in — the bed was effectively
+    # silent for the first 3-5 seconds, which read as "the music
+    # starts late". 0.5 s from a soft 0.35 floor has the bed fully
+    # up well inside second one.
     master_env = np.ones(n, dtype=np.float32)
-    fin = min(n, int(8 * sr))
+    fin = min(n, int(0.5 * sr))
     fout = min(n, int(10 * sr))
-    master_env[:fin] = np.linspace(0, 1, fin, dtype=np.float32)
+    master_env[:fin] = np.linspace(0.35, 1.0, fin, dtype=np.float32)
     master_env[-fout:] = np.linspace(1, 0, fout, dtype=np.float32)
 
     mono = pad * 0.85

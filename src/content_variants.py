@@ -26,12 +26,28 @@ people; no diagnosis, no manipulation framing (audited downstream).
 from __future__ import annotations
 
 # ── slot pools (shared by every slotted example) ─────────────────────
+# LEGACY mixed pool — kept for compatibility; new stories pair one
+# woman + one man (see FEMALE_NAMES / MALE_NAMES) so the named couple
+# always matches the man+woman pair the episode art actually draws.
 NAMES = [
     "Maya", "Noah", "Lena", "Sam", "Ava", "Theo", "Iris", "Eli",
     "Nora", "Adam", "Zoe", "Leo", "Emma", "Kai", "Sara", "Omar",
     "Layla", "Ben", "Chloe", "Rami", "Dina", "Jack", "Nina", "Milo",
     "Tara", "Youssef", "Amy", "Cole", "Hana", "Ivan", "Rosa", "Finn",
     "Ada", "Jonas", "Mira", "Seth", "Tala", "Ryan", "Aya", "Luke",
+]
+# 2026-10-21 fix: {a}/{b} used to draw ANY two names — the "couple" could
+# read as Finn & Milo (two men) or Tara & Ava (two women) while the art
+# shows a man+woman pair. Casting now draws one from each pool.
+FEMALE_NAMES = [
+    "Maya", "Lena", "Ava", "Iris", "Nora", "Zoe", "Emma", "Sara",
+    "Layla", "Chloe", "Dina", "Nina", "Tara", "Amy", "Hana", "Rosa",
+    "Ada", "Mira", "Tala", "Aya",
+]
+MALE_NAMES = [
+    "Noah", "Sam", "Theo", "Eli", "Adam", "Leo", "Kai", "Omar",
+    "Ben", "Rami", "Jack", "Milo", "Youssef", "Cole", "Ivan", "Finn",
+    "Jonas", "Seth", "Ryan", "Luke",
 ]
 PLACES = [
     "a coffee shop downtown", "the office", "a wedding", "the airport",
