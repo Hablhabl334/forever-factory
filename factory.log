@@ -1,41 +1,31 @@
-[0;93m2026-10-20 15:42:52.420472323 [W:onnxruntime:Default, device_discovery.cc:95 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
-[stats] growth report 2026-10-20
-[stats]   total: 1729 views  (+12 since last report)
-[stats]      119 views  ·  Subscribe for more tips like this #psychology #relationship 
-[stats]      110 views  ·  Subscribe for more tips like this #psychology #relationship 
-[stats]       90 views  ·  Subscribe for more tips like this #psychology #relationship 
-[31] script: Red Flags People Ignore (1133 words, hash c3d255cc9f)
-  [voice] local neural narration: 147 chunks (Kokoro af_heart)
+[0;93m2026-10-21 05:20:24.923546402 [W:onnxruntime:Default, device_discovery.cc:95 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
+[grid] booking 2 short slot(s) in the next 24h (free: 2026-10-22T00:00:00+03:00, 2026-10-22T06:00:00+03:00)
+[32] script: The Science of a Real Apology (1188 words, hash 496bb77b8e)
+  [voice] local neural narration: 135 chunks (Kokoro af_heart)
   [voice] polished: presence EQ + gentle compression
-[31] narration: 475s, 147 caption chunks
-[31] long video: 493s, 46.2MB
-  [voice] local neural narration: 28 chunks (Kokoro af_heart)
+[32] narration: 479s, 135 caption chunks
+[32] long video: 497s, 46.9MB
+  [voice] local neural narration: 19 chunks (Kokoro af_heart)
   [voice] polished: presence EQ + gentle compression
-  [short 1] 66s, 28 cards, 5.5MB
-  [voice] local neural narration: 25 chunks (Kokoro af_heart)
+  [short 1] 48s, 19 cards, 4.1MB
+  [voice] local neural narration: 21 chunks (Kokoro af_heart)
   [voice] polished: presence EQ + gentle compression
-  [short 2] 62s, 25 cards, 5.1MB
-  [voice] local neural narration: 31 chunks (Kokoro af_heart)
+  [short 2] 53s, 21 cards, 4.5MB
+  [voice] local neural narration: 21 chunks (Kokoro af_heart)
   [voice] polished: presence EQ + gentle compression
-  [short 3] 66s, 31 cards, 5.9MB
-  [voice] local neural narration: 28 chunks (Kokoro af_heart)
+  [short 3] 51s, 21 cards, 3.6MB
+  [voice] local neural narration: 17 chunks (Kokoro af_heart)
   [voice] polished: presence EQ + gentle compression
-  [short 4] 65s, 28 cards, 5.7MB
-  [voice] local neural narration: 28 chunks (Kokoro af_heart)
+  [short 4] 48s, 17 cards, 4.1MB
+  [voice] local neural narration: 23 chunks (Kokoro af_heart)
   [voice] polished: presence EQ + gentle compression
-  [short 5] 62s, 28 cards, 5.3MB
-  [voice] local neural narration: 25 chunks (Kokoro af_heart)
+  [short 5] 54s, 23 cards, 4.5MB
+  [voice] local neural narration: 18 chunks (Kokoro af_heart)
   [voice] polished: presence EQ + gentle compression
-  [short 6] 61s, 25 cards, 4.6MB
-[31] thumbnail + 4 shorts ready
-  [youtube] uploaded long: -TaBXAnUPqo (publishAt 2026-10-22T20:00:00+03:00)
-  [youtube] setting thumbnail thumbnail.png (57 KB) on -TaBXAnUPqo
-  [youtube] thumbnail set
-  [youtube] uploaded short: y_XhaC-aTgY (publishAt 2026-10-21T00:00:00+03:00)
-  [youtube] uploaded short: z4Jm-cn-LeA (publishAt 2026-10-21T06:00:00+03:00)
-  [youtube] uploaded short: CGaiyBIYsWs (publishAt 2026-10-21T12:00:00+03:00)
-  [youtube] uploaded short: b1Gd-ermBQQ (publishAt 2026-10-21T18:00:00+03:00)
-[playlist] 1 long video(s) not in the playlist yet
-[playlist] ep31 long added (-TaBXAnUPqo)
-  ✓ episode 31: Red Flags People Ignore
-combination space: 273,301,428,924,195,840 stories — the factory never repeats
+  [short 6] 49s, 18 cards, 3.6MB
+[32] thumbnail + 2 shorts ready
+[32] DRY-RUN: would upload long at 2026-10-23T20:00:00+03:00
+[32] DRY-RUN: would upload short 1 at 2026-10-22T00:00:00+03:00
+[32] DRY-RUN: would upload short 2 at 2026-10-22T06:00:00+03:00
+  - episode 32: The Science of a Real Apology (dry-run)
+combination space: 273,306,627,721,774,080 stories — the factory never repeats
