@@ -1,41 +1,44 @@
-[0;93m2026-10-22 15:56:40.980163142 [W:onnxruntime:Default, device_discovery.cc:95 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
-[stats] growth report 2026-10-22
-[stats]   total: 1751 views  (+12 since last report)
+[0;93m2026-10-23 15:48:37.714915572 [W:onnxruntime:Default, device_discovery.cc:95 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
+[stats] growth report 2026-10-23
+[stats]   total: 1768 views  (+17 since last report)
 [stats]      119 views  ·  Subscribe for more tips like this #psychology #relationship 
 [stats]      110 views  ·  Subscribe for more tips like this #psychology #relationship 
 [stats]       90 views  ·  Subscribe for more tips like this #psychology #relationship 
-[33] script: What Heartbreak Does to Your Brain (1155 words, hash 8190232fc9)
-  [voice] local neural narration: 135 chunks (Kokoro af_heart)
+[34] script: The Science of a Real Apology (1209 words, hash 8522898c99)
+  [voice] local neural narration: 139 chunks (Kokoro af_heart)
   [voice] polished: presence EQ + gentle compression
-[33] narration: 455s, 135 caption chunks
-[33] long video: 473s, 43.1MB
-  [voice] local neural narration: 19 chunks (Kokoro af_heart)
-  [voice] polished: presence EQ + gentle compression
-  [short 1] 49s, 19 cards, 3.7MB
-  [voice] local neural narration: 20 chunks (Kokoro af_heart)
-  [voice] polished: presence EQ + gentle compression
-  [short 2] 51s, 20 cards, 4.0MB
-  [voice] local neural narration: 21 chunks (Kokoro af_heart)
-  [voice] polished: presence EQ + gentle compression
-  [short 3] 49s, 21 cards, 3.7MB
-  [voice] local neural narration: 19 chunks (Kokoro af_heart)
-  [voice] polished: presence EQ + gentle compression
-  [short 4] 52s, 19 cards, 3.9MB
+[34] narration: 488s, 139 caption chunks
+[34] long video: 506s, 47.3MB
   [voice] local neural narration: 22 chunks (Kokoro af_heart)
   [voice] polished: presence EQ + gentle compression
-  [short 5] 54s, 22 cards, 3.6MB
-  [voice] local neural narration: 18 chunks (Kokoro af_heart)
+  [short 1] 54s, 22 cards, 4.5MB
+  [voice] local neural narration: 21 chunks (Kokoro af_heart)
   [voice] polished: presence EQ + gentle compression
-  [short 6] 46s, 18 cards, 3.2MB
-[33] thumbnail + 4 shorts ready
-  [youtube] uploaded long: HaXTuZiut1E (publishAt 2026-10-24T20:00:00+03:00)
-  [youtube] setting thumbnail thumbnail.png (67 KB) on HaXTuZiut1E
+  [short 2] 47s, 21 cards, 3.7MB
+  [voice] local neural narration: 19 chunks (Kokoro af_heart)
+  [voice] polished: presence EQ + gentle compression
+  [short 3] 51s, 19 cards, 4.0MB
+  [voice] local neural narration: 19 chunks (Kokoro af_heart)
+  [voice] polished: presence EQ + gentle compression
+  [short 4] 49s, 19 cards, 3.4MB
+  [voice] local neural narration: 17 chunks (Kokoro af_heart)
+  [voice] polished: presence EQ + gentle compression
+  [short 5] 49s, 17 cards, 4.2MB
+  [voice] local neural narration: 17 chunks (Kokoro af_heart)
+  [voice] polished: presence EQ + gentle compression
+  [short 6] narration 44.4s < 45s floor — re-voicing slower (-6%), attempt 1
+  [voice] local neural narration: 15 chunks (Kokoro af_heart)
+  [voice] polished: presence EQ + gentle compression
+  [short 6] 48s, 15 cards, 3.9MB
+[34] thumbnail + 4 shorts ready
+  [youtube] uploaded long: fRGtg20GL30 (publishAt 2026-10-25T20:00:00+03:00)
+  [youtube] setting thumbnail thumbnail.png (59 KB) on fRGtg20GL30
   [youtube] thumbnail set
-  [youtube] uploaded short: 0hwlRPpsyYk (publishAt 2026-10-23T00:00:00+03:00)
-  [youtube] uploaded short: yr1nz2gvsts (publishAt 2026-10-23T06:00:00+03:00)
-  [youtube] uploaded short: 2JPQxld1sbo (publishAt 2026-10-23T12:00:00+03:00)
-  [youtube] uploaded short: FkyJmlS6KOs (publishAt 2026-10-23T18:00:00+03:00)
+  [youtube] uploaded short: h9QigC3YiN4 (publishAt 2026-10-24T00:00:00+03:00)
+  [youtube] uploaded short: iSmlOehr4ms (publishAt 2026-10-24T06:00:00+03:00)
+  [youtube] uploaded short: OgVHFsF0n5w (publishAt 2026-10-24T12:00:00+03:00)
+  [youtube] uploaded short: mCS8ZdkfJ7s (publishAt 2026-10-24T18:00:00+03:00)
 [playlist] 1 long video(s) not in the playlist yet
-[playlist] ep33 long added (HaXTuZiut1E)
-  ✓ episode 33: What Heartbreak Does to Your Brain
+[playlist] ep34 long added (fRGtg20GL30)
+  ✓ episode 34: The Science of a Real Apology
 combination space: 273,306,627,721,774,080 stories — the factory never repeats
