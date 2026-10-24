@@ -1,47 +1,39 @@
-[0;93m2026-10-24 14:40:49.340004054 [W:onnxruntime:Default, device_discovery.cc:95 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
+[0;93m2026-10-24 19:02:03.823557001 [W:onnxruntime:Default, device_discovery.cc:95 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
 [stats] growth report 2026-10-24
-[stats]   total: 1774 views  (+6 since last report)
+[stats]   total: 1774 views  (+0 since last report)
 [stats]      120 views  ·  Subscribe for more tips like this #psychology #relationship 
 [stats]      110 views  ·  Subscribe for more tips like this #psychology #relationship 
 [stats]       90 views  ·  Subscribe for more tips like this #psychology #relationship 
-[grid] booking 3 short slot(s) in the next 24h (free: 2026-10-25T00:00:00+03:00, 2026-10-25T06:00:00+03:00, 2026-10-25T12:00:00+03:00)
-[35] script: The Psychology of Long Distance (1172 words, hash 1d9e8e901b)
-  [voice] local neural narration: 132 chunks (Kokoro af_heart)
+[grid] booking 1 short slot(s) in the next 24h (free: 2026-10-25T18:00:00+03:00)
+[36] script: Chemistry vs Compatibility (1169 words, hash f1328213c9)
+  [voice] local neural narration: 135 chunks (Kokoro af_heart)
   [voice] polished: presence EQ + gentle compression
-[35] narration: 472s, 132 caption chunks
-[35] long video: 490s, 44.8MB
-  [voice] local neural narration: 19 chunks (Kokoro af_heart)
-  [voice] polished: presence EQ + gentle compression
-  [short 1] 50s, 19 cards, 3.8MB
-  [voice] local neural narration: 20 chunks (Kokoro af_heart)
-  [voice] polished: presence EQ + gentle compression
-  [short 2] 50s, 20 cards, 3.6MB
-  [voice] local neural narration: 17 chunks (Kokoro af_heart)
-  [voice] polished: presence EQ + gentle compression
-  [short 3] narration 44.4s < 45s floor — re-voicing slower (-6%), attempt 1
-  [voice] local neural narration: 13 chunks (Kokoro af_heart)
-  [voice] polished: presence EQ + gentle compression
-  [short 3] 48s, 13 cards, 3.7MB
-  [voice] local neural narration: 19 chunks (Kokoro af_heart)
-  [voice] polished: presence EQ + gentle compression
-  [short 4] 48s, 19 cards, 3.8MB
+[36] narration: 461s, 135 caption chunks
+[36] long video: 479s, 44.4MB
   [voice] local neural narration: 18 chunks (Kokoro af_heart)
   [voice] polished: presence EQ + gentle compression
-  [short 5] 45s, 18 cards, 3.5MB
-  [voice] local neural narration: 20 chunks (Kokoro af_heart)
+  [short 1] 50s, 18 cards, 4.3MB
+  [voice] local neural narration: 18 chunks (Kokoro af_heart)
   [voice] polished: presence EQ + gentle compression
-  [short 6] narration 44.8s < 45s floor — re-voicing slower (-6%), attempt 1
-  [voice] local neural narration: 17 chunks (Kokoro af_heart)
+  [short 2] 49s, 18 cards, 3.7MB
+  [voice] local neural narration: 18 chunks (Kokoro af_heart)
   [voice] polished: presence EQ + gentle compression
-  [short 6] 49s, 17 cards, 3.9MB
-[35] thumbnail + 3 shorts ready
-  [youtube] uploaded long: M0emHThNAuU (publishAt 2026-10-26T20:00:00+03:00)
-  [youtube] setting thumbnail thumbnail.png (66 KB) on M0emHThNAuU
+  [short 3] 48s, 18 cards, 3.6MB
+  [voice] local neural narration: 19 chunks (Kokoro af_heart)
+  [voice] polished: presence EQ + gentle compression
+  [short 4] 50s, 19 cards, 4.2MB
+  [voice] local neural narration: 21 chunks (Kokoro af_heart)
+  [voice] polished: presence EQ + gentle compression
+  [short 5] 50s, 21 cards, 4.0MB
+  [voice] local neural narration: 18 chunks (Kokoro af_heart)
+  [voice] polished: presence EQ + gentle compression
+  [short 6] 46s, 18 cards, 3.8MB
+[36] thumbnail + 1 shorts ready
+  [youtube] uploaded long: kZHzlwyIfmc (publishAt now)
+  [youtube] setting thumbnail thumbnail.png (61 KB) on kZHzlwyIfmc
   [youtube] thumbnail set
-  [youtube] uploaded short: u6wW5fij2e0 (publishAt 2026-10-25T00:00:00+03:00)
-  [youtube] uploaded short: NXcZ9U7q1ns (publishAt 2026-10-25T06:00:00+03:00)
-  [youtube] uploaded short: H-xJB2NnvgU (publishAt 2026-10-25T12:00:00+03:00)
+  [youtube] uploaded short: I6tB1XKMBME (publishAt 2026-10-25T18:00:00+03:00)
 [playlist] 1 long video(s) not in the playlist yet
-[playlist] ep35 long added (M0emHThNAuU)
-  ✓ episode 35: The Psychology of Long Distance
+[playlist] quota low — finishing next cycle
+  ✓ episode 36: Chemistry vs Compatibility
 combination space: 273,306,627,721,774,080 stories — the factory never repeats
