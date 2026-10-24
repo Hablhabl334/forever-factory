@@ -1,44 +1,47 @@
-[0;93m2026-10-23 15:48:37.714915572 [W:onnxruntime:Default, device_discovery.cc:95 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
-[stats] growth report 2026-10-23
-[stats]   total: 1768 views  (+17 since last report)
-[stats]      119 views  ·  Subscribe for more tips like this #psychology #relationship 
+[0;93m2026-10-24 14:40:49.340004054 [W:onnxruntime:Default, device_discovery.cc:95 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
+[stats] growth report 2026-10-24
+[stats]   total: 1774 views  (+6 since last report)
+[stats]      120 views  ·  Subscribe for more tips like this #psychology #relationship 
 [stats]      110 views  ·  Subscribe for more tips like this #psychology #relationship 
 [stats]       90 views  ·  Subscribe for more tips like this #psychology #relationship 
-[34] script: The Science of a Real Apology (1209 words, hash 8522898c99)
-  [voice] local neural narration: 139 chunks (Kokoro af_heart)
+[grid] booking 3 short slot(s) in the next 24h (free: 2026-10-25T00:00:00+03:00, 2026-10-25T06:00:00+03:00, 2026-10-25T12:00:00+03:00)
+[35] script: The Psychology of Long Distance (1172 words, hash 1d9e8e901b)
+  [voice] local neural narration: 132 chunks (Kokoro af_heart)
   [voice] polished: presence EQ + gentle compression
-[34] narration: 488s, 139 caption chunks
-[34] long video: 506s, 47.3MB
-  [voice] local neural narration: 22 chunks (Kokoro af_heart)
-  [voice] polished: presence EQ + gentle compression
-  [short 1] 54s, 22 cards, 4.5MB
-  [voice] local neural narration: 21 chunks (Kokoro af_heart)
-  [voice] polished: presence EQ + gentle compression
-  [short 2] 47s, 21 cards, 3.7MB
+[35] narration: 472s, 132 caption chunks
+[35] long video: 490s, 44.8MB
   [voice] local neural narration: 19 chunks (Kokoro af_heart)
   [voice] polished: presence EQ + gentle compression
-  [short 3] 51s, 19 cards, 4.0MB
+  [short 1] 50s, 19 cards, 3.8MB
+  [voice] local neural narration: 20 chunks (Kokoro af_heart)
+  [voice] polished: presence EQ + gentle compression
+  [short 2] 50s, 20 cards, 3.6MB
+  [voice] local neural narration: 17 chunks (Kokoro af_heart)
+  [voice] polished: presence EQ + gentle compression
+  [short 3] narration 44.4s < 45s floor — re-voicing slower (-6%), attempt 1
+  [voice] local neural narration: 13 chunks (Kokoro af_heart)
+  [voice] polished: presence EQ + gentle compression
+  [short 3] 48s, 13 cards, 3.7MB
   [voice] local neural narration: 19 chunks (Kokoro af_heart)
   [voice] polished: presence EQ + gentle compression
-  [short 4] 49s, 19 cards, 3.4MB
+  [short 4] 48s, 19 cards, 3.8MB
+  [voice] local neural narration: 18 chunks (Kokoro af_heart)
+  [voice] polished: presence EQ + gentle compression
+  [short 5] 45s, 18 cards, 3.5MB
+  [voice] local neural narration: 20 chunks (Kokoro af_heart)
+  [voice] polished: presence EQ + gentle compression
+  [short 6] narration 44.8s < 45s floor — re-voicing slower (-6%), attempt 1
   [voice] local neural narration: 17 chunks (Kokoro af_heart)
   [voice] polished: presence EQ + gentle compression
-  [short 5] 49s, 17 cards, 4.2MB
-  [voice] local neural narration: 17 chunks (Kokoro af_heart)
-  [voice] polished: presence EQ + gentle compression
-  [short 6] narration 44.4s < 45s floor — re-voicing slower (-6%), attempt 1
-  [voice] local neural narration: 15 chunks (Kokoro af_heart)
-  [voice] polished: presence EQ + gentle compression
-  [short 6] 48s, 15 cards, 3.9MB
-[34] thumbnail + 4 shorts ready
-  [youtube] uploaded long: fRGtg20GL30 (publishAt 2026-10-25T20:00:00+03:00)
-  [youtube] setting thumbnail thumbnail.png (59 KB) on fRGtg20GL30
+  [short 6] 49s, 17 cards, 3.9MB
+[35] thumbnail + 3 shorts ready
+  [youtube] uploaded long: M0emHThNAuU (publishAt 2026-10-26T20:00:00+03:00)
+  [youtube] setting thumbnail thumbnail.png (66 KB) on M0emHThNAuU
   [youtube] thumbnail set
-  [youtube] uploaded short: h9QigC3YiN4 (publishAt 2026-10-24T00:00:00+03:00)
-  [youtube] uploaded short: iSmlOehr4ms (publishAt 2026-10-24T06:00:00+03:00)
-  [youtube] uploaded short: OgVHFsF0n5w (publishAt 2026-10-24T12:00:00+03:00)
-  [youtube] uploaded short: mCS8ZdkfJ7s (publishAt 2026-10-24T18:00:00+03:00)
+  [youtube] uploaded short: u6wW5fij2e0 (publishAt 2026-10-25T00:00:00+03:00)
+  [youtube] uploaded short: NXcZ9U7q1ns (publishAt 2026-10-25T06:00:00+03:00)
+  [youtube] uploaded short: H-xJB2NnvgU (publishAt 2026-10-25T12:00:00+03:00)
 [playlist] 1 long video(s) not in the playlist yet
-[playlist] ep34 long added (fRGtg20GL30)
-  ✓ episode 34: The Science of a Real Apology
+[playlist] ep35 long added (M0emHThNAuU)
+  ✓ episode 35: The Psychology of Long Distance
 combination space: 273,306,627,721,774,080 stories — the factory never repeats
