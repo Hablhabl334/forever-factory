@@ -159,6 +159,9 @@ jobs:
           YT_CLIENT_ID: ${{ secrets.YT_CLIENT_ID }}
           YT_CLIENT_SECRET: ${{ secrets.YT_CLIENT_SECRET }}
           YT_REFRESH_TOKEN: ${{ secrets.YT_REFRESH_TOKEN }}
+          # the muse (LLM writing layer): absent secret -> dormant,
+          # the machine runs exactly as it did before. Never required.
+          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
         run: |
           set -o pipefail   # a python failure must fail the workflow (and fire the alert), not be swallowed by tee
           DRY=""
@@ -182,6 +185,10 @@ jobs:
           # missing pathspec must never abort the whole staging.)
           git add data/state.json factory.log 2>/dev/null || true
           git add data/state.json.bak 2>/dev/null || true
+          # the muse's enhanced stories ride with the memory: they ARE
+          # the replayable text of every episode (its request budget
+          # lives inside state.json and needs no line of its own)
+          git add data/muse_cache 2>/dev/null || true
           if git diff --cached --quiet; then
             echo "nothing new to remember"
           else

@@ -143,6 +143,7 @@ def register_story(state: dict, story: dict, episode_n: int, today: str) -> dict
         "seed": story["seed"],
         "date": today,
         "status": "in_progress",
+        "muse": story.get("muse", "grammar"),
         "ids": {"long": None, "shorts": [], "thumbnail": None},
         "shashes": list(story.get("short_hashes", [])),
     }

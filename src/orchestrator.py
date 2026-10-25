@@ -23,6 +23,7 @@ from pathlib import Path
 from . import art_engine, discovery, ledger, render, shorts as shorts_mod, \
     thumbnails, tts, youtube
 from .config import cfg, ROOT
+from . import muse
 from .story_engine import generate_story, combination_space, N_SHORTS
 
 WORK_ROOT = ROOT / "work"
@@ -264,6 +265,13 @@ def _rebuild_thumb(record: dict, state: dict) -> Path | None:
             continue
         if s["hash"] == record.get("hash") and s["title"] == record.get("title"):
             story = s
+            break
+        # muse episodes record the ENHANCED text's hash - replay
+        # through the muse cache (cache-only: never a network call,
+        # a missing cache falls through to the graceful skip below)
+        m = muse.enhance(s, state, cache_only=True)
+        if m["hash"] == record.get("hash") and m["title"] == record.get("title"):
+            story = m
             break
     if story is None:
         print(f"  [thumbs] ep{record['n']}: no seed candidate replays the "
@@ -543,6 +551,11 @@ def _run_daily_inner(dry_run: bool, longs: int | None,
             used_short = used_short - set(record.get("shashes", []))
 
         story = generate_story(seed, used, used_short)
+        # the muse: LLM rewrite of every line the audience hears.
+        # No-op offline (no key / no budget / any error) - the grammar
+        # story ships unchanged. Cache-first, so a re-run replays the
+        # identical enhanced text (crash-resume contract intact).
+        story = muse.enhance(story, state)
         if record is None:
             ledger.register_story(state, story, n, date.today().isoformat())
         else:
