@@ -92,8 +92,15 @@ def _pluck(f: float, dur: float, sr: int) -> np.ndarray:
 
 
 def synth_music(seed: int, duration: float, sr: int = SR,
-                mood: str = "warm") -> np.ndarray:
-    """Return mono float32 mix, peak-normalized to ~0.5. Calm by design."""
+                mood: str = "warm", instant_attack: bool = False) -> np.ndarray:
+    """Return mono float32 mix, peak-normalized to ~0.5. Calm by design.
+
+    v4 instant_attack=True (shorts): the bed opens at FULL voice from
+    frame one — first chord ramp 0.9->1.0 in 0.08 s, master fade-in
+    0.06 s, and the first arpeggio pluck lands inside the first half
+    second (sound craft: 'enter at the track's strongest bar'). The
+    long-video path keeps the gentler 0.5 s settle under the title
+    card."""
     rng = np.random.default_rng(seed)
     n = int(duration * sr)
 
@@ -122,10 +129,15 @@ def synth_music(seed: int, duration: float, sr: int = SR,
         fade = min(seg_n, int(3.0 * sr))
         env = np.ones(seg_n, dtype=np.float32)
         if i == 0:
-            # 2026-10-21 owner rule: music is audible from second one —
-            # the very first chord ramps 0.2 -> 1.0 in 0.6 s (was 3 s)
-            f0 = min(seg_n, int(0.6 * sr))
-            env[:f0] = np.linspace(0.2, 1.0, f0, dtype=np.float32)
+            if instant_attack:
+                # v4 shorts: full voice inside the first 80 ms
+                f0 = min(seg_n, int(0.08 * sr))
+                env[:f0] = np.linspace(0.9, 1.0, f0, dtype=np.float32)
+            else:
+                # 2026-10-21 owner rule: music is audible from second one —
+                # the very first chord ramps 0.2 -> 1.0 in 0.6 s (was 3 s)
+                f0 = min(seg_n, int(0.6 * sr))
+                env[:f0] = np.linspace(0.2, 1.0, f0, dtype=np.float32)
         else:
             env[:fade] = np.linspace(0, 1, fade, dtype=np.float32)
         seg *= env
@@ -145,8 +157,16 @@ def synth_music(seed: int, duration: float, sr: int = SR,
         p += int(step * sr)
         ci += 1
     n_plucks = max(3, int(duration / 2.6))
-    for _ in range(n_plucks):
-        start = rng.uniform(0, max(0.1, duration - 3))
+    first_pluck_at = None
+    if instant_attack:
+        # v4 shorts: one pluck INSIDE the first half second
+        first_pluck_at = rng.uniform(0.25, 0.55)
+    starts = [first_pluck_at] if first_pluck_at is not None else []
+    starts += [rng.uniform(0, max(0.1, duration - 3))
+               for _ in range(n_plucks - (1 if first_pluck_at is not None else 0))]
+    for start in starts:
+        if start is None:
+            continue
         s0 = int(start * sr)
         edge = max(e for e in chord_edges if e <= s0) if chord_edges else 0
         chord = chords[(chord_edges.index(edge)) % len(chords)] if edge else chords[0]
@@ -191,9 +211,13 @@ def synth_music(seed: int, duration: float, sr: int = SR,
     # starts late". 0.5 s from a soft 0.35 floor has the bed fully
     # up well inside second one.
     master_env = np.ones(n, dtype=np.float32)
-    fin = min(n, int(0.5 * sr))
+    if instant_attack:
+        fin = min(n, int(0.06 * sr))
+        master_env[:fin] = np.linspace(0.85, 1.0, fin, dtype=np.float32)
+    else:
+        fin = min(n, int(0.5 * sr))
+        master_env[:fin] = np.linspace(0.35, 1.0, fin, dtype=np.float32)
     fout = min(n, int(10 * sr))
-    master_env[:fin] = np.linspace(0.35, 1.0, fin, dtype=np.float32)
     master_env[-fout:] = np.linspace(1, 0, fout, dtype=np.float32)
 
     mono = pad * 0.85
@@ -202,9 +226,62 @@ def synth_music(seed: int, duration: float, sr: int = SR,
     mono += noise
     mono *= master_env
 
+    # v4 level law: RMS-normalize FIRST (a globally-loud pluck or bell
+    # must not bury the sustained pad — the bed's job is to be FELT in
+    # the first second), then peak-cap at 0.5. Before, peak-only
+    # normalization made the pad level swing ~10 dB between seeds:
+    # some episodes opened near-silent while the voice was still
+    # warming up — exactly the 'music starts late' read we fixed once
+    # already on 2026-10-21.
+    rms = float(np.sqrt(np.mean(np.square(mono.astype(np.float64)))))
+    if rms > 1e-6:
+        mono *= np.float32(0.10 / rms)     # consistent bed floor, every seed
     peak = float(np.max(np.abs(mono))) or 1.0
-    mono *= (0.5 / peak)
+    if peak > 0.5:
+        mono *= np.float32(0.5 / peak)
     return mono
+
+
+# ── v4 SFX accents (sound craft: 'few and exact — every effect has a
+# cause on screen'). Three causes, three sounds, rotated by seed so no
+# two cards share the identical take: the hook landing (pop), the term
+# reveal (riser into impact — once per short), and the CTA (soft pop).
+# Every hit sits 3-6 dB over the ducked bed; nothing synthesized as a
+# chime or a ding (banned: they read as templates).
+
+
+def synth_sfx(kind: str, seed: int, sr: int = SR) -> np.ndarray:
+    """Return float32 mono SFX peak-normalized to ~1.0 (the mixer
+    scales it). kind: 'pop' (0.16 s landing accent) or 'riser'
+    (~0.75 s sweep whose thump lands at the END — start it 0.75 s
+    before the beat it accents)."""
+    rng = np.random.default_rng(seed)
+    if kind == "pop":
+        n = int(0.16 * sr)
+        t = np.arange(n, dtype=np.float32) / sr
+        f0 = float(rng.uniform(170.0, 200.0))
+        thump = np.sin(2 * np.pi * (f0 - 80.0 * t) * t, dtype=np.float32) \
+            * np.exp(-t / 0.045)
+        click = (rng.standard_normal(n).astype(np.float32)
+                 * np.exp(-t / 0.008)) * 0.35
+        out = thump + click
+    elif kind == "riser":
+        sweep_n = int(0.62 * sr)
+        t = np.arange(sweep_n, dtype=np.float32) / sr
+        noise = rng.standard_normal(sweep_n).astype(np.float32)
+        noise = _moving_average(noise, max(2, int(0.012 * sr)))
+        prog = (t / max(t[-1], 1e-6)) ** 2.2            # accelerating swell
+        sweep = noise * prog * 1.6
+        thump_n = int(0.13 * sr)
+        t2 = np.arange(thump_n, dtype=np.float32) / sr
+        fth = float(rng.uniform(52.0, 62.0))
+        thump = np.sin(2 * np.pi * fth * t2, dtype=np.float32) \
+            * np.exp(-t2 / 0.050)
+        out = np.concatenate([sweep, thump])
+    else:
+        return np.zeros(8, dtype=np.float32)
+    peak = float(np.max(np.abs(out))) or 1.0
+    return (out / peak).astype(np.float32)
 
 
 # ── mix helpers shared by the long and shorts renderers ─────────────

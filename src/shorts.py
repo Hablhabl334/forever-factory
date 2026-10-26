@@ -56,7 +56,12 @@ def _build_card_layers(kind: str, text: str, short: dict, seed: int,
                        part: int) -> dict:
     band, sc = short["band"], short["scene"]
     if kind == "hook":
-        return art_engine.build_hook_layers(short["hook"], band, part, sc, seed)
+        # v4: the hook card shows the OPENER — the 2-6 word chunk the
+        # voice speaks first — as huge word art. Frame zero is the
+        # thumbnail: one bold line already on screen, not a 16-word
+        # essay the viewer has not heard yet. (The full hook line
+        # still lands on card 1 exactly when the voice says it.)
+        return art_engine.build_hook_layers(text, band, part, sc, seed)
     if kind == "term":
         return art_engine.build_term_layers(short["term"], band, sc, seed)
     if kind == "cta":
@@ -65,11 +70,18 @@ def _build_card_layers(kind: str, text: str, short: dict, seed: int,
 
 
 def _mix_audio(short_work: Path, narration: dict, seed: int,
-               mood: str = "warm") -> Path:
-    """narration + mood-matched ducking music bed -> master.wav.
-    The bed is exactly as long as the narration: voice, script,
-    animation and music all END together (owner rule — never silent
-    padding at the end)."""
+               mood: str = "warm",
+               accents: list[tuple[float, str]] | None = None) -> Path:
+    """narration + mood-matched ducking music bed + SFX accents ->
+    master.wav. The bed is exactly as long as the narration: voice,
+    script, animation and music all END together (owner rule — never
+    silent padding at the end).
+
+    v4: the bed opens at FULL voice from frame one (instant attack —
+    'the music is part of the first second') at 0.30 gain, and the
+    three structural beats get a sonic accent: a pop on the hook
+    landing, a riser-into-impact on the term reveal, a soft pop on
+    the CTA. Each hit sits 3-6 dB over the ducked bed."""
     import wave
 
     depth = float(cfg()["music"].get("duck_depth", 0.55))
@@ -81,18 +93,33 @@ def _mix_audio(short_work: Path, narration: dict, seed: int,
 
     total = narration["total"]
     n = int(total * music.SR)
-    music_bed = music.synth_music(seed + 700, total, mood=mood)
+    music_bed = music.synth_music(seed + 700, total, mood=mood,
+                                  instant_attack=True)
     music_bed *= music.duck_envelope(narr_44, n, music.SR, depth)
-    # 2026-10-21 owner rule: the music is part of the first second —
-    # raised 0.16 -> 0.21 alongside synth_music's instant fade-in so
-    # the bed is audible from 0:01 (still ducked well under the voice)
-    music_bed *= np.float32(0.21)
+    # v4: 0.21 -> 0.30 — the bed was near-subliminal during speech
+    # (peak ~0.047); 0.30 keeps it well under the 0.085-RMS voice
+    # while making the first second feel scored, not empty
+    music_bed *= np.float32(0.30)
 
     mix = np.zeros(n, dtype=np.float32)
     end_i = min(n, len(narr_44))
     mix[:end_i] += narr_44[:end_i]
     m = min(n, len(music_bed))
     mix[:m] += music_bed[:m]
+
+    # v4 SFX accents at the card boundaries (times from the card map)
+    if accents:
+        gains = {"pop": 0.13, "riser": 0.17}
+        for i, (t0, kind) in enumerate(accents):
+            sfx = music.synth_sfx(kind, seed + 977 + i * 31)
+            g = np.float32(gains.get(kind, 0.12))
+            s0 = int(t0 * music.SR)
+            if kind == "riser":
+                # the riser's thump lands ON the beat: start it earlier
+                s0 = max(0, s0 - int(0.62 * music.SR))
+            s1 = min(n, s0 + len(sfx))
+            if s1 > s0:
+                mix[s0:s1] += sfx[:s1 - s0] * g
 
     peak = float(np.max(np.abs(mix))) or 1.0
     if peak > 0.89:
@@ -139,15 +166,18 @@ def render_shorts(story: dict, work_dir: Path, out_dir: Path) -> list[Path]:
 
         # 1. narration (cached; brisk pace + tighter pauses + smaller
         # caption chunks for shorts — a card change every ~2 s is a
-        # visual reset that holds retention). The cache key includes
-        # the script hash: if the script ever changes underneath, the
-        # narration re-renders (never stale). at_dashes=True (2026-10-21):
-        # every em-dash becomes its own beat with a hesitation pause.
+        # visual reset that holds retention). v4: chunk_words 9 -> 6 —
+        # vertical pacing craft ('a new beat every 2-4 s, the payoff
+        # before the swipe'); six words at ~2.4 words/s is exactly a
+        # 2.5 s beat. The cache key includes the script hash: if the
+        # script ever changes underneath, the narration re-renders
+        # (never stale). at_dashes=True (2026-10-21): every em-dash
+        # becomes its own beat with a hesitation pause.
         mini = {"hash": f"{story['hash']}-{short['shash'][:10]}",
                 "scenes": [{"n": 1, "id": "short", "narration": short["script"]}]}
         rate = cfg()["voice"].get("edge_rate_shorts")
         narration = tts.narrate(mini, sw, sent_pause=0.26, scene_pause=0.30,
-                                rate_pct=rate, chunk_words=9, at_dashes=True)
+                                rate_pct=rate, chunk_words=6, at_dashes=True)
         # Owner rule: the VOICE carries the whole video — no silent
         # seconds, the script ends WITH the video. Scripts are built
         # ~150+ words (≈55 s) so this almost never triggers; if the
@@ -168,22 +198,32 @@ def render_shorts(story: dict, work_dir: Path, out_dir: Path) -> list[Path]:
         chunks = narration["chunks"]
         total = narration["total"]
 
-        # 2. one animated card per caption chunk (karaoke-style)
+        # 2. one animated card per caption chunk (karaoke-style).
+        # v4 accents: the term reveal and the CTA render with a dip-cut
+        # entrance, and their audio beats are collected for the mixer:
+        # pop on the hook landing, riser into the term card, pop on CTA.
         seed = story["seed"] + n * 131
         style = anim.pick_style(story["seed"])   # one style per video
         clips: list[Path] = []
+        accents: list[tuple[float, str]] = []
         for i, ch in enumerate(chunks):
             start = ch["start"]
             end = chunks[i + 1]["start"] if i + 1 < len(chunks) else total
             dur = max(0.8, end - start)
             kind = _card_kind(ch["text"], i, short.get("term"))
+            if kind == "hook" and start < 0.6:
+                accents.append((max(0.06, start + 0.24), "pop"))
+            elif kind == "term":
+                accents.append((start, "riser"))
+            elif kind == "cta":
+                accents.append((start, "pop"))
             cp = clips_dir / f"{i:02d}.mp4"
             if not cp.exists() or float(probe(cp).get("format", {}).get("duration", 0)) < dur - 0.4:
                 motion = MOTIONS[(seed + i) % 4]
                 layers = _build_card_layers(kind, ch["text"], short, seed, n)
                 render_clip_art(layers, seed, cp, dur, motion,
                                 size=(1080, 1920), anim_style=style,
-                                card_idx=i)
+                                card_idx=i, accent=kind in ("term", "cta"))
             clips.append(cp)
 
         # 3. concat + audio
@@ -198,7 +238,8 @@ def render_shorts(story: dict, work_dir: Path, out_dir: Path) -> list[Path]:
         master = sw / "master.wav"
         if not master.exists():
             master = _mix_audio(sw, narration, seed,
-                                mood=story.get("mood", "warm"))
+                                mood=story.get("mood", "warm"),
+                                accents=accents)
 
         _ffmpeg(["-i", str(silent), "-i", str(master),
                  "-map", "0:v", "-map", "1:a",

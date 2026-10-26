@@ -45,7 +45,7 @@ import math
 import subprocess
 from pathlib import Path
 
-from PIL import Image, ImageDraw
+from PIL import Image, ImageDraw, ImageEnhance
 
 from . import art_engine
 
@@ -224,7 +224,7 @@ def _rig_at(prm: dict, t: float, T: float) -> dict:
 
 
 def compose_frame(layers: dict, params: list[dict], t: float,
-                  T: float) -> Image.Image:
+                  T: float, skip_text: bool = False) -> Image.Image:
     """One frame: bg + living characters (+ text layer, ALWAYS last).
 
     v2.1: when the rig is enabled and the sprite carries its `spec`,
@@ -235,6 +235,11 @@ def compose_frame(layers: dict, params: list[dict], t: float,
 
     THE TEXT OVERLAY IS NEVER TOUCHED in either path: it composites
     last, from its own transparent layer, on top of everything.
+
+    v4: skip_text=True composites the world WITHOUT the text layer —
+    used only by render_intro, which lands the text itself (scale+
+    alpha entrance) so the words arrive as an event instead of
+    existing since forever.
     """
     img = layers["bg"].copy()
     dr = None
@@ -258,10 +263,95 @@ def compose_frame(layers: dict, params: list[dict], t: float,
         x = int(sp["anchor_x"] - sp["w"] / 2 + dx)
         y = int(sp["feet_y"] - (sp["h"] - 16) + dy)
         img.paste(spr, (x, y), spr)
-    tl = layers.get("text_layer")
+    tl = None if skip_text else layers.get("text_layer")
     if tl is not None:
         img = Image.alpha_composite(img.convert("RGBA"), tl).convert("RGB")
     return img
+
+
+# v4 entrance craft (hyperframes motion.md): "arrive slow, land
+# still" — a long-tailed ease-out scale 1.055 -> 1.000. NOT a loop
+# (the banned 'breathing/pulsing' default): the text lands ONCE per
+# card, then holds dead still while the world keeps moving underneath
+# it. ALPHA stays 1.0 from frame zero: frame 0 is the feed thumbnail
+# — "one bold line already on screen", never a washed-out fade-in.
+_INTRO_FRAMES = 9          # 0.30 s at 30 fps
+_POP_SCALE = 1.055
+
+
+def render_intro(layers: dict, seed: int, style: str, fps: int,
+                 n_unique: int, out: Path, dip: bool = False,
+                 n_intro: int = _INTRO_FRAMES) -> None:
+    """Render the card's ENTRANCE segment as unique frames and encode
+    to out (intro.mp4). n_unique MUST be the same loop length the
+    caller hands to encode_loop: the intro is literally the loop's
+    first n_intro frames with the text landing on top, so the seam
+    intro->loop is frame-exact continuous (the replay then trims the
+    loop to start at frame n_intro).
+
+    dip=True (the term reveal and CTA): the first frames darken
+    briefly (0.80 / 0.90 / 0.97) — a 'dip cut': the transition reads
+    as meant, an accent instead of a swap.
+
+    Cached + atomic exactly like the loop."""
+    if out.exists():
+        return
+
+    from .rng import FactoryRNG
+
+    T = n_unique / fps           # same period encode_loop will use
+    params = [_char_params(seed, style, i, T)
+              for i in range(len(layers.get("sprites", [])))]
+    jit = FactoryRNG(seed).between(0.0, 1.8)
+    for i, prm in enumerate(params):
+        prm["phase"] += jit * i    # SAME jitter as encode_loop
+
+    w, h = layers["size"]
+    tl = layers.get("text_layer")
+    bbox = tl.getbbox() if tl is not None else None
+    crop = tl.crop(bbox) if (tl is not None and bbox) else None
+    cx = (bbox[0] + bbox[2]) / 2 if bbox else w / 2
+    cy = (bbox[1] + bbox[3]) / 2 if bbox else h / 2
+
+    dip_curve = (0.80, 0.90, 0.97)
+    tmp = out.with_suffix(".tmp.mp4")
+    tmp.parent.mkdir(parents=True, exist_ok=True)
+    proc = subprocess.Popen(
+        ["ffmpeg", "-hide_banner", "-loglevel", "error", "-nostdin", "-y",
+         "-f", "rawvideo", "-pix_fmt", "rgb24", "-s", f"{w}x{h}",
+         "-r", str(fps), "-i", "-",
+         "-c:v", "libx264", "-preset", "veryfast", "-crf", "15",
+         "-g", str(fps * 2), "-pix_fmt", "yuv420p", str(tmp)],
+        stdin=subprocess.PIPE, stdout=subprocess.DEVNULL,
+        stderr=subprocess.PIPE,
+    )
+    try:
+        for i in range(n_intro):
+            frame = compose_frame(layers, params, i / fps, T,
+                                  skip_text=crop is not None)
+            if dip and i < len(dip_curve):
+                frame = ImageEnhance.Brightness(frame).enhance(dip_curve[i])
+            if crop is not None:
+                p = i / max(1, n_intro - 1)
+                e = 1.0 - (1.0 - p) ** 3          # cubic ease-out tail
+                scale = _POP_SCALE - (_POP_SCALE - 1.0) * e
+                cw, ch = crop.size
+                nw = max(1, round(cw * scale))
+                nh = max(1, round(ch * scale))
+                scaled = crop.resize((nw, nh), Image.BICUBIC)
+                fr = frame.convert("RGBA")
+                fr.alpha_composite(scaled, (int(cx - nw / 2), int(cy - nh / 2)))
+                frame = fr.convert("RGB")
+            proc.stdin.write(frame.tobytes())
+        proc.stdin.close()
+        rc = proc.wait(timeout=120)
+        if rc != 0:
+            raise RuntimeError(
+                f"intro encode failed: {proc.stderr.read()[-500:].decode()}")
+        tmp.replace(out)
+    finally:
+        if proc.poll() is None:
+            proc.kill()
 
 
 def encode_loop(layers: dict, seed: int, style: str, fps: int,

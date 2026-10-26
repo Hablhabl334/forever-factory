@@ -193,21 +193,32 @@ def _zoompan_expr(motion: str, frames: int, size: str = "1920x1080") -> str:
 MOTIONS = ["zoom_in", "pan_right", "zoom_out", "pan_left"]
 
 
-def _drift_expr(motion: str, n_frames: int, w: int, h: int) -> str:
+def _drift_expr(motion: str, n_frames: int, w: int, h: int,
+                eased: bool = False) -> str:
     """Ken Burns for an ALREADY-ANIMATED source: progressive scale
     (eval per frame, driven by the monotonically increasing frame count
     `n`, so the drift glides smoothly across loop seams), then a fixed
-    output crop with per-frame x/y."""
+    output crop with per-frame x/y.
+
+    v4 eased=True (the new default `video.camera: drift`): the
+    progress runs through smoothstep p*p*(3-2p) — the power2.inOut
+    camera ease from the motion craft notes — and the zoom range
+    tightens to 5.5% so baked card text reads as the world gently
+    breathing, never as 'the titles keep scaling'."""
     N = max(2, n_frames)
-    Z = 0.07
+    Z = 0.055 if eased else 0.07
+    if eased:
+        p = f"((n/{N})*(n/{N})*(3-2*(n/{N})))"
+    else:
+        p = f"(n/{N})"
     if motion == "zoom_in":
-        sc, x, y = f"(1+{Z}*n/{N})", "(iw-ow)/2", "(ih-oh)/2"
+        sc, x, y = f"(1+{Z}*{p})", "(iw-ow)/2", "(ih-oh)/2"
     elif motion == "zoom_out":
-        sc, x, y = f"(1+{Z}*(1-n/{N}))", "(iw-ow)/2", "(ih-oh)/2"
+        sc, x, y = f"(1+{Z}*(1-{p}))", "(iw-ow)/2", "(ih-oh)/2"
     elif motion == "pan_right":
-        sc, x, y = "1.06", f"(iw-ow)*n/{N}", "(ih-oh)/2"
+        sc, x, y = "1.05", f"(iw-ow)*{p}", "(ih-oh)/2"
     else:  # pan_left
-        sc, x, y = "1.06", f"(iw-ow)*(1-n/{N})", "(ih-oh)/2"
+        sc, x, y = "1.05", f"(iw-ow)*(1-{p})", "(ih-oh)/2"
     return (f"scale=w='trunc(iw*{sc}/4)*4':h=-2:eval=frame,"
             f"crop={w}:{h}:x='{x}':y='{y}'")
 
@@ -246,18 +257,29 @@ def render_clip_art(layers: dict, seed: int, out: Path, dur: float,
                     motion: str, ass_file: Path | None = None,
                     size: tuple[int, int] | None = None,
                     anim_style: str | None = None,
-                    card_idx: int = 0) -> None:
-    """Render one ANIMATED clip: the characters live at 30 fps
-    (v2.1: articulated rig — planted feet, moving arms/legs/head,
-    blinks, glances) under a camera that is LOCKED by default: the
-    background stays perfectly static — no zoom in, no zoom out, no
-    pan left or right. All motion comes from the characters.
+                    card_idx: int = 0, accent: bool = False) -> None:
+    """Render one ANIMATED clip, v4 'the retention build':
 
-    The legacy Ken Burns drift is one config flip away
-    (video.camera: kenburns) for anyone who ever wants it back.
-    Captions burn on top exactly as before. Atomic + resumable (the
-    encoded frame loop is cached next to the clip; its filename is
-    versioned by frame count AND rig mode)."""
+      * ENTRANCE — the first 0.30 s of every card renders as unique
+        frames: the text LANDS (ease-out scale + alpha) while the
+        characters keep moving at their normal phase (motion craft:
+        'arrive slow, land still'; a landed title is dead still
+        afterwards — no pulsing loops). accent=True adds a 3-frame
+        dip-cut for the term reveal and CTA cards.
+      * LONGER LOOPS — unique-frame budget 90-240 (was 60-150): the
+        sway/blink cycle repeats less visibly.
+      * CAMERA — `video.camera: drift` (new default): an eased 5.5%
+        Ken Burns across the whole card, world and text together for
+        baked text cards (the burn-in ASS captions stay STATIC: they
+        composite after the drift). 'static' and 'kenburns' still
+        honored exactly as before.
+
+    The seam math: the intro IS the loop's first n_intro frames (same
+    params, same phase), and the loop replay is trimmed to start at
+    frame n_intro — character motion never jumps at the seam.
+
+    Atomic + resumable: loop and intro are each cached next to the
+    clip (frame counts + rig + accent in the names)."""
     from . import anim
 
     vconf = cfg()["video"]
@@ -272,37 +294,65 @@ def render_clip_art(layers: dict, seed: int, out: Path, dur: float,
 
     # 1. the unique-frame loop (cached; frame count + rig in the name
     #    so pre-rig caches can never leak into rig-era renders)
-    n_unique = max(60, min(150, frames))
+    n_unique = max(90, min(240, frames))
     n_unique -= n_unique % 2
     rig_on = anim.rig_enabled()
     loop_path = out.with_name(
         f"{out.stem}_loop{n_unique}{'_rig' if rig_on else ''}.mp4")
-    anim.encode_loop(layers, seed + card_idx * 37, style, fps, n_unique,
-                     loop_path)
+    loop_seed = seed + card_idx * 37
+    anim.encode_loop(layers, loop_seed, style, fps, n_unique, loop_path)
 
-    # 2. replay the loop for exactly `frames` frames — static camera
-    #    by default (nothing but the characters move); legacy drift
-    #    only when explicitly configured
-    camera = vconf.get("camera", "static")
-    if camera == "kenburns":
-        filters = [_drift_expr(motion, frames, w, h)]
-    else:
-        filters = []
+    # 2. the entrance segment (cached; skip on very short cards where
+    #    0.3 s would eat a third of the shot)
+    n_intro = anim._INTRO_FRAMES if frames >= 24 else 0
+    intro_path = None
+    if n_intro:
+        intro_path = out.with_name(
+            f"{out.stem}_intro{'_dip' if accent else ''}.mp4")
+        anim.render_intro(layers, loop_seed, style, fps, n_unique,
+                          intro_path, dip=accent)
+
+    # 3. post chain: camera (drift default) + burn-in captions
+    camera = vconf.get("camera", "drift")
+    post: list[str] = []
+    if camera == "drift":
+        post.append(_drift_expr(motion, frames, w, h, eased=True))
+    elif camera == "kenburns":
+        post.append(_drift_expr(motion, frames, w, h, eased=False))
     if ass_file is not None:
         fontsdir = ROOT / "assets" / "fonts"
-        filters.append(f"ass=filename='{ass_file}':fontsdir='{fontsdir}'")
-    filters.append("format=yuv420p")
-    vf = ",".join(filters)
+        post.append(f"ass=filename='{ass_file}':fontsdir='{fontsdir}'")
+    post.append("format=yuv420p")
+    post_chain = ",".join(post)
 
     tmp = out.with_suffix(".tmp.mp4")
-    args = [
-        "-stream_loop", "-1", "-fflags", "+genpts", "-i", str(loop_path),
-        "-vf", vf,
-        "-frames:v", str(frames), "-r", str(fps),
-        "-c:v", "libx264", "-preset", vconf.get("preset", "veryfast"),
-        "-crf", str(vconf.get("crf", 21)),
-        "-g", "60", "-an", str(tmp),
-    ]
+    if n_intro and intro_path is not None:
+        # [0]=intro (n_intro frames) + [1]=loop replay trimmed to
+        # frames [n_intro, frames) — frame-exact continuation — then
+        # the post chain across the joined card
+        args = [
+            "-i", str(intro_path),
+            "-stream_loop", "-1", "-fflags", "+genpts", "-i", str(loop_path),
+            "-filter_complex",
+            f"[1:v]trim=start_frame={n_intro}:end_frame={frames},"
+            f"setpts=PTS-STARTPTS[b];"
+            f"[0:v][b]concat=n=2:v=1:a=0[cc];"
+            f"[cc]{post_chain}[out]",
+            "-map", "[out]",
+            "-frames:v", str(frames), "-r", str(fps),
+            "-c:v", "libx264", "-preset", vconf.get("preset", "veryfast"),
+            "-crf", str(vconf.get("crf", 21)),
+            "-g", "60", "-an", str(tmp),
+        ]
+    else:
+        args = [
+            "-stream_loop", "-1", "-fflags", "+genpts", "-i", str(loop_path),
+            "-vf", post_chain,
+            "-frames:v", str(frames), "-r", str(fps),
+            "-c:v", "libx264", "-preset", vconf.get("preset", "veryfast"),
+            "-crf", str(vconf.get("crf", 21)),
+            "-g", "60", "-an", str(tmp),
+        ]
     _ffmpeg(args, timeout=max(120, int(frames / 2)))
     tmp.replace(out)
 

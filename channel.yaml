@@ -106,15 +106,17 @@ video:
   overscan: 1.25                    # Ken Burns headroom
   crf: 21
   preset: veryfast
-  title_card_seconds: 6
-  end_card_seconds: 12
-  # ── v2.1 CHARACTER RIG UPGRADE (added 2026-10-18 — purely additive;
-  # every setting above is untouched and still authoritative) ──────
-  # LOCKED CAMERA: the scene backgrounds never move — no zoom in,
-  # no zoom out, no pan left or right. All motion now comes from the
-  # characters themselves (that is the hook). Set "kenburns" to ever
-  # restore the old whole-frame drift on scene cards.
-  camera: "static"
+  title_card_seconds: 4             # v4: 6 -> 4 — a 6 s title before a
+                                    # spoken word bleeds viewers in 2026
+  end_card_seconds: 8               # v4: 12 -> 8 — tighter outro, same message
+  # ── v4 THE RETENTION BUILD (2026-10-26): the camera now BREATHES —
+  # an eased 5.5% smoothstep Ken Burns across every animated card
+  # (world and baked text drift together; burn-in ASS captions stay
+  # static because they composite after the drift). The characters
+  # still carry the motion budget; the drift is the floor, not the
+  # show. "static" freezes the camera exactly as v2.1 did; "kenburns"
+  # restores the old linear 7% drift.
+  camera: "drift"
   # ARTICULATED CHARACTERS: planted feet with real weight shifts and
   # heel lifts, swinging arms with hands (plus a gentle reach toward
   # the partner), torso lean, breathing, head drifts and nods, living

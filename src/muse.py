@@ -358,12 +358,16 @@ EXAMPLE (for a different concept, never reuse its lines):
   "question": "Who in your life replies slowly but always shows up when it actually matters?"
 }}
 
-FIELD RULES:
-- opener: 3-6 words, pattern interrupt, never a question, never
-  starts with "Did you know" or "Psychology"
-- hook: one 12-18 word sentence, doubles as the on-screen headline
-- micro: one vivid third-person moment, no dialogue, no names, and
-  it must NOT contain the concept term
+FIELD RULES (v4 retention build):
+- opener: 2-4 words, pattern interrupt, never a question, never
+  starts with "Did you know" or "Psychology" — it becomes HUGE
+  on-screen word art while it is spoken, so it must be punchy, and
+  NONE of its words may appear again in the hook
+- hook: one 12-18 word sentence, doubles as the on-screen headline;
+  it must NOT repeat or contain the opener
+- micro: one vivid third-person moment, AT MOST TWO SENTENCES, no
+  dialogue, no names, and it must NOT contain the concept term —
+  a micro-moment, not a scene
 - fact1 / fact2: two distinct WHY-it-happens sentences, plain
   psychology, no numbers, no concept term
 - reveal: contains the exact concept term verbatim, phrased like the
@@ -422,9 +426,19 @@ def _valid_short(fields: dict, term: str) -> str | None:
         return None
     if "?" in fields["opener"]:
         return None
+    # v4: the opener becomes the frame-zero word art while the hook is
+    # the card-1 headline — repeating words between them reads as a
+    # stutter in the first five seconds (the swipe window)
+    opener_words = {w.strip(".,!?;:'\"").lower()
+                    for w in fields["opener"].split() if len(w) >= 4}
+    if opener_words and opener_words & set(fields["hook"].lower().split()):
+        return None
     if len(fields["hook"].split()) > 18 or len(fields["hook"].split()) < 5:
         return None
     if len(fields["micro"].split()) > 28:
+        return None
+    # v4: a micro-MOMENT, not a scene — two sentences max
+    if len([s for s in fields["micro"].split(".") if s.strip()]) > 2:
         return None
     if len(fields["fact1"].split()) > 32 or len(fields["fact2"].split()) > 32:
         return None

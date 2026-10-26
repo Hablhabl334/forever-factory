@@ -46,8 +46,9 @@ def make_thumbnail(story: dict, out: Path, seed: int | None = None) -> Path:
     art_engine._center(d, 640, 52, label, band_f, art_engine.WHITE)
     d.rectangle([560, 112, 720, 118], fill=art_engine.PURPLE)
 
-    # the promise: huge, white, one accent word
-    f = _font("card", 92)
+    # the promise: huge, white, one accent word (v4: 92 -> 102 px —
+    # thumbnail text competes at phone size; cut words, never shrink)
+    f = _font("card", 102)
     text = _pick_promise(story).upper()
     words = text.split()
     acc = max(words, key=len) if words else ""
@@ -64,7 +65,7 @@ def make_thumbnail(story: dict, out: Path, seed: int | None = None) -> Path:
         lines.append((" ".join(cur), cur_acc))
     lines = lines[:3]
 
-    y = 210
+    y = 200
     for text, has_acc in lines:
         tw_line = d.textlength(text, font=f)
         x = 640 - tw_line / 2
@@ -76,13 +77,17 @@ def make_thumbnail(story: dict, out: Path, seed: int | None = None) -> Path:
             d.text((x2 + d.textlength(acc, font=f), y), post, font=f, fill=art_engine.WHITE)
         else:
             d.text((x, y), text, font=f, fill=art_engine.WHITE)
-        y += 112
+        y += 120
 
-    # silhouettes bottom (subtle depth)
-    art_engine._mono_pair(d, 1280, 700, 0.5,
-                          {"emotion_a": "neutral", "pose_a": "stand",
-                           "emotion_b": "neutral", "pose_b": "stand"},
-                          (seed or story["seed"]) + 5)
+    # v4: the LOCKED COLORED couple (the exact pair from every video)
+    # instead of the grey mono silhouettes — the thumbnail and the
+    # video finally show the same characters; brand recall at a glance
+    layers = art_engine._attach_couple(
+        img, {"emotion_a": "inlove", "pose_a": "stand",
+              "emotion_b": "inlove", "pose_b": "stand"},
+        (seed or story["seed"]) + 5, 1280, 706, 0.46)
+    img = art_engine.compose_static(layers)
+    d = ImageDraw.Draw(img)
 
     # wordmark
     art_engine._wordmark(d, 640, 660, 34)

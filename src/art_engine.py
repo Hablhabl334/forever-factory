@@ -167,7 +167,28 @@ def _ellipsize(d: ImageDraw.ImageDraw, text: str, f: ImageFont.FreeTypeFont,
 
 def _center(d: ImageDraw.ImageDraw, cx: float, y: float, line: str,
             f: ImageFont.FreeTypeFont, fill, stroke: int = 0,
-            stroke_fill=None) -> float:
+            stroke_fill=None, accent: str | None = None,
+            accent_fill=None) -> float:
+    """Draw one centered line. v4: when `accent` (a word from this
+    line) is set, that word renders in accent_fill (PURPLE) with the
+    same stroke — 'one highlighted word in the accent colour, which
+    carries meaning' (motion craft). All other geometry unchanged."""
+    if accent and accent in line:
+        pre, _, post = line.partition(accent)
+        tw = d.textlength(line, font=f)
+        x = cx - tw / 2
+        sf = stroke_fill or INK
+        if pre:
+            d.text((x, y), pre, font=f, fill=fill,
+                   stroke_width=stroke, stroke_fill=sf)
+            x += d.textlength(pre, font=f)
+        d.text((x, y), accent, font=f, fill=accent_fill or PURPLE,
+               stroke_width=stroke, stroke_fill=sf)
+        x += d.textlength(accent, font=f)
+        if post:
+            d.text((x, y), post, font=f, fill=fill,
+                   stroke_width=stroke, stroke_fill=sf)
+        return y + f.size * 1.22
     tw = d.textlength(line, font=f)
     d.text((cx - tw / 2, y), line, font=f, fill=fill,
            stroke_width=stroke, stroke_fill=stroke_fill or INK)
@@ -1098,35 +1119,60 @@ def _shorts_band(d: ImageDraw.ImageDraw, band: str,
         d.rectangle([540 - lw / 2, 152, 540 + lw / 2, 157], fill=PURPLE)
 
 
+_STRIP_PUNCT = ".,!?;:'\"-" + "\u2014\u201c\u201d"   # . , ! ? ; : ' " - curly quotes
+
+
+def _pick_accent(text: str) -> str | None:
+    """v4: the ONE word that carries the line's meaning — longest
+    alphabetic word of 4+ letters ('calls', 'this', 'with' are
+    grammatical furniture; 'attachment', 'silence', 'responds'
+    carry the idea). Never a number-only token."""
+    best, best_n = None, 3
+    for w in text.split():
+        core = w.strip(_STRIP_PUNCT).lower()
+        if len(core) > best_n and core.isalpha():
+            best, best_n = w.strip(_STRIP_PUNCT), len(core)
+    return best
+
+
 def _zone_block(td: ImageDraw.ImageDraw, text: str, kind: str,
                 base: int, floor: int, max_w: float, max_lines: int,
-                fill, stroke: int, stroke_fill) -> None:
+                fill, stroke: int, stroke_fill,
+                accent: bool = True) -> None:
     """Wrap text to level centered lines and place the block in the
     middle of the clear zone (above the couple's heads). The block
     is vertically CENTERED in the zone so every card keeps the same
-    visual rhythm: label top, text mid, couple bottom."""
+    visual rhythm: label top, text mid, couple bottom.
+
+    v4: one accent word per card renders in PURPLE (accent=False
+    restores the plain single-colour block)."""
     f, lines = _fit_text(td, text, kind, base, floor, max_w, max_lines)
+    acc = _pick_accent(text) if accent else None
     block_h = len(lines) * f.size * 1.22
     cy = (_SHORTS_TEXT_TOP + _SHORTS_TEXT_BOT) / 2
     y = cy - block_h / 2
     for line in lines:
         y = _center(td, 540, y, line, f, fill,
-                    stroke=stroke, stroke_fill=stroke_fill)
+                    stroke=stroke, stroke_fill=stroke_fill,
+                    accent=acc if (acc and acc in line) else None,
+                    accent_fill=PURPLE)
 
 
 def build_hook_layers(hook: str, band: str, part: int, scene: dict,
                       seed: int) -> dict:
-    """Hook card: couple scene + the hook line as a level text block
-    centered in the OPEN zone above their heads (never on top of the
-    characters), normal caption size, ink-on-paper like the long
-    video cards."""
+    """Hook card, v4 'frame zero is the thumbnail': the card shows
+    the OPENER (the 2-6 word pattern interrupt the voice speaks in
+    the first beat — passed here as `hook` by the shorts renderer)
+    as HUGE word art, not the full 12-18 word hook line: a face, the
+    result, or one bold line already on screen; the viewer decides
+    in about a second. Display 122 -> 78 px, max two lines."""
     layers = build_couple_layers(scene, seed + 91, 1080, 1920, zoom=1.0)
     d = ImageDraw.Draw(layers["bg"])
     _shorts_band(d, band, part)
     tl = Image.new("RGBA", (1080, 1920), (0, 0, 0, 0))
     td = ImageDraw.Draw(tl)
-    _zone_block(td, hook.lower(), "display", 84, 58, 920, 4,
-                INK, stroke=6, stroke_fill=PAPER)
+    _zone_block(td, hook.lower(), "display", 122, 78, 940, 2,
+                INK, stroke=7, stroke_fill=PAPER)
     layers["text_layer"] = tl
     return layers
 
