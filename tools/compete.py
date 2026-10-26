@@ -31,11 +31,14 @@ Files produced in data/competitive/:
     snap_<date>.json   this week's raw pull (channel stats + uploads)
     bench_<date>.md    the us-vs-them report (also the issue body)
     steer.json         machine-readable angles for the muse layer
+    topic_queue.json   next week's episode topics (steal list -> queue;
+                       consumed deterministically by the story engine)
 """
 from __future__ import annotations
 
 import argparse
 import json
+import re
 import sys
 import urllib.request
 from datetime import date, datetime, timezone
@@ -44,6 +47,7 @@ from pathlib import Path
 sys.path.insert(0, ".")
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from src.youtube import API_BASE, get_access_token  # noqa: E402
+from src.content_data import TOPICS  # noqa: E402
 from trend_intel import classify, themes  # noqa: E402  (formula taxonomy)
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -552,9 +556,12 @@ def report(a: dict, quota_units: int | None) -> str:
     # 5. angles
     L += ["", "## 5. Recommended angles for next week", ""]
     L += [f"{i}. {ang}" for i, ang in enumerate(_angles(a), 1)]
-    L += ["", "Topics/titles stay in the owner's lock zone — these angles "
-          "reach the scripts through data/competitive/steer.json (the muse "
-          "layer's weekly steer, vocabulary-level only)."]
+    L += ["", "Topics follow this week's queue (owner-unlocked): the steal "
+          "list becomes the coming week's episodes through "
+          "data/competitive/topic_queue.json - scored by which topics "
+          "the niche's winning videos actually mentioned. Titles and "
+          "category stay locked; the muse steers vocabulary via "
+          "steer.json."]
     return "\n".join(L)
 
 
@@ -580,6 +587,72 @@ def steer_write(a: dict) -> None:
     }
     COMP_DIR.mkdir(parents=True, exist_ok=True)
     (COMP_DIR / "steer.json").write_text(json.dumps(steer, indent=1))
+    topic_queue_write(a, [w for w, _ in th])
+
+
+# ── the topic queue (owner-unlocked 2026-10-26) ─────────────────────
+
+def _topic_tokens(topic_id: str) -> set[str]:
+    """Matching tokens for a topic: id words + title words + band words."""
+    t = TOPICS[topic_id]
+    words: set[str] = set()
+    for src in (topic_id.split("_"), t["title"].split(),
+                t.get("band", "").split()):
+        for w in src:
+            w = re.sub(r"[^a-z]", "", w.lower())
+            if len(w) >= 4 and w not in ("psychology", "people",
+                                        "actually", "about", "your"):
+                words.add(w)
+    return words
+
+
+def topic_queue_write(a: dict, hot_theme_words: list[str]) -> None:
+    """The steal list, translated into next week's episode topics.
+
+    Scores every channel topic by how strongly this week's WINNING
+    niche uploads mention it, and writes the ranked queue the story
+    engine consumes deterministically (data committed weekly = the
+    same episode replays after any crash). Titles/category/schedule
+    stay locked; only the daily topic pick gains this preference."""
+    score: dict[str, int] = {tid: 0 for tid in TOPICS}
+    views: dict[str, int] = {tid: 0 for tid in TOPICS}
+    why: dict[str, str] = {}
+    for u in a["fresh"]:
+        title = (u.get("title") or "").lower()
+        if not title:
+            continue
+        for tid in TOPICS:
+            if any(w in title for w in _topic_tokens(tid)):
+                score[tid] += 1
+                views[tid] += u.get("views") or 0
+                if tid not in why:
+                    why[tid] = (f"{u.get('title', '')[:60]} "
+                                f"({u.get('views', 0):,} views)")
+    ranked = sorted((tid for tid in TOPICS if score[tid] > 0),
+                    key=lambda tid: (-score[tid], -views[tid]))
+    # theme words rescue weak weeks: one hot word can point a topic
+    themewords = " ".join(hot_theme_words).lower()
+    for tid in TOPICS:
+        if tid in ranked:
+            continue
+        if any(w in themewords for w in _topic_tokens(tid)):
+            ranked.append(tid)
+            why[tid] = "hot theme word this week"
+    # minimum spread: a 1-topic queue would hammer one band all week
+    for tid in TOPICS:
+        if len(ranked) >= 4:
+            break
+        if tid not in ranked:
+            ranked.append(tid)
+            why[tid] = "rotation fill (weak signal this week)"
+    queue = {
+        "week": a["end"].isoformat(),
+        "generated": datetime.now(timezone.utc).isoformat(),
+        "queue": ranked,
+        "why": {tid: why.get(tid, "") for tid in ranked},
+    }
+    COMP_DIR.mkdir(parents=True, exist_ok=True)
+    (COMP_DIR / "topic_queue.json").write_text(json.dumps(queue, indent=1))
 
 
 # ── snapshots on disk ───────────────────────────────────────────────
@@ -663,6 +736,7 @@ def main() -> int:
     print(bench)
     print(f"\n[bench]  {bench_file.relative_to(ROOT)}")
     print(f"[steer]  {(COMP_DIR / 'steer.json').relative_to(ROOT)}")
+    print(f"[queue]  {(COMP_DIR / 'topic_queue.json').relative_to(ROOT)}")
     return 0
 
 

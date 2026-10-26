@@ -26,7 +26,10 @@ framing — love content that names patterns, never pathologizes people.
 from __future__ import annotations
 
 import hashlib
+import json
 import re
+from datetime import date
+from pathlib import Path
 
 from .content_data import CTA_LINE, CONCEPTS, SERIES_NAME, TOPICS
 from .content_micros import MICROS
@@ -419,12 +422,40 @@ def _short_hash(script: str) -> str:
     return hashlib.sha1(script.encode()).hexdigest()[:16]
 
 
+# ── the weekly competitive queue (owner-unlocked 2026-10-26) ────────
+
+def _steered_topics() -> list[tuple[str, dict]] | None:
+    """This week's episode-topic queue, written by tools/compete.py.
+
+    The weekly benchmark scores every channel topic by what the
+    niche's winning videos actually mentioned and commits the ranked
+    queue to data/competitive/topic_queue.json. A fresh (<= 9 days)
+    queue constrains today's topic pick to those topics - the steal
+    list literally becomes the coming week's episodes.
+
+    Determinism: the queue is a committed FILE, so the same seed
+    picks the same topic all week and every crash-resume replays the
+    identical episode (the same law as the muse cache). Missing /
+    stale / unreadable / all-invalid ids -> None and _build picks
+    from all 24 topics exactly as before, byte-identical."""
+    try:
+        q = json.loads(Path("data/competitive/topic_queue.json")
+                      .read_text())
+        week = date.fromisoformat(q.get("week", ""))
+        if not 0 <= (date.today() - week).days <= 9:
+            return None
+        ids = [t for t in q.get("queue", []) if t in TOPICS]
+        return [(t, TOPICS[t]) for t in ids] or None
+    except Exception:
+        return None
+
+
 # ── the episode builder ─────────────────────────────────────────────
 
 def _build(seed: int) -> dict:
     rng = FactoryRNG(seed)
 
-    topic_id, topic = rng.pick(list(TOPICS.items()))
+    topic_id, topic = rng.pick(_steered_topics() or list(TOPICS.items()))
     keys = [k for k in topic["concepts"] if k in CONCEPTS]
     picked = rng.some(keys, min(N_SEGMENTS, len(keys)))
 

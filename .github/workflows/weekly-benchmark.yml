@@ -1,19 +1,32 @@
 name: weekly-benchmark
 
-# The us-vs-niche benchmark (tools/compete.py). Runs Sundays 14:17
-# Cairo (12:17 UTC) — early in the quota day (05:17 Pacific, five
-# hours after the quota reset) so its ~20 units can never compete
-# with the evening factory cycle. Never touches the render/publish
-# path: it reads state.json, pulls competitor stats on the channel's
-# own OAuth, and commits research files + a rolling benchmark Issue.
+# The us-vs-niche benchmark (tools/compete.py). Runs Sundays on its
+# own — no human ever clicks anything:
+#   14:17 Cairo  — the weekly run
+#   14:43 Cairo  — same-day backup ring (a missed/delayed GitHub cron
+#                  slot gets a second chance 26 minutes later)
+#   Mon 08:19 Cairo — morning-after recovery (a fully-missed Sunday
+#                  still measures the week before anyone notices)
+# The backup slots are FREE: the benchgate step sees a bench file no
+# older than yesterday and skips the whole run in ~15 seconds (the
+# same cheap-SKIP law as the factory's daily gate).
+#
+# Timing vs quota: 12:17 UTC = 05:17 Pacific — five hours after the
+# quota reset on a fresh quota day, so its ~20 units can never
+# compete with the evening factory cycle. Never touches the
+# render/publish path: reads state.json, pulls competitor stats on
+# the channel's own OAuth, commits research files + rolls the weekly
+# benchmark Issue (exactly ONE open at a time).
 #
 # Pipeline: trend scan (yt-dlp niche search, 0 quota, populates
 # data/trend/ and feeds roster auto-discovery) -> compete.py (seeds +
-# roster pull, week-over-week math, report + steer.json) -> commit
-# -> roll the benchmark Issue (close last week's, open this week's).
+# roster pull, week-over-week math, report + steer.json +
+# topic_queue.json) -> commit -> roll the Issue.
 on:
   schedule:
-    - cron: "17 12 * * 0"   # Sunday 12:17 UTC = 14:17 Cairo
+    - cron: "17 12 * * 0"   # Sunday 12:17 UTC = 14:17 Cairo — weekly
+    - cron: "43 12 * * 0"   # Sunday 12:43 UTC — same-day backup ring
+    - cron: "19 5 * * 1"    # Monday 05:19 UTC = 08:19 Cairo — recovery
   workflow_dispatch:
 
 permissions:
@@ -36,12 +49,34 @@ jobs:
         with:
           ref: main
 
+      - name: Has this week already been measured?
+        id: benchgate
+        run: |
+          # SKIP when a bench file from today or yesterday exists:
+          # the weekly run succeeded already (extra cron fire or a
+          # Monday recovery after a healthy Sunday). Yesterday
+          # counts — the recovery slot must not re-measure a week
+          # the Sunday slot already captured.
+          LATEST=$(ls -1 data/competitive/bench_*.md 2>/dev/null | sort | tail -1)
+          if [ -n "$LATEST" ]; then
+            LATEST_D=$(basename "$LATEST" .md); LATEST_D=${LATEST_D#bench_}
+            AGE=$(( ( $(date -u +%s) - $(date -u -d "$LATEST_D" +%s) ) / 86400 ))
+            echo "latest bench: $LATEST_D ($AGE day(s) ago)"
+            if [ "$AGE" -le 1 ]; then
+              echo "run=false" >> "$GITHUB_OUTPUT"
+              exit 0
+            fi
+          fi
+          echo "run=true" >> "$GITHUB_OUTPUT"
+
       - name: Set up Python
+        if: steps.benchgate.outputs.run == 'true'
         uses: actions/setup-python@v5
         with:
           python-version: "3.12"
 
       - name: Install research deps
+        if: steps.benchgate.outputs.run == 'true'
         run: |
           # Only what the research tools need — NOT requirements.txt:
           # the render stack (piper/kokoro/numpy/Pillow) is dead
@@ -53,11 +88,13 @@ jobs:
       - name: Trend scan (niche radar, 0 quota)
         # Best-effort: the roster survives a yt-dlp hiccup on its
         # seeds; discovery simply catches up next week.
+        if: steps.benchgate.outputs.run == 'true'
         run: |
           python tools/trend_intel.py --shorts-only || \
             echo "::warning::trend scan failed — roster runs on seeds this week"
 
       - name: Weekly benchmark
+        if: steps.benchgate.outputs.run == 'true'
         env:
           YT_CLIENT_ID: ${{ secrets.YT_CLIENT_ID }}
           YT_CLIENT_SECRET: ${{ secrets.YT_CLIENT_SECRET }}
@@ -65,6 +102,7 @@ jobs:
         run: python tools/compete.py
 
       - name: Commit the research memory
+        if: steps.benchgate.outputs.run == 'true'
         run: |
           git config user.name "psychlove-factory"
           git config user.email "actions@users.noreply.github.com"
@@ -85,6 +123,7 @@ jobs:
         # Exactly ONE open benchmark issue at a time: last week's
         # closes as this week's opens (a rolling digest — the queue
         # stays clean, the same law as close_resolved_issues.py).
+        if: steps.benchgate.outputs.run == 'true'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
@@ -103,7 +142,7 @@ jobs:
             --body-file data/competitive/bench_issue_body.md
 
       - name: Alert on failure
-        if: failure() || cancelled()
+        if: (failure() || cancelled()) && steps.benchgate.outputs.run == 'true'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |

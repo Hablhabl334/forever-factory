@@ -253,6 +253,54 @@ def _run_tests(state_file: Path, state_before: bytes) -> int:
           state_file.read_bytes() == state_before if state_file.exists()
           else True)
 
+    # ── 3b. topic queue written by the run (steal list -> next topics)
+    from src.content_data import TOPICS as ALL_TOPICS
+    tq = json.loads((COMP / "topic_queue.json").read_text()) \
+        if (COMP / "topic_queue.json").exists() else {}
+    check("queue: week is today", tq.get("week") == date.today().isoformat())
+    q = tq.get("queue", [])
+    check("queue: both flags topics scored into top-2",
+          set(q[:2]) == {"red_flags", "green_flags"}, f"got {q[:2]}")
+    check("queue: minimum spread to 4 topics", len(q) >= 4, f"got {len(q)}")
+    check("queue: every id is a real topic",
+          all(t in ALL_TOPICS for t in q))
+    check("queue: why cites the winning video",
+          "views)" in tq.get("why", {}).get("green_flags", ""),
+          tq.get("why", {}).get("green_flags", "")[:60])
+
+    # ── 3c. story engine consumes the queue deterministically
+    from src.story_engine import _steered_topics, generate_story
+    known = ["green_flags", "red_flags", "long_distance", "trust"]
+    (COMP / "topic_queue.json").write_text(
+        json.dumps({"week": date.today().isoformat(), "queue": known}))
+    steered = _steered_topics()
+    check("engine: fresh queue -> exactly those topics",
+          [t for t, _ in steered] == known if steered else False)
+    (COMP / "topic_queue.json").write_text(
+        json.dumps({"week": date.today().isoformat(),
+                    "queue": ["bogus_topic"] + known}))
+    check("engine: invalid ids filtered, rest kept",
+          [t for t, _ in _steered_topics()] == known)
+    bands = {ALL_TOPICS[t]["band"] for t in known}
+    in_pool = all(
+        generate_story(s)["scenes"][0]["image"]["band"] in bands
+        for s in range(1, 13))
+    check("engine: 12/12 seeds pick from the steered queue", in_pool)
+    h1 = generate_story(777)["hash"]
+    h2 = generate_story(777)["hash"]
+    check("engine: deterministic under steer (same seed = same story)",
+          h1 == h2)
+    (COMP / "topic_queue.json").write_text(
+        json.dumps({"week": (date.today() - timedelta(days=10)).isoformat(),
+                    "queue": known}))
+    check("engine: 10-day-old queue ignored (freshness gate)",
+          _steered_topics() is None)
+    outside = any(
+        generate_story(s)["scenes"][0]["image"]["band"] not in bands
+        for s in range(1, 16))
+    check("engine: stale queue -> full 24-topic pool again", outside)
+    (COMP / "topic_queue.json").unlink()
+
     # ── 4. muse steer block: fresh file -> block; stale -> ""
     block = muse._steer_block()
     check("steer: fresh block mentions WEEKLY STEER",
