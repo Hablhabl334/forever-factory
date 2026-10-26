@@ -1,0 +1,387 @@
+{
+ "title": "Why We Get Jealous",
+ "topic": "jealousy",
+ "topic_label": "psychology of jealousy",
+ "mood": "attachment",
+ "series": "Psychology of Love",
+ "hook": "Jealousy is not proof of love \u2014 it's a security system with a broken alarm. Let's look at what it's actually guarding.",
+ "words": 1050,
+ "hash": "6405e6447ccd25d4",
+ "seed": 58293343440957,
+ "atoms": {
+  "topic": "Why We Get Jealous",
+  "concepts": [
+   "the boundary filter",
+   "negativity bias",
+   "attachment styles",
+   "on-off cycles",
+   "jealousy as information",
+   "anxious attachment",
+   "rejection sensitivity",
+   "secure attachment"
+  ]
+ },
+ "question": "Would you send this to them? Tell me why not.",
+ "scenes": [
+  {
+   "n": 1,
+   "id": "open_card",
+   "narration": "Jealousy isn't a love note; it's a glitchy alarm system. Let's see what it's really protecting. Today you get eight quiet pieces of psychology about why jealousy shows up - stick around, the one that lands might surprise you.",
+   "image": {
+    "kind": "topic_card",
+    "topic": "Why We Get Jealous",
+    "band": "psychology of jealousy",
+    "count": 8
+   }
+  },
+  {
+   "n": 2,
+   "id": "tip1_card",
+   "narration": "People who push back on your limits were only ever okay with you having none. Boundaries mark where you stop and someone else begins - your time, body, money, yes and no - and clear lines actually make people feel safer because visible rules are rules you can trust.",
+   "image": {
+    "kind": "concept_card",
+    "tip": 1,
+    "total": 8,
+    "term": "the boundary filter",
+    "headline": "People who resent your boundaries were only ever compatible with your absence of them.",
+    "accent_word": null
+   }
+  },
+  {
+   "n": 3,
+   "id": "tip1_scene",
+   "narration": "Ben says he can't take late calls on weekdays - calm, kind, final. The one who honors it stays; the one who rings at 2 a.m. opts out on their own. State the line early, gently, no apology. You're not asking permission, you're posting the map.",
+   "image": {
+    "kind": "couple_scene",
+    "emotion_a": "neutral",
+    "pose_a": "stand",
+    "emotion_b": "neutral",
+    "pose_b": "phone",
+    "overlay": [
+     "psychologists call this",
+     "the boundary filter"
+    ]
+   }
+  },
+  {
+   "n": 4,
+   "id": "tip2_card",
+   "narration": "Bad moments get etched in ink; good ones fade in pencil. That negativity bias is an ancient ledger that kept ancestors alive but quietly drains relationships, because partners always feel shortchanged no matter how much they give - contempt is just that bias with a voice, and noticing the tilt does most of the work.",
+   "image": {
+    "kind": "concept_card",
+    "tip": 2,
+    "total": 8,
+    "term": "negativity bias",
+    "headline": "Bad moments get written in ink; good ones in pencil. Relationships go bankrupt on that accounting.",
+    "accent_word": null
+   }
+  },
+  {
+   "n": 5,
+   "id": "tip2_scene",
+   "narration": "Youssef plans, cooks, shows up all month. At a downtown cafe he lets slip one tired, sharp remark and Nora files the whole night under it. Her brain isn't ungrateful; it's wired for survival. Speak the balance out loud: name one thing they did right each time the ledger records a wrong. You're fixing a biased ledger, not inventing praise.",
+   "image": {
+    "kind": "couple_scene",
+    "emotion_a": "annoyed",
+    "pose_a": "arms_crossed",
+    "emotion_b": "sad",
+    "pose_b": "stand",
+    "overlay": [
+     "psychologists call this",
+     "negativity bias"
+    ]
+   }
+  },
+  {
+   "n": 6,
+   "id": "tip3_card",
+   "narration": "Your attachment style is the operating system love runs on, and almost nobody checks which version they installed. Research sorts love habits into four broad styles - secure, anxious, avoidant, fearful - not personalities but strategies your younger self built to stay close to the people it depended on. Your style decides what feels normal: closeness, distance, or a nervous mix. The hopeful part: styles shift with safe people and honest practice.",
+   "image": {
+    "kind": "concept_card",
+    "tip": 3,
+    "total": 8,
+    "term": "attachment styles",
+    "headline": "Your attachment style is the operating system love runs on \u2014 and almost nobody checks which one they installed.",
+    "accent_word": null
+   }
+  },
+  {
+   "n": 7,
+   "id": "tip3_scene",
+   "narration": "Milo hears 'let's talk tonight' and feels steady. Sara hears the same words and spends the afternoon rehearsing a defense. The sentence was identical; the internal readers weren't. Learn your default before you blame the other person. When you know what your nervous system expects, you stop mistaking your history for their behavior.",
+   "image": {
+    "kind": "couple_scene",
+    "emotion_a": "neutral",
+    "pose_a": "stand",
+    "emotion_b": "surprised",
+    "pose_b": "stand",
+    "overlay": [
+     "psychologists call this",
+     "attachment styles"
+    ]
+   }
+  },
+  {
+   "n": 8,
+   "id": "tip4_card",
+   "narration": "Every breakup with the same person gets easier to start and harder to count. Studies of on-again off-again couples show the cycle feeds on ambiguity, not love. Each reunion runs on relief, and relief is a terrible judge of fit. The pattern also normalizes itself - the third split doesn't scare anyone like the first did. The real question isn't whether you love each other - cyclical couples usually do - it's whether anything actually gets solved between reunions.",
+   "image": {
+    "kind": "concept_card",
+    "tip": 4,
+    "total": 8,
+    "term": "on-off cycles",
+    "headline": "Every breakup with the same person gets easier to start \u2014 and harder to count.",
+    "accent_word": null
+   }
+  },
+  {
+   "n": 9,
+   "id": "tip4_scene",
+   "narration": "Friends ask Lena what changed this time. Nothing changed - the relief just showed up on schedule at 3 a.m. wearing the costume of love. Ask the one question cycles avoid: what did we actually solve between the last two reunions? If the answer is nothing, the next round is already booked.",
+   "image": {
+    "kind": "couple_scene",
+    "emotion_a": "sad",
+    "pose_a": "stand",
+    "emotion_b": "neutral",
+    "pose_b": "phone",
+    "overlay": [
+     "psychologists call this",
+     "on-off cycles"
+    ]
+   }
+  },
+  {
+   "n": 10,
+   "id": "tip5_card",
+   "narration": "Every jealousy stems from either a real threat or an old wound hearing its favorite song. Jealousy has two possible sources - a genuine threat in the moment, or an insecurity in the alarm system itself. The first calls for a conversation; the second calls for self work - but they feel identical from inside. Unchecked jealousy turns into control, and control kills desire fast. The skill isn't feeling less; it's checking the signal before you obey it.",
+   "image": {
+    "kind": "concept_card",
+    "tip": 5,
+    "total": 8,
+    "term": "jealousy as information",
+    "headline": "Every jealousy has one of two sources: a real threat, or an old wound hearing its favorite song.",
+    "accent_word": null
+   }
+  },
+  {
+   "n": 11,
+   "id": "tip5_scene",
+   "narration": "At a birthday party Sam's coworker gets a big laugh and Hana's chest tightens. Did something actually happen, or did an old wound just get played? One answer needs a talk; the other needs a journal. Bring the feeling, not the case files. 'I felt something and I want to understand it' opens doors that evidence slams shut.",
+   "image": {
+    "kind": "couple_scene",
+    "emotion_a": "annoyed",
+    "pose_a": "arms_crossed",
+    "emotion_b": "surprised",
+    "pose_b": "phone",
+    "overlay": [
+     "psychologists call this",
+     "jealousy as information"
+    ]
+   }
+  },
+  {
+   "n": 12,
+   "id": "tip6_card",
+   "narration": "Rereading a text for the ninth time isn't love - it's your nervous system hunting for proof it's safe. Anxious attachment works like an oversensitive smoke detector. It spots distance early and often correctly, but it can't gauge how serious the fire is. So a delayed reply becomes a possible breakup, a short answer a possible ending. The exhaustion isn't from caring too much; it's from monitoring without rest. Reassurance helps for a moment; predictability is what actually heals.",
+   "image": {
+    "kind": "concept_card",
+    "tip": 6,
+    "total": 8,
+    "term": "anxious attachment",
+    "headline": "Rereading a text for the ninth time isn't love \u2014 it's your nervous system searching for evidence it's safe.",
+    "accent_word": null
+   }
+  },
+  {
+   "n": 13,
+   "id": "tip6_scene",
+   "narration": "Amy liked three posts and skipped Sam's. That's the whole evidence file - and it's enough to put the relationship on trial at the gym that same night. Predictability heals what reassurance only sedates. Ask for patterns, not promises.",
+   "image": {
+    "kind": "couple_scene",
+    "emotion_a": "anxious",
+    "pose_a": "phone",
+    "emotion_b": "tired",
+    "pose_b": "stand",
+    "overlay": [
+     "psychologists call this",
+     "anxious attachment"
+    ]
+   }
+  },
+  {
+   "n": 14,
+   "id": "tip7_card",
+   "narration": "If a single 'K' feels like a door slamming, your threat detector is calibrated to a war that's over. Rejection sensitivity means your nervous system flags possible exclusion faster and harder than average, often rooted in early moments when approval vanished without explanation. The cost is high: you see rejection that isn't there, react to protect yourself, and sometimes create the distance you feared. It's a self-fulfilling alarm.",
+   "image": {
+    "kind": "concept_card",
+    "tip": 7,
+    "total": 8,
+    "term": "rejection sensitivity",
+    "headline": "If 'K' feels like a door slamming, your threat detector is calibrated to a war that's over.",
+    "accent_word": null
+   }
+  },
+  {
+   "n": 15,
+   "id": "tip7_scene",
+   "narration": "Ryan doesn't call after a long day. Tala's chest tightens like a door slammed. The war Tala's detector is fighting ended years ago - nobody updated it. Separate the trigger from the evidence. Two deep breaths and one honest question beat a three-hour silent investigation.",
+   "image": {
+    "kind": "couple_scene",
+    "emotion_a": "anxious",
+    "pose_a": "phone",
+    "emotion_b": "tired",
+    "pose_b": "phone",
+    "overlay": [
+     "psychologists call this",
+     "rejection sensitivity"
+    ]
+   }
+  },
+  {
+   "n": 16,
+   "id": "tip8_card",
+   "narration": "Secure love has no plot twists, and that's not boring - that's the point. Securely connected people do something quietly radical: they take words at face value. 'I'm busy' means busy. 'I love you' means they'll act like it on a Tuesday, not just on anniversaries. Their calm isn't a lack of depth; it's the absence of a constant threat detector. Research keeps finding the same thing: security is the style that makes every other relationship skill actually work.",
+   "image": {
+    "kind": "concept_card",
+    "tip": 8,
+    "total": 8,
+    "term": "secure attachment",
+    "headline": "Secure love has no plot twists. That's not boring \u2014 that's the point.",
+    "accent_word": null
+   }
+  },
+  {
+   "n": 17,
+   "id": "tip8_scene",
+   "narration": "Jack says 'you hurt my feelings at the office party' and Sara doesn't defend, counterattack, or freeze - she says 'you're right, that was careless.' The conversation lasts ninety seconds and nothing escalates. Security is a skill set, not a personality type: face-value listening, repair after fights, and words that predict behavior.",
+   "image": {
+    "kind": "couple_scene",
+    "emotion_a": "happy",
+    "pose_a": "stand",
+    "emotion_b": "happy",
+    "pose_b": "stand",
+    "overlay": [
+     "psychologists call this",
+     "secure attachment"
+    ]
+   }
+  },
+  {
+   "n": 18,
+   "id": "outro_card",
+   "narration": "That was eight pieces of psychology on why jealousy shows up. If even one made your love life click, you already got your money's worth - this one was free. Would you send this to them? Tell me why not. Hit subscribe for more insights like this.",
+   "image": {
+    "kind": "outro_card",
+    "topic": "Why We Get Jealous"
+   }
+  }
+ ],
+ "shorts": [
+  {
+   "n": 1,
+   "concept": "rejection_sensitivity",
+   "band": "psychology of jealousy",
+   "hook": "Your brain treats a brief reply like a sudden eviction notice served without warning.",
+   "term": "rejection sensitivity",
+   "script": "One letter. Panic. Your brain treats a brief reply like a sudden eviction notice served without warning. She stares at the glowing screen, thumbs frozen above glass, convinced the silence means she has already been erased from the story they were building together. Early moments when care disappeared without warning taught your nervous system to scan for abandonment in every pause between messages, every delayed response that feels like a door closing. The alarm fires before any real evidence arrives, turning neutral moments into proof that you are about to be left behind without explanation or mercy. Psychologists call this rejection sensitivity. Pause, breathe twice, then ask what they actually meant instead of deciding the worst for them and spiraling alone in the dark. When did a tiny message feel like a verdict you could not appeal no matter how hard you tried to reason it away. Subscribe for more tips like this.",
+   "words": 153,
+   "shash": "36e549d2658e506f",
+   "scene": {
+    "emotion_a": "anxious",
+    "pose_a": "phone",
+    "emotion_b": "tired",
+    "pose_b": "phone"
+   }
+  },
+  {
+   "n": 2,
+   "concept": "boundaries_attract",
+   "band": "psychology of jealousy",
+   "hook": "A clear rule does not push love away it makes love safe enough to stay and grow deeper.",
+   "term": "the boundary filter",
+   "script": "Line drawn. Peace found. A clear rule does not push love away it makes love safe enough to stay and grow deeper. He states his limit once, calmly, and watches the ones who cannot respect it reveal themselves immediately without him chasing or explaining. Visible expectations create safety because people relax when they know exactly where the edges are and what happens when they are crossed without warning. The filter does not lose you connection it simply prices each person accurately so you stop paying for access they never earned or valued truly. Psychologists call this the boundary filter. State your limits early and kindly without apology because you are publishing a map not asking for permission to exist in your own life. Which limit have you been afraid to name because you feared the silence that might follow it most of all. Subscribe for more tips like this.",
+   "words": 149,
+   "shash": "4fc2a5fb5b7e924a",
+   "scene": {
+    "emotion_a": "neutral",
+    "pose_a": "stand",
+    "emotion_b": "neutral",
+    "pose_b": "phone"
+   }
+  },
+  {
+   "n": 3,
+   "concept": "secure_attachment",
+   "band": "psychology of jealousy",
+   "hook": "The calmest partner often holds the deepest safety net beneath the surface.",
+   "term": "secure attachment",
+   "script": "Steady hands. Quiet nights. The calmest partner often holds the deepest safety net beneath the surface. He reads the message, sets the phone beside the stove, and keeps stirring the sauce without a flicker of doubt in his shoulders. A nervous system that learned safety early stops scanning for threats in every pause between words. When the baseline is trust, energy goes toward building something new instead of bracing for impact. Psychologists call this secure attachment. Next time stillness feels boring, name it as the rarest kind of proof that you are not in danger. When did you last mistake peace for a problem waiting to happen? Subscribe for more tips like this.",
+   "words": 113,
+   "shash": "0612aed56870ab59",
+   "scene": {
+    "emotion_a": "happy",
+    "pose_a": "stand",
+    "emotion_b": "happy",
+    "pose_b": "stand"
+   }
+  },
+  {
+   "n": 4,
+   "concept": "negativity_bias",
+   "band": "psychology of jealousy",
+   "hook": "Your partner's brain will remember the one sharp sentence over the twenty kind ones \u2014 it's not ingratitude, it's archaeology.",
+   "term": "negativity bias",
+   "script": "Send this to the right person. Your partner's brain will remember the one sharp sentence over the twenty kind ones \u2014 it's not ingratitude, it's archaeology. Ten kind moments recorded in pencil, one cruel one in ink. That's the brain's ancient accounting. Awareness of the bias is most of the battle. It kept our ancestors alive, but it quietly bankrupts relationships, because partners feel underpaid no matter how much they give. You showed up all month \u2014 one sharp comment at dinner, and the evening belongs to it. Psychologists have a name for this: negativity bias. Balance out loud: name one thing they did right every time your brain files one thing they did wrong. You're correcting a biased ledger, not lying. How many times did this happen to you? Count below. Subscribe for more tips like this.",
+   "words": 138,
+   "shash": "aede45ec0c975a62",
+   "scene": {
+    "emotion_a": "annoyed",
+    "pose_a": "arms_crossed",
+    "emotion_b": "sad",
+    "pose_b": "stand"
+   }
+  },
+  {
+   "n": 5,
+   "concept": "on_off_cycles",
+   "band": "psychology of jealousy",
+   "hook": "Reunions run on relief, and relief is a terrible judge of compatibility.",
+   "term": "on-off cycles",
+   "script": "File this under 'oh'. Reunions run on relief, and relief is a terrible judge of compatibility. The third breakup was the easiest to start. That should scare you more than the first. The cycle also normalizes itself: the third breakup simply doesn't scare anyone the way the first one did. The question isn't 'do we love each other' \u2014 cyclical couples usually do \u2014 it's 'do we ever solve anything between reunions'. Research on on-again, off-again couples finds the pattern usually feeds on ambiguity rather than love. Psychologists call this on-off cycles. If you restart, restart with changes, not just with feelings. A reunion without a new plan is a rerun with spoilers. Which one have you been \u2014 honestly? Tell me below. Subscribe for more tips like this.",
+   "words": 129,
+   "shash": "9716608cf8ed2306",
+   "scene": {
+    "emotion_a": "sad",
+    "pose_a": "stand",
+    "emotion_b": "neutral",
+    "pose_b": "phone"
+   }
+  },
+  {
+   "n": 6,
+   "concept": "attachment_styles",
+   "band": "psychology of jealousy",
+   "hook": "Your attachment style is the operating system love runs on \u2014 and almost nobody checks which one they installed.",
+   "term": "attachment styles",
+   "script": "This is not advice. It's bigger. Your attachment style is the operating system love runs on \u2014 and almost nobody checks which one they installed. You both heard 'let's talk tonight.' One of you relaxed. The other spent the day preparing a defense. And here's the hopeful part \u2014 styles can change with safe people and honest practice. Attachment research splits love habits into four broad styles: secure, anxious, avoidant, and fearful. They're not personalities, they're strategies your younger self built to stay close to the people it depended on. Psychologists have a name for this: attachment styles. Styles aren't life sentences. Safe people plus honest practice rewrite them slowly, at any age. Which side of this are you on? Say it below. Subscribe for more tips like this.",
+   "words": 129,
+   "shash": "4c075563b6c407e2",
+   "scene": {
+    "emotion_a": "neutral",
+    "pose_a": "stand",
+    "emotion_b": "surprised",
+    "pose_b": "stand"
+   }
+  }
+ ],
+ "short_hashes": [
+  "36e549d2658e506f",
+  "4fc2a5fb5b7e924a",
+  "0612aed56870ab59",
+  "aede45ec0c975a62",
+  "9716608cf8ed2306",
+  "4c075563b6c407e2"
+ ],
+ "muse": "llm",
+ "muse_model": "nvidia/nemotron-3-ultra-550b-a55b:free"
+}
