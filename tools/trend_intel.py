@@ -101,6 +101,7 @@ def discover(query: str, n: int, shorts_only: bool) -> list[dict]:
         items.append({
             "id": vid, "title": d.get("title") or "",
             "channel": d.get("channel") or d.get("uploader") or "",
+            "channel_id": d.get("channel_id") or "",  # roster fuel for tools/compete.py
             "duration": dur,
             "views_flat": d.get("view_count") or 0,
             "query": query,
@@ -155,6 +156,7 @@ def trending_chart(region: str, category: str | None) -> list[dict]:
         out.append({
             "id": v["id"], "title": sn.get("title", ""),
             "channel": sn.get("channelTitle", ""),
+            "channel_id": sn.get("channelId", ""),
             "views": int(st.get("viewCount") or 0),
             "likes": int(st.get("likeCount") or 0),
             "comments": int(st.get("commentCount") or 0),

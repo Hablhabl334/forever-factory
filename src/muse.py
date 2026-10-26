@@ -54,10 +54,48 @@ import re
 import time
 import urllib.error
 import urllib.request
+from datetime import date
 from pathlib import Path
 
 from .content_data import CTA_LINE
 from .story_engine import _BANNED_RE, _short_hash
+
+
+# ── weekly competitive steer (tools/compete.py output) ───────────
+
+def _steer_block() -> str:
+    """This week's niche steer, as phrasing-level guidance only.
+
+    Reads data/competitive/steer.json (written by the weekly
+    benchmark, tools/compete.py). Missing / stale (older than 9
+    days) / unreadable -> "" and the writing briefs stay
+    byte-identical to the pre-steer machine. The steer never adds
+    facts - the no-new-claims rule stays king - it tilts WORD
+    CHOICE and hook shape toward what the niche is rewarding this
+    week (hot vocabulary, winning title shapes)."""
+    try:
+        d = json.loads(Path("data/competitive/steer.json").read_text())
+        week = date.fromisoformat(d.get("week", ""))
+    except Exception:
+        return ""
+    if not (0 <= (date.today() - week).days <= 9):
+        return ""
+    themes = ", ".join(d.get("hot_themes", [])[:6])
+    shapes = ", ".join(
+        f["name"].lower().replace("_", " ")
+        for f in d.get("hot_formulas", [])[:3] if f.get("name"))
+    if not (themes or shapes):
+        return ""
+    lines = ["WEEKLY STEER (what the niche rewarded this week - "
+             "phrasing-level only):"]
+    if themes:
+        lines.append(f"- hot vocabulary: when a draft line naturally "
+                     f"allows it, prefer words like {themes}")
+    if shapes:
+        lines.append(f"- winning shapes this week: {shapes}")
+    lines.append("- the steer changes vocabulary and rhythm ONLY - "
+                 "never add facts or claims the draft does not contain")
+    return "\n".join(lines) + "\n\n"
 
 # ── configuration ───────────────────────────────────────────────────
 
@@ -305,7 +343,7 @@ def _long_brief(story: dict) -> str:
                  if avoid else "")
     return f"""{_STYLE}
 
-Rewrite every scene narration of today's long video below. Each draft is a
+{_steer_block()}Rewrite every scene narration of today's long video below. Each draft is a
 finished beat; keep its role, its facts and its concept, but write it like
 a human scriptwriter would say it out loud. Vary sentence rhythm; some
 short punchy lines, some flowing ones. Keep each within 70%-150% of the
@@ -342,7 +380,7 @@ def _shorts_brief(story: dict) -> str:
             f"fact basis (do not copy phrasing):\n{sh['script']}")
     return f"""{_STYLE}
 
-Rewrite each of these {len(items)} YouTube Shorts as one fresh 60-second
+{_steer_block()}Rewrite each of these {len(items)} YouTube Shorts as one fresh 60-second
 vertical script. Write them like this EXAMPLE (match its shape, rhythm
 and field lengths closely - it is calibrated to the channel's pace):
 

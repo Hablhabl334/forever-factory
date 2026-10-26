@@ -1,0 +1,114 @@
+name: weekly-benchmark
+
+# The us-vs-niche benchmark (tools/compete.py). Runs Sundays 14:17
+# Cairo (12:17 UTC) — early in the quota day (05:17 Pacific, five
+# hours after the quota reset) so its ~20 units can never compete
+# with the evening factory cycle. Never touches the render/publish
+# path: it reads state.json, pulls competitor stats on the channel's
+# own OAuth, and commits research files + a rolling benchmark Issue.
+#
+# Pipeline: trend scan (yt-dlp niche search, 0 quota, populates
+# data/trend/ and feeds roster auto-discovery) -> compete.py (seeds +
+# roster pull, week-over-week math, report + steer.json) -> commit
+# -> roll the benchmark Issue (close last week's, open this week's).
+on:
+  schedule:
+    - cron: "17 12 * * 0"   # Sunday 12:17 UTC = 14:17 Cairo
+  workflow_dispatch:
+
+permissions:
+  contents: write   # commit data/competitive/ + data/trend/
+  issues: write     # the rolling weekly benchmark issue
+
+# Separate from the factory's concurrency group: research must never
+# queue behind (or cancel) a production cycle.
+concurrency:
+  group: benchmark
+  cancel-in-progress: false
+
+jobs:
+  benchmark:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install research deps
+        run: |
+          # Only what the research tools need — NOT requirements.txt:
+          # the render stack (piper/kokoro/numpy/Pillow) is dead
+          # weight here. yt-dlp is deliberately UNPINNED: it tracks
+          # YouTube's moving extractor target (the same living-range
+          # law as edge-tts — an exact pin would rot within weeks).
+          pip install PyYAML yt-dlp
+
+      - name: Trend scan (niche radar, 0 quota)
+        # Best-effort: the roster survives a yt-dlp hiccup on its
+        # seeds; discovery simply catches up next week.
+        run: |
+          python tools/trend_intel.py --shorts-only || \
+            echo "::warning::trend scan failed — roster runs on seeds this week"
+
+      - name: Weekly benchmark
+        env:
+          YT_CLIENT_ID: ${{ secrets.YT_CLIENT_ID }}
+          YT_CLIENT_SECRET: ${{ secrets.YT_CLIENT_SECRET }}
+          YT_REFRESH_TOKEN: ${{ secrets.YT_REFRESH_TOKEN }}
+        run: python tools/compete.py
+
+      - name: Commit the research memory
+        run: |
+          git config user.name "psychlove-factory"
+          git config user.email "actions@users.noreply.github.com"
+          git add data/competitive 2>/dev/null || true
+          git add data/trend 2>/dev/null || true
+          if git diff --cached --quiet; then
+            echo "nothing new to benchmark"
+          else
+            git commit -m "weekly benchmark: $(date -u +%F)"
+            # Rebase against any push that landed while we pulled —
+            # the same no-force law as the factory memory commit.
+            git fetch origin main
+            git rebase origin/main
+            git push origin main
+          fi
+
+      - name: Roll the benchmark Issue
+        # Exactly ONE open benchmark issue at a time: last week's
+        # closes as this week's opens (a rolling digest — the queue
+        # stays clean, the same law as close_resolved_issues.py).
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh issue list --state open \
+            --search 'in:title "Weekly benchmark"' \
+            --json number --jq '.[].number' | while read -r n; do
+              gh issue close "$n" \
+                --comment "Superseded by this week's benchmark." || true
+            done
+          gh issue create \
+            --title "Weekly benchmark — $(date -u +%F)" \
+            --body-file data/competitive/bench_issue_body.md \
+            --label "benchmark" 2>/dev/null || \
+          gh issue create \
+            --title "Weekly benchmark — $(date -u +%F)" \
+            --body-file data/competitive/bench_issue_body.md
+
+      - name: Alert on failure
+        if: failure() || cancelled()
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          TITLE="Weekly benchmark failed — $(date -u +%F)"
+          DUPES=$(gh issue list --state open --search "in:title \"$TITLE\"" --json number --jq 'length' 2>/dev/null || echo 0)
+          if [ "$DUPES" = "0" ]; then
+            gh issue create --title "$TITLE" --body "The weekly benchmark run failed (trend scan is best-effort and never alerts; this means compete.py, the commit, or the Issue roll failed). The factory's daily production is NOT affected — this is research-only.\n\nSee the run: $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID\n\n- auto-filed by the weekly benchmark workflow" || true
+          fi
