@@ -721,3 +721,48 @@ COMMENT_QUESTIONS = [
     "If this named your pattern, say 'same' below.",
     "Know someone who needs this? The comments are open.",
 ]
+
+# ── the hook-writer pattern layer (batch-2 skills, 2026-10-27) ───────
+# hook-writer-sms doctrine: nine proven hook patterns (contrarian,
+# question, statistic, empathy, before/after, negation, open loop,
+# list preview, bold claim). The pools above were strong but largely
+# mono-pattern; one pattern-diverse hook per concept is appended here
+# so the seeded draw can rotate PATTERNS, not just phrasings — pattern
+# variety is retention variety. Rules and pattern labels live in
+# src/hook_patterns.py; the merge below keeps the pools ordered
+# (original first, then legacy variants, then pattern hooks).
+from .hook_patterns import PATTERN_HOOKS  # noqa: E402
+
+for _k, _pairs in PATTERN_HOOKS.items():
+    _vh = VARIANTS.setdefault(_k, {}).setdefault("hooks", [])
+    for _pat, _hook in _pairs:
+        if _hook not in _vh:
+            _vh.append(_hook)
+
+# ── BRIDGES: the long video's tension holds (batch-2 skills) ────────
+# script-writer + short-form-video doctrine: the long video's mid-sag
+# is where watch-time dies. Every concept segment EXCEPT the last now
+# ends with a spoken curiosity bridge — a one-breath tease that hands
+# the viewer to the next pattern ("tension hold" in the retention
+# grammar). Drawn WITHOUT replacement within an episode (rng.some), so
+# a single long never repeats a bridge.
+#
+# Writing rules (asserted by scripts/test_batch2_skills.py):
+#   * 8-18 words, one breath, spoken over the couple scene
+#   * never names a TERM or a reveal marker (the next card's payoff
+#     stays a payoff)
+#   * passes the story_engine safety audit
+BRIDGES = [
+    "Hold that thought — because the next pattern explains why it keeps happening.",
+    "That one was the warm-up. The next is the one that lands.",
+    "Before you file that away: the next lesson is the reason it keeps finding you.",
+    "Which raises a harder question — and the next piece answers it.",
+    "If that stung, stay seated. The next one explains the sting.",
+    "Almost nobody connects this next pattern to the last one. You're about to.",
+    "Keep that feeling — the next lesson will need it.",
+    "Here comes the part your brain will want to argue with.",
+    "The next pattern is the quiet one nobody teaches — and it changes the last one.",
+    "One more layer, because this pattern has a partner in crime.",
+    "Stay with me — the next one is the one people replay.",
+    "That was the what. Next is the why behind it.",
+]

@@ -185,19 +185,33 @@ def long_metadata(story: dict, narration: dict) -> dict:
 
 
 def short_metadata(story: dict, short: dict) -> dict:
-    """FIXED title + FIXED tags (the owner's growth strategy)."""
-    # First line = the hook question: the visible fold of the
-    # description is engagement bait, not boilerplate (comments are
-    # the strongest ranking signal a Short earns).
+    """FIXED title + FIXED tags (the owner's growth strategy).
+
+    The description is the only free text surface a Short has — the
+    title is locked, so the youtube-seo doctrine lands here: the
+    concept's TERM (the exact phrase a searching viewer types), the
+    hook line (the claim, quotable and indexable), and the niche
+    keywords, all in plain sentences. The engagement question keeps
+    the visible fold (comments stay the strongest ranking signal).
+    """
     from .content_variants import COMMENT_QUESTIONS
     q = story.get("question") or COMMENT_QUESTIONS[0]
-    desc = (
-        f"{q}\n\n"
-        f"{SHORT_HASHTAGS}\n\n"
-        f"New love psychology shorts every day — {story['topic_label']}.\n"
-        f"The full video is on the channel.\n\n"
-        f"{SHORT_HASHTAGS}"
-    )
+    term = (short.get("term") or "").strip()
+    hook = (short.get("hook") or "").strip()
+    lines: list[str] = [q, "", SHORT_HASHTAGS, ""]
+    if hook:
+        lines += [hook, ""]
+    if term:
+        t = f"{term[0].upper()}{term[1:]}"
+        lines += [f"{t} explained — love psychology and relationship "
+                  f"tips in plain words.", ""]
+    lines += [
+        f"New love psychology shorts every day — {story['topic_label']}.",
+        "The full video is on the channel.",
+        "",
+        SHORT_HASHTAGS,
+    ]
+    desc = "\n".join(lines)
     return {"title": SHORT_TITLE, "description": desc[:4900],
             "tags": list(SHORT_TAGS)}
 

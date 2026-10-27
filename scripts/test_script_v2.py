@@ -275,8 +275,13 @@ for sh in leg_story["shorts"]:
         leg_hits += 1
 check("legacy path: slot-filled two-cast examples return",
       leg_hits >= len(leg_story["shorts"]) - 2, f"hits={leg_hits}")
+# 2026-10-27: the band is the assembler's documented contract
+# (125-205 at the Kokoro 150-wpm pace — floor loop + ceiling shed in
+# _shorts_script). The old 90-170 bounds were the retired Jenny
+# voice's calibration and only passed by luck of the draw; the
+# batch-2 hook pools shifted the draws and exposed the mismatch.
 check("legacy scripts still in the word band",
-      all(90 <= s["words"] <= 170 for s in leg_story["shorts"]),
+      all(125 <= s["words"] <= 205 for s in leg_story["shorts"]),
       str([s["words"] for s in leg_story["shorts"]]))
 
 # ── 8. determinism + freshness ───────────────────────────────────────

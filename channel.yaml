@@ -61,6 +61,11 @@ daily:                              # what the factory produces each day
 story:
   segments: 8                       # psychology concepts per long video
   safety_max_attempts: 8            # audit gate regeneration attempts
+  # Curiosity bridges (batch-2 skills, 2026-10-27): every segment
+  # except the last ends on a spoken one-line tease of the next
+  # pattern — the tension hold against the mid-video sag. false =
+  # roll back to bridge-free scripts.
+  bridges: true
 
 voice:
   # ENGINE LADDER (auto): 1) Kokoro-82M — vendored INSIDE this repo
