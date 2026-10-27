@@ -1,47 +1,35 @@
-[0;93m2026-10-26 18:50:58.046586893 [W:onnxruntime:Default, device_discovery.cc:95 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
-[stats] growth report 2026-10-26
-[stats]   total: 1977 views  (+27 since last report)
-[stats]      187 views  ·  Subscribe for more tips like this #psychology #relationship 
-[stats]      120 views  ·  Subscribe for more tips like this #psychology #relationship 
-[stats]      110 views  ·  Subscribe for more tips like this #psychology #relationship 
-  [muse] long: 18/18 scenes rewritten (nvidia)
-  [muse] shorts: retrying 4 reject(s)
-  [muse] shorts: 3/6 rewritten (nvidia)
-[38] script: Why We Get Jealous (1050 words, hash 6405e6447c)
-  [voice] local neural narration: 115 chunks (Kokoro af_heart)
+[0;93m2026-10-27 07:19:05.425306998 [W:onnxruntime:Default, device_discovery.cc:95 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
+[grid] booking 2 short slot(s) in the next 24h (free: 2026-10-28T00:00:00+03:00, 2026-10-28T06:00:00+03:00)
+  [muse] long: 16/18 scenes rewritten (nvidia)
+  [muse] shorts: retrying 6 reject(s)
+  [muse] shorts: 6/6 rewritten (nvidia)
+[39] script: Love Languages, Without the Hype (938 words, hash 58a1f00324)
+  [voice] local neural narration: 103 chunks (Kokoro af_heart)
   [voice] polished: presence EQ + gentle compression
-[38] narration: 419s, 115 caption chunks
-[38] long video: 431s, 45.9MB
-  [voice] local neural narration: 27 chunks (Kokoro af_heart)
+[39] narration: 365s, 103 caption chunks
+[39] long video: 377s, 38.1MB
+  [voice] local neural narration: 25 chunks (Kokoro af_heart)
   [voice] polished: presence EQ + gentle compression
-  [short 1] 59s, 27 cards, 7.9MB
-  [voice] local neural narration: 26 chunks (Kokoro af_heart)
+  [short 1] 56s, 25 cards, 7.5MB
+  [voice] local neural narration: 24 chunks (Kokoro af_heart)
   [voice] polished: presence EQ + gentle compression
-  [short 2] 57s, 26 cards, 7.6MB
-  [voice] local neural narration: 21 chunks (Kokoro af_heart)
+  [short 2] 51s, 24 cards, 7.1MB
+  [voice] local neural narration: 25 chunks (Kokoro af_heart)
   [voice] polished: presence EQ + gentle compression
-  [short 3] narration 42.9s < 45s floor — re-voicing slower (-10%), attempt 1
-  [voice] local neural narration: 14 chunks (Kokoro af_heart)
+  [short 3] 53s, 25 cards, 6.9MB
+  [voice] local neural narration: 24 chunks (Kokoro af_heart)
   [voice] polished: presence EQ + gentle compression
-  [short 3] 47s, 14 cards, 6.0MB
+  [short 4] 50s, 24 cards, 6.9MB
   [voice] local neural narration: 23 chunks (Kokoro af_heart)
   [voice] polished: presence EQ + gentle compression
-  [short 4] 51s, 23 cards, 6.8MB
-  [voice] local neural narration: 23 chunks (Kokoro af_heart)
+  [short 5] 51s, 23 cards, 6.6MB
+  [voice] local neural narration: 28 chunks (Kokoro af_heart)
   [voice] polished: presence EQ + gentle compression
-  [short 5] 51s, 23 cards, 7.0MB
-  [voice] local neural narration: 22 chunks (Kokoro af_heart)
-  [voice] polished: presence EQ + gentle compression
-  [short 6] 50s, 22 cards, 6.8MB
-[38] thumbnail + 4 shorts ready
-  [youtube] uploaded long: nIIbWMlFxNk (publishAt 2026-10-28T20:00:00+03:00)
-  [youtube] setting thumbnail thumbnail.png (56 KB) on nIIbWMlFxNk
-  [youtube] thumbnail set
-  [youtube] uploaded short: D0q4kqGUBwY (publishAt 2026-10-27T00:00:00+03:00)
-  [youtube] uploaded short: SZ92BTSOPI4 (publishAt 2026-10-27T06:00:00+03:00)
-  [youtube] uploaded short: uQLG24dBSF4 (publishAt 2026-10-27T12:00:00+03:00)
-  [youtube] uploaded short: 0TAm-jTjv_k (publishAt 2026-10-27T18:00:00+03:00)
-[playlist] 1 long video(s) not in the playlist yet
-[playlist] ep38 long added (nIIbWMlFxNk)
-  ✓ episode 38: Why We Get Jealous
+  [short 6] 57s, 28 cards, 7.8MB
+[39] thumbnail audit: 5 words, 102px, 120px var 5693, 66KB — ok
+[39] thumbnail + 2 shorts ready
+[39] DRY-RUN: would upload long at 2026-10-29T20:00:00+03:00
+[39] DRY-RUN: would upload short 1 at 2026-10-28T00:00:00+03:00
+[39] DRY-RUN: would upload short 2 at 2026-10-28T06:00:00+03:00
+  - episode 39: Love Languages, Without the Hype (dry-run)
 combination space: 273,306,627,721,774,080 stories — the factory never repeats

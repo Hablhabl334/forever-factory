@@ -1,0 +1,387 @@
+{
+ "title": "Love Languages, Without the Hype",
+ "topic": "love_languages",
+ "topic_label": "psychology of love languages",
+ "mood": "warm",
+ "series": "Psychology of Love",
+ "hook": "You can love someone fluently and still speak the wrong language. Here's why the translation matters more than the feeling.",
+ "words": 938,
+ "hash": "58a1f0032467bfa2",
+ "seed": 125633702625904,
+ "atoms": {
+  "topic": "Love Languages, Without the Hype",
+  "concepts": [
+   "green flags",
+   "real apology",
+   "the trust equation",
+   "slow love",
+   "bids for connection",
+   "secure attachment",
+   "repair attempts",
+   "the self-expansion model"
+  ]
+ },
+ "question": "Does this hit home? Tell me I'm not the only one.",
+ "scenes": [
+  {
+   "n": 1,
+   "id": "open_card",
+   "narration": "You can speak the same language and still miss each other entirely. Translation matters more than feeling. Today you get eight quiet pieces of psychology about love languages, no hype - stay to the end, because the one that lands won't be the one you guessed.",
+   "image": {
+    "kind": "topic_card",
+    "topic": "Love Languages, Without the Hype",
+    "band": "psychology of love languages",
+    "count": 8
+   }
+  },
+  {
+   "n": 2,
+   "id": "tip1_card",
+   "narration": "Green flags are quiet \u2014 consistency never makes noise, and noise is all we're trained to notice. Green flags are unsexy: they remember small things, they're on time, they apologize specifically, they're kind to waiters and exes alike. Our attention systems are trained by drama, so steadiness registers as flat \u2014 the psychological version of a quiet engine. The trick is to actively look for the boring signals, because they're the ones carrying the relationship's actual weight. A person whose presence calms you is doing something biochemically rare.",
+   "image": {
+    "kind": "concept_card",
+    "tip": 1,
+    "total": 8,
+    "term": "green flags",
+    "headline": "Green flags are quiet \u2014 consistency never makes noise, and noise is all we're trained to notice.",
+    "accent_word": null
+   }
+  },
+  {
+   "n": 3,
+   "id": "tip1_scene",
+   "narration": "No fireworks - they text when they promised, they remember your mom's test, and you fall asleep easier with them nearby. Your body noticed before your mind did. Write down the small reliable things you noticed this week - showing up, remembering, fixing - then watch for those patterns in people instead of chasing spark.",
+   "image": {
+    "kind": "couple_scene",
+    "emotion_a": "happy",
+    "pose_a": "stand",
+    "emotion_b": "happy",
+    "pose_b": "stand",
+    "overlay": [
+     "psychologists call this",
+     "green flags"
+    ]
+   }
+  },
+  {
+   "n": 4,
+   "id": "tip2_card",
+   "narration": "'I'm sorry you feel that way' looks like an apology but carries none. A genuine one names the exact action, owns the impact, drops excuses, and adds a concrete change - any 'if' or 'but' erases it, and the real test is whether behavior shifts within days.",
+   "image": {
+    "kind": "concept_card",
+    "tip": 2,
+    "total": 8,
+    "term": "real apology",
+    "headline": "'I'm sorry you feel that way' is an apology-shaped object. Check the ingredients: there's no apology in it.",
+    "accent_word": null
+   }
+  },
+  {
+   "n": 5,
+   "id": "tip2_scene",
+   "narration": "One says 'Sorry, but I was tired.' The other says 'I snapped at dinner, that wasn't fair, and tonight I'll tell you when I'm at my limit.' The second carries a timestamp. Treat each sorry like a ledger entry: state the act, own the hurt, skip qualifiers, and attach a date for the new habit.",
+   "image": {
+    "kind": "couple_scene",
+    "emotion_a": "sad",
+    "pose_a": "stand",
+    "emotion_b": "neutral",
+    "pose_b": "stand",
+    "overlay": [
+     "psychologists call this",
+     "real apology"
+    ]
+   }
+  },
+  {
+   "n": 6,
+   "id": "tip3_card",
+   "narration": "Showing up at the agreed time is a deposit; arriving late with flowers is still a withdrawal. Trust builds from repeated alignment of words, actions, and motives - grand gestures can't refill an account that only grows through tiny, identical deposits.",
+   "image": {
+    "kind": "concept_card",
+    "tip": 3,
+    "total": 8,
+    "term": "the trust equation",
+    "headline": "If you say 7, be there at 7. That's a deposit. 7:15 with flowers is still a withdrawal.",
+    "accent_word": null
+   }
+  },
+  {
+   "n": 7,
+   "id": "tip3_scene",
+   "narration": "Rosa vowed change with fireworks and slipped back. Milo sent 'landing now' at every arrival for two years. Whose word now carries weight everywhere? Promise less, keep more - overpromising is just debt dressed in romance.",
+   "image": {
+    "kind": "couple_scene",
+    "emotion_a": "neutral",
+    "pose_a": "stand",
+    "emotion_b": "happy",
+    "pose_b": "stand",
+    "overlay": [
+     "psychologists call this",
+     "the trust equation"
+    ]
+   }
+  },
+  {
+   "n": 8,
+   "id": "tip4_card",
+   "narration": "Falling for the highlight reel means you meet the real person later. Slow love builds the bond before the fantasy, letting intimacy grow on months of real data instead of weeks of projection - less cinematic, far more durable.",
+   "image": {
+    "kind": "concept_card",
+    "tip": 4,
+    "total": 8,
+    "term": "slow love",
+    "headline": "Fast love happens in the dark: you fall for the montage and meet the person later.",
+    "accent_word": null
+   }
+  },
+  {
+   "n": 9,
+   "id": "tip4_scene",
+   "narration": "No labels by the third date, no weekend trips by week two - yet at six months you know their spending habits, their temper, their mother. You're not less in love; you're in love with a verified picture. Let the timeline be a feature, not a flaw - depth is slow by design, and rushing skips the checks.",
+   "image": {
+    "kind": "couple_scene",
+    "emotion_a": "happy",
+    "pose_a": "stand",
+    "emotion_b": "neutral",
+    "pose_b": "stand",
+    "overlay": [
+     "psychologists call this",
+     "slow love"
+    ]
+   }
+  },
+  {
+   "n": 10,
+   "id": "tip5_card",
+   "narration": "Love isn't maintained on anniversaries. It's maintained on Tuesdays \u2014 one small 'yes' at a time. Gottman's team found couples make tiny bids for connection constantly \u2014 a comment, a question, a pointed finger at a sunset. Partners either turn toward the bid, turn away, or turn against it, and the ratio predicts the relationship's future with unsettling accuracy. Masters of relationship turn toward roughly nine times out of ten, even when the bid is boring. Love isn't maintained on anniversaries; it's maintained on Tuesdays, one small 'yes' at a time.",
+   "image": {
+    "kind": "concept_card",
+    "tip": 5,
+    "total": 8,
+    "term": "bids for connection",
+    "headline": "Love isn't maintained on anniversaries. It's maintained on Tuesdays \u2014 one small 'yes' at a time.",
+    "accent_word": null
+   }
+  },
+  {
+   "n": 11,
+   "id": "tip5_scene",
+   "narration": "At 4 p.m. in the kitchen Nina points at the moon. Leo murmurs 'mm' and keeps scrolling. Nothing dramatic happened, yet a quiet withdrawal just hit an unchecked balance. The sillier the invitation, the sharper the test of the partnership.",
+   "image": {
+    "kind": "couple_scene",
+    "emotion_a": "happy",
+    "pose_a": "stand",
+    "emotion_b": "tired",
+    "pose_b": "phone",
+    "overlay": [
+     "psychologists call this",
+     "bids for connection"
+    ]
+   }
+  },
+  {
+   "n": 12,
+   "id": "tip6_card",
+   "narration": "Secure love can feel flat at first because the adrenaline of anxiety is gone. People who are securely connected take words at face value - 'I'm busy' means busy, 'I love you' shows up on a regular Tuesday - and that calm isn't emptiness, it's the missing threat alarm that lets every other skill function.",
+   "image": {
+    "kind": "concept_card",
+    "tip": 6,
+    "total": 8,
+    "term": "secure attachment",
+    "headline": "Secure love feels underwhelming at first \u2014 because there's no adrenaline where the anxiety used to be.",
+    "accent_word": null
+   }
+  },
+  {
+   "n": 13,
+   "id": "tip6_scene",
+   "narration": "Adam says 'you hurt me at the beach.' Layla doesn't defend, counter, or freeze - she replies 'you're right, that was careless.' The talk ends in ninety seconds with no escalation. Security shows up as listening at face value, quick repair, and words that match later actions.",
+   "image": {
+    "kind": "couple_scene",
+    "emotion_a": "happy",
+    "pose_a": "stand",
+    "emotion_b": "happy",
+    "pose_b": "stand",
+    "overlay": [
+     "psychologists call this",
+     "secure attachment"
+    ]
+   }
+  },
+  {
+   "n": 14,
+   "id": "tip7_card",
+   "narration": "Staying together isn't about zero fights; it's about how quickly the heat drops. The best predictor is the speed and warmth of a repair - a joke, a touch, 'this is hard for me too' - delivered mid-fight, not after the verdict. What ends a bond isn't the spark but the fire's refusal to hear an extinguisher.",
+   "image": {
+    "kind": "concept_card",
+    "tip": 7,
+    "total": 8,
+    "term": "repair attempts",
+    "headline": "The strongest predictor of staying together isn't zero conflict. It's how fast the temperature drops.",
+    "accent_word": null
+   }
+  },
+  {
+   "n": 15,
+   "id": "tip7_scene",
+   "narration": "Jonas cracks a terrible joke at the fight's peak. Chloe laughs anyway. That laugh lands a repair - worth more than winning. Memorize one line and deploy it before you're ready; 'we're on the same team' works even when it feels false.",
+   "image": {
+    "kind": "couple_scene",
+    "emotion_a": "annoyed",
+    "pose_a": "arms_crossed",
+    "emotion_b": "sad",
+    "pose_b": "stand",
+    "overlay": [
+     "psychologists call this",
+     "repair attempts"
+    ]
+   }
+  },
+  {
+   "n": 16,
+   "id": "tip8_card",
+   "narration": "We don't fall for a person; we fall for who we become beside them. The self-expansion view says we're drawn to those who enlarge our world - new ideas, fresh courage, novel experiences - so shared adventures bind faster than shared sofas, and when growth stalls the fuel runs dry.",
+   "image": {
+    "kind": "concept_card",
+    "tip": 8,
+    "total": 8,
+    "term": "the self-expansion model",
+    "headline": "We don't fall for people \u2014 we fall for the version of ourselves we become around them.",
+    "accent_word": null
+   }
+  },
+  {
+   "n": 17,
+   "id": "tip8_scene",
+   "narration": "Every Saturday for Theo and Iris repeats the same meal, the same show, the same quiet at a rooftop gathering. No one's miserable - both are quietly shrinking and calling it peace. Schedule one brand-new experience each month; novelty isn't a luxury, it's upkeep.",
+   "image": {
+    "kind": "couple_scene",
+    "emotion_a": "happy",
+    "pose_a": "stand",
+    "emotion_b": "happy",
+    "pose_b": "arms_crossed",
+    "overlay": [
+     "psychologists call this",
+     "the self-expansion model"
+    ]
+   }
+  },
+  {
+   "n": 18,
+   "id": "outro_card",
+   "narration": "That was eight quiet pieces of psychology about love languages, no hype. If even one made your love life click, you already got your money's worth - this one was free. Does this hit home? Tell me I'm not the only one. Subscribe for more like this.",
+   "image": {
+    "kind": "outro_card",
+    "topic": "Love Languages, Without the Hype"
+   }
+  }
+ ],
+ "shorts": [
+  {
+   "n": 1,
+   "concept": "repair_attempts",
+   "band": "psychology of love languages",
+   "hook": "The couples who last are the ones who cool down fastest during the argument.",
+   "term": "repair attempts",
+   "script": "Mid-fight hand squeeze. The couples who last are the ones who cool down fastest during the argument. He stops mid-sentence, reaches across the table, and presses his palm against hers until the sharp edges in both their voices soften and the room feels breathable again. A small gesture during conflict signals that the bond matters more than the point being argued, and the nervous system registers safety before the mind catches up. When partners practice de-escalation in the heat, they build a reflex that protects the connection from cumulative damage that no grand apology can undo later. Psychologists call this repair attempts. Next time tension spikes, try one deliberate move toward the other person before the silence hardens into something you cannot name. What is the smallest thing that has ever pulled you both back from the edge? Subscribe for more tips like this.",
+   "words": 144,
+   "shash": "9814f1c208526465",
+   "scene": {
+    "emotion_a": "annoyed",
+    "pose_a": "arms_crossed",
+    "emotion_b": "sad",
+    "pose_b": "stand"
+   }
+  },
+  {
+   "n": 2,
+   "concept": "apology_languages",
+   "band": "psychology of love languages",
+   "hook": "An apology that does not change the following week is just decoration on the same wound.",
+   "term": "real apology",
+   "script": "Flowers on Friday. An apology that does not change the following week is just decoration on the same wound. She sets the bouquet on the counter, watches them wilt by Wednesday, and realizes the same sharp tone has already returned to the kitchen. Words settle the moment because they are easy to produce, but behavior settles the pattern because it requires sustained effort that the brain resists. When regret stays verbal, the hurt learns it is negotiable, and the cycle deepens each time the promise goes unkept. In psychology this is called real apology. Next time you hear sorry, watch the calendar - the repair lives in what happens on Tuesday, not in what was said on Sunday. Which apology in your life actually changed the rhythm, and which one just paused the music? Subscribe for more tips like this.",
+   "words": 140,
+   "shash": "392b1d6f21e879d1",
+   "scene": {
+    "emotion_a": "sad",
+    "pose_a": "stand",
+    "emotion_b": "neutral",
+    "pose_b": "stand"
+   }
+  },
+  {
+   "n": 3,
+   "concept": "bids_for_connection",
+   "band": "psychology of love languages",
+   "hook": "The bid was never about the animal - it was an invitation to step outside together.",
+   "term": "bids for connection",
+   "script": "Dog on sidewalk. The bid was never about the animal - it was an invitation to step outside together. She points toward the window, he glances once and returns to his screen, and the small space between them grows a fraction wider without either noticing. Every tiny reach - a shared link, a muttered observation, a sigh - functions as a quiet test of whether the other person is still available. Couples who consistently turn toward those reaches build a reservoir of trust that carries them through the inevitable stretches of distance or stress. Psychologists call these bids for connection. For one full day, treat every interruption as a doorway - look up, answer, stay for the extra thirty seconds it costs. What was the last small reach you missed, and what would have happened if you had turned? Subscribe for more tips like this.",
+   "words": 145,
+   "shash": "cf53308bf17d45d1",
+   "scene": {
+    "emotion_a": "happy",
+    "pose_a": "stand",
+    "emotion_b": "tired",
+    "pose_b": "phone"
+   }
+  },
+  {
+   "n": 4,
+   "concept": "secure_attachment",
+   "band": "psychology of love languages",
+   "hook": "Secure love has no plot twists because the script was never written to confuse you.",
+   "term": "secure attachment",
+   "script": "Busy means busy. Secure love has no plot twists because the script was never written to confuse you. She reads the message, feels no spike of panic, and goes back to her book because the words matched the actions every single time before. When early experiences taught that affection is reliable, the nervous system stops scanning for threat and starts investing in the present. That baseline of safety makes every other skill - listening, repairing, expanding - actually usable instead of theoretical. There is a term for this in psychology: secure attachment. If calm feels unfamiliar, ask whether you are mistaking the absence of chaos for the absence of chemistry. Who in your life lets you take their words at face value without a decoder ring? Subscribe for more tips like this.",
+   "words": 132,
+   "shash": "5a0c16d7648e7563",
+   "scene": {
+    "emotion_a": "happy",
+    "pose_a": "stand",
+    "emotion_b": "happy",
+    "pose_b": "stand"
+   }
+  },
+  {
+   "n": 5,
+   "concept": "self_expansion",
+   "band": "psychology of love languages",
+   "hook": "We fall for the version of ourselves that only exists when that person is near.",
+   "term": "the self-expansion model",
+   "script": "First hike together. We fall for the version of ourselves that only exists when that person is near. They reach the summit exhausted, laughing at nothing, and she realizes she has never felt this brave or this curious with anyone else. Shared novelty activates the brain's reward system in a way that familiar comfort cannot, and the self expands to include the new territory. When the expansion stops, the relationship feels stale not because love faded but because the engine that powered it went idle. There is a term for this in psychology: the self-expansion model. Pick one thing that scares you both slightly and do it this month - the shared stumble matters more than the shared sofa. When did you last surprise yourself because someone invited you into a bigger world? Subscribe for more tips like this.",
+   "words": 139,
+   "shash": "3bd31ee49f09a5a5",
+   "scene": {
+    "emotion_a": "happy",
+    "pose_a": "stand",
+    "emotion_b": "happy",
+    "pose_b": "arms_crossed"
+   }
+  },
+  {
+   "n": 6,
+   "concept": "slow_love",
+   "band": "psychology of love languages",
+   "hook": "Fast love skips the inspections and meets the real person only after the lease is signed.",
+   "term": "slow love",
+   "script": "Winter reveals everything. Fast love skips the inspections and meets the real person only after the lease is signed. Six months in, he learns the credit-card debt, the temper with parents, the quiet grief - all the things the montage never showed. Projection is cheap because it requires no data, but information is expensive because it demands time, attention, and the willingness to stay when the picture shifts. Relationships that survive the slow reveal do so because each layer was witnessed before the next one arrived, building a foundation that holds weight. There is a term for this in psychology: slow love. Let the timeline be a feature instead of a bug - depth is slow by design, and anything rushing past the inspections is skipping the structure. What did you discover in month six that you are glad you did not know in week two? Subscribe for more tips like this.",
+   "words": 152,
+   "shash": "130100ba85768309",
+   "scene": {
+    "emotion_a": "happy",
+    "pose_a": "stand",
+    "emotion_b": "neutral",
+    "pose_b": "stand"
+   }
+  }
+ ],
+ "short_hashes": [
+  "9814f1c208526465",
+  "392b1d6f21e879d1",
+  "cf53308bf17d45d1",
+  "5a0c16d7648e7563",
+  "3bd31ee49f09a5a5",
+  "130100ba85768309"
+ ],
+ "muse": "llm",
+ "muse_model": "nvidia/nemotron-3-ultra-550b-a55b:free"
+}
