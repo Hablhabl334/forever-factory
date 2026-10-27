@@ -27,7 +27,11 @@ Every day, on GitHub's servers, for free, the factory:
    blurred letterbox), with ffmpeg.
 6. **Generates the thumbnail + all metadata** — search-first titles
    and keyword-loaded descriptions for longs, a fixed
-   subscription-funnel title on Shorts, chapters, tags.
+   subscription-funnel title on Shorts, chapters parsed INTO the
+   description, tags — plus the AI-SEO text layer: the narration
+   uploads as a machine-readable caption track and a channel summary
+   comment seeds every long (models don't watch videos, they read
+   the text around them).
 7. **Uploads everything once, scheduled to publish at the fixed grid
    (Africa/Cairo)**: Shorts at **00:00 / 06:00 / 12:00 / 18:00**, the
    long at **20:00**. Public times never move; when the machine runs

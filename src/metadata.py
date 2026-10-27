@@ -11,8 +11,10 @@ The Short rules come straight from the channel owner and are FIXED:
   every Short into a subscription funnel.)
 
 Long videos stay SEO-driven (search-first heads, rotating long-tails,
-keyword-loaded first 150 description chars, chapter lists from the
-script's concept structure, ~500-char tag budgets).
+keyword-loaded first 150 description chars, a liftable 40-60 word
+answer block, chapter timestamps parsed INTO the description, ~350-
+char tag budgets) — the full ai-seo text-layer anatomy: models don't
+watch the video, they read the text around it.
 """
 from __future__ import annotations
 
@@ -113,6 +115,26 @@ def _tag_list(story: dict) -> list[str]:
     return packed
 
 
+def _answer_block(story: dict, n: int) -> str:
+    """The ai-seo skill's liftable passage: a 40-60 word, complete,
+    standalone answer near the top of the description — the block an
+    AI Overview or chat answer can quote whole (models read the text
+    layer; give them a clean one to lift). Deterministic per story."""
+    concepts = list(story["atoms"]["concepts"])
+    if len(concepts) > 5:
+        named = ", ".join(concepts[:4]) + f", {concepts[4]} and more"
+    elif len(concepts) > 1:
+        named = ", ".join(concepts[:-1]) + f" and {concepts[-1]}"
+    else:
+        named = concepts[0] if concepts else "love psychology"
+    return (
+        f"In plain words: this video answers \"{story['title']}\" with "
+        f"{n} real psychology lessons — {named}. Each lesson is one "
+        f"short scene, one plain-English takeaway, and one line you "
+        f"can actually use in your own relationship tonight."
+    )
+
+
 def long_metadata(story: dict, narration: dict) -> dict:
     vconf = cfg()["video"]
     title_s = float(vconf.get("title_card_seconds", 6))
@@ -135,11 +157,19 @@ def long_metadata(story: dict, narration: dict) -> dict:
         f"Psychology of love explained in plain words — {n} lessons on "
         f"{story['title'].lower()}. Relationship tips that actually change "
         f"how you love.\n\n"
+        # the liftable answer block (ai-seo: 40-60 words, complete,
+        # self-contained — the passage an AI answer can quote whole)
+        f"{_answer_block(story, n)}\n\n"
         f"\U0001f4ac {story.get('question', 'Which lesson hit home?')}\n\n"
         f"\"{story['hook']}\"\n\n"
         f"What you'll learn:\n"
         + "\n".join(f"  {i+1}. {term}" for i, term in enumerate(story["atoms"]["concepts"]))
         + "\n\n"
+        # chapters IN the description: YouTube parses leading
+        # timestamps into real chapter markers (the first is 0:00),
+        # and every chapter line is another labeled, liftable claim
+        # for AI answers — this list used to be computed and dropped
+        f"Chapters:\n" + "\n".join(chapters) + "\n\n"
         f"New love psychology videos every day — attraction, attachment, "
         f"breakups, self-worth and the science behind how we love.\n\n"
         f"\U0001f9ea ABOUT {channel['display_name'].upper()}\n"
@@ -170,3 +200,19 @@ def short_metadata(story: dict, short: dict) -> dict:
     )
     return {"title": SHORT_TITLE, "description": desc[:4900],
             "tags": list(SHORT_TAGS)}
+
+
+def summary_comment(story: dict) -> str:
+    """The channel's own first comment on the long (ai-seo: an extra
+    liftable, indexed text block that survives even when nobody opens
+    the description — plus the comment-section seed this niche grows
+    on). Numbered list + the open-loop question; never a hard sell."""
+    n = len(story["atoms"]["concepts"])
+    from .content_variants import COMMENT_QUESTIONS
+    q = story.get("question") or COMMENT_QUESTIONS[0]
+    lessons = "\n".join(f"{i+1}. {t}" for i, t in
+                        enumerate(story["atoms"]["concepts"]))
+    return (f"Today's {n} lessons on {story['title'].lower()}:\n"
+            f"{lessons}\n\n"
+            f"{q}\n\n"
+            f"A new love psychology lesson every day 💜")

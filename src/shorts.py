@@ -223,7 +223,8 @@ def render_shorts(story: dict, work_dir: Path, out_dir: Path) -> list[Path]:
                 layers = _build_card_layers(kind, ch["text"], short, seed, n)
                 render_clip_art(layers, seed, cp, dur, motion,
                                 size=(1080, 1920), anim_style=style,
-                                card_idx=i, accent=kind in ("term", "cta"))
+                                card_idx=i, accent=kind in ("term", "cta"),
+                                pop=(kind == "cta"))
             clips.append(cp)
 
         # 3. concat + audio

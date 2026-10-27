@@ -257,7 +257,8 @@ def render_clip_art(layers: dict, seed: int, out: Path, dur: float,
                     motion: str, ass_file: Path | None = None,
                     size: tuple[int, int] | None = None,
                     anim_style: str | None = None,
-                    card_idx: int = 0, accent: bool = False) -> None:
+                    card_idx: int = 0, accent: bool = False,
+                    pop: bool = False) -> None:
     """Render one ANIMATED clip, v4 'the retention build':
 
       * ENTRANCE — the first 0.30 s of every card renders as unique
@@ -265,7 +266,9 @@ def render_clip_art(layers: dict, seed: int, out: Path, dur: float,
         characters keep moving at their normal phase (motion craft:
         'arrive slow, land still'; a landed title is dead still
         afterwards — no pulsing loops). accent=True adds a 3-frame
-        dip-cut for the term reveal and CTA cards.
+        dip-cut for the term reveal and CTA cards. pop=True (the CTA
+        only, 2026-10-27) lands with the Pop-in settle: one gentle
+        undershoot, still exactly 1.0 at the seam.
       * LONGER LOOPS — unique-frame budget 90-240 (was 60-150): the
         sway/blink cycle repeats less visibly.
       * CAMERA — `video.camera: drift` (new default): an eased 5.5%
@@ -308,9 +311,10 @@ def render_clip_art(layers: dict, seed: int, out: Path, dur: float,
     intro_path = None
     if n_intro:
         intro_path = out.with_name(
-            f"{out.stem}_intro{'_dip' if accent else ''}.mp4")
+            f"{out.stem}_intro{'_dip' if accent else ''}"
+            f"{'_pop' if pop else ''}.mp4")
         anim.render_intro(layers, loop_seed, style, fps, n_unique,
-                          intro_path, dip=accent)
+                          intro_path, dip=accent, pop=pop)
 
     # 3. post chain: camera (drift default) + burn-in captions
     camera = vconf.get("camera", "drift")

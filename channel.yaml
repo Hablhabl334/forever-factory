@@ -123,6 +123,16 @@ video:
   # eye gaze, blinks. false = classic whole-sprite sway/bob/blink.
   rig: true
 
+thumbnail:
+  # (youtube-thumbnail-design skill, 2026-10-27) The LOCKED couple
+  # never changes — only the FACE expression varies per episode,
+  # seeded: warm positive expressions read best at phone size
+  # (expression CTR table); "inlove" carries double weight as the
+  # brand signature. The checklist audit (120px squint test measured,
+  # ≤6 promise words, mobile text floor, contrast, <2MB) runs every
+  # cycle and is logged — fail-open by design (deterministic renders).
+  emotions: ["inlove", "inlove", "happy", "hopeful", "shy"]
+
 shorts:
   width: 1080
   height: 1920
@@ -143,6 +153,21 @@ youtube:
   made_for_kids: false              # general-audience relationship content
   synthetic_media_disclosure: true  # honest AI-assistance disclosure
   privacy: "public"                 # final visibility (publishAt schedules it)
+
+  # ── AI-SEO TEXT LAYER (2026-10-27, the ai-seo skill) ─────────────
+  # Models don't watch the video — they read the text around it. The
+  # narration now ships as a machine-readable English caption track
+  # (captions.insert, 50 units) and the long gets a channel summary
+  # comment (commentThreads.insert, 50 units): a second liftable text
+  # block that seeds the comment section. ~100 units/day on top of
+  # the ~8.3k baseline. One structural refusal (400/403) is remembered
+  # in state and never retried; transient failures retry next cycle; a
+  # failed call costs 0 quota and never blocks a day that shipped.
+  # The API cannot pin comments — pin each in Studio if you want (optional).
+  text_layer:
+    captions: true            # caption track on the long (the transcript)
+    captions_shorts: false    # shorts stay quota-lean (flip on later if wanted)
+    summary_comment: true     # channel summary comment on the long
 
   # COMMENTS POLICY — OPEN, by design:
   #   This is NOT child-directed content anymore, so the COPPA comment

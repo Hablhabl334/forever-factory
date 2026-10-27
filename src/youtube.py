@@ -493,6 +493,11 @@ def upload_video(filepath: Path, meta: dict, publish_at: str | None,
         status["containsSyntheticMedia"] = True
 
     meta = dict(meta)
+    # chapters live IN the description text now (2026-10-27 fix — they
+    # were computed since day 1 but never shown: YouTube parses leading
+    # timestamps from the description, there is no snippet.chapters
+    # field). Never send a non-snippet key to the API.
+    meta.pop("chapters", None)
     meta.setdefault("categoryId", str(yconf.get("category_id", "24")))
     meta.setdefault("defaultLanguage", yconf.get("default_language", "en"))
     meta.setdefault("defaultAudioLanguage", yconf.get("default_language", "en"))

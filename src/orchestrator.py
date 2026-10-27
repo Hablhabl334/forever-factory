@@ -20,8 +20,8 @@ import traceback
 from datetime import date
 from pathlib import Path
 
-from . import art_engine, discovery, ledger, render, shorts as shorts_mod, \
-    thumbnails, tts, youtube
+from . import ai_layer, art_engine, discovery, ledger, render, \
+    shorts as shorts_mod, thumbnails, tts, youtube
 from .config import cfg, ROOT
 from . import muse
 from .story_engine import generate_story, combination_space, N_SHORTS
@@ -280,9 +280,16 @@ def _rebuild_thumb(record: dict, state: dict) -> Path | None:
     out_dir = OUT_ROOT / f"episode_{record['n']:03d}"
     out_dir.mkdir(parents=True, exist_ok=True)
     thumb = out_dir / "thumbnail.png"
-    if thumb.exists():
-        return thumb
-    return thumbnails.make_thumbnail(story, thumb, story["seed"])
+    if not thumb.exists():
+        thumbnails.make_thumbnail(story, thumb, story["seed"])
+    try:
+        rep = thumbnails.audit_thumbnail(story, thumb)
+        if not rep["ok"]:
+            print(f"  [thumbs] ep{record['n']} audit warn "
+                  f"(fail-open): {rep['fails']}")
+    except Exception as exc:
+        print(f"  [thumbs] ep{record['n']} audit skipped ({exc})")
+    return thumb
 
 
 def backfill_thumbnails(state: dict) -> list[str]:
@@ -356,10 +363,25 @@ def produce_episode(story: dict, episode_n: int, dry_run: bool,
     short_files = shorts_mod.render_shorts(story, work, out)
     short_files = short_files[:n_shorts]
 
-    # 4. thumbnail (dark bold card, from the story spec)
+    # 4. thumbnail (dark bold card, from the story spec) + the
+    #    youtube-thumbnail-design checklist audit (logged every
+    #    cycle; fails OPEN — a deterministic render would repeat any
+    #    failure forever, so the audit catches regressions in the
+    #    log/tests, never starves the grid)
     thumb = out / "thumbnail.png"
     if not thumb.exists():
         thumbnails.make_thumbnail(story, thumb, story["seed"])
+    try:
+        rep = thumbnails.audit_thumbnail(story, thumb)
+        if rep["ok"]:
+            print(f"[{episode_n}] thumbnail audit: {rep['words']} words, "
+                  f"{rep['font_px']}px, 120px var {rep['px120_var']}, "
+                  f"{rep['png_kb']}KB — ok")
+        else:
+            print(f"[{episode_n}] THUMBNAIL AUDIT FAIL (shipping anyway, "
+                  f"deterministic render): {rep['fails']}")
+    except Exception as exc:
+        print(f"[{episode_n}] thumbnail audit skipped ({exc})")
     print(f"[{episode_n}] thumbnail + {len(short_files)} shorts ready")
 
     # 5. metadata
@@ -420,6 +442,22 @@ def produce_episode(story: dict, episode_n: int, dry_run: bool,
             used_slots["short"].add(short_slot)
             _remember_slot(state, "short", short_slot)
         recorded_shorts.append(sid)  # a re-run skips this one next time
+
+    # 7. the AI-SEO text layer (ai_layer — the ai-seo skill, translated):
+    #    machine-readable caption track + the channel summary comment,
+    #    ~100 units of pure bonus AFTER the videos are safe. Idempotent
+    #    per episode, refusal-aware, quota-gated — and a bonus surface
+    #    can never kill or defer a day that already shipped.
+    if long_id is not None:
+        try:
+            tl = ai_layer.attach_text_layer(story, episode_n, long_id,
+                                            narration, recorded_shorts,
+                                            state, work)
+            if tl:
+                print(f"[{episode_n}] text layer: {tl}")
+        except Exception as exc:
+            print(f"  [{episode_n}] text layer skipped ({exc}) — "
+                  f"the uploads are safe, this is bonus surface")
 
     # honest result: a deferred day must NEVER look like a produced one
     # (Oct 7: the log printed "✓ episode 16" after two quota deferrals —

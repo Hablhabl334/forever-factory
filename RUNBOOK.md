@@ -678,3 +678,87 @@ render) + durability suite + viral suite all green; a full local
 production Short rendered clean (68 s, 33 cards, Kokoro af_heart,
 rig + static camera, 120 s render); VLM quality gate on the
 finished video: 8.5/10, "high-quality, publishable asset".
+
+## Part 15 — The free-skill upgrade: AI-SEO text layer + thumbnail craft (2026-10-27)
+
+**What changed and why.** The owner's standing rule — install free,
+readable skills only, skip anything API/quota-gated — added 11 free
+skills to the agent library (ai-seo, youtube-thumbnail-design,
+marketing-psychology, marketing-ideas, animation-vocabulary,
+claude-handoff, subagent-driven-development, code-review,
+agent-browser, playwright-cli, browser-fingerprint-audit; 7 paid/API
+twins skipped at install time). This upgrade translates the ones with
+factory-relevant doctrine into code, in the same pattern as the
+2026-10-26 trend-intel translation. The full skill→factory map lives
+in `SKILLS.md`.
+
+### 1. The AI-SEO text layer (src/ai_layer.py — NEW)
+
+Doctrine (ai-seo skill, `references/youtube-ai-citations.md`): models
+don't watch the video — they read the text around it. The factory
+spoke every word but never shipped two machine-readable surfaces.
+Both now ride the existing `youtube.force-ssl` scope (already
+re-consented — no owner action needed):
+
+* **caption track** — the narration chunks upload as a clean English
+  WebVTT via `captions.insert` (50 units, the long; shorts opt-in,
+  default off). Exact words, exact timings — better than any
+  auto-caption.
+* **summary comment** — the channel posts its own first comment on
+  the long via `commentThreads.insert` (50 units): the numbered
+  lesson list + the comment-bait question. The Data API cannot pin
+  comments; pin in Studio if wanted (optional, 30 s).
+* **description upgrade** — a liftable 40-60 word answer block near
+  the top, and **chapter timestamps now IN the description** (bug
+  fix: chapters were computed daily since ep1 and silently dropped at
+  upload — YouTube parses them from description lines, and there is
+  no snippet.chapters field; `src/youtube.py` now strips the inert
+  key).
+
+**The contract** (all regression-tested in
+`scripts/test_skill_upgrades.py`): quota spent only on success; ONE
+structural refusal (400/403) remembered in
+`state["text_layer_refused"]` and never retried (the 2026-10-06 tags
+lesson applied from birth); transient failures retry next cycle;
+quota-low days skip the bonus surface first; per-episode ledger flags
+make everything idempotent across crash-resumes; the whole layer runs
+AFTER the day's uploads are safe and can never block or defer a day.
+Budget: +100 units/day on the ~8.3k baseline (10,000 cap).
+
+**Config** (`channel.yaml → youtube.text_layer`): `captions: true`,
+`captions_shorts: false`, `summary_comment: true`.
+
+### 2. Thumbnail craft (src/thumbnails.py)
+
+From the youtube-thumbnail-design skill (design rules are free; its
+paid image-API examples ignored):
+
+* **max 6 words** of promise text — cut words, never shrink
+* **seeded expression variety** — the LOCKED couple stays identical;
+  only the face varies per episode from warm positives
+  (`thumbnail.emotions`, inlove double-weighted)
+* **the automated checklist** — spec size, measured 120px squint
+  test (text-band separability on the real 120x67 downscale), the 8%
+  mobile text floor, contrast delta, <2 MB. Logged every cycle,
+  **fail-open**: renders are deterministic, so a hard failure would
+  repeat forever — the audit is a regression gate for the log and
+  tests, never a day-killer.
+
+### 3. Pop-in CTA (src/anim.py, src/render.py, src/shorts.py)
+
+animation-vocabulary + the peak-end rule: the CTA card — the final
+beat of every Short — now lands with a **Pop in** settle (one gentle
+undershoot, exactly 1.0 at the seam, frame 0 still the full-size feed
+thumbnail). Cached under its own `_intro_dip_pop.mp4` name so old
+intros can never leak.
+
+**Verification** (2026-10-27): new 57-check suite
+`scripts/test_skill_upgrades.py` (VTT format, fake-API contract
+matrix: success/idempotent/refusal-remembered/transient-retry/
+quota-low, attach flow, answer block + chapters assertions,
+thumbnail audit incl. graceful-fail, pop curve math + real pop-clip
+render, chapters-key strip) — ALL PASS. Existing suites:
+script_v2 41/0, oct8 41/0, grid_heal, durability, compete 38,
+v4_extras, rig_upgrade 30/0 — ALL PASS; muse 26/2 unchanged
+(pre-existing); viral + v4_render live-voice smokes are
+sandbox-environmental (no TTS packages here), unchanged paths.

@@ -278,10 +278,31 @@ def compose_frame(layers: dict, params: list[dict], t: float,
 _INTRO_FRAMES = 9          # 0.30 s at 30 fps
 _POP_SCALE = 1.055
 
+# 2026-10-27 — Pop in (animation-vocabulary skill) for the CTA card:
+# "appears with a slight overshoot, like it bounces into place."
+# Applied to the LANDING only (frame 0 stays the full-size feed
+# thumbnail): the same ease-out amplitude, damped by a cosine so the
+# settle passes through ONE undershoot (~0.994) and lands EXACTLY on
+# 1.0 at the seam — algebraically zero at u=1, so the loop never
+# jumps. The final beat of every Short gets the peak-end treatment:
+# the last thing a viewer feels is motion that ANSWERS, not a still.
+_POP_WOBBLE = 2.2 * math.pi
+
+
+def pop_scale(p: float, pop: bool = True) -> float:
+    """Scale at progress p in [0,1]. pop=False is the v4 plain
+    ease-out landing (unchanged); pop=True is the Pop-in settle:
+    1.055 -> one gentle undershoot -> exactly 1.0."""
+    e = 1.0 - (1.0 - p) ** 3               # cubic ease-out tail
+    if pop:
+        return 1.0 + (_POP_SCALE - 1.0) * (1.0 - e) * math.cos(_POP_WOBBLE * p)
+    return _POP_SCALE - (_POP_SCALE - 1.0) * e
+
 
 def render_intro(layers: dict, seed: int, style: str, fps: int,
                  n_unique: int, out: Path, dip: bool = False,
-                 n_intro: int = _INTRO_FRAMES) -> None:
+                 n_intro: int = _INTRO_FRAMES,
+                 pop: bool = False) -> None:
     """Render the card's ENTRANCE segment as unique frames and encode
     to out (intro.mp4). n_unique MUST be the same loop length the
     caller hands to encode_loop: the intro is literally the loop's
@@ -292,6 +313,10 @@ def render_intro(layers: dict, seed: int, style: str, fps: int,
     dip=True (the term reveal and CTA): the first frames darken
     briefly (0.80 / 0.90 / 0.97) — a 'dip cut': the transition reads
     as meant, an accent instead of a swap.
+
+    pop=True (the CTA only): the landing settles with one gentle
+    Pop-in undershoot instead of the plain ease-out (peak-end craft:
+    the subscribe ask is the final beat of every Short).
 
     Cached + atomic exactly like the loop."""
     if out.exists():
@@ -333,8 +358,7 @@ def render_intro(layers: dict, seed: int, style: str, fps: int,
                 frame = ImageEnhance.Brightness(frame).enhance(dip_curve[i])
             if crop is not None:
                 p = i / max(1, n_intro - 1)
-                e = 1.0 - (1.0 - p) ** 3          # cubic ease-out tail
-                scale = _POP_SCALE - (_POP_SCALE - 1.0) * e
+                scale = pop_scale(p, pop=pop)
                 cw, ch = crop.size
                 nw = max(1, round(cw * scale))
                 nh = max(1, round(ch * scale))
