@@ -1,8 +1,10 @@
-[0;93m2026-10-27 07:19:05.425306998 [W:onnxruntime:Default, device_discovery.cc:95 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
-[grid] booking 2 short slot(s) in the next 24h (free: 2026-10-28T00:00:00+03:00, 2026-10-28T06:00:00+03:00)
-  [muse] long: 16/18 scenes rewritten (nvidia)
-  [muse] shorts: retrying 6 reject(s)
-  [muse] shorts: 6/6 rewritten (nvidia)
+[0;93m2026-10-27 16:46:27.164796443 [W:onnxruntime:Default, device_discovery.cc:95 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
+[stats] growth report 2026-10-27
+[stats]   total: 1984 views  (+7 since last report)
+[stats]      187 views  ·  Subscribe for more tips like this #psychology #relationship 
+[stats]      120 views  ·  Subscribe for more tips like this #psychology #relationship 
+[stats]      110 views  ·  Subscribe for more tips like this #psychology #relationship 
+  [muse] cache hit seed 125633702625904 - replay
 [39] script: Love Languages, Without the Hype (938 words, hash 58a1f00324)
   [voice] local neural narration: 103 chunks (Kokoro af_heart)
   [voice] polished: presence EQ + gentle compression
@@ -22,14 +24,32 @@
   [short 4] 50s, 24 cards, 6.9MB
   [voice] local neural narration: 23 chunks (Kokoro af_heart)
   [voice] polished: presence EQ + gentle compression
-  [short 5] 51s, 23 cards, 6.6MB
+  [short 5] 51s, 23 cards, 6.7MB
   [voice] local neural narration: 28 chunks (Kokoro af_heart)
   [voice] polished: presence EQ + gentle compression
   [short 6] 57s, 28 cards, 7.8MB
 [39] thumbnail audit: 5 words, 102px, 120px var 5693, 66KB — ok
-[39] thumbnail + 2 shorts ready
-[39] DRY-RUN: would upload long at 2026-10-29T20:00:00+03:00
-[39] DRY-RUN: would upload short 1 at 2026-10-28T00:00:00+03:00
-[39] DRY-RUN: would upload short 2 at 2026-10-28T06:00:00+03:00
-  - episode 39: Love Languages, Without the Hype (dry-run)
-combination space: 273,306,627,721,774,080 stories — the factory never repeats
+[39] thumbnail + 4 shorts ready
+  [youtube] uploaded long: KizVVG31X3k (publishAt 2026-10-29T20:00:00+03:00)
+  [youtube] setting thumbnail thumbnail.png (66 KB) on KizVVG31X3k
+  [youtube] thumbnail set
+  [youtube] uploaded short: rMCN-eR4o1w (publishAt 2026-10-28T00:00:00+03:00)
+  [youtube] uploaded short: MUz562UBHds (publishAt 2026-10-28T06:00:00+03:00)
+  [youtube] uploaded short: g5pLIe-_7Lg (publishAt 2026-10-28T12:00:00+03:00)
+  [youtube] uploaded short: -O03KVnaDEA (publishAt 2026-10-28T18:00:00+03:00)
+  [ai-seo] captions refused (400) — remembered, never retried. Body: {
+  "error": {
+    "code": 400,
+    "message": "The request contains invalid metadata values, which prevent the track from being created. Confirm that the request specifies valid values for the \u003c
+  [ai-seo] summary comment refused (403) — remembered, never retried. Body: {
+  "error": {
+    "code": 403,
+    "message": "The comment thread could not be created due to insufficient permissions. The request might not be properly authorized.",
+    "errors": [
+      {
+       
+[39] text layer: {'captions_long': 'skipped', 'comment': 'skipped'}
+[playlist] 1 long video(s) not in the playlist yet
+[playlist] ep39 long added (KizVVG31X3k)
+  ✓ episode 39: Love Languages, Without the Hype
+combination space: 273,308,412,123,694,080 stories — the factory never repeats
