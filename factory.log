@@ -1,55 +1,47 @@
-[0;93m2026-10-27 16:46:27.164796443 [W:onnxruntime:Default, device_discovery.cc:95 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
-[stats] growth report 2026-10-27
-[stats]   total: 1984 views  (+7 since last report)
+[0;93m2026-10-28 18:37:51.067450078 [W:onnxruntime:Default, device_discovery.cc:95 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
+[stats] growth report 2026-10-28
+[stats]   total: 2034 views  (+50 since last report)
 [stats]      187 views  ·  Subscribe for more tips like this #psychology #relationship 
 [stats]      120 views  ·  Subscribe for more tips like this #psychology #relationship 
 [stats]      110 views  ·  Subscribe for more tips like this #psychology #relationship 
-  [muse] cache hit seed 125633702625904 - replay
-[39] script: Love Languages, Without the Hype (938 words, hash 58a1f00324)
-  [voice] local neural narration: 103 chunks (Kokoro af_heart)
+  [muse] long: 18/18 scenes rewritten (nvidia)
+  [muse] shorts: reply shape rejected - keeping drafts
+  [muse] shorts: retrying 6 reject(s)
+  [muse] shorts: 2/6 rewritten (nvidia)
+[40] script: Self-Love Before Love (1230 words, hash cefa733101)
+  [voice] local neural narration: 140 chunks (Kokoro af_heart)
   [voice] polished: presence EQ + gentle compression
-[39] narration: 365s, 103 caption chunks
-[39] long video: 377s, 38.1MB
+[40] narration: 491s, 140 caption chunks
+[40] long video: 503s, 49.4MB
   [voice] local neural narration: 25 chunks (Kokoro af_heart)
   [voice] polished: presence EQ + gentle compression
-  [short 1] 56s, 25 cards, 7.5MB
-  [voice] local neural narration: 24 chunks (Kokoro af_heart)
-  [voice] polished: presence EQ + gentle compression
-  [short 2] 51s, 24 cards, 7.1MB
-  [voice] local neural narration: 25 chunks (Kokoro af_heart)
-  [voice] polished: presence EQ + gentle compression
-  [short 3] 53s, 25 cards, 6.9MB
-  [voice] local neural narration: 24 chunks (Kokoro af_heart)
-  [voice] polished: presence EQ + gentle compression
-  [short 4] 50s, 24 cards, 6.9MB
+  [short 1] 55s, 25 cards, 7.4MB
   [voice] local neural narration: 23 chunks (Kokoro af_heart)
   [voice] polished: presence EQ + gentle compression
-  [short 5] 51s, 23 cards, 6.7MB
-  [voice] local neural narration: 28 chunks (Kokoro af_heart)
+  [short 2] 50s, 23 cards, 6.6MB
+  [voice] local neural narration: 26 chunks (Kokoro af_heart)
   [voice] polished: presence EQ + gentle compression
-  [short 6] 57s, 28 cards, 7.8MB
-[39] thumbnail audit: 5 words, 102px, 120px var 5693, 66KB — ok
-[39] thumbnail + 4 shorts ready
-  [youtube] uploaded long: KizVVG31X3k (publishAt 2026-10-29T20:00:00+03:00)
-  [youtube] setting thumbnail thumbnail.png (66 KB) on KizVVG31X3k
+  [short 3] 58s, 26 cards, 7.8MB
+  [voice] local neural narration: 23 chunks (Kokoro af_heart)
+  [voice] polished: presence EQ + gentle compression
+  [short 4] 47s, 23 cards, 6.2MB
+  [voice] local neural narration: 24 chunks (Kokoro af_heart)
+  [voice] polished: presence EQ + gentle compression
+  [short 5] 53s, 24 cards, 6.5MB
+  [voice] local neural narration: 25 chunks (Kokoro af_heart)
+  [voice] polished: presence EQ + gentle compression
+  [short 6] 53s, 25 cards, 7.5MB
+[40] thumbnail audit: 3 words, 102px, 120px var 4049, 57KB — ok
+[40] thumbnail + 4 shorts ready
+  [youtube] uploaded long: LeBL9nIqImE (publishAt 2026-10-30T20:00:00+02:00)
+  [youtube] setting thumbnail thumbnail.png (56 KB) on LeBL9nIqImE
   [youtube] thumbnail set
-  [youtube] uploaded short: rMCN-eR4o1w (publishAt 2026-10-28T00:00:00+03:00)
-  [youtube] uploaded short: MUz562UBHds (publishAt 2026-10-28T06:00:00+03:00)
-  [youtube] uploaded short: g5pLIe-_7Lg (publishAt 2026-10-28T12:00:00+03:00)
-  [youtube] uploaded short: -O03KVnaDEA (publishAt 2026-10-28T18:00:00+03:00)
-  [ai-seo] captions refused (400) — remembered, never retried. Body: {
-  "error": {
-    "code": 400,
-    "message": "The request contains invalid metadata values, which prevent the track from being created. Confirm that the request specifies valid values for the \u003c
-  [ai-seo] summary comment refused (403) — remembered, never retried. Body: {
-  "error": {
-    "code": 403,
-    "message": "The comment thread could not be created due to insufficient permissions. The request might not be properly authorized.",
-    "errors": [
-      {
-       
-[39] text layer: {'captions_long': 'skipped', 'comment': 'skipped'}
+  [youtube] uploaded short: ckFpIjDtm6Y (publishAt 2026-10-29T00:00:00+03:00)
+  [youtube] uploaded short: vmKaS-OszfY (publishAt 2026-10-29T06:00:00+03:00)
+  [youtube] uploaded short: lEofPLtJjXo (publishAt 2026-10-29T12:00:00+03:00)
+  [youtube] uploaded short: HrZRukOiLj0 (publishAt 2026-10-29T18:00:00+03:00)
+[40] text layer: {'captions_long': 'refused', 'comment': 'refused'}
 [playlist] 1 long video(s) not in the playlist yet
-[playlist] ep39 long added (KizVVG31X3k)
-  ✓ episode 39: Love Languages, Without the Hype
+[playlist] ep40 long added (LeBL9nIqImE)
+  ✓ episode 40: Self-Love Before Love
 combination space: 273,308,412,123,694,080 stories — the factory never repeats
