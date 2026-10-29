@@ -1,47 +1,47 @@
-[0;93m2026-10-28 18:37:51.067450078 [W:onnxruntime:Default, device_discovery.cc:95 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
-[stats] growth report 2026-10-28
-[stats]   total: 2034 views  (+50 since last report)
-[stats]      187 views  ·  Subscribe for more tips like this #psychology #relationship 
+[0;93m2026-10-29 18:44:19.303521221 [W:onnxruntime:Default, device_discovery.cc:95 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
+[stats] growth report 2026-10-29
+[stats]   total: 2127 views  (+93 since last report)
+[stats]      188 views  ·  Subscribe for more tips like this #psychology #relationship 
 [stats]      120 views  ·  Subscribe for more tips like this #psychology #relationship 
 [stats]      110 views  ·  Subscribe for more tips like this #psychology #relationship 
   [muse] long: 18/18 scenes rewritten (nvidia)
-  [muse] shorts: reply shape rejected - keeping drafts
   [muse] shorts: retrying 6 reject(s)
-  [muse] shorts: 2/6 rewritten (nvidia)
-[40] script: Self-Love Before Love (1230 words, hash cefa733101)
-  [voice] local neural narration: 140 chunks (Kokoro af_heart)
+  [muse] shorts: reply shape rejected - keeping drafts
+  [muse] shorts: 0/6 rewritten (nvidia)
+[41] script: What Keeps Love Alive (1160 words, hash f8b4746fcd)
+  [voice] local neural narration: 141 chunks (Kokoro af_heart)
   [voice] polished: presence EQ + gentle compression
-[40] narration: 491s, 140 caption chunks
-[40] long video: 503s, 49.4MB
-  [voice] local neural narration: 25 chunks (Kokoro af_heart)
-  [voice] polished: presence EQ + gentle compression
-  [short 1] 55s, 25 cards, 7.4MB
+[41] narration: 465s, 141 caption chunks
+[41] long video: 477s, 47.3MB
   [voice] local neural narration: 23 chunks (Kokoro af_heart)
   [voice] polished: presence EQ + gentle compression
-  [short 2] 50s, 23 cards, 6.6MB
-  [voice] local neural narration: 26 chunks (Kokoro af_heart)
+  [short 1] 46s, 23 cards, 5.7MB
+  [voice] local neural narration: 22 chunks (Kokoro af_heart)
   [voice] polished: presence EQ + gentle compression
-  [short 3] 58s, 26 cards, 7.8MB
-  [voice] local neural narration: 23 chunks (Kokoro af_heart)
-  [voice] polished: presence EQ + gentle compression
-  [short 4] 47s, 23 cards, 6.2MB
+  [short 2] 48s, 22 cards, 5.9MB
   [voice] local neural narration: 24 chunks (Kokoro af_heart)
   [voice] polished: presence EQ + gentle compression
-  [short 5] 53s, 24 cards, 6.5MB
-  [voice] local neural narration: 25 chunks (Kokoro af_heart)
+  [short 3] 53s, 24 cards, 6.9MB
+  [voice] local neural narration: 26 chunks (Kokoro af_heart)
   [voice] polished: presence EQ + gentle compression
-  [short 6] 53s, 25 cards, 7.5MB
-[40] thumbnail audit: 3 words, 102px, 120px var 4049, 57KB — ok
-[40] thumbnail + 4 shorts ready
-  [youtube] uploaded long: LeBL9nIqImE (publishAt 2026-10-30T20:00:00+02:00)
-  [youtube] setting thumbnail thumbnail.png (56 KB) on LeBL9nIqImE
+  [short 4] 54s, 26 cards, 6.6MB
+  [voice] local neural narration: 26 chunks (Kokoro af_heart)
+  [voice] polished: presence EQ + gentle compression
+  [short 5] 54s, 26 cards, 6.9MB
+  [voice] local neural narration: 24 chunks (Kokoro af_heart)
+  [voice] polished: presence EQ + gentle compression
+  [short 6] 50s, 24 cards, 5.9MB
+[41] thumbnail audit: 4 words, 102px, 120px var 4346, 59KB — ok
+[41] thumbnail + 4 shorts ready
+  [youtube] uploaded long: 8stAqRkbZjw (publishAt 2026-10-31T20:00:00+02:00)
+  [youtube] setting thumbnail thumbnail.png (58 KB) on 8stAqRkbZjw
   [youtube] thumbnail set
-  [youtube] uploaded short: ckFpIjDtm6Y (publishAt 2026-10-29T00:00:00+03:00)
-  [youtube] uploaded short: vmKaS-OszfY (publishAt 2026-10-29T06:00:00+03:00)
-  [youtube] uploaded short: lEofPLtJjXo (publishAt 2026-10-29T12:00:00+03:00)
-  [youtube] uploaded short: HrZRukOiLj0 (publishAt 2026-10-29T18:00:00+03:00)
-[40] text layer: {'captions_long': 'refused', 'comment': 'refused'}
+  [youtube] uploaded short: 2mqPih2P8Og (publishAt 2026-10-30T00:00:00+02:00)
+  [youtube] uploaded short: 4H6czjbhkFQ (publishAt 2026-10-30T06:00:00+02:00)
+  [youtube] uploaded short: 3y56J5YeLIY (publishAt 2026-10-30T12:00:00+02:00)
+  [youtube] uploaded short: qd8zAARYMug (publishAt 2026-10-30T18:00:00+02:00)
+[41] text layer: {'captions_long': 'refused', 'comment': 'refused'}
 [playlist] 1 long video(s) not in the playlist yet
-[playlist] ep40 long added (LeBL9nIqImE)
-  ✓ episode 40: Self-Love Before Love
+[playlist] ep41 long added (8stAqRkbZjw)
+  ✓ episode 41: What Keeps Love Alive
 combination space: 273,308,412,123,694,080 stories — the factory never repeats
