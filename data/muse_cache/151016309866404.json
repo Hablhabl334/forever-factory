@@ -1,0 +1,387 @@
+{
+ "title": "Chemistry vs Compatibility",
+ "topic": "chemistry",
+ "topic_label": "chemistry vs compatibility",
+ "mood": "warm",
+ "series": "Psychology of Love",
+ "hook": "Chemistry gets you in the door. Compatibility decides whether you'll still be inside in five years. Here's the difference.",
+ "words": 1220,
+ "hash": "96f2376151c0af6d",
+ "seed": 151016309866404,
+ "atoms": {
+  "topic": "Chemistry vs Compatibility",
+  "concepts": [
+   "the dopamine novelty effect",
+   "secure attachment",
+   "positive illusion",
+   "the scarcity effect",
+   "green flags",
+   "the self-expansion model",
+   "slow love",
+   "misattribution of arousal"
+  ]
+ },
+ "question": "Would you send this to them? Tell me why not.",
+ "scenes": [
+  {
+   "n": 1,
+   "id": "open_card",
+   "narration": "Chemistry opens the door. Compatibility decides if you're still standing in the kitchen five years later. Here's how to tell them apart. Today you get eight quiet pieces on chemistry versus compatibility. Stay to the end - the one that lands won't be the one you saw coming.",
+   "image": {
+    "kind": "topic_card",
+    "topic": "Chemistry vs Compatibility",
+    "band": "chemistry vs compatibility",
+    "count": 8
+   }
+  },
+  {
+   "n": 2,
+   "id": "tip1_card",
+   "narration": "The first half year of love is a drug phase, plain and simple - and the comedown is scheduled, not personal. Early romance floods your reward circuit with dopamine, the same chemistry that drives craving. That's why you can't stop thinking about them: your brain has marked them as a prize to chase. But novelty expires on a timeline. The intensity drops whether the love is real or not. Couples who understand this don't panic when the fire settles into warmth.",
+   "image": {
+    "kind": "concept_card",
+    "tip": 1,
+    "total": 8,
+    "term": "the dopamine novelty effect",
+    "headline": "The first six months of love are literally a drug phase \u2014 and withdrawal is scheduled, not personal.",
+    "accent_word": null
+   }
+  },
+  {
+   "n": 3,
+   "id": "tip1_scene",
+   "narration": "Month seven hits and the butterflies are gone. You wonder if the love went with them. It didn't. The chemicals just stopped footing the bill - now the relationship has to pay for itself. When the fire becomes warmth, don't walk away from the feeling. Upgrade what you're building: travel, learn, go deeper. Keep that in mind - the next pattern shows why this keeps happening.",
+   "image": {
+    "kind": "couple_scene",
+    "emotion_a": "happy",
+    "pose_a": "stand",
+    "emotion_b": "tired",
+    "pose_b": "phone",
+    "overlay": [
+     "psychologists call this",
+     "the dopamine novelty effect"
+    ]
+   }
+  },
+  {
+   "n": 4,
+   "id": "tip2_card",
+   "narration": "When a relationship feels like relief instead of a rush, you might've finally found solid ground. Secure people do something quietly radical: they take words at face value. 'I'm busy' means busy. 'I love you' means they show up on a random Tuesday, not just anniversaries. That calm isn't shallow - it's what happens when the threat detector finally powers down. The data keeps pointing the same way: security is the foundation that lets every other skill work.",
+   "image": {
+    "kind": "concept_card",
+    "tip": 2,
+    "total": 8,
+    "term": "secure attachment",
+    "headline": "If a relationship feels like relief instead of a rush, you may have finally gotten it right.",
+    "accent_word": null
+   }
+  },
+  {
+   "n": 5,
+   "id": "tip2_scene",
+   "narration": "Milo says you hurt me at work. Nina doesn't defend, counter, or freeze. She says: you're right, that was careless. Ninety seconds. Done. Nothing spirals. Security isn't a personality type - it's a skill set. Listening at face value. Repairing after. Words that match what comes next. Stick around - the next one is the one people come back to.",
+   "image": {
+    "kind": "couple_scene",
+    "emotion_a": "happy",
+    "pose_a": "stand",
+    "emotion_b": "happy",
+    "pose_b": "stand",
+    "overlay": [
+     "psychologists call this",
+     "secure attachment"
+    ]
+   }
+  },
+  {
+   "n": 6,
+   "id": "tip3_card",
+   "narration": "The healthiest couples idealize each other a little. The ones that implode idealize a lot. Researchers call it positive illusion: committed partners see each other more kindly than the facts strictly warrant, and those couples end up more satisfied. The rose-colored glasses help you forgive the small stuff and stay invested. The danger zone is the fog version - where the halo gets so bright you miss values, character, consistency. See them clearly enough to know their patterns. Kindly enough to forgive their humanity.",
+   "image": {
+    "kind": "concept_card",
+    "tip": 3,
+    "total": 8,
+    "term": "positive illusion",
+    "headline": "The healthiest couples idealize each other a little. The destroyed ones idealize a lot.",
+    "accent_word": null
+   }
+  },
+  {
+   "n": 7,
+   "id": "tip3_scene",
+   "narration": "Youssef cancels on Chloe again. Chloe says: they're just busy. She'd never tolerate this from a stranger. The halo is cooking the books. Ask a friend you trust to fact-check your version of them. Not to follow their verdict - just to compare notes. That's the what. Next comes the why.",
+   "image": {
+    "kind": "couple_scene",
+    "emotion_a": "happy",
+    "pose_a": "stand",
+    "emotion_b": "neutral",
+    "pose_b": "phone",
+    "overlay": [
+     "psychologists call this",
+     "positive illusion"
+    ]
+   }
+  },
+  {
+   "n": 8,
+   "id": "tip4_card",
+   "narration": "'Hard to get' isn't a personality trait - it's a pricing glitch your brain runs on repeat. Scarcity makes anything look more valuable the less available it is. Attention included. Someone who gives you a Tuesday slot might be worth less to your week than someone who gives you every day. But your brain sees 'limited edition' and slaps on a collector's markup. The fix: price the actual behavior, not the availability schedule.",
+   "image": {
+    "kind": "concept_card",
+    "tip": 4,
+    "total": 8,
+    "term": "the scarcity effect",
+    "headline": "'Hard to get' isn't a personality \u2014 it's a pricing error your brain keeps making.",
+    "accent_word": null
+   }
+  },
+  {
+   "n": 9,
+   "id": "tip4_scene",
+   "narration": "Ava slots Rami in when it's convenient - a Tuesday here, a maybe there. Rami rearranges their entire week around that window. Rami isn't valuing a connection. They're bidding on a rare item. Choose consistency over scarcity. Available people aren't cheap - they're fairly priced. Next up: the part your brain will fight you on.",
+   "image": {
+    "kind": "couple_scene",
+    "emotion_a": "anxious",
+    "pose_a": "stand",
+    "emotion_b": "smug",
+    "pose_b": "phone",
+    "overlay": [
+     "psychologists call this",
+     "the scarcity effect"
+    ]
+   }
+  },
+  {
+   "n": 10,
+   "id": "tip5_card",
+   "narration": "Green flags don't announce themselves. Consistency makes no noise, and noise is all we've been trained to spot. Green flags are deeply unsexy: they remember the small stuff, show up on time, apologize with specifics, treat waiters and exes with the same kindness. Our attention is wired for drama, so steadiness reads as flat - like a quiet engine you forget is running. The move is to actively hunt for the boring signals. They're the ones doing the heavy lifting. Someone whose presence calms your nervous system is doing something biochemically rare.",
+   "image": {
+    "kind": "concept_card",
+    "tip": 5,
+    "total": 8,
+    "term": "green flags",
+    "headline": "Green flags are quiet \u2014 consistency never makes noise, and noise is all we're trained to notice.",
+    "accent_word": null
+   }
+  },
+  {
+   "n": 11,
+   "id": "tip5_scene",
+   "narration": "Maya texts when she says she will. Asks how Kai's mom's test went. Treats the waiter at the concert with respect. No drama, no electric spikes - and Kai sleeps better near Maya than in years. The nervous system clocked it before the heart caught up. This week, list your boring green flags: on time, remembers, repairs. Then look for that list in people, not chemistry. Which raises a harder question - the next piece answers it.",
+   "image": {
+    "kind": "couple_scene",
+    "emotion_a": "happy",
+    "pose_a": "stand",
+    "emotion_b": "happy",
+    "pose_b": "stand",
+    "overlay": [
+     "psychologists call this",
+     "green flags"
+    ]
+   }
+  },
+  {
+   "n": 12,
+   "id": "tip6_card",
+   "narration": "Ever notice you miss who you became around them more than you miss them? That's the self-expansion model: we're pulled toward people who make our world bigger. New ideas. New courage. New experiences. That's why shared adventures bond faster than shared sofas. It also explains why things go stale when growth stops - the expansion was the fuel, not the garnish. Couples who keep learning together keep choosing each other.",
+   "image": {
+    "kind": "concept_card",
+    "tip": 6,
+    "total": 8,
+    "term": "the self-expansion model",
+    "headline": "Ever notice you miss who you were around them more than you miss them?",
+    "accent_word": null
+   }
+  },
+  {
+   "n": 13,
+   "id": "tip6_scene",
+   "narration": "Ava and Adam took a class. Got lost in a new city. Built something that failed. Came home closer anyway. The activity didn't matter - becoming newer people together did. To keep love alive, expand together. A skill neither of you knows. A trip with no itinerary. A hobby that scares you both. Novelty repairs what routine wears down. Hold that feeling - the next lesson needs it.",
+   "image": {
+    "kind": "couple_scene",
+    "emotion_a": "happy",
+    "pose_a": "stand",
+    "emotion_b": "happy",
+    "pose_b": "arms_crossed",
+    "overlay": [
+     "psychologists call this",
+     "the self-expansion model"
+    ]
+   }
+  },
+  {
+   "n": 14,
+   "id": "tip7_card",
+   "narration": "Slow love isn't less intense - it's better capitalized. Fast love runs on credit. Researchers call it slow love: building the relationship before the fantasy, letting intimacy grow over months of real data instead of weeks of projection. Fast love happens in the dark - you fall for the highlight reel and meet the actual person later. Slow love moves at the speed of actual knowing, so affection grows on facts, not imagination. Less cinematic. Dramatically more durable.",
+   "image": {
+    "kind": "concept_card",
+    "tip": 7,
+    "total": 8,
+    "term": "slow love",
+    "headline": "Slow love isn't less intense \u2014 it's better funded. Fast love runs on credit.",
+    "accent_word": null
+   }
+  },
+  {
+   "n": 15,
+   "id": "tip7_scene",
+   "narration": "No labels by date three. No weekend trips by week two. But six months in, you know their money habits, their temper, their mother. You're not less in love. You're in love with a verified account. Let the timeline be a feature, not a bug. Depth is slow by design - anything faster is skipping the inspection. One more layer, because this pattern has a partner in crime.",
+   "image": {
+    "kind": "couple_scene",
+    "emotion_a": "happy",
+    "pose_a": "stand",
+    "emotion_b": "neutral",
+    "pose_b": "stand",
+    "overlay": [
+     "psychologists call this",
+     "slow love"
+    ]
+   }
+  },
+  {
+   "n": 16,
+   "id": "tip8_card",
+   "narration": "A racing heart can't distinguish terror from chemistry - so it files both under 'in love.' In a classic study, men who crossed a shaky suspension bridge rated the woman waiting on the other side as far more attractive than men who crossed a stable one. Their hearts pounded from the height, but their brains billed the arousal to attraction. This is misattribution of arousal: excitement from any source gets charged to the person standing closest. That's why rollercoasters beat coffee for first dates.",
+   "image": {
+    "kind": "concept_card",
+    "tip": 8,
+    "total": 8,
+    "term": "misattribution of arousal",
+    "headline": "A racing heart can't tell the difference between terror and chemistry \u2014 so it files everything under 'in love'.",
+    "accent_word": null
+   }
+  },
+  {
+   "n": 17,
+   "id": "tip8_scene",
+   "narration": "Omar and Chloe had a quiet, easy first date and felt something missing. The missing piece wasn't chemistry - it was the excitement their brains needed to misread. Re-test the spark on a boring Tuesday. Attraction that survives silence runs on more than adrenaline.",
+   "image": {
+    "kind": "couple_scene",
+    "emotion_a": "surprised",
+    "pose_a": "stand",
+    "emotion_b": "happy",
+    "pose_b": "stand",
+    "overlay": [
+     "psychologists call this",
+     "misattribution of arousal"
+    ]
+   }
+  },
+  {
+   "n": 18,
+   "id": "outro_card",
+   "narration": "That was eight pieces on chemistry versus compatibility. If even one made your love life suddenly click, you got your money's worth - and this one was free. Would you send this to them? Tell me why not. Subscribe for more like this.",
+   "image": {
+    "kind": "outro_card",
+    "topic": "Chemistry vs Compatibility"
+   }
+  }
+ ],
+ "shorts": [
+  {
+   "n": 1,
+   "concept": "green_flags",
+   "band": "chemistry vs compatibility",
+   "hook": "The quiet moments that settle your nervous system are the ones nobody ever thinks to post about.",
+   "term": "green flags",
+   "script": "Calm Tuesday morning. The quiet moments that settle your nervous system are the ones nobody ever thinks to post about. She notices her shoulders drop while folding laundry beside him on a random Tuesday. The silence between them feels like exhaling after holding your breath all week. Steady presence regulates your nervous system more reliably than grand gestures because biological safety accumulates through thousands of micro-moments of attunement rather than occasional excitement spikes that fade. Drama trains your attention to chase spikes so consistency registers as flat until you measure how settled you feel hours after parting ways and the dust settles. Psychologists call this green flags. Next time rate the connection by how you feel the afternoon after seeing them not the intensity of the goodbye hug. When did you last realize someone's steady calm was the real gift beneath all the noise and drama? Subscribe for more tips like this.",
+   "words": 152,
+   "shash": "a4cef5cd9dcdafc0",
+   "scene": {
+    "emotion_a": "happy",
+    "pose_a": "stand",
+    "emotion_b": "happy",
+    "pose_b": "stand"
+   }
+  },
+  {
+   "n": 2,
+   "concept": "self_expansion",
+   "band": "chemistry vs compatibility",
+   "hook": "Relationships thrive when both people keep stretching their edges side by side instead of settling into sameness.",
+   "term": "the self-expansion model",
+   "script": "New trail together. Relationships thrive when both people keep stretching their edges side by side instead of settling into sameness. They try pottery class and fail laughing then sign up for hiking next month. The schedule fills with firsts instead of routines. Shared new experiences rewire your bond because learning together creates overlapping identity space that comfort alone cannot build. When growth stops the relationship loses its engine since expansion fuels the choice to stay more than comfort ever could. Researchers name this pattern the self-expansion model. Pick one unfamiliar thing to learn together this month and watch how the struggle reshapes your connection. What new skill would change how you see each other if you started it tomorrow? Subscribe for more tips like this.",
+   "words": 125,
+   "shash": "24dca15519454f84",
+   "scene": {
+    "emotion_a": "happy",
+    "pose_a": "stand",
+    "emotion_b": "happy",
+    "pose_b": "arms_crossed"
+   }
+  },
+  {
+   "n": 3,
+   "concept": "misattribution_arousal",
+   "band": "chemistry vs compatibility",
+   "hook": "Your racing heart during scary moments often gets mislabeled as romantic chemistry by a brain guessing at sources.",
+   "term": "misattribution of arousal",
+   "script": "Horror movie handhold. Your racing heart during scary moments often gets mislabeled as romantic chemistry by a brain guessing at sources. They jump at the monster and grip tightens then later the fear feels indistinguishable from desire. The body keeps the score either way. Physical arousal from fear and attraction activate similar pathways so your brain guesses the source based on context not cause. A famous bridge experiment showed height induced panic made strangers rate each other as more attractive than calm crossings did. Science labels this misattribution of arousal. Test the spark again during a calm grocery run and see what remains when adrenaline leaves the room. Have you mistaken adrenaline for affection in a high stakes moment that felt like fate? Subscribe for more tips like this.",
+   "words": 129,
+   "shash": "1b684df564dd5840",
+   "scene": {
+    "emotion_a": "surprised",
+    "pose_a": "stand",
+    "emotion_b": "happy",
+    "pose_b": "stand"
+   }
+  },
+  {
+   "n": 4,
+   "concept": "dopamine_novelty",
+   "band": "chemistry vs compatibility",
+   "hook": "Early obsession feels like love but runs on the same circuitry as craving not connection.",
+   "term": "the dopamine novelty effect",
+   "script": "First month fever. Early obsession feels like love but runs on the same circuitry as craving not connection. She checks notifications every three minutes sketches his name on receipts forgets to eat lunch. The world narrows to one bright point. Novelty floods reward pathways with dopamine creating focus that mimics deep attachment but operates on a biological schedule. The intensity drop is scheduled by biology not a sign the connection failed so the crash feels like betrayal when it is just chemistry. Experts term this the dopamine novelty effect. Measure interest by whether you still ask questions after the rush fades not by how often you think of them. When did the chemistry dip and what stayed when the fireworks stopped? Subscribe for more tips like this.",
+   "words": 127,
+   "shash": "34d8e5cc01b59041",
+   "scene": {
+    "emotion_a": "happy",
+    "pose_a": "stand",
+    "emotion_b": "tired",
+    "pose_b": "phone"
+   }
+  },
+  {
+   "n": 5,
+   "concept": "slow_love",
+   "band": "chemistry vs compatibility",
+   "hook": "Rushing past the ordinary moments skips the inspections that make love durable instead of cinematic.",
+   "term": "slow love",
+   "script": "Six month milestone. Rushing past the ordinary moments skips the inspections that make love durable instead of cinematic. They discuss rent splits on a rainy Thursday no montage just spreadsheets. The glow fades but the knowledge deepens. Fast bonding borrows against future knowledge because depth requires witnessing habits under stress not just highlight reels. Anyone pushing pace is avoiding the data that would reveal incompatibility so speed becomes a shield not a spark. Psychology refers to this as slow love. Let the timeline breathe the right person will not vanish during the boring parts that build real trust. What did you learn about them in month five that month one carefully hid? Subscribe for more tips like this.",
+   "words": 118,
+   "shash": "60cdcbdd89cce93d",
+   "scene": {
+    "emotion_a": "happy",
+    "pose_a": "stand",
+    "emotion_b": "neutral",
+    "pose_b": "stand"
+   }
+  },
+  {
+   "n": 6,
+   "concept": "scarcity_effect",
+   "band": "chemistry vs compatibility",
+   "hook": "Limited availability tricks your brain into pricing crumbs like rare diamonds instead of seeing the real value.",
+   "term": "the scarcity effect",
+   "script": "Tuesday only slot. Limited availability tricks your brain into pricing crumbs like rare diamonds instead of seeing the real value. She rearranges her whole week for his two hour window while he confirms last minute. The calendar bends but the pattern holds. Scarcity triggers loss aversion so intermittent attention feels more valuable than consistent care because the brain confuses rarity with worth. The brain slaps a collector's price on Tuesday slots making them feel like jackpots while daily presence gets taken for granted. Studies identify this as the scarcity effect. Value the person who shows up daily over the one who fits you in when convenient. Who gives you Tuesdays and who gives you every day without negotiation? Subscribe for more tips like this.",
+   "words": 124,
+   "shash": "3987dd2958788a28",
+   "scene": {
+    "emotion_a": "anxious",
+    "pose_a": "stand",
+    "emotion_b": "smug",
+    "pose_b": "phone"
+   }
+  }
+ ],
+ "short_hashes": [
+  "a4cef5cd9dcdafc0",
+  "24dca15519454f84",
+  "1b684df564dd5840",
+  "34d8e5cc01b59041",
+  "60cdcbdd89cce93d",
+  "3987dd2958788a28"
+ ],
+ "muse": "llm",
+ "muse_model": "nvidia/nemotron-3-ultra-550b-a55b:free"
+}
