@@ -1,48 +1,2265 @@
-[0;93m2026-10-31 16:37:33.037736627 [W:onnxruntime:Default, device_discovery.cc:95 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
-[stats] growth report 2026-10-31
-[stats]   total: 2167 views  (+27 since last report)
-[stats]      188 views  ·  Subscribe for more tips like this #psychology #relationship 
-[stats]      120 views  ·  Subscribe for more tips like this #psychology #relationship 
-[stats]      111 views  ·  Subscribe for more tips like this #psychology #relationship 
-  [muse] long: 18/18 scenes rewritten (nvidia)
-  [muse] shorts: reply shape rejected - keeping drafts
-  [muse] shorts: retrying 6 reject(s)
-  [muse] shorts: no reply - keeping drafts
-  [muse] shorts: 0/6 rewritten (nvidia)
-[43] script: Red Flags People Ignore (1074 words, hash bb4486d842)
-  [voice] local neural narration: 122 chunks (Kokoro af_heart)
-  [voice] polished: presence EQ + gentle compression
-[43] narration: 417s, 122 caption chunks
-[43] long video: 429s, 44.9MB
-  [voice] local neural narration: 24 chunks (Kokoro af_heart)
-  [voice] polished: presence EQ + gentle compression
-  [short 1] 51s, 24 cards, 6.8MB
-  [voice] local neural narration: 23 chunks (Kokoro af_heart)
-  [voice] polished: presence EQ + gentle compression
-  [short 2] 51s, 23 cards, 6.6MB
-  [voice] local neural narration: 26 chunks (Kokoro af_heart)
-  [voice] polished: presence EQ + gentle compression
-  [short 3] 53s, 26 cards, 6.6MB
-  [voice] local neural narration: 25 chunks (Kokoro af_heart)
-  [voice] polished: presence EQ + gentle compression
-  [short 4] 55s, 25 cards, 7.2MB
-  [voice] local neural narration: 22 chunks (Kokoro af_heart)
-  [voice] polished: presence EQ + gentle compression
-  [short 5] 51s, 22 cards, 6.7MB
-  [voice] local neural narration: 24 chunks (Kokoro af_heart)
-  [voice] polished: presence EQ + gentle compression
-  [short 6] 53s, 24 cards, 7.1MB
-[43] thumbnail audit: 4 words, 102px, 120px var 4868, 60KB — ok
-[43] thumbnail + 4 shorts ready
-  [youtube] uploaded long: MpR4TtgggrE (publishAt 2026-11-02T20:00:00+02:00)
-  [youtube] setting thumbnail thumbnail.png (59 KB) on MpR4TtgggrE
-  [youtube] thumbnail set
-  [youtube] uploaded short: DTJrqwlggyg (publishAt 2026-11-01T00:00:00+02:00)
-  [youtube] uploaded short: K7GsxCUNhcY (publishAt 2026-11-01T06:00:00+02:00)
-  [youtube] uploaded short: vllikY7A_js (publishAt 2026-11-01T12:00:00+02:00)
-  [youtube] uploaded short: ZcCIoSfhxBA (publishAt 2026-11-01T18:00:00+02:00)
-[43] text layer: {'captions_long': 'refused', 'comment': 'refused'}
-[playlist] 1 long video(s) not in the playlist yet
-[playlist] ep43 long added (MpR4TtgggrE)
-  ✓ episode 43: Red Flags People Ignore
-combination space: 273,308,412,123,694,080 stories — the factory never repeats
+[epnum] assigned 174 number(s); next new video is #175
+[epnum] 174 video(s) still to rename — 1680 units left, 50+100 per rename
+  [youtube] rename DTJrqwlggyg failed: {
+  "error": {
+    "code": 403,
+    "message": "Forbidden",
+    "errors": [
+      {
+        "message": "Forbidden",
+        "domain": "youtube.video",
+        "reason": "forbidden"
+      }
+    ]
+  }
+}
+  [youtube] rename 8stAqRkbZjw failed: {
+  "error": {
+    "code": 403,
+    "message": "Forbidden",
+    "errors": [
+      {
+        "message": "Forbidden",
+        "domain": "youtube.video",
+        "reason": "forbidden"
+      }
+    ]
+  }
+}
+  [youtube] rename ZcCIoSfhxBA failed: {
+  "error": {
+    "code": 403,
+    "message": "Forbidden",
+    "errors": [
+      {
+        "message": "Forbidden",
+        "domain": "youtube.video",
+        "reason": "forbidden"
+      }
+    ]
+  }
+}
+  [youtube] rename vllikY7A_js failed: {
+  "error": {
+    "code": 403,
+    "message": "Forbidden",
+    "errors": [
+      {
+        "message": "Forbidden",
+        "domain": "youtube.video",
+        "reason": "forbidden"
+      }
+    ]
+  }
+}
+  [youtube] rename K7GsxCUNhcY failed: {
+  "error": {
+    "code": 403,
+    "message": "Forbidden",
+    "errors": [
+      {
+        "message": "Forbidden",
+        "domain": "youtube.video",
+        "reason": "forbidden"
+      }
+    ]
+  }
+}
+  [youtube] rename MpR4TtgggrE failed: {
+  "error": {
+    "code": 403,
+    "message": "Forbidden",
+    "errors": [
+      {
+        "message": "Forbidden",
+        "domain": "youtube.video",
+        "reason": "forbidden"
+      }
+    ]
+  }
+}
+  [youtube] rename kMLTxIRnW4k failed: {
+  "error": {
+    "code": 403,
+    "message": "Forbidden",
+    "errors": [
+      {
+        "message": "Forbidden",
+        "domain": "youtube.video",
+        "reason": "forbidden"
+      }
+    ]
+  }
+}
+  [youtube] rename pupu3HGVAq4 failed: {
+  "error": {
+    "code": 403,
+    "message": "Forbidden",
+    "errors": [
+      {
+        "message": "Forbidden",
+        "domain": "youtube.video",
+        "reason": "forbidden"
+      }
+    ]
+  }
+}
+  [youtube] rename P-A5xb9zWp0 failed: {
+  "error": {
+    "code": 403,
+    "message": "Forbidden",
+    "errors": [
+      {
+        "message": "Forbidden",
+        "domain": "youtube.video",
+        "reason": "forbidden"
+      }
+    ]
+  }
+}
+  [youtube] rename hTlvr5JeMFA failed: {
+  "error": {
+    "code": 403,
+    "message": "Forbidden",
+    "errors": [
+      {
+        "message": "Forbidden",
+        "domain": "youtube.video",
+        "reason": "forbidden"
+      }
+    ]
+  }
+}
+  [youtube] rename H8WwqhC2lps failed: {
+  "error": {
+    "code": 403,
+    "message": "Forbidden",
+    "errors": [
+      {
+        "message": "Forbidden",
+        "domain": "youtube.video",
+        "reason": "forbidden"
+      }
+    ]
+  }
+}
+  [youtube] rename LeBL9nIqImE failed: {
+  "error": {
+    "code": 403,
+    "message": "Forbidden",
+    "errors": [
+      {
+        "message": "Forbidden",
+        "domain": "youtube.video",
+        "reason": "forbidden"
+      }
+    ]
+  }
+}
+  [youtube] rename qd8zAARYMug failed: {
+  "error": {
+    "code": 403,
+    "message": "Forbidden",
+    "errors": [
+      {
+        "message": "Forbidden",
+        "domain": "youtube.video",
+        "reason": "forbidden"
+      }
+    ]
+  }
+}
+  [youtube] rename 3y56J5YeLIY failed: {
+  "error": {
+    "code": 403,
+    "message": "Forbidden",
+    "errors": [
+      {
+        "message": "Forbidden",
+        "domain": "youtube.video",
+        "reason": "forbidden"
+      }
+    ]
+  }
+}
+  [youtube] rename 4H6czjbhkFQ failed: {
+  "error": {
+    "code": 403,
+    "message": "Forbidden",
+    "errors": [
+      {
+        "message": "Forbidden",
+        "domain": "youtube.video",
+        "reason": "forbidden"
+      }
+    ]
+  }
+}
+  [youtube] rename 2mqPih2P8Og failed: {
+  "error": {
+    "code": 403,
+    "message": "Forbidden",
+    "errors": [
+      {
+        "message": "Forbidden",
+        "domain": "youtube.video",
+        "reason": "forbidden"
+      }
+    ]
+  }
+}
+  [youtube] rename KizVVG31X3k failed: {
+  "error": {
+    "code": 403,
+    "message": "Forbidden",
+    "errors": [
+      {
+        "message": "Forbidden",
+        "domain": "youtube.video",
+        "reason": "forbidden"
+      }
+    ]
+  }
+}
+  [youtube] rename HrZRukOiLj0 failed: {
+  "error": {
+    "code": 403,
+    "message": "Forbidden",
+    "errors": [
+      {
+        "message": "Forbidden",
+        "domain": "youtube.video",
+        "reason": "forbidden"
+      }
+    ]
+  }
+}
+  [youtube] rename lEofPLtJjXo failed: {
+  "error": {
+    "code": 403,
+    "message": "Forbidden",
+    "errors": [
+      {
+        "message": "Forbidden",
+        "domain": "youtube.video",
+        "reason": "forbidden"
+      }
+    ]
+  }
+}
+  [youtube] rename vmKaS-OszfY failed: {
+  "error": {
+    "code": 403,
+    "message": "Forbidden",
+    "errors": [
+      {
+        "message": "Forbidden",
+        "domain": "youtube.video",
+        "reason": "forbidden"
+      }
+    ]
+  }
+}
+  [youtube] rename ckFpIjDtm6Y failed: {
+  "error": {
+    "code": 403,
+    "message": "Forbidden",
+    "errors": [
+      {
+        "message": "Forbidden",
+        "domain": "youtube.video",
+        "reason": "forbidden"
+      }
+    ]
+  }
+}
+  [youtube] rename nIIbWMlFxNk failed: {
+  "error": {
+    "code": 403,
+    "message": "Forbidden",
+    "errors": [
+      {
+        "message": "Forbidden",
+        "domain": "youtube.video",
+        "reason": "forbidden"
+      }
+    ]
+  }
+}
+  [youtube] rename -O03KVnaDEA failed: {
+  "error": {
+    "code": 403,
+    "message": "Forbidden",
+    "errors": [
+      {
+        "message": "Forbidden",
+        "domain": "youtube.video",
+        "reason": "forbidden"
+      }
+    ]
+  }
+}
+  [youtube] rename g5pLIe-_7Lg failed: {
+  "error": {
+    "code": 403,
+    "message": "Forbidden",
+    "errors": [
+      {
+        "message": "Forbidden",
+        "domain": "youtube.video",
+        "reason": "forbidden"
+      }
+    ]
+  }
+}
+  [youtube] rename MUz562UBHds failed: {
+  "error": {
+    "code": 403,
+    "message": "Forbidden",
+    "errors": [
+      {
+        "message": "Forbidden",
+        "domain": "youtube.video",
+        "reason": "forbidden"
+      }
+    ]
+  }
+}
+  [youtube] rename rMCN-eR4o1w failed: {
+  "error": {
+    "code": 403,
+    "message": "Forbidden",
+    "errors": [
+      {
+        "message": "Forbidden",
+        "domain": "youtube.video",
+        "reason": "forbidden"
+      }
+    ]
+  }
+}
+  [youtube] rename YOwPV_ZOJIo failed: {
+  "error": {
+    "code": 403,
+    "message": "Forbidden",
+    "errors": [
+      {
+        "message": "Forbidden",
+        "domain": "youtube.video",
+        "reason": "forbidden"
+      }
+    ]
+  }
+}
+  [youtube] rename 0TAm-jTjv_k failed: {
+  "error": {
+    "code": 403,
+    "message": "Forbidden",
+    "errors": [
+      {
+        "message": "Forbidden",
+        "domain": "youtube.video",
+        "reason": "forbidden"
+      }
+    ]
+  }
+}
+  [youtube] rename uQLG24dBSF4 failed: {
+  "error": {
+    "code": 403,
+    "message": "Forbidden",
+    "errors": [
+      {
+        "message": "Forbidden",
+        "domain": "youtube.video",
+        "reason": "forbidden"
+      }
+    ]
+  }
+}
+  [youtube] rename SZ92BTSOPI4 failed: {
+  "error": {
+    "code": 403,
+    "message": "Forbidden",
+    "errors": [
+      {
+        "message": "Forbidden",
+        "domain": "youtube.video",
+        "reason": "forbidden"
+      }
+    ]
+  }
+}
+  [youtube] rename D0q4kqGUBwY failed: {
+  "error": {
+    "code": 403,
+    "message": "Forbidden",
+    "errors": [
+      {
+        "message": "Forbidden",
+        "domain": "youtube.video",
+        "reason": "forbidden"
+      }
+    ]
+  }
+}
+  [youtube] rename M0emHThNAuU failed: {
+  "error": {
+    "code": 403,
+    "message": "Forbidden",
+    "errors": [
+      {
+        "message": "Forbidden",
+        "domain": "youtube.video",
+        "reason": "forbidden"
+      }
+    ]
+  }
+}
+  [youtube] rename FSE1QtkktQQ failed: {
+  "error": {
+    "code": 403,
+    "message": "Forbidden",
+    "errors": [
+      {
+        "message": "Forbidden",
+        "domain": "youtube.video",
+        "reason": "forbidden"
+      }
+    ]
+  }
+}
+  [youtube] rename z88LTELMIfk failed: {
+  "error": {
+    "code": 403,
+    "message": "Forbidden",
+    "errors": [
+      {
+        "message": "Forbidden",
+        "domain": "youtube.video",
+        "reason": "forbidden"
+      }
+    ]
+  }
+}
+  [youtube] rename CgJxjnJtD88 failed: {
+  "error": {
+    "code": 403,
+    "message": "Forbidden",
+    "errors": [
+      {
+        "message": "Forbidden",
+        "domain": "youtube.video",
+        "reason": "forbidden"
+      }
+    ]
+  }
+}
+  [youtube] rename ZV8xkQtpCmE failed: {
+  "error": {
+    "code": 403,
+    "message": "Forbidden",
+    "errors": [
+      {
+        "message": "Forbidden",
+        "domain": "youtube.video",
+        "reason": "forbidden"
+      }
+    ]
+  }
+}
+  [youtube] rename fRGtg20GL30 failed: {
+  "error": {
+    "code": 403,
+    "message": "Forbidden",
+    "errors": [
+      {
+        "message": "Forbidden",
+        "domain": "youtube.video",
+        "reason": "forbidden"
+      }
+    ]
+  }
+}
+  [youtube] rename I6tB1XKMBME failed: {
+  "error": {
+    "code": 403,
+    "message": "Forbidden",
+    "errors": [
+      {
+        "message": "Forbidden",
+        "domain": "youtube.video",
+        "reason": "forbidden"
+      }
+    ]
+  }
+}
+  [youtube] rename H-xJB2NnvgU failed: {
+  "error": {
+    "code": 403,
+    "message": "Forbidden",
+    "errors": [
+      {
+        "message": "Forbidden",
+        "domain": "youtube.video",
+        "reason": "forbidden"
+      }
+    ]
+  }
+}
+  [youtube] rename NXcZ9U7q1ns failed: {
+  "error": {
+    "code": 403,
+    "message": "Forbidden",
+    "errors": [
+      {
+        "message": "Forbidden",
+        "domain": "youtube.video",
+        "reason": "forbidden"
+      }
+    ]
+  }
+}
+  [youtube] rename u6wW5fij2e0 failed: {
+  "error": {
+    "code": 403,
+    "message": "Forbidden",
+    "errors": [
+      {
+        "message": "Forbidden",
+        "domain": "youtube.video",
+        "reason": "forbidden"
+      }
+    ]
+  }
+}
+  [youtube] rename kZHzlwyIfmc failed: {
+  "error": {
+    "code": 403,
+    "message": "Forbidden",
+    "errors": [
+      {
+        "message": "Forbidden",
+        "domain": "youtube.video",
+        "reason": "forbidden"
+      }
+    ]
+  }
+}
+  [youtube] rename HaXTuZiut1E failed: {
+  "error": {
+    "code": 403,
+    "message": "Forbidden",
+    "errors": [
+      {
+        "message": "Forbidden",
+        "domain": "youtube.video",
+        "reason": "forbidden"
+      }
+    ]
+  }
+}
+  [youtube] rename mCS8ZdkfJ7s failed: {
+  "error": {
+    "code": 403,
+    "message": "Forbidden",
+    "errors": [
+      {
+        "message": "Forbidden",
+        "domain": "youtube.video",
+        "reason": "forbidden"
+      }
+    ]
+  }
+}
+  [youtube] rename OgVHFsF0n5w failed: {
+  "error": {
+    "code": 403,
+    "message": "Forbidden",
+    "errors": [
+      {
+        "message": "Forbidden",
+        "domain": "youtube.video",
+        "reason": "forbidden"
+      }
+    ]
+  }
+}
+  [youtube] rename iSmlOehr4ms failed: {
+  "error": {
+    "code": 403,
+    "message": "Forbidden",
+    "errors": [
+      {
+        "message": "Forbidden",
+        "domain": "youtube.video",
+        "reason": "forbidden"
+      }
+    ]
+  }
+}
+  [youtube] rename h9QigC3YiN4 failed: {
+  "error": {
+    "code": 403,
+    "message": "Forbidden",
+    "errors": [
+      {
+        "message": "Forbidden",
+        "domain": "youtube.video",
+        "reason": "forbidden"
+      }
+    ]
+  }
+}
+  [youtube] rename kbhi_VMujlo failed: {
+  "error": {
+    "code": 403,
+    "message": "Forbidden",
+    "errors": [
+      {
+        "message": "Forbidden",
+        "domain": "youtube.video",
+        "reason": "forbidden"
+      }
+    ]
+  }
+}
+  [youtube] rename FkyJmlS6KOs failed: {
+  "error": {
+    "code": 403,
+    "message": "Forbidden",
+    "errors": [
+      {
+        "message": "Forbidden",
+        "domain": "youtube.video",
+        "reason": "forbidden"
+      }
+    ]
+  }
+}
+  [youtube] rename 2JPQxld1sbo failed: {
+  "error": {
+    "code": 403,
+    "message": "Forbidden",
+    "errors": [
+      {
+        "message": "Forbidden",
+        "domain": "youtube.video",
+        "reason": "forbidden"
+      }
+    ]
+  }
+}
+  [youtube] rename yr1nz2gvsts failed: {
+  "error": {
+    "code": 403,
+    "message": "Forbidden",
+    "errors": [
+      {
+        "message": "Forbidden",
+        "domain": "youtube.video",
+        "reason": "forbidden"
+      }
+    ]
+  }
+}
+  [youtube] rename 0hwlRPpsyYk failed: {
+  "error": {
+    "code": 403,
+    "message": "Forbidden",
+    "errors": [
+      {
+        "message": "Forbidden",
+        "domain": "youtube.video",
+        "reason": "forbidden"
+      }
+    ]
+  }
+}
+  [youtube] rename -TaBXAnUPqo failed: {
+  "error": {
+    "code": 403,
+    "message": "Forbidden",
+    "errors": [
+      {
+        "message": "Forbidden",
+        "domain": "youtube.video",
+        "reason": "forbidden"
+      }
+    ]
+  }
+}
+  [youtube] rename puZxniQgcrE failed: {
+  "error": {
+    "code": 403,
+    "message": "Forbidden",
+    "errors": [
+      {
+        "message": "Forbidden",
+        "domain": "youtube.video",
+        "reason": "forbidden"
+      }
+    ]
+  }
+}
+  [youtube] rename KjIw9uIUNB4 failed: {
+  "error": {
+    "code": 403,
+    "message": "Forbidden",
+    "errors": [
+      {
+        "message": "Forbidden",
+        "domain": "youtube.video",
+        "reason": "forbidden"
+      }
+    ]
+  }
+}
+  [youtube] rename 7ztyL7UKDmQ failed: {
+  "error": {
+    "code": 403,
+    "message": "Forbidden",
+    "errors": [
+      {
+        "message": "Forbidden",
+        "domain": "youtube.video",
+        "reason": "forbidden"
+      }
+    ]
+  }
+}
+  [youtube] rename pjUAw7aAdlw failed: {
+  "error": {
+    "code": 403,
+    "message": "Forbidden",
+    "errors": [
+      {
+        "message": "Forbidden",
+        "domain": "youtube.video",
+        "reason": "forbidden"
+      }
+    ]
+  }
+}
+  [youtube] rename SOD5eQRXnhE failed: {
+  "error": {
+    "code": 403,
+    "message": "Forbidden",
+    "errors": [
+      {
+        "message": "Forbidden",
+        "domain": "youtube.video",
+        "reason": "forbidden"
+      }
+    ]
+  }
+}
+  [youtube] rename b1Gd-ermBQQ failed: {
+  "error": {
+    "code": 403,
+    "message": "Forbidden",
+    "errors": [
+      {
+        "message": "Forbidden",
+        "domain": "youtube.video",
+        "reason": "forbidden"
+      }
+    ]
+  }
+}
+  [youtube] rename CGaiyBIYsWs failed: {
+  "error": {
+    "code": 403,
+    "message": "Forbidden",
+    "errors": [
+      {
+        "message": "Forbidden",
+        "domain": "youtube.video",
+        "reason": "forbidden"
+      }
+    ]
+  }
+}
+  [youtube] rename z4Jm-cn-LeA failed: {
+  "error": {
+    "code": 403,
+    "message": "Forbidden",
+    "errors": [
+      {
+        "message": "Forbidden",
+        "domain": "youtube.video",
+        "reason": "forbidden"
+      }
+    ]
+  }
+}
+  [youtube] rename y_XhaC-aTgY failed: {
+  "error": {
+    "code": 403,
+    "message": "Forbidden",
+    "errors": [
+      {
+        "message": "Forbidden",
+        "domain": "youtube.video",
+        "reason": "forbidden"
+      }
+    ]
+  }
+}
+  [youtube] rename 9Phpq9_BAiw failed: {
+  "error": {
+    "code": 403,
+    "message": "Forbidden",
+    "errors": [
+      {
+        "message": "Forbidden",
+        "domain": "youtube.video",
+        "reason": "forbidden"
+      }
+    ]
+  }
+}
+  [youtube] rename WPk0ESfr_XY failed: {
+  "error": {
+    "code": 403,
+    "message": "Forbidden",
+    "errors": [
+      {
+        "message": "Forbidden",
+        "domain": "youtube.video",
+        "reason": "forbidden"
+      }
+    ]
+  }
+}
+  [youtube] rename 7FjE_HiDCpg failed: {
+  "error": {
+    "code": 403,
+    "message": "Forbidden",
+    "errors": [
+      {
+        "message": "Forbidden",
+        "domain": "youtube.video",
+        "reason": "forbidden"
+      }
+    ]
+  }
+}
+  [youtube] rename ARDgnFYpUB4 failed: {
+  "error": {
+    "code": 403,
+    "message": "Forbidden",
+    "errors": [
+      {
+        "message": "Forbidden",
+        "domain": "youtube.video",
+        "reason": "forbidden"
+      }
+    ]
+  }
+}
+  [youtube] rename 0A9ay7PHgik failed: {
+  "error": {
+    "code": 403,
+    "message": "Forbidden",
+    "errors": [
+      {
+        "message": "Forbidden",
+        "domain": "youtube.video",
+        "reason": "forbidden"
+      }
+    ]
+  }
+}
+  [youtube] rename R3tncS1qf_4 failed: {
+  "error": {
+    "code": 403,
+    "message": "Forbidden",
+    "errors": [
+      {
+        "message": "Forbidden",
+        "domain": "youtube.video",
+        "reason": "forbidden"
+      }
+    ]
+  }
+}
+  [youtube] rename xpBpBSMHHO8 failed: {
+  "error": {
+    "code": 403,
+    "message": "Forbidden",
+    "errors": [
+      {
+        "message": "Forbidden",
+        "domain": "youtube.video",
+        "reason": "forbidden"
+      }
+    ]
+  }
+}
+  [youtube] rename HXga6EY7axk failed: {
+  "error": {
+    "code": 403,
+    "message": "Forbidden",
+    "errors": [
+      {
+        "message": "Forbidden",
+        "domain": "youtube.video",
+        "reason": "forbidden"
+      }
+    ]
+  }
+}
+  [youtube] rename J8ZVtj40uLg failed: {
+  "error": {
+    "code": 403,
+    "message": "Forbidden",
+    "errors": [
+      {
+        "message": "Forbidden",
+        "domain": "youtube.video",
+        "reason": "forbidden"
+      }
+    ]
+  }
+}
+  [youtube] rename paDwJgf-RJA failed: {
+  "error": {
+    "code": 403,
+    "message": "Forbidden",
+    "errors": [
+      {
+        "message": "Forbidden",
+        "domain": "youtube.video",
+        "reason": "forbidden"
+      }
+    ]
+  }
+}
+  [youtube] rename Nwa-iPnEtW4 failed: {
+  "error": {
+    "code": 403,
+    "message": "Forbidden",
+    "errors": [
+      {
+        "message": "Forbidden",
+        "domain": "youtube.video",
+        "reason": "forbidden"
+      }
+    ]
+  }
+}
+  [youtube] rename EUk4eyrsG_A failed: {
+  "error": {
+    "code": 403,
+    "message": "Forbidden",
+    "errors": [
+      {
+        "message": "Forbidden",
+        "domain": "youtube.video",
+        "reason": "forbidden"
+      }
+    ]
+  }
+}
+  [youtube] rename Oom5CTar8AI failed: {
+  "error": {
+    "code": 403,
+    "message": "Forbidden",
+    "errors": [
+      {
+        "message": "Forbidden",
+        "domain": "youtube.video",
+        "reason": "forbidden"
+      }
+    ]
+  }
+}
+  [youtube] rename OUwbUOC5z50 failed: {
+  "error": {
+    "code": 403,
+    "message": "Forbidden",
+    "errors": [
+      {
+        "message": "Forbidden",
+        "domain": "youtube.video",
+        "reason": "forbidden"
+      }
+    ]
+  }
+}
+  [youtube] rename XWFGj1Jqroc failed: {
+  "error": {
+    "code": 403,
+    "message": "Forbidden",
+    "errors": [
+      {
+        "message": "Forbidden",
+        "domain": "youtube.video",
+        "reason": "forbidden"
+      }
+    ]
+  }
+}
+  [youtube] rename rBcCY3QpTq8 failed: {
+  "error": {
+    "code": 403,
+    "message": "Forbidden",
+    "errors": [
+      {
+        "message": "Forbidden",
+        "domain": "youtube.video",
+        "reason": "forbidden"
+      }
+    ]
+  }
+}
+  [youtube] rename 65eOn98dpLw failed: {
+  "error": {
+    "code": 403,
+    "message": "Forbidden",
+    "errors": [
+      {
+        "message": "Forbidden",
+        "domain": "youtube.video",
+        "reason": "forbidden"
+      }
+    ]
+  }
+}
+  [youtube] rename 3lgFu7TlRD4 failed: {
+  "error": {
+    "code": 403,
+    "message": "Forbidden",
+    "errors": [
+      {
+        "message": "Forbidden",
+        "domain": "youtube.video",
+        "reason": "forbidden"
+      }
+    ]
+  }
+}
+  [youtube] rename ey4SiEoqsFI failed: {
+  "error": {
+    "code": 403,
+    "message": "Forbidden",
+    "errors": [
+      {
+        "message": "Forbidden",
+        "domain": "youtube.video",
+        "reason": "forbidden"
+      }
+    ]
+  }
+}
+  [youtube] rename ZmbFvBJjBVQ failed: {
+  "error": {
+    "code": 403,
+    "message": "Forbidden",
+    "errors": [
+      {
+        "message": "Forbidden",
+        "domain": "youtube.video",
+        "reason": "forbidden"
+      }
+    ]
+  }
+}
+  [youtube] rename bBCNumrSosA failed: {
+  "error": {
+    "code": 403,
+    "message": "Forbidden",
+    "errors": [
+      {
+        "message": "Forbidden",
+        "domain": "youtube.video",
+        "reason": "forbidden"
+      }
+    ]
+  }
+}
+  [youtube] rename orbgL2cMeLg failed: {
+  "error": {
+    "code": 403,
+    "message": "Forbidden",
+    "errors": [
+      {
+        "message": "Forbidden",
+        "domain": "youtube.video",
+        "reason": "forbidden"
+      }
+    ]
+  }
+}
+  [youtube] rename _N20Lyredqs failed: {
+  "error": {
+    "code": 403,
+    "message": "Forbidden",
+    "errors": [
+      {
+        "message": "Forbidden",
+        "domain": "youtube.video",
+        "reason": "forbidden"
+      }
+    ]
+  }
+}
+  [youtube] rename xmYP9w32f7o failed: {
+  "error": {
+    "code": 403,
+    "message": "Forbidden",
+    "errors": [
+      {
+        "message": "Forbidden",
+        "domain": "youtube.video",
+        "reason": "forbidden"
+      }
+    ]
+  }
+}
+  [youtube] rename I_UEbRXrDmw failed: {
+  "error": {
+    "code": 403,
+    "message": "Forbidden",
+    "errors": [
+      {
+        "message": "Forbidden",
+        "domain": "youtube.video",
+        "reason": "forbidden"
+      }
+    ]
+  }
+}
+  [youtube] rename R9EuY6Fk1SE failed: {
+  "error": {
+    "code": 403,
+    "message": "Forbidden",
+    "errors": [
+      {
+        "message": "Forbidden",
+        "domain": "youtube.video",
+        "reason": "forbidden"
+      }
+    ]
+  }
+}
+  [youtube] rename rZmcYgpuTeY failed: {
+  "error": {
+    "code": 403,
+    "message": "Forbidden",
+    "errors": [
+      {
+        "message": "Forbidden",
+        "domain": "youtube.video",
+        "reason": "forbidden"
+      }
+    ]
+  }
+}
+  [youtube] rename a5KbqMoOxCY failed: {
+  "error": {
+    "code": 403,
+    "message": "Forbidden",
+    "errors": [
+      {
+        "message": "Forbidden",
+        "domain": "youtube.video",
+        "reason": "forbidden"
+      }
+    ]
+  }
+}
+  [youtube] rename zzbuQEX4mIY failed: {
+  "error": {
+    "code": 403,
+    "message": "Forbidden",
+    "errors": [
+      {
+        "message": "Forbidden",
+        "domain": "youtube.video",
+        "reason": "forbidden"
+      }
+    ]
+  }
+}
+  [youtube] rename l-dL8a7S0n8 failed: {
+  "error": {
+    "code": 403,
+    "message": "Forbidden",
+    "errors": [
+      {
+        "message": "Forbidden",
+        "domain": "youtube.video",
+        "reason": "forbidden"
+      }
+    ]
+  }
+}
+  [youtube] rename reUGaXNmCj0 failed: {
+  "error": {
+    "code": 403,
+    "message": "Forbidden",
+    "errors": [
+      {
+        "message": "Forbidden",
+        "domain": "youtube.video",
+        "reason": "forbidden"
+      }
+    ]
+  }
+}
+  [youtube] rename 6pTMjsED0VY failed: {
+  "error": {
+    "code": 403,
+    "message": "Forbidden",
+    "errors": [
+      {
+        "message": "Forbidden",
+        "domain": "youtube.video",
+        "reason": "forbidden"
+      }
+    ]
+  }
+}
+  [youtube] rename sa-mzDthuJk failed: {
+  "error": {
+    "code": 403,
+    "message": "Forbidden",
+    "errors": [
+      {
+        "message": "Forbidden",
+        "domain": "youtube.video",
+        "reason": "forbidden"
+      }
+    ]
+  }
+}
+  [youtube] rename FLsNtF1DBCE failed: {
+  "error": {
+    "code": 403,
+    "message": "Forbidden",
+    "errors": [
+      {
+        "message": "Forbidden",
+        "domain": "youtube.video",
+        "reason": "forbidden"
+      }
+    ]
+  }
+}
+  [youtube] rename z5TxIROSwXY failed: {
+  "error": {
+    "code": 403,
+    "message": "Forbidden",
+    "errors": [
+      {
+        "message": "Forbidden",
+        "domain": "youtube.video",
+        "reason": "forbidden"
+      }
+    ]
+  }
+}
+  [youtube] rename QlrDJJ-5IQc failed: {
+  "error": {
+    "code": 403,
+    "message": "Forbidden",
+    "errors": [
+      {
+        "message": "Forbidden",
+        "domain": "youtube.video",
+        "reason": "forbidden"
+      }
+    ]
+  }
+}
+  [youtube] rename xJNNTbamvJk failed: {
+  "error": {
+    "code": 403,
+    "message": "Forbidden",
+    "errors": [
+      {
+        "message": "Forbidden",
+        "domain": "youtube.video",
+        "reason": "forbidden"
+      }
+    ]
+  }
+}
+  [youtube] rename AV4KJybKLAA failed: {
+  "error": {
+    "code": 403,
+    "message": "Forbidden",
+    "errors": [
+      {
+        "message": "Forbidden",
+        "domain": "youtube.video",
+        "reason": "forbidden"
+      }
+    ]
+  }
+}
+  [youtube] rename xoJJLIANTVk failed: {
+  "error": {
+    "code": 403,
+    "message": "Forbidden",
+    "errors": [
+      {
+        "message": "Forbidden",
+        "domain": "youtube.video",
+        "reason": "forbidden"
+      }
+    ]
+  }
+}
+  [youtube] rename Kke2b8XAUrc failed: {
+  "error": {
+    "code": 403,
+    "message": "Forbidden",
+    "errors": [
+      {
+        "message": "Forbidden",
+        "domain": "youtube.video",
+        "reason": "forbidden"
+      }
+    ]
+  }
+}
+  [youtube] rename qKuIhuET60Q failed: {
+  "error": {
+    "code": 403,
+    "message": "Forbidden",
+    "errors": [
+      {
+        "message": "Forbidden",
+        "domain": "youtube.video",
+        "reason": "forbidden"
+      }
+    ]
+  }
+}
+  [youtube] rename vrhDMCOHeCM failed: {
+  "error": {
+    "code": 403,
+    "message": "Forbidden",
+    "errors": [
+      {
+        "message": "Forbidden",
+        "domain": "youtube.video",
+        "reason": "forbidden"
+      }
+    ]
+  }
+}
+  [youtube] rename uOOhcB6-YBY failed: {
+  "error": {
+    "code": 403,
+    "message": "Forbidden",
+    "errors": [
+      {
+        "message": "Forbidden",
+        "domain": "youtube.video",
+        "reason": "forbidden"
+      }
+    ]
+  }
+}
+  [youtube] rename D0zJvuBOdUQ failed: {
+  "error": {
+    "code": 403,
+    "message": "Forbidden",
+    "errors": [
+      {
+        "message": "Forbidden",
+        "domain": "youtube.video",
+        "reason": "forbidden"
+      }
+    ]
+  }
+}
+  [youtube] rename AEzUpgRNo24 failed: {
+  "error": {
+    "code": 403,
+    "message": "Forbidden",
+    "errors": [
+      {
+        "message": "Forbidden",
+        "domain": "youtube.video",
+        "reason": "forbidden"
+      }
+    ]
+  }
+}
+  [youtube] rename 9STiEcejZts failed: {
+  "error": {
+    "code": 403,
+    "message": "Forbidden",
+    "errors": [
+      {
+        "message": "Forbidden",
+        "domain": "youtube.video",
+        "reason": "forbidden"
+      }
+    ]
+  }
+}
+  [youtube] rename 3BY2x38hY8w failed: {
+  "error": {
+    "code": 403,
+    "message": "Forbidden",
+    "errors": [
+      {
+        "message": "Forbidden",
+        "domain": "youtube.video",
+        "reason": "forbidden"
+      }
+    ]
+  }
+}
+  [youtube] rename 6gnLZ_47Bko failed: {
+  "error": {
+    "code": 403,
+    "message": "Forbidden",
+    "errors": [
+      {
+        "message": "Forbidden",
+        "domain": "youtube.video",
+        "reason": "forbidden"
+      }
+    ]
+  }
+}
+  [youtube] rename wGBIp_obHz0 failed: {
+  "error": {
+    "code": 403,
+    "message": "Forbidden",
+    "errors": [
+      {
+        "message": "Forbidden",
+        "domain": "youtube.video",
+        "reason": "forbidden"
+      }
+    ]
+  }
+}
+  [youtube] rename cMnefUlDjG0 failed: {
+  "error": {
+    "code": 403,
+    "message": "Forbidden",
+    "errors": [
+      {
+        "message": "Forbidden",
+        "domain": "youtube.video",
+        "reason": "forbidden"
+      }
+    ]
+  }
+}
+  [youtube] rename wnhUBSBCweg failed: {
+  "error": {
+    "code": 403,
+    "message": "Forbidden",
+    "errors": [
+      {
+        "message": "Forbidden",
+        "domain": "youtube.video",
+        "reason": "forbidden"
+      }
+    ]
+  }
+}
+  [youtube] rename C-9pvasCZDY failed: {
+  "error": {
+    "code": 403,
+    "message": "Forbidden",
+    "errors": [
+      {
+        "message": "Forbidden",
+        "domain": "youtube.video",
+        "reason": "forbidden"
+      }
+    ]
+  }
+}
+  [youtube] rename 7cNLdF5VNmY failed: {
+  "error": {
+    "code": 403,
+    "message": "Forbidden",
+    "errors": [
+      {
+        "message": "Forbidden",
+        "domain": "youtube.video",
+        "reason": "forbidden"
+      }
+    ]
+  }
+}
+  [youtube] rename QIU2EQ99Ejg failed: {
+  "error": {
+    "code": 403,
+    "message": "Forbidden",
+    "errors": [
+      {
+        "message": "Forbidden",
+        "domain": "youtube.video",
+        "reason": "forbidden"
+      }
+    ]
+  }
+}
+  [youtube] rename ok5iJVUFjsg failed: {
+  "error": {
+    "code": 403,
+    "message": "Forbidden",
+    "errors": [
+      {
+        "message": "Forbidden",
+        "domain": "youtube.video",
+        "reason": "forbidden"
+      }
+    ]
+  }
+}
+  [youtube] rename WY-8CRAIEpY failed: {
+  "error": {
+    "code": 403,
+    "message": "Forbidden",
+    "errors": [
+      {
+        "message": "Forbidden",
+        "domain": "youtube.video",
+        "reason": "forbidden"
+      }
+    ]
+  }
+}
+  [youtube] rename cPHiDsx-92g failed: {
+  "error": {
+    "code": 403,
+    "message": "Forbidden",
+    "errors": [
+      {
+        "message": "Forbidden",
+        "domain": "youtube.video",
+        "reason": "forbidden"
+      }
+    ]
+  }
+}
+  [youtube] rename Ze0INcnm6G4 failed: {
+  "error": {
+    "code": 403,
+    "message": "Forbidden",
+    "errors": [
+      {
+        "message": "Forbidden",
+        "domain": "youtube.video",
+        "reason": "forbidden"
+      }
+    ]
+  }
+}
+  [youtube] rename 9okYnbx-WIY failed: {
+  "error": {
+    "code": 403,
+    "message": "Forbidden",
+    "errors": [
+      {
+        "message": "Forbidden",
+        "domain": "youtube.video",
+        "reason": "forbidden"
+      }
+    ]
+  }
+}
+  [youtube] rename JwtqNVDtuLE failed: {
+  "error": {
+    "code": 403,
+    "message": "Forbidden",
+    "errors": [
+      {
+        "message": "Forbidden",
+        "domain": "youtube.video",
+        "reason": "forbidden"
+      }
+    ]
+  }
+}
+  [youtube] rename IYRX-R2hRDs failed: {
+  "error": {
+    "code": 403,
+    "message": "Forbidden",
+    "errors": [
+      {
+        "message": "Forbidden",
+        "domain": "youtube.video",
+        "reason": "forbidden"
+      }
+    ]
+  }
+}
+  [youtube] rename wuDMgIJeUMw failed: {
+  "error": {
+    "code": 403,
+    "message": "Forbidden",
+    "errors": [
+      {
+        "message": "Forbidden",
+        "domain": "youtube.video",
+        "reason": "forbidden"
+      }
+    ]
+  }
+}
+  [youtube] rename ITMeCzxJV8I failed: {
+  "error": {
+    "code": 403,
+    "message": "Forbidden",
+    "errors": [
+      {
+        "message": "Forbidden",
+        "domain": "youtube.video",
+        "reason": "forbidden"
+      }
+    ]
+  }
+}
+  [youtube] rename Xe0be2KbpWE failed: {
+  "error": {
+    "code": 403,
+    "message": "Forbidden",
+    "errors": [
+      {
+        "message": "Forbidden",
+        "domain": "youtube.video",
+        "reason": "forbidden"
+      }
+    ]
+  }
+}
+  [youtube] rename 7KhHlXIUN7k failed: {
+  "error": {
+    "code": 403,
+    "message": "Forbidden",
+    "errors": [
+      {
+        "message": "Forbidden",
+        "domain": "youtube.video",
+        "reason": "forbidden"
+      }
+    ]
+  }
+}
+  [youtube] rename jOebUbltVQI failed: {
+  "error": {
+    "code": 403,
+    "message": "Forbidden",
+    "errors": [
+      {
+        "message": "Forbidden",
+        "domain": "youtube.video",
+        "reason": "forbidden"
+      }
+    ]
+  }
+}
+  [youtube] rename EYP4N0ZEMNo failed: {
+  "error": {
+    "code": 403,
+    "message": "Forbidden",
+    "errors": [
+      {
+        "message": "Forbidden",
+        "domain": "youtube.video",
+        "reason": "forbidden"
+      }
+    ]
+  }
+}
+  [youtube] rename peGtkMIl7LI failed: {
+  "error": {
+    "code": 403,
+    "message": "Forbidden",
+    "errors": [
+      {
+        "message": "Forbidden",
+        "domain": "youtube.video",
+        "reason": "forbidden"
+      }
+    ]
+  }
+}
+  [youtube] rename Q9rx7zBltoQ failed: {
+  "error": {
+    "code": 403,
+    "message": "Forbidden",
+    "errors": [
+      {
+        "message": "Forbidden",
+        "domain": "youtube.video",
+        "reason": "forbidden"
+      }
+    ]
+  }
+}
+  [youtube] rename vhZWjuHPpws failed: {
+  "error": {
+    "code": 403,
+    "message": "Forbidden",
+    "errors": [
+      {
+        "message": "Forbidden",
+        "domain": "youtube.video",
+        "reason": "forbidden"
+      }
+    ]
+  }
+}
+  [youtube] rename pFsqkgWkXEA failed: {
+  "error": {
+    "code": 403,
+    "message": "Forbidden",
+    "errors": [
+      {
+        "message": "Forbidden",
+        "domain": "youtube.video",
+        "reason": "forbidden"
+      }
+    ]
+  }
+}
+  [youtube] rename y_9VDnn9-7k failed: {
+  "error": {
+    "code": 403,
+    "message": "Forbidden",
+    "errors": [
+      {
+        "message": "Forbidden",
+        "domain": "youtube.video",
+        "reason": "forbidden"
+      }
+    ]
+  }
+}
+  [youtube] rename xRVhNWoBfn4 failed: {
+  "error": {
+    "code": 403,
+    "message": "Forbidden",
+    "errors": [
+      {
+        "message": "Forbidden",
+        "domain": "youtube.video",
+        "reason": "forbidden"
+      }
+    ]
+  }
+}
+  [youtube] rename 4eYAQRFA3Uk failed: {
+  "error": {
+    "code": 403,
+    "message": "Forbidden",
+    "errors": [
+      {
+        "message": "Forbidden",
+        "domain": "youtube.video",
+        "reason": "forbidden"
+      }
+    ]
+  }
+}
+  [youtube] rename yr5iRQg5U3o failed: {
+  "error": {
+    "code": 403,
+    "message": "Forbidden",
+    "errors": [
+      {
+        "message": "Forbidden",
+        "domain": "youtube.video",
+        "reason": "forbidden"
+      }
+    ]
+  }
+}
+  [youtube] rename qKXpRXZHuvs failed: {
+  "error": {
+    "code": 403,
+    "message": "Forbidden",
+    "errors": [
+      {
+        "message": "Forbidden",
+        "domain": "youtube.video",
+        "reason": "forbidden"
+      }
+    ]
+  }
+}
+  [youtube] rename cPlgv-IXN-w failed: {
+  "error": {
+    "code": 403,
+    "message": "Forbidden",
+    "errors": [
+      {
+        "message": "Forbidden",
+        "domain": "youtube.video",
+        "reason": "forbidden"
+      }
+    ]
+  }
+}
+  [youtube] rename NEpaHpN_z2Y failed: {
+  "error": {
+    "code": 403,
+    "message": "Forbidden",
+    "errors": [
+      {
+        "message": "Forbidden",
+        "domain": "youtube.video",
+        "reason": "forbidden"
+      }
+    ]
+  }
+}
+  [youtube] rename HpRLqiAR7ks failed: {
+  "error": {
+    "code": 403,
+    "message": "Forbidden",
+    "errors": [
+      {
+        "message": "Forbidden",
+        "domain": "youtube.video",
+        "reason": "forbidden"
+      }
+    ]
+  }
+}
+  [youtube] rename 8Dg8yh488N8 failed: {
+  "error": {
+    "code": 403,
+    "message": "Forbidden",
+    "errors": [
+      {
+        "message": "Forbidden",
+        "domain": "youtube.video",
+        "reason": "forbidden"
+      }
+    ]
+  }
+}
+  [youtube] rename 4CsBqeLACzY failed: {
+  "error": {
+    "code": 403,
+    "message": "Forbidden",
+    "errors": [
+      {
+        "message": "Forbidden",
+        "domain": "youtube.video",
+        "reason": "forbidden"
+      }
+    ]
+  }
+}
+  [youtube] rename 57GaUcN6Xfo failed: {
+  "error": {
+    "code": 403,
+    "message": "Forbidden",
+    "errors": [
+      {
+        "message": "Forbidden",
+        "domain": "youtube.video",
+        "reason": "forbidden"
+      }
+    ]
+  }
+}
+  [youtube] rename aC8V7uEF1zA failed: {
+  "error": {
+    "code": 403,
+    "message": "Forbidden",
+    "errors": [
+      {
+        "message": "Forbidden",
+        "domain": "youtube.video",
+        "reason": "forbidden"
+      }
+    ]
+  }
+}
+  [youtube] rename ZwoNP3tA_zI failed: {
+  "error": {
+    "code": 403,
+    "message": "Forbidden",
+    "errors": [
+      {
+        "message": "Forbidden",
+        "domain": "youtube.video",
+        "reason": "forbidden"
+      }
+    ]
+  }
+}
+  [youtube] rename ElMNPkRma0Q failed: {
+  "error": {
+    "code": 403,
+    "message": "Forbidden",
+    "errors": [
+      {
+        "message": "Forbidden",
+        "domain": "youtube.video",
+        "reason": "forbidden"
+      }
+    ]
+  }
+}
+  [youtube] rename 5wQ0wmS7GHQ failed: {
+  "error": {
+    "code": 403,
+    "message": "Forbidden",
+    "errors": [
+      {
+        "message": "Forbidden",
+        "domain": "youtube.video",
+        "reason": "forbidden"
+      }
+    ]
+  }
+}
+  [youtube] rename ISod_uguaR8 failed: {
+  "error": {
+    "code": 403,
+    "message": "Forbidden",
+    "errors": [
+      {
+        "message": "Forbidden",
+        "domain": "youtube.video",
+        "reason": "forbidden"
+      }
+    ]
+  }
+}
+  [youtube] rename HjkTdKjH49s failed: {
+  "error": {
+    "code": 403,
+    "message": "Forbidden",
+    "errors": [
+      {
+        "message": "Forbidden",
+        "domain": "youtube.video",
+        "reason": "forbidden"
+      }
+    ]
+  }
+}
+  [youtube] rename L7DJ2Nu2uo8 failed: {
+  "error": {
+    "code": 403,
+    "message": "Forbidden",
+    "errors": [
+      {
+        "message": "Forbidden",
+        "domain": "youtube.video",
+        "reason": "forbidden"
+      }
+    ]
+  }
+}
+  [youtube] rename GRna0qAiWEg failed: {
+  "error": {
+    "code": 403,
+    "message": "Forbidden",
+    "errors": [
+      {
+        "message": "Forbidden",
+        "domain": "youtube.video",
+        "reason": "forbidden"
+      }
+    ]
+  }
+}
+  [youtube] rename Mw2D_4ot0G8 failed: {
+  "error": {
+    "code": 403,
+    "message": "Forbidden",
+    "errors": [
+      {
+        "message": "Forbidden",
+        "domain": "youtube.video",
+        "reason": "forbidden"
+      }
+    ]
+  }
+}
+  [youtube] rename BJrBRuMoosA failed: {
+  "error": {
+    "code": 403,
+    "message": "Forbidden",
+    "errors": [
+      {
+        "message": "Forbidden",
+        "domain": "youtube.video",
+        "reason": "forbidden"
+      }
+    ]
+  }
+}
+  [youtube] rename 8m3PZ44NW2c failed: {
+  "error": {
+    "code": 403,
+    "message": "Forbidden",
+    "errors": [
+      {
+        "message": "Forbidden",
+        "domain": "youtube.video",
+        "reason": "forbidden"
+      }
+    ]
+  }
+}
+  [youtube] rename n_GOahvID_Y failed: {
+  "error": {
+    "code": 403,
+    "message": "Forbidden",
+    "errors": [
+      {
+        "message": "Forbidden",
+        "domain": "youtube.video",
+        "reason": "forbidden"
+      }
+    ]
+  }
+}
+  [youtube] rename git-4p8E9xY failed: {
+  "error": {
+    "code": 403,
+    "message": "Forbidden",
+    "errors": [
+      {
+        "message": "Forbidden",
+        "domain": "youtube.video",
+        "reason": "forbidden"
+      }
+    ]
+  }
+}
+  [youtube] rename fkFhtGfsx_0 failed: {
+  "error": {
+    "code": 403,
+    "message": "Forbidden",
+    "errors": [
+      {
+        "message": "Forbidden",
+        "domain": "youtube.video",
+        "reason": "forbidden"
+      }
+    ]
+  }
+}
+  [youtube] rename k8PzqtNVynI failed: {
+  "error": {
+    "code": 403,
+    "message": "Forbidden",
+    "errors": [
+      {
+        "message": "Forbidden",
+        "domain": "youtube.video",
+        "reason": "forbidden"
+      }
+    ]
+  }
+}
+  [youtube] rename DA0tiB7QrlY failed: {
+  "error": {
+    "code": 403,
+    "message": "Forbidden",
+    "errors": [
+      {
+        "message": "Forbidden",
+        "domain": "youtube.video",
+        "reason": "forbidden"
+      }
+    ]
+  }
+}
+  [youtube] rename WSM7pIy8kdE failed: {
+  "error": {
+    "code": 403,
+    "message": "Forbidden",
+    "errors": [
+      {
+        "message": "Forbidden",
+        "domain": "youtube.video",
+        "reason": "forbidden"
+      }
+    ]
+  }
+}
+  [youtube] rename pSRPxXnyAZg failed: {
+  "error": {
+    "code": 403,
+    "message": "Forbidden",
+    "errors": [
+      {
+        "message": "Forbidden",
+        "domain": "youtube.video",
+        "reason": "forbidden"
+      }
+    ]
+  }
+}
+  [youtube] rename Mir11YcoWAw failed: {
+  "error": {
+    "code": 403,
+    "message": "Forbidden",
+    "errors": [
+      {
+        "message": "Forbidden",
+        "domain": "youtube.video",
+        "reason": "forbidden"
+      }
+    ]
+  }
+}
+  [youtube] rename DVAoVnK5FtA failed: {
+  "error": {
+    "code": 403,
+    "message": "Forbidden",
+    "errors": [
+      {
+        "message": "Forbidden",
+        "domain": "youtube.video",
+        "reason": "forbidden"
+      }
+    ]
+  }
+}
+  [youtube] rename Zjf7Ne2z_4U failed: {
+  "error": {
+    "code": 403,
+    "message": "Forbidden",
+    "errors": [
+      {
+        "message": "Forbidden",
+        "domain": "youtube.video",
+        "reason": "forbidden"
+      }
+    ]
+  }
+}
+  [youtube] rename 3ZR4l08XxyE failed: {
+  "error": {
+    "code": 403,
+    "message": "Forbidden",
+    "errors": [
+      {
+        "message": "Forbidden",
+        "domain": "youtube.video",
+        "reason": "forbidden"
+      }
+    ]
+  }
+}
+  [youtube] rename TnJJf_3-Zg8 failed: {
+  "error": {
+    "code": 403,
+    "message": "Forbidden",
+    "errors": [
+      {
+        "message": "Forbidden",
+        "domain": "youtube.video",
+        "reason": "forbidden"
+      }
+    ]
+  }
+}
+  [youtube] rename h4B5GXfmjLg failed: {
+  "error": {
+    "code": 403,
+    "message": "Forbidden",
+    "errors": [
+      {
+        "message": "Forbidden",
+        "domain": "youtube.video",
+        "reason": "forbidden"
+      }
+    ]
+  }
+}
+  [youtube] rename kvFpuUEz8QA failed: {
+  "error": {
+    "code": 403,
+    "message": "Forbidden",
+    "errors": [
+      {
+        "message": "Forbidden",
+        "domain": "youtube.video",
+        "reason": "forbidden"
+      }
+    ]
+  }
+}
+  [youtube] rename 4tbBV--cTsI failed: {
+  "error": {
+    "code": 403,
+    "message": "Forbidden",
+    "errors": [
+      {
+        "message": "Forbidden",
+        "domain": "youtube.video",
+        "reason": "forbidden"
+      }
+    ]
+  }
+}
+  [youtube] rename UG4z7_XQkjM failed: {
+  "error": {
+    "code": 403,
+    "message": "Forbidden",
+    "errors": [
+      {
+        "message": "Forbidden",
+        "domain": "youtube.video",
+        "reason": "forbidden"
+      }
+    ]
+  }
+}
+  [youtube] rename Iocf2nxJuOY failed: {
+  "error": {
+    "code": 403,
+    "message": "Forbidden",
+    "errors": [
+      {
+        "message": "Forbidden",
+        "domain": "youtube.video",
+        "reason": "forbidden"
+      }
+    ]
+  }
+}
+  [youtube] rename _oF4dTUGy24 failed: {
+  "error": {
+    "code": 403,
+    "message": "Forbidden",
+    "errors": [
+      {
+        "message": "Forbidden",
+        "domain": "youtube.video",
+        "reason": "forbidden"
+      }
+    ]
+  }
+}
+  [youtube] rename TRY0QZfgjBE failed: {
+  "error": {
+    "code": 403,
+    "message": "Forbidden",
+    "errors": [
+      {
+        "message": "Forbidden",
+        "domain": "youtube.video",
+        "reason": "forbidden"
+      }
+    ]
+  }
+}
+[epnum] assigned 174, renamed 0, verified 0 — 174 still pending (quota-gated; the next cycle resumes automatically)
