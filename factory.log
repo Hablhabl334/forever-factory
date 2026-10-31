@@ -1,45 +1,48 @@
-[0;93m2026-10-30 18:12:47.434503414 [W:onnxruntime:Default, device_discovery.cc:95 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
-[stats] growth report 2026-10-30
-[stats]   total: 2140 views  (+13 since last report)
+[0;93m2026-10-31 16:37:33.037736627 [W:onnxruntime:Default, device_discovery.cc:95 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
+[stats] growth report 2026-10-31
+[stats]   total: 2167 views  (+27 since last report)
 [stats]      188 views  ·  Subscribe for more tips like this #psychology #relationship 
 [stats]      120 views  ·  Subscribe for more tips like this #psychology #relationship 
 [stats]      111 views  ·  Subscribe for more tips like this #psychology #relationship 
   [muse] long: 18/18 scenes rewritten (nvidia)
-  [muse] shorts: 6/6 rewritten (nvidia)
-[42] script: Chemistry vs Compatibility (1220 words, hash 96f2376151)
-  [voice] local neural narration: 153 chunks (Kokoro af_heart)
+  [muse] shorts: reply shape rejected - keeping drafts
+  [muse] shorts: retrying 6 reject(s)
+  [muse] shorts: no reply - keeping drafts
+  [muse] shorts: 0/6 rewritten (nvidia)
+[43] script: Red Flags People Ignore (1074 words, hash bb4486d842)
+  [voice] local neural narration: 122 chunks (Kokoro af_heart)
   [voice] polished: presence EQ + gentle compression
-[42] narration: 478s, 153 caption chunks
-[42] long video: 490s, 48.0MB
+[43] narration: 417s, 122 caption chunks
+[43] long video: 429s, 44.9MB
+  [voice] local neural narration: 24 chunks (Kokoro af_heart)
+  [voice] polished: presence EQ + gentle compression
+  [short 1] 51s, 24 cards, 6.8MB
+  [voice] local neural narration: 23 chunks (Kokoro af_heart)
+  [voice] polished: presence EQ + gentle compression
+  [short 2] 51s, 23 cards, 6.6MB
+  [voice] local neural narration: 26 chunks (Kokoro af_heart)
+  [voice] polished: presence EQ + gentle compression
+  [short 3] 53s, 26 cards, 6.6MB
   [voice] local neural narration: 25 chunks (Kokoro af_heart)
   [voice] polished: presence EQ + gentle compression
-  [short 1] 62s, 25 cards, 8.3MB
-  [voice] local neural narration: 20 chunks (Kokoro af_heart)
+  [short 4] 55s, 25 cards, 7.2MB
+  [voice] local neural narration: 22 chunks (Kokoro af_heart)
   [voice] polished: presence EQ + gentle compression
-  [short 2] 49s, 20 cards, 6.1MB
-  [voice] local neural narration: 21 chunks (Kokoro af_heart)
+  [short 5] 51s, 22 cards, 6.7MB
+  [voice] local neural narration: 24 chunks (Kokoro af_heart)
   [voice] polished: presence EQ + gentle compression
-  [short 3] 51s, 21 cards, 6.9MB
-  [voice] local neural narration: 20 chunks (Kokoro af_heart)
-  [voice] polished: presence EQ + gentle compression
-  [short 4] 49s, 20 cards, 6.3MB
-  [voice] local neural narration: 19 chunks (Kokoro af_heart)
-  [voice] polished: presence EQ + gentle compression
-  [short 5] 46s, 19 cards, 6.1MB
-  [voice] local neural narration: 20 chunks (Kokoro af_heart)
-  [voice] polished: presence EQ + gentle compression
-  [short 6] 49s, 20 cards, 6.3MB
-[42] thumbnail audit: 3 words, 102px, 120px var 4602, 64KB — ok
-[42] thumbnail + 4 shorts ready
-  [youtube] uploaded long: H8WwqhC2lps (publishAt 2026-11-01T20:00:00+02:00)
-  [youtube] setting thumbnail thumbnail.png (64 KB) on H8WwqhC2lps
+  [short 6] 53s, 24 cards, 7.1MB
+[43] thumbnail audit: 4 words, 102px, 120px var 4868, 60KB — ok
+[43] thumbnail + 4 shorts ready
+  [youtube] uploaded long: MpR4TtgggrE (publishAt 2026-11-02T20:00:00+02:00)
+  [youtube] setting thumbnail thumbnail.png (59 KB) on MpR4TtgggrE
   [youtube] thumbnail set
-  [youtube] uploaded short: hTlvr5JeMFA (publishAt 2026-10-31T00:00:00+02:00)
-  [youtube] uploaded short: P-A5xb9zWp0 (publishAt 2026-10-31T06:00:00+02:00)
-  [youtube] uploaded short: pupu3HGVAq4 (publishAt 2026-10-31T12:00:00+02:00)
-  [youtube] uploaded short: kMLTxIRnW4k (publishAt 2026-10-31T18:00:00+02:00)
-[42] text layer: {'captions_long': 'refused', 'comment': 'refused'}
+  [youtube] uploaded short: DTJrqwlggyg (publishAt 2026-11-01T00:00:00+02:00)
+  [youtube] uploaded short: K7GsxCUNhcY (publishAt 2026-11-01T06:00:00+02:00)
+  [youtube] uploaded short: vllikY7A_js (publishAt 2026-11-01T12:00:00+02:00)
+  [youtube] uploaded short: ZcCIoSfhxBA (publishAt 2026-11-01T18:00:00+02:00)
+[43] text layer: {'captions_long': 'refused', 'comment': 'refused'}
 [playlist] 1 long video(s) not in the playlist yet
-[playlist] ep42 long added (H8WwqhC2lps)
-  ✓ episode 42: Chemistry vs Compatibility
+[playlist] ep43 long added (MpR4TtgggrE)
+  ✓ episode 43: Red Flags People Ignore
 combination space: 273,308,412,123,694,080 stories — the factory never repeats

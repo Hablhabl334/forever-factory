@@ -1,0 +1,387 @@
+{
+ "title": "Red Flags People Ignore",
+ "topic": "red_flags",
+ "topic_label": "psychology of red flags",
+ "mood": "healing",
+ "series": "Psychology of Love",
+ "hook": "Red flags rarely look red in the beginning \u2014 they look like butterflies. Here's what the butterflies hide.",
+ "words": 1074,
+ "hash": "bb4486d842cc9644",
+ "seed": 39316042500745,
+ "atoms": {
+  "topic": "Red Flags People Ignore",
+  "concepts": [
+   "love bombing",
+   "on-off cycles",
+   "the four horsemen",
+   "the cost of ambiguity",
+   "breadcrumbing",
+   "jealousy as information",
+   "negativity bias",
+   "the boundary filter"
+  ]
+ },
+ "question": "Which one are you in this \u2014 be honest in the comments.",
+ "scenes": [
+  {
+   "n": 1,
+   "id": "open_card",
+   "narration": "Red flags don't arrive in red. They arrive in butterflies. Today you get eight quiet pieces of psychology about the flags people miss - stay till the end, because the one that lands won't be the one you saw coming.",
+   "image": {
+    "kind": "topic_card",
+    "topic": "Red Flags People Ignore",
+    "band": "psychology of red flags",
+    "count": 8
+   }
+  },
+  {
+   "n": 2,
+   "id": "tip1_card",
+   "narration": "Fast love doesn't prove destiny. Sometimes it proves a script. Overwhelming affection deployed early - constant messages, grand gifts, future plans by day ten - that's the pattern. Real intensity leaves room for your pace; this kind doesn't. The tell isn't the gesture size, it's what happens when you tap the brakes even a little. The pattern creates a debt: you owe enthusiasm, and the interest compounds daily.",
+   "image": {
+    "kind": "concept_card",
+    "tip": 1,
+    "total": 8,
+    "term": "love bombing",
+    "headline": "Fast love isn't proof of destiny. Sometimes it's proof of a script.",
+    "accent_word": null
+   }
+  },
+  {
+   "n": 3,
+   "id": "tip1_scene",
+   "narration": "By week two they've named you soulmate and picked your song. By week three, a slow text from you triggers a meltdown. The affection was never about you - it was about velocity. Pace is a filter. Say 'I want to slow down' and watch the reaction - a full personality preview in sixty seconds. One more layer, because this pattern travels with a partner.",
+   "image": {
+    "kind": "couple_scene",
+    "emotion_a": "surprised",
+    "pose_a": "stand",
+    "emotion_b": "smug",
+    "pose_b": "arms_crossed",
+    "overlay": [
+     "psychologists call this",
+     "love bombing"
+    ]
+   }
+  },
+  {
+   "n": 4,
+   "id": "tip2_card",
+   "narration": "Every breakup with the same person gets easier to start and harder to number. The cycle feeds on ambiguity, not love. Each reunion runs on relief, and relief is a lousy compass for compatibility. The pattern also normalizes itself: the third split doesn't scare anyone like the first did. The question isn't whether you love each other - you usually do - it's whether anything gets solved between reunions.",
+   "image": {
+    "kind": "concept_card",
+    "tip": 2,
+    "total": 8,
+    "term": "on-off cycles",
+    "headline": "Every breakup with the same person gets easier to start \u2014 and harder to count.",
+    "accent_word": null
+   }
+  },
+  {
+   "n": 5,
+   "id": "tip2_scene",
+   "narration": "Friends ask Jonas what changed this time. Nothing. The relief just showed up at four p.m. wearing love's costume. If you restart, restart with changes, not just feelings. A reunion without a new plan is a rerun with spoilers. Hold that thought - the next lesson needs it.",
+   "image": {
+    "kind": "couple_scene",
+    "emotion_a": "sad",
+    "pose_a": "stand",
+    "emotion_b": "neutral",
+    "pose_b": "phone",
+    "overlay": [
+     "psychologists call this",
+     "on-off cycles"
+    ]
+   }
+  },
+  {
+   "n": 6,
+   "id": "tip3_card",
+   "narration": "Eye-rolls aren't harmless. Decades of couple research show contempt predicts endings better than anything. The framework names four horsemen: criticism of the person not the behavior, contempt - eye-rolls, mockery, superiority - defensiveness, and stonewalling. Contempt carries the heaviest weight because it signals disgust, not disagreement. The antidotes are learnable: complain without blame, name the feeling, own your share, ask for a pause instead of going silent. Every horseman has an exit ramp.",
+   "image": {
+    "kind": "concept_card",
+    "tip": 3,
+    "total": 8,
+    "term": "the four horsemen",
+    "headline": "Eye-rolls are not harmless. In forty years of couple research, contempt predicted endings better than anything else.",
+    "accent_word": null
+   }
+  },
+  {
+   "n": 7,
+   "id": "tip3_scene",
+   "narration": "'The dishes aren't done' is a complaint from Omar. 'Of course not - you're just like your mother' is a cavalry charge. The first opens a conversation; the second starts a countdown. Swap 'you always' for 'when this happens, I feel that.' Same heat, no arson. Here comes the part your brain will want to fight.",
+   "image": {
+    "kind": "couple_scene",
+    "emotion_a": "annoyed",
+    "pose_a": "arms_crossed",
+    "emotion_b": "detached",
+    "pose_b": "away",
+    "overlay": [
+     "psychologists call this",
+     "the four horsemen"
+    ]
+   }
+  },
+  {
+   "n": 8,
+   "id": "tip4_card",
+   "narration": "Mixed signals aren't mixed. Ambivalence is a clear message - you're just discounting your attention. When someone runs hot and cold, most people try to decode - but the signal is the message. It says: I want your presence without my consistency. The hidden cost: months spent auditing someone instead of living. Certainty feels boring, but it's the only soil where things grow.",
+   "image": {
+    "kind": "concept_card",
+    "tip": 4,
+    "total": 8,
+    "term": "the cost of ambiguity",
+    "headline": "Mixed signals aren't mixed. Ambivalence is a clean, readable message \u2014 you're just charging too little for your attention.",
+    "accent_word": null
+   }
+  },
+  {
+   "n": 9,
+   "id": "tip4_scene",
+   "narration": "Iris gets 'baby' in texts and cancelled plans in real life - a label at dawn, invisible at the office party. She's become a translator for a language that only says maybe. Replace 'what do they feel' with 'what do they do.' Behavior is the only signal that doesn't mix. Stay close - the next one is the one people replay.",
+   "image": {
+    "kind": "couple_scene",
+    "emotion_a": "anxious",
+    "pose_a": "stand",
+    "emotion_b": "detached",
+    "pose_b": "phone",
+    "overlay": [
+     "psychologists call this",
+     "the cost of ambiguity"
+    ]
+   }
+  },
+  {
+   "n": 10,
+   "id": "tip5_card",
+   "narration": "The eleven p.m. 'you up' isn't connection - it's inventory management. The pattern feeds someone minimum attention to keep them interested, never enough to build. The giver enjoys being wanted more than wanting. For the receiver, each crumb restarts hope and resets the clock - that's the design. The pattern runs on your optimism, not their potential.",
+   "image": {
+    "kind": "concept_card",
+    "tip": 5,
+    "total": 8,
+    "term": "breadcrumbing",
+    "headline": "The 11 p.m. 'you up' isn't connection \u2014 it's inventory management.",
+    "accent_word": null
+   }
+  },
+  {
+   "n": 11,
+   "id": "tip5_scene",
+   "narration": "Every week or two: a compliment, a meme, a 'we should hang out' that never becomes a plan. You've been full on hope, starving on facts for months. Stop measuring potential. Start counting patterns. The pattern is the person. Which raises a harder question - and the next piece answers it.",
+   "image": {
+    "kind": "couple_scene",
+    "emotion_a": "anxious",
+    "pose_a": "phone",
+    "emotion_b": "smug",
+    "pose_b": "phone",
+    "overlay": [
+     "psychologists call this",
+     "breadcrumbing"
+    ]
+   }
+  },
+  {
+   "n": 12,
+   "id": "tip6_card",
+   "narration": "Jealousy isn't proof of love. It's an alarm - your job is to find what tripped it. Two possible sources: a real threat in the room, or a glitch in the alarm itself. The first earns a conversation; the second earns self-work - but they feel identical from inside. Unchecked, jealousy becomes control, and control kills desire fastest. The skill isn't feeling less - it's investigating the signal before obeying it.",
+   "image": {
+    "kind": "concept_card",
+    "tip": 6,
+    "total": 8,
+    "term": "jealousy as information",
+    "headline": "Jealousy isn't proof of love. It's an alarm \u2014 and your job is to figure out what tripped it.",
+    "accent_word": null
+   }
+  },
+  {
+   "n": 13,
+   "id": "tip6_scene",
+   "narration": "Their coworker got a laugh and your chest tightened. Was something happening - or did an old wound hear its favorite song? One answer needs a talk. The other needs a journal. Choose right and the night survives. Ask the alarm: 'what exactly did I see?' Facts first, story second. Then decide if the conversation is with them - or with yourself. Before you file that: the next lesson is why it keeps finding you.",
+   "image": {
+    "kind": "couple_scene",
+    "emotion_a": "annoyed",
+    "pose_a": "arms_crossed",
+    "emotion_b": "surprised",
+    "pose_b": "phone",
+    "overlay": [
+     "psychologists call this",
+     "jealousy as information"
+    ]
+   }
+  },
+  {
+   "n": 14,
+   "id": "tip7_card",
+   "narration": "One cruel sentence outweighs a dozen kind ones - your brain records the knife in ink, the gift in pencil. Ancient accounting kept ancestors alive; now it quietly bankrupts relationships, because partners feel underpaid no matter what they give. This is why contempt predicts breakup so strongly - contempt is that bias with a voice. Awareness of the tilt is most of the fight.",
+   "image": {
+    "kind": "concept_card",
+    "tip": 7,
+    "total": 8,
+    "term": "negativity bias",
+    "headline": "One cruel sentence outweighs ten kind ones \u2014 your brain is built to remember the knife, not the gift.",
+    "accent_word": null
+   }
+  },
+  {
+   "n": 15,
+   "id": "tip7_scene",
+   "narration": "Amy did a string of kind things this week and one forgetful one. Guess which one Leo is still describing at dinner. The ledger is rigged by design. Deliver criticism once. Repetition doesn't sharpen the point - it just sets the ink. That was the warm-up. The next one lands.",
+   "image": {
+    "kind": "couple_scene",
+    "emotion_a": "annoyed",
+    "pose_a": "arms_crossed",
+    "emotion_b": "sad",
+    "pose_b": "stand",
+    "overlay": [
+     "psychologists call this",
+     "negativity bias"
+    ]
+   }
+  },
+  {
+   "n": 16,
+   "id": "tip8_card",
+   "narration": "People who resent your boundaries were only ever compatible with your lack of them. Boundaries mark where you end and another begins: your time, body, money, yes and no. Clear boundaries do something counterintuitive - they make people feel safer, because visible rules are trustworthy rules. People who resent your boundaries were only ever compatible with your absence of them. The filter isn't losing people - it's pricing them accurately.",
+   "image": {
+    "kind": "concept_card",
+    "tip": 8,
+    "total": 8,
+    "term": "the boundary filter",
+    "headline": "People who resent your boundaries were only ever compatible with your absence of them.",
+    "accent_word": null
+   }
+  },
+  {
+   "n": 17,
+   "id": "tip8_scene",
+   "narration": "You said 'no late-night calls on workdays' - simple, kind, final. The person who respected it stayed. The person who called at two a.m. anyway just opted out. The filter isn't losing you people. It's pricing them accurately - a service to everyone involved.",
+   "image": {
+    "kind": "couple_scene",
+    "emotion_a": "neutral",
+    "pose_a": "stand",
+    "emotion_b": "neutral",
+    "pose_b": "phone",
+    "overlay": [
+     "psychologists call this",
+     "the boundary filter"
+    ]
+   }
+  },
+  {
+   "n": 18,
+   "id": "outro_card",
+   "narration": "That was eight pieces of psychology about red flags people ignore. If even one made your love life suddenly make sense, you already got your money's worth - this one was free. Which one are you in this - be honest in the comments. Subscribe for more like this.",
+   "image": {
+    "kind": "outro_card",
+    "topic": "Red Flags People Ignore"
+   }
+  }
+ ],
+ "shorts": [
+  {
+   "n": 1,
+   "concept": "breadcrumbing",
+   "band": "psychology of red flags",
+   "hook": "If they only ever give you the minimum, why does the minimum feel like a jackpot?",
+   "term": "breadcrumbing",
+   "script": "This one will sting. If they only ever give you the minimum, why does the minimum feel like a jackpot? A meme at midnight, silence all week. You've been fed just enough to stay starving. The breadcrumber enjoys being wanted more than they want the wanting. The pattern runs on your optimism, not on their potential. For the person receiving it, each crumb restarts hope and resets the clock, which is exactly the design. 'We should hang out soon' \u2014 soon has now lasted four months. There is a term for this in psychology: breadcrumbing. Stop measuring their potential. Start counting their patterns. The pattern is the person. Test with specifics: place, date, hour. Breadcrumbers vanish at logistics; interested people negotiate them. Have you seen breadcrumbing up close? Tell me below. Subscribe for more tips like this.",
+   "words": 137,
+   "shash": "f2cb91f00ef2235e",
+   "scene": {
+    "emotion_a": "anxious",
+    "pose_a": "phone",
+    "emotion_b": "smug",
+    "pose_b": "phone"
+   }
+  },
+  {
+   "n": 2,
+   "concept": "love_bombing",
+   "band": "psychology of red flags",
+   "hook": "Fast love isn't proof of destiny. Sometimes it's proof of a script.",
+   "term": "love bombing",
+   "script": "This deserves 30 seconds. Fast love isn't proof of destiny. Sometimes it's proof of a script. Real intensity lets you set the tempo. The other kind punishes you for having one. Bombing creates a debt: you owe enthusiasm, and the interest rate rises. Genuine intensity exists, but healthy intensity leaves room for your pace \u2014 bombing doesn't. The tell isn't the size of the gesture; it's what happens when you slow down even slightly. By week two: soulmate, your song, names for the kids. By week three, a slow reply got punished. Psychologists have a name for this: love bombing. Real intensity leaves room for your speed. Bombing doesn't. That difference is the whole test. Would you send this to them? Tell me why not. Subscribe for more tips like this.",
+   "words": 131,
+   "shash": "0b8bddaed4ebecb7",
+   "scene": {
+    "emotion_a": "surprised",
+    "pose_a": "stand",
+    "emotion_b": "smug",
+    "pose_b": "arms_crossed"
+   }
+  },
+  {
+   "n": 3,
+   "concept": "four_horsemen",
+   "band": "psychology of red flags",
+   "hook": "'You always' and 'you never' aren't complaints \u2014 they're cavalry.",
+   "term": "the four horsemen",
+   "script": "Not a theory \u2014 a pattern. 'You always' and 'you never' aren't complaints \u2014 they're cavalry. One of you went silent mid-fight. The other shouted to break through. Two habits, one collapse. Every horseman has an exit ramp. The antidotes are learnable: complain without blaming, describe feelings, own your share, and ask for a pause instead of going silent. Of the four, contempt is the heaviest single predictor, because it communicates disgust rather than disagreement. 'You're just like your mother' did more damage in one sentence than the dishes ever could. In psychology, this is called the four horsemen. Catch the eye-roll. It feels like a blink; it lands like disgust \u2014 and disgust is the one signal relationships rarely survive. Does this hit home? Tell me I'm not the only one. Subscribe for more tips like this.",
+   "words": 138,
+   "shash": "bdc808d94d24a0ae",
+   "scene": {
+    "emotion_a": "annoyed",
+    "pose_a": "arms_crossed",
+    "emotion_b": "detached",
+    "pose_b": "away"
+   }
+  },
+  {
+   "n": 4,
+   "concept": "mixed_signals_cost",
+   "band": "psychology of red flags",
+   "hook": "Mixed signals aren't mixed. Ambivalence is a clean, readable message \u2014 you're just charging too little for your attention.",
+   "term": "the cost of ambiguity",
+   "script": "Read this twice. Mixed signals aren't mixed. Ambivalence is a clean, readable message \u2014 you're just charging too little for your attention. You spend your week decoding someone whose actions already said everything. Decoding is the expensive part. Certainty may be boring, but it's the only soil where anything actually grows. When someone runs hot and cold, most people try to decode the signal \u2014 but the signal IS the message. Ambivalence communicates: 'I want the benefits of your presence without the obligations of my consistency.' The hidden cost is months of your attention spent auditing someone instead of living. There is a term for this in psychology: the cost of ambiguity. Swap 'what do they feel' for 'what do they do'. Behavior is the only signal that never mixes. How many times did this happen to you? Count below. Subscribe for more tips like this.",
+   "words": 146,
+   "shash": "9d8bb35c5fe82238",
+   "scene": {
+    "emotion_a": "anxious",
+    "pose_a": "stand",
+    "emotion_b": "detached",
+    "pose_b": "phone"
+   }
+  },
+  {
+   "n": 5,
+   "concept": "jealousy_signal",
+   "band": "psychology of red flags",
+   "hook": "Every jealousy has one of two sources: a real threat, or an old wound hearing its favorite song.",
+   "term": "jealousy as information",
+   "script": "This is your brain on love. Every jealousy has one of two sources: a real threat, or an old wound hearing its favorite song. Sometimes the feeling points at them. Sometimes it points at a scar. From inside, they feel identical. The skill isn't feeling less \u2014 it's investigating the signal before obeying it. Unchecked jealousy becomes control, and control is the fastest known killer of desire. Jealousy has two possible sources: a real threat in the situation, or an insecurity in the alarm system itself. There is a term for this in psychology: jealousy as information. Ask the alarm one question: 'what exactly did I see?' Facts first, story second \u2014 then choose the right conversation. Have you lived this? I read every comment. Subscribe for more tips like this.",
+   "words": 131,
+   "shash": "49f95723919d027e",
+   "scene": {
+    "emotion_a": "annoyed",
+    "pose_a": "arms_crossed",
+    "emotion_b": "surprised",
+    "pose_b": "phone"
+   }
+  },
+  {
+   "n": 6,
+   "concept": "on_off_cycles",
+   "band": "psychology of red flags",
+   "hook": "Every breakup with the same person gets easier to start \u2014 and harder to count.",
+   "term": "on-off cycles",
+   "script": "This is the part nobody says. Every breakup with the same person gets easier to start \u2014 and harder to count. Relief is a terrible judge of compatibility, but it powers every reunion. The question isn't 'do we love each other' \u2014 cyclical couples usually do \u2014 it's 'do we ever solve anything between reunions'. The cycle also normalizes itself: the third breakup simply doesn't scare anyone the way the first one did. Research on on-again, off-again couples finds the pattern usually feeds on ambiguity rather than love. In psychology, this is called on-off cycles. Ask the one question cycles avoid: 'what did we actually solve between the last two reunions?' If the answer is nothing, the next round is scheduled. Does this hit home? Tell me I'm not the only one. Subscribe for more tips like this.",
+   "words": 138,
+   "shash": "a52aa9be5d46cbba",
+   "scene": {
+    "emotion_a": "sad",
+    "pose_a": "stand",
+    "emotion_b": "neutral",
+    "pose_b": "phone"
+   }
+  }
+ ],
+ "short_hashes": [
+  "f2cb91f00ef2235e",
+  "0b8bddaed4ebecb7",
+  "bdc808d94d24a0ae",
+  "9d8bb35c5fe82238",
+  "49f95723919d027e",
+  "a52aa9be5d46cbba"
+ ],
+ "muse": "llm",
+ "muse_model": "nvidia/nemotron-3-ultra-550b-a55b:free"
+}
