@@ -1,20 +1,27 @@
 """Per-video YouTube metadata for the love-psychology channel.
 
-The Short rules come straight from the channel owner and are FIXED:
+The Short rules come straight from the channel owner:
   * every Short title  = "Subscribe for more tips like this
-    #psychology #relationship #love #relationshipgoals"
-    (same locked title every time; the fixed tags the owner specified
-    are appended at the END of the title)
+    #epN #psychology #relationship #love #relationshipgoals"
   * every Short tags   = #psychology #relationship #love #relationshipgoals
-  (fixed titles are a deliberate growth strategy in this niche — the
-  Shorts feed sells the hook, not the title; the identical title turns
-  every Short into a subscription funnel.)
+
+  2026-11-01 OWNER DECISION — THE #epN SYSTEM: the fixed title put the
+  SAME exact string on 130+ Shorts and YouTube read them as duplicate
+  titles (bad for reach, useless for a viewer trying to reference a
+  video). Every video — long and Short — now carries a UNIQUE #epN in
+  its title and an "Episode #N" line in its description. The CTA and
+  the fixed hashtags are untouched (the subscription funnel survives);
+  only the unique number is added, so no two titles on the channel
+  stay identical. New videos claim their number from the ledger
+  counter (ledger.allocate_ep_number); the ~170 pre-decision videos
+  are numbered and renamed by the backfill (src/epnumbering.py).
 
 Long videos stay SEO-driven (search-first heads, rotating long-tails,
 keyword-loaded first 150 description chars, a liftable 40-60 word
 answer block, chapter timestamps parsed INTO the description, ~350-
 char tag budgets) — the full ai-seo text-layer anatomy: models don't
-watch the video, they read the text around it.
+watch the video, they read the text around it. The #epN rides at the
+end of the title (clipped into YouTube's 100-char limit).
 """
 from __future__ import annotations
 
@@ -23,9 +30,16 @@ from .content_data import CTA_LINE
 
 SHORT_TAGS = ["#psychology", "#relationship", "#love", "#relationshipgoals"]
 SHORT_HASHTAGS = "#psychology #relationship #love #relationshipgoals"
-# Owner's rule: the SAME locked title every time, with the fixed tags
-# appended at the end (84 chars — well under YouTube's 100-char limit).
+# Owner's rule: the SAME locked CTA + fixed tags every time. Since
+# 2026-11-01 a unique #epN is inserted between the CTA and the tags —
+# the duplicate-title fix that keeps the funnel AND frees the algorithm.
 SHORT_TITLE = f"{CTA_LINE.rstrip('.')} {SHORT_HASHTAGS}"
+
+# The description lines that carry the number (shared with the rename
+# backfill in src/epnumbering.py, so a born-numbered video and a
+# renamed legacy video read exactly the same).
+LONG_EP_LINE = "Episode #{n} of the daily love psychology series."
+SHORT_EP_LINE = "Episode #{n} of the daily love psychology shorts."
 
 TITLE_FRAMES = [
     ("Psychology of Love", "Love Psychology Tips"),
@@ -77,16 +91,18 @@ def _clip(text: str, limit: int) -> str:
     return text if len(text) <= limit else text[:limit].rstrip(" |—-,·")
 
 
-def long_title(story: dict) -> str:
+def long_title(story: dict, ep_num: int | None = None) -> str:
     head, tail = _frame(story)
-    n = len(story["atoms"]["concepts"])
+    # the unique #epN rides at the END; the SEO head and rotating tail
+    # keep their space (everything still fits YouTube's 100-char limit)
+    suffix = f" #ep{ep_num}" if ep_num is not None else ""
     full = f"{head}: {story['title']} | {tail}"
-    if len(full) <= 100:
-        return full
+    if len(full) + len(suffix) <= 100:
+        return full + suffix
     mid = f"{head}: {story['title']}"
-    if len(mid) <= 100:
-        return mid
-    return _clip(mid, 100)
+    if len(mid) + len(suffix) <= 100:
+        return mid + suffix
+    return _clip(mid, 100 - len(suffix)) + suffix
 
 
 def _tag_list(story: dict) -> list[str]:
@@ -135,7 +151,8 @@ def _answer_block(story: dict, n: int) -> str:
     )
 
 
-def long_metadata(story: dict, narration: dict) -> dict:
+def long_metadata(story: dict, narration: dict,
+                   ep_num: int | None = None) -> dict:
     vconf = cfg()["video"]
     title_s = float(vconf.get("title_card_seconds", 6))
     channel = cfg()["channel"]
@@ -171,7 +188,9 @@ def long_metadata(story: dict, narration: dict) -> dict:
         # for AI answers — this list used to be computed and dropped
         f"Chapters:\n" + "\n".join(chapters) + "\n\n"
         f"New love psychology videos every day — attraction, attachment, "
-        f"breakups, self-worth and the science behind how we love.\n\n"
+        f"breakups, self-worth and the science behind how we love. "
+        + (LONG_EP_LINE.format(n=ep_num) if ep_num is not None else "")
+        + "\n\n"
         f"\U0001f9ea ABOUT {channel['display_name'].upper()}\n"
         f"Real psychology, plain language. One new video every day about "
         f"love, relationships and the mind behind them.\n\n"
@@ -180,20 +199,30 @@ def long_metadata(story: dict, narration: dict) -> dict:
         f"media policy. Not made for kids.\n\n"
         f"#psychology #love #relationship"
     )
-    return {"title": long_title(story), "description": desc[:4900],
+    return {"title": long_title(story, ep_num), "description": desc[:4900],
             "tags": _tag_list(story), "chapters": chapters}
 
 
-def short_metadata(story: dict, short: dict) -> dict:
-    """FIXED title + FIXED tags (the owner's growth strategy).
+def short_metadata(story: dict, short: dict,
+                    ep_num: int | None = None) -> dict:
+    """FIXED CTA + FIXED tags (the owner's funnel) — plus the unique
+    #epN (owner decision 2026-11-01) so no two Shorts share a title.
+    ep_num=None keeps the legacy un-numbered title (tests, tooling).
 
-    The description is the only free text surface a Short has — the
-    title is locked, so the youtube-seo doctrine lands here: the
-    concept's TERM (the exact phrase a searching viewer types), the
-    hook line (the claim, quotable and indexable), and the niche
-    keywords, all in plain sentences. The engagement question keeps
-    the visible fold (comments stay the strongest ranking signal).
+    The description is the free text surface a Short has — the
+    youtube-seo doctrine lands here: the concept's TERM (the exact
+    phrase a searching viewer types), the hook line (the claim,
+    quotable and indexable), and the niche keywords, all in plain
+    sentences. The engagement question keeps the visible fold
+    (comments stay the strongest ranking signal).
     """
+    if ep_num is None:
+        title = SHORT_TITLE
+    else:
+        # unique title per Short: CTA + #epN + the fixed hashtags
+        # (91 chars at 3 digits — still under YouTube's 100-char limit)
+        cta = CTA_LINE.rstrip(".")
+        title = f"{cta} #ep{ep_num} {SHORT_HASHTAGS}"
     from .content_variants import COMMENT_QUESTIONS
     q = story.get("question") or COMMENT_QUESTIONS[0]
     term = (short.get("term") or "").strip()
@@ -208,11 +237,12 @@ def short_metadata(story: dict, short: dict) -> dict:
     lines += [
         f"New love psychology shorts every day — {story['topic_label']}.",
         "The full video is on the channel.",
-        "",
-        SHORT_HASHTAGS,
     ]
+    if ep_num is not None:
+        lines.append(SHORT_EP_LINE.format(n=ep_num))
+    lines += ["", SHORT_HASHTAGS]
     desc = "\n".join(lines)
-    return {"title": SHORT_TITLE, "description": desc[:4900],
+    return {"title": title, "description": desc[:4900],
             "tags": list(SHORT_TAGS)}
 
 

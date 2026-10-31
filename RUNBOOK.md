@@ -762,3 +762,72 @@ script_v2 41/0, oct8 41/0, grid_heal, durability, compete 38,
 v4_extras, rig_upgrade 30/0 — ALL PASS; muse 26/2 unchanged
 (pre-existing); viral + v4_render live-voice smokes are
 sandbox-environmental (no TTS packages here), unchanged paths.
+
+---
+
+## Part 16 — The #epN system: unique numbered titles (2026-11-01)
+
+**What changed and why.** The owner decision of Nov 1: the fixed
+Shorts title put the SAME exact string on 130+ videos. YouTube read
+the channel as duplicate titles (an algorithmic liability), and a
+viewer could not reference "that one Short". From this day every
+video — long and Short — carries a **unique #epN** in its title plus
+an "Episode #N" line in its description:
+
+* **Shorts**: `Subscribe for more tips like this #ep132
+  #psychology #relationship #love #relationshipgoals` — the CTA and
+  the fixed hashtags are untouched (the funnel survives); only the
+  unique number is inserted.
+* **Longs**: the SEO title keeps its head and rotating tail; ` #ep37`
+  is appended (clipped into YouTube's 100-char limit).
+* Descriptions gain one plain-text line (`Episode #N of the daily
+  love psychology series.` / `... shorts.`) — searchable, and the
+  same sentence a born-numbered video carries.
+
+**How numbering works.**
+
+* New videos claim a number from `ep_numbering.seq_next` in
+  state.json (`ledger.allocate_ep_number`) — persisted BEFORE the
+  upload, so a number is never handed out twice. A quota-deferred
+  upload leaves a small cosmetic gap; never a collision, never a
+  reuse.
+* The first allocation seeds the counter from every video id the
+  ledger knows (+1), so a new video can never take a number the
+  backfill will later give to an old video.
+* `src/epnumbering.py: renumber_and_rename()` runs at the END of
+  every daily cycle (after production and the discovery pass): it
+  inventories the uploads playlist, numbers every un-numbered real
+  video **chronologically starting at #1**, adopts crash-orphans,
+  skips zero-duration placeholders, then renames the backlog
+  **newest first** inside the day's leftover quota
+  (`videos.update` = 50 units each, 100-unit reserve always kept).
+  ~33 renames/day → the ~170 legacy videos finish in under a week.
+
+**What is deliberately untouched (locked settings).** The publish
+grid, the CTA text, the fixed hashtags, tags, categoryId, languages,
+the playlist/channel branding, the niche, the visual identity — the
+rename passes every snippet field through from the fetched video, so
+nothing but title/description text ever changes.
+
+**Ops.**
+
+* Watch progress: `grep '\[epnum\]' factory.log` — each cycle prints
+  assigned/renamed/pending.
+* Force a run now: Actions → daily-factory → Run workflow → tick
+  **rename_only** (gate-bypassed, quota-gated, state committed).
+* A video stuck at `gave up after 3 attempts` (non-quota rejection):
+  read its error in factory.log history, fix manually or clear
+  `attempts` in `ep_numbering.videos.<videoId>` in state.json.
+* Zero-duration placeholders are never numbered and never block
+  anything; delete them once in YouTube Studio if you want.
+
+**Verification** (2026-11-01): new 62-check suite
+`scripts/test_ep_numbering.py` (allocation seeding/monotonicity,
+binding, born-metadata shapes incl. 100-char limits and legacy
+compat, rename rules incl. idempotency, and the full mocked backfill:
+chronological density, orphan adoption, placeholder skip, live-title
+verification, quota gating, quota-family refusal without burning
+attempts, collision guard, give-up-after-3) — ALL PASS. Existing
+suites: durability, oct8 41/0, grid_heal, skill_upgrades 57,
+batch2_skills 45 — ALL PASS; viral live-voice smoke unchanged
+(sandbox-environmental, no TTS packages here).

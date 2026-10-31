@@ -48,6 +48,12 @@ DEFAULT = {
     "episodes": [],          # [{n, title, hash, seed, date, status, ids, shashes}]
     "story_hashes": [],      # no-repeat ledger (long scripts)
     "short_hashes": [],      # no-repeat ledger (Short scripts — the forever bank)
+    # the #epN forever-counter (2026-11-01 owner decision: every video
+    # on the channel carries a unique number in its title/description)
+    #   seq_next  — the next number a NEW video will claim
+    #   videos    — {videoId: {n, kind, episode, renamed?, born?, attempts?}}
+    #   channel_synced — True once the backfill has numbered the channel
+    "ep_numbering": {"seq_next": 1, "videos": {}},
     "quota": {"date": None, "units_used": 0},
     "last_run": None,
     "stats": {"videos_published": 0, "days_active": 0},
@@ -120,6 +126,53 @@ def save(state: dict) -> None:
 def next_episode_number(state: dict) -> int:
     nums = [e["n"] for e in state.get("episodes", [])]
     return (max(nums) + 1) if nums else 1
+
+
+# ── the #epN forever-counter ────────────────────────────────────────
+
+def allocate_ep_number(state: dict) -> int:
+    """Claim the next forever-number for a NEW video (owner decision,
+    2026-11-01: every video title/description carries a unique #epN).
+
+    The counter is persisted BEFORE the upload runs, so a number can
+    never be handed out twice — the cost is that a quota-deferred
+    upload leaves a small cosmetic gap in the sequence (never a
+    collision, never a reuse). Before the first channel sync the
+    counter is seeded from every video id the ledger knows, so a new
+    video can never take a number the rename backfill will later give
+    to an old video. Seeding is monotonic (max), so it stays safe even
+    if the backfill keeps failing.
+    """
+    box = state.setdefault("ep_numbering", {})
+    if not box.get("channel_synced"):
+        ids: set[str] = set()
+        for e in state.get("episodes", []):
+            eids = e.get("ids") or {}
+            if eids.get("long"):
+                ids.add(eids["long"])
+            for s in eids.get("shorts") or []:
+                if s:
+                    ids.add(s)
+        box["seq_next"] = max(int(box.get("seq_next", 1)), len(ids) + 1)
+    n = int(box.get("seq_next", 1))
+    box["seq_next"] = n + 1
+    save(state)
+    return n
+
+
+def bind_ep_number(state: dict, video_id: str, n: int, kind: str,
+                   episode_n: int) -> None:
+    """Record which number a PUBLISHED video actually carries (long or
+    short, fresh upload or crash-adoption). The rename backfill reads
+    this map to know what is already numbered and what still needs
+    its title updated."""
+    if not video_id:
+        return
+    box = state.setdefault("ep_numbering", {})
+    vids = box.setdefault("videos", {})
+    rec = vids.setdefault(video_id, {})
+    rec.update({"n": n, "kind": kind, "episode": episode_n, "born": True})
+    save(state)
 
 
 def used_hashes(state: dict) -> set[str]:

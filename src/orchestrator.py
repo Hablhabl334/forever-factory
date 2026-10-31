@@ -20,8 +20,8 @@ import traceback
 from datetime import date
 from pathlib import Path
 
-from . import ai_layer, art_engine, discovery, ledger, render, \
-    shorts as shorts_mod, thumbnails, tts, youtube
+from . import ai_layer, art_engine, discovery, epnumbering, ledger, \
+    render, shorts as shorts_mod, thumbnails, tts, youtube
 from .config import cfg, ROOT
 from . import muse
 from .story_engine import generate_story, combination_space, N_SHORTS
@@ -384,9 +384,15 @@ def produce_episode(story: dict, episode_n: int, dry_run: bool,
         print(f"[{episode_n}] thumbnail audit skipped ({exc})")
     print(f"[{episode_n}] thumbnail + {len(short_files)} shorts ready")
 
-    # 5. metadata
+    # 5. metadata — each video first claims its unique #epN (owner
+    #    decision 2026-11-01: no two titles on the channel are
+    #    identical, and every video is findable by its number). The
+    #    number is allocated and persisted BEFORE the upload so it can
+    #    never be handed out twice; a quota-deferred upload leaves a
+    #    small cosmetic gap in the sequence, never a collision.
     from . import metadata as meta_mod
-    long_meta = meta_mod.long_metadata(story, narration)
+    long_ep = ledger.allocate_ep_number(state)
+    long_meta = meta_mod.long_metadata(story, narration, long_ep)
 
     # 6. upload (or dry-run plan)
     if dry_run:
@@ -417,9 +423,11 @@ def produce_episode(story: dict, episode_n: int, dry_run: bool,
 
     long_slot = youtube.next_slot("long", used_slots["long"])
     long_id = youtube.upload_video(final, long_meta, long_slot, episode_n, "long", state)
-    if long_id is not None and long_id not in rec_ids:
-        used_slots["long"].add(long_slot)
-        _remember_slot(state, "long", long_slot)
+    if long_id is not None:
+        ledger.bind_ep_number(state, long_id, long_ep, "long", episode_n)
+        if long_id not in rec_ids:
+            used_slots["long"].add(long_slot)
+            _remember_slot(state, "long", long_slot)
 
     # upload the 4 shorts into the 6-hour grid (shorts first = the funnel
     # fills before the evening long lands). Idempotent per index: a short
@@ -432,10 +440,13 @@ def produce_episode(story: dict, episode_n: int, dry_run: bool,
                   f"({recorded_shorts[i]}) — skipping")
             continue
         short_spec = story["shorts"][i] if i < len(story.get("shorts", [])) else {}
-        short_meta = meta_mod.short_metadata(story, short_spec)
+        short_ep = ledger.allocate_ep_number(state)
+        short_meta = meta_mod.short_metadata(story, short_spec, short_ep)
         short_slot = youtube.next_slot("short", used_slots["short"])
         # thumbnails not set for shorts (auto frame is fine; quota discipline)
         sid = youtube.upload_video(sf, short_meta, short_slot, episode_n, "short", state)
+        if sid is not None:
+            ledger.bind_ep_number(state, sid, short_ep, "short", episode_n)
         if sid is None:
             break  # quota exhausted — stop uploading for today
         if sid not in rec_ids:  # fresh upload → its slot is now taken
@@ -660,6 +671,21 @@ def _run_daily_inner(dry_run: bool, longs: int | None,
         # all scope-aware and quota-gated, never blocking, never repeating
         discovery.evening_pass(state)
 
+        # end-of-cycle #epN pass (owner decision 2026-11-01): number
+        # every un-numbered channel video and rename what the day's
+        # leftover quota affords (~33/day → the ~170 legacy videos
+        # finish in under a week; newest first so recent uploads get
+        # algorithmic relief soonest). Runs AFTER production and the
+        # discovery pass — a rename is never worth more than an upload
+        # — and never blocks the day: any hiccup retries next cycle.
+        try:
+            summary = epnumbering.renumber_and_rename(state)
+            if summary["renamed"] or summary["assigned"]:
+                print(f"[epnum] cycle summary: {summary}")
+        except Exception as exc:
+            print(f"[epnum] numbering pass skipped ({exc}) — "
+                  f"the uploads are safe, this retries next cycle")
+
         ledger.save(state)
     return results
 
@@ -672,6 +698,8 @@ def main() -> int:
     ap.add_argument("--episode", type=int, default=None, help="produce only this episode number")
     ap.add_argument("--backfill-thumbs", action="store_true",
                     help="only set missing custom thumbnails, then exit")
+    ap.add_argument("--rename-only", action="store_true",
+                    help="only run the #epN numbering/rename backfill, then exit")
     ap.add_argument("--verify-token", action="store_true", help="check YouTube credentials only")
     args = ap.parse_args()
 
@@ -684,6 +712,15 @@ def main() -> int:
         state = ledger.load()
         done = backfill_thumbnails(state)
         print(f"[thumbs] backfill complete: {len(done)} set")
+        return 0
+
+    if args.rename_only:
+        state = ledger.load()
+        summary = epnumbering.renumber_and_rename(state)
+        print(f"[epnum] assigned {summary['assigned']}, renamed "
+              f"{summary['renamed']}, verified {summary['verified']} — "
+              f"{summary['pending']} still pending (quota-gated; the "
+              f"next cycle resumes automatically)")
         return 0
 
     try:

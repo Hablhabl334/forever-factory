@@ -28,6 +28,10 @@ on:
         description: "Only set missing custom thumbnails (no new episodes)"
         type: boolean
         default: false
+      rename_only:
+        description: "Only run the #epN numbering/rename backfill (no new episodes)"
+        type: boolean
+        default: false
       gated:
         description: "Respect the daily gate (default ON: API dispatches like the external pinger or watchdog are quota-safe; untick only to force a re-run of an already-produced day)"
         type: boolean
@@ -68,9 +72,9 @@ jobs:
       - name: Has today's cycle already run?
         id: gate
         run: |
-          if [ "${{ inputs.backfill_only }}" = "true" ] || [ "${{ inputs.dry_run }}" = "true" ]; then
+          if [ "${{ inputs.backfill_only }}" = "true" ] || [ "${{ inputs.dry_run }}" = "true" ] || [ "${{ inputs.rename_only }}" = "true" ]; then
             echo "run=true" >> "$GITHUB_OUTPUT"
-            echo "explicit mode (backfill/dry-run) - gate bypassed"
+            echo "explicit mode (backfill/dry-run/rename) - gate bypassed"
             exit 0
           fi
           EVENT="${{ github.event_name }}"
@@ -168,6 +172,7 @@ jobs:
           if [ "${{ inputs.dry_run }}" = "true" ]; then DRY="--dry-run"; fi
           MODE=""
           if [ "${{ inputs.backfill_only }}" = "true" ]; then MODE="--backfill-thumbs"; fi
+          if [ "${{ inputs.rename_only }}" = "true" ]; then MODE="--rename-only"; fi
           python main.py $DRY $MODE 2>&1 | tee factory.log
           # a deferred day must be visible in the run summary too
           if grep -q 'uploads deferred' factory.log; then

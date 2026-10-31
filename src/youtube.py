@@ -36,6 +36,12 @@ THUMB_SET_URL = "https://www.googleapis.com/upload/youtube/v3/thumbnails/set"
 CHUNK = 8 * 1024 * 1024  # 8 MB resumable chunks
 UPLOAD_UNITS = 1600
 THUMB_UNITS = 50
+# videos.update (the #epN rename backfill) — a WRITE, same cost class
+# as thumbnails.set; budgeted per video, newest first, inside the
+# day's leftover quota (see src/epnumbering.py).
+UPDATE_UNITS = 50
+# videos.list / playlistItems.list / channels.list — cheap reads
+LIST_UNITS = 1
 
 # ── server-side quota classification ───────────────────────────────
 # YouTube's "no" comes in several shapes, and the old catch-all
@@ -434,6 +440,131 @@ def set_thumbnail(token: str, video_id: str, thumb: Path) -> bool:
     """Public wrapper: set a custom thumbnail (50 quota units at the
     API). Used by the upload flow and the daily self-healing backfill."""
     return _set_thumbnail(token, video_id, thumb)
+
+
+# ── the #epN rename backfill surface ───────────────────────────────
+
+def list_channel_videos(token: str, state: dict | None = None) -> dict[str, str]:
+    """Every video on the channel's uploads playlist: {videoId: title}.
+
+    The LIVE title is the source of truth for the #epN system — it
+    proves what is already numbered/renamed without a per-video
+    fetch, and it surfaces crash-orphans the ledger never recorded
+    (a video whose upload landed but whose id was lost to a crash).
+    Pages of 50; the uploads playlist id is cached in state so the
+    channels.list lookup costs 1 unit exactly once, ever."""
+    box = (state or {}).get("ep_numbering") or {}
+    playlist_id = box.get("uploads_playlist_id")
+    if not playlist_id:
+        req = urllib.request.Request(
+            f"{API_BASE}/channels?part=contentDetails&mine=true",
+            headers={"Authorization": f"Bearer {token}"})
+        with urllib.request.urlopen(req, timeout=30) as resp:
+            ch = json.loads(resp.read())["items"][0]
+        playlist_id = ch["contentDetails"]["relatedPlaylists"]["uploads"]
+        if state is not None:
+            ledger.spend_quota(state, LIST_UNITS)
+            state.setdefault("ep_numbering", {})["uploads_playlist_id"] = playlist_id
+            ledger.save(state)
+    out: dict[str, str] = {}
+    page_token = ""
+    while True:
+        url = (f"{API_BASE}/playlistItems?part=snippet&playlistId={playlist_id}"
+               f"&maxResults=50")
+        if page_token:
+            url += f"&pageToken={page_token}"
+        req = urllib.request.Request(
+            url, headers={"Authorization": f"Bearer {token}"})
+        with urllib.request.urlopen(req, timeout=30) as resp:
+            data = json.loads(resp.read())
+        for it in data.get("items", []):
+            rid = it.get("snippet", {}).get("resourceId", {}) or {}
+            if rid.get("kind") == "youtube#video" and rid.get("videoId"):
+                out[rid["videoId"]] = it["snippet"].get("title", "") or ""
+        if state is not None:
+            ledger.spend_quota(state, LIST_UNITS)
+            ledger.save(state)
+        page_token = data.get("nextPageToken", "") or ""
+        if not page_token:
+            break
+    return out
+
+
+def fetch_video_snippets(token: str, video_ids: list[str],
+                         state: dict | None = None) -> dict[str, dict]:
+    """snippet + contentDetails for up to N video ids, batched 50 per
+    call (1 unit per batch). Returns {videoId: snippet} with a private
+    "_duration" field (seconds) attached — the placeholder filter in
+    the backfill needs it (a P0D abandoned-init session is not a real
+    video and must never be numbered)."""
+    out: dict[str, dict] = {}
+    ids = [v for v in video_ids if v]
+    for i in range(0, len(ids), 50):
+        batch = ids[i:i + 50]
+        req = urllib.request.Request(
+            f"{API_BASE}/videos?part=snippet,contentDetails&id="
+            + ",".join(batch),
+            headers={"Authorization": f"Bearer {token}"})
+        with urllib.request.urlopen(req, timeout=30) as resp:
+            items = json.loads(resp.read()).get("items", [])
+        for it in items:
+            sn = dict(it.get("snippet", {}) or {})
+            sn["_duration"] = _duration_seconds(
+                (it.get("contentDetails", {}) or {}).get("duration", ""))
+            out[it["id"]] = sn
+        if state is not None:
+            ledger.spend_quota(state, LIST_UNITS)
+            ledger.save(state)
+    return out
+
+
+def update_video_snippet(token: str, video_id: str, snippet: dict,
+                          title: str, description: str,
+                          state: dict | None = None) -> dict:
+    """Rename a live video (videos.update, part=snippet, 50 units).
+
+    Only snippet fields are sent, and every writable field is passed
+    through from the FETCHED snippet — categoryId, languages and tags
+    must survive the rename untouched (videos.update REPLACES the
+    whole snippet; forgetting a field would reset it). Returns
+    {"ok": bool, "reason": str} so the caller can tell a permanent
+    rejection from a quota-family one without parsing bodies twice."""
+    body: dict = {"snippet": {
+        "title": title,
+        "description": description,
+        "categoryId": str(snippet.get("categoryId")
+                          or cfg()["youtube"].get("category_id", "24")),
+    }}
+    if snippet.get("tags"):
+        body["snippet"]["tags"] = snippet["tags"]
+    for k in ("defaultLanguage", "defaultAudioLanguage"):
+        if snippet.get(k):
+            body["snippet"][k] = snippet[k]
+    req = urllib.request.Request(
+        f"{API_BASE}/videos?part=snippet",
+        data=json.dumps(body).encode(),
+        headers={"Authorization": f"Bearer {token}",
+                 "Content-Type": "application/json"},
+        method="PUT",
+    )
+    try:
+        with urllib.request.urlopen(req, timeout=60) as resp:
+            ok = resp.status in (200, 201)
+            raw = b""
+    except urllib.error.HTTPError as e:
+        ok = False
+        try:
+            raw = e.read()
+        except Exception:
+            raw = b""
+    reason = _error_reason(raw.decode(errors="replace")[:2000]) if not ok else ""
+    if ok and state is not None:
+        ledger.spend_quota(state, UPDATE_UNITS)
+        ledger.save(state)
+    if not ok:
+        print(f"  [youtube] rename {video_id} failed: "
+              f"{raw.decode(errors='replace')[:200]}")
+    return {"ok": ok, "reason": reason}
 
 
 def upload_video(filepath: Path, meta: dict, publish_at: str | None,

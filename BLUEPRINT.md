@@ -76,6 +76,7 @@ Parts 1–11.)
 | Oct 13 | **The voice incident**: the neural TTS endpoint refused the runner's IP range; the offline fallback counted as SUCCESS — two robotic days shipped silently. Fixed: edge-tts range-pinned (>=7.3.1,<8), patient multi-voice probe, voice-degraded cycles FAIL before upload so backup slots retry on fresh runner IPs, and a "Voice degraded" Issue fires the moment quality drops | The blueprint's loudest lesson: **availability is not quality**. A fallback that silently succeeds is worse than a failure — make every quality regression as loud as an outage |
 | Oct 16 | **The viral upgrade**: the voice went fully LOCAL — Kokoro-82M vendored in the repo (~120 MB, MIT, CPU ~2x realtime, no API/network at all, af_heart); hooks engineered for the algorithm (every Short opens with a 2-6 word pattern interrupt + closes with a comment-bait question; longs + descriptions carry it too); shorts pacing tightened (9-word karaoke cards, ~2.5 s rhythm, word band recalibrated to the measured 150 wpm) | Three growth levers with one theme: **own the whole stack**. The voice can never go dark; the first two seconds and the comment section — the two signals the Shorts feed actually ranks on — are now scripted, offline, forever |
 | Oct 18 | **The character rig + locked camera (v2.1)**: every character now redrawn per frame with a real articulated rig — planted feet with weight shifts and heel lifts, swinging arms with hands (plus a once-per-loop reach toward the partner), torso lean, breathing, head drifts and nods, living eye gaze, blinks — while the camera is LOCKED: scene backgrounds are perfectly static (no zoom, no pan; all motion comes from the characters). Legacy Ken Burns and whole-sprite motion remain one config flip away (`video.camera: kenburns`, `video.rig: false`); the script text overlay is composited last and never touched | The visual half of the viral equation: motion that reads as LIFE (not camera drift) is what holds the first seconds of a Short — and it costs 4 ms of CPU per frame, offline, forever |
+| Nov 1 | **The #epN system (owner decision)**: the fixed Shorts title put the SAME exact string on 130+ videos — YouTube read them as duplicate titles and no viewer could reference "that one Short". Every video now carries a UNIQUE #epN in its title (Shorts: CTA + #epN + fixed hashtags; longs: SEO title + #epN) and an "Episode #N" line in its description. New videos claim a number from a ledger counter persisted before upload (never reused, never colliding); the ~170 legacy videos are numbered chronologically and RENAMED by a quota-aware backfill (50 units per videos.update, ~33/day inside the leftover budget, newest first — done in ~a week, resumable, self-verifying against the live titles) | Two lessons: **identical titles are an algorithmic liability**, not a branding asset — uniqueness and findability now come free with the funnel intact; and the rename backfill is the template for any future bulk metadata surgery: reads are cheap (1 unit/50 videos), writes are budgeted, and the LIVE channel is always the source of truth |
 | Oct 9–12 | **Clean operation**: 3+ consecutive 100%-green days, all cycles producing 4 shorts + 1 long, auto-closing old issues, memory committing nightly | The proof state — this is what "working" looks like in the Actions tab |
 
 **The five design laws** (everything above collapses into these):
@@ -499,7 +500,8 @@ machine look like".
 | Voice | PRIMARY: Kokoro-82M local (vendored `assets/voice_kokoro/`, af_heart, speed 0.96, jitter 4.5) · BACKUP: edge-tts `en-US-JennyNeural` · LAST RESORT: Piper `en_US-lessac-medium` (loud, retried) |
 | Music | numpy synth, −23 dB bed, 0.55 duck depth, mood-matched |
 | Video | 1080p30, CRF 21 veryfast, Ken Burns overscan 1.25 |
-| Shorts | 1080×1920, fixed title "Subscribe for more tips like this" |
+| Shorts | 1080×1920, title "Subscribe for more tips like this #epN #psychology #relationship #love #relationshipgoals" — CTA + fixed tags locked, #epN unique per video |
+| Episode numbers | every video (long + Short) carries a unique #epN in title + description; ledger counter `ep_numbering.seq_next`; legacy videos renamed by the quota-aware backfill (~33/day) |
 | Quota budget | 10,000 units/day, 1,600/video, ledger per Pacific day |
 | YouTube flags | madeForKids false · synthetic media disclosure ON · public |
 | Secrets | `YT_CLIENT_ID`, `YT_CLIENT_SECRET`, `YT_REFRESH_TOKEN` |
@@ -530,6 +532,9 @@ machine look like".
 | `VOICE-ALERT` + "Voice degraded" Issue | neural TTS refused the runner IP (self-retried on fresh runners first) | usually self-heals next slot; if more than a day, RUNBOOK Part 12 |
 | `VoiceQualityError ... aborting BEFORE upload` | the voice-degraded retry ring working as designed | nothing — the next slot re-attempts automatically |
 | Videos sound robotic | the day exhausted `max_voice_retries` and shipped the offline voice | RUNBOOK Part 12 (a dry-run dispatch confirms recovery) |
+| `[epnum] rename budget spent` | normal — the day's leftover quota is honoring the 100-unit reserve | nothing; the backfill resumes next cycle |
+| `[epnum] ... gave up after 3 attempts` | one video's rename keeps failing for a non-quota reason | read factory.log history; fix its title manually or clear `attempts` in state.json |
+| `[epnum] ... placeholder` | an abandoned upload session left a 0-duration video | delete it once in YouTube Studio (the machine never numbers it) |
 
 **The golden rule**: when anything looks wrong, read
 `factory.log` (committed every cycle) — the machine explains itself.
