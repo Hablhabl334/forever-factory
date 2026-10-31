@@ -518,18 +518,19 @@ def fetch_video_snippets(token: str, video_ids: list[str],
     return out
 
 
-def update_video_snippet(token: str, video_id: str, snippet: dict,
-                          title: str, description: str,
-                          state: dict | None = None) -> dict:
-    """Rename a live video (videos.update, part=snippet, 50 units).
-
-    Only snippet fields are sent, and every writable field is passed
-    through from the FETCHED snippet — categoryId, languages and tags
-    must survive the rename untouched (videos.update REPLACES the
-    whole snippet; forgetting a field would reset it). Returns
-    {"ok": bool, "reason": str} so the caller can tell a permanent
-    rejection from a quota-family one without parsing bodies twice."""
-    body: dict = {"snippet": {
+def _update_body(video_id: str, snippet: dict, title: str,
+                 description: str) -> dict:
+    """The videos.update request body. The video is identified by the
+    REQUIRED `id` field INSIDE the body (2026-11-01 lesson: PUT
+    /videos?part=snippet with only a snippet body returns 403
+    forbidden, domain youtube.video — YouTube cannot even tell which
+    video you mean). Every writable snippet field is passed through
+    from the FETCHED snippet, because videos.update REPLACES the
+    resource: an omitted field that already has a value is DELETED
+    (only selfDeclaredMadeForKids/containsSyntheticMedia are exempt).
+    Read-only fields (publishedAt, channelId, thumbnails, localized)
+    are deliberately not sent."""
+    body: dict = {"id": video_id, "snippet": {
         "title": title,
         "description": description,
         "categoryId": str(snippet.get("categoryId")
@@ -540,6 +541,20 @@ def update_video_snippet(token: str, video_id: str, snippet: dict,
     for k in ("defaultLanguage", "defaultAudioLanguage"):
         if snippet.get(k):
             body["snippet"][k] = snippet[k]
+    return body
+
+
+def update_video_snippet(token: str, video_id: str, snippet: dict,
+                          title: str, description: str,
+                          state: dict | None = None) -> dict:
+    """Rename a live video (videos.update, part=snippet, 50 units).
+
+    The body is built by _update_body (id + full snippet pass-through
+    — categoryId, languages and tags survive the rename untouched).
+    Returns {"ok": bool, "reason": str} so the caller can tell a
+    permanent rejection from a quota-family one without parsing
+    bodies twice."""
+    body = _update_body(video_id, snippet, title, description)
     req = urllib.request.Request(
         f"{API_BASE}/videos?part=snippet",
         data=json.dumps(body).encode(),

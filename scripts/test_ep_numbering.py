@@ -201,7 +201,38 @@ try:
 
     # ── 6. the backfill (YouTube layer mocked) ───────────────────────
 
-    section("6. the backfill — assign + rename, fully mocked")
+    section("6a. the videos.update request body (the Oct-31 403 lesson)")
+
+    body = youtube._update_body(
+        "MpR4TtgggrE",
+        {"title": "old", "description": "old", "tags": ["love", "psychology"],
+         "categoryId": "24", "defaultLanguage": "en",
+         "defaultAudioLanguage": "en", "publishedAt": "2026-10-31T00:00:00Z",
+         "channelId": "UCx", "thumbnails": {"default": {"url": "https://x"}},
+         "localized": {"title": "old"}},
+        "New title #ep42", "New desc")
+    check("the video id rides IN the body (required — its absence was the 403)",
+          body.get("id"), "MpR4TtgggrE")
+    sn = body["snippet"]
+    check("title/description/categoryId present",
+          (sn["title"], sn["description"], sn["categoryId"]),
+          ("New title #ep42", "New desc", "24"))
+    check("tags pass through (else they would be DELETED)",
+          sn.get("tags"), ["love", "psychology"])
+    check("languages pass through",
+          (sn.get("defaultLanguage"), sn.get("defaultAudioLanguage")),
+          ("en", "en"))
+    check("read-only fields never sent",
+          any(k in sn for k in ("publishedAt", "channelId", "thumbnails", "localized")),
+          False)
+    body2 = youtube._update_body("X", {"categoryId": "24"}, "t", "d")
+    check("no tags key when the video has none",
+          "tags" in body2["snippet"], False)
+    body3 = youtube._update_body("X", {}, "t", "d")
+    check("categoryId falls back to the channel config",
+          body3["snippet"]["categoryId"], "24")
+
+    section("6b. the backfill — assign + rename, fully mocked")
 
     def install_mocks(state, channel_titles, snippets, updates,
                       refuse_reason=None):
@@ -356,6 +387,21 @@ try:
     summary6b = epnumbering.renumber_and_rename(st)
     check("defer active -> the whole pass holds",
           (summary6b["assigned"], len(updates6b)), (0, 0))
+
+    # 6f-b. a GLOBAL 403 forbidden stops the pass without burning attempts
+    st = state_fixture()
+    titles, snips = channel_and_snippets(st)
+    updates6c: list = []
+    install_mocks(st, titles, snips, updates6c, refuse_reason="forbidden")
+    summary6c = epnumbering.renumber_and_rename(st)
+    check("global 403 stops the pass after one call",
+          len(updates6c), 1)
+    recs = [r for r in st["ep_numbering"].values()]
+    vids_map = st["ep_numbering"]["videos"]
+    check("no video's attempt budget burned by a global 403",
+          all(r.get("attempts", 0) == 0 for r in vids_map.values()), True)
+    check("everything stays pending (numbering intact)",
+          summary6c["pending"], 6)
 
     # 6g. collision guard — a born number is never reused
     st = state_fixture()

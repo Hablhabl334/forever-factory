@@ -257,6 +257,19 @@ def renumber_and_rename(state: dict) -> dict:
             youtube._mark_server_defer(state, res["reason"], hours)
             vids[vid]["attempts"] = attempts   # not burned by quota
             break
+        elif res["reason"] == "forbidden":
+            # 403 forbidden is GLOBAL (auth/scope/request shape), not
+            # this video's fault — retrying the next 170 videos would
+            # burn their attempt budgets against the same wall. Stop
+            # the whole pass loudly without counting the attempt;
+            # the same classification the playlist layer uses.
+            vids[vid]["attempts"] = attempts   # not burned by a global 403
+            print("  [epnum] rename FORBIDDEN (403) — a global "
+                  "authorization/request problem, not this video. "
+                  "Stopping the pass; check the request shape and the "
+                  "token's scopes (RUNBOOK Part 3 re-consent) before "
+                  "the next cycle")
+            break
         else:
             summary["skipped"] += 1     # permanent-ish: retry ≤ MAX_ATTEMPTS
     ledger.save(state)
