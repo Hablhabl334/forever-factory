@@ -235,3 +235,123 @@ Before adding any skill to `/home/z/my-project/skills/`:
 3. If it touches the factory: does this file get a row above?
 Four "no"s = don't install; a "yes" = clone the source repo to
 `/home/z/my-project/repos/` and write the map row in the same change.
+
+## Batch-3: the great harvest of 2026-11-01 (translated same-day)
+
+The skills.sh survey became a harvest: the library grew to ~100
+installed skills, installed one-at-a-time under the standing
+free-and-readable rule. This batch-3 section maps what the factory
+TOOK from it. Enforced by `scripts/test_batch3_skills.py` (62
+checks).
+
+### Translated into factory code
+
+* **copywriting** — *the AI-tells blacklist* → `src/ai_tells.py`,
+  the muse gate (`src/muse.py`), the per-episode tells audit
+  (`orchestrator.produce_episode` step 5b), `ledger.note_tells`
+  Doctrine: certain patterns make copy read machine-written —
+  "it's not X, it's Y" reveals, era openers, recap closers,
+  throat-clearing, filler transitions, rhetorical "The result?",
+  colon reveals, and a vocabulary of hollow words (delve,
+  tapestry, unlock, seamless...). A reader who smells a machine
+  doubts the claims — and YouTube's inauthentic-content policy
+  reads the same signals. Three severities, doctrine-faithful:
+  * **scrubbed** (muse text only, `ai_tells.scrub` in the
+    `_sanitize` choke point): banned vocabulary swapped for
+    neutral words, era openers / throat-clearing / filler /
+    recap closers stripped at sentence starts — conservative,
+    never adds facts, never empties a line;
+  * **rejected** (muse gate, `ai_tells.hard` in `_clean_line`):
+    a line still carrying a hard tell after the scrub is thrown
+    out and the grammar twin ships — the same fail-safe that
+    guards fake statistics. The brief itself now carries the
+    rules (`BRIEF_LINES` in the muse's HARD RULES), so the model
+    is steered before the gate ever has to bite;
+  * **audited** (everything, log-only): the deliberate contrast
+    reveals in the hand pools keep their sparse, concrete use —
+    per-episode counts land in factory.log and the ledger
+    (`ep["tells"]`), so copy drift is visible in the noon report
+    instead of invisible in the prose.
+  Niche adaptations on record: "journey" is audience language in
+  love-psychology (capped, never banned); "the power of love" is
+  niche vocabulary, not a tell; one hand line ("one word: maybe")
+  uses the colon reveal as art — doctrine's "still fine" clause.
+
+* **verification-before-completion** — *the Iron Law: done means
+  VERIFIED PUBLIC* → `src/verify.py`, `tools/verify_public.py`,
+  `ledger.mark_verified`, the workflow's "Alert on publish-
+  verification failure" step, `channel.yaml: verify:` block
+  The ledger's "done" only ever meant the upload API ACCEPTED
+  the ids — never that the videos actually went public at their
+  slots. Now every recent episode gets its videos probed via the
+  free anonymous oEmbed endpoint (ZERO API quota): confirmed-
+  public videos are stamped `ep["verified"]` (live evidence
+  only, never blanket-true); a completed episode whose video is
+  still not public past the 2-day grace window prints a
+  VERIFY-ALERT marker the workflow turns into a dated Issue —
+  the VOICE-ALERT pattern, aimed at the loudest silent failure
+  (stuck private, removed, a publishAt that never fired). The
+  rare oEmbed-unclear cases (public with embedding disabled
+  answers 401) are settled by ONE videos.list call — 1 unit/day
+  max, and `--no-api` keeps the noon report strictly zero-quota.
+  Fail-open: a blind probe retries next run; an active quota
+  defer suppresses alerts (the grid is late on purpose);
+  in_progress episodes stay with the resume ladder. Rollback:
+  `channel.yaml: verify.enabled: false`.
+
+### The visual refresh bank (owner-gated, identity LOCKED)
+
+* **bento / editorial / glassmorphism / neon / paper / premium /
+  terracotta** — complete ready-to-apply visual systems (palette,
+  type scale, component specs as design tokens), plus
+  **design-system** (the token architecture: primitive →
+  semantic → component) and **banner-design**. The channel's
+  visual identity is LOCKED (the warm-paper couple look, the
+  thumbnail brand) and none of these touch it. What they are:
+  eight pre-loaded design systems, on the shelf for the day the
+  OWNER approves a visual refresh or a new format — a seasonal
+  card treatment, a new series look, a milestone rebrand. Until
+  that owner decision lands, they are reference doctrine only:
+  no pixels change without it.
+* **brand** — the guidelines framework (voice framework,
+  consistency checklist, visual-identity spec). In this repo the
+  doctrine already lives as `channel.yaml`: the locks ARE the
+  brand guidelines. The skill is the checklist to re-read before
+  any change that touches a locked surface.
+
+### The ops discipline (agent-side, for me — the noon report and
+### every factory change)
+
+* **systematic-debugging** — root-cause tracing before fixing (the
+  2026-10-13 voice incident is the canonical case study: 2 robotic
+  days were an upstream endpoint block, found via log archaeology,
+  not guesswork). Re-read before touching any failure path.
+* **test-driven-development** — the batch test ritual this repo
+  already follows (batch-2/3 suites lock doctrine into 45+62
+  checks; the stale-fixture fix in this batch — test_muse's
+  opener shared a word with its hook and pre-dated the v4
+  anti-stutter gate — is TDD's "a stale test lies" lesson).
+* **verification-before-completion** — applies to MY work too:
+  no "pushed/working" claim without re-reading the push result and
+  the suite output in the same session. The gate function runs on
+  the agent, not just the factory.
+* **grill-me** — the relentless-interview discipline for any
+  future owner request that changes a locked surface: interrogate
+  the plan BEFORE building (whose decision unlocks this lock?
+  what breaks downstream? what does done look like?).
+* **find-skills** — the ecosystem index for the NEXT harvest;
+  the standing free-and-readable rule above still gates installs.
+* **writing-for-agents / doc-coauthoring** — agent-side writing
+  craft; reference only.
+* **image-edit** — z-ai SDK editing; API-gated, same dormant tier
+  as the LLM/VLM/TTS twins above.
+
+### The owner-decision plays (mapped, dormant)
+
+* **ab-testing** — YouTube Studio's Test & Compare is an OWNER
+  action (the Data API cannot run thumbnail experiments). The free
+  telemetry that feeds any future A/B judgment is already built:
+  the daily analytics snapshot, the Sunday benchmark
+  (`tools/compete.py`), and the per-cycle thumbnail checklist
+  audit. The moment an owner wants to test thumbnails, the
+  baseline data is waiting in `data/`.

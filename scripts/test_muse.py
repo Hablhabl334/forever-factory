@@ -90,8 +90,13 @@ check("plain line passes", muse._clean_line("The quiet ones feel the most."))
 
 print("== 5. shorts field gates ==")
 term = "the distancing dance"
+# fixture note (2026-11-01): the opener must not share a 4+ letter
+# word with the hook — the v4 anti-stutter gate (opener becomes the
+# frame-zero word art; a repeated word reads as a stutter). The old
+# fixture "She pulls away first." shared "first" with the hook and
+# pre-dated that gate, failing on otherwise-clean main.
 good = {
-    "opener": "She pulls away first.",
+    "opener": "She pulls away.",
     "hook": "The one who leaves first is often the one who feels the most.",
     "micro": "He reads her message at midnight, types nothing for an hour, "
              "then puts the phone face-down on the table.",

@@ -57,6 +57,7 @@ import urllib.request
 from datetime import date
 from pathlib import Path
 
+from . import ai_tells
 from .content_data import CTA_LINE
 from .story_engine import _BANNED_RE, _short_hash
 
@@ -144,6 +145,12 @@ def _sanitize(text: str) -> str:
     for bad, good in _ASCII_MAP.items():
         text = text.replace(bad, good)
     text = _CTRL_RE.sub("", text)
+    # batch-3 (copywriting skill): every muse line passes the AI-tells
+    # scrubber — banned vocabulary swapped, era openers / throat-
+    # clearing / filler / recap closers stripped at sentence starts.
+    # Conservative: what scrub cannot safely fix is caught by the
+    # hard() gate below, never silently mangled.
+    text = ai_tells.scrub(text)
     text = re.sub(r"\s+", " ", text).strip()
     return text
 
@@ -155,6 +162,12 @@ def _clean_line(text: str) -> bool:
     if _BANNED_RE.search(text):
         return False
     if _STAT_RE.search(text):
+        return False
+    # batch-3: a line still carrying a HARD AI tell after the scrub
+    # (era opener, throat-clearing, recap closer, filler, rhetorical
+    # reveal, colon reveal, banned vocabulary) is REJECTED — the
+    # grammar twin ships, the same fail-safe that guards statistics.
+    if ai_tells.hard(text):
         return False
     return True
 
@@ -329,7 +342,11 @@ _RULES = """HARD RULES:
 - no invented statistics or numbers (never "73% of people", "9 out of 10")
 - never say: disorder, diagnose, narcissist, toxic, manipulative, cure, therapy
 - never pathologize; the channel names patterns, it never labels people
-- same information as the draft, in fresh words - do not add new claims"""
+- same information as the draft, in fresh words - do not add new claims
+
+""" + ai_tells.BRIEF_LINES + """
+A line that breaks the AI-tell rules is discarded and the draft ships
+instead - the blacklist is enforced, not advisory."""
 
 
 def _long_brief(story: dict) -> str:

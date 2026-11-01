@@ -260,6 +260,38 @@ def mark_voice_engine(state: dict, episode_n: int, engine: str) -> None:
             break
 
 
+def mark_verified(state: dict, episode_n: int, kind: str, video_id: str,
+                  when_iso: str) -> None:
+    """batch-3 (verification-before-completion): stamp the moment a
+    video was CONFIRMED public by the zero-quota oEmbed probe — live
+    evidence only, never blanket-true. "done" in the ledger now
+    means verified public, not merely accepted by the upload API.
+    Idempotent (restamping is a no-op overwrite). In-memory; rides
+    the next ledger.save()."""
+    for e in state.get("episodes", []):
+        if e["n"] == episode_n:
+            v = e.setdefault("verified", {})
+            if kind == "long":
+                v["long"] = when_iso
+            else:
+                v.setdefault("shorts", {})[video_id] = when_iso
+            break
+
+
+def note_tells(state: dict, episode_n: int, report: dict) -> None:
+    """batch-3 (copywriting): the per-episode AI-tells count — the
+    audit that makes copy drift visible in the noon report instead
+    of invisible in the prose. LOG-ONLY: hand pools keep their
+    deliberate, sparse rhetorical devices; nobody rewrites them by
+    regex. Small on purpose: only non-zero categories are stored.
+    In-memory; rides the next ledger.save()."""
+    for e in state.get("episodes", []):
+        if e["n"] == episode_n:
+            keep = {k: v for k, v in report.items()
+                    if k != "total" and v}
+            e["tells"] = keep
+            break
+
 def spend_quota(state: dict, units: int) -> None:
     q = state["quota"]
     today = _quota_today()

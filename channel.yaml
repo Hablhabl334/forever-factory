@@ -70,6 +70,23 @@ story:
   # roll back to bridge-free scripts.
   bridges: true
 
+# ── POST-PUBLISH VERIFICATION (batch-3 skills, 2026-11-01) ────────
+# verification-before-completion: an episode is only "done" when its
+# videos are CONFIRMED public by the free anonymous oEmbed probe
+# (src/verify.py). Confirmed videos are stamped in the ledger
+# (ep["verified"]); a completed episode whose video is STILL not
+# public past the grace window raises a VERIFY-ALERT marker, which
+# the workflow's alert step turns into a dated Issue (the VOICE-
+# ALERT pattern). Zero API quota in the normal path: the single
+# 1-unit videos.list fallback only settles rare oEmbed-unclear
+# cases (public video with embedding disabled answers 401), and the
+# noon report runs with --no-api anyway. Fail-open by design.
+verify:
+  enabled: true
+  grace_days: 2        # episode date + 2 days before "late" is declared
+  scan_days: 10        # how many recent production days get probed
+  fallback_api: true   # 1 unit/day max, only for unclear cases
+
 voice:
   # ENGINE LADDER (auto): 1) Kokoro-82M — vendored INSIDE this repo
   # (assets/voice_kokoro/), fully local/offline, ~2x realtime CPU,

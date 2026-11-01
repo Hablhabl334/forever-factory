@@ -394,6 +394,27 @@ def produce_episode(story: dict, episode_n: int, dry_run: bool,
     long_ep = ledger.allocate_ep_number(state)
     long_meta = meta_mod.long_metadata(story, narration, long_ep)
 
+    # 5b. AI-tells audit (batch-3, the copywriting skill): one count
+    #     of machine-sounding patterns per episode — in the log and
+    #     the ledger, next to voice_engine. LOG-ONLY by design: the
+    #     hand pools use their devices deliberately and sparsely;
+    #     the count makes any future drift (a pool edit, a muse slip
+    #     past the scrubber) visible in the noon report. Fail-open.
+    try:
+        from . import ai_tells
+        surface = " ".join(
+            [story["hook"]]
+            + [s["narration"] for s in story["scenes"]]
+            + [sh.get("script", "") for sh in story.get("shorts", [])]
+            + [long_meta["title"], long_meta["description"]])
+        rep = ai_tells.audit(surface)
+        ledger.note_tells(state, episode_n, rep)
+        print(f"[{episode_n}] tells audit: reveal={rep['contrast_reveal']} "
+              f"vocab={rep['banned_vocab']} filler={rep['filler']} "
+              f"intensifier={rep['intensifier']} (logged, not rewritten)")
+    except Exception as exc:
+        print(f"[{episode_n}] tells audit skipped ({exc})")
+
     # 6. upload (or dry-run plan)
     if dry_run:
         long_slot = youtube.next_slot("long", used_slots["long"])
@@ -539,6 +560,19 @@ def _run_daily_inner(dry_run: bool, longs: int | None,
     # (read-only scope — works from day one; failures never block)
     if not dry_run:
         discovery.morning_report(state)
+
+    # batch-3 (verification-before-completion): the ledger's "done"
+    # is only done when the videos are CONFIRMED public. Zero-quota
+    # oEmbed probe of every recent episode; confirmed videos are
+    # stamped, late/missing ones raise VERIFY-ALERT markers the
+    # workflow turns into a dated Issue (the VOICE-ALERT pattern).
+    # Fail-open — a blind probe retries next run, never blocks.
+    if not dry_run:
+        try:
+            from . import verify
+            verify.run(state)
+        except Exception as e:
+            print(f"[verify] skipped ({e})")
 
     target = int(longs or cfg()["daily"]["long_videos"])
     results: list[dict] = []

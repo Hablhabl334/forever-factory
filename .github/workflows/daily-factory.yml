@@ -276,3 +276,29 @@ jobs:
           gh issue create --title "$TITLE" --body "$BODY" || true
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Alert on publish-verification failure
+        # batch-3 (verification-before-completion): the zero-quota
+        # oEmbed pass stamps every video it SEES public; a completed
+        # episode with a video still missing past the 2-day grace
+        # window means the slot never fired, the video is stuck
+        # private, or it was removed — the loudest possible SILENT
+        # failure. Like VOICE-ALERT: marker in the log -> one dated
+        # Issue, dupe-guarded.
+        if: always()
+        run: |
+          if [ ! -f factory.log ] || ! grep -q "VERIFY-ALERT:" factory.log; then
+            echo "all recent videos verified public (or probe blind) — no alert needed"
+            exit 0
+          fi
+          echo "::warning::completed episodes have videos that are not public past the grace window"
+          TITLE="Publish verification failed — $(date -u +%F)"
+          DUPES=$(gh issue list --state open --search "in:title \"$TITLE\"" --json number --jq 'length' 2>/dev/null || echo 0)
+          if [ "$DUPES" = "0" ]; then
+            ALERTS=$(grep "VERIFY-ALERT:" factory.log | head -20)
+            BODY=$(printf 'The zero-quota oEmbed verification pass found completed episodes with videos that are NOT public past the 2-day grace window. The API cannot change visibility — check these in YouTube Studio (stuck private, removed, or a publishAt that never fired):\n\n%s\n\nSee the run: %s/actions/runs/%s\n\n- auto-filed by the factory' "$ALERTS" "$GITHUB_SERVER_URL/$GITHUB_REPOSITORY" "$GITHUB_RUN_ID")
+            gh issue create --title "$TITLE" --body "$BODY" || true
+          fi
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
