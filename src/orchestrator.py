@@ -415,6 +415,26 @@ def produce_episode(story: dict, episode_n: int, dry_run: bool,
     except Exception as exc:
         print(f"[{episode_n}] tells audit skipped ({exc})")
 
+    # 5c. viral pre-flight (batch-4, the short-form-video + hook-writer
+    #     + youtube-seo translation, src/viral.py): a deterministic
+    #     0-100 click-craft score for the day's long title — logged
+    #     next to the tells count. LOG-ONLY by design (the same law as
+    #     the tells audit): the score never blocks or rewrites; it
+    #     makes the craft measurable in the noon report and feeds the
+    #     weekly pattern-feedback loop that reads it back. Fail-open.
+    try:
+        from . import viral
+        base_title = long_meta["title"].split("#ep")[0].strip()
+        v_score, v_notes = viral.score_title(base_title)
+        viral.note_viral(state, episode_n, {
+            "score": v_score, "formula": viral.formula_of(base_title),
+            "notes": v_notes})
+        print(f"[{episode_n}] viral score: {v_score}/100 "
+              f"({viral.formula_of(base_title) or 'plain'}) "
+              f"{'; '.join(v_notes[:3])}")
+    except Exception as exc:
+        print(f"[{episode_n}] viral score skipped ({exc})")
+
     # 6. upload (or dry-run plan)
     if dry_run:
         long_slot = youtube.next_slot("long", used_slots["long"])

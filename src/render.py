@@ -295,13 +295,16 @@ def render_clip_art(layers: dict, seed: int, out: Path, dur: float,
         frames = 8
     style = anim_style or anim.pick_style(seed)
 
-    # 1. the unique-frame loop (cached; frame count + rig in the name
-    #    so pre-rig caches can never leak into rig-era renders)
+    # 1. the unique-frame loop (cached; frame count + rig + depth in
+    #    the name so pre-rig/pre-depth caches can never leak)
     n_unique = max(90, min(240, frames))
     n_unique -= n_unique % 2
     rig_on = anim.rig_enabled()
+    from .depth import enabled as depth_enabled
+    d4 = depth_enabled()
     loop_path = out.with_name(
-        f"{out.stem}_loop{n_unique}{'_rig' if rig_on else ''}.mp4")
+        f"{out.stem}_loop{n_unique}{'_rig' if rig_on else ''}"
+        f"{'_d4' if d4 else ''}.mp4")
     loop_seed = seed + card_idx * 37
     anim.encode_loop(layers, loop_seed, style, fps, n_unique, loop_path)
 
@@ -312,7 +315,8 @@ def render_clip_art(layers: dict, seed: int, out: Path, dur: float,
     if n_intro:
         intro_path = out.with_name(
             f"{out.stem}_intro{'_dip' if accent else ''}"
-            f"{'_pop' if pop else ''}.mp4")
+            f"{'_pop' if pop else ''}"
+            f"{'_d4' if d4 else ''}.mp4")
         anim.render_intro(layers, loop_seed, style, fps, n_unique,
                           intro_path, dip=accent, pop=pop)
 

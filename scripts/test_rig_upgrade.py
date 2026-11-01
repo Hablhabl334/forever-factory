@@ -43,6 +43,7 @@ import numpy as np
 from PIL import Image
 
 from src import anim, art_engine, render
+from src import depth
 from src.config import cfg
 
 PASS = FAIL = 0
@@ -116,8 +117,23 @@ char_band = slice(480, 1000)
 bg_band = slice(0, 260)
 check("characters visibly move (f0 vs f1)", d01[char_band].mean() > 0.5)
 check("characters visibly move (f1 vs f2)", d12[char_band].mean() > 0.5)
-check("background pixels are IDENTICAL across frames",
-      int(d01[bg_band].max()) == 0 and int(d12[bg_band].max()) == 0)
+# batch-4 doctrine: the far plane now LIVES (parallax against the
+# hips, motes, shaft) — the invariance moved from "identical" to
+# "atmosphere-grade, no hard teleport" (seam exactness is checked
+# below, and the legacy identical-background rollback right after)
+check("far plane moves like atmosphere, not a cut (batch-4)",
+      float(d01[bg_band].mean()) > 0.0
+      and float((d01[bg_band] > 40).mean()) < 0.05)
+
+# the pre-batch-4 world is still one config flip away and still
+# pixel-identical (the rollback contract)
+set_video(depth="legacy")
+g0 = np.asarray(anim.compose_frame(layers, params, 0.0, T), np.int16)
+g1 = np.asarray(anim.compose_frame(layers, params, 1.2, T), np.int16)
+dg = np.abs(g0 - g1)
+check("depth=legacy rollback: background pixels IDENTICAL again",
+      int(dg[bg_band].max()) == 0)
+set_video(depth="parallax")
 
 seam = np.abs(np.asarray(f0, np.int16) - np.asarray(fT, np.int16))
 check("loop seam: frame(0) == frame(T) exactly", int(seam.max()) == 0)
@@ -161,10 +177,16 @@ check("feet stay planted (bob never moves the anchor)",
       all(abs(anim._rig_at(params[0], u * T, T)["bob_dy"]) < 12.0
           for u in (0.1, 0.3, 0.6)))
 
-# rig OFF -> the classic whole-sprite path, pixel-identical
-set_video(rig=False)
+# rig OFF -> the classic whole-sprite path, pixel-identical (with
+# depth=legacy so the depth world does not ride on top; batch-4 also
+# draws the recorded contact shadows in the fallback, so the manual
+# reference draws them too)
+set_video(rig=False, depth="legacy")
 f_off = anim.compose_frame(layers, params, 1.2, T)
 legacy = layers["bg"].copy()
+ldr = ImageDraw.Draw(legacy)
+for sh in layers.get("shadows", []):
+    depth.draw_shadow(ldr, sh["x"], sh["y"], sh["s"], sh.get("mono", False))
 for sp, prm in zip(layers["sprites"], params):
     state = anim._eye_at(prm, 1.2)
     spr = sp[state or sp["default"]]
@@ -176,7 +198,7 @@ for sp, prm in zip(layers["sprites"], params):
                        int(sp["feet_y"] - (sp["h"] - 16) + dy)), spr)
 check("rig OFF reproduces the classic sprite paste EXACTLY",
       bool((np.asarray(f_off) == np.asarray(legacy)).all()))
-set_video(rig=True, camera="static")
+set_video(rig=True, depth="parallax")
 
 # ── 3. the locked camera ─────────────────────────────────────────────
 print("== locked camera ==")
@@ -252,12 +274,30 @@ h1 = np.asarray(anim.compose_frame(hook_layers, hp, 3.1, T), np.int16)
 dh = np.abs(h0 - h1)
 text_zone = dh[230:910, :]
 char_zone = dh[1250:1750, :]
-check("hook text zone is 100% identical across frames",
-      int(text_zone.max()) == 0)
 check("shorts characters move under the text",
       char_zone.mean() > 0.5)
-check("topic label (on bg) never moves",
-      int(dh[60:170, :].max()) == 0)
+# batch-4 doctrine: the INK of the text is untouchable (atmosphere
+# may wash around it; the letters themselves never change)
+ink0 = h0[230:910, :] < 80
+ink1 = h1[230:910, :] < 80
+check("hook text INK is 100% identical across frames",
+      bool((ink0 == ink1).all()))
+# the topic label now rides the far plane (batch-4 parallax): it may
+# sway WITHIN the clamp, never beyond it
+b0 = h0[60:170, :].astype(float).mean(axis=2)
+b1 = h1[60:170, :].astype(float).mean(axis=2)
+shifts = {}
+for dx in range(-12, 13):
+    if dx == 0:
+        cand, ref = b1, b0
+    elif dx > 0:
+        cand, ref = b1[:, dx:], b0[:, :-dx]
+    else:
+        cand, ref = b1[:, :dx], b0[:, -dx:]
+    shifts[dx] = float(np.abs(cand - ref).mean())
+best_dx = min(shifts, key=shifts.get)
+check("topic label rides the far plane within the parallax clamp",
+      -depth._MAX_DX <= best_dx <= depth._MAX_DX)
 
 # ── 5. a real clip render (ffmpeg) ───────────────────────────────────
 print("== real clip render ==")
@@ -286,8 +326,10 @@ def grab(path: Path, ts: float) -> np.ndarray:
 
 ga, gb = grab(clip, 0.5), grab(clip, 2.5)
 gd = np.abs(ga - gb)
-check("encoded clip: bg band pixel-stable (<0.1% visibly moved)",
-      float((gd[bg_band] > 12).mean()) < 0.001)
+# batch-4: the far plane parallax may move soft pixels in the bg
+# band — the contract is no hard teleport (>40 on >5% of the band)
+check("encoded clip: bg band stays atmosphere-grade (<5% hard-moved)",
+      float((gd[bg_band] > 40).mean()) < 0.05)
 check("encoded clip: characters visibly moving",
       gd[char_band].mean() > 0.5)
 

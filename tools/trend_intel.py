@@ -35,6 +35,11 @@ from src.youtube import API_BASE, get_access_token  # noqa: E402
 ROOT = Path(__file__).resolve().parent.parent
 SNAP_DIR = ROOT / "data" / "trend"
 
+# one source of truth for the title-shape taxonomy: src/viral.py
+# (batch-4 moved it there; trend_intel + viral + retention_probe all
+# speak the same formula names now)
+from src.viral import FORMULAS  # noqa: E402
+
 # Niche defaults mirror channel.yaml niche: love-psychology
 DEFAULT_QUERIES = [
     "psychology of love",
@@ -44,13 +49,19 @@ DEFAULT_QUERIES = [
 MIN_VIEWS = 5000          # skill edge case: small niche -> lower to 10k->5k floor here
 SHORT_MAX_SECONDS = 65
 
-FORMULAS = [  # (name, pattern) — first match wins, order = priority
-    ("NUMBER_LIST", r"\b(top\s*\d+|\d+\s+(best|things|signs|ways|facts|reasons|mistakes|habits|rules|tips))\b"),
-    ("HOW_TO", r"\bhow\s+to\b|\bstep[- ]by[- ]step\b|complete guide|\bguide\b"),
-    ("VS_COMPARISON", r"\bvs\.?\b|\bversus\b|which is better"),
-    ("WARNING", r"\b(avoid|mistake[s]?|stop doing|never|don'?t|red flags?|warnings?|toxic)\b"),
-    ("STORY", r"\bi\s+(tried|learned|realized)\b|what happened when|my (ex|partner|crush)"),
-    ("YEAR_SPECIFIC", r"\b(20[2-3]\d)\b"),
+# batch-4: live search-demand probes (Google Suggest with ds=yt —
+# what people actually TYPE into YouTube search, zero key, zero
+# quota). The seeds are need-to-know phrases in our niche: the words
+# around them in the autocomplete are the demand signal.
+SUGGEST_SEEDS = [
+    "psychology of love",
+    "why do i",
+    "relationship tips",
+    "attachment style",
+    "signs you",
+    "how to stop",
+    "love bombing",
+    "getting over",
 ]
 STOPWORDS = set("""a an the of in on for to and or but is are was were be been
 this that these those you your my me i we they it its his her their with without
@@ -67,6 +78,37 @@ def classify(title: str) -> str:
         if re.search(pat, t):
             return name
     return "PLAIN"
+
+
+def suggest(probes: list[str] | None = None) -> dict[str, list[str]]:
+    """YouTube search autocomplete (Google Suggest, ds=yt) — live
+    search demand: what viewers actually type around our niche.
+    Zero key, zero quota, zero quota pool. Best-effort per seed."""
+    out: dict[str, list[str]] = {}
+    for q in (probes if probes is not None else SUGGEST_SEEDS):
+        try:
+            url = ("https://suggestqueries.google.com/complete/search"
+                   "?client=firefox&ds=yt&q=" + urllib.parse.quote(q))
+            req = urllib.request.Request(
+                url, headers={"User-Agent": "Mozilla/5.0 (X11; Linux x86_64)"})
+            with urllib.request.urlopen(req, timeout=15) as r:
+                data = json.loads(r.read().decode("utf-8", "replace"))
+            if isinstance(data, list) and len(data) > 1 and isinstance(data[1], list):
+                out[q] = [str(s) for s in data[1]][:8]
+        except Exception as exc:
+            print(f"[suggest] {q!r} failed ({exc}) — continuing")
+    return out
+
+
+def suggest_summary(sug: dict[str, list[str]], top: int = 10) -> list[str]:
+    """The rising demand words across all autocomplete expansions."""
+    counts: dict[str, int] = {}
+    for phrases in sug.values():
+        for p in phrases:
+            for w in re.findall(r"[a-z']{3,}", p.lower()):
+                if w not in STOPWORDS and w not in {"com", "www", "http"}:
+                    counts[w] = counts.get(w, 0) + 1
+    return [w for w, _ in sorted(counts.items(), key=lambda kv: -kv[1])[:top]]
 
 
 def discover(query: str, n: int, shorts_only: bool) -> list[dict]:
@@ -268,7 +310,20 @@ def main() -> int:
     ap.add_argument("--region", default="EG", help="region for --chart (default EG)")
     ap.add_argument("--category", help="optional categoryId for --chart (10=music, 20=gaming)")
     ap.add_argument("--offline", action="store_true", help="replay latest snapshot")
+    ap.add_argument("--suggest-only", action="store_true",
+                    help="just the autocomplete demand probe (no yt-dlp, no OAuth)")
     args = ap.parse_args()
+
+    if args.suggest_only:
+        sug = suggest()
+        if not sug:
+            sys.exit("suggest probe came back empty (network blocked?)")
+        for seed, phrases in sug.items():
+            print(f"\n{seed}:")
+            for p in phrases[:5]:
+                print(f"  - {p}")
+        print("\n[rising demand words]", ", ".join(suggest_summary(sug)))
+        return 0
 
     if args.offline:
         snap = latest_snapshot()
@@ -302,9 +357,16 @@ def main() -> int:
 
     SNAP_DIR.mkdir(parents=True, exist_ok=True)
     snap = SNAP_DIR / f"trend_{datetime.now():%Y%m%d_%H%M}.json"
+    sug = suggest()                      # batch-4: demand probe, best-effort
     snap.write_text(json.dumps({"source": source, "ts": datetime.now(timezone.utc).isoformat(),
-                                "items": items}, indent=1))
+                                "items": items, "suggest": sug}, indent=1))
     print(brief(score(items), source))
+    if sug:
+        print("\nSEARCH DEMAND (autocomplete, batch-4):")
+        for seed, phrases in list(sug.items())[:4]:
+            tops = "; ".join(phrases[:3])
+            print(f"  {seed} -> {tops}")
+        print("  [rising words] " + ", ".join(suggest_summary(sug)))
     print(f"\n[snapshot] {snap.relative_to(ROOT)}")
     return 0
 

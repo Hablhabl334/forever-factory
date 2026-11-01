@@ -98,6 +98,22 @@ def _steer_block() -> str:
                  "never add facts or claims the draft does not contain")
     return "\n".join(lines) + "\n\n"
 
+
+# ── batch-4 pattern feedback (src/viral.py, our own channel's data) ─
+
+def _feedback_block() -> str:
+    """Which title shapes and retention shapes actually earned views
+    on OUR channel — computed by src/viral.py from the daily analytics
+    snapshots (+ the retention probe when it has run). Same law as
+    the steer: phrasing-level only, never a new fact or claim.
+    Missing / stale / below the signal floor -> "" and the briefs
+    stay byte-identical to the pre-feedback machine."""
+    try:
+        from .viral import feedback_block
+        return feedback_block()
+    except Exception:
+        return ""
+
 # ── configuration ───────────────────────────────────────────────────
 
 _MODELS = [
@@ -360,7 +376,7 @@ def _long_brief(story: dict) -> str:
                  if avoid else "")
     return f"""{_STYLE}
 
-{_steer_block()}Rewrite every scene narration of today's long video below. Each draft is a
+{_steer_block()}{_feedback_block()}Rewrite every scene narration of today's long video below. Each draft is a
 finished beat; keep its role, its facts and its concept, but write it like
 a human scriptwriter would say it out loud. Vary sentence rhythm; some
 short punchy lines, some flowing ones. Keep each within 70%-150% of the

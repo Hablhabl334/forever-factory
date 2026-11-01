@@ -1,0 +1,68 @@
+{
+ "week": "2026-11-01",
+ "episodes": 6,
+ "generated": "src/viral.py",
+ "median_first_week_views": 15.5,
+ "by_formula": [
+  {
+   "name": "HOW_TO",
+   "n": 3,
+   "mean_views": 28,
+   "ratio": 1.81
+  },
+  {
+   "name": "PLAIN",
+   "n": 3,
+   "mean_views": 3,
+   "ratio": 0.19
+  }
+ ],
+ "by_band": [
+  {
+   "name": "mid(60-74)",
+   "n": 3,
+   "mean_views": 28,
+   "ratio": 1.81
+  },
+  {
+   "name": "low(<60)",
+   "n": 3,
+   "mean_views": 3,
+   "ratio": 0.19
+  }
+ ],
+ "best": [
+  {
+   "title": "How To Heal After A Breakup",
+   "views": 28,
+   "score": 71,
+   "formula": "HOW_TO"
+  },
+  {
+   "title": "How To Heal After A Breakup",
+   "views": 28,
+   "score": 71,
+   "formula": "HOW_TO"
+  },
+  {
+   "title": "How To Heal After A Breakup",
+   "views": 28,
+   "score": 71,
+   "formula": "HOW_TO"
+  }
+ ],
+ "worst": [
+  {
+   "title": "Thoughts About Relationships",
+   "views": 3,
+   "score": 50,
+   "formula": "PLAIN"
+  },
+  {
+   "title": "Thoughts About Relationships",
+   "views": 3,
+   "score": 50,
+   "formula": "PLAIN"
+  }
+ ]
+}

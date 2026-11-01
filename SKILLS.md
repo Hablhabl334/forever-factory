@@ -299,25 +299,101 @@ checks).
   in_progress episodes stay with the resume ladder. Rollback:
   `channel.yaml: verify.enabled: false`.
 
-### The visual refresh bank (owner-gated, identity LOCKED)
+### The visual refresh bank (owner-gated; MOTION unlocked 2026-11-01)
 
 * **bento / editorial / glassmorphism / neon / paper / premium /
   terracotta** — complete ready-to-apply visual systems (palette,
   type scale, component specs as design tokens), plus
   **design-system** (the token architecture: primitive →
   semantic → component) and **banner-design**. The channel's
-  visual identity is LOCKED (the warm-paper couple look, the
-  thumbnail brand) and none of these touch it. What they are:
-  eight pre-loaded design systems, on the shelf for the day the
-  OWNER approves a visual refresh or a new format — a seasonal
-  card treatment, a new series look, a milestone rebrand. Until
-  that owner decision lands, they are reference doctrine only:
-  no pixels change without it.
+  visual identity stays LOCKED (the warm-paper couple look, the
+  thumbnail brand) — but the owner UNLOCKED the visual settings
+  on 2026-11-01, and the motion/depth half of that bank is now
+  LIVE in the render (see batch-4 below: parallax, DOF, motes,
+  shaft — the couple's look untouched). The palette/type systems
+  remain on the shelf for a bigger owner-approved refresh.
 * **brand** — the guidelines framework (voice framework,
   consistency checklist, visual-identity spec). In this repo the
   doctrine already lives as `channel.yaml`: the locks ARE the
   brand guidelines. The skill is the checklist to re-read before
   any change that touches a locked surface.
+
+## batch-4 (2026-11-01) — THE DEPTH BUILD + THE VIRAL BRAIN
+
+The owner unlocked the visual settings ("I didnt lock the visuals
+settings") and asked for real depth, better movement, and a viral
+brain. Two engines shipped, both fail-open, both free:
+
+### The depth engine  →  `src/depth.py` (new), `src/art_engine.py`,
+### `src/anim.py`, `src/render.py`
+
+The world becomes 2.5D without touching the locked couple:
+
+* **parallax** — the far plane (wall, props) counter-moves against
+  the couple's hip sway like a tracked camera (±8px clamp);
+  floor and text stay pinned. A wainscot + panel-seam wall
+  structure (flat-art vocabulary, PAPER_DEEP) gives the parallax
+  its rail — a featureless wall shows nothing.
+* **depth of field** — the far plane bakes once with a Gaussian
+  blur; the couple and the floor stay razor sharp.
+* **living air** — 30 seeded dust motes in three depth bands
+  (behind / around / in front), integer-cycle drift.
+* **volumetric light** — room scenes get a soft shaft (seeded 60%
+  presence, 5-level shimmer ladder) from a corner.
+* **grounded shadows** — the contact ellipse now follows the hips
+  and stretches at the weight-shift extreme (was: static bake).
+* **seam law intact** — every term integer-cycle periodic;
+  frame(T) == frame(0) exactly (tested). **Fail-open** — any depth
+  exception collapses to the exact pre-batch-4 frame (also
+  tested, shadows included). Loop/intro caches carry a `_d4`
+  marker. Gates: `video.depth: parallax|legacy`, `video.motes`,
+  `video.shaft: shimmer|static|off`. Verified by eye (VLM pass on
+  all six checks) and by cross-correlation (wall shifts 6px over
+  half a loop, residual 0.98 → 0.18).
+
+### The viral brain  →  `src/viral.py` (new), `tools/retention_probe.py`
+### (new), `tools/trend_intel.py`, `tools/compete.py`, `src/muse.py`,
+### `src/orchestrator.py`
+
+Score before publish, learn after — all deterministic, offline:
+
+* **score_title** (short-form-video + hook-writer + youtube-seo
+  doctrine): 0-100 click-craft score per long title (you-address,
+  curiosity opener, power word, emotion word, question form,
+  length band, formula shape; penalties for AI-tell vocabulary,
+  shouting caps, clickbait tells). LOG-ONLY at publish
+  (`ep["viral"]`, next to `ep["tells"]`) — never a gate.
+* **the feedback loop** (ab-testing doctrine): every episode's
+  title joins its actual first-window view gains from the daily
+  analytics snapshots (zero quota — math on data we already
+  collect); the Sunday benchmark aggregates which shapes /
+  score bands beat the channel median →
+  `data/competitive/viral_feedback.json` → the muse brief gains a
+  PATTERN FEEDBACK block (phrasing-level only, same law as the
+  steer). **Signal floor**: below 5 median first-window views the
+  block stays silent — no noise guidance (the channel's longs
+  currently sit at 0-2 first-week views; the loop wakes as they
+  grow).
+* **retention probe** — the OAuth token's dormant
+  `yt-analytics.readonly` scope finally used: per-video retention
+  (averageViewPercentage), watch minutes, impressions + CTR from
+  the YouTube Analytics API (own quota pool, 50k/day; we spend a
+  handful). Runs Sundays, best-effort, `--offline` replay.
+  Retention is measurable even at 5 views — the strongest signal
+  at this channel's scale.
+* **suggest probe** (trend_intel `--suggest-only` + every
+  snapshot): Google Suggest with `ds=yt` — what viewers actually
+  TYPE around the niche ("why do i push people away",
+  "attachment styles in relationships"), zero key, zero quota.
+* **FORMULAS single-sourced** in `src/viral.py`; trend_intel now
+  imports them (one taxonomy everywhere).
+
+Tests: `scripts/test_batch4_skills.py` — 19 checks; rig suite
+updated to the new doctrine (+6 checks, 31 total); skill_upgrades
+6g/6i updated for the `_d4` cache marker. All 15 suites green
+(batch2 45, skill_upgrades 57, script_v2 41, viral 51, oct8 41,
+rig 31, compete 38, muse 28, ep_numbering, grid_heal, v4_extras,
+v4_render, durability, batch3 62, batch4 19).
 
 ### The ops discipline (agent-side, for me — the noon report and
 ### every factory change)

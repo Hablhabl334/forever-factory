@@ -233,6 +233,13 @@ def compose_frame(layers: dict, params: list[dict], t: float,
     moving, eyes glancing. Otherwise the classic whole-sprite
     sway/bob/blink path runs, pixel-identical to the pre-rig era.
 
+    batch-4: when the depth engine is on, the world under the couple
+    is the two-plane parallax composition (blurred far plane that
+    counter-moves against the hips, fixed floor, dust motes, light
+    shaft, rig-aware contact shadows — src/depth.py). Any failure at
+    any point collapses the frame to the flat legacy path: the
+    machine can never die because of depth.
+
     THE TEXT OVERLAY IS NEVER TOUCHED in either path: it composites
     last, from its own transparent layer, on top of everything.
 
@@ -241,8 +248,28 @@ def compose_frame(layers: dict, params: list[dict], t: float,
     alpha entrance) so the words arrive as an event instead of
     existing since forever.
     """
-    img = layers["bg"].copy()
-    dr = None
+    from . import depth
+    depth_on = False
+    if depth.enabled():
+        try:
+            img = depth.world_base(layers, params, t, T)
+            depth_on = True
+        except Exception:
+            depth_on = False
+    if not depth_on:
+        img = layers["bg"].copy()
+        # depth-era cards carry RECORDED shadows (not baked); the
+        # fail-open fallback draws them statically so a collapsed
+        # frame is pixel-identical to the legacy machine, not a
+        # shadowless near-miss
+        dr = None
+        if layers.get("shadows"):
+            dr = ImageDraw.Draw(img)
+            for sh in layers["shadows"]:
+                depth.draw_shadow(dr, sh["x"], sh["y"], sh["s"],
+                                  sh.get("mono", False))
+    else:
+        dr = None
     two_pi = 2.0 * math.pi
     rig_on = rig_enabled()
     for sp, prm in zip(layers.get("sprites", []), params):
@@ -263,6 +290,11 @@ def compose_frame(layers: dict, params: list[dict], t: float,
         x = int(sp["anchor_x"] - sp["w"] / 2 + dx)
         y = int(sp["feet_y"] - (sp["h"] - 16) + dy)
         img.paste(spr, (x, y), spr)
+    if depth_on:
+        try:
+            depth.foreground(img, layers, t, T)
+        except Exception:
+            pass
     tl = None if skip_text else layers.get("text_layer")
     if tl is not None:
         img = Image.alpha_composite(img.convert("RGBA"), tl).convert("RGB")

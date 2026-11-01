@@ -244,8 +244,9 @@ ok("6f perceptually settled by 3/4 (subpixel micro-settle only)",
    f"feels finished, micro-settles underneath)")
 
 # the real render path: a CTA-style card through render_clip_art with
-# pop=True — the intro must exist as a _intro_dip_pop.mp4 clip of
-# exactly the intro length (the seam contract lives in the filenames)
+# pop=True — the intro must exist as a _intro_dip_pop[_d4].mp4 clip of
+# exactly the intro length (the seam contract lives in the filenames;
+# batch-4 appends its _d4 depth marker — glob both eras)
 from src import art_engine, render  # noqa: E402
 scene = next(s for s in story["scenes"]
              if s.get("image", {}).get("kind") == "couple_scene")
@@ -253,14 +254,16 @@ layers = art_engine.build_scene_layers(scene, story["seed"] + scene["n"] * 13)
 cta_clip = TMP / "cta_card.mp4"
 render.render_clip_art(layers, story["seed"], cta_clip, 4.0, "zoom_in",
                        card_idx=7, accent=True, pop=True)
-intro_pop = TMP / "cta_card_intro_dip_pop.mp4"
-ok("6g pop intro rendered + cached under its own name", intro_pop.exists())
+intro_pop = next(TMP.glob("cta_card_intro_dip_pop*.mp4"), None)
+ok("6g pop intro rendered + cached under its own name",
+   intro_pop is not None and "_d4" in intro_pop.name,
+   f"({intro_pop.name if intro_pop else 'missing'} — batch-4 depth marker)")
 info = render.probe(intro_pop)
 ok("6h pop intro is the 0.30s entrance",
    0.25 < float(info["format"]["duration"]) < 0.40,
    f"({float(info['format']['duration']):.2f}s)")
 ok("6i the loop + final clip still render (seam contract intact)",
-   cta_clip.exists() and len(list(TMP.glob("cta_card_loop*_rig.mp4"))) == 1,
+   cta_clip.exists() and len(list(TMP.glob("cta_card_loop*_rig*.mp4"))) == 1,
    f"(final {cta_clip.stat().st_size/1e6:.2f}MB)")
 
 print("== 7. upload snippet: the inert chapters key never sent ==")

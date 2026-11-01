@@ -729,6 +729,15 @@ def _scene_room(d: ImageDraw.ImageDraw, w: int, h: int, floor_y: int,
                 seed: int) -> None:
     from .rng import FactoryRNG
     r = FactoryRNG(seed)
+    # ── batch-4 wall structure: a wainscot line + a few panel seams
+    # in the flat-art vocabulary (never dark, but VISIBLE: PAPER_DEEP
+    # on PAPER reads at phone size even under the far-plane blur —
+    # this is the rail the parallax and depth-of-field ride on). ──
+    wx = int(floor_y * r.between(0.68, 0.78))
+    d.line([0, wx, w, wx], fill=PAPER_DEEP, width=6)
+    for _ in range(int(r.between(2, 4))):
+        x = int(w * r.between(0.08, 0.92))
+        d.line([x, wx, x, floor_y], fill=PAPER_SHADE, width=3)
     d.rectangle([0, floor_y, w, h], fill=PAPER_SHADE)
     d.line([0, floor_y, w, floor_y], fill=PAPER_DEEP, width=5)
     for i in range(1, 6):
@@ -879,26 +888,48 @@ def _ground_shadow(d, x: float, feet_y: float, s: float,
 def _attach_couple(bg: Image.Image, spec: dict, seed: int, w: float,
                    floor_y: float, s: float) -> dict:
     """The COLORED locked couple as sprites on any background — bright
-    cards never fall back to dark silhouettes (user rule: no dark)."""
+    cards never fall back to dark silhouettes (user rule: no dark).
+
+    batch-4: when the depth engine is on, contact shadows are NOT
+    baked — their positions are recorded in layers['shadows'] and the
+    animator draws them rig-aware (they follow the hips). Static
+    paths still see the identical picture via compose_static."""
+    from . import depth
     ea = vary_emotion(seed, spec.get("emotion_a", "neutral"), 3)
     eb = vary_emotion(seed, spec.get("emotion_b", "neutral"), 4)
     a, b = _figure_specs(seed, ea, spec.get("pose_a", "stand"),
                          eb, spec.get("pose_b", "stand"))
     d = ImageDraw.Draw(bg)
     ax, bx = w * 0.34, w * 0.66
-    _ground_shadow(d, ax, floor_y, s)
-    _ground_shadow(d, bx, floor_y, s)
+    shadows: list[dict] = []
+    if not depth.enabled():
+        _ground_shadow(d, ax, floor_y, s)
+        _ground_shadow(d, bx, floor_y, s)
+    else:
+        shadows = [{"x": ax, "y": floor_y, "s": s, "mono": False},
+                   {"x": bx, "y": floor_y, "s": s, "mono": False}]
     sa, sb = render_character_sprites(a, s), render_character_sprites(b, s)
     sa.update({"anchor_x": ax, "feet_y": floor_y})
     sb.update({"anchor_x": bx, "feet_y": floor_y})
     return {"bg": bg, "sprites": [sa, sb], "text_layer": None,
-            "size": bg.size}
+            "size": bg.size, "shadows": shadows,
+            "depth_kind": "glow", "depth_seed": seed,
+            "depth_top": 200 if bg.size[1] > bg.size[0] else 260}
 
 
 def compose_static(layers: dict) -> Image.Image:
     """Flatten layers into one still image (frame zero — also used by
-    thumbnails and any static fallback path)."""
+    thumbnails and any static fallback path).
+
+    batch-4: recorded (unbaked) contact shadows are drawn here so the
+    depth era keeps pixel-identical static output."""
+    from . import depth
     img = layers["bg"].copy()
+    if layers.get("shadows"):
+        d = ImageDraw.Draw(img)
+        for sh in layers["shadows"]:
+            depth.draw_shadow(d, sh["x"], sh["y"], sh["s"],
+                              sh.get("mono", False))
     for sp in layers.get("sprites", []):
         spr = sp[sp["default"]]
         img.paste(spr, (int(sp["anchor_x"] - sp["w"] / 2),
@@ -912,7 +943,12 @@ def compose_static(layers: dict) -> Image.Image:
 def build_couple_layers(spec: dict, seed: int, w: int = 1920, h: int = 1080,
                         zoom: float = 1.0) -> dict:
     """Scene room + the locked couple as movable sprites. Faces get a
-    seeded emotion-intensity pass so expressions differ per video."""
+    seeded emotion-intensity pass so expressions differ per video.
+
+    batch-4: room scenes carry depth_kind='room' (the light shaft is
+    room-only) and record shadows instead of baking them when the
+    depth engine is on (top strip stays crisp for the shorts band)."""
+    from . import depth
     ea = vary_emotion(seed, spec["emotion_a"], 1)
     eb = vary_emotion(seed, spec["emotion_b"], 2)
     img = Image.new("RGB", (w, h), PAPER)
@@ -922,8 +958,13 @@ def build_couple_layers(spec: dict, seed: int, w: int = 1920, h: int = 1080,
     s = (1.02 if w >= 1600 else 1.45) * zoom
     ax, bx = w * 0.32, w * 0.68
     feet = floor_y + 6
-    _ground_shadow(d, ax, feet, s)
-    _ground_shadow(d, bx, feet, s)
+    shadows: list[dict] = []
+    if not depth.enabled():
+        _ground_shadow(d, ax, feet, s)
+        _ground_shadow(d, bx, feet, s)
+    else:
+        shadows = [{"x": ax, "y": feet, "s": s, "mono": False},
+                   {"x": bx, "y": feet, "s": s, "mono": False}]
     img = _vignette(img)
 
     a_spec, b_spec = _figure_specs(seed, ea, spec["pose_a"], eb, spec["pose_b"])
@@ -932,25 +973,35 @@ def build_couple_layers(spec: dict, seed: int, w: int = 1920, h: int = 1080,
     sa.update({"anchor_x": ax, "feet_y": feet})
     sb.update({"anchor_x": bx, "feet_y": feet})
     return {"bg": img, "sprites": [sa, sb], "text_layer": None,
-            "size": (w, h)}
+            "size": (w, h), "shadows": shadows,
+            "depth_kind": "room", "depth_seed": seed,
+            "depth_top": 200 if h > w else 0}
 
 
 def build_mono_pair_layers(bg: Image.Image, spec: dict, seed: int,
                            w: float, floor_y: float, s: float) -> dict:
     """Attach the mono silhouette couple (ink cards) as sprites."""
+    from . import depth
     ea = vary_emotion(seed, spec.get("emotion_a", "neutral"), 3)
     eb = vary_emotion(seed, spec.get("emotion_b", "neutral"), 4)
     a, b = _mono_specs(seed, ea, spec.get("pose_a", "stand"),
                        eb, spec.get("pose_b", "stand"))
     d = ImageDraw.Draw(bg)
     ax, bx = w * 0.34, w * 0.66
-    _ground_shadow(d, ax, floor_y, s, mono=True)
-    _ground_shadow(d, bx, floor_y, s, mono=True)
+    shadows: list[dict] = []
+    if not depth.enabled():
+        _ground_shadow(d, ax, floor_y, s, mono=True)
+        _ground_shadow(d, bx, floor_y, s, mono=True)
+    else:
+        shadows = [{"x": ax, "y": floor_y, "s": s, "mono": True},
+                   {"x": bx, "y": floor_y, "s": s, "mono": True}]
     sa, sb = render_character_sprites(a, s), render_character_sprites(b, s)
     sa.update({"anchor_x": ax, "feet_y": floor_y})
     sb.update({"anchor_x": bx, "feet_y": floor_y})
     return {"bg": bg, "sprites": [sa, sb], "text_layer": None,
-            "size": bg.size}
+            "size": bg.size, "shadows": shadows,
+            "depth_kind": "ink", "depth_seed": seed,
+            "depth_top": 200 if bg.size[1] > bg.size[0] else 0}
 
 
 # ── long-video cards (1920x1080) ─────────────────────────────────────

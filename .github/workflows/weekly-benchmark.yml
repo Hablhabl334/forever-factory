@@ -101,6 +101,19 @@ jobs:
           YT_REFRESH_TOKEN: ${{ secrets.YT_REFRESH_TOKEN }}
         run: python tools/compete.py
 
+      - name: Retention probe (YouTube Analytics API, own quota pool)
+        # batch-4: per-video retention / watch-time / CTR — the real
+        # distribution signals, from the yt-analytics.readonly scope
+        # the OAuth token already carries. Separate quota pool from
+        # Data API v3 (50k/day own budget; we use a handful of units).
+        # Best-effort by design: a silent week never alerts.
+        if: steps.benchgate.outputs.run == 'true'
+        env:
+          YT_CLIENT_ID: ${{ secrets.YT_CLIENT_ID }}
+          YT_CLIENT_SECRET: ${{ secrets.YT_CLIENT_SECRET }}
+          YT_REFRESH_TOKEN: ${{ secrets.YT_REFRESH_TOKEN }}
+        run: python tools/retention_probe.py || true
+
       - name: Commit the research memory
         if: steps.benchgate.outputs.run == 'true'
         run: |

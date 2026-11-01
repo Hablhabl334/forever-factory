@@ -148,6 +148,21 @@ video:
   # eye gaze, blinks. false = classic whole-sprite sway/bob/blink.
   rig: true
 
+  # ── batch-4 THE DEPTH BUILD (2026-11-01, owner unlocked visuals):
+  # the world becomes 2.5D — the far plane (wall, props) bakes once
+  # with a soft depth-of-field blur and counter-moves against the
+  # couple's hip sway like a camera parallax; the floor and every
+  # text stay pinned; seeded dust motes drift in three depth bands
+  # (behind, around, in front of the couple); room scenes get a
+  # shimmering volumetric light shaft; contact shadows follow the
+  # hips and stretch at the weight-shift extreme. Seam law intact:
+  # every term is integer-cycle periodic, loops never jump. Any
+  # failure collapses to the flat pre-batch-4 path (fail-open).
+  # "legacy" restores the single-plane world exactly.
+  depth: "parallax"
+  motes: true            # the living air (three depth bands)
+  shaft: "shimmer"       # light shaft on room scenes: shimmer|static|off
+
 thumbnail:
   # (youtube-thumbnail-design skill, 2026-10-27) The LOCKED couple
   # never changes — only the FACE expression varies per episode,

@@ -589,6 +589,19 @@ def steer_write(a: dict) -> None:
     (COMP_DIR / "steer.json").write_text(json.dumps(steer, indent=1))
     topic_queue_write(a, [w for w, _ in th])
 
+    # batch-4: the pattern feedback — our OWN channel's first-window
+    # view gains joined to title shapes + the retention probe's data
+    # (data/competitive/viral_feedback.json). The muse reads it as a
+    # phrasing-level block; silent below the signal floor.
+    try:
+        from src.viral import build_feedback
+        fb = build_feedback(load_state())
+        print(f"[viral] feedback: {fb.get('episodes', 0)} episodes, "
+              f"median {fb.get('median_first_week_views', 'n/a')} views "
+              f"-> {(COMP_DIR / 'viral_feedback.json').name}")
+    except Exception as exc:
+        print(f"[viral] feedback skipped ({exc}) — best-effort")
+
 
 # ── the topic queue (owner-unlocked 2026-10-26) ─────────────────────
 
