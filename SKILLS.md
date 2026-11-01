@@ -422,6 +422,118 @@ v4_render, durability, batch3 62, batch4 19).
 * **image-edit** — z-ai SDK editing; API-gated, same dormant tier
   as the LLM/VLM/TTS twins above.
 
+## Batch-5: the video/visual mega-harvest (2026-11-02)
+
+The owner's order: "get ALL the video-generation and visual skills —
+free ones installed, paid/API ones copied as concepts — then build a
+realistic-visuals test WITHOUT touching the locked settings." The
+library grew 346 → **507** (161 new this batch, plus the ~246 of the
+lost-context harvest on 2026-11-01). Every install was serial
+(one repo at a time), every new skill was scanned for API-key/paid/
+login gates, and **6 wrappers were quarantined** to
+`scripts/quarantine_batch5/` (concept value, no install):
+reverse-any-video, seedance-2-5, scenario-video, scenario-3d-worlds,
+scenario-sprite-animation, scenario-video-assembly (all paid-API
+services via MCP).
+
+### The realistic-3D pipeline bank (new)
+
+* **Blender suite (30 skills)** — roble3/cc-blender-skill (text-to-blender,
+  reference-to-3d, wireframe-to-3d, texture-driven-mesh-fitting,
+  blender-materials/rendering/uv-texturing, atlas-uv-fitting,
+  animation-quality-gate...) + scenario-labs blender craft (rigging —
+  including ARKit-52/viseme face rigs for lip sync —, sculpting,
+  lighting-rendering — EEVEE vs Cycles, HDRI, AgX/ACES —, texturing,
+  uv-baking, retopology, hard-surface, animation). All local, all
+  free. This is the "3D characters as real as possible" engine bank.
+* **Unreal/Unity (10)** — ue-animation-system, ue-character-movement,
+  ue-materials-rendering, ue-sequencer-cinematics, unreal-engine,
+  unity-animation. The real-human rendering tier if we ever outgrow
+  2.5D.
+* **img2threejs, threejs-gltf-loading, threejs-scene-setup** — image →
+  3D and glTF character loading for any web-render route.
+* **multimodal-stable-diffusion** — free local HuggingFace Diffusers
+  playbook (txt2img, img2img, inpaint, outpaint, variations).
+* **ComfyUI bank (pre-existing + verified)**: comfyui-research,
+  comfyui-inventory, comfyui-lora-training, comfyui-character-gen —
+  the free local generation route (ckruz/comfyui-expert repo went
+  private; skipped).
+
+### The motion-craft bank (new)
+
+* **dylantarre full ladder** — the 12-principles mastery set completed
+  (staging, secondary-action, straight-ahead-pose, timing-principle,
+  exaggeration, timing-calibration, appeal, character-appeal,
+  filmmaker, motion-designer, spatial-thinking, video-motion-graphics,
+  the 9-step principles curriculum absolute-beginner → master).
+  Character-appeal + filmmaker are the two that speak directly to
+  believable people on screen.
+* **disney-animation-rule-skill** — the Disney rules as a named
+  checklist.
+* **performance-direction** — provider-independent ACTING direction for
+  synthetic performers: objective/obstacle/action, beat-level physical
+  behavior, eye-line, facial expression, lip-sync alignment, take QA.
+  THE skill for "real humans" (free doctrine).
+* **Official GSAP (6) + Remotion (8) + hyperframes core** (motion-
+  doctrine, seam-craft, media-use, captions-overlay, cli, slideshow,
+  cut-the-curve, oversized-cursor, remotion-to-hyperframes) — motion
+  law + the loop-seam craft (seam-craft names what our SEAM LAW does).
+* **cinematic-camera + cinematography + shot-composition** — camera
+  language for believable depth.
+* **iart-ai explainer/tiktok/text-message suites** — caption-animation,
+  countdown-video, lower-thirds, text-message-animation, whiteboard,
+  isometric, explainer-video (Shorts-native motion vocabulary).
+* **animate-text, awwwards-animations, title-sequence-3d, vox-explainer,
+  loop-cover, reference-to-motion, motion-brief-writer,
+  motion-prompt-writer** — title/text motion craft.
+* **manim-composer + manim best practices** — free math/explainer
+  animation engine.
+
+### The production bank (new)
+
+* **video-prompting** — prompt craft for ALL video models (Veo,
+  Seedance, Wan, LTX, MiniMax) + character-sheet prompts for
+  consistency. Model-agnostic doctrine, works on free local models.
+* **talking-head-and-piece-to-camera** — the real-human format craft.
+* **video-shotcraft, video-storyboard, short-drama suite (prompts/
+  storyboard/image-prompts), viral-youtube-shorts, viral-hooks,
+  viral-reverse-engineering, scripting-and-storyboarding** — Short
+  drama + Shorts structure.
+* **ffmpeg, moviepy, video_toolkit, playwright-recording** (free local
+  toolchain), **sound-design-film**, **cinematography** (fal catalog
+  shot/lens/lighting language — doctrine only, no key), **openfilm**
+  (free npx film-craft manual), **text-to-lottie**, **broll: motion-
+  broll, object-separation, explainer presets**.
+
+### The API-gated concept map (copy the ideas, run them free)
+
+What the paid services sell, and the free local route for each:
+* **Talking avatar** (HeyGen/Synthesia/P-Video-Avatar) → Blender
+  character + ARKit-52/viseme rig (scenario-blender-rigging) + kokoro
+  audio + free lipsync (Wav2Lip/LivePortrait class), or ComfyUI
+  character-consistency (comfyui-lora-training + character-gen).
+* **Text/image→video** (Veo/Seedance/Wan/Kling/Pika/Runway/MiniMax) →
+  ComfyUI/Diffusers with open weights (Wan 2.x, HunyuanVideo, LTX-2)
+  + video-prompting craft; keyframes via SD/Flux.
+* **Lipsync** (fal-lip-sync) → Wav2Lip/SadTalker/LivePortrait (local).
+* **Face consistency** (nano-banana style) → LoRA training + InstantID/
+  PuLid class free nodes.
+* **Video inpaint/outpaint/extend** (runcomfy/doany) → ProPainter class
+  local models.
+* **Text/image→3D** (Meshy/Tripo/Rodin/Sparc3D) → Blender craft
+  (text-to-blender, reference-to-3d, wireframe-to-3d) + TripoSR open
+  weights; **Gaussian-splat worlds** (scenario-3d-worlds concept) →
+  Nerfstudio/3DGS open toolchain.
+* **4K upscale** (scenario/topaz) → Real-ESRGAN/Video2X + ffmpeg.
+* **Dubbing/voice clone** (ElevenLabs/Fish) → kokoro (our engine),
+  XTTS/F5-TTS open models.
+* **UGC ad machine** (pika ugc-ads/arcreel/blitzreels) → realistic-
+  ugc-video + ugc-ad-production craft on our own render path.
+
+Standing rule unchanged: free and readable only; a skill that gates
+usage behind a key/quota/login is quarantined with its concept noted
+here, never wired into the factory.
+
 ### The owner-decision plays (mapped, dormant)
 
 * **ab-testing** — YouTube Studio's Test & Compare is an OWNER
