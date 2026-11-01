@@ -1,68 +1,74 @@
 {
  "week": "2026-11-01",
- "episodes": 6,
+ "episodes": 23,
  "generated": "src/viral.py",
- "median_first_week_views": 15.5,
+ "median_first_week_views": 1,
  "by_formula": [
   {
    "name": "HOW_TO",
-   "n": 3,
-   "mean_views": 28,
-   "ratio": 1.81
+   "n": 2,
+   "mean_views": 3,
+   "ratio": 3.0
   },
   {
    "name": "PLAIN",
-   "n": 3,
-   "mean_views": 3,
-   "ratio": 0.19
+   "n": 19,
+   "mean_views": 1.7,
+   "ratio": 1.68
   }
  ],
  "by_band": [
   {
+   "name": "high(75+)",
+   "n": 1,
+   "mean_views": 0,
+   "ratio": 0.0
+  },
+  {
    "name": "mid(60-74)",
-   "n": 3,
-   "mean_views": 28,
-   "ratio": 1.81
+   "n": 8,
+   "mean_views": 2.6,
+   "ratio": 2.62
   },
   {
    "name": "low(<60)",
-   "n": 3,
-   "mean_views": 3,
-   "ratio": 0.19
+   "n": 14,
+   "mean_views": 1.4,
+   "ratio": 1.43
   }
  ],
  "best": [
   {
-   "title": "How To Heal After A Breakup",
-   "views": 28,
-   "score": 71,
+   "title": "The Psychology of Ghosting",
+   "views": 7,
+   "score": 50,
+   "formula": "PLAIN"
+  },
+  {
+   "title": "How to Get Over a Breakup",
+   "views": 6,
+   "score": 65,
    "formula": "HOW_TO"
   },
   {
-   "title": "How To Heal After A Breakup",
-   "views": 28,
-   "score": 71,
-   "formula": "HOW_TO"
-  },
-  {
-   "title": "How To Heal After A Breakup",
-   "views": 28,
-   "score": 71,
-   "formula": "HOW_TO"
+   "title": "What Keeps Love Alive",
+   "views": 5,
+   "score": 61,
+   "formula": "PLAIN"
   }
  ],
  "worst": [
   {
-   "title": "Thoughts About Relationships",
-   "views": 3,
-   "score": 50,
+   "title": "What Heartbreak Does to Your Brain",
+   "views": 0,
+   "score": 77,
    "formula": "PLAIN"
   },
   {
-   "title": "Thoughts About Relationships",
-   "views": 3,
-   "score": 50,
-   "formula": "PLAIN"
+   "title": "Chemistry vs Compatibility",
+   "views": 0,
+   "score": 59,
+   "formula": "VS_COMPARISON"
   }
  ]
 }
