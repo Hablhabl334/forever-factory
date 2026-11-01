@@ -1,5 +1,5 @@
 # Weekly benchmark — week of 2026-10-25 -> 2026-11-01
-roster: 6 channels | their fresh uploads analyzed: 12 | quota spent: ~9 units | FIRST BASELINE WEEK — deltas arrive next week
+roster: 6 channels | their fresh uploads analyzed: 11 | quota spent: ~9 units | FIRST BASELINE WEEK — deltas arrive next week
 
 ## 1. The league — 7-day growth
 
@@ -17,27 +17,27 @@ roster: 6 channels | their fresh uploads analyzed: 12 | quota spent: ~9 units | 
 
 | Title | Channel | Age | Views | V/day | Formula |
 |---|---|---|---|---|---|
-| THE VIVEK RAMASWAMY AD: Why some parents don | Psychology with  | 6.0d | 143,577 | 23,929 | WARNING |
-| Why Love NEVER Lasts FOREVER | The School of Li | 4.2d | 87,783 | 20,900 | WARNING |
-| How To Know Yourself | The School of Li | 0.5d | 5,825 | 11,650 | HOW_TO |
-| What We Owe To Those Who Loved Us In Our Chi | The School of Li | 4.2d | 40,850 | 9,726 | PLAIN |
-| Traumatic Intelligence, the "Rarest Type" Di | Psych2Go | 8.3d | 57,749 | 6,957 | PLAIN |
-| Why We Get Triggered | The School of Li | 7.2d | 41,431 | 5,754 | PLAIN |
+| THE VIVEK RAMASWAMY AD: Why some parents don | Psychology with  | 6.0d | 143,640 | 23,940 | WARNING |
+| Why Love NEVER Lasts FOREVER | The School of Li | 4.2d | 87,871 | 20,921 | WARNING |
+| How To Know Yourself | The School of Li | 0.5d | 6,088 | 12,176 | HOW_TO |
+| What We Owe To Those Who Loved Us In Our Chi | The School of Li | 4.2d | 40,854 | 9,727 | PLAIN |
+| Traumatic Intelligence, the "Rarest Type" Di | Psych2Go | 8.3d | 57,766 | 6,959 | PLAIN |
+| Why We Get Triggered | The School of Li | 7.2d | 41,434 | 5,754 | PLAIN |
 | My husband pretended to be a creep in Italia | Psychology with  | 4.9d | 14,436 | 2,946 | PLAIN |
-| 😍 This Is the Greeting Men Only Use With Wom | Love Psychology | 8.0d | 234 | 29 | PLAIN |
-| ❤️ He's Not Over You, He's Just Silent — WAT | Love Psychology | 10.0d | 161 | 16 | PLAIN |
+| 😍 This Is the Greeting Men Only Use With Wom | Love Psychology | 8.0d | 233 | 29 | PLAIN |
 | ❤️ This Is the Test Every Man Gives Before H | Love Psychology | 9.0d | 56 | 6 | PLAIN |
+| ❤️ How To Actually Make A Man Miss You Like  | Love Psychology | 3.7d | 9 | 2 | HOW_TO |
 
 ## 3. What the niche shipped this week
 
-- formula mix: PLAIN 8 (66%), WARNING 2 (16%), HOW_TO 2 (16%)
-- hot theme words: male, psychology, love, women, he's, vivek, ramaswamy, some
-- shorts share: 0/12 (0%) of fresh uploads under 65 s
+- formula mix: PLAIN 7 (63%), WARNING 2 (18%), HOW_TO 2 (18%)
+- hot theme words: male, psychology, love, women, vivek, ramaswamy, some, parents
+- shorts share: 0/11 (0%) of fresh uploads under 65 s
 - niche cadence: 1 uploads/channel/week vs our 7 (5/day machine = 35/week)
 
 ## 4. Us vs the field
 
-- our fresh uploads average **2.3 views/day**; the niche fresh average is 6826.7 -> we run at **<1% of niche pace**
+- our fresh uploads average **2.3 views/day**; the niche fresh average is 7496.8 -> we run at **<1% of niche pace**
 - channel views gained this week: +217 (total 2,167 as of 2026-10-31)
 
 ## 5. Recommended angles for next week
