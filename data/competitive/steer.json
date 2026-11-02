@@ -1,38 +1,38 @@
 {
- "week": "2026-11-01",
- "generated": "2026-11-01T18:05:58.415871+00:00",
+ "week": "2026-11-02",
+ "generated": "2026-11-02T13:37:06.774113+00:00",
  "hot_formulas": [
   {
    "name": "PLAIN",
-   "videos": 7,
-   "example": "What We Owe To Those Who Loved Us In Our Childhood"
-  },
-  {
-   "name": "WARNING",
-   "videos": 2,
-   "example": "THE VIVEK RAMASWAMY AD: Why some parents don't believe their child's allegations"
+   "videos": 8,
+   "example": "Smart People Can't Find Love. Here's Why"
   },
   {
    "name": "HOW_TO",
    "videos": 2,
    "example": "How To Know Yourself"
+  },
+  {
+   "name": "WARNING",
+   "videos": 2,
+   "example": "THE VIVEK RAMASWAMY AD: Why some parents don't believe their child's allegations"
   }
  ],
  "hot_themes": [
+  "love",
   "male",
   "psychology",
-  "love",
   "women",
-  "vivek",
-  "ramaswamy",
-  "some",
-  "parents"
+  "smart",
+  "people",
+  "can't",
+  "find"
  ],
  "recommended_angles": [
-  "Male \u2014 the plain angle (winning formula x hottest theme this week)",
-  "What nobody tells you about male",
-  "7 signs of male everyone misses"
+  "Love \u2014 the plain angle (winning formula x hottest theme this week)",
+  "What nobody tells you about love",
+  "7 signs of love everyone misses"
  ],
- "niche_velocity": 7496.8,
- "our_velocity": 2.3
+ "niche_velocity": 11618.6,
+ "our_velocity": null
 }

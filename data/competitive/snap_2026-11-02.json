@@ -1,0 +1,2228 @@
+{
+ "date": "2026-11-02",
+ "ts": "2026-11-02T13:37:04.681693+00:00",
+ "them": {
+  "UCkJEpR7JmS36tajD34Gp4VA": {
+   "title": "Psych2Go",
+   "handle": "@psych2go",
+   "subs": 13200000,
+   "views": 2176899290,
+   "video_count": 4061,
+   "uploads_playlist": "UUkJEpR7JmS36tajD34Gp4VA",
+   "recent": [
+    {
+     "id": "POUF4fhMZ6c",
+     "title": "Smart People Can't Find Love. Here's Why",
+     "published_at": "2026-11-02T05:12:07Z",
+     "views": 26397,
+     "duration_s": 357,
+     "age_days": 0.5,
+     "velocity": 52794.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "t-FOflqGq-o",
+     "title": "Traumatic Intelligence, the \"Rarest Type\" Discourse",
+     "published_at": "2026-10-24T10:56:56Z",
+     "views": 58984,
+     "duration_s": 330,
+     "age_days": 9.1,
+     "velocity": 6481.8,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "77qczL2i7Hs",
+     "title": "",
+     "published_at": "2026-10-21T10:08:35Z",
+     "age_days": 12.1,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "kzCYtpE4hdg",
+     "title": "",
+     "published_at": "2026-10-16T20:36:39Z",
+     "age_days": 16.7,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "8pao38vriwg",
+     "title": "",
+     "published_at": "2026-10-10T21:12:46Z",
+     "age_days": 22.7,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "hVDi1CdFRxA",
+     "title": "",
+     "published_at": "2026-10-08T01:37:20Z",
+     "age_days": 25.5,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "PRNMJhMMsb0",
+     "title": "",
+     "published_at": "2026-10-04T14:52:17Z",
+     "age_days": 28.9,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "rOnSVOXISOQ",
+     "title": "",
+     "published_at": "2026-09-27T03:02:58Z",
+     "age_days": 36.4,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "o6ePv14n0SE",
+     "title": "",
+     "published_at": "2026-09-23T04:22:22Z",
+     "age_days": 40.4,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "qA8lSgNH6f8",
+     "title": "",
+     "published_at": "2026-09-17T07:27:03Z",
+     "age_days": 46.3,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "aK-8RoZ7qNw",
+     "title": "",
+     "published_at": "2026-09-11T22:00:26Z",
+     "age_days": 51.7,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "BRXAMkaMzHs",
+     "title": "",
+     "published_at": "2026-09-09T22:47:54Z",
+     "age_days": 53.6,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "ZOXNFs4kjAc",
+     "title": "",
+     "published_at": "2026-08-31T17:59:22Z",
+     "age_days": 62.8,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "TMgUp3P2S7U",
+     "title": "",
+     "published_at": "2026-08-21T11:40:11Z",
+     "age_days": 73.1,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "4oA0vHbmrdw",
+     "title": "",
+     "published_at": "2026-08-09T13:14:55Z",
+     "age_days": 85.0,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "adY3Z04l-yU",
+     "title": "",
+     "published_at": "2026-08-08T13:12:10Z",
+     "age_days": 86.0,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "2KAri3P0YE4",
+     "title": "",
+     "published_at": "2026-07-29T08:39:06Z",
+     "age_days": 96.2,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "9HBfpAK-jUo",
+     "title": "",
+     "published_at": "2026-07-26T15:35:36Z",
+     "age_days": 98.9,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "bA7mHsBLOQU",
+     "title": "",
+     "published_at": "2026-07-25T13:03:40Z",
+     "age_days": 100.0,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "tsDkpbAtZGE",
+     "title": "",
+     "published_at": "2026-07-24T13:20:25Z",
+     "age_days": 101.0,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "jik2kKvNKPY",
+     "title": "",
+     "published_at": "2026-07-22T21:21:57Z",
+     "age_days": 102.7,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "tCWFULp8YN8",
+     "title": "",
+     "published_at": "2026-07-14T17:59:24Z",
+     "age_days": 110.8,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "iSupToo0e5w",
+     "title": "",
+     "published_at": "2026-07-13T10:16:17Z",
+     "age_days": 112.1,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "PMQ_LSwNr5w",
+     "title": "",
+     "published_at": "2026-07-12T09:12:25Z",
+     "age_days": 113.2,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "dGh3oKuV0Dg",
+     "title": "",
+     "published_at": "2026-07-10T12:17:25Z",
+     "age_days": 115.1,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "15V-OJU6-gk",
+     "title": "",
+     "published_at": "2026-07-08T09:14:55Z",
+     "age_days": 117.2,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "pvUwAbkgOwI",
+     "title": "",
+     "published_at": "2026-07-01T12:48:54Z",
+     "age_days": 124.0,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "QuYdQH8juJ4",
+     "title": "",
+     "published_at": "2026-06-29T16:57:27Z",
+     "age_days": 125.9,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "pqHERe1cfHg",
+     "title": "",
+     "published_at": "2026-06-25T04:53:57Z",
+     "age_days": 130.4,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "EMLcZ9lI6Nc",
+     "title": "",
+     "published_at": "2026-06-23T11:00:39Z",
+     "age_days": 132.1,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "v7XQCKs-kuE",
+     "title": "",
+     "published_at": "2026-06-17T03:15:41Z",
+     "age_days": 138.4,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "N5u5Y-bGJ1o",
+     "title": "",
+     "published_at": "2026-06-17T01:17:59Z",
+     "age_days": 138.5,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "J1vgGsonh0U",
+     "title": "",
+     "published_at": "2026-06-14T17:21:56Z",
+     "age_days": 140.8,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "aUTxeBEmBZE",
+     "title": "",
+     "published_at": "2026-06-13T22:26:04Z",
+     "age_days": 141.6,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "fjLQhIqWBSQ",
+     "title": "",
+     "published_at": "2026-06-12T08:27:51Z",
+     "age_days": 143.2,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "95SKdlqIEQ4",
+     "title": "",
+     "published_at": "2026-06-11T12:07:44Z",
+     "age_days": 144.1,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "nBvx4IjhPdQ",
+     "title": "",
+     "published_at": "2026-06-10T01:54:26Z",
+     "age_days": 145.5,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "b0wkglxN-d8",
+     "title": "",
+     "published_at": "2026-06-08T07:43:13Z",
+     "age_days": 147.2,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "02bauxUk_Z0",
+     "title": "",
+     "published_at": "2026-06-07T07:34:01Z",
+     "age_days": 148.3,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "gSEyBf7_u_w",
+     "title": "",
+     "published_at": "2026-06-06T12:43:19Z",
+     "age_days": 149.0,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "UrSBgrSa6pw",
+     "title": "",
+     "published_at": "2026-06-06T07:30:46Z",
+     "age_days": 149.3,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "4o5KV-iGqm8",
+     "title": "",
+     "published_at": "2026-06-05T20:08:07Z",
+     "age_days": 149.7,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "TVwtwdeYP7A",
+     "title": "",
+     "published_at": "2026-06-04T10:37:51Z",
+     "age_days": 151.1,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "OgYxuCSjwGo",
+     "title": "",
+     "published_at": "2026-06-02T04:09:39Z",
+     "age_days": 153.4,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "iHVXt9pcEWA",
+     "title": "",
+     "published_at": "2026-06-01T08:11:34Z",
+     "age_days": 154.2,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "D5YK_vxVxG4",
+     "title": "",
+     "published_at": "2026-05-25T21:26:08Z",
+     "age_days": 160.7,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "3m0v0ZvxOMg",
+     "title": "",
+     "published_at": "2026-05-24T13:22:07Z",
+     "age_days": 162.0,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "Oy_0-5vM4g4",
+     "title": "",
+     "published_at": "2026-05-23T12:46:07Z",
+     "age_days": 163.0,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "UPJhXRp9dKE",
+     "title": "",
+     "published_at": "2026-05-22T12:35:27Z",
+     "age_days": 164.0,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "qzsdeNEMtFw",
+     "title": "",
+     "published_at": "2026-05-21T12:17:28Z",
+     "age_days": 165.1,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    }
+   ]
+  },
+  "UC7IcJI8PUf5Z3zKxnZvTBog": {
+   "title": "The School of Life",
+   "handle": "@theschooloflifetv",
+   "subs": 9800000,
+   "views": 1012196081,
+   "video_count": 1261,
+   "uploads_playlist": "UU7IcJI8PUf5Z3zKxnZvTBog",
+   "recent": [
+    {
+     "id": "qxU9IPogiPw",
+     "title": "How To Know Yourself",
+     "published_at": "2026-11-01T14:00:10Z",
+     "views": 23085,
+     "duration_s": 90,
+     "age_days": 1.0,
+     "velocity": 23085.0,
+     "formula": "HOW_TO"
+    },
+    {
+     "id": "R5iJXYsLjs0",
+     "title": "What We Owe To Those Who Loved Us In Our Childhood",
+     "published_at": "2026-10-28T14:00:29Z",
+     "views": 42649,
+     "duration_s": 90,
+     "age_days": 5.0,
+     "velocity": 8529.8,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "OytwvZqDOX8",
+     "title": "Why Love NEVER Lasts FOREVER",
+     "published_at": "2026-10-28T14:00:04Z",
+     "views": 94738,
+     "duration_s": 141,
+     "age_days": 5.0,
+     "velocity": 18947.6,
+     "formula": "WARNING"
+    },
+    {
+     "id": "JfFMQ3W2P9Y",
+     "title": "Why We Get Triggered",
+     "published_at": "2026-10-25T14:00:25Z",
+     "views": 41667,
+     "duration_s": 87,
+     "age_days": 8.0,
+     "velocity": 5208.4,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "O4FjeAYDRMQ",
+     "title": "",
+     "published_at": "2026-10-21T13:00:37Z",
+     "age_days": 12.0,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "nUla-n_S3mU",
+     "title": "",
+     "published_at": "2026-10-21T13:00:06Z",
+     "age_days": 12.0,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "NkTEpraIxS8",
+     "title": "",
+     "published_at": "2026-10-18T13:00:39Z",
+     "age_days": 15.0,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "6fdWAK6l4u0",
+     "title": "",
+     "published_at": "2026-10-14T13:00:23Z",
+     "age_days": 19.0,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "fTrF-6hI8i8",
+     "title": "",
+     "published_at": "2026-10-14T13:00:05Z",
+     "age_days": 19.0,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "BRi3b8itAUs",
+     "title": "",
+     "published_at": "2026-10-11T13:00:28Z",
+     "age_days": 22.0,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "uk3wUnCEghw",
+     "title": "",
+     "published_at": "2026-10-07T13:00:30Z",
+     "age_days": 26.0,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "QcH11HL2eNc",
+     "title": "",
+     "published_at": "2026-10-07T13:00:25Z",
+     "age_days": 26.0,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "tG4OrOgRTl4",
+     "title": "",
+     "published_at": "2026-10-04T13:00:15Z",
+     "age_days": 29.0,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "1byF6MPfXhM",
+     "title": "",
+     "published_at": "2026-09-30T13:00:08Z",
+     "age_days": 33.0,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "3_uOA2K78M8",
+     "title": "",
+     "published_at": "2026-09-30T13:00:07Z",
+     "age_days": 33.0,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "Cc1C7u8FdE8",
+     "title": "",
+     "published_at": "2026-09-27T13:00:02Z",
+     "age_days": 36.0,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "VMqJHctl2g4",
+     "title": "",
+     "published_at": "2026-09-23T13:00:10Z",
+     "age_days": 40.0,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "c__DMV_Clog",
+     "title": "",
+     "published_at": "2026-09-23T13:00:01Z",
+     "age_days": 40.0,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "iKoG1FkOnVk",
+     "title": "",
+     "published_at": "2026-09-16T13:00:26Z",
+     "age_days": 47.0,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "Fvv39_ku3I8",
+     "title": "",
+     "published_at": "2026-09-13T13:00:04Z",
+     "age_days": 50.0,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "iGd0Fu3xj54",
+     "title": "",
+     "published_at": "2026-09-09T13:00:27Z",
+     "age_days": 54.0,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "1bmUWt9wejI",
+     "title": "",
+     "published_at": "2026-09-09T13:00:11Z",
+     "age_days": 54.0,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "WTmqhOOMbw4",
+     "title": "",
+     "published_at": "2026-09-06T13:00:38Z",
+     "age_days": 57.0,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "G_ATGHMKEZA",
+     "title": "",
+     "published_at": "2026-09-02T13:00:19Z",
+     "age_days": 61.0,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "2XwX4VLwnQo",
+     "title": "",
+     "published_at": "2026-09-02T13:00:08Z",
+     "age_days": 61.0,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "KTiUpr2Mfsc",
+     "title": "",
+     "published_at": "2026-08-30T13:00:14Z",
+     "age_days": 64.0,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "ct9bdqkNbfk",
+     "title": "",
+     "published_at": "2026-08-26T13:00:13Z",
+     "age_days": 68.0,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "op77gGdFY1g",
+     "title": "",
+     "published_at": "2026-08-26T13:00:04Z",
+     "age_days": 68.0,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "lSflLzfWTUs",
+     "title": "",
+     "published_at": "2026-08-23T13:00:27Z",
+     "age_days": 71.0,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "E6Alr7PX7Ps",
+     "title": "",
+     "published_at": "2026-08-19T13:00:34Z",
+     "age_days": 75.0,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "OwiuTWfFK2c",
+     "title": "",
+     "published_at": "2026-08-19T13:00:15Z",
+     "age_days": 75.0,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "eF2ZSd0fD3A",
+     "title": "",
+     "published_at": "2026-08-16T13:00:03Z",
+     "age_days": 78.0,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "ZPCiooVcGn4",
+     "title": "",
+     "published_at": "2026-08-12T13:00:20Z",
+     "age_days": 82.0,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "156C-c48ezU",
+     "title": "",
+     "published_at": "2026-08-12T13:00:11Z",
+     "age_days": 82.0,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "41ZhEniIlU4",
+     "title": "",
+     "published_at": "2026-08-09T13:00:10Z",
+     "age_days": 85.0,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "cUHzgaULtPA",
+     "title": "",
+     "published_at": "2026-08-05T13:00:14Z",
+     "age_days": 89.0,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "FbS1hO2dQPM",
+     "title": "",
+     "published_at": "2026-08-05T13:00:03Z",
+     "age_days": 89.0,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "ODcBdk38ck0",
+     "title": "",
+     "published_at": "2026-08-02T13:00:27Z",
+     "age_days": 92.0,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "QUxxeMnKuGA",
+     "title": "",
+     "published_at": "2026-07-29T13:00:10Z",
+     "age_days": 96.0,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "zRp_0hc-ZgQ",
+     "title": "",
+     "published_at": "2026-07-29T13:00:01Z",
+     "age_days": 96.0,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "nGriC9oEz9w",
+     "title": "",
+     "published_at": "2026-07-26T13:00:07Z",
+     "age_days": 99.0,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "EyHPvu4aIJY",
+     "title": "",
+     "published_at": "2026-07-22T13:00:27Z",
+     "age_days": 103.0,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "IoUHF6NG8d4",
+     "title": "",
+     "published_at": "2026-07-22T13:00:09Z",
+     "age_days": 103.0,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "yNmTV0jAQXo",
+     "title": "",
+     "published_at": "2026-07-19T13:00:17Z",
+     "age_days": 106.0,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "DnKQ7Wc9A0w",
+     "title": "",
+     "published_at": "2026-07-15T13:00:08Z",
+     "age_days": 110.0,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "_HqfzLk0QxU",
+     "title": "",
+     "published_at": "2026-07-15T13:00:07Z",
+     "age_days": 110.0,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "8rFhG8RrpnY",
+     "title": "",
+     "published_at": "2026-07-12T13:00:18Z",
+     "age_days": 113.0,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "5Ir36fo_R-I",
+     "title": "",
+     "published_at": "2026-07-08T13:00:18Z",
+     "age_days": 117.0,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "LRvydNSQNsc",
+     "title": "",
+     "published_at": "2026-07-08T13:00:17Z",
+     "age_days": 117.0,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "O19vOPCuznQ",
+     "title": "",
+     "published_at": "2026-07-05T13:00:18Z",
+     "age_days": 120.0,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    }
+   ]
+  },
+  "UCir93b_ftqInEaDpsWYbo_g": {
+   "title": "Practical Psychology",
+   "handle": "@practicalpsychologytips",
+   "subs": 2360000,
+   "views": 122831324,
+   "video_count": 311,
+   "uploads_playlist": "UUir93b_ftqInEaDpsWYbo_g",
+   "recent": [
+    {
+     "id": "8T_N7KQRnWQ",
+     "title": "",
+     "published_at": "2022-08-16T13:44:42Z",
+     "age_days": 1539.0,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "mQKhAue2Js0",
+     "title": "",
+     "published_at": "2022-07-23T16:36:35Z",
+     "age_days": 1562.9,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "W6G5typ5u0c",
+     "title": "",
+     "published_at": "2022-07-05T18:04:22Z",
+     "age_days": 1580.8,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "p5pe7EGtjMw",
+     "title": "",
+     "published_at": "2022-06-22T21:02:44Z",
+     "age_days": 1593.7,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "fyOUgwDbvdY",
+     "title": "",
+     "published_at": "2022-06-13T15:59:33Z",
+     "age_days": 1602.9,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "I5G298BBhpY",
+     "title": "",
+     "published_at": "2022-05-17T18:45:13Z",
+     "age_days": 1629.8,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "os5ThrJfXVE",
+     "title": "",
+     "published_at": "2021-11-04T18:34:30Z",
+     "age_days": 1823.8,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "7-uZNKewZt4",
+     "title": "",
+     "published_at": "2021-08-10T15:10:28Z",
+     "age_days": 1909.9,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "k1Gs6PfbqYI",
+     "title": "",
+     "published_at": "2021-08-05T14:20:22Z",
+     "age_days": 1915.0,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "U98qvyAGnSg",
+     "title": "",
+     "published_at": "2021-07-26T12:00:25Z",
+     "age_days": 1925.1,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "kLyPEUGS-_Q",
+     "title": "",
+     "published_at": "2021-07-14T16:07:33Z",
+     "age_days": 1936.9,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "-W-ML_dG_4Y",
+     "title": "",
+     "published_at": "2021-04-24T11:05:56Z",
+     "age_days": 2018.1,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "SNWW-pPmTsI",
+     "title": "",
+     "published_at": "2021-04-21T13:22:21Z",
+     "age_days": 2021.0,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "VVyhhMzWkiU",
+     "title": "",
+     "published_at": "2021-04-18T14:23:47Z",
+     "age_days": 2024.0,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "J87xrHy748Q",
+     "title": "",
+     "published_at": "2021-04-15T12:58:58Z",
+     "age_days": 2027.0,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "G1-vaIe2FGM",
+     "title": "",
+     "published_at": "2021-04-12T13:54:13Z",
+     "age_days": 2030.0,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "WoTBPwMeAyo",
+     "title": "",
+     "published_at": "2021-04-09T17:27:48Z",
+     "age_days": 2032.8,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "BpaChja09lc",
+     "title": "",
+     "published_at": "2021-04-06T23:17:01Z",
+     "age_days": 2035.6,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "_AfUk2gQYlY",
+     "title": "",
+     "published_at": "2021-04-03T16:41:47Z",
+     "age_days": 2038.9,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "DMX565ohxwM",
+     "title": "",
+     "published_at": "2021-03-31T20:33:16Z",
+     "age_days": 2041.7,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "m5qApIjNLXY",
+     "title": "",
+     "published_at": "2021-03-28T17:39:12Z",
+     "age_days": 2044.8,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "6FkgLyhtY54",
+     "title": "",
+     "published_at": "2021-03-25T14:29:48Z",
+     "age_days": 2048.0,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "hy7CptLHiV0",
+     "title": "",
+     "published_at": "2021-03-22T18:47:58Z",
+     "age_days": 2050.8,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "2xMgHKxukr0",
+     "title": "",
+     "published_at": "2021-03-19T17:47:39Z",
+     "age_days": 2053.8,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "akYMB5Rqq6s",
+     "title": "",
+     "published_at": "2021-03-16T13:28:03Z",
+     "age_days": 2057.0,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "_DukOlChQQQ",
+     "title": "",
+     "published_at": "2021-03-13T13:31:22Z",
+     "age_days": 2060.0,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "3YOox59J0Bk",
+     "title": "",
+     "published_at": "2021-03-10T15:46:02Z",
+     "age_days": 2062.9,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "iXv91xFipLM",
+     "title": "",
+     "published_at": "2021-03-07T14:27:12Z",
+     "age_days": 2066.0,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "lKyUihBWU_s",
+     "title": "",
+     "published_at": "2021-03-04T13:52:30Z",
+     "age_days": 2069.0,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "Z81_eF-D8JA",
+     "title": "",
+     "published_at": "2021-03-01T17:28:19Z",
+     "age_days": 2071.8,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "GZgIYGaeWy0",
+     "title": "",
+     "published_at": "2021-02-17T17:05:37Z",
+     "age_days": 2083.9,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "Z59sJbg_if0",
+     "title": "",
+     "published_at": "2021-02-10T14:20:46Z",
+     "age_days": 2091.0,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "fei2WVqEykM",
+     "title": "",
+     "published_at": "2021-02-05T15:28:27Z",
+     "age_days": 2095.9,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "6lYsmt9qUVI",
+     "title": "",
+     "published_at": "2021-02-03T20:30:14Z",
+     "age_days": 2097.7,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "wlGQIxNpzks",
+     "title": "",
+     "published_at": "2021-01-29T21:56:23Z",
+     "age_days": 2102.7,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "mBDULN6Jtn0",
+     "title": "",
+     "published_at": "2021-01-19T03:13:04Z",
+     "age_days": 2113.4,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "F624Baz-Vzk",
+     "title": "",
+     "published_at": "2021-01-12T15:24:36Z",
+     "age_days": 2119.9,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "7KU5u75J8VU",
+     "title": "",
+     "published_at": "2020-12-30T15:13:23Z",
+     "age_days": 2132.9,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "6Iu5Me2L0Rs",
+     "title": "",
+     "published_at": "2020-12-21T20:40:09Z",
+     "age_days": 2141.7,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "fZMKhZE5SeM",
+     "title": "",
+     "published_at": "2020-12-20T04:42:14Z",
+     "age_days": 2143.4,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "A_MqKZxQjMI",
+     "title": "",
+     "published_at": "2020-12-17T15:30:32Z",
+     "age_days": 2145.9,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "HJm_IjyKECo",
+     "title": "",
+     "published_at": "2020-12-10T20:16:13Z",
+     "age_days": 2152.7,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "cw3e_XFIeQI",
+     "title": "",
+     "published_at": "2020-12-08T21:41:41Z",
+     "age_days": 2154.7,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "sDxjV8FhFDo",
+     "title": "",
+     "published_at": "2020-11-27T16:10:51Z",
+     "age_days": 2165.9,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "53xwbZf09Wg",
+     "title": "",
+     "published_at": "2020-11-26T18:02:06Z",
+     "age_days": 2166.8,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "21vaxB5EBwc",
+     "title": "",
+     "published_at": "2020-11-25T22:56:54Z",
+     "age_days": 2167.6,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "PnkYbZUP8G8",
+     "title": "",
+     "published_at": "2020-11-23T16:06:01Z",
+     "age_days": 2169.9,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "iLXDPW9t-Cw",
+     "title": "",
+     "published_at": "2020-11-22T15:08:12Z",
+     "age_days": 2170.9,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "dP-KbPZnihY",
+     "title": "",
+     "published_at": "2020-11-21T16:53:34Z",
+     "age_days": 2171.9,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "o7atSNrMMkI",
+     "title": "",
+     "published_at": "2020-11-20T15:51:11Z",
+     "age_days": 2172.9,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    }
+   ]
+  },
+  "UCOxhlNofmYH-MRC36TURUGw": {
+   "title": "Psychology with Dr. Ana",
+   "handle": "@anapsychology",
+   "subs": 694000,
+   "views": 64342988,
+   "video_count": 784,
+   "uploads_playlist": "UUOxhlNofmYH-MRC36TURUGw",
+   "recent": [
+    {
+     "id": "-S1OSSX6XH8",
+     "title": "My husband pretended to be a creep in Italian",
+     "published_at": "2026-10-27T21:00:13Z",
+     "views": 14773,
+     "duration_s": 166,
+     "age_days": 5.7,
+     "velocity": 2591.8,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "klROakmn2IM",
+     "title": "THE VIVEK RAMASWAMY AD: Why some parents don't believe their child's allegations",
+     "published_at": "2026-10-26T18:00:32Z",
+     "views": 147893,
+     "duration_s": 617,
+     "age_days": 6.8,
+     "velocity": 21749.0,
+     "formula": "WARNING"
+    },
+    {
+     "id": "NzG1xTh1FEk",
+     "title": "",
+     "published_at": "2026-10-21T18:00:26Z",
+     "age_days": 11.8,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "WQDY9OqMNf8",
+     "title": "",
+     "published_at": "2026-10-19T18:00:09Z",
+     "age_days": 13.8,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "DkeOxCuC0e4",
+     "title": "",
+     "published_at": "2026-10-12T18:00:02Z",
+     "age_days": 20.8,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "UguB2U7EHdo",
+     "title": "",
+     "published_at": "2026-10-07T18:00:31Z",
+     "age_days": 25.8,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "JpEd48gmEaY",
+     "title": "",
+     "published_at": "2026-10-05T18:00:18Z",
+     "age_days": 27.8,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "kzYOJ9I87Fw",
+     "title": "",
+     "published_at": "2026-09-30T18:00:11Z",
+     "age_days": 32.8,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "uQ1opBscXZs",
+     "title": "",
+     "published_at": "2026-09-23T18:00:35Z",
+     "age_days": 39.8,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "TJKufjkKyws",
+     "title": "",
+     "published_at": "2026-09-21T18:00:07Z",
+     "age_days": 41.8,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "jiTX7ogCxjM",
+     "title": "",
+     "published_at": "2026-09-14T19:00:36Z",
+     "age_days": 48.8,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "FQo2OOp3xns",
+     "title": "",
+     "published_at": "2026-09-14T18:00:19Z",
+     "age_days": 48.8,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "p-PU68SvolA",
+     "title": "",
+     "published_at": "2026-09-13T19:00:35Z",
+     "age_days": 49.8,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "fyudL_h4KTI",
+     "title": "",
+     "published_at": "2026-09-12T19:00:18Z",
+     "age_days": 50.8,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "NG1vH2IOIaU",
+     "title": "",
+     "published_at": "2026-09-10T19:00:39Z",
+     "age_days": 52.8,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "skY-I2gzVCs",
+     "title": "",
+     "published_at": "2026-09-09T18:00:33Z",
+     "age_days": 53.8,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "XGO6eyScWK0",
+     "title": "",
+     "published_at": "2026-09-08T19:00:36Z",
+     "age_days": 54.8,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "F5HbmD889_M",
+     "title": "",
+     "published_at": "2026-09-07T19:00:06Z",
+     "age_days": 55.8,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "LkQ8HL18qL4",
+     "title": "",
+     "published_at": "2026-09-07T18:00:33Z",
+     "age_days": 55.8,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "DYtSiSav15I",
+     "title": "",
+     "published_at": "2026-09-06T19:00:39Z",
+     "age_days": 56.8,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "S5yP-SVunis",
+     "title": "",
+     "published_at": "2026-09-05T19:00:14Z",
+     "age_days": 57.8,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "kxvqs-XxQhA",
+     "title": "",
+     "published_at": "2026-09-04T19:00:05Z",
+     "age_days": 58.8,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "-zFimidwtFo",
+     "title": "",
+     "published_at": "2026-09-03T19:00:14Z",
+     "age_days": 59.8,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "8DtSeaWlgMs",
+     "title": "",
+     "published_at": "2026-09-02T19:00:11Z",
+     "age_days": 60.8,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "0vTuQB_ZdRE",
+     "title": "",
+     "published_at": "2026-09-02T18:00:08Z",
+     "age_days": 60.8,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "WK_vRUoF01A",
+     "title": "",
+     "published_at": "2026-09-01T19:00:10Z",
+     "age_days": 61.8,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "e8vFSaVxoBI",
+     "title": "",
+     "published_at": "2026-08-31T19:00:02Z",
+     "age_days": 62.8,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "t9W6lAsxPXE",
+     "title": "",
+     "published_at": "2026-08-30T19:00:35Z",
+     "age_days": 63.8,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "DYUGDLapv3o",
+     "title": "",
+     "published_at": "2026-08-29T19:00:14Z",
+     "age_days": 64.8,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "l_1-zadSPVg",
+     "title": "",
+     "published_at": "2026-08-28T19:00:24Z",
+     "age_days": 65.8,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "qoh0XhTw8Gc",
+     "title": "",
+     "published_at": "2026-08-27T19:00:18Z",
+     "age_days": 66.8,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "a3hDZvlJ1zM",
+     "title": "",
+     "published_at": "2026-08-26T19:00:11Z",
+     "age_days": 67.8,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "I5__RHuYDYU",
+     "title": "",
+     "published_at": "2026-08-26T18:00:06Z",
+     "age_days": 67.8,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "mvyBBOuRNAw",
+     "title": "",
+     "published_at": "2026-08-25T19:00:07Z",
+     "age_days": 68.8,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "unUr1dFtwWQ",
+     "title": "",
+     "published_at": "2026-08-24T19:00:25Z",
+     "age_days": 69.8,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "s0gFwlWn1y0",
+     "title": "",
+     "published_at": "2026-08-24T18:17:15Z",
+     "age_days": 69.8,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "0xyKxJ5Hws0",
+     "title": "",
+     "published_at": "2026-08-23T19:00:36Z",
+     "age_days": 70.8,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "PfrkF2lRPfU",
+     "title": "",
+     "published_at": "2026-08-22T19:00:34Z",
+     "age_days": 71.8,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "tS4pQyrie7M",
+     "title": "",
+     "published_at": "2026-08-21T19:00:28Z",
+     "age_days": 72.8,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "_PfupTfuyQY",
+     "title": "",
+     "published_at": "2026-08-20T19:00:16Z",
+     "age_days": 73.8,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "KHdgeLuUEXs",
+     "title": "",
+     "published_at": "2026-08-18T19:00:18Z",
+     "age_days": 75.8,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "vS41970_3hE",
+     "title": "",
+     "published_at": "2026-08-17T19:00:05Z",
+     "age_days": 76.8,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "fyBRQURmdO8",
+     "title": "",
+     "published_at": "2026-08-17T18:00:17Z",
+     "age_days": 76.8,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "vGNX7GLw8Do",
+     "title": "",
+     "published_at": "2026-08-16T19:00:04Z",
+     "age_days": 77.8,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "8vySXeqRsdY",
+     "title": "",
+     "published_at": "2026-08-15T19:00:25Z",
+     "age_days": 78.8,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "NIZ8SD06blo",
+     "title": "",
+     "published_at": "2026-08-15T19:00:02Z",
+     "age_days": 78.8,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "_KLTdEYZ9pw",
+     "title": "",
+     "published_at": "2026-08-14T05:05:42Z",
+     "age_days": 80.4,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "i3325nSE8Ko",
+     "title": "",
+     "published_at": "2026-08-13T19:00:35Z",
+     "age_days": 80.8,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "UXx0hsQDTMM",
+     "title": "",
+     "published_at": "2026-08-12T19:00:10Z",
+     "age_days": 81.8,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "-fGrOd1S5AY",
+     "title": "",
+     "published_at": "2026-08-12T18:00:27Z",
+     "age_days": 81.8,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    }
+   ]
+  },
+  "UCmSCjzNN4gc7t_FIU5hW3Mw": {
+   "title": "Love Psychology",
+   "handle": "@lovepsychology-d7q",
+   "subs": 128,
+   "views": 22599,
+   "video_count": 42,
+   "uploads_playlist": "UUmSCjzNN4gc7t_FIU5hW3Mw",
+   "recent": [
+    {
+     "id": "D8NUYkiDcuU",
+     "title": "\u2764\ufe0f How To Actually Make A Man Miss You Like Crazy \ud83d\ude0d | Male Psychology & Love",
+     "published_at": "2026-10-29T02:26:42Z",
+     "views": 10,
+     "duration_s": 1549,
+     "age_days": 4.5,
+     "velocity": 2.2,
+     "formula": "HOW_TO"
+    },
+    {
+     "id": "RWZwqIoeNJY",
+     "title": "\u2764\ufe0f The ONE Boundary That Makes Women Deeply Respect You \ud83d\udd25 | Male Psychology",
+     "published_at": "2026-10-27T18:00:39Z",
+     "views": 9,
+     "duration_s": 430,
+     "age_days": 5.8,
+     "velocity": 1.6,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "nMT-Mxyoi_U",
+     "title": "\ud83d\ude0d This Is the Greeting Men Only Use With Women They Want \u2764\ufe0f | Male Psychology",
+     "published_at": "2026-10-24T18:00:01Z",
+     "views": 236,
+     "duration_s": 1666,
+     "age_days": 8.8,
+     "velocity": 26.8,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "im4xn3Y-CaY",
+     "title": "\u2764\ufe0f This Is the Test Every Man Gives Before He Commits \ud83d\ude31 | Male Psychology & Love \ud83d\udc8d",
+     "published_at": "2026-10-23T18:00:05Z",
+     "views": 56,
+     "duration_s": 1972,
+     "age_days": 9.8,
+     "velocity": 5.7,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "ft0nzDNZGgY",
+     "title": "",
+     "published_at": "2026-10-22T18:00:37Z",
+     "age_days": 10.8,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "lwsDE7UYA4g",
+     "title": "",
+     "published_at": "2026-10-21T18:00:15Z",
+     "age_days": 11.8,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "sfr8b0vaX8o",
+     "title": "",
+     "published_at": "2026-10-20T18:00:14Z",
+     "age_days": 12.8,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "hjHL28k6J_4",
+     "title": "",
+     "published_at": "2026-10-19T08:06:09Z",
+     "age_days": 14.2,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "ro0CG-5WBtw",
+     "title": "",
+     "published_at": "2026-10-16T18:15:38Z",
+     "age_days": 16.8,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "9G7-ced66pQ",
+     "title": "",
+     "published_at": "2026-10-15T18:57:36Z",
+     "age_days": 17.8,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "RWwZZhEfboI",
+     "title": "",
+     "published_at": "2026-10-15T02:00:19Z",
+     "age_days": 18.5,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "NLICih46Zfo",
+     "title": "",
+     "published_at": "2026-10-14T18:00:15Z",
+     "age_days": 18.8,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "h6gdV3O4OI8",
+     "title": "",
+     "published_at": "2026-10-14T02:00:34Z",
+     "age_days": 19.5,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "irq_Uy4kAs0",
+     "title": "",
+     "published_at": "2026-10-13T18:00:21Z",
+     "age_days": 19.8,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "2RcdMLFqIQY",
+     "title": "",
+     "published_at": "2026-10-13T01:00:07Z",
+     "age_days": 20.5,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "YyrGpTCpHCU",
+     "title": "",
+     "published_at": "2026-10-12T18:02:13Z",
+     "age_days": 20.8,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "zuwEYi7Dg-4",
+     "title": "",
+     "published_at": "2026-10-07T18:00:27Z",
+     "age_days": 25.8,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "pIDNiq5ZBLA",
+     "title": "",
+     "published_at": "2026-10-02T18:00:09Z",
+     "age_days": 30.8,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "lauBmoJRn_w",
+     "title": "",
+     "published_at": "2026-09-23T13:38:43Z",
+     "age_days": 40.0,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "tOR-_Cp6dqs",
+     "title": "",
+     "published_at": "2026-09-20T13:56:24Z",
+     "age_days": 43.0,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "kldfg-Oaps0",
+     "title": "",
+     "published_at": "2026-09-19T12:17:13Z",
+     "age_days": 44.1,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "X91fDCemwAs",
+     "title": "",
+     "published_at": "2026-09-18T11:06:22Z",
+     "age_days": 45.1,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "MhwYW5btgY0",
+     "title": "",
+     "published_at": "2026-09-17T12:20:29Z",
+     "age_days": 46.1,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "WmqLvA2VFUU",
+     "title": "",
+     "published_at": "2026-09-16T12:58:56Z",
+     "age_days": 47.0,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "pB4Kn6p3E5I",
+     "title": "",
+     "published_at": "2026-09-15T12:48:25Z",
+     "age_days": 48.0,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "eeaDTF-MBmQ",
+     "title": "",
+     "published_at": "2026-09-14T11:47:22Z",
+     "age_days": 49.1,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "HgjV1emxztg",
+     "title": "",
+     "published_at": "2026-09-11T13:02:50Z",
+     "age_days": 52.0,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "2TZ0G45ii_c",
+     "title": "",
+     "published_at": "2026-09-10T13:26:47Z",
+     "age_days": 53.0,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "qpcREp7ibAs",
+     "title": "",
+     "published_at": "2026-09-09T14:19:49Z",
+     "age_days": 54.0,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "gnYxooPVFCA",
+     "title": "",
+     "published_at": "2026-09-08T12:30:07Z",
+     "age_days": 55.0,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "8UskJNhQcKc",
+     "title": "",
+     "published_at": "2026-09-07T13:00:19Z",
+     "age_days": 56.0,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "EY6qN4a3hx4",
+     "title": "",
+     "published_at": "2026-09-06T13:28:21Z",
+     "age_days": 57.0,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "sxuqT5FRO0M",
+     "title": "",
+     "published_at": "2026-09-05T14:09:32Z",
+     "age_days": 58.0,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "gancoTT9LUs",
+     "title": "",
+     "published_at": "2026-09-03T07:52:12Z",
+     "age_days": 60.2,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "Rse-OjmoY5k",
+     "title": "",
+     "published_at": "2026-09-02T08:39:53Z",
+     "age_days": 61.2,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "rVxygL8t9os",
+     "title": "",
+     "published_at": "2026-08-31T13:22:04Z",
+     "age_days": 63.0,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "FdfhYQfXqoA",
+     "title": "",
+     "published_at": "2026-08-30T14:00:28Z",
+     "age_days": 64.0,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "4K7vsCl3GT8",
+     "title": "",
+     "published_at": "2026-08-29T14:17:49Z",
+     "age_days": 65.0,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "jfl3cTprhkY",
+     "title": "",
+     "published_at": "2026-08-28T13:00:26Z",
+     "age_days": 66.0,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "5Ti4UNTMP6Q",
+     "title": "",
+     "published_at": "2026-08-18T14:12:15Z",
+     "age_days": 76.0,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "KrtHC-lAAp0",
+     "title": "",
+     "published_at": "2026-08-11T13:51:29Z",
+     "age_days": 83.0,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "ZqJYB4jW4qI",
+     "title": "",
+     "published_at": "2026-08-10T13:00:35Z",
+     "age_days": 84.0,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    }
+   ]
+  },
+  "UCL5gf7dhko3CBdaVxJLo9uA": {
+   "title": "Relationship Psychology",
+   "handle": "@relationshippsychology-t6n",
+   "subs": 5,
+   "views": 881,
+   "video_count": 24,
+   "uploads_playlist": "UUL5gf7dhko3CBdaVxJLo9uA",
+   "recent": [
+    {
+     "id": "VR5cSd3gzqE",
+     "title": "",
+     "published_at": "2026-09-13T13:19:27Z",
+     "age_days": 50.0,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "vyZY-3nmdeY",
+     "title": "",
+     "published_at": "2026-09-12T13:03:23Z",
+     "age_days": 51.0,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "wCYM9KfgUfg",
+     "title": "",
+     "published_at": "2026-09-12T03:06:39Z",
+     "age_days": 51.4,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "_B766oI5om8",
+     "title": "",
+     "published_at": "2026-09-11T12:52:29Z",
+     "age_days": 52.0,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "86rrJg2LC2M",
+     "title": "",
+     "published_at": "2026-09-11T01:29:41Z",
+     "age_days": 52.5,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "TdvW8yibKcQ",
+     "title": "",
+     "published_at": "2026-09-10T13:09:18Z",
+     "age_days": 53.0,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "eSJJQOZ-7Dw",
+     "title": "",
+     "published_at": "2026-09-10T04:54:27Z",
+     "age_days": 53.4,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "l_QSd1YzYuk",
+     "title": "",
+     "published_at": "2026-09-09T12:29:04Z",
+     "age_days": 54.0,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "9gIjqNjhJdI",
+     "title": "",
+     "published_at": "2026-09-08T12:57:24Z",
+     "age_days": 55.0,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "0HCwvyx2_20",
+     "title": "",
+     "published_at": "2026-09-08T01:28:24Z",
+     "age_days": 55.5,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "llqxxN4qxV0",
+     "title": "",
+     "published_at": "2026-09-06T12:46:22Z",
+     "age_days": 57.0,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "A1iv_Oxc-7E",
+     "title": "",
+     "published_at": "2026-09-05T11:19:25Z",
+     "age_days": 58.1,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "C82-L2DUPmw",
+     "title": "",
+     "published_at": "2026-09-05T03:33:53Z",
+     "age_days": 58.4,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "tUwZRNs7IUw",
+     "title": "",
+     "published_at": "2026-09-04T12:59:55Z",
+     "age_days": 59.0,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "zl27xQKLzaU",
+     "title": "",
+     "published_at": "2026-09-04T01:00:19Z",
+     "age_days": 59.5,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "Cx3Vow4c-Yk",
+     "title": "",
+     "published_at": "2026-09-03T13:00:16Z",
+     "age_days": 60.0,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "q9zrWEOCp2k",
+     "title": "",
+     "published_at": "2026-09-03T01:00:58Z",
+     "age_days": 60.5,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "tGN41bvK_rc",
+     "title": "",
+     "published_at": "2026-09-02T04:58:20Z",
+     "age_days": 61.4,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "pDg3Aj43VhQ",
+     "title": "",
+     "published_at": "2026-09-01T14:43:43Z",
+     "age_days": 62.0,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "RvwY7LqUtro",
+     "title": "",
+     "published_at": "2026-09-01T05:52:29Z",
+     "age_days": 62.3,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "EfccM1Ska0Q",
+     "title": "",
+     "published_at": "2026-08-31T18:00:19Z",
+     "age_days": 62.8,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "oY8USLqaxHw",
+     "title": "",
+     "published_at": "2026-08-31T03:07:51Z",
+     "age_days": 63.4,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "4iRAVYbfGTo",
+     "title": "",
+     "published_at": "2026-08-30T10:59:35Z",
+     "age_days": 64.1,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    },
+    {
+     "id": "XVTae75VsGA",
+     "title": "",
+     "published_at": "2026-08-29T12:06:58Z",
+     "age_days": 65.1,
+     "velocity": 0.0,
+     "formula": "PLAIN"
+    }
+   ]
+  }
+ },
+ "us": {
+  "title": "the love psychology",
+  "handle": "@the-love-psychology",
+  "subs": 12,
+  "views": 2277,
+  "video_count": 148,
+  "uploads_playlist": "",
+  "id": "UCg-ZEQJiqXYC8y9xUomaEBQ"
+ },
+ "our_id": "UCg-ZEQJiqXYC8y9xUomaEBQ"
+}
