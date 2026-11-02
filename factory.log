@@ -1,55 +1,8 @@
-[0;93m2026-11-02 21:58:17.929012510 [W:onnxruntime:Default, device_discovery.cc:95 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
 [stats] growth report 2026-11-02
-[stats]   total: 2338 views  (+5 since last report)
+[stats]   total: 2342 views  (+4 since last report)
 [stats]      188 views  ·  Subscribe for more tips like this #ep136 #psychology #relati
 [stats]      120 views  ·  Subscribe for more tips like this #ep94 #psychology #relatio
 [stats]      111 views  ·  Subscribe for more tips like this #ep65 #psychology #relatio
 [verify] 47 video(s) confirmed public, 0 late past the 2-day grace window
-[grid] booking 1 short slot(s) in the next 24h (free: 2026-11-03T18:00:00+02:00)
-  [muse] long: reply shape rejected - keeping drafts
-  [muse] shorts: retrying 6 reject(s)
-  [muse] shorts: 3/6 rewritten (nvidia)
-[45] script: The Love Bombing Trap (1208 words, hash 0a17b323af)
-  [voice] local neural narration: 136 chunks (Kokoro af_heart)
-  [voice] polished: presence EQ + gentle compression
-[45] narration: 484s, 136 caption chunks
-[45] long video: 496s, 56.7MB
-  [voice] local neural narration: 22 chunks (Kokoro af_heart)
-  [voice] polished: presence EQ + gentle compression
-  [short 1] 46s, 22 cards, 7.8MB
-  [voice] local neural narration: 24 chunks (Kokoro af_heart)
-  [voice] polished: presence EQ + gentle compression
-  [short 2] 49s, 24 cards, 8.5MB
-  [voice] local neural narration: 22 chunks (Kokoro af_heart)
-  [voice] polished: presence EQ + gentle compression
-  [short 3] 47s, 22 cards, 7.2MB
-  [voice] local neural narration: 20 chunks (Kokoro af_heart)
-  [voice] polished: presence EQ + gentle compression
-  [short 4] narration 44.5s < 45s floor — re-voicing slower (-6%), attempt 1
-  [voice] local neural narration: 15 chunks (Kokoro af_heart)
-  [voice] polished: presence EQ + gentle compression
-  [short 4] 48s, 15 cards, 6.8MB
-  [voice] local neural narration: 19 chunks (Kokoro af_heart)
-  [voice] polished: presence EQ + gentle compression
-  [short 5] narration 44.4s < 45s floor — re-voicing slower (-6%), attempt 1
-  [voice] local neural narration: 14 chunks (Kokoro af_heart)
-  [voice] polished: presence EQ + gentle compression
-  [short 5] 47s, 14 cards, 7.6MB
-  [voice] local neural narration: 22 chunks (Kokoro af_heart)
-  [voice] polished: presence EQ + gentle compression
-  [short 6] 50s, 22 cards, 8.6MB
-[45] thumbnail audit: 4 words, 102px, 120px var 4260, 58KB — ok
-[45] thumbnail + 1 shorts ready
-[45] tells audit: reveal=5 vocab=0 filler=0 intensifier=3 (logged, not rewritten)
-[45] viral score: 69/100 (plain) length sweet spot; power word: trap; emotion word: love
-  [youtube] uploaded long: vBb2tNg1a68 (publishAt 2026-11-05T20:00:00+02:00)
-  [youtube] setting thumbnail thumbnail.png (57 KB) on vBb2tNg1a68
-  [youtube] thumbnail set
-  [quota] 79 units left, need 1650 — deferring
-[45] text layer: {'captions_long': 'refused', 'comment': 'refused'}
-[playlist] 1 long video(s) not in the playlist yet
-[playlist] ep45 long added (vBb2tNg1a68)
-[epnum] 1 video(s) still to rename — 24 units left, 50+100 per rename
-  [epnum] rename budget spent — resuming next cycle
-  ! episode 45: The Love Bombing Trap — uploads deferred (quota); the next cycle resumes it
+[quota] only 23 units left — cannot even land the long (need 1650) — deferring today's uploads
 combination space: 273,308,412,123,694,080 stories — the factory never repeats
