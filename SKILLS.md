@@ -74,11 +74,12 @@ a daily love-psychology channel with zero budget?"
 ### animation-vocabulary — *the motion glossary*  →  `src/anim.py`
 Named patterns the factory already speaks, so future motion work has
 exact words: **ease-out** landings (every card), **Pop in** (the CTA
-settle, `pop_scale()`), the **dip cut** (term reveal), the breathing
-camera **drift**. The glossary is the design review vocabulary: any
-new motion must have a NAME from this list and a reason ("Pop in —
-appears with a slight overshoot, like it bounces into place") before
-it gets code.
+settle, `pop_scale()`), the **dip cut** (term reveal). The breathing
+camera **drift** is retired (2026-11-03 owner law: the camera never
+moves — every card is a locked tripod). The glossary is the design
+review vocabulary: any new motion must have a NAME from this list and
+a reason ("Pop in — appears with a slight overshoot, like it bounces
+into place") before it gets code.
 
 ### claude-handoff — *the memory contract*  →  `/home/z/my-project/worklog.md`
 No `claude --bg` here; the local adapter (installed with the skill)
@@ -327,17 +328,22 @@ brain. Two engines shipped, both fail-open, both free:
 ### The depth engine  →  `src/depth.py` (new), `src/art_engine.py`,
 ### `src/anim.py`, `src/render.py`
 
-The world becomes 2.5D without touching the locked couple:
+The world becomes 2.5D without touching the locked couple. 2026-11-03
+owner law on top: **the camera NEVER moves** — no pan, no zoom, no
+push-in, anywhere (`video.camera: static` is the law; `drift` and
+`kenburns` are rollback-only):
 
-* **parallax** — the far plane (wall, props) counter-moves against
-  the couple's hip sway like a tracked camera (±8px clamp);
-  floor and text stay pinned. A wainscot + panel-seam wall
-  structure (flat-art vocabulary, PAPER_DEEP) gives the parallax
-  its rail — a featureless wall shows nothing.
+* **parallax** — RETIRED 2026-11-03: the far plane no longer
+  counter-moves (`_PARALLAX_X/_Y` zeroed in `src/depth.py`); the
+  two-plane split stays as the carrier of the depth-of-field blur.
+  The wainscot + panel-seam wall structure (flat-art vocabulary,
+  PAPER_DEEP) remains the depth rail for the blur.
 * **depth of field** — the far plane bakes once with a Gaussian
   blur; the couple and the floor stay razor sharp.
 * **living air** — 30 seeded dust motes in three depth bands
-  (behind / around / in front), integer-cycle drift.
+  (behind / around / in front), integer-cycle drift. With the camera
+  locked, this (and the shaft) is the background's only motion —
+  the world breathes without the camera moving.
 * **volumetric light** — room scenes get a soft shaft (seeded 60%
   presence, 5-level shimmer ladder) from a corner.
 * **grounded shadows** — the contact ellipse now follows the hips
@@ -347,9 +353,10 @@ The world becomes 2.5D without touching the locked couple:
   exception collapses to the exact pre-batch-4 frame (also
   tested, shadows included). Loop/intro caches carry a `_d4`
   marker. Gates: `video.depth: parallax|legacy`, `video.motes`,
-  `video.shaft: shimmer|static|off`. Verified by eye (VLM pass on
-  all six checks) and by cross-correlation (wall shifts 6px over
-  half a loop, residual 0.98 → 0.18).
+  `video.shaft: shimmer|static|off`, `video.camera: static|drift|
+  kenburns`. The locked-world test renders the world at two
+  timestamps with the atmosphere stubbed and requires pixel
+  identity — a moving far plane now FAILS the suite.
 
 ### The viral brain  →  `src/viral.py` (new), `tools/retention_probe.py`
 ### (new), `tools/trend_intel.py`, `tools/compete.py`, `src/muse.py`,

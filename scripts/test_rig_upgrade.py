@@ -117,10 +117,11 @@ char_band = slice(480, 1000)
 bg_band = slice(0, 260)
 check("characters visibly move (f0 vs f1)", d01[char_band].mean() > 0.5)
 check("characters visibly move (f1 vs f2)", d12[char_band].mean() > 0.5)
-# batch-4 doctrine: the far plane now LIVES (parallax against the
-# hips, motes, shaft) — the invariance moved from "identical" to
-# "atmosphere-grade, no hard teleport" (seam exactness is checked
-# below, and the legacy identical-background rollback right after)
+# batch-4 doctrine (rev 2026-11-03): the camera is LOCKED — the far
+# plane no longer parallax-countermoves; the background still LIVES
+# through the atmosphere (motes, shaft) — "atmosphere-grade, no hard
+# teleport" (seam exactness is checked below, and the legacy
+# identical-background rollback right after)
 check("far plane moves like atmosphere, not a cut (batch-4)",
       float(d01[bg_band].mean()) > 0.0
       and float((d01[bg_band] > 40).mean()) < 0.05)

@@ -134,14 +134,14 @@ video:
   title_card_seconds: 4             # v4: 6 -> 4 — a 6 s title before a
                                     # spoken word bleeds viewers in 2026
   end_card_seconds: 8               # v4: 12 -> 8 — tighter outro, same message
-  # ── v4 THE RETENTION BUILD (2026-10-26): the camera now BREATHES —
-  # an eased 5.5% smoothstep Ken Burns across every animated card
-  # (world and baked text drift together; burn-in ASS captions stay
-  # static because they composite after the drift). The characters
-  # still carry the motion budget; the drift is the floor, not the
-  # show. "static" freezes the camera exactly as v2.1 did; "kenburns"
-  # restores the old linear 7% drift.
-  camera: "drift"
+  # ── 2026-11-03 OWNER LAW — THE CAMERA NEVER MOVES: "stop moving the
+  # camera right or left or zooming in or out, I want normal." Every
+  # card (scenes, title, end, fallback stills) renders on a locked
+  # tripod — no pan, no zoom, no push-in, no Ken Burns. The motion
+  # budget belongs to the characters and the atmosphere (motes,
+  # shaft) only. "drift" (eased 5.5% Ken Burns) and "kenburns" (old
+  # linear 7%) remain one config flip away as the rollback path.
+  camera: "static"
   # ARTICULATED CHARACTERS: planted feet with real weight shifts and
   # heel lifts, swinging arms with hands (plus a gentle reach toward
   # the partner), torso lean, breathing, head drifts and nods, living
@@ -150,15 +150,17 @@ video:
 
   # ── batch-4 THE DEPTH BUILD (2026-11-01, owner unlocked visuals):
   # the world becomes 2.5D — the far plane (wall, props) bakes once
-  # with a soft depth-of-field blur and counter-moves against the
-  # couple's hip sway like a camera parallax; the floor and every
-  # text stay pinned; seeded dust motes drift in three depth bands
-  # (behind, around, in front of the couple); room scenes get a
-  # shimmering volumetric light shaft; contact shadows follow the
-  # hips and stretch at the weight-shift extreme. Seam law intact:
-  # every term is integer-cycle periodic, loops never jump. Any
-  # failure collapses to the flat pre-batch-4 path (fail-open).
-  # "legacy" restores the single-plane world exactly.
+  # with a soft depth-of-field blur; the floor and every text stay
+  # pinned; seeded dust motes drift in three depth bands (behind,
+  # around, in front of the couple); room scenes get a shimmering
+  # volumetric light shaft; contact shadows follow the hips and
+  # stretch at the weight-shift extreme. 2026-11-03 owner law: the
+  # far-plane COUNTER-MOVE (the old tracked-shot parallax) is zeroed
+  # in src/depth.py — the world is a locked tripod, only the
+  # atmosphere lives. Seam law intact: every term is integer-cycle
+  # periodic, loops never jump. Any failure collapses to the flat
+  # pre-batch-4 path (fail-open). "legacy" restores the single-plane
+  # world exactly.
   depth: "parallax"
   motes: true            # the living air (three depth bands)
   shaft: "shimmer"       # light shaft on room scenes: shimmer|static|off

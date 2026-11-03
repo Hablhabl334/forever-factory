@@ -282,10 +282,12 @@ slow sinusoidal **sway**, breathing **bob**, and natural **blinks**
 (2–4 s apart, never in unison, 100–160 ms long). All motions run an
 integer number of cycles per loop, so the 2–5 s frame loop is
 seamless. Frames are piped to ffmpeg as raw video (no PNG round
-trips) and the final clip adds the Ken Burns drift via per-frame
-`scale`+`crop` (driven by the filter's own frame counter `n`, so the
-drift glides across loop seams). Render cost: ~1 s per second of
-video — the daily job budget is unaffected.
+trips) and the final clip composites with a **locked camera** (the
+2026-11-03 owner law: no Ken Burns, no pan, no zoom — `camera:
+static` in channel.yaml; `drift`/`kenburns` remain rollback-only via
+per-frame `scale`+`crop` driven by the filter's own frame counter).
+Render cost: ~1 s per second of video — the daily job budget is
+unaffected.
 
 **3. Six movement styles, one locked couple.** A style is seeded
 **per video** (`sync_breath`, `gentle_sway`, `counter_sway`,

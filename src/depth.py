@@ -7,10 +7,13 @@ owner unlocked the visual settings and asked for real depth, real
 movement, a 3D feel — this module is that answer, built entirely from
 free knowledge harvested in the great skills batch:
 
-  * PARALLAX (animation-vocabulary, hyperframes motion notes) — the
-    world is now TWO planes. The far wall/props counter-move against
-    the couple's hip sway like a subtle camera parallax; the floor
-    and the text NEVER move (feet planted, text is sacred).
+  * PARALLAX — RETIRED 2026-11-03 (owner directive: "the camera must
+    not move — no pan, no zoom, I want normal"). The two-plane split
+    STAYS (it carries the depth-of-field blur) but the far plane no
+    longer counter-moves: _PARALLAX_X/_PARALLAX_Y are zeroed, so the
+    world is a locked tripod and the only motion left is the
+    characters themselves. The floor and the text NEVER moved and
+    still don't (feet planted, text is sacred).
   * DEPTH OF FIELD (premium / design-taste-frontend craft) — the far
     plane bakes once with a soft Gaussian blur while the couple stays
     razor sharp: the instant 'shot on a real camera' cue.
@@ -35,7 +38,10 @@ module collapses the frame to the pre-batch-4 composition path —
 the machine can never die because of depth.
 
 Gates (channel.yaml -> video):
-  depth:  parallax | legacy      (default parallax)
+  depth:  parallax | legacy      (default parallax — but with the
+                                 parallax COUNTER-MOVE zeroed: the
+                                 two-plane world is static, only its
+                                 atmosphere lives)
   motes:  true | false           (default true)
   shaft:  shimmer | static | off (default shimmer, room scenes only)
 
@@ -51,10 +57,13 @@ from PIL import Image, ImageDraw, ImageFilter
 
 # ── constants ─────────────────────────────────────────────────────────
 _PAD = 10            # overscan margin on the far plane (px)
-_PARALLAX_X = 0.90   # far counter-move vs the hip sway (a tracked
-                     # shot: the camera rides the couple, the world
-                     # answers — reads clearly next to the 5.5% drift)
-_PARALLAX_Y = 0.22   # far counter-move vs the breathing bob
+# 2026-11-03 owner directive — THE CAMERA NEVER MOVES: no pan left/
+# right, no zoom, no push-in. The far-plane counter-move (the old
+# 0.90/0.22 tracked-shot parallax) is zeroed; the overscan canvas and
+# the clamp math below stay intact (harmless at 0, one-line rollback
+# if the doctrine is ever reversed).
+_PARALLAX_X = 0.0    # far counter-move vs the hip sway — LOCKED
+_PARALLAX_Y = 0.0    # far counter-move vs the breathing bob — LOCKED
 _MAX_DX, _MAX_DY = 8, 4
 _MOTE_COLOR = (250, 244, 226)      # warm dust, matches PAPER
 _SHAFT_COLOR = (255, 246, 216)     # warm light

@@ -85,30 +85,50 @@ def test_seam_law_room_and_glow():
             "seam law broken: frame(T) != frame(0)"
 
 
-def test_parallax_visible_and_clamped():
-    best_abs = 0
+def test_world_locked_no_camera_motion():
+    """2026-11-03 owner law: THE CAMERA NEVER MOVES. No pan left or
+    right, no zoom, no push-in. With the atmosphere stubbed out, the
+    world under the couple must be pixel-identical between two
+    arbitrary timestamps — a locked tripod. The atmosphere itself
+    (motes, shaft) must stay alive, and the depth-of-field blur must
+    survive (the far plane stays softer than the baked bg)."""
     for seed in (1234, 777, 2026):
         layers = _room_layers(seed)
         ps = _params(seed, anim.pick_style(seed))
-        f0 = np.asarray(anim.compose_frame(layers, ps, 0.0, T)).astype(float)
-        f2 = np.asarray(anim.compose_frame(layers, ps, T / 2, T)).astype(float)
-
-        def wall(img):
-            return np.concatenate([img[960:1660, 0:220],
-                                   img[960:1660, 860:1080]], axis=1).mean(axis=2)
-
-        sa, sb = wall(f0), wall(f2)
-        scores = {}
-        for dx in range(-12, 13):
-            if dx >= 0:
-                cand, ref = sb[:, dx:], sa[:, :sb.shape[1] - dx]
-            else:
-                cand, ref = sb[:, :dx], sa[:, -dx:]
-            scores[dx] = float(np.abs(cand - ref).mean())
-        dx = min(scores, key=scores.get)
-        best_abs = max(best_abs, abs(dx))
-    assert best_abs >= 3, f"parallax invisible (best shift {best_abs}px across seeds)"
-    assert best_abs <= depth._MAX_DX, "parallax beyond the clamp"
+        # stub the atmosphere: with motes + shaft silent, ANY far-plane
+        # motion left would be pure camera parallax — there must be none
+        orig_motes, orig_shaft = depth._draw_motes, depth._paste_shaft
+        depth._draw_motes = lambda *a, **k: None
+        depth._paste_shaft = lambda *a, **k: None
+        try:
+            w0 = np.asarray(
+                depth.world_base(layers, ps, 0.0, T)).astype(int)
+            w2 = np.asarray(
+                depth.world_base(layers, ps, T / 2, T)).astype(int)
+        finally:
+            depth._draw_motes, depth._paste_shaft = orig_motes, orig_shaft
+        floor_y = layers["depth"]["floor_y"]
+        band = slice(0, max(1, floor_y - 60))   # above the shadow halo
+        assert int(np.abs(w0[band] - w2[band]).max()) == 0, \
+            "camera moved: the locked world shifted between frames"
+    # the locked world is not a dead painting: the atmosphere keeps
+    # the background alive with the camera frozen
+    layers = _room_layers(42)
+    ps = _params(42, anim.pick_style(42))
+    f0 = np.asarray(anim.compose_frame(layers, ps, 0.0, T)).astype(int)
+    f2 = np.asarray(anim.compose_frame(layers, ps, T / 2, T)).astype(int)
+    bg = slice(0, 260)
+    assert float(np.abs(f0[bg] - f2[bg]).mean()) > 0.0, \
+        "atmosphere dead: motes/shaft stopped with depth on"
+    # depth of field survives the lock: the far plane is softer than
+    # the baked background in the same wall region
+    dep = layers["depth"]
+    box = (depth._PAD + 0, depth._PAD + 960, depth._PAD + 220, depth._PAD + 1660)
+    far = np.asarray(dep["far"].crop(box).convert("L")).astype(float)
+    ref = np.asarray(layers["bg"].crop((0, 960, 220, 1660)).convert("L")).astype(float)
+    energy = lambda a: float(np.abs(np.diff(a, axis=1)).mean())
+    assert energy(far) < energy(ref), \
+        "depth of field lost: far plane as sharp as the baked bg"
 
 
 def test_fail_open_legacy_identical():

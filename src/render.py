@@ -163,11 +163,22 @@ def _parse_ass_time(s: str) -> float:
 
 
 # ── Ken Burns motions ──────────────────────────────────────────────
-# v2.1: these drive ONLY the legacy path (video.camera: kenburns) and
-# the still-image cards without characters (title / end / outro). The
-# character scene cards run a LOCKED static camera by default — the
-# owner's spec: no zoom in, no zoom out, no pan left or right; the
-# motion budget comes from the articulated characters instead.
+# 2026-11-03 owner directive — THE CAMERA NEVER MOVES: "stop moving
+# the camera right or left or zooming in or out, I want normal." The
+# default `video.camera: static` renders EVERY card on a locked
+# tripod (scene cards, title, end, fallback stills). The motion
+# budget comes from the articulated characters and the depth
+# atmosphere (motes, shaft) only. `drift` / `kenburns` remain one
+# config flip away as the rollback path.
+
+def _static_expr(frames: int, size: str = "1920x1080") -> str:
+    """The LOCKED TRIPOD: same zoompan mechanics as the motions above
+    (one PNG in, d frames out) but z pinned to 1 and x/y pinned to
+    center — exactly the framing of frame 0 of the old zoom_in, frozen
+    for the whole card. No pan, no zoom, ever."""
+    d = max(2, frames)
+    return (f"zoompan=z='1':x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':"
+            f"d={d}:s={size}:fps=30")
 
 def _zoompan_expr(motion: str, frames: int, size: str = "1920x1080") -> str:
     d = max(2, frames)
@@ -233,7 +244,13 @@ def render_clip(png: Path, out: Path, dur: float, motion: str,
     if size is None:
         size = (int(vconf["width"]), int(vconf["height"]))
     frames = int(round(dur * fps))
-    filters = [_zoompan_expr(motion, frames, f"{size[0]}x{size[1]}")]
+    # 2026-11-03: the camera gate governs the single-PNG cards too —
+    # static (the default and the law) renders a locked tripod.
+    camera = vconf.get("camera", "drift")
+    if camera == "static":
+        filters = [_static_expr(frames, f"{size[0]}x{size[1]}")]
+    else:
+        filters = [_zoompan_expr(motion, frames, f"{size[0]}x{size[1]}")]
     if ass_file is not None:
         fontsdir = ROOT / "assets" / "fonts"
         filters.append(f"ass=filename='{ass_file}':fontsdir='{fontsdir}'")
@@ -271,11 +288,12 @@ def render_clip_art(layers: dict, seed: int, out: Path, dur: float,
         undershoot, still exactly 1.0 at the seam.
       * LONGER LOOPS — unique-frame budget 90-240 (was 60-150): the
         sway/blink cycle repeats less visibly.
-      * CAMERA — `video.camera: drift` (new default): an eased 5.5%
-        Ken Burns across the whole card, world and text together for
-        baked text cards (the burn-in ASS captions stay STATIC: they
-        composite after the drift). 'static' and 'kenburns' still
-        honored exactly as before.
+      * CAMERA — `video.camera: static` (2026-11-03 law): the card is
+        a locked tripod — no drift filter at all, world and text sit
+        exactly where the loop put them. 'drift' (the old 5.5% eased
+        Ken Burns, world and baked text together; the burn-in ASS
+        captions composite after the camera either way) and
+        'kenburns' remain honored exactly as before.
 
     The seam math: the intro IS the loop's first n_intro frames (same
     params, same phase), and the loop replay is trimmed to start at
