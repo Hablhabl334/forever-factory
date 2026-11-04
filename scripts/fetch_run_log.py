@@ -18,7 +18,7 @@ import urllib.error
 import urllib.request
 from pathlib import Path
 
-ROOT = Path("/home/z/my-project/download/forever-factory")
+ROOT = Path(__file__).resolve().parent.parent
 
 
 def _tok() -> str:

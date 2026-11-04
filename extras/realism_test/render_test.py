@@ -17,7 +17,7 @@ import sys
 import time
 from pathlib import Path
 
-FF = Path("/home/z/my-project/download/forever-factory")
+FF = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(FF))
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 

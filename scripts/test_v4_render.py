@@ -11,7 +11,7 @@ from pathlib import Path
 
 sys.path.insert(0, ".")
 
-ROOT = Path("/home/z/my-project/download/forever-factory")
+ROOT = Path(__file__).resolve().parent.parent
 WORK = ROOT / "work" / "test_v4"
 OUT = ROOT / "out" / "test_v4"
 for p in (WORK, OUT):

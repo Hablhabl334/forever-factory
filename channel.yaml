@@ -123,6 +123,21 @@ voice:
   sentence_pause: 0.42              # seconds between sentences (jittered ±28%)
   paragraph_pause: 0.70             # seconds between scenes (jittered)
   sample_rate: 22050
+  # ── THE HUMAN EDGE (2026-11-05) ──────────────────────────────────
+  # Owner diagnosis: "videos and shorts is flagged as ai video
+  # generated, that's what kills the views." The real killer is that
+  # LISTENERS hear synthetic delivery and leave inside 8 seconds —
+  # retention dies, the algorithm stops recommending, and "AI-
+  # generated" is just the label that gets pinned on it afterward.
+  # We do not dodge classifiers (never — honest classification stays);
+  # we make the voice genuinely human-feeling so people stay.
+  # src/voice_human.py adds, all offline and seeded-deterministic:
+  # variable mood-aware pauses, procedural breaths, join jitter, a
+  # -60 dB room-tone bed, per-chunk loudness/pacing micro-variation,
+  # and prosody punctuation at the TTS-input layer (caption text,
+  # titles, CTA, grid, thumbnails: untouched). Fail-open: any
+  # humanizer error collapses to the proven pipeline unchanged.
+  humanize: true
 
 video:
   width: 1920

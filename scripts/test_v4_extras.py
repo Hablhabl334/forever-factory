@@ -9,7 +9,7 @@ sys.path.insert(0, ".")
 
 from src import art_engine, render, story_engine, thumbnails, muse  # noqa: E402
 
-ROOT = Path("/home/z/my-project/download/forever-factory")
+ROOT = Path(__file__).resolve().parent.parent
 TMP = ROOT / "work" / "v4_checks"
 if TMP.exists():
     shutil.rmtree(TMP)

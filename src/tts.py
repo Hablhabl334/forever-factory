@@ -171,6 +171,46 @@ def _pause_for(text: str, idx: int, base: float) -> float:
     return base * (0.72 + 0.56 * val)
 
 
+# ── the human edge (2026-11-05) — fail-open seams ────────────────────
+# Every seam swallows every exception: a humanizer bug can never kill
+# a voice, change a caption, or shift a duration. voice.humanize in
+# channel.yaml is the gate; see src/voice_human.py for the laws.
+
+def _voice_human():
+    from . import voice_human
+    return voice_human
+
+
+def _human_tts_text(vconf: dict, text: str) -> str:
+    """(g) prosody punctuation — TTS INPUT ONLY, caption text LOCKED."""
+    try:
+        return _voice_human().tts_text(vconf, text)
+    except Exception:
+        return text
+
+
+def _human_speed(vconf: dict, idx: int, text: str) -> float:
+    """(f) per-chunk pacing multiplier fed to the engine APIs."""
+    try:
+        return _voice_human().speed_multiplier(vconf, idx, text)
+    except Exception:
+        return 1.0
+
+
+def _human_schedule(plan: list[dict], vconf: dict, story: dict,
+                    sent_pause: float, scene_pause: float) -> dict | None:
+    """The full humanized timing plan, or None (plain pipeline)."""
+    try:
+        vh = _voice_human()
+        if not vh.enabled(vconf):
+            return None
+        return vh.schedule_for(plan, sent_pause, scene_pause,
+                               story.get("hash"), sr=SR)
+    except Exception as exc:
+        print(f"  [voice] human edge skipped ({type(exc).__name__})")
+        return None
+
+
 def _parse_pct(s: str) -> float:
     return float(str(s).replace("%", "").strip() or 0)
 
@@ -304,6 +344,10 @@ def _kokoro_synth_all(items: list[tuple[int, str]], chunks_dir: Path,
         if text.rstrip().endswith("?"):
             speed *= 0.97
         speed = max(0.5, min(2.0, speed))
+        # (f) human edge: mood pacing — hooks a touch faster,
+        # reflective lines a touch slower (fail-open to 1.0)
+        speed *= _human_speed(vconf, idx, text)
+        speed = max(0.5, min(2.0, speed))
         audio, sr = kokoro.create(
             text, voice=voice, speed=round(speed, 4), lang="en-us")
         _f32_to_wav_22050(audio, sr, chunks_dir / f"chunk_{idx:03d}.wav")
@@ -356,7 +400,8 @@ def _edge_synth_all(items: list[tuple[int, str]], chunks_dir: Path,
         # touch on questions — flat questions were a robotic tell
         is_question = text.rstrip().endswith("?")
         rate = _fmt_pct(base_rate + _jitter_pct(text, jitter)
-                        + (-2.0 if is_question else 0.0))
+                        + (-2.0 if is_question else 0.0)
+                        + (_human_speed(vconf, idx, text) - 1.0) * 100.0)
         pitch = _fmt_hz(base_pitch + _jitter_pct(text, pitch_jitter)
                         + (1.0 if is_question else 0.0))
         last_err: Exception | None = None
@@ -543,6 +588,18 @@ def narrate(story: dict, work_dir: Path, model_path: Path | None = None,
             idx += 1
             plan.append({"scene": scene["n"], "text": text, "idx": idx})
 
+    # the human edge (2026-11-05): mood-aware pauses, breaths, room
+    # tone, pacing life. Fail-open — sched None = the proven plain
+    # pipeline, byte-for-byte. The schedule only shapes SILENCE:
+    # caption metadata and the master wav are built from the same
+    # numbers, so sync stays sacred.
+    sched = _human_schedule(plan, vconf, story, sent_pause, scene_pause)
+    if sched is not None:
+        vconf["_human_speed"] = sched["speeds"]
+        vconf["_human_story"] = story.get("hash")
+        print("  [voice] human edge ON: variable pauses, breaths, "
+              "room tone, pacing life")
+
     # engine choice: kokoro (local) -> edge (network) -> piper (last
     # resort, loud). 2026-10-13 lesson: one failed probe used to
     # convert a single bad minute into a whole robotic day. The
@@ -567,20 +624,27 @@ def narrate(story: dict, work_dir: Path, model_path: Path | None = None,
                   f"narrating with {voice_ok}")
             vconf["edge_name"] = voice_ok
 
-    # engine consistency: never mix two voices in one narration
+    # engine consistency: never mix two voices in one narration. The
+    # humanize fingerprint rides along so toggling the human edge
+    # (or upgrading it) re-voices from scratch instead of mixing
+    # prosody regimes inside one narration.
     marker = chunks_dir / "engine.txt"
-    cached_engine = marker.read_text().strip() if marker.exists() else engine
-    if cached_engine != engine:
+    marker_name = engine + ("+h" if sched is not None else "")
+    cached_engine = marker.read_text().strip() if marker.exists() else marker_name
+    if cached_engine != marker_name:
         _wipe_chunks(chunks_dir)
-    marker.write_text(engine)
+    marker.write_text(marker_name)
 
     # synthesize missing chunks
     missing = [p for p in plan
                if not (chunks_dir / f"chunk_{p['idx']:03d}.wav").exists()]
     if missing:
+        # (g) prosody punctuation lives at the TTS-INPUT layer only —
+        # the caption text in `plan` is LOCKED and never changes
         if engine == "kokoro":
             try:
-                _kokoro_synth_all([(p["idx"], p["text"]) for p in missing],
+                _kokoro_synth_all([(p["idx"], _human_tts_text(vconf, p["text"]))
+                                   for p in missing],
                                   chunks_dir, vconf, rate_pct=rate_pct)
                 print(f"  [voice] local neural narration: {len(missing)} chunks "
                       f"(Kokoro {vconf.get('kokoro_voice', 'af_heart')})")
@@ -589,11 +653,12 @@ def narrate(story: dict, work_dir: Path, model_path: Path | None = None,
                       "edge-tts (whole narration, one consistent voice)")
                 engine = "edge"
                 _wipe_chunks(chunks_dir)
-                marker.write_text(engine)
+                marker.write_text(engine + ("+h" if sched is not None else ""))
                 missing = plan
         if engine == "edge":
             try:
-                _edge_synth_all([(p["idx"], p["text"]) for p in missing],
+                _edge_synth_all([(p["idx"], _human_tts_text(vconf, p["text"]))
+                                 for p in missing],
                                 chunks_dir, vconf)
                 print(f"  [voice] neural narration: {len(missing)} chunks "
                       f"({vconf.get('edge_name', 'en-US-AriaNeural')})")
@@ -604,7 +669,7 @@ def narrate(story: dict, work_dir: Path, model_path: Path | None = None,
                     NEURAL_FALLBACK = True
                     engine = "piper"
                     _wipe_chunks(chunks_dir)
-                    marker.write_text(engine)
+                    marker.write_text(engine + ("+h" if sched is not None else ""))
                     missing = plan  # everything again, one consistent voice
                 else:
                     raise
@@ -612,48 +677,89 @@ def narrate(story: dict, work_dir: Path, model_path: Path | None = None,
             from piper import PiperVoice
             voice = PiperVoice.load(str(model_path))
             for p in missing:
-                frames = _synth_chunk_piper(voice, p["text"], length_scale)
+                frames = _synth_chunk_piper(
+                    voice, _human_tts_text(vconf, p["text"]), length_scale)
                 write_wav(chunks_dir / f"chunk_{p['idx']:03d}.wav", frames)
             print(f"  [voice] offline Piper narration: {len(missing)} chunks")
 
-    # assemble timing metadata from the exact chunk durations
+    # assemble timing metadata from the exact chunk durations.
+    # TWO explicit branches: plain (legacy code, byte-for-byte) and
+    # human edge (gaps come from the schedule; metadata and master
+    # are built from the SAME numbers — captions can never drift).
     chunks_meta: list[dict] = []
     scene_durations: list[float] = []
-    t = 0.0
-    last_scene = plan[0]["scene"] if plan else 1
-    scene_start = 0.0
-    for p in plan:
-        frames = read_wav(chunks_dir / f"chunk_{p['idx']:03d}.wav")
-        dur = len(frames) / SR
-        if p["scene"] != last_scene:
-            t += _pause_for(p["text"], -p["scene"], scene_pause)
+    frames_list: list = []          # human branch: read each chunk once
+    if sched is None:
+        t = 0.0
+        last_scene = plan[0]["scene"] if plan else 1
+        scene_start = 0.0
+        for p in plan:
+            frames = read_wav(chunks_dir / f"chunk_{p['idx']:03d}.wav")
+            dur = len(frames) / SR
+            if p["scene"] != last_scene:
+                t += _pause_for(p["text"], -p["scene"], scene_pause)
+                scene_durations.append(round(t - scene_start, 3))
+                scene_start = t
+                last_scene = p["scene"]
+            chunks_meta.append({
+                "scene": p["scene"],
+                "text": p["text"],
+                "start": round(t, 3),
+                "end": round(t + dur, 3),
+            })
+            t += dur + _pause_for(p["text"], p["idx"], sent_pause)
+        if plan:
+            t += scene_pause
             scene_durations.append(round(t - scene_start, 3))
-            scene_start = t
-            last_scene = p["scene"]
-        chunks_meta.append({
-            "scene": p["scene"],
-            "text": p["text"],
-            "start": round(t, 3),
-            "end": round(t + dur, 3),
-        })
-        t += dur + _pause_for(p["text"], p["idx"], sent_pause)
-    if plan:
-        t += scene_pause
-        scene_durations.append(round(t - scene_start, 3))
+    else:
+        gaps = sched["gap_before"]
+        t = 0.0
+        last_scene = plan[0]["scene"] if plan else 1
+        scene_start = 0.0
+        for j, p in enumerate(plan):
+            frames = read_wav(chunks_dir / f"chunk_{p['idx']:03d}.wav")
+            frames = _voice_human().apply_gain(
+                frames, sched["gains"].get(p["idx"], 1.0))
+            frames_list.append(frames)
+            dur = len(frames) / SR          # gain never changes duration
+            if j > 0:
+                t += gaps[j]                # merged sent+scene humanized gap
+                if p["scene"] != last_scene:
+                    scene_durations.append(round(t - scene_start, 3))
+                    scene_start = t
+                    last_scene = p["scene"]
+            chunks_meta.append({
+                "scene": p["scene"],
+                "text": p["text"],
+                "start": round(t, 3),
+                "end": round(t + dur, 3),
+            })
+            t += dur
+        if plan:
+            t += sched["sent_after_last"] + scene_pause
+            scene_durations.append(round(t - scene_start, 3))
 
     total = t
 
-    # master narration wav: concat cached chunks with pauses
-    master = array.array("h")
-    pause_frames = lambda secs: array.array("h", b"\x00\x00" * int(secs * SR))
-    last_scene = plan[0]["scene"] if plan else 1
-    for p in plan:
-        master.extend(read_wav(chunks_dir / f"chunk_{p['idx']:03d}.wav"))
-        master.extend(pause_frames(_pause_for(p["text"], p["idx"], sent_pause)))
-        if p["scene"] != last_scene:
-            master.extend(
-                pause_frames(_pause_for(p["text"], -p["scene"], scene_pause)))
-            last_scene = p["scene"]
+    # master narration wav: human branch assembles with breaths,
+    # gains and the room-tone bed; plain branch stays legacy.
+    if sched is None:
+        master = array.array("h")
+        pause_frames = lambda secs: array.array("h", b"\x00\x00" * int(secs * SR))
+        last_scene = plan[0]["scene"] if plan else 1
+        for p in plan:
+            master.extend(read_wav(chunks_dir / f"chunk_{p['idx']:03d}.wav"))
+            master.extend(pause_frames(_pause_for(p["text"], p["idx"], sent_pause)))
+            if p["scene"] != last_scene:
+                master.extend(
+                    pause_frames(_pause_for(p["text"], -p["scene"], scene_pause)))
+                last_scene = p["scene"]
+    else:
+        master = _voice_human().assemble(
+            frames_list,
+            sched["gap_before"],
+            sched["breath_before"],
+            total, SR, sched["room_db"], sched["room_seed"])
 
     # trim/pad to exact total length
     need = int(total * SR)

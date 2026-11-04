@@ -13,7 +13,7 @@ from pathlib import Path
 
 sys.path.insert(0, ".")
 
-ROOT = Path("/home/z/my-project/download/forever-factory")
+ROOT = Path(__file__).resolve().parent.parent
 TMP = ROOT / "work" / "skill_upgrade_checks"
 if TMP.exists():
     shutil.rmtree(TMP)

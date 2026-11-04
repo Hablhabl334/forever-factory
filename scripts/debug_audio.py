@@ -7,7 +7,7 @@ from pathlib import Path
 import numpy as np
 
 sys.path.insert(0, ".")
-ROOT = Path("/home/z/my-project/download/forever-factory")
+ROOT = Path(__file__).resolve().parent.parent
 SW = ROOT / "work" / "test_v4" / "short_01"
 
 
