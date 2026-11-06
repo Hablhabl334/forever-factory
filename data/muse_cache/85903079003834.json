@@ -1,0 +1,387 @@
+{
+ "title": "Boundaries in Love",
+ "topic": "boundaries",
+ "topic_label": "psychology of boundaries",
+ "mood": "warm",
+ "series": "Psychology of Love",
+ "hook": "A boundary isn't a wall \u2014 it's a filter. And the people it filters out were never going to stay anyway.",
+ "words": 1046,
+ "hash": "02f51b332727d876",
+ "seed": 85903079003834,
+ "atoms": {
+  "topic": "Boundaries in Love",
+  "concepts": [
+   "jealousy as information",
+   "the boundary filter",
+   "the cost of ambiguity",
+   "the trust equation",
+   "green flags",
+   "on-off cycles",
+   "secure attachment",
+   "the worth baseline"
+  ]
+ },
+ "question": "Have you seen jealousy as information up close? Tell me below.",
+ "scenes": [
+  {
+   "n": 1,
+   "id": "open_card",
+   "narration": "Boundaries work like a filter, letting the right people stay. The ones they screen out were never meant to stay. Today you get eight quiet pieces of psychology on boundaries in love - stick around, because the one that lands won't be the one you expect.",
+   "image": {
+    "kind": "topic_card",
+    "topic": "Boundaries in Love",
+    "band": "psychology of boundaries",
+    "count": 8
+   }
+  },
+  {
+   "n": 2,
+   "id": "tip1_card",
+   "narration": "Jealousy comes from either a real threat or an old wound replaying its favorite tune. When the threat is real, a conversation helps; when it's an old insecurity, the work is internal. Both feel the same from the inside. Let it run unchecked and it turns into control, which kills desire fast. The trick isn't to feel less, it's to check the signal before you act on it.",
+   "image": {
+    "kind": "concept_card",
+    "tip": 1,
+    "total": 8,
+    "term": "jealousy as information",
+    "headline": "Every jealousy has one of two sources: a real threat, or an old wound hearing its favorite song.",
+    "accent_word": null
+   }
+  },
+  {
+   "n": 3,
+   "id": "tip1_scene",
+   "narration": "At a concert a coworker lands a big laugh and Chloe feels her chest tighten. Was there a real slight or just an old wound echoing? One calls for a talk, the other for a journal. Ask the alarm: what did I actually see? Facts first, story second, then pick the right conversation. That was the warm-up; the next one hits harder.",
+   "image": {
+    "kind": "couple_scene",
+    "emotion_a": "annoyed",
+    "pose_a": "arms_crossed",
+    "emotion_b": "surprised",
+    "pose_b": "phone",
+    "overlay": [
+     "psychologists call this",
+     "jealousy as information"
+    ]
+   }
+  },
+  {
+   "n": 4,
+   "id": "tip2_card",
+   "narration": "A boundary works like a filter, a screen that makes love possible. It marks where you stop and someone else starts - your time, body, money, yes and no. Clear limits actually make people feel safer because visible rules are trustworthy. Anyone who resents your limits only ever fit the version of you without them. The filter doesn't lose people; it prices them correctly.",
+   "image": {
+    "kind": "concept_card",
+    "tip": 2,
+    "total": 8,
+    "term": "the boundary filter",
+    "headline": "A boundary isn't a wall to keep love out \u2014 it's a filter that makes love possible.",
+    "accent_word": null
+   }
+  },
+  {
+   "n": 5,
+   "id": "tip2_scene",
+   "narration": "Amy lays out the rules up front: weekends are a yes, emergencies always, guilt trips never. The relationship feels safer, not smaller. Rules you can see are rules you can trust. The filter doesn't push people away; it sets the right price for everyone. If that stung, stay put - the next piece explains why.",
+   "image": {
+    "kind": "couple_scene",
+    "emotion_a": "neutral",
+    "pose_a": "stand",
+    "emotion_b": "neutral",
+    "pose_b": "phone",
+    "overlay": [
+     "psychologists call this",
+     "the boundary filter"
+    ]
+   }
+  },
+  {
+   "n": 6,
+   "id": "tip3_card",
+   "narration": "Mixed signals aren't confusion; they're the priciest clarity you can buy. When someone runs hot and cold, the signal itself is the message - it says I want the perks without the commitment. The hidden cost is months spent auditing instead of living. Certainty feels boring, yet it's the only ground where something real can grow.",
+   "image": {
+    "kind": "concept_card",
+    "tip": 3,
+    "total": 8,
+    "term": "the cost of ambiguity",
+    "headline": "Mixed signals aren't confusion. They're the most expensive clarity you'll ever buy.",
+    "accent_word": null
+   }
+  },
+  {
+   "n": 7,
+   "id": "tip3_scene",
+   "narration": "Mira reads 'baby' in a text at six a.m. and watches plans evaporate at the gym. She's translating a language that only ever says maybe. Switch the question from what they feel to what they do. Behavior never mixes. That leaves a harder question, and the next piece answers it.",
+   "image": {
+    "kind": "couple_scene",
+    "emotion_a": "anxious",
+    "pose_a": "stand",
+    "emotion_b": "detached",
+    "pose_b": "phone",
+    "overlay": [
+     "psychologists call this",
+     "the cost of ambiguity"
+    ]
+   }
+  },
+  {
+   "n": 8,
+   "id": "tip4_card",
+   "narration": "Trust grows from boring predictability rather than grand promises. Researchers say it's consistency plus integrity over self-interest - words, actions, motives aligning again and again. Big gestures can't fix broken patterns; trust compounds like a savings account in tiny, identical deposits. Rebuilding after betrayal takes the same slow, steady rate. There's no lottery version of trust.",
+   "image": {
+    "kind": "concept_card",
+    "tip": 4,
+    "total": 8,
+    "term": "the trust equation",
+    "headline": "Trust isn't built by promises \u2014 it's built by boring predictability, delivered over time.",
+    "accent_word": null
+   }
+  },
+  {
+   "n": 9,
+   "id": "tip4_scene",
+   "narration": "One broken pattern drained the three-year account Sara and Ryan built. Rebuilding works the same way: tiny, identical, boring deposits - no lottery version. Make fewer promises, keep more of them. Overpromising is just debt dressed up as romance. Hold that feeling; the next lesson will need it.",
+   "image": {
+    "kind": "couple_scene",
+    "emotion_a": "neutral",
+    "pose_a": "stand",
+    "emotion_b": "happy",
+    "pose_b": "stand",
+    "overlay": [
+     "psychologists call this",
+     "the trust equation"
+    ]
+   }
+  },
+  {
+   "n": 10,
+   "id": "tip5_card",
+   "narration": "No fireworks, just follow-through - the unsexy signs that carry the relationship. Green flags are mundane: they remember details, show up on time, apologize specifically, treat waiters and exes the same. Our brains crave drama, so steadiness feels flat, like a quiet engine. The move is to hunt for those boring signals; they bear the real weight. Someone whose presence calms you is doing something biochemically rare.",
+   "image": {
+    "kind": "concept_card",
+    "tip": 5,
+    "total": 8,
+    "term": "green flags",
+    "headline": "No fireworks, just follow-through: the unsexy signs carrying the whole relationship.",
+    "accent_word": null
+   }
+  },
+  {
+   "n": 11,
+   "id": "tip5_scene",
+   "narration": "At one a.m. on a Tuesday Layla noticed nothing spectacular was happening and she felt completely safe. That isn't boring; it's biochemically rare. List your quiet green flags this week - punctual, remembers, repairs. Then seek that list in people, not chemistry. Keep that thought; the next pattern shows why it repeats.",
+   "image": {
+    "kind": "couple_scene",
+    "emotion_a": "happy",
+    "pose_a": "stand",
+    "emotion_b": "happy",
+    "pose_b": "stand",
+    "overlay": [
+     "psychologists call this",
+     "green flags"
+    ]
+   }
+  },
+  {
+   "n": 12,
+   "id": "tip6_card",
+   "narration": "Each breakup with the same person gets easier to start and harder to count. Studies show on-again, off-again cycles run on ambiguity, not love. Reunions are fueled by relief, which is a lousy compatibility test. The cycle normalizes: the third split doesn't scare like the first. The real question isn't whether you love each other - you usually do - it's whether anything gets solved between reunions.",
+   "image": {
+    "kind": "concept_card",
+    "tip": 6,
+    "total": 8,
+    "term": "on-off cycles",
+    "headline": "Every breakup with the same person gets easier to start \u2014 and harder to count.",
+    "accent_word": null
+   }
+  },
+  {
+   "n": 13,
+   "id": "tip6_scene",
+   "narration": "Friends ask Jonas what changed this time. Nothing changed - relief showed up on schedule at eleven, dressed as love. If you restart, bring changes, not just feelings. A reunion without a new plan is a rerun with spoilers. Almost no one links this pattern to the last one. You're about to.",
+   "image": {
+    "kind": "couple_scene",
+    "emotion_a": "sad",
+    "pose_a": "stand",
+    "emotion_b": "neutral",
+    "pose_b": "phone",
+    "overlay": [
+     "psychologists call this",
+     "on-off cycles"
+    ]
+   }
+  },
+  {
+   "n": 14,
+   "id": "tip7_card",
+   "narration": "Secure love feels underwhelming at first because the adrenaline of anxiety is gone. Secure people do something quietly radical: they take words at face value. 'I'm busy' means busy. 'I love you' means they act like it on a Tuesday, not just anniversaries. Their calm isn't shallow; it's the absence of a constant threat detector. Research keeps showing security is the style that lets every other relationship skill work.",
+   "image": {
+    "kind": "concept_card",
+    "tip": 7,
+    "total": 8,
+    "term": "secure attachment",
+    "headline": "Secure love feels underwhelming at first \u2014 because there's no adrenaline where the anxiety used to be.",
+    "accent_word": null
+   }
+  },
+  {
+   "n": 15,
+   "id": "tip7_scene",
+   "narration": "Youssef tells Nora she hurt his feelings at a wedding. Nora doesn't defend, counterattack, or freeze - she says, you're right, that was careless. The talk lasts ninety seconds and nothing escalates. Security is a skill set, not a personality: listening at face value, repairing after fights, words that predict behavior. Keep that in mind; the next lesson explains why it keeps finding you.",
+   "image": {
+    "kind": "couple_scene",
+    "emotion_a": "happy",
+    "pose_a": "stand",
+    "emotion_b": "happy",
+    "pose_b": "stand",
+    "overlay": [
+     "psychologists call this",
+     "secure attachment"
+    ]
+   }
+  },
+  {
+   "n": 16,
+   "id": "tip8_card",
+   "narration": "You don't attract what you deserve; you attract what you believe you can keep. Psychologists say self-esteem works like a price floor - it sets the lowest treatment you'll tolerate. Raise the floor and bad offers become unaffordable; lower it and mistreatment looks like luck. That's why someone can leave a terrible relationship and step into a similar one - the filter moved, not the market. Building worth isn't vanity; it's relationship economics.",
+   "image": {
+    "kind": "concept_card",
+    "tip": 8,
+    "total": 8,
+    "term": "the worth baseline",
+    "headline": "You don't attract what you deserve. You attract what you believe you can keep.",
+    "accent_word": null
+   }
+  },
+  {
+   "n": 17,
+   "id": "tip8_scene",
+   "narration": "After the breakup you swore never again, yet six months later you're pointing out the same red flags to a new close friend. The pattern followed the price floor, not the person. Do the unglamorous work: sleep, build, keep promises to yourself. Worth climbs with kept commitments, and standards rise with it.",
+   "image": {
+    "kind": "couple_scene",
+    "emotion_a": "neutral",
+    "pose_a": "stand",
+    "emotion_b": "neutral",
+    "pose_b": "stand",
+    "overlay": [
+     "psychologists call this",
+     "the worth baseline"
+    ]
+   }
+  },
+  {
+   "n": 18,
+   "id": "outro_card",
+   "narration": "That was eight pieces of psychology on boundaries in love. If even one made your love life click, you got your money's worth - this one was free. Have you seen jealousy as information up close? Tell me below. Subscribe for more tips like this.",
+   "image": {
+    "kind": "outro_card",
+    "topic": "Boundaries in Love"
+   }
+  }
+ ],
+ "shorts": [
+  {
+   "n": 1,
+   "concept": "on_off_cycles",
+   "band": "psychology of boundaries",
+   "hook": "Relief masquerades as love while the same problems wait patiently in the corner.",
+   "term": "on-off cycles",
+   "script": "Breakup. Makeup. Repeat. Relief masquerades as love while the same problems wait patiently in the corner. She packs a box labeled with his things, tapes it shut carefully, then unpacks it three weeks later when his text arrives on a Tuesday afternoon. The brain codes reunion relief as proof of deep connection because the emotional contrast feels louder and more meaningful than the calm that preceded the breakup. Each completed cycle raises the threshold so the next rupture barely registers as a warning worth heeding. Psychologists call this on-off cycles. Before you agree to try again, write down the specific behavioral change that makes this attempt different from the last two. Which argument have you already rehearsed three times without ever reaching a clear new resolution? Subscribe for more tips like this.",
+   "words": 132,
+   "shash": "8bf5b2d18dc0fcc5",
+   "scene": {
+    "emotion_a": "sad",
+    "pose_a": "stand",
+    "emotion_b": "neutral",
+    "pose_b": "phone"
+   }
+  },
+  {
+   "n": 2,
+   "concept": "green_flags",
+   "band": "psychology of boundaries",
+   "hook": "Consistency makes no sound yet it carries the weight of everything love builds.",
+   "term": "green flags",
+   "script": "Quiet wins. Consistency makes no sound yet it carries the weight of everything love builds. He sets his phone down screen-first on the table and listens to her entire story without checking the time once, not even when it buzzes. Drama trains people's attention systems to mistake emotional intensity for genuine intimacy so plain steadiness registers as a flat line instead of a foundation. The nervous system learns to associate calm with genuine safety only after repeated exposure proves the quiet is reliable and not a warning trap. Psychologists call this green flags. Rate the person by how you feel two full hours after parting ways, not by the spark that flickers in the first five minutes. Who in your life feels like a deep breath you didn't know you needed but you keep overlooking them anyway? Subscribe for more tips like this.",
+   "words": 143,
+   "shash": "d0c04c3274e9ba0c",
+   "scene": {
+    "emotion_a": "happy",
+    "pose_a": "stand",
+    "emotion_b": "happy",
+    "pose_b": "stand"
+   }
+  },
+  {
+   "n": 3,
+   "concept": "mixed_signals_cost",
+   "band": "psychology of boundaries",
+   "hook": "Ambivalence speaks louder than words when it offers presence without the promise of real consistency.",
+   "term": "the cost of ambiguity",
+   "script": "Mixed signals are messages. Ambivalence speaks louder than words when it offers presence without the promise of real consistency. She rewrites the same text four times trying to sound casual while her stomach tightens with each unanswered hour that passes silently by. People's brains prefer endlessly decoding mixed signals over facing the plain clarity that the person simply does not want the same level of commitment. Ambiguity extracts a hidden tax paid in months of mental energy spent auditing intentions instead of building a life that moves forward. Psychologists call this the cost of ambiguity. Name a clear deadline for clarity out loud and watch how fast the ambiguity resolves itself when it cannot hide anymore. Which situation have you spent weeks translating in your head when the answer was already sitting in the silence? Subscribe for more tips like this.",
+   "words": 141,
+   "shash": "7ee81373c729855d",
+   "scene": {
+    "emotion_a": "anxious",
+    "pose_a": "stand",
+    "emotion_b": "detached",
+    "pose_b": "phone"
+   }
+  },
+  {
+   "n": 4,
+   "concept": "jealousy_signal",
+   "band": "psychology of boundaries",
+   "hook": "Stop measuring love by how jealous you feel. Jealousy is a pointer \u2014 follow it to the fear underneath.",
+   "term": "jealousy as information",
+   "script": "File this under 'oh'. Stop measuring love by how jealous you feel. Jealousy is a pointer \u2014 follow it to the fear underneath. The alarm went off. Before confronting anyone, ask it: what exactly did I see? The skill isn't feeling less \u2014 it's investigating the signal before obeying it. Unchecked jealousy becomes control, and control is the fastest known killer of desire. Jealousy has two possible sources: a real threat in the situation, or an insecurity in the alarm system itself. There is a term for this in psychology: jealousy as information. Bring the feeling, not the case files. 'I felt something and I want to understand it' opens doors that evidence slams shut. Which one are you in this \u2014 be honest in the comments. Subscribe for more tips like this.",
+   "words": 133,
+   "shash": "17c17add84a0a10f",
+   "scene": {
+    "emotion_a": "annoyed",
+    "pose_a": "arms_crossed",
+    "emotion_b": "surprised",
+    "pose_b": "phone"
+   }
+  },
+  {
+   "n": 5,
+   "concept": "boundaries_attract",
+   "band": "psychology of boundaries",
+   "hook": "A clear limit acts like a filter letting the right love in while showing everyone else the exit.",
+   "term": "the boundary filter",
+   "script": "Boundaries are not walls. A clear limit acts like a filter letting the right love in while showing everyone else the exit. She states her availability once without over-explaining and watches the confused ones drift away slowly while the steady ones simply nod and stay close by. Visible rules create psychological safety because predictable boundaries signal that the relationship can handle honesty without collapsing into chaos or retreat. Resentment toward a stated limit usually reveals a warning about someone who benefited from the absence of that limit and never expected to pay. Psychologists call this the boundary filter. State your limit once clearly and treat the reaction as smart data about who truly belongs in your life. Which boundary have you been over-explaining to someone who proves they only stay when you have none at all anymore? Subscribe for more tips like this.",
+   "words": 143,
+   "shash": "d4564ab3324fc45b",
+   "scene": {
+    "emotion_a": "neutral",
+    "pose_a": "stand",
+    "emotion_b": "neutral",
+    "pose_b": "phone"
+   }
+  },
+  {
+   "n": 6,
+   "concept": "secure_attachment",
+   "band": "psychology of boundaries",
+   "hook": "Security feels like relief because the threat detector finally stops scanning for exits in every single pause.",
+   "term": "secure attachment",
+   "script": "Calm is not boring. Security feels like relief because the threat detector finally stops scanning for exits in every single pause. He reads the text saying busy and puts the phone down without constructing three disaster scenarios in the space of a single quiet minute. People's nervous systems learn to trust consistency only after repeated evidence proves that silence does not equal abandonment or punishment in this dynamic. Secure functioning makes every other relationship skill actually usable because the foundation holds steady when conflict or distance arrives unexpectedly. Psychologists call this secure attachment. If calm reads as chemistry-free to you, check your training because the adrenaline you miss might be an alarm not a spark. When someone is consistently steady with you, does it feel like genuine safety or does it feel like love is missing? Subscribe for more tips like this.",
+   "words": 142,
+   "shash": "eaaa73a6ffee2cc8",
+   "scene": {
+    "emotion_a": "happy",
+    "pose_a": "stand",
+    "emotion_b": "happy",
+    "pose_b": "stand"
+   }
+  }
+ ],
+ "short_hashes": [
+  "8bf5b2d18dc0fcc5",
+  "d0c04c3274e9ba0c",
+  "7ee81373c729855d",
+  "17c17add84a0a10f",
+  "d4564ab3324fc45b",
+  "eaaa73a6ffee2cc8"
+ ],
+ "muse": "llm",
+ "muse_model": "nvidia/nemotron-3-ultra-550b-a55b:free"
+}
