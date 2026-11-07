@@ -1,8 +1,53 @@
+[0;93m2026-11-07 11:49:52.033063441 [W:onnxruntime:Default, device_discovery.cc:95 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
 [stats] growth report 2026-11-07
-[stats]   total: 2452 views  (+11 since last report)
+[stats]   total: 2496 views  (+44 since last report)
 [stats]      189 views  ·  Subscribe for more tips like this #ep136 #psychology #relati
 [stats]      120 views  ·  Subscribe for more tips like this #ep94 #psychology #relatio
 [stats]      111 views  ·  Subscribe for more tips like this #ep65 #psychology #relatio
-[verify] 44 video(s) confirmed public, 0 late past the 2-day grace window
-[quota] only 19 units left — cannot even land the long (need 1650) — deferring today's uploads
+[verify] 46 video(s) confirmed public, 0 late past the 2-day grace window
+  [muse] cache hit seed 85903079003834 - replay
+[49] script: Boundaries in Love (1046 words, hash 02f51b3327)
+  [voice] human edge ON: variable pauses, breaths, room tone, pacing life
+  [voice] local neural narration: 116 chunks (Kokoro af_heart)
+  [voice] polished: presence EQ + gentle compression
+[49] narration: 409s, 116 caption chunks
+[49] long video: 421s, 36.8MB
+  [voice] human edge ON: variable pauses, breaths, room tone, pacing life
+  [voice] local neural narration: 23 chunks (Kokoro af_heart)
+  [voice] polished: presence EQ + gentle compression
+  [short 1] 51s, 23 cards, 5.8MB
+  [voice] human edge ON: variable pauses, breaths, room tone, pacing life
+  [voice] local neural narration: 24 chunks (Kokoro af_heart)
+  [voice] polished: presence EQ + gentle compression
+  [short 2] 53s, 24 cards, 5.8MB
+  [voice] human edge ON: variable pauses, breaths, room tone, pacing life
+  [voice] local neural narration: 23 chunks (Kokoro af_heart)
+  [voice] polished: presence EQ + gentle compression
+  [short 3] 54s, 23 cards, 4.6MB
+  [voice] human edge ON: variable pauses, breaths, room tone, pacing life
+  [voice] local neural narration: 23 chunks (Kokoro af_heart)
+  [voice] polished: presence EQ + gentle compression
+  [short 4] 48s, 23 cards, 5.0MB
+  [voice] human edge ON: variable pauses, breaths, room tone, pacing life
+  [voice] local neural narration: 23 chunks (Kokoro af_heart)
+  [voice] polished: presence EQ + gentle compression
+  [short 5] 54s, 23 cards, 4.6MB
+  [voice] human edge ON: variable pauses, breaths, room tone, pacing life
+  [voice] local neural narration: 23 chunks (Kokoro af_heart)
+  [voice] polished: presence EQ + gentle compression
+  [short 6] 55s, 23 cards, 4.9MB
+[49] thumbnail audit: 3 words, 102px, 120px var 3371, 59KB — ok
+[49] thumbnail + 4 shorts ready
+[49] tells audit: reveal=2 vocab=0 filler=0 intensifier=1 (logged, not rewritten)
+[49] viral score: 63/100 (plain) length sweet spot; emotion word: love
+  [youtube] uploaded long: DfP3_oMl1cg (publishAt 2026-11-09T20:00:00+02:00)
+  [youtube] setting thumbnail thumbnail.png (59 KB) on DfP3_oMl1cg
+  [youtube] thumbnail set
+  [youtube] uploaded short: s65qcrzBRYw (publishAt 2026-11-07T18:00:00+02:00)
+  [youtube] uploaded short: oRx1G-OtYKw (publishAt 2026-11-08T00:00:00+02:00)
+  [youtube] uploaded short: 1MFNt6B9l-E (publishAt 2026-11-08T06:00:00+02:00)
+  [youtube] uploaded short: 6PnsM8nQzFA (publishAt 2026-11-08T12:00:00+02:00)
+[49] text layer: {'captions_long': 'refused', 'comment': 'refused'}
+[epnum] 3 video(s) still to rename — 1733 units left, 50+100 per rename
+  ✓ episode 49: Boundaries in Love
 combination space: 273,308,412,123,694,080 stories — the factory never repeats
