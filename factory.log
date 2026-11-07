@@ -1,57 +1,9 @@
-[0;93m2026-11-07 22:46:15.005264071 [W:onnxruntime:Default, device_discovery.cc:95 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
-[stats] persisting detail for 203 of 204 videos (bounded memory: recent 200 + top 100)
+[stats] persisting detail for 204 of 205 videos (bounded memory: recent 200 + top 100)
 [stats] growth report 2026-11-07
-[stats]   total: 2529 views  (+33 since last report)
+[stats]   total: 2532 views  (+3 since last report)
 [stats]      189 views  ·  Subscribe for more tips like this #ep136 #psychology #relati
 [stats]      120 views  ·  Subscribe for more tips like this #ep94 #psychology #relatio
 [stats]      111 views  ·  Subscribe for more tips like this #ep65 #psychology #relatio
 [verify] 48 video(s) confirmed public, 0 late past the 2-day grace window
-[grid] booking 2 short slot(s) in the next 24h (free: 2026-11-08T18:00:00+02:00, 2026-11-09T00:00:00+02:00)
-  [muse] long: 18/18 scenes rewritten (nvidia)
-  [muse] shorts: retrying 4 reject(s)
-  [muse] shorts: 5/6 rewritten (nvidia)
-[50] script: Becoming Emotionally Secure (1116 words, hash a4e21c5d5d)
-  [voice] human edge ON: variable pauses, breaths, room tone, pacing life
-  [voice] local neural narration: 119 chunks (Kokoro af_heart)
-  [voice] polished: presence EQ + gentle compression
-[50] narration: 421s, 119 caption chunks
-[50] long video: 433s, 40.9MB
-  [voice] human edge ON: variable pauses, breaths, room tone, pacing life
-  [voice] local neural narration: 25 chunks (Kokoro af_heart)
-  [voice] polished: presence EQ + gentle compression
-  [short 1] 53s, 25 cards, 6.6MB
-  [voice] human edge ON: variable pauses, breaths, room tone, pacing life
-  [voice] local neural narration: 24 chunks (Kokoro af_heart)
-  [voice] polished: presence EQ + gentle compression
-  [short 2] 49s, 24 cards, 6.0MB
-  [voice] human edge ON: variable pauses, breaths, room tone, pacing life
-  [voice] local neural narration: 21 chunks (Kokoro af_heart)
-  [voice] polished: presence EQ + gentle compression
-  [short 3] 46s, 21 cards, 6.1MB
-  [voice] human edge ON: variable pauses, breaths, room tone, pacing life
-  [voice] local neural narration: 26 chunks (Kokoro af_heart)
-  [voice] polished: presence EQ + gentle compression
-  [short 4] 52s, 26 cards, 6.1MB
-  [voice] human edge ON: variable pauses, breaths, room tone, pacing life
-  [voice] local neural narration: 24 chunks (Kokoro af_heart)
-  [voice] polished: presence EQ + gentle compression
-  [short 5] 53s, 24 cards, 6.1MB
-  [voice] human edge ON: variable pauses, breaths, room tone, pacing life
-  [voice] local neural narration: 26 chunks (Kokoro af_heart)
-  [voice] polished: presence EQ + gentle compression
-  [short 6] 53s, 26 cards, 5.1MB
-[50] thumbnail audit: 3 words, 102px, 120px var 5257, 64KB — ok
-[50] thumbnail + 2 shorts ready
-[50] tells audit: reveal=5 vocab=0 filler=0 intensifier=0 (logged, not rewritten)
-[50] viral score: 45/100 (plain) too long; emotion word: love
-  [youtube] uploaded long: 7OxhtMSgynI (publishAt 2026-11-10T20:00:00+02:00)
-  [youtube] setting thumbnail thumbnail.png (64 KB) on 7OxhtMSgynI
-  [youtube] thumbnail set
-  [quota] 79 units left, need 1650 — deferring
-[50] text layer: {'captions_long': 'refused', 'comment': 'refused'}
-[playlist] 1 long video(s) not in the playlist yet
-[playlist] ep50 long added (7OxhtMSgynI)
-[epnum] 1 video(s) still to rename — 23 units left, 50+100 per rename
-  [epnum] rename budget spent — resuming next cycle
-  ! episode 50: Becoming Emotionally Secure — uploads deferred (quota); the next cycle resumes it
+[quota] only 22 units left — cannot even land the long (need 1650) — deferring today's uploads
 combination space: 273,308,412,123,694,080 stories — the factory never repeats
