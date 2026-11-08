@@ -1,38 +1,33 @@
 {
- "week": "2026-11-02",
- "generated": "2026-11-02T13:37:06.774113+00:00",
+ "week": "2026-11-08",
+ "generated": "2026-11-08T17:57:01.174614+00:00",
  "hot_formulas": [
   {
    "name": "PLAIN",
    "videos": 8,
-   "example": "Smart People Can't Find Love. Here's Why"
+   "example": "Everything I'd do if I wanted my child to develop BPD"
   },
   {
    "name": "HOW_TO",
-   "videos": 2,
+   "videos": 1,
    "example": "How To Know Yourself"
-  },
-  {
-   "name": "WARNING",
-   "videos": 2,
-   "example": "THE VIVEK RAMASWAMY AD: Why some parents don't believe their child's allegations"
   }
  ],
  "hot_themes": [
-  "love",
-  "male",
-  "psychology",
-  "women",
-  "smart",
   "people",
-  "can't",
-  "find"
+  "love",
+  "theschooloflife",
+  "animation",
+  "everything",
+  "wanted",
+  "child",
+  "develop"
  ],
  "recommended_angles": [
-  "Love \u2014 the plain angle (winning formula x hottest theme this week)",
-  "What nobody tells you about love",
-  "7 signs of love everyone misses"
+  "People \u2014 the plain angle (winning formula x hottest theme this week)",
+  "What nobody tells you about people",
+  "7 signs of people everyone misses"
  ],
- "niche_velocity": 11618.6,
- "our_velocity": null
+ "niche_velocity": 35318.2,
+ "our_velocity": 2.7
 }

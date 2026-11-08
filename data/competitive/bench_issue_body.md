@@ -1,50 +1,49 @@
-# Weekly benchmark — week of 2026-11-01 -> 2026-11-02
-roster: 6 channels | their fresh uploads analyzed: 12 | quota spent: ~9 units
+# Weekly benchmark — week of 2026-11-02 -> 2026-11-08
+roster: 6 channels | their fresh uploads analyzed: 9 | quota spent: ~9 units
 
 ## 1. The league — 7-day growth
 
 | Channel | Subs | Subs 7d | Views 7d | Uploads 7d |
 |---|---|---|---|---|
-| **the love psychology (us)** | 12 | +0 | +38 | 1 |
-| Psych2Go | 13.2M | +0 | +258,806 | 1 |
-| The School of Life | 9,800,000 | +0 | +87,475 | 1 |
-| Psychology with Dr. Ana | 694,000 | +0 | +67,391 | 0 |
-| Practical Psychology | 2,360,000 | +0 | +6,511 | 0 |
-| Love Psychology | 128 | +0 | +141 | 0 |
-| Relationship Psychology | 5 | +0 | +0 | 0 |
+| **the love psychology (us)** | 15 | +3 | +236 | 6 |
+| Psych2Go | 13.2M | +0 | +3,522,276 | 3 |
+| Psychology with Dr. Ana | 697,000 | +3,000 | +1,445,877 | 2 |
+| The School of Life | 9,800,000 | +0 | +1,251,937 | 3 |
+| Practical Psychology | 2,360,000 | +0 | +87,282 | 0 |
+| Love Psychology | 130 | +2 | +281 | 0 |
+| Relationship Psychology | 5 | +0 | +4 | 0 |
 
 ## 2. The steal list — their best new videos (views/day)
 
 | Title | Channel | Age | Views | V/day | Formula |
 |---|---|---|---|---|---|
-| Smart People Can't Find Love. Here's Why | Psych2Go | 0.5d | 26,397 | 52,794 | PLAIN |
-| How To Know Yourself | The School of Li | 1.0d | 23,085 | 23,085 | HOW_TO |
-| THE VIVEK RAMASWAMY AD: Why some parents don | Psychology with  | 6.8d | 147,893 | 21,749 | WARNING |
-| Why Love NEVER Lasts FOREVER | The School of Li | 5.0d | 94,738 | 18,947 | WARNING |
-| What We Owe To Those Who Loved Us In Our Chi | The School of Li | 5.0d | 42,649 | 8,529 | PLAIN |
-| Traumatic Intelligence, the "Rarest Type" Di | Psych2Go | 9.1d | 58,984 | 6,481 | PLAIN |
-| Why We Get Triggered | The School of Li | 8.0d | 41,667 | 5,208 | PLAIN |
-| My husband pretended to be a creep in Italia | Psychology with  | 5.7d | 14,773 | 2,591 | PLAIN |
-| 😍 This Is the Greeting Men Only Use With Wom | Love Psychology | 8.8d | 236 | 26 | PLAIN |
-| ❤️ This Is the Test Every Man Gives Before H | Love Psychology | 9.8d | 56 | 5 | PLAIN |
+| Everything I'd do if I wanted my child to de | Psychology with  | 4.0d | 418,434 | 104,608 | PLAIN |
+| You’re TOO Self-Aware… and It’s Hurting You | Psych2Go | 0.5d | 27,092 | 54,184 | PLAIN |
+| Why We Don’t Have Much Choice in Dating (Des | The School of Li | 4.2d | 227,063 | 54,062 | PLAIN |
+| 7 Subtle Habits of People Who See Right Thro | Psych2Go | 1.3d | 51,624 | 39,710 | PLAIN |
+| Smart People Can't Find Love. Here's Why | Psych2Go | 6.5d | 151,903 | 23,369 | PLAIN |
+| The Art of Spotting a Liar: The Stephanie La | Psychology with  | 6.0d | 103,745 | 17,290 | PLAIN |
+| The Problem with Over-Friendly People #thesc | The School of Li | 0.5d | 5,789 | 11,578 | PLAIN |
+| The Darkest Truth About Love #theschooloflif | The School of Li | 4.2d | 31,201 | 7,428 | PLAIN |
+| How To Know Yourself | The School of Li | 7.2d | 40,540 | 5,630 | HOW_TO |
 
 ## 3. What the niche shipped this week
 
-- formula mix: PLAIN 8 (66%), HOW_TO 2 (16%), WARNING 2 (16%)
-- hot theme words: love, male, psychology, women, smart, people, can't, find
-- shorts share: 0/12 (0%) of fresh uploads under 65 s
-- niche cadence: 0 uploads/channel/week vs our 1 (5/day machine = 35/week)
+- formula mix: PLAIN 8 (88%), HOW_TO 1 (11%)
+- hot theme words: people, love, theschooloflife, animation, everything, wanted, child, develop
+- shorts share: 1/9 (11%) of fresh uploads under 65 s
+- niche cadence: 1 uploads/channel/week vs our 6 (5/day machine = 35/week)
 
 ## 4. Us vs the field
 
-- no fresh uploads on our side this window
-- channel views gained this week: +38 (total 2,328 as of 2026-11-02)
+- our fresh uploads average **2.7 views/day**; the niche fresh average is 35318.2 -> we run at **<1% of niche pace**
+- channel views gained this week: +236 (total 2,564 as of 2026-11-08)
 
 ## 5. Recommended angles for next week
 
-1. Love — the plain angle (winning formula x hottest theme this week)
-2. What nobody tells you about love
-3. 7 signs of love everyone misses
+1. People — the plain angle (winning formula x hottest theme this week)
+2. What nobody tells you about people
+3. 7 signs of people everyone misses
 
 Topics follow this week's queue (owner-unlocked): the steal list becomes the coming week's episodes through data/competitive/topic_queue.json - scored by which topics the niche's winning videos actually mentioned. Titles and category stay locked; the muse steers vocabulary via steer.json.
 

@@ -1,20 +1,32 @@
 {
- "week": "2026-11-02",
- "episodes": 24,
+ "week": "2026-11-08",
+ "episodes": 22,
  "generated": "src/viral.py",
- "median_first_week_views": 2.0,
+ "median_first_week_views": 0.0,
  "by_formula": [
+  {
+   "name": "WARNING",
+   "n": 2,
+   "mean_views": 3.5,
+   "ratio": null
+  },
   {
    "name": "HOW_TO",
    "n": 2,
-   "mean_views": 4,
-   "ratio": 2.0
+   "mean_views": 1,
+   "ratio": null
+  },
+  {
+   "name": "VS_COMPARISON",
+   "n": 2,
+   "mean_views": 1,
+   "ratio": null
   },
   {
    "name": "PLAIN",
-   "n": 20,
-   "mean_views": 1.9,
-   "ratio": 0.95
+   "n": 16,
+   "mean_views": 0.4,
+   "ratio": null
   }
  ],
  "by_band": [
@@ -22,53 +34,53 @@
    "name": "high(75+)",
    "n": 1,
    "mean_views": 0,
-   "ratio": 0.0
+   "ratio": null
   },
   {
    "name": "mid(60-74)",
-   "n": 9,
-   "mean_views": 3,
-   "ratio": 1.5
+   "n": 12,
+   "mean_views": 1.2,
+   "ratio": null
   },
   {
    "name": "low(<60)",
-   "n": 14,
-   "mean_views": 1.6,
-   "ratio": 0.79
+   "n": 9,
+   "mean_views": 0.3,
+   "ratio": null
   }
  ],
  "best": [
   {
-   "title": "The Psychology of Ghosting",
-   "views": 7,
-   "score": 50,
+   "title": "Red Flags People Ignore",
+   "views": 6,
+   "score": 60,
+   "formula": "WARNING"
+  },
+  {
+   "title": "What Keeps Love Alive",
+   "views": 4,
+   "score": 61,
    "formula": "PLAIN"
   },
   {
    "title": "How to Get Over a Breakup",
-   "views": 6,
+   "views": 2,
    "score": 65,
    "formula": "HOW_TO"
-  },
-  {
-   "title": "What Keeps Love Alive",
-   "views": 5,
-   "score": 61,
-   "formula": "PLAIN"
   }
  ],
  "worst": [
   {
-   "title": "What Heartbreak Does to Your Brain",
+   "title": "What Keeps Love Alive",
    "views": 0,
-   "score": 77,
+   "score": 61,
    "formula": "PLAIN"
   },
   {
-   "title": "Chemistry vs Compatibility",
+   "title": "Why We Get Jealous",
    "views": 0,
-   "score": 59,
-   "formula": "VS_COMPARISON"
+   "score": 63,
+   "formula": "PLAIN"
   }
  ]
 }
