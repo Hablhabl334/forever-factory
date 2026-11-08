@@ -11,21 +11,21 @@ roster: 6 channels | their fresh uploads analyzed: 9 | quota spent: ~9 units
 | The School of Life | 9,800,000 | +0 | +1,251,937 | 3 |
 | Practical Psychology | 2,360,000 | +0 | +87,282 | 0 |
 | Love Psychology | 130 | +2 | +281 | 0 |
-| Relationship Psychology | 5 | +0 | +4 | 0 |
+| Relationship Psychology | 5 | +0 | +3 | 0 |
 
 ## 2. The steal list — their best new videos (views/day)
 
 | Title | Channel | Age | Views | V/day | Formula |
 |---|---|---|---|---|---|
-| Everything I'd do if I wanted my child to de | Psychology with  | 4.0d | 418,434 | 104,608 | PLAIN |
-| You’re TOO Self-Aware… and It’s Hurting You | Psych2Go | 0.5d | 27,092 | 54,184 | PLAIN |
-| Why We Don’t Have Much Choice in Dating (Des | The School of Li | 4.2d | 227,063 | 54,062 | PLAIN |
-| 7 Subtle Habits of People Who See Right Thro | Psych2Go | 1.3d | 51,624 | 39,710 | PLAIN |
-| Smart People Can't Find Love. Here's Why | Psych2Go | 6.5d | 151,903 | 23,369 | PLAIN |
-| The Art of Spotting a Liar: The Stephanie La | Psychology with  | 6.0d | 103,745 | 17,290 | PLAIN |
-| The Problem with Over-Friendly People #thesc | The School of Li | 0.5d | 5,789 | 11,578 | PLAIN |
-| The Darkest Truth About Love #theschooloflif | The School of Li | 4.2d | 31,201 | 7,428 | PLAIN |
-| How To Know Yourself | The School of Li | 7.2d | 40,540 | 5,630 | HOW_TO |
+| Everything I'd do if I wanted my child to de | Psychology with  | 4.0d | 418,992 | 104,748 | PLAIN |
+| You’re TOO Self-Aware… and It’s Hurting You | Psych2Go | 0.5d | 27,660 | 55,320 | PLAIN |
+| Why We Don’t Have Much Choice in Dating (Des | The School of Li | 4.2d | 227,287 | 54,116 | PLAIN |
+| 7 Subtle Habits of People Who See Right Thro | Psych2Go | 1.3d | 51,819 | 39,860 | PLAIN |
+| Smart People Can't Find Love. Here's Why | Psych2Go | 6.5d | 151,881 | 23,366 | PLAIN |
+| The Art of Spotting a Liar: The Stephanie La | Psychology with  | 6.0d | 103,785 | 17,297 | PLAIN |
+| The Problem with Over-Friendly People #thesc | The School of Li | 0.5d | 6,086 | 12,172 | PLAIN |
+| The Darkest Truth About Love #theschooloflif | The School of Li | 4.2d | 31,232 | 7,436 | PLAIN |
+| How To Know Yourself | The School of Li | 7.2d | 40,544 | 5,631 | HOW_TO |
 
 ## 3. What the niche shipped this week
 
@@ -36,7 +36,7 @@ roster: 6 channels | their fresh uploads analyzed: 9 | quota spent: ~9 units
 
 ## 4. Us vs the field
 
-- our fresh uploads average **2.7 views/day**; the niche fresh average is 35318.2 -> we run at **<1% of niche pace**
+- our fresh uploads average **2.7 views/day**; the niche fresh average is 35549.8 -> we run at **<1% of niche pace**
 - channel views gained this week: +236 (total 2,564 as of 2026-11-08)
 
 ## 5. Recommended angles for next week

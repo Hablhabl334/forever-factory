@@ -1,6 +1,6 @@
 {
  "date": "2026-11-08",
- "ts": "2026-11-08T17:56:58.475599+00:00",
+ "ts": "2026-11-08T18:04:11.020601+00:00",
  "them": {
   "UCkJEpR7JmS36tajD34Gp4VA": {
    "title": "Psych2Go",
@@ -14,30 +14,30 @@
      "id": "Tsm45ihesTk",
      "title": "You\u2019re TOO Self-Aware\u2026 and It\u2019s Hurting You",
      "published_at": "2026-11-08T08:55:52Z",
-     "views": 27092,
+     "views": 27660,
      "duration_s": 367,
      "age_days": 0.5,
-     "velocity": 54184.0,
+     "velocity": 55320.0,
      "formula": "PLAIN"
     },
     {
      "id": "kED0CRzTf9k",
      "title": "7 Subtle Habits of People Who See Right Through Everyone",
      "published_at": "2026-11-07T11:10:39Z",
-     "views": 51624,
+     "views": 51819,
      "duration_s": 392,
      "age_days": 1.3,
-     "velocity": 39710.8,
+     "velocity": 39860.8,
      "formula": "PLAIN"
     },
     {
      "id": "POUF4fhMZ6c",
      "title": "Smart People Can't Find Love. Here's Why",
      "published_at": "2026-11-02T05:12:07Z",
-     "views": 151903,
+     "views": 151881,
      "duration_s": 357,
      "age_days": 6.5,
-     "velocity": 23369.7,
+     "velocity": 23366.3,
      "formula": "PLAIN"
     },
     {
@@ -430,40 +430,40 @@
      "id": "Nqtv2ELLvPs",
      "title": "The Problem with Over-Friendly People #theschooloflife #animation #friendship",
      "published_at": "2026-11-08T14:00:17Z",
-     "views": 5789,
+     "views": 6086,
      "duration_s": 83,
      "age_days": 0.5,
-     "velocity": 11578.0,
+     "velocity": 12172.0,
      "formula": "PLAIN"
     },
     {
      "id": "uAAQZMJKmnA",
      "title": "The Darkest Truth About Love #theschooloflife #animation #love",
      "published_at": "2026-11-04T14:00:38Z",
-     "views": 31201,
+     "views": 31232,
      "duration_s": 65,
      "age_days": 4.2,
-     "velocity": 7428.8,
+     "velocity": 7436.2,
      "formula": "PLAIN"
     },
     {
      "id": "Q3qLo_kGi10",
      "title": "Why We Don\u2019t Have Much Choice in Dating (Despite the Apps)",
      "published_at": "2026-11-04T14:00:20Z",
-     "views": 227063,
+     "views": 227287,
      "duration_s": 170,
      "age_days": 4.2,
-     "velocity": 54062.6,
+     "velocity": 54116.0,
      "formula": "PLAIN"
     },
     {
      "id": "qxU9IPogiPw",
      "title": "How To Know Yourself",
      "published_at": "2026-11-01T14:00:10Z",
-     "views": 40540,
+     "views": 40544,
      "duration_s": 90,
      "age_days": 7.2,
-     "velocity": 5630.6,
+     "velocity": 5631.1,
      "formula": "HOW_TO"
     },
     {
@@ -920,7 +920,7 @@
      "id": "U98qvyAGnSg",
      "title": "",
      "published_at": "2021-07-26T12:00:25Z",
-     "age_days": 1931.2,
+     "age_days": 1931.3,
      "velocity": 0.0,
      "formula": "PLAIN"
     },
@@ -952,7 +952,7 @@
      "id": "VVyhhMzWkiU",
      "title": "",
      "published_at": "2021-04-18T14:23:47Z",
-     "age_days": 2030.1,
+     "age_days": 2030.2,
      "velocity": 0.0,
      "formula": "PLAIN"
     },
@@ -1064,7 +1064,7 @@
      "id": "iXv91xFipLM",
      "title": "",
      "published_at": "2021-03-07T14:27:12Z",
-     "age_days": 2072.1,
+     "age_days": 2072.2,
      "velocity": 0.0,
      "formula": "PLAIN"
     },
@@ -1258,20 +1258,20 @@
      "id": "IoS-jljlLSQ",
      "title": "Everything I'd do if I wanted my child to develop BPD",
      "published_at": "2026-11-04T19:00:25Z",
-     "views": 418434,
+     "views": 418992,
      "duration_s": 859,
      "age_days": 4.0,
-     "velocity": 104608.5,
+     "velocity": 104748.0,
      "formula": "PLAIN"
     },
     {
      "id": "WSw9X2fYVWo",
      "title": "The Art of Spotting a Liar: The Stephanie Lazarus Interrogation",
      "published_at": "2026-11-02T19:00:02Z",
-     "views": 103745,
+     "views": 103785,
      "duration_s": 1915,
      "age_days": 6.0,
-     "velocity": 17290.8,
+     "velocity": 17297.5,
      "formula": "PLAIN"
     },
     {
@@ -1672,7 +1672,7 @@
      "id": "D8NUYkiDcuU",
      "title": "",
      "published_at": "2026-10-29T02:26:42Z",
-     "age_days": 10.6,
+     "age_days": 10.7,
      "velocity": 0.0,
      "formula": "PLAIN"
     },
@@ -2010,7 +2010,7 @@
    "title": "Relationship Psychology",
    "handle": "@relationshippsychology-t6n",
    "subs": 5,
-   "views": 885,
+   "views": 884,
    "video_count": 24,
    "uploads_playlist": "UUL5gf7dhko3CBdaVxJLo9uA",
    "recent": [
@@ -2214,7 +2214,7 @@
   "handle": "@the-love-psychology",
   "subs": 15,
   "views": 2553,
-  "video_count": 185,
+  "video_count": 186,
   "uploads_playlist": "",
   "id": "UCg-ZEQJiqXYC8y9xUomaEBQ"
  },
