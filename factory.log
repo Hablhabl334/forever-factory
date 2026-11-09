@@ -1,9 +1,54 @@
+[0;93m2026-11-09 14:04:22.902961161 [W:onnxruntime:Default, device_discovery.cc:95 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
 [stats] persisting detail for 204 of 210 videos (bounded memory: recent 200 + top 100)
 [stats] growth report 2026-11-09
-[stats]   total: 2605 views  (+5 since last report)
+[stats]   total: 2617 views  (+12 since last report)
 [stats]      189 views  ·  Subscribe for more tips like this #ep136 #psychology #relati
 [stats]      120 views  ·  Subscribe for more tips like this #ep94 #psychology #relatio
 [stats]      111 views  ·  Subscribe for more tips like this #ep65 #psychology #relatio
-[verify] 43 video(s) confirmed public, 0 late past the 2-day grace window
-[quota] only 15 units left — cannot even land the long (need 1650) — deferring today's uploads
+[verify] 45 video(s) confirmed public, 0 late past the 2-day grace window
+  [muse] cache hit seed 205501050486654 - replay
+[51] script: Green Flags Everyone Misses (1227 words, hash cae663cf02)
+  [voice] human edge ON: variable pauses, breaths, room tone, pacing life
+  [voice] local neural narration: 132 chunks (Kokoro af_heart)
+  [voice] polished: presence EQ + gentle compression
+[51] narration: 470s, 132 caption chunks
+[51] long video: 482s, 42.3MB
+  [voice] human edge ON: variable pauses, breaths, room tone, pacing life
+  [voice] local neural narration: 24 chunks (Kokoro af_heart)
+  [voice] polished: presence EQ + gentle compression
+  [short 1] 49s, 24 cards, 4.4MB
+  [voice] human edge ON: variable pauses, breaths, room tone, pacing life
+  [voice] local neural narration: 23 chunks (Kokoro af_heart)
+  [voice] polished: presence EQ + gentle compression
+  [short 2] 50s, 23 cards, 5.8MB
+  [voice] human edge ON: variable pauses, breaths, room tone, pacing life
+  [voice] local neural narration: 24 chunks (Kokoro af_heart)
+  [voice] polished: presence EQ + gentle compression
+  [short 3] 52s, 24 cards, 4.5MB
+  [voice] human edge ON: variable pauses, breaths, room tone, pacing life
+  [voice] local neural narration: 26 chunks (Kokoro af_heart)
+  [voice] polished: presence EQ + gentle compression
+  [short 4] 51s, 26 cards, 4.3MB
+  [voice] human edge ON: variable pauses, breaths, room tone, pacing life
+  [voice] local neural narration: 25 chunks (Kokoro af_heart)
+  [voice] polished: presence EQ + gentle compression
+  [short 5] 50s, 25 cards, 5.5MB
+  [voice] human edge ON: variable pauses, breaths, room tone, pacing life
+  [voice] local neural narration: 23 chunks (Kokoro af_heart)
+  [voice] polished: presence EQ + gentle compression
+  [short 6] 51s, 23 cards, 5.7MB
+[51] thumbnail audit: 4 words, 102px, 120px var 5469, 62KB — ok
+[51] thumbnail + 4 shorts ready
+[51] tells audit: reveal=2 vocab=0 filler=0 intensifier=0 (logged, not rewritten)
+[51] viral score: 51/100 (plain) too long; power word: everyone; emotion word: love
+  [youtube] uploaded long: ea2zYVARG50 (publishAt now)
+  [youtube] setting thumbnail thumbnail.png (62 KB) on ea2zYVARG50
+  [youtube] thumbnail set
+  [youtube] uploaded short: w7X7fHOsDq0 (publishAt 2026-11-09T18:00:00+02:00)
+  [youtube] uploaded short: 9-S9UWdOetg (publishAt 2026-11-10T00:00:00+02:00)
+  [youtube] uploaded short: Tu9L0QDuGuQ (publishAt 2026-11-10T06:00:00+02:00)
+  [youtube] uploaded short: q2LKFXs3YJo (publishAt 2026-11-10T12:00:00+02:00)
+[51] text layer: {'captions_long': 'refused', 'comment': 'refused'}
+[epnum] 3 video(s) still to rename — 1732 units left, 50+100 per rename
+  ✓ episode 51: Green Flags Everyone Misses
 combination space: 273,308,412,123,694,080 stories — the factory never repeats
