@@ -1,0 +1,387 @@
+{
+ "title": "What Keeps Love Alive",
+ "topic": "lasting",
+ "topic_label": "psychology of lasting love",
+ "mood": "warm",
+ "series": "Psychology of Love",
+ "hook": "Passion fades on schedule \u2014 but attraction was never the engine. Here's what actually drives long love.",
+ "words": 1214,
+ "hash": "3ff2ac7f7c376de7",
+ "seed": 165019238723139,
+ "atoms": {
+  "topic": "What Keeps Love Alive",
+  "concepts": [
+   "green flags",
+   "the trust equation",
+   "bids for connection",
+   "oxytocin bonding",
+   "the self-expansion model",
+   "repair attempts",
+   "slow love",
+   "the dopamine novelty effect"
+  ]
+ },
+ "question": "Know someone who needs this? The comments are open.",
+ "scenes": [
+  {
+   "n": 1,
+   "id": "open_card",
+   "narration": "Passion fades on schedule. Attraction was never the engine. Today you get eight quiet pieces of psychology about what keeps love alive. Stay till the end - the one that lands won't be the one you expect.",
+   "image": {
+    "kind": "topic_card",
+    "topic": "What Keeps Love Alive",
+    "band": "psychology of lasting love",
+    "count": 8
+   }
+  },
+  {
+   "n": 2,
+   "id": "tip1_card",
+   "narration": "Green flags are quiet. Consistency never makes noise, and noise is all we're trained to notice. They remember small things. They show up on time. They apologize specifically. They're kind to waiters and exes alike. Our attention gets trained by drama, so steadiness registers as flat - a quiet engine we mistake for nothing happening. The trick is to actively look for the boring signals. They carry the relationship's actual weight. Someone whose presence calms you is doing something biochemically rare.",
+   "image": {
+    "kind": "concept_card",
+    "tip": 1,
+    "total": 8,
+    "term": "green flags",
+    "headline": "Green flags are quiet \u2014 consistency never makes noise, and noise is all we're trained to notice.",
+    "accent_word": null
+   }
+  },
+  {
+   "n": 3,
+   "id": "tip1_scene",
+   "narration": "Rosa texts when she says she will. She asks how Leo's mom's test went. She's kind to waiters at a rooftop party. No drama, no electric highs - and Leo sleeps better than he has in years. The nervous system noticed before the heart did. Score people on how you feel two hours after seeing them, not two minutes. Calm is a green flag in disguise. One more layer - this pattern has a partner in crime.",
+   "image": {
+    "kind": "couple_scene",
+    "emotion_a": "happy",
+    "pose_a": "stand",
+    "emotion_b": "happy",
+    "pose_b": "stand",
+    "overlay": [
+     "psychologists call this",
+     "green flags"
+    ]
+   }
+  },
+  {
+   "n": 4,
+   "id": "tip2_card",
+   "narration": "Trust isn't built by grand promises. It's built by boring predictability, compounded daily. Researchers describe it as consistency plus integrity divided by self-interest - people trust those whose words, actions, and motives line up, repeatedly. Grand gestures can't compensate for broken patterns. Trust compounds like a savings account, in small identical deposits. That's why recovery after betrayal is slow - the account must be rebuilt at the same boring rate it was drained. There's no lottery version of trust.",
+   "image": {
+    "kind": "concept_card",
+    "tip": 2,
+    "total": 8,
+    "term": "the trust equation",
+    "headline": "Trust isn't built by grand promises. It's built by boring predictability, compounded daily.",
+    "accent_word": null
+   }
+  },
+  {
+   "n": 5,
+   "id": "tip2_scene",
+   "narration": "Aya promised change with fireworks - and relapsed. Jonas quietly texted \"landing now\" at every arrival for two years. Guess whose word is currency now. Make fewer promises, keep more of them. If you say seven, be there at seven - that's a deposit. Seven-fifteen with flowers is still a withdrawal. That was the warm-up. The next one lands harder.",
+   "image": {
+    "kind": "couple_scene",
+    "emotion_a": "neutral",
+    "pose_a": "stand",
+    "emotion_b": "happy",
+    "pose_b": "stand",
+    "overlay": [
+     "psychologists call this",
+     "the trust equation"
+    ]
+   }
+  },
+  {
+   "n": 6,
+   "id": "tip3_card",
+   "narration": "When did someone last ask for your attention without actually asking? Gottman's team found couples make tiny bids for connection constantly - a comment, a question, a finger pointed at a sunset. Partners turn toward, turn away, or turn against. The ratio predicts the future with unsettling accuracy. Masters turn toward roughly nine times out of ten, even when the bid is boring. Love isn't maintained on anniversaries. It's maintained on Tuesdays, one small yes at a time.",
+   "image": {
+    "kind": "concept_card",
+    "tip": 3,
+    "total": 8,
+    "term": "bids for connection",
+    "headline": "When was the last time someone asked for your attention without actually asking?",
+    "accent_word": null
+   }
+  },
+  {
+   "n": 7,
+   "id": "tip3_scene",
+   "narration": "They say \"look at the moon\" from the kitchen. You say \"mm\" and keep scrolling. Nothing happened - but a small withdrawal just hit an account neither of you checks often enough. For one day, answer every bid: look up, laugh, respond. It's the cheapest relationship upgrade with the highest return. Almost nobody connects this next pattern to the last one. You're about to.",
+   "image": {
+    "kind": "couple_scene",
+    "emotion_a": "happy",
+    "pose_a": "stand",
+    "emotion_b": "tired",
+    "pose_b": "phone",
+    "overlay": [
+     "psychologists call this",
+     "bids for connection"
+    ]
+   }
+  },
+  {
+   "n": 8,
+   "id": "tip4_card",
+   "narration": "Hugs aren't dessert - they're the maintenance contract. Oxytocin, released through touch and closeness, turns attraction into attachment. Holding, hugging, long quiet contact literally re-glue two nervous systems. That's why distance after a fight feels physical, not just emotional - the bond's maintenance got interrupted. Ten minutes of contact a day quietly outranks a monthly bouquet.",
+   "image": {
+    "kind": "concept_card",
+    "tip": 4,
+    "total": 8,
+    "term": "oxytocin bonding",
+    "headline": "Hugs aren't the dessert of a relationship \u2014 they're the maintenance contract.",
+    "accent_word": null
+   }
+  },
+  {
+   "n": 9,
+   "id": "tip4_scene",
+   "narration": "You haven't hugged properly in weeks - quick pecks, passing taps, screens between you. The relationship isn't dying of drama. It's starving for its chemistry. Repair with touch before words when you can. A real hug lowers the guard an argument raised. Before you file that away - the next lesson explains why it keeps finding you.",
+   "image": {
+    "kind": "couple_scene",
+    "emotion_a": "happy",
+    "pose_a": "stand",
+    "emotion_b": "happy",
+    "pose_b": "stand",
+    "overlay": [
+     "psychologists call this",
+     "oxytocin bonding"
+    ]
+   }
+  },
+  {
+   "n": 10,
+   "id": "tip5_card",
+   "narration": "We don't fall for people - we fall for who we become around them. Psychologists call this the self-expansion model. We're drawn to people who make our world bigger: new ideas, new courage, new experiences. That's why shared adventures bond couples faster than shared sofas. It explains why relationships feel stale when growth stops - the expansion was the fuel, not the bonus. Couples who keep learning together keep choosing each other.",
+   "image": {
+    "kind": "concept_card",
+    "tip": 5,
+    "total": 8,
+    "term": "the self-expansion model",
+    "headline": "We don't fall for people \u2014 we fall for the version of ourselves we become around them.",
+    "accent_word": null
+   }
+  },
+  {
+   "n": 11,
+   "id": "tip5_scene",
+   "narration": "Remember how alive you felt on that first trip, that first project, that first disaster you survived as a team? You weren't high on just the person - you were high on your own growth, with them beside it. To keep love alive, expand together. A new skill, a trip, a hobby that scares you both - novelty repairs what routine erodes. That was the what. Next comes the why.",
+   "image": {
+    "kind": "couple_scene",
+    "emotion_a": "happy",
+    "pose_a": "stand",
+    "emotion_b": "happy",
+    "pose_b": "arms_crossed",
+    "overlay": [
+     "psychologists call this",
+     "the self-expansion model"
+    ]
+   }
+  },
+  {
+   "n": 12,
+   "id": "tip6_card",
+   "narration": "After a fight, one small move predicts whether a couple lasts - and it takes under a minute. Gottman's long-term studies found the best predictor of staying together wasn't the absence of conflict. It was the speed and warmth of repair attempts. A repair attempt is any move that lowers the temperature: a joke, a touch, \"this is hard for me too.\" The healthiest couples repair mid-fight, not after the verdict. What kills relationships isn't the spark - it's the fire's inability to hear an extinguisher.",
+   "image": {
+    "kind": "concept_card",
+    "tip": 6,
+    "total": 8,
+    "term": "repair attempts",
+    "headline": "After a fight, one small move predicts whether a couple lasts \u2014 and it takes under a minute.",
+    "accent_word": null
+   }
+  },
+  {
+   "n": 13,
+   "id": "tip6_scene",
+   "narration": "Mid-argument at a dinner party, Ada breaks eye contact and says \"can we sit closer?\" Nothing got solved. The war got a ceasefire - and solutions only live past ceasefires. Learn one repair phrase by heart and use it before you feel ready. \"We're on the same team\" works even when it's the last thing you feel. Hold that thought - the next pattern explains why it keeps happening.",
+   "image": {
+    "kind": "couple_scene",
+    "emotion_a": "annoyed",
+    "pose_a": "arms_crossed",
+    "emotion_b": "sad",
+    "pose_b": "stand",
+    "overlay": [
+     "psychologists call this",
+     "repair attempts"
+    ]
+   }
+  },
+  {
+   "n": 14,
+   "id": "tip7_card",
+   "narration": "Fast love happens in the dark - you fall for the montage and meet the person later. Sociologists call it slow love: building the relationship before the fantasy, letting intimacy develop over months of real information instead of weeks of projection. Fast love happens in the dark. Slow love keeps the pace of actual knowledge, so affection grows on facts instead of imagination. It's less cinematic and dramatically more durable.",
+   "image": {
+    "kind": "concept_card",
+    "tip": 7,
+    "total": 8,
+    "term": "slow love",
+    "headline": "Fast love happens in the dark: you fall for the montage and meet the person later.",
+    "accent_word": null
+   }
+  },
+  {
+   "n": 15,
+   "id": "tip7_scene",
+   "narration": "No labels by date three, no weekend trip by week two for Adam and Emma. Six months in, Adam knows Emma's money habits, her temper, her mother. Adam isn't less in love - he's in love with a verified account. Let the timeline be a feature, not a bug. Depth is slow by design - anything too fast skips the inspections. Keep that feeling - the next lesson will need it.",
+   "image": {
+    "kind": "couple_scene",
+    "emotion_a": "happy",
+    "pose_a": "stand",
+    "emotion_b": "neutral",
+    "pose_b": "stand",
+    "overlay": [
+     "psychologists call this",
+     "slow love"
+    ]
+   }
+  },
+  {
+   "n": 16,
+   "id": "tip8_card",
+   "narration": "New love is literally a stimulant phase. The couples who last are the ones who don't panic during the comedown. Early romance floods the brain's reward circuit with dopamine - the same chemistry that powers craving and focus. That's why new love feels obsessive: you think about them constantly because the brain treats them as a reward it must pursue. But novelty fades on a schedule, and the intensity drops whether the love is real or not. Couples who know this stop panicking when the fire settles into warmth.",
+   "image": {
+    "kind": "concept_card",
+    "tip": 8,
+    "total": 8,
+    "term": "the dopamine novelty effect",
+    "headline": "New love is literally a stimulant phase. The couples who last are the ones who don't panic during the comedown.",
+    "accent_word": null
+   }
+  },
+  {
+   "n": 17,
+   "id": "tip8_scene",
+   "narration": "Around month seven, Kai told Chloe: \"I don't feel the rush anymore.\" Chloe didn't panic. She said: \"Good - now we can build something that doesn't need a drug to run.\" Don't measure love by intensity. Measure it by interest. Real love survives the chemistry drop and gets interesting again on purpose.",
+   "image": {
+    "kind": "couple_scene",
+    "emotion_a": "happy",
+    "pose_a": "stand",
+    "emotion_b": "tired",
+    "pose_b": "phone",
+    "overlay": [
+     "psychologists call this",
+     "the dopamine novelty effect"
+    ]
+   }
+  },
+  {
+   "n": 18,
+   "id": "outro_card",
+   "narration": "That was eight pieces of psychology about what keeps love alive. If even one made your own love life suddenly make sense, you got your money's worth - this one was free. Know someone who needs this? The comments are open. Subscribe for more like this.",
+   "image": {
+    "kind": "outro_card",
+    "topic": "What Keeps Love Alive"
+   }
+  }
+ ],
+ "shorts": [
+  {
+   "n": 1,
+   "concept": "repair_attempts",
+   "band": "psychology of lasting love",
+   "hook": "The couples who last are not the ones who fight less but the ones who mend faster.",
+   "term": "repair attempts",
+   "script": "Mid-argument pause. The couples who last are not the ones who fight less but the ones who mend faster. She reaches across the kitchen counter and rests her fingers on his wrist while the water runs. A repair attempt is any small move that lowers the temperature before the damage hardens into resentment. When partners ignore those moments the conflict escalates until someone has to lose for it to end. Psychologists call this repair attempts. Next time the air gets thin try a joke or a touch or simply say this is hard for me too. What is the smallest thing that has ever stopped a fight in your house? Subscribe for more tips like this.",
+   "words": 116,
+   "shash": "cf533100a3b97a8f",
+   "scene": {
+    "emotion_a": "annoyed",
+    "pose_a": "arms_crossed",
+    "emotion_b": "sad",
+    "pose_b": "stand"
+   }
+  },
+  {
+   "n": 2,
+   "concept": "trust_equation",
+   "band": "psychology of lasting love",
+   "hook": "Trust builds in the boring repeat of showing up not in the grand gesture that follows a miss.",
+   "term": "the trust equation",
+   "script": "Seven fifteen arrives. Trust builds in the boring repeat of showing up not in the grand gesture that follows a miss. He texts landing now every Tuesday for two years while the other promises change with fireworks then relapses. Researchers describe trust as consistency plus integrity divided by self interest so words actions and motives must line up repeatedly. A broken pattern cannot be fixed by intensity alone the account rebuilds at the same slow rate it was drained. Psychologists call this the trust equation. Make fewer promises and keep more of them because overpromising is just debt in a romantic accent. Whose word has become gold in your life simply because they never stopped showing up? Subscribe for more tips like this.",
+   "words": 123,
+   "shash": "397db861311ba0ca",
+   "scene": {
+    "emotion_a": "neutral",
+    "pose_a": "stand",
+    "emotion_b": "happy",
+    "pose_b": "stand"
+   }
+  },
+  {
+   "n": 3,
+   "concept": "slow_love",
+   "band": "psychology of lasting love",
+   "hook": "The quiet pace that builds something real often looks like nothing is happening at all.",
+   "term": "slow love",
+   "script": "Calendar marked empty. The quiet pace that builds something real often looks like nothing is happening at all. He watches her fold laundry on a Tuesday evening, memorizing the rhythm of her hands without needing a label for the feeling growing quietly between them. When attraction unfolds without any manufactured pressure, the mind has room to catalog genuine compatibility instead of projecting fantasy onto a stranger it barely knows. Rushed intimacy skips the ordinary moments where trust actually forms, leaving a foundation that cracks under the first real weight of life. Psychologists call this slow love. Next time you feel the urge to accelerate everything, pause and let the next ordinary moment breathe fully without demanding a label. Which relationship in your life grew strongest because nobody forced the timeline and everything developed at its own natural, unhurried speed? Subscribe for more tips like this.",
+   "words": 145,
+   "shash": "6915cb90ed0564c2",
+   "scene": {
+    "emotion_a": "happy",
+    "pose_a": "stand",
+    "emotion_b": "neutral",
+    "pose_b": "stand"
+   }
+  },
+  {
+   "n": 4,
+   "concept": "oxytocin_bonding",
+   "band": "psychology of lasting love",
+   "hook": "Hugs are not the dessert of a relationship they are the maintenance contract that words cannot replace.",
+   "term": "oxytocin bonding",
+   "script": "Three weeks silent. Hugs are not the dessert of a relationship they are the maintenance contract that words cannot replace. She sits on the edge of the bed and leans into him until both nervous systems settle into the same rhythm. Oxytocin released through touch and closeness is the bonding chemical that turns attraction into attachment. Distance after a fight feels physical because the bond's daily maintenance got interrupted not just the emotional weather. Psychologists call this oxytocin bonding. After conflict touch before talking when you can because it reopens the door the argument slammed shut. Would you send this to them right now or is something still stopping you? Subscribe for more tips like this.",
+   "words": 116,
+   "shash": "6a34d5e570a8d9a2",
+   "scene": {
+    "emotion_a": "happy",
+    "pose_a": "stand",
+    "emotion_b": "happy",
+    "pose_b": "stand"
+   }
+  },
+  {
+   "n": 5,
+   "concept": "dopamine_novelty",
+   "band": "psychology of lasting love",
+   "hook": "The crash after the initial high feels like loss but it is actually the brain resetting its baseline.",
+   "term": "the dopamine novelty effect",
+   "script": "Morning coffee cold. The crash after the initial high feels like loss but it is actually the brain resetting its baseline. She stares at her phone waiting for a notification that used to arrive every hour, wondering why the sudden silence feels heavier than the constant noise did. Early infatuation floods the reward system with chemicals that mimic addiction, making the person feel essential in a way that has very little to do with who they actually are. As the novelty schedule runs its course, the intensity drops on a predictable timeline regardless of whether genuine attachment has taken root underneath the surface. Psychologists call this the dopamine novelty effect. When the fire settles into warmth, treat the shift as a signal to build something deeper together instead of a reason to walk away. How many times have you mistaken the comedown for the end of love itself instead of the beginning of something real? Subscribe for more tips like this.",
+   "words": 161,
+   "shash": "837335b3f5d61fb5",
+   "scene": {
+    "emotion_a": "happy",
+    "pose_a": "stand",
+    "emotion_b": "tired",
+    "pose_b": "phone"
+   }
+  },
+  {
+   "n": 6,
+   "concept": "bids_for_connection",
+   "band": "psychology of lasting love",
+   "hook": "The smallest gesture toward you is rarely about the gesture and almost always about being seen.",
+   "term": "bids for connection",
+   "script": "Dog at window. The smallest gesture toward you is rarely about the gesture and almost always about being seen. He points at a bird outside the kitchen window and she pauses the kettle to follow his gaze, neither speaking until the moment passes naturally between them. Each tiny invitation to share attention acts as a test of whether the other person values the connection more than their current focus allows right now. Relationships that last are built on thousands of these micro responses where one person turns toward the other instead of turning away or against. Psychologists call this bids for connection. For one full day, answer every small reach with genuine presence and watch how the atmosphere shifts between you both. Which bid did you almost miss today that might have changed the entire evening if you had turned toward it instead of away? Subscribe for more tips like this.",
+   "words": 151,
+   "shash": "0a070723290dc551",
+   "scene": {
+    "emotion_a": "happy",
+    "pose_a": "stand",
+    "emotion_b": "tired",
+    "pose_b": "phone"
+   }
+  }
+ ],
+ "short_hashes": [
+  "cf533100a3b97a8f",
+  "397db861311ba0ca",
+  "6915cb90ed0564c2",
+  "6a34d5e570a8d9a2",
+  "837335b3f5d61fb5",
+  "0a070723290dc551"
+ ],
+ "muse": "llm",
+ "muse_model": "nvidia/nemotron-3-ultra-550b-a55b:free"
+}
