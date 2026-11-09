@@ -1,5 +1,5 @@
 {
- "week": "2026-11-08",
+ "week": "2026-11-09",
  "episodes": 22,
  "generated": "src/viral.py",
  "median_first_week_views": 0.0,
@@ -11,21 +11,15 @@
    "ratio": null
   },
   {
-   "name": "HOW_TO",
-   "n": 2,
-   "mean_views": 1,
+   "name": "PLAIN",
+   "n": 17,
+   "mean_views": 0.5,
    "ratio": null
   },
   {
    "name": "VS_COMPARISON",
    "n": 2,
-   "mean_views": 1,
-   "ratio": null
-  },
-  {
-   "name": "PLAIN",
-   "n": 16,
-   "mean_views": 0.4,
+   "mean_views": 0.5,
    "ratio": null
   }
  ],
@@ -39,13 +33,13 @@
   {
    "name": "mid(60-74)",
    "n": 12,
-   "mean_views": 1.2,
+   "mean_views": 1.3,
    "ratio": null
   },
   {
    "name": "low(<60)",
    "n": 9,
-   "mean_views": 0.3,
+   "mean_views": 0.2,
    "ratio": null
   }
  ],
@@ -58,7 +52,7 @@
   },
   {
    "title": "What Keeps Love Alive",
-   "views": 4,
+   "views": 3,
    "score": 61,
    "formula": "PLAIN"
   },
