@@ -1,9 +1,70 @@
+[0;93m2026-11-12 13:53:03.913166568 [W:onnxruntime:Default, device_discovery.cc:95 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
 [stats] persisting detail for 204 of 225 videos (bounded memory: recent 200 + top 100)
 [stats] growth report 2026-11-12
-[stats]   total: 2712 views  (+3 since last report)
+[stats]   total: 2726 views  (+14 since last report)
 [stats]      189 views  ·  Subscribe for more tips like this #ep136 #psychology #relati
 [stats]      120 views  ·  Subscribe for more tips like this #ep94 #psychology #relatio
 [stats]      111 views  ·  Subscribe for more tips like this #ep65 #psychology #relatio
-[verify] 44 video(s) confirmed public, 0 late past the 2-day grace window
-[quota] only 15 units left — cannot even land the long (need 1650) — deferring today's uploads
+[verify] 45 video(s) confirmed public, 0 late past the 2-day grace window
+  [muse] cache hit seed 185458021505121 - replay
+[54] script: What Keeps Love Alive (1134 words, hash 7c4851c34b)
+  [voice] human edge ON: variable pauses, breaths, room tone, pacing life
+  [voice] local neural narration: 143 chunks (Kokoro af_heart)
+  [voice] polished: presence EQ + gentle compression
+[54] narration: 450s, 143 caption chunks
+[54] long video: 462s, 41.1MB
+  [voice] human edge ON: variable pauses, breaths, room tone, pacing life
+  [voice] local neural narration: 26 chunks (Kokoro af_heart)
+  [voice] polished: presence EQ + gentle compression
+  [short 1] 57s, 26 cards, 6.8MB
+  [voice] human edge ON: variable pauses, breaths, room tone, pacing life
+  [voice] local neural narration: 22 chunks (Kokoro af_heart)
+  [voice] polished: presence EQ + gentle compression
+  [short 2] 48s, 22 cards, 5.8MB
+  [voice] human edge ON: variable pauses, breaths, room tone, pacing life
+  [voice] local neural narration: 23 chunks (Kokoro af_heart)
+  [voice] polished: presence EQ + gentle compression
+  [short 3] narration 44.6s < 45s floor — re-voicing slower (-6%), attempt 1
+  [voice] human edge ON: variable pauses, breaths, room tone, pacing life
+  [voice] local neural narration: 13 chunks (Kokoro af_heart)
+  [voice] polished: presence EQ + gentle compression
+  [short 3] 46s, 13 cards, 4.2MB
+  [voice] human edge ON: variable pauses, breaths, room tone, pacing life
+  [voice] local neural narration: 21 chunks (Kokoro af_heart)
+  [voice] polished: presence EQ + gentle compression
+  [short 4] narration 43.7s < 45s floor — re-voicing slower (-8%), attempt 1
+  [voice] human edge ON: variable pauses, breaths, room tone, pacing life
+  [voice] local neural narration: 15 chunks (Kokoro af_heart)
+  [voice] polished: presence EQ + gentle compression
+  [short 4] 47s, 15 cards, 4.3MB
+  [voice] human edge ON: variable pauses, breaths, room tone, pacing life
+  [voice] local neural narration: 20 chunks (Kokoro af_heart)
+  [voice] polished: presence EQ + gentle compression
+  [short 5] narration 43.2s < 45s floor — re-voicing slower (-9%), attempt 1
+  [voice] human edge ON: variable pauses, breaths, room tone, pacing life
+  [voice] local neural narration: 14 chunks (Kokoro af_heart)
+  [voice] polished: presence EQ + gentle compression
+  [short 5] 48s, 14 cards, 5.1MB
+  [voice] human edge ON: variable pauses, breaths, room tone, pacing life
+  [voice] local neural narration: 21 chunks (Kokoro af_heart)
+  [voice] polished: presence EQ + gentle compression
+  [short 6] narration 43.7s < 45s floor — re-voicing slower (-8%), attempt 1
+  [voice] human edge ON: variable pauses, breaths, room tone, pacing life
+  [voice] local neural narration: 18 chunks (Kokoro af_heart)
+  [voice] polished: presence EQ + gentle compression
+  [short 6] 47s, 18 cards, 5.4MB
+[54] thumbnail audit: 4 words, 102px, 120px var 4346, 59KB — ok
+[54] thumbnail + 4 shorts ready
+[54] tells audit: reveal=3 vocab=0 filler=0 intensifier=2 (logged, not rewritten)
+[54] viral score: 63/100 (plain) length sweet spot; emotion word: love
+  [youtube] uploaded long: sL6oCJ1feGY (publishAt now)
+  [youtube] setting thumbnail thumbnail.png (58 KB) on sL6oCJ1feGY
+  [youtube] thumbnail set
+  [youtube] uploaded short: NR3fqXlvUYU (publishAt 2026-11-12T18:00:00+02:00)
+  [youtube] uploaded short: fqNgyegZjaA (publishAt 2026-11-13T00:00:00+02:00)
+  [youtube] uploaded short: jYqS1YS77yo (publishAt 2026-11-13T06:00:00+02:00)
+  [youtube] uploaded short: BG5hc6-foNM (publishAt 2026-11-13T12:00:00+02:00)
+[54] text layer: {'captions_long': 'refused', 'comment': 'refused'}
+[epnum] 3 video(s) still to rename — 1732 units left, 50+100 per rename
+  ✓ episode 54: What Keeps Love Alive
 combination space: 273,308,412,123,694,080 stories — the factory never repeats
