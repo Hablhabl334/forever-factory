@@ -1,0 +1,387 @@
+{
+ "title": "The Love Bombing Trap",
+ "topic": "love_bombing",
+ "topic_label": "psychology of love bombing",
+ "mood": "healing",
+ "series": "Psychology of Love",
+ "hook": "Too much too soon is not a compliment \u2014 it's a pattern. Here's how intensity gets mistaken for destiny.",
+ "words": 1193,
+ "hash": "1110e8c434d9fdf8",
+ "seed": 181946518259472,
+ "atoms": {
+  "topic": "The Love Bombing Trap",
+  "concepts": [
+   "love bombing",
+   "the boundary filter",
+   "the scarcity effect",
+   "positive illusion",
+   "the dopamine novelty effect",
+   "on-off cycles",
+   "intermittent reinforcement",
+   "negativity bias"
+  ]
+ },
+ "question": "Did this one sting a little? Then comment 'felt'.",
+ "scenes": [
+  {
+   "n": 1,
+   "id": "open_card",
+   "narration": "Too much too soon isn't a compliment; it's a pattern. Here's how intensity gets mistaken for destiny. Today you get eight quiet pieces of psychology about the love bombing trap, stay till the end because the one that lands won't be the one you expect.",
+   "image": {
+    "kind": "topic_card",
+    "topic": "The Love Bombing Trap",
+    "band": "psychology of love bombing",
+    "count": 8
+   }
+  },
+  {
+   "n": 2,
+   "id": "tip1_card",
+   "narration": "Too much too soon isn't romance moving fast. It's a sales pitch with a deadline. Love bombing shows up as overwhelming affection early on, constant messages, grand gifts, future plans by day ten. Genuine intensity exists, but healthy intensity leaves room for your pace while bombing does not. The tell isn't the size of the gesture; it's what happens when you slow down even slightly. Bombing creates a debt, you owe enthusiasm and the interest rate rises.",
+   "image": {
+    "kind": "concept_card",
+    "tip": 1,
+    "total": 8,
+    "term": "love bombing",
+    "headline": "Too much too soon isn't romance moving fast. It's a sales pitch with a deadline.",
+    "accent_word": null
+   }
+  },
+  {
+   "n": 3,
+   "id": "tip1_scene",
+   "narration": "Emma was adored at a speed that felt like a movie until she tried slowing down on Friday. The adoration flipped into pressure in a single conversation. Affection with a tempo requirement is control's opening act. Real intensity leaves room for your speed. Bombing doesn't. That difference is the whole test. That one was the warm up. The next is the one that lands.",
+   "image": {
+    "kind": "couple_scene",
+    "emotion_a": "surprised",
+    "pose_a": "stand",
+    "emotion_b": "smug",
+    "pose_b": "arms_crossed",
+    "overlay": [
+     "psychologists call this",
+     "love bombing"
+    ]
+   }
+  },
+  {
+   "n": 4,
+   "id": "tip2_card",
+   "narration": "People who resent your boundaries were only ever compatible with your absence of them. Boundaries mark where you end and someone else begins, your time, body, money, yes and no. Clear boundaries actually make people feel safer because visible rules are rules you can trust. The filter doesn't lose people; it prices them accurately.",
+   "image": {
+    "kind": "concept_card",
+    "tip": 2,
+    "total": 8,
+    "term": "the boundary filter",
+    "headline": "People who resent your boundaries were only ever compatible with your absence of them.",
+    "accent_word": null
+   }
+  },
+  {
+   "n": 5,
+   "id": "tip2_scene",
+   "narration": "You said I can't do late night calls on workdays, simple, kind, final. The person who respected it stayed. The person who called at 2 a.m. anyway just self selected out. State them early, kindly, without apology. You're not asking permission, you're publishing the map. One more layer, because this pattern has a partner in crime.",
+   "image": {
+    "kind": "couple_scene",
+    "emotion_a": "neutral",
+    "pose_a": "stand",
+    "emotion_b": "neutral",
+    "pose_b": "phone",
+    "overlay": [
+     "psychologists call this",
+     "the boundary filter"
+    ]
+   }
+  },
+  {
+   "n": 6,
+   "id": "tip3_card",
+   "narration": "'Hard to get' isn't a personality; it's a pricing error your brain keeps making. The scarcity effect makes anything seem more valuable as it becomes less available, including attention. Someone who gives you Tuesday might genuinely be worth less to your week than someone who gives you every day. But the brain sees limited availability and slaps on a collector's price. The fix is pricing the person's actual behavior, not their availability schedule.",
+   "image": {
+    "kind": "concept_card",
+    "tip": 3,
+    "total": 8,
+    "term": "the scarcity effect",
+    "headline": "'Hard to get' isn't a personality \u2014 it's a pricing error your brain keeps making.",
+    "accent_word": null
+   }
+  },
+  {
+   "n": 7,
+   "id": "tip3_scene",
+   "narration": "Nora gets full attention for two hours every ten days and it feels electric. Meanwhile Kai's calm available friend gets labeled too easy at a house party. The market is completely upside down. Price the behavior, not the availability. Someone giving you every day is worth more than someone giving you Tuesday. Almost nobody connects this next pattern to the last one. You're about to.",
+   "image": {
+    "kind": "couple_scene",
+    "emotion_a": "anxious",
+    "pose_a": "stand",
+    "emotion_b": "smug",
+    "pose_b": "phone",
+    "overlay": [
+     "psychologists call this",
+     "the scarcity effect"
+    ]
+   }
+  },
+  {
+   "n": 8,
+   "id": "tip4_card",
+   "narration": "In love your brain runs a mild marketing campaign for the other person, fine in small doses, fatal in large ones. Psychologists call it positive illusion, committed partners rate each other more kindly than reality strictly supports and studies find mildly idealizing couples are actually more satisfied. The glasses help you forgive small flaws and invest long term. The failure mode is the fog version, ignoring values, character, and consistency because the halo is bright. See the person clearly enough to know their behavior, kindly enough to forgive their humanity.",
+   "image": {
+    "kind": "concept_card",
+    "tip": 4,
+    "total": 8,
+    "term": "positive illusion",
+    "headline": "In love, your brain runs a mild marketing campaign for the other person \u2014 fine in small doses, fatal in large ones.",
+    "accent_word": null
+   }
+  },
+  {
+   "n": 9,
+   "id": "tip4_scene",
+   "narration": "Milo's friends list the patterns they've watched for a year at a house party. Milo counters every one with an exception. Some of that is loyalty, the rest is a campaign Milo runs on Milo's own perception. Keep the kindness, drop the blindness. Ask yourself would I respect this behavior if I saw it in a stranger. Keep that feeling, the next lesson will need it.",
+   "image": {
+    "kind": "couple_scene",
+    "emotion_a": "happy",
+    "pose_a": "stand",
+    "emotion_b": "neutral",
+    "pose_b": "phone",
+    "overlay": [
+     "psychologists call this",
+     "positive illusion"
+    ]
+   }
+  },
+  {
+   "n": 10,
+   "id": "tip5_card",
+   "narration": "New love is literally a stimulant phase. The couples who last are the ones who don't panic during the comedown. Early romance floods the brain's reward circuit with dopamine, the same chemistry that powers craving and focus. That's why new love feels obsessive, you think about them constantly because the brain treats them as a reward it must pursue. But novelty fades on a schedule and the intensity drops whether the love is real or not. Couples who know this stop panicking when the fire settles into warmth.",
+   "image": {
+    "kind": "concept_card",
+    "tip": 5,
+    "total": 8,
+    "term": "the dopamine novelty effect",
+    "headline": "New love is literally a stimulant phase. The couples who last are the ones who don't panic during the comedown.",
+    "accent_word": null
+   }
+  },
+  {
+   "n": 11,
+   "id": "tip5_scene",
+   "narration": "Ada misses the old butterflies and starts wondering about other people. What Ada is actually missing is a brain state, not a person. Chasing it is chasing a high with new dealers. Don't measure love by intensity, measure it by interest. Real love survives the chemistry drop and gets interesting again on purpose. The next pattern is the quiet one nobody teaches and it changes the last one.",
+   "image": {
+    "kind": "couple_scene",
+    "emotion_a": "happy",
+    "pose_a": "stand",
+    "emotion_b": "tired",
+    "pose_b": "phone",
+    "overlay": [
+     "psychologists call this",
+     "the dopamine novelty effect"
+    ]
+   }
+  },
+  {
+   "n": 12,
+   "id": "tip6_card",
+   "narration": "Every breakup with the same person gets easier to start and harder to count. Research on on again off again couples finds the pattern usually feeds on ambiguity rather than love. Each reunion is powered by relief and relief is a terrible judge of compatibility. The cycle also normalizes itself, the third breakup simply doesn't scare anyone the way the first one did. The question isn't do we love each other, cyclical couples usually do, it's do we ever solve anything between reunions.",
+   "image": {
+    "kind": "concept_card",
+    "tip": 6,
+    "total": 8,
+    "term": "on-off cycles",
+    "headline": "Every breakup with the same person gets easier to start \u2014 and harder to count.",
+    "accent_word": null
+   }
+  },
+  {
+   "n": 13,
+   "id": "tip6_scene",
+   "narration": "Omar and Dina have broken up twice, once in spring, once by autumn. Both comebacks felt like fate. The actual problems attended all three relationships, quietly outliving every reunion. If you restart, restart with changes, not just with feelings. A reunion without a new plan is a rerun with spoilers. Stay with me, the next one is the one people replay.",
+   "image": {
+    "kind": "couple_scene",
+    "emotion_a": "sad",
+    "pose_a": "stand",
+    "emotion_b": "neutral",
+    "pose_b": "phone",
+    "overlay": [
+     "psychologists call this",
+     "on-off cycles"
+    ]
+   }
+  },
+  {
+   "n": 14,
+   "id": "tip7_card",
+   "narration": "The person who answers once a week can own your whole brain, and the pull comes from a payout schedule rather than chemistry. Psychologists call this intermittent reinforcement, the same schedule that keeps people glued to slot machines. When affection arrives unpredictably your brain releases more dopamine than it would for affection that arrives reliably. The uncertainty itself becomes the hook because a maybe demands constant attention. That's why an inconsistent person can feel more intense than a consistent one.",
+   "image": {
+    "kind": "concept_card",
+    "tip": 7,
+    "total": 8,
+    "term": "intermittent reinforcement",
+    "headline": "The person who answers once a week can own your whole brain \u2014 and it's not chemistry, it's a payout schedule.",
+    "accent_word": null
+   }
+  },
+  {
+   "n": 15,
+   "id": "tip7_scene",
+   "narration": "You text on Monday, they answer on Thursday, warm, funny, perfect. Then silence again for a week. You're not addicted to them, you're addicted to the unpredictability and the relief when the coin finally drops. Track the pattern, not the highs. A calendar of crumbs was never a relationship. Which raises a harder question and the next piece answers it.",
+   "image": {
+    "kind": "couple_scene",
+    "emotion_a": "anxious",
+    "pose_a": "phone",
+    "emotion_b": "detached",
+    "pose_b": "phone",
+    "overlay": [
+     "psychologists call this",
+     "intermittent reinforcement"
+    ]
+   }
+  },
+  {
+   "n": 16,
+   "id": "tip8_card",
+   "narration": "One insult can erase a month of compliments. Negativity bias is the mind's ancient accounting, bad moments get recorded in ink, good ones in pencil. It kept our ancestors alive but it quietly bankrupts relationships because partners feel underpaid no matter how much they give. This is why contempt is the single strongest predictor of breakup, contempt is negativity bias with a voice. Awareness of the bias is most of the battle.",
+   "image": {
+    "kind": "concept_card",
+    "tip": 8,
+    "total": 8,
+    "term": "negativity bias",
+    "headline": "Why does one insult from them erase a month of compliments?",
+    "accent_word": null
+   }
+  },
+  {
+   "n": 17,
+   "id": "tip8_scene",
+   "narration": "Amy did nine kind things this week and one forgetful one, and Luke is still describing that one at 11 p.m. that night. The ledger is rigged by design. Deliver criticism once. Repetition doesn't strengthen the point, it just sets the ink.",
+   "image": {
+    "kind": "couple_scene",
+    "emotion_a": "annoyed",
+    "pose_a": "arms_crossed",
+    "emotion_b": "sad",
+    "pose_b": "stand",
+    "overlay": [
+     "psychologists call this",
+     "negativity bias"
+    ]
+   }
+  },
+  {
+   "n": 18,
+   "id": "outro_card",
+   "narration": "That was eight pieces of psychology about the love bombing trap. If even one of them made your own love life suddenly make sense you already got your money's worth, this one was free. Did this one sting a little? Then comment 'felt'. Subscribe for more tips like this.",
+   "image": {
+    "kind": "outro_card",
+    "topic": "The Love Bombing Trap"
+   }
+  }
+ ],
+ "shorts": [
+  {
+   "n": 1,
+   "concept": "scarcity_effect",
+   "band": "psychology of love bombing",
+   "hook": "The brain prices rare attention like diamonds while daily devotion goes unnoticed.",
+   "term": "the scarcity effect",
+   "script": "Tuesday slot only. The brain prices rare attention like diamonds while daily devotion goes unnoticed. She rearranges her entire week for a two-hour window he offers between meetings then calls it fate. Limited availability triggers a survival circuit that equates scarcity with high value even when the substance is thin and the person barely shows up. Consistent presence builds actual trust because the nervous system learns safety from predictability not from chasing crumbs that disappear by morning. Psychologists call this the scarcity effect. Price the behavior you receive every week not the one night they finally appear and call it everything. When did you last mistake a scarce slot for something worth building a life around and wanted more? Subscribe for more tips like this.",
+   "words": 125,
+   "shash": "30c842b530b79e79",
+   "scene": {
+    "emotion_a": "anxious",
+    "pose_a": "stand",
+    "emotion_b": "smug",
+    "pose_b": "phone"
+   }
+  },
+  {
+   "n": 2,
+   "concept": "love_bombing",
+   "band": "psychology of love bombing",
+   "hook": "Grand gestures that arrive before you know their middle name carry a hidden invoice.",
+   "term": "love bombing",
+   "script": "Day ten forever. Grand gestures that arrive before you know their middle name carry a hidden invoice. He sends flowers to her workplace every morning and texts the moment she opens her eyes demanding instant reply. Overwhelming early intensity floods the reward system so the recipient mistakes pressure for passion and compliance for genuine connection. Healthy desire makes space for the other person to breathe while bombing demands immediate matching energy as proof of loyalty. The term psychologists use is love bombing. Watch what happens when you slow down one notch and see if the warmth stays or vanishes like animation. Have you ever felt the affection disappear the moment you stopped mirroring its frantic pace? Subscribe for more tips like this.",
+   "words": 122,
+   "shash": "c2a6f9369127e25a",
+   "scene": {
+    "emotion_a": "surprised",
+    "pose_a": "stand",
+    "emotion_b": "smug",
+    "pose_b": "arms_crossed"
+   }
+  },
+  {
+   "n": 3,
+   "concept": "rose_glasses",
+   "band": "psychology of love bombing",
+   "hook": "The mind paints kindness onto strangers because love requires a lens that softens every edge.",
+   "term": "positive illusion",
+   "script": "Halo in focus. The mind paints kindness onto strangers because love requires a lens that softens every edge. She explains away his broken promises as stress while her friends count the pattern in silence waiting for her to see. Idealization helps couples bond through early friction by highlighting virtues and muting flaws long enough to build shared history. The danger arrives when the filter blocks red flags that would stop any reasonable person from investing further time. Psychologists name this positive illusion. Keep the generosity but remove the blindfold by asking what you would tolerate from someone you just met. Which behavior have you excused in a partner that you would never accept from a friend or stranger? Subscribe for more tips like this.",
+   "words": 124,
+   "shash": "0c082b4698a12e4d",
+   "scene": {
+    "emotion_a": "happy",
+    "pose_a": "stand",
+    "emotion_b": "neutral",
+    "pose_b": "phone"
+   }
+  },
+  {
+   "n": 4,
+   "concept": "intermittent_reinforcement",
+   "band": "psychology of love bombing",
+   "hook": "There's a reason you can't stop checking for their reply \u2014 and it has nothing to do with how much you like them.",
+   "term": "intermittent reinforcement",
+   "script": "You'll think about this later. There's a reason you can't stop checking for their reply \u2014 and it has nothing to do with how much you like them. Uncertainty pays better than consistency, which is why the calm ones feel boring to you. When affection arrives unpredictably, your brain releases more dopamine than it would for affection that arrives reliably. That's why an inconsistent person can feel more intense than a consistent one. The uncertainty itself becomes the hook, because a maybe demands constant attention. Psychologists call this intermittent reinforcement. Consistency is the real green flag. If calm feels boring to you right now, that's a sign about your nervous system, not about the person offering it. Have you seen intermittent reinforcement up close? Tell me below. Subscribe for more tips like this.",
+   "words": 133,
+   "shash": "92ce676ddc775bda",
+   "scene": {
+    "emotion_a": "anxious",
+    "pose_a": "phone",
+    "emotion_b": "detached",
+    "pose_b": "phone"
+   }
+  },
+  {
+   "n": 5,
+   "concept": "on_off_cycles",
+   "band": "psychology of love bombing",
+   "hook": "Repeating the same breakup does not dull the pain it only numbs the surprise of returning.",
+   "term": "on-off cycles",
+   "script": "Third return pending. Repeating the same breakup does not dull the pain it only numbs the surprise of returning. They pack boxes together for the third time while naming the exact fights that brought them here again. Cyclical reunions survive on the comfort of familiarity while the original conflicts sit untouched between every dramatic comeback. Love alone cannot sustain a loop that solves nothing because each round rehearses the same ending with new scars added. Psychologists refer to this as on-off cycles. Before the next return ask what specific change happened since the last departure not what you hope will happen. What problem has survived every reunion in your loop without ever being named out loud or solved? Subscribe for more tips like this.",
+   "words": 124,
+   "shash": "e2cc296e1a658c02",
+   "scene": {
+    "emotion_a": "sad",
+    "pose_a": "stand",
+    "emotion_b": "neutral",
+    "pose_b": "phone"
+   }
+  },
+  {
+   "n": 6,
+   "concept": "negativity_bias",
+   "band": "psychology of love bombing",
+   "hook": "One cruel sentence outweighs ten kind ones \u2014 your brain is built to remember the knife, not the gift.",
+   "term": "negativity bias",
+   "script": "The internet won't say this. One cruel sentence outweighs ten kind ones \u2014 your brain is built to remember the knife, not the gift. You showed up all month \u2014 one sharp comment at dinner, and the evening belongs to it. It kept our ancestors alive, but it quietly bankrupts relationships, because partners feel underpaid no matter how much they give. Awareness of the bias is most of the battle. Ten kind moments recorded in pencil, one cruel one in ink. That's the brain's ancient accounting. Psychologists have a name for this: negativity bias. Balance the ledger out loud: name what they did right, especially when your brain only wants to file what they did wrong. Who do you know in this pattern? Tag them carefully. Subscribe for more tips like this.",
+   "words": 132,
+   "shash": "7c438e8a37823df5",
+   "scene": {
+    "emotion_a": "annoyed",
+    "pose_a": "arms_crossed",
+    "emotion_b": "sad",
+    "pose_b": "stand"
+   }
+  }
+ ],
+ "short_hashes": [
+  "30c842b530b79e79",
+  "c2a6f9369127e25a",
+  "0c082b4698a12e4d",
+  "92ce676ddc775bda",
+  "e2cc296e1a658c02",
+  "7c438e8a37823df5"
+ ],
+ "muse": "llm",
+ "muse_model": "nvidia/nemotron-3-ultra-550b-a55b:free"
+}
