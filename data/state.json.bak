@@ -1734,7 +1734,8 @@
    "verified": {
     "long": "2026-11-12T21:31:35+00:00",
     "shorts": {
-     "HFFKIqqWdgA": "2026-11-13T20:56:44+00:00"
+     "HFFKIqqWdgA": "2026-11-13T20:56:44+00:00",
+     "UBWG0DxgcB0": "2026-11-14T00:18:49+00:00"
     }
    }
   },
@@ -1772,6 +1773,9 @@
      "power word: everyone",
      "emotion word: love"
     ]
+   },
+   "verified": {
+    "long": "2026-11-14T00:18:49+00:00"
    }
   }
  ],
