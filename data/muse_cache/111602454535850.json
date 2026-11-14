@@ -1,0 +1,387 @@
+{
+ "title": "Love Languages, Without the Hype",
+ "topic": "love_languages",
+ "topic_label": "psychology of love languages",
+ "mood": "warm",
+ "series": "Psychology of Love",
+ "hook": "You can love someone fluently and still speak the wrong language. Here's why the translation matters more than the feeling.",
+ "words": 1254,
+ "hash": "214002ba4e9347b6",
+ "seed": 111602454535850,
+ "atoms": {
+  "topic": "Love Languages, Without the Hype",
+  "concepts": [
+   "secure attachment",
+   "slow love",
+   "real apology",
+   "the trust equation",
+   "repair attempts",
+   "the self-expansion model",
+   "green flags",
+   "bids for connection"
+  ]
+ },
+ "question": "Did this one sting a little? Then comment 'felt'.",
+ "scenes": [
+  {
+   "n": 1,
+   "id": "open_card",
+   "narration": "You can speak love fluently and still get the dialect wrong. Here's why translation matters more than the feeling itself. Today: eight quiet pieces of psychology about love languages, minus the hype. Stay to the end - the one that lands won't be the one you expect.",
+   "image": {
+    "kind": "topic_card",
+    "topic": "Love Languages, Without the Hype",
+    "band": "psychology of love languages",
+    "count": 8
+   }
+  },
+  {
+   "n": 2,
+   "id": "tip1_card",
+   "narration": "Secure love feels underwhelming at first. No adrenaline where the anxiety used to live. Securely connected people do something quietly radical: they take words at face value. 'I'm busy' means busy. 'I love you' means they show up on a random Tuesday, not just anniversaries. Their calm isn't shallow - it's the absence of a constant threat detector. Research keeps circling back to the same finding: security is the style that lets every other relationship skill actually work.",
+   "image": {
+    "kind": "concept_card",
+    "tip": 1,
+    "total": 8,
+    "term": "secure attachment",
+    "headline": "Secure love feels underwhelming at first \u2014 because there's no adrenaline where the anxiety used to be.",
+    "accent_word": null
+   }
+  },
+  {
+   "n": 3,
+   "id": "tip1_scene",
+   "narration": "Chloe says 'you hurt my feelings at the gym' and Youssef doesn't defend, counterattack, or freeze. He says 'you're right, that was careless.' Ninety seconds. Nothing escalates. If calm reads as chemistry-free to you, check your training - the adrenaline you miss might be an alarm, not a spark. If that stung, stay seated. The next one explains why.",
+   "image": {
+    "kind": "couple_scene",
+    "emotion_a": "happy",
+    "pose_a": "stand",
+    "emotion_b": "happy",
+    "pose_b": "stand",
+    "overlay": [
+     "psychologists call this",
+     "secure attachment"
+    ]
+   }
+  },
+  {
+   "n": 4,
+   "id": "tip2_card",
+   "narration": "Fast love shows the highlight reel. Going slow introduces the actual human. Sociologists call it slow love: building the relationship before the fantasy, letting intimacy grow over months of real information instead of weeks of projection. Fast love happens in the dark - you fall for the montage and meet the person later. Slow love keeps the pace of actual knowledge, so affection grows on facts instead of imagination. Less cinematic. Dramatically more durable.",
+   "image": {
+    "kind": "concept_card",
+    "tip": 2,
+    "total": 8,
+    "term": "slow love",
+    "headline": "Fast love shows you the highlight reel. Going slow introduces you to the actual human.",
+    "accent_word": null
+   }
+  },
+  {
+   "n": 5,
+   "id": "tip2_scene",
+   "narration": "No labels by date three, no weekend trips by week two - but six months in you know their money habits, their temper, their mother. You're not less in love. You're in love with a verified account. Let the timeline be a feature, not a bug. Depth is slow by design - anything moving too fast is skipping the inspections. Hold that thought - the next pattern explains why it keeps happening.",
+   "image": {
+    "kind": "couple_scene",
+    "emotion_a": "happy",
+    "pose_a": "stand",
+    "emotion_b": "neutral",
+    "pose_b": "stand",
+    "overlay": [
+     "psychologists call this",
+     "slow love"
+    ]
+   }
+  },
+  {
+   "n": 6,
+   "id": "tip3_card",
+   "narration": "'I'm sorry you feel that way' is an apology-shaped object. Check the ingredients: no apology inside. A real one has four load-bearing parts: the specific action, the acknowledgment of impact, zero excuses, and a change plan. 'If' and 'but' cancel the whole thing - 'I'm sorry if I hurt you' files the hurt as hypothetical. The strongest predictor of repair isn't warmth; it's the change that follows within a week. Words settle the moment. Behavior settles the pattern.",
+   "image": {
+    "kind": "concept_card",
+    "tip": 3,
+    "total": 8,
+    "term": "real apology",
+    "headline": "'I'm sorry you feel that way' is an apology-shaped object. Check the ingredients: there's no apology in it.",
+    "accent_word": null
+   }
+  },
+  {
+   "n": 7,
+   "id": "tip3_scene",
+   "narration": "Compare: 'Sorry, but I was exhausted' versus 'I snapped at dinner. It wasn't fair to you. Tonight I'll tell you when I'm at my limit.' One is a speech. The other is a promise with a timestamp. Audit apologies like a bank: name the action, own the impact, no 'if', no 'but', and a dated change plan. The next pattern is the quiet one nobody teaches - and it changes the last one.",
+   "image": {
+    "kind": "couple_scene",
+    "emotion_a": "sad",
+    "pose_a": "stand",
+    "emotion_b": "neutral",
+    "pose_b": "stand",
+    "overlay": [
+     "psychologists call this",
+     "real apology"
+    ]
+   }
+  },
+  {
+   "n": 8,
+   "id": "tip4_card",
+   "narration": "Trust isn't built by promises. It's built by boring predictability, delivered over time. Researchers describe it as consistency plus integrity divided by self-interest: people trust those whose words, actions, and motives line up, repeatedly. Grand gestures can't compensate for broken patterns - trust compounds like a savings account, in small identical deposits. This is also why recovery after betrayal is slow: the account must be rebuilt at the same boring rate it was drained. There is no lottery version of trust.",
+   "image": {
+    "kind": "concept_card",
+    "tip": 4,
+    "total": 8,
+    "term": "the trust equation",
+    "headline": "Trust isn't built by promises \u2014 it's built by boring predictability, delivered over time.",
+    "accent_word": null
+   }
+  },
+  {
+   "n": 9,
+   "id": "tip4_scene",
+   "narration": "One partner promised change with fireworks and relapsed. The other quietly texted 'landing now' at every arrival for two years. Guess whose word is now currency? Make fewer promises, keep more of them. If you say 7, be there at 7 - that's a deposit. 7:15 with flowers is still a withdrawal. Keep that feeling - the next lesson will need it.",
+   "image": {
+    "kind": "couple_scene",
+    "emotion_a": "neutral",
+    "pose_a": "stand",
+    "emotion_b": "happy",
+    "pose_b": "stand",
+    "overlay": [
+     "psychologists call this",
+     "the trust equation"
+    ]
+   }
+  },
+  {
+   "n": 10,
+   "id": "tip5_card",
+   "narration": "The strongest predictor of staying together isn't zero conflict. It's how fast the temperature drops. Gottman's long-term studies found the single best predictor wasn't absence of conflict - it was the speed and warmth of repair attempts. A repair attempt is any move that lowers the temperature: a joke, a touch, 'this is hard for me too.' The healthiest couples repair mid-fight, not after the verdict. What kills relationships isn't the spark - it's the fire's inability to hear an extinguisher.",
+   "image": {
+    "kind": "concept_card",
+    "tip": 5,
+    "total": 8,
+    "term": "repair attempts",
+    "headline": "The strongest predictor of staying together isn't zero conflict. It's how fast the temperature drops.",
+    "accent_word": null
+   }
+  },
+  {
+   "n": 11,
+   "id": "tip5_scene",
+   "narration": "Jonas makes a terrible joke at the worst moment of the fight. Ada laughs despite everything. That laugh is a repair attempt landing - worth more than winning the argument. Repair mid-fight, not after the verdict. After the verdict, someone has to lose first. Almost nobody connects this next pattern to the last one. You're about to.",
+   "image": {
+    "kind": "couple_scene",
+    "emotion_a": "annoyed",
+    "pose_a": "arms_crossed",
+    "emotion_b": "sad",
+    "pose_b": "stand",
+    "overlay": [
+     "psychologists call this",
+     "repair attempts"
+    ]
+   }
+  },
+  {
+   "n": 12,
+   "id": "tip6_card",
+   "narration": "Ever notice you miss who you were around them more than you miss them? Psychologists call this the self-expansion model of love. We're drawn to people who make our world bigger: new ideas, new courage, new experiences. That's why shared adventures bond couples faster than shared sofas. It also explains why relationships feel stale when growth stops - the expansion was the fuel, not just the bonus. Couples who keep learning together keep choosing each other.",
+   "image": {
+    "kind": "concept_card",
+    "tip": 6,
+    "total": 8,
+    "term": "the self-expansion model",
+    "headline": "Ever notice you miss who you were around them more than you miss them?",
+    "accent_word": null
+   }
+  },
+  {
+   "n": 13,
+   "id": "tip6_scene",
+   "narration": "Remember how alive you felt that first trip, that first project, that first disaster you survived as a team? You weren't high on the person only - you were high on your own growth, with them beside it. Book one experience a month that neither of you has tried. Novelty isn't a luxury for couples; it's maintenance. Here comes the part your brain will want to argue with.",
+   "image": {
+    "kind": "couple_scene",
+    "emotion_a": "happy",
+    "pose_a": "stand",
+    "emotion_b": "happy",
+    "pose_b": "arms_crossed",
+    "overlay": [
+     "psychologists call this",
+     "the self-expansion model"
+    ]
+   }
+  },
+  {
+   "n": 14,
+   "id": "tip7_card",
+   "narration": "No fireworks, just follow-through: the unsexy signs carrying the whole relationship. Green flags are unsexy - they remember small things, they're on time, they apologize specifically, they're kind to waiters and exes alike. Our attention systems are trained by drama, so steadiness registers as flat - the psychological version of a quiet engine. The trick is to actively look for the boring signals, because they're the ones carrying the relationship's actual weight. A person whose presence calms you is doing something biochemically rare.",
+   "image": {
+    "kind": "concept_card",
+    "tip": 7,
+    "total": 8,
+    "term": "green flags",
+    "headline": "No fireworks, just follow-through: the unsexy signs carrying the whole relationship.",
+    "accent_word": null
+   }
+  },
+  {
+   "n": 15,
+   "id": "tip7_scene",
+   "narration": "Aya texts when Aya says, asks how Luke's mom's test went, and is kind to waiters at a rooftop party. No drama, no electric highs - and Luke sleeps better around Aya than Luke has in years. The nervous system noticed before the heart did. Score people on how you feel two hours after seeing them, not two minutes. Calm is a green flag wearing a disguise. Which raises a harder question - and the next piece answers it.",
+   "image": {
+    "kind": "couple_scene",
+    "emotion_a": "happy",
+    "pose_a": "stand",
+    "emotion_b": "happy",
+    "pose_b": "stand",
+    "overlay": [
+     "psychologists call this",
+     "green flags"
+    ]
+   }
+  },
+  {
+   "n": 16,
+   "id": "tip8_card",
+   "narration": "'Look at that dog' is not about the dog. It never was. Gottman's team found couples make tiny bids for connection constantly - a comment, a question, a pointed finger at a sunset. Partners either turn toward the bid, turn away, or turn against it, and the ratio predicts the relationship's future with unsettling accuracy. Masters of relationship turn toward roughly nine times out of ten, even when the bid is boring. Love isn't maintained on anniversaries; it's maintained on Tuesdays, one small 'yes' at a time.",
+   "image": {
+    "kind": "concept_card",
+    "tip": 8,
+    "total": 8,
+    "term": "bids for connection",
+    "headline": "'Look at that dog' is not about the dog. It never was.",
+    "accent_word": null
+   }
+  },
+  {
+   "n": 17,
+   "id": "tip8_scene",
+   "narration": "They said 'look at the moon' from the kitchen. You said 'mm' and kept scrolling. Nothing happened - and a small withdrawal was just made from an account neither of you checks often enough. Boring bids count double - the sillier the bid, the purer the test of the alliance.",
+   "image": {
+    "kind": "couple_scene",
+    "emotion_a": "happy",
+    "pose_a": "stand",
+    "emotion_b": "tired",
+    "pose_b": "phone",
+    "overlay": [
+     "psychologists call this",
+     "bids for connection"
+    ]
+   }
+  },
+  {
+   "n": 18,
+   "id": "outro_card",
+   "narration": "That was eight pieces of psychology about love languages, without the hype. If even one made your own love life suddenly make sense, you already got your money's worth - this one was free. Did this one sting a little? Then comment 'felt'. Subscribe for more tips like this.",
+   "image": {
+    "kind": "outro_card",
+    "topic": "Love Languages, Without the Hype"
+   }
+  }
+ ],
+ "shorts": [
+  {
+   "n": 1,
+   "concept": "apology_languages",
+   "band": "psychology of love languages",
+   "hook": "'I'm sorry you feel that way' is an apology-shaped object. Check the ingredients: there's no apology in it.",
+   "term": "real apology",
+   "script": "This is not advice. It's bigger. 'I'm sorry you feel that way' is an apology-shaped object. Check the ingredients: there's no apology in it. They apologized with flowers for the same hurt they re-caused by Friday. The strongest predictor of repair isn't the apology's warmth; it's the change that follows within a week. Words settle the moment; behavior settles the pattern. 'If' and 'but' cancel the whole thing \u2014 'I'm sorry if I hurt you' files the hurt as hypothetical. 'Sorry you feel that way' landed with a thud, because it was addressed to your feelings, not their actions. Psychologists call this real apology. Judge the apology a week later. Words settle the moment; behavior settles the pattern. Did this one sting a little? Then comment 'felt'. Subscribe for more tips like this.",
+   "words": 133,
+   "shash": "d32b15c2471b44f5",
+   "scene": {
+    "emotion_a": "sad",
+    "pose_a": "stand",
+    "emotion_b": "neutral",
+    "pose_b": "stand"
+   }
+  },
+  {
+   "n": 2,
+   "concept": "secure_attachment",
+   "band": "psychology of love languages",
+   "hook": "The most attractive sentence in a relationship is a calm 'okay, tell me more' \u2014 and it takes years of safety to say it naturally.",
+   "term": "secure attachment",
+   "script": "This will follow you today. The most attractive sentence in a relationship is a calm 'okay, tell me more' \u2014 and it takes years of safety to say it naturally. 'I'm busy' just means busy. Imagine reading one sentence at face value. Securely connected people do something quietly radical: they take words at face value. 'I'm busy' means busy. Their calm isn't a lack of depth \u2014 it's the absence of a constant threat detector. 'I love you' means they'll act like it on Tuesday, not just on anniversaries. Psychologists have a name for this: secure attachment. If calm reads as chemistry-free to you, check your training \u2014 the adrenaline you miss might be an alarm, not a spark. One word in the comments: chaser or retreater? Subscribe for more tips like this.",
+   "words": 133,
+   "shash": "93553c8ea62e69a6",
+   "scene": {
+    "emotion_a": "happy",
+    "pose_a": "stand",
+    "emotion_b": "happy",
+    "pose_b": "stand"
+   }
+  },
+  {
+   "n": 3,
+   "concept": "self_expansion",
+   "band": "psychology of love languages",
+   "hook": "The couples who last aren't the ones who love hardest \u2014 they're the ones who keep growing side by side.",
+   "term": "the self-expansion model",
+   "script": "This hits different at 2 a.m. The couples who last aren't the ones who love hardest \u2014 they're the ones who keep growing side by side. Adventures bond faster than sofas. Shared novelty is the cheapest renovation a relationship can buy. We're drawn to people who make our world bigger: new ideas, new courage, new experiences. Couples who keep learning together keep choosing each other. It also explains why relationships feel stale when growth stops \u2014 the expansion was the fuel, not just the bonus. Psychologists call this the self-expansion model. Book one experience a month that neither of you has tried. Novelty is not a luxury for couples; it's maintenance. Which one have you been \u2014 honestly? Tell me below. Subscribe for more tips like this.",
+   "words": 127,
+   "shash": "7eb955076f5787e8",
+   "scene": {
+    "emotion_a": "happy",
+    "pose_a": "stand",
+    "emotion_b": "happy",
+    "pose_b": "arms_crossed"
+   }
+  },
+  {
+   "n": 4,
+   "concept": "repair_attempts",
+   "band": "psychology of love languages",
+   "hook": "The couples who last are not conflict free but fast at lowering the heat.",
+   "term": "repair attempts",
+   "script": "War got ceasefire. The couples who last are not conflict free but fast at lowering the heat. She stops mid-sentence, reaches across the table, and squeezes his hand while the argument still hangs hot between them and the words keep wanting to fly sharp. A move that lowers the temperature works because it signals the bond matters more than winning the point, and the nervous system registers safety before the words even land. Couples who ignore the outstretched hand let the temperature climb until contempt settles in, and contempt is the acid that dissolves connection slowly over time. Psychologists call this repair attempts. Memorize one phrase that lowers the heat and use it before you feel ready to be generous or calm. Who in your life offers a hand mid-fight and watches the room exhale when they do without saying a word? Subscribe for more tips like this.",
+   "words": 148,
+   "shash": "0c69673c1047755e",
+   "scene": {
+    "emotion_a": "annoyed",
+    "pose_a": "arms_crossed",
+    "emotion_b": "sad",
+    "pose_b": "stand"
+   }
+  },
+  {
+   "n": 5,
+   "concept": "bids_for_connection",
+   "band": "psychology of love languages",
+   "hook": "'Look at that dog' is not about the dog. It never was.",
+   "term": "bids for connection",
+   "script": "File this under 'oh'. 'Look at that dog' is not about the dog. It never was. 'Look at that dog.' They weren't pointing at the dog. They were asking you to come outside with them. Masters of relationship turn toward roughly nine times out of ten, even when the bid is boring. Love isn't maintained on anniversaries; it's maintained on Tuesdays, one small 'yes' at a time. Partners either turn toward the bid, turn away, or turn against it, and the ratio predicts the relationship's future with unsettling accuracy. There is a term for this in psychology: bids for connection. For one day, answer every bid: look up, laugh, respond. It's the cheapest relationship upgrade with the highest return. Did this one sting a little? Then comment 'felt'. Subscribe for more tips like this.",
+   "words": 134,
+   "shash": "11d676371a534511",
+   "scene": {
+    "emotion_a": "happy",
+    "pose_a": "stand",
+    "emotion_b": "tired",
+    "pose_b": "phone"
+   }
+  },
+  {
+   "n": 6,
+   "concept": "slow_love",
+   "band": "psychology of love languages",
+   "hook": "Fast love shows you the highlight reel. Going slow introduces you to the actual human.",
+   "term": "slow love",
+   "script": "Small sentence, heavy truth. Fast love shows you the highlight reel. Going slow introduces you to the actual human. Weeks of projection are cheaper than months of information \u2014 but only one of them survives winter. Fast love happens in the dark \u2014 you fall for the montage and meet the person later. It's less cinematic and dramatically more durable. Six months in, you know their money habits, their temper, their mother \u2014 because nobody rushed you past the inspections. There is a term for this in psychology: slow love. Let the timeline be a feature, not a bug. Depth is slow by design \u2014 anything moving too fast is skipping the inspections. Have you seen slow love up close? Tell me below. Subscribe for more tips like this.",
+   "words": 129,
+   "shash": "82823969954eb60c",
+   "scene": {
+    "emotion_a": "happy",
+    "pose_a": "stand",
+    "emotion_b": "neutral",
+    "pose_b": "stand"
+   }
+  }
+ ],
+ "short_hashes": [
+  "d32b15c2471b44f5",
+  "93553c8ea62e69a6",
+  "7eb955076f5787e8",
+  "0c69673c1047755e",
+  "11d676371a534511",
+  "82823969954eb60c"
+ ],
+ "muse": "llm",
+ "muse_model": "nvidia/nemotron-3-ultra-550b-a55b:free"
+}
