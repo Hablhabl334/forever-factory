@@ -10,33 +10,33 @@ roster: 6 channels | their fresh uploads analyzed: 9 | quota spent: ~9 units
 | Psychology with Dr. Ana | 701,000 | +3,000 | +1,256,083 | 1 |
 | The School of Life | 9,800,000 | +0 | +1,122,278 | 3 |
 | Practical Psychology | 2,360,000 | +0 | +105,567 | 0 |
-| Love Psychology | 132 | +1 | +169 | 0 |
+| Love Psychology | 132 | +1 | +177 | 0 |
 | Relationship Psychology | 5 | +0 | +6 | 0 |
 
 ## 2. The steal list — their best new videos (views/day)
 
 | Title | Channel | Age | Views | V/day | Formula |
 |---|---|---|---|---|---|
-| Bill Burr is a lesson on emotional repressio | Psychology with  | 6.0d | 271,185 | 45,197 | HOW_TO |
-| When Everything Hurts So Much | An Animated  | Psych2Go | 4.6d | 82,092 | 17,846 | PLAIN |
-| You're NOT As BAD as You THINK You Are (Watc | Psych2Go | 0.5d | 8,811 | 17,622 | PLAIN |
-| Learn to Forget Your Ex | The School of Li | 4.2d | 68,146 | 16,225 | PLAIN |
-| The Importance of a Breakdown | The School of Li | 0.5d | 7,673 | 15,346 | PLAIN |
-| You’re TOO Self-Aware… and It’s Hurting You | Psych2Go | 7.4d | 107,306 | 14,500 | PLAIN |
-| 7 Subtle Habits of People Who See Right Thro | Psych2Go | 8.3d | 88,368 | 10,646 | PLAIN |
-| Not Liking One's Looks | The School of Li | 4.2d | 32,690 | 7,783 | PLAIN |
-| The Problem with Over-Friendly People #thesc | The School of Li | 7.2d | 39,922 | 5,544 | PLAIN |
+| Bill Burr is a lesson on emotional repressio | Psychology with  | 6.0d | 271,302 | 45,217 | HOW_TO |
+| You're NOT As BAD as You THINK You Are (Watc | Psych2Go | 0.5d | 10,725 | 21,450 | PLAIN |
+| When Everything Hurts So Much | An Animated  | Psych2Go | 4.6d | 82,187 | 17,866 | PLAIN |
+| Learn to Forget Your Ex | The School of Li | 4.2d | 68,188 | 16,235 | PLAIN |
+| The Importance of a Breakdown | The School of Li | 0.5d | 7,972 | 15,944 | PLAIN |
+| You’re TOO Self-Aware… and It’s Hurting You | Psych2Go | 7.4d | 107,358 | 14,507 | PLAIN |
+| 7 Subtle Habits of People Who See Right Thro | Psych2Go | 8.3d | 88,383 | 10,648 | PLAIN |
+| Not Liking One's Looks | The School of Li | 4.2d | 32,705 | 7,786 | PLAIN |
+| The Problem with Over-Friendly People #thesc | The School of Li | 7.2d | 39,928 | 5,545 | PLAIN |
 
 ## 3. What the niche shipped this week
 
 - formula mix: PLAIN 8 (88%), HOW_TO 1 (11%)
-- hot theme words: people, bill, burr, lesson, emotional, repression, overcome, everything
+- hot theme words: people, bill, burr, lesson, emotional, repression, overcome, you're
 - shorts share: 0/9 (0%) of fresh uploads under 65 s
 - niche cadence: 1 uploads/channel/week vs our 6 (5/day machine = 35/week)
 
 ## 4. Us vs the field
 
-- our fresh uploads average **2.5 views/day**; the niche fresh average is 16745.8 -> we run at **<1% of niche pace**
+- our fresh uploads average **2.5 views/day**; the niche fresh average is 17244.6 -> we run at **<1% of niche pace**
 - channel views gained this week: +236 (total 2,870 as of 2026-11-15)
 
 ## 5. Recommended angles for next week
