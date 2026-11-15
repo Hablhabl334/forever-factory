@@ -1,23 +1,23 @@
 {
- "week": "2026-11-09",
- "episodes": 22,
+ "week": "2026-11-15",
+ "episodes": 20,
  "generated": "src/viral.py",
  "median_first_week_views": 0.0,
  "by_formula": [
   {
-   "name": "WARNING",
+   "name": "VS_COMPARISON",
    "n": 2,
-   "mean_views": 3.5,
+   "mean_views": 1,
    "ratio": null
   },
   {
    "name": "PLAIN",
-   "n": 17,
-   "mean_views": 0.5,
+   "n": 16,
+   "mean_views": 0.6,
    "ratio": null
   },
   {
-   "name": "VS_COMPARISON",
+   "name": "WARNING",
    "n": 2,
    "mean_views": 0.5,
    "ratio": null
@@ -32,48 +32,48 @@
   },
   {
    "name": "mid(60-74)",
-   "n": 12,
-   "mean_views": 1.3,
+   "n": 9,
+   "mean_views": 0.8,
    "ratio": null
   },
   {
    "name": "low(<60)",
-   "n": 9,
-   "mean_views": 0.2,
+   "n": 10,
+   "mean_views": 0.5,
    "ratio": null
   }
  ],
  "best": [
   {
-   "title": "Red Flags People Ignore",
-   "views": 6,
-   "score": 60,
-   "formula": "WARNING"
-  },
-  {
-   "title": "What Keeps Love Alive",
+   "title": "The Love Bombing Trap",
    "views": 3,
    "score": 61,
    "formula": "PLAIN"
   },
   {
-   "title": "How to Get Over a Breakup",
+   "title": "Boundaries in Love",
    "views": 2,
-   "score": 65,
-   "formula": "HOW_TO"
+   "score": 51,
+   "formula": "PLAIN"
+  },
+  {
+   "title": "Chemistry vs Compatibility",
+   "views": 1,
+   "score": 59,
+   "formula": "VS_COMPARISON"
   }
  ],
  "worst": [
   {
-   "title": "What Keeps Love Alive",
+   "title": "Becoming Emotionally Secure",
    "views": 0,
-   "score": 61,
+   "score": 50,
    "formula": "PLAIN"
   },
   {
-   "title": "Why We Get Jealous",
+   "title": "Becoming Emotionally Secure",
    "views": 0,
-   "score": 63,
+   "score": 50,
    "formula": "PLAIN"
   }
  ]

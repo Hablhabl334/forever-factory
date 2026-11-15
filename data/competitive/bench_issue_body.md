@@ -1,43 +1,43 @@
-# Weekly benchmark — week of 2026-11-08 -> 2026-11-09
+# Weekly benchmark — week of 2026-11-09 -> 2026-11-15
 roster: 6 channels | their fresh uploads analyzed: 9 | quota spent: ~9 units
 
 ## 1. The league — 7-day growth
 
 | Channel | Subs | Subs 7d | Views 7d | Uploads 7d |
 |---|---|---|---|---|
-| **the love psychology (us)** | 15 | +0 | +74 | 1 |
-| Psych2Go | 13.2M | +0 | +295,542 | 1 |
-| Psychology with Dr. Ana | 698,000 | +1,000 | +107,811 | 0 |
-| The School of Life | 9,800,000 | +0 | +92,241 | 1 |
-| Practical Psychology | 2,360,000 | +0 | +6,001 | 0 |
-| Love Psychology | 131 | +1 | +32 | 0 |
-| Relationship Psychology | 5 | +0 | +4 | 0 |
+| **the love psychology (us)** | 16 | +1 | +236 | 6 |
+| Psych2Go | 13.2M | +0 | +3,693,728 | 2 |
+| Psychology with Dr. Ana | 701,000 | +3,000 | +1,256,083 | 1 |
+| The School of Life | 9,800,000 | +0 | +1,122,278 | 3 |
+| Practical Psychology | 2,360,000 | +0 | +105,567 | 0 |
+| Love Psychology | 132 | +1 | +169 | 0 |
+| Relationship Psychology | 5 | +0 | +6 | 0 |
 
 ## 2. The steal list — their best new videos (views/day)
 
 | Title | Channel | Age | Views | V/day | Formula |
 |---|---|---|---|---|---|
-| Everything I'd do if I wanted my child to de | Psychology with  | 4.8d | 477,132 | 99,402 | PLAIN |
-| Why We Don’t Have Much Choice in Dating (Des | The School of Li | 5.0d | 247,177 | 49,435 | PLAIN |
-| You’re TOO Self-Aware… and It’s Hurting You | Psych2Go | 1.2d | 58,318 | 48,598 | PLAIN |
-| 7 Subtle Habits of People Who See Right Thro | Psych2Go | 2.1d | 65,821 | 31,343 | PLAIN |
-| The Problem with Over-Friendly People #thesc | The School of Li | 1.0d | 22,997 | 22,997 | PLAIN |
-| Smart People Can't Find Love. Here's Why | Psych2Go | 7.4d | 157,700 | 21,310 | PLAIN |
-| The Art of Spotting a Liar: The Stephanie La | Psychology with  | 6.8d | 107,157 | 15,758 | PLAIN |
-| The Darkest Truth About Love #theschooloflif | The School of Li | 5.0d | 32,912 | 6,582 | PLAIN |
-| How To Know Yourself | The School of Li | 8.0d | 40,904 | 5,113 | HOW_TO |
+| Bill Burr is a lesson on emotional repressio | Psychology with  | 6.0d | 271,185 | 45,197 | HOW_TO |
+| When Everything Hurts So Much | An Animated  | Psych2Go | 4.6d | 82,092 | 17,846 | PLAIN |
+| You're NOT As BAD as You THINK You Are (Watc | Psych2Go | 0.5d | 8,811 | 17,622 | PLAIN |
+| Learn to Forget Your Ex | The School of Li | 4.2d | 68,146 | 16,225 | PLAIN |
+| The Importance of a Breakdown | The School of Li | 0.5d | 7,673 | 15,346 | PLAIN |
+| You’re TOO Self-Aware… and It’s Hurting You | Psych2Go | 7.4d | 107,306 | 14,500 | PLAIN |
+| 7 Subtle Habits of People Who See Right Thro | Psych2Go | 8.3d | 88,368 | 10,646 | PLAIN |
+| Not Liking One's Looks | The School of Li | 4.2d | 32,690 | 7,783 | PLAIN |
+| The Problem with Over-Friendly People #thesc | The School of Li | 7.2d | 39,922 | 5,544 | PLAIN |
 
 ## 3. What the niche shipped this week
 
 - formula mix: PLAIN 8 (88%), HOW_TO 1 (11%)
-- hot theme words: people, love, theschooloflife, animation, everything, wanted, child, develop
-- shorts share: 1/9 (11%) of fresh uploads under 65 s
-- niche cadence: 0 uploads/channel/week vs our 1 (5/day machine = 35/week)
+- hot theme words: people, bill, burr, lesson, emotional, repression, overcome, everything
+- shorts share: 0/9 (0%) of fresh uploads under 65 s
+- niche cadence: 1 uploads/channel/week vs our 6 (5/day machine = 35/week)
 
 ## 4. Us vs the field
 
-- no fresh uploads on our side this window
-- channel views gained this week: +74 (total 2,605 as of 2026-11-09)
+- our fresh uploads average **2.5 views/day**; the niche fresh average is 16745.8 -> we run at **<1% of niche pace**
+- channel views gained this week: +236 (total 2,870 as of 2026-11-15)
 
 ## 5. Recommended angles for next week
 
