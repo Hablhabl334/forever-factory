@@ -1,9 +1,74 @@
+[0;93m2026-11-16 13:49:04.201323374 [W:onnxruntime:Default, device_discovery.cc:95 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
 [stats] persisting detail for 213 of 245 videos (bounded memory: recent 200 + top 100)
 [stats] growth report 2026-11-16
-[stats]   total: 2898 views  (-2 since last report)
+[stats]   total: 2918 views  (+20 since last report)
 [stats]      189 views  ·  Subscribe for more tips like this #ep136 #psychology #relati
 [stats]      120 views  ·  Subscribe for more tips like this #ep94 #psychology #relatio
 [stats]      111 views  ·  Subscribe for more tips like this #ep65 #psychology #relatio
-[verify] 43 video(s) confirmed public, 0 late past the 2-day grace window
-[quota] only 14 units left — cannot even land the long (need 1650) — deferring today's uploads
+[verify] 45 video(s) confirmed public, 0 late past the 2-day grace window
+  [muse] cache hit seed 106207063599632 - replay
+[58] script: Self-Love Before Love (1208 words, hash f96eac1db0)
+  [voice] human edge ON: variable pauses, breaths, room tone, pacing life
+  [voice] local neural narration: 139 chunks (Kokoro af_heart)
+  [voice] polished: presence EQ + gentle compression
+[58] narration: 471s, 139 caption chunks
+[58] long video: 483s, 43.0MB
+  [voice] human edge ON: variable pauses, breaths, room tone, pacing life
+  [voice] local neural narration: 20 chunks (Kokoro af_heart)
+  [voice] polished: presence EQ + gentle compression
+  [short 1] narration 43.0s < 45s floor — re-voicing slower (-10%), attempt 1
+  [voice] human edge ON: variable pauses, breaths, room tone, pacing life
+  [voice] local neural narration: 13 chunks (Kokoro af_heart)
+  [voice] polished: presence EQ + gentle compression
+  [short 1] 47s, 13 cards, 4.7MB
+  [voice] human edge ON: variable pauses, breaths, room tone, pacing life
+  [voice] local neural narration: 19 chunks (Kokoro af_heart)
+  [voice] polished: presence EQ + gentle compression
+  [short 2] narration 41.3s < 45s floor — re-voicing slower (-14%), attempt 1
+  [voice] human edge ON: variable pauses, breaths, room tone, pacing life
+  [voice] local neural narration: 13 chunks (Kokoro af_heart)
+  [voice] polished: presence EQ + gentle compression
+  [short 2] 48s, 13 cards, 5.1MB
+  [voice] human edge ON: variable pauses, breaths, room tone, pacing life
+  [voice] local neural narration: 20 chunks (Kokoro af_heart)
+  [voice] polished: presence EQ + gentle compression
+  [short 3] narration 41.8s < 45s floor — re-voicing slower (-13%), attempt 1
+  [voice] human edge ON: variable pauses, breaths, room tone, pacing life
+  [voice] local neural narration: 13 chunks (Kokoro af_heart)
+  [voice] polished: presence EQ + gentle compression
+  [short 3] 46s, 13 cards, 4.5MB
+  [voice] human edge ON: variable pauses, breaths, room tone, pacing life
+  [voice] local neural narration: 22 chunks (Kokoro af_heart)
+  [voice] polished: presence EQ + gentle compression
+  [short 4] narration 42.1s < 45s floor — re-voicing slower (-12%), attempt 1
+  [voice] human edge ON: variable pauses, breaths, room tone, pacing life
+  [voice] local neural narration: 17 chunks (Kokoro af_heart)
+  [voice] polished: presence EQ + gentle compression
+  [short 4] 48s, 17 cards, 4.1MB
+  [voice] human edge ON: variable pauses, breaths, room tone, pacing life
+  [voice] local neural narration: 21 chunks (Kokoro af_heart)
+  [voice] polished: presence EQ + gentle compression
+  [short 5] 45s, 21 cards, 5.4MB
+  [voice] human edge ON: variable pauses, breaths, room tone, pacing life
+  [voice] local neural narration: 20 chunks (Kokoro af_heart)
+  [voice] polished: presence EQ + gentle compression
+  [short 6] narration 41.1s < 45s floor — re-voicing slower (-14%), attempt 1
+  [voice] human edge ON: variable pauses, breaths, room tone, pacing life
+  [voice] local neural narration: 14 chunks (Kokoro af_heart)
+  [voice] polished: presence EQ + gentle compression
+  [short 6] 47s, 14 cards, 4.0MB
+[58] thumbnail audit: 3 words, 102px, 120px var 4049, 57KB — ok
+[58] thumbnail + 4 shorts ready
+[58] tells audit: reveal=1 vocab=0 filler=0 intensifier=0 (logged, not rewritten)
+[58] viral score: 55/100 (plain) emotion word: love
+  [youtube] uploaded long: Sb19XUcrH5g (publishAt now)
+  [youtube] setting thumbnail thumbnail.png (56 KB) on Sb19XUcrH5g
+  [youtube] thumbnail set
+  [youtube] uploaded short: woZDKT5XBI8 (publishAt 2026-11-16T18:00:00+02:00)
+  [youtube] uploaded short: eUF-dgKDrpQ (publishAt 2026-11-17T00:00:00+02:00)
+  [youtube] uploaded short: Y-rm7iIW7mg (publishAt 2026-11-17T06:00:00+02:00)
+  [youtube] uploaded short: R2g1xlzExZM (publishAt 2026-11-17T12:00:00+02:00)
+[58] text layer: {'captions_long': 'refused', 'comment': 'refused'}
+[epnum] 3 video(s) still to rename — 1731 units left, 50+100 per rename
+  ✓ episode 58: Self-Love Before Love
 combination space: 273,308,412,123,694,080 stories — the factory never repeats
