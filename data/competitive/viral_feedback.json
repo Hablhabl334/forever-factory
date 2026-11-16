@@ -1,23 +1,23 @@
 {
- "week": "2026-11-15",
- "episodes": 20,
+ "week": "2026-11-16",
+ "episodes": 21,
  "generated": "src/viral.py",
- "median_first_week_views": 0.0,
+ "median_first_week_views": 0,
  "by_formula": [
   {
-   "name": "VS_COMPARISON",
-   "n": 2,
-   "mean_views": 1,
-   "ratio": null
-  },
-  {
    "name": "PLAIN",
-   "n": 16,
+   "n": 17,
    "mean_views": 0.6,
    "ratio": null
   },
   {
    "name": "WARNING",
+   "n": 2,
+   "mean_views": 0.5,
+   "ratio": null
+  },
+  {
+   "name": "VS_COMPARISON",
    "n": 2,
    "mean_views": 0.5,
    "ratio": null
@@ -38,7 +38,7 @@
   },
   {
    "name": "low(<60)",
-   "n": 10,
+   "n": 11,
    "mean_views": 0.5,
    "ratio": null
   }
@@ -51,23 +51,23 @@
    "formula": "PLAIN"
   },
   {
-   "title": "Boundaries in Love",
-   "views": 2,
-   "score": 51,
+   "title": "Green Flags Everyone Misses",
+   "views": 3,
+   "score": 56,
    "formula": "PLAIN"
   },
   {
-   "title": "Chemistry vs Compatibility",
+   "title": "Love Languages, Without the Hype",
    "views": 1,
-   "score": 59,
-   "formula": "VS_COMPARISON"
+   "score": 63,
+   "formula": "PLAIN"
   }
  ],
  "worst": [
   {
-   "title": "Becoming Emotionally Secure",
+   "title": "Boundaries in Love",
    "views": 0,
-   "score": 50,
+   "score": 51,
    "formula": "PLAIN"
   },
   {

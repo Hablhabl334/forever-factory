@@ -1,43 +1,43 @@
-# Weekly benchmark — week of 2026-11-09 -> 2026-11-15
+# Weekly benchmark — week of 2026-11-15 -> 2026-11-16
 roster: 6 channels | their fresh uploads analyzed: 9 | quota spent: ~9 units
 
 ## 1. The league — 7-day growth
 
 | Channel | Subs | Subs 7d | Views 7d | Uploads 7d |
 |---|---|---|---|---|
-| **the love psychology (us)** | 16 | +1 | +236 | 6 |
-| Psych2Go | 13.2M | +0 | +3,693,728 | 2 |
-| Psychology with Dr. Ana | 701,000 | +3,000 | +1,256,083 | 1 |
-| The School of Life | 9,800,000 | +0 | +1,122,278 | 3 |
-| Practical Psychology | 2,360,000 | +0 | +105,567 | 0 |
-| Love Psychology | 132 | +1 | +177 | 0 |
-| Relationship Psychology | 5 | +0 | +6 | 0 |
+| **the love psychology (us)** | 16 | +0 | +56 | 1 |
+| Psych2Go | 13.2M | +0 | +340,042 | 1 |
+| The School of Life | 9,800,000 | +0 | +92,218 | 1 |
+| Psychology with Dr. Ana | 701,000 | +0 | +52,517 | 0 |
+| Practical Psychology | 2,360,000 | +0 | +8,258 | 0 |
+| Love Psychology | 132 | +0 | +5 | 0 |
+| Relationship Psychology | 5 | +0 | +0 | 0 |
 
 ## 2. The steal list — their best new videos (views/day)
 
 | Title | Channel | Age | Views | V/day | Formula |
 |---|---|---|---|---|---|
-| Bill Burr is a lesson on emotional repressio | Psychology with  | 6.0d | 271,302 | 45,217 | HOW_TO |
-| You're NOT As BAD as You THINK You Are (Watc | Psych2Go | 0.5d | 10,725 | 21,450 | PLAIN |
-| When Everything Hurts So Much | An Animated  | Psych2Go | 4.6d | 82,187 | 17,866 | PLAIN |
-| Learn to Forget Your Ex | The School of Li | 4.2d | 68,188 | 16,235 | PLAIN |
-| The Importance of a Breakdown | The School of Li | 0.5d | 7,972 | 15,944 | PLAIN |
-| You’re TOO Self-Aware… and It’s Hurting You | Psych2Go | 7.4d | 107,358 | 14,507 | PLAIN |
-| 7 Subtle Habits of People Who See Right Thro | Psych2Go | 8.3d | 88,383 | 10,648 | PLAIN |
-| Not Liking One's Looks | The School of Li | 4.2d | 32,705 | 7,786 | PLAIN |
-| The Problem with Over-Friendly People #thesc | The School of Li | 7.2d | 39,928 | 5,545 | PLAIN |
+| You're NOT As BAD as You THINK You Are (Watc | Psych2Go | 0.9d | 81,983 | 91,092 | PLAIN |
+| Bill Burr is a lesson on emotional repressio | Psychology with  | 6.8d | 282,291 | 41,513 | HOW_TO |
+| The Importance of a Breakdown | The School of Li | 1.0d | 24,734 | 24,734 | PLAIN |
+| When Everything Hurts So Much | An Animated  | Psych2Go | 5.4d | 86,246 | 15,971 | PLAIN |
+| Learn to Forget Your Ex | The School of Li | 5.0d | 71,323 | 14,264 | PLAIN |
+| You’re TOO Self-Aware… and It’s Hurting You | Psych2Go | 8.2d | 109,388 | 13,340 | PLAIN |
+| 7 Subtle Habits of People Who See Right Thro | Psych2Go | 9.1d | 89,044 | 9,785 | PLAIN |
+| Not Liking One's Looks | The School of Li | 5.0d | 33,963 | 6,792 | PLAIN |
+| The Problem with Over-Friendly People #thesc | The School of Li | 8.0d | 40,515 | 5,064 | PLAIN |
 
 ## 3. What the niche shipped this week
 
 - formula mix: PLAIN 8 (88%), HOW_TO 1 (11%)
-- hot theme words: people, bill, burr, lesson, emotional, repression, overcome, you're
+- hot theme words: people, you're, think, till, bill, burr, lesson, emotional
 - shorts share: 0/9 (0%) of fresh uploads under 65 s
-- niche cadence: 1 uploads/channel/week vs our 6 (5/day machine = 35/week)
+- niche cadence: 0 uploads/channel/week vs our 1 (5/day machine = 35/week)
 
 ## 4. Us vs the field
 
-- our fresh uploads average **2.5 views/day**; the niche fresh average is 17244.6 -> we run at **<1% of niche pace**
-- channel views gained this week: +236 (total 2,870 as of 2026-11-15)
+- no fresh uploads on our side this window
+- channel views gained this week: +56 (total 2,898 as of 2026-11-16)
 
 ## 5. Recommended angles for next week
 
