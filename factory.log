@@ -1,9 +1,58 @@
+[0;93m2026-11-17 14:41:08.388530151 [W:onnxruntime:Default, device_discovery.cc:95 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
 [stats] persisting detail for 217 of 250 videos (bounded memory: recent 200 + top 100)
 [stats] growth report 2026-11-17
-[stats]   total: 3076 views  (+0 since last report)
+[stats]   total: 3098 views  (+22 since last report)
 [stats]      189 views  ·  Subscribe for more tips like this #ep136 #psychology #relati
-[stats]      143 views  ·  Subscribe for more tips like this #ep278 #psychology #relati
+[stats]      157 views  ·  Subscribe for more tips like this #ep278 #psychology #relati
 [stats]      120 views  ·  Subscribe for more tips like this #ep94 #psychology #relatio
-[verify] 44 video(s) confirmed public, 0 late past the 2-day grace window
-[quota] only 11 units left — cannot even land the long (need 1650) — deferring today's uploads
+[verify] 45 video(s) confirmed public, 0 late past the 2-day grace window
+  [muse] cache hit seed 103779257209012 - replay
+[59] script: Self-Love Before Love (1219 words, hash d4979c5c5c)
+  [voice] human edge ON: variable pauses, breaths, room tone, pacing life
+  [voice] local neural narration: 136 chunks (Kokoro af_heart)
+  [voice] polished: presence EQ + gentle compression
+[59] narration: 469s, 136 caption chunks
+[59] long video: 481s, 46.3MB
+  [voice] human edge ON: variable pauses, breaths, room tone, pacing life
+  [voice] local neural narration: 26 chunks (Kokoro af_heart)
+  [voice] polished: presence EQ + gentle compression
+  [short 1] 51s, 26 cards, 6.0MB
+  [voice] human edge ON: variable pauses, breaths, room tone, pacing life
+  [voice] local neural narration: 25 chunks (Kokoro af_heart)
+  [voice] polished: presence EQ + gentle compression
+  [short 2] 50s, 25 cards, 6.2MB
+  [voice] human edge ON: variable pauses, breaths, room tone, pacing life
+  [voice] local neural narration: 25 chunks (Kokoro af_heart)
+  [voice] polished: presence EQ + gentle compression
+  [short 3] 55s, 25 cards, 5.6MB
+  [voice] human edge ON: variable pauses, breaths, room tone, pacing life
+  [voice] local neural narration: 20 chunks (Kokoro af_heart)
+  [voice] polished: presence EQ + gentle compression
+  [short 4] 50s, 20 cards, 6.2MB
+  [voice] human edge ON: variable pauses, breaths, room tone, pacing life
+  [voice] local neural narration: 21 chunks (Kokoro af_heart)
+  [voice] polished: presence EQ + gentle compression
+  [short 5] narration 43.2s < 45s floor — re-voicing slower (-9%), attempt 1
+  [voice] human edge ON: variable pauses, breaths, room tone, pacing life
+  [voice] local neural narration: 17 chunks (Kokoro af_heart)
+  [voice] polished: presence EQ + gentle compression
+  [short 5] 46s, 17 cards, 5.8MB
+  [voice] human edge ON: variable pauses, breaths, room tone, pacing life
+  [voice] local neural narration: 25 chunks (Kokoro af_heart)
+  [voice] polished: presence EQ + gentle compression
+  [short 6] 51s, 25 cards, 6.5MB
+[59] thumbnail audit: 3 words, 102px, 120px var 4030, 57KB — ok
+[59] thumbnail + 4 shorts ready
+[59] tells audit: reveal=2 vocab=0 filler=0 intensifier=0 (logged, not rewritten)
+[59] viral score: 55/100 (plain) emotion word: love
+  [youtube] uploaded long: rtELioKlfPw (publishAt now)
+  [youtube] setting thumbnail thumbnail.png (56 KB) on rtELioKlfPw
+  [youtube] thumbnail set
+  [youtube] uploaded short: QDYV5gqThZk (publishAt 2026-11-17T18:00:00+02:00)
+  [youtube] uploaded short: JxE3gyB8ky0 (publishAt 2026-11-18T00:00:00+02:00)
+  [youtube] uploaded short: So_q8ixQOME (publishAt 2026-11-18T06:00:00+02:00)
+  [youtube] uploaded short: 6-B9AkRDAJc (publishAt 2026-11-18T12:00:00+02:00)
+[59] text layer: {'captions_long': 'refused', 'comment': 'refused'}
+[epnum] 4 video(s) still to rename — 1731 units left, 50+100 per rename
+  ✓ episode 59: Self-Love Before Love
 combination space: 273,308,412,123,694,080 stories — the factory never repeats
