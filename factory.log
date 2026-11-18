@@ -1,69 +1,9 @@
-[0;93m2026-11-17 21:51:34.245114565 [W:onnxruntime:Default, device_discovery.cc:95 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
-[stats] persisting detail for 220 of 254 videos (bounded memory: recent 200 + top 100)
-[stats] growth report 2026-11-17
-[stats]   total: 3108 views  (+10 since last report)
+[stats] persisting detail for 220 of 255 videos (bounded memory: recent 200 + top 100)
+[stats] growth report 2026-11-18
+[stats]   total: 3114 views  (+6 since last report)
 [stats]      189 views  ·  Subscribe for more tips like this #ep136 #psychology #relati
 [stats]      158 views  ·  Subscribe for more tips like this #ep278 #psychology #relati
 [stats]      120 views  ·  Subscribe for more tips like this #ep94 #psychology #relatio
-[verify] 47 video(s) confirmed public, 0 late past the 2-day grace window
-[grid] booking 1 short slot(s) in the next 24h (free: 2026-11-18T18:00:00+02:00)
-  [muse] long: no reply - keeping drafts
-  [muse] shorts: retrying 5 reject(s)
-  [muse] shorts: 5/6 rewritten (nvidia)
-[60] script: Green Flags Everyone Misses (1264 words, hash f53a78eb4b)
-  [voice] human edge ON: variable pauses, breaths, room tone, pacing life
-  [voice] local neural narration: 144 chunks (Kokoro af_heart)
-  [voice] polished: presence EQ + gentle compression
-[60] narration: 485s, 144 caption chunks
-[60] long video: 497s, 46.1MB
-  [voice] human edge ON: variable pauses, breaths, room tone, pacing life
-  [voice] local neural narration: 19 chunks (Kokoro af_heart)
-  [voice] polished: presence EQ + gentle compression
-  [short 1] narration 41.1s < 45s floor — re-voicing slower (-14%), attempt 1
-  [voice] human edge ON: variable pauses, breaths, room tone, pacing life
-  [voice] local neural narration: 13 chunks (Kokoro af_heart)
-  [voice] polished: presence EQ + gentle compression
-  [short 1] 46s, 13 cards, 5.1MB
-  [voice] human edge ON: variable pauses, breaths, room tone, pacing life
-  [voice] local neural narration: 19 chunks (Kokoro af_heart)
-  [voice] polished: presence EQ + gentle compression
-  [short 2] narration 42.9s < 45s floor — re-voicing slower (-10%), attempt 1
-  [voice] human edge ON: variable pauses, breaths, room tone, pacing life
-  [voice] local neural narration: 14 chunks (Kokoro af_heart)
-  [voice] polished: presence EQ + gentle compression
-  [short 2] 47s, 14 cards, 5.4MB
-  [voice] human edge ON: variable pauses, breaths, room tone, pacing life
-  [voice] local neural narration: 25 chunks (Kokoro af_heart)
-  [voice] polished: presence EQ + gentle compression
-  [short 3] 52s, 25 cards, 6.0MB
-  [voice] human edge ON: variable pauses, breaths, room tone, pacing life
-  [voice] local neural narration: 19 chunks (Kokoro af_heart)
-  [voice] polished: presence EQ + gentle compression
-  [short 4] narration 43.2s < 45s floor — re-voicing slower (-9%), attempt 1
-  [voice] human edge ON: variable pauses, breaths, room tone, pacing life
-  [voice] local neural narration: 14 chunks (Kokoro af_heart)
-  [voice] polished: presence EQ + gentle compression
-  [short 4] 48s, 14 cards, 5.6MB
-  [voice] human edge ON: variable pauses, breaths, room tone, pacing life
-  [voice] local neural narration: 23 chunks (Kokoro af_heart)
-  [voice] polished: presence EQ + gentle compression
-  [short 5] 45s, 23 cards, 4.6MB
-  [voice] human edge ON: variable pauses, breaths, room tone, pacing life
-  [voice] local neural narration: 24 chunks (Kokoro af_heart)
-  [voice] polished: presence EQ + gentle compression
-  [short 6] 54s, 24 cards, 6.9MB
-[60] thumbnail audit: 4 words, 102px, 120px var 5453, 62KB — ok
-[60] thumbnail + 1 shorts ready
-[60] tells audit: reveal=2 vocab=0 filler=0 intensifier=0 (logged, not rewritten)
-[60] viral score: 51/100 (plain) too long; power word: everyone; emotion word: love
-  [youtube] uploaded long: 6XYViiUgk80 (publishAt 2026-11-20T20:00:00+02:00)
-  [youtube] setting thumbnail thumbnail.png (61 KB) on 6XYViiUgk80
-  [youtube] thumbnail set
-  [quota] 77 units left, need 1650 — deferring
-[60] text layer: {'captions_long': 'refused', 'comment': 'refused'}
-[playlist] 1 long video(s) not in the playlist yet
-[playlist] ep60 long added (6XYViiUgk80)
-[epnum] 1 video(s) still to rename — 20 units left, 50+100 per rename
-  [epnum] rename budget spent — resuming next cycle
-  ! episode 60: Green Flags Everyone Misses — uploads deferred (quota); the next cycle resumes it
+[verify] 43 video(s) confirmed public, 0 late past the 2-day grace window
+[quota] only 19 units left — cannot even land the long (need 1650) — deferring today's uploads
 combination space: 273,308,412,123,694,080 stories — the factory never repeats
