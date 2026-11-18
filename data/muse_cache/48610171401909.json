@@ -1,0 +1,387 @@
+{
+ "title": "How to Get Over a Breakup",
+ "topic": "breakup",
+ "topic_label": "psychology of breakups",
+ "mood": "healing",
+ "series": "Psychology of Love",
+ "hook": "Heartbreak is not weakness \u2014 your brain is going through something very real, and there is a way out.",
+ "words": 1225,
+ "hash": "1a5ddb107a24706e",
+ "seed": 48610171401909,
+ "atoms": {
+  "topic": "How to Get Over a Breakup",
+  "concepts": [
+   "heartbreak withdrawal",
+   "rosy retrospection",
+   "the worth baseline",
+   "rumination",
+   "cortisol bonding",
+   "the no-contact reset",
+   "the Zeigarnik effect",
+   "the closure myth"
+  ]
+ },
+ "question": "Which one are you in this \u2014 be honest in the comments.",
+ "scenes": [
+  {
+   "n": 1,
+   "id": "open_card",
+   "narration": "Heartbreak isn't weakness. Your brain is doing something very real, and there's a way through. Today you get eight quiet pieces of psychology about how to get over a breakup. Stay till the end - the one that hits you won't be the one you expect.",
+   "image": {
+    "kind": "topic_card",
+    "topic": "How to Get Over a Breakup",
+    "band": "psychology of breakups",
+    "count": 8
+   }
+  },
+  {
+   "n": 2,
+   "id": "tip1_card",
+   "narration": "Heartbreak lives in your brain's withdrawal circuits. That's why 'just get over it' is medically useless. When researchers scanned people who'd just been rejected, the regions that lit up overlapped with physical pain and craving during withdrawal. Your brain built its routines around a person who's gone, and it protests like any addicted system. The appetite loss, the obsessive replay, the waves at night - they're symptoms, not weakness. And like withdrawal, the intensity is time-limited if you stop relapsing.",
+   "image": {
+    "kind": "concept_card",
+    "tip": 1,
+    "total": 8,
+    "term": "heartbreak withdrawal",
+    "headline": "Heartbreak lives in the brain's withdrawal circuits \u2014 which is why 'just get over it' is medically useless advice.",
+    "accent_word": null
+   }
+  },
+  {
+   "n": 3,
+   "id": "tip1_scene",
+   "narration": "Day nine after the breakup. Maya feels it in her body like a flu at 2 a.m. every night. Nothing's wrong with Maya. Her days were dosed with a person, and the dose stopped. Treat heartbreak like recovery, not sadness: routine, movement, sleep, and no relapse-checking their profile. The craving is the drug leaving. That was the what. Next comes the why.",
+   "image": {
+    "kind": "couple_scene",
+    "emotion_a": "sad",
+    "pose_a": "hands_face",
+    "emotion_b": "detached",
+    "pose_b": "away",
+    "overlay": [
+     "psychologists call this",
+     "heartbreak withdrawal"
+    ]
+   }
+  },
+  {
+   "n": 4,
+   "id": "tip2_card",
+   "narration": "You're not missing the person. You're missing the director's cut your memory produced after the fact. Rosy retrospection is the documented tendency to remember the past more fondly than you lived it. Pain fades first from memory - merciful for trauma, treacherous for breakups. Six months out, your mind replays the trip and the laughing. The silent car rides and the Sunday dread rarely make the cut. The person in your head is a curated version. The real one had scenes you paid to forget.",
+   "image": {
+    "kind": "concept_card",
+    "tip": 2,
+    "total": 8,
+    "term": "rosy retrospection",
+    "headline": "You're not missing the person. You're missing the director's cut your memory produced after the fact.",
+    "accent_word": null
+   }
+  },
+  {
+   "n": 5,
+   "id": "tip2_scene",
+   "narration": "Six months out, Ava replays the trip, the laughing, the rain. The Sunday dread and the silent car rides never make the edit. Ava isn't remembering the relationship. She's remembering its trailer. Add up the real last month before deciding it was love. The ending data is data too. Keep that feeling - the next lesson will need it.",
+   "image": {
+    "kind": "couple_scene",
+    "emotion_a": "sad",
+    "pose_a": "stand",
+    "emotion_b": "happy",
+    "pose_b": "phone",
+    "overlay": [
+     "psychologists call this",
+     "rosy retrospection"
+    ]
+   }
+  },
+  {
+   "n": 6,
+   "id": "tip3_card",
+   "narration": "If you keep explaining away the bare minimum, the problem isn't your standards. It's your set point. Psychologists find self-esteem acts like a price floor: it sets the minimum treatment you'll quietly tolerate. Raise the floor and bad offers stop being affordable. Lower it and mistreatment starts looking like luck. That's why the same person can leave a terrible relationship and walk straight into a similar one. The filter carried over, not the market. Working on worth isn't vanity. It's relationship economics.",
+   "image": {
+    "kind": "concept_card",
+    "tip": 3,
+    "total": 8,
+    "term": "the worth baseline",
+    "headline": "If you keep explaining away the bare minimum, the problem isn't your standards \u2014 it's your set point.",
+    "accent_word": null
+   }
+  },
+  {
+   "n": 7,
+   "id": "tip3_scene",
+   "narration": "After the breakup, Youssef swore 'never again' - with feeling. Six months later, he's explaining the same patterns to a new best friend at a rooftop party. The filter carried over. The market didn't change. Do the boring work: sleep, build, keep promises to yourself. Worth rises with kept commitments, and standards follow it. Hold that thought - because the next pattern explains why it keeps happening.",
+   "image": {
+    "kind": "couple_scene",
+    "emotion_a": "neutral",
+    "pose_a": "stand",
+    "emotion_b": "neutral",
+    "pose_b": "stand",
+    "overlay": [
+     "psychologists call this",
+     "the worth baseline"
+    ]
+   }
+  },
+  {
+   "n": 8,
+   "id": "tip4_card",
+   "narration": "Why does replaying the ending feel like progress when it quietly eats the whole afternoon? Rumination feels like problem-solving, but it re-runs the same scene without producing any new answers. Each replay strengthens the memory path, so the thoughts get easier to think, not easier to drop. That's why 'I just need to figure out what went wrong' can last a year. The brain is chewing, never swallowing. Actual processing produces decisions. Rumination only produces more replays.",
+   "image": {
+    "kind": "concept_card",
+    "tip": 4,
+    "total": 8,
+    "term": "rumination",
+    "headline": "Why does replaying the ending feel like progress, when it quietly eats the whole afternoon?",
+    "accent_word": null
+   }
+  },
+  {
+   "n": 9,
+   "id": "tip4_scene",
+   "narration": "Cole 'just needs to figure out what went wrong' - a project now older than the relationship was. The brain is chewing. It never swallows. Interrupt with your body: walk, lift, cook, call someone. The loop can't run while the body holds the score. Almost nobody connects this next pattern to the last one. You're about to.",
+   "image": {
+    "kind": "couple_scene",
+    "emotion_a": "sad",
+    "pose_a": "hands_face",
+    "emotion_b": "detached",
+    "pose_b": "away",
+    "overlay": [
+     "psychologists call this",
+     "rumination"
+    ]
+   }
+  },
+  {
+   "n": 10,
+   "id": "tip5_card",
+   "narration": "A relationship that keeps you stressed can still keep you attached. Stress itself builds the glue. Cortisol doesn't just wreck you - it also deepens memory and attachment under the right conditions. Unpredictable partners spike it constantly, and the relief that follows each good moment gets bonded to them. This is how up-down relationships tattoo themselves into your mind while calm ones barely leave a note. The intensity isn't proof of deeper love. It's proof of a stressed system doing its job.",
+   "image": {
+    "kind": "concept_card",
+    "tip": 5,
+    "total": 8,
+    "term": "cortisol bonding",
+    "headline": "A relationship that keeps you stressed can still keep you attached \u2014 stress itself builds the glue.",
+    "accent_word": null
+   }
+  },
+  {
+   "n": 11,
+   "id": "tip5_scene",
+   "narration": "Noah and Emma fight, reconcile, and repeat. Noah's friends ask what's so special about Emma, and Noah can't answer - because Noah isn't more in love. Noah is more chemically booked. Rate the relationship by your weekday calm, not by the intensity of the reunions. Peace is data. If that stung, stay seated. The next one explains the sting.",
+   "image": {
+    "kind": "couple_scene",
+    "emotion_a": "anxious",
+    "pose_a": "stand",
+    "emotion_b": "detached",
+    "pose_b": "phone",
+    "overlay": [
+     "psychologists call this",
+     "cortisol bonding"
+    ]
+   }
+  },
+  {
+   "n": 12,
+   "id": "tip6_card",
+   "narration": "What actually changes in your brain after three weeks of not hearing from them? Contact with a person you're withdrawing from works like a drink for an alcoholic: one message resets the craving clock. The pain you feel in silence isn't proof you belong together. It's the withdrawal curve doing its steep part. After a few weeks, the same memories start arriving with less voltage, because the bond is finally un-maintained. Space doesn't change them. It changes your chemistry.",
+   "image": {
+    "kind": "concept_card",
+    "tip": 6,
+    "total": 8,
+    "term": "the no-contact reset",
+    "headline": "What actually changes in your brain after three weeks of not hearing from them?",
+    "accent_word": null
+   }
+  },
+  {
+   "n": 13,
+   "id": "tip6_scene",
+   "narration": "You broke it off but kept watching the stories, 'just to see.' That's not strength. That's dosing yourself with exactly enough to stay sick. Full silence, including the profile. The healing you're buying costs 30 honest days. Checking extends the invoice. Here comes the part your brain will want to argue with.",
+   "image": {
+    "kind": "couple_scene",
+    "emotion_a": "anxious",
+    "pose_a": "phone",
+    "emotion_b": "away",
+    "pose_b": "away",
+    "overlay": [
+     "psychologists call this",
+     "the no-contact reset"
+    ]
+   }
+  },
+  {
+   "n": 14,
+   "id": "tip7_card",
+   "narration": "Your ex stays memorable because the story stayed unfinished. Open files get no archive. The Zeigarnik effect is the mind's habit of holding open tasks in active memory while completed ones get filed away. A relationship that ended with silence or chaos stays 'open,' so the brain keeps it loaded like a browser tab. It's not love keeping them accessible. It's the lack of an ending sentence. People who write their own closure report the tab finally closing.",
+   "image": {
+    "kind": "concept_card",
+    "tip": 7,
+    "total": 8,
+    "term": "the Zeigarnik effect",
+    "headline": "Your ex stays memorable because the story stayed unfinished \u2014 open files get no archive.",
+    "accent_word": null
+   }
+  },
+  {
+   "n": 15,
+   "id": "tip7_scene",
+   "narration": "If they'd said a real goodbye, you'd miss them like a finished book. Instead you miss them like a cliffhanger - because that's exactly what your memory filed it as. Write the ending yourself: one page - what it was, why it ended, what you keep. Sign it. The mind respects a signature. The next pattern is the quiet one nobody teaches, and it changes the last one.",
+   "image": {
+    "kind": "couple_scene",
+    "emotion_a": "sad",
+    "pose_a": "stand",
+    "emotion_b": "detached",
+    "pose_b": "away",
+    "overlay": [
+     "psychologists call this",
+     "the Zeigarnik effect"
+    ]
+   }
+  },
+  {
+   "n": 16,
+   "id": "tip8_card",
+   "narration": "You already know what happened. You're waiting for a co-signature from someone who left without signing. Most people waiting for closure already know what happened. They're waiting for the other person to co-sign the paperwork. The reason it never arrives is that a clean explanation would require the other person to be more organized than their exit was. Acceptance research is clear: meaning can be self-authored. Permission cannot be outsourced. The explanation you want is real. You're just asking the wrong supplier.",
+   "image": {
+    "kind": "concept_card",
+    "tip": 8,
+    "total": 8,
+    "term": "the closure myth",
+    "headline": "You already know what happened. You're waiting for a co-signature from someone who left without signing.",
+    "accent_word": null
+   }
+  },
+  {
+   "n": 17,
+   "id": "tip8_scene",
+   "narration": "You rehearsed the conversation a hundred times: the apology, the reasons, the dignity. You could write it yourself, almost word for word. That's the tell - the file is complete. Only your signature is missing. Write the ending letter you're waiting for - from them - then sign it yourself. It sounds silly. It works.",
+   "image": {
+    "kind": "couple_scene",
+    "emotion_a": "sad",
+    "pose_a": "stand",
+    "emotion_b": "away",
+    "pose_b": "away",
+    "overlay": [
+     "psychologists call this",
+     "the closure myth"
+    ]
+   }
+  },
+  {
+   "n": 18,
+   "id": "outro_card",
+   "narration": "That was eight pieces of psychology about how to get over a breakup. If even one of them made your own love life suddenly make sense, you already got your money's worth - this one was free. Which one are you in this - be honest in the comments. Subscribe for more tips like this.",
+   "image": {
+    "kind": "outro_card",
+    "topic": "How to Get Over a Breakup"
+   }
+  }
+ ],
+ "shorts": [
+  {
+   "n": 1,
+   "concept": "self_worth_reset",
+   "band": "psychology of breakups",
+   "hook": "Self-esteem is a price floor \u2014 mistreatment below it stops being affordable.",
+   "term": "the worth baseline",
+   "script": "This one will sting. Self-esteem is a price floor \u2014 mistreatment below it stops being affordable. Raise the floor and bad offers stop looking affordable. Standards are economics, not vanity. That's why the same person can leave a terrible relationship and walk straight into a similar one \u2014 the filter, not the market, carried over. Working on worth isn't vanity; it's relationship economics. Psychologists find that self-esteem acts like a price floor: it sets the minimum treatment you'll quietly tolerate. Psychologists have a name for this: the worth baseline. Do the boring work: sleep, build, keep promises to yourself. Worth rises with kept commitments, and standards follow it. Which one are you in this \u2014 be honest in the comments. Subscribe for more tips like this.",
+   "words": 126,
+   "shash": "57eacf52e5523bb1",
+   "scene": {
+    "emotion_a": "neutral",
+    "pose_a": "stand",
+    "emotion_b": "neutral",
+    "pose_b": "stand"
+   }
+  },
+  {
+   "n": 2,
+   "concept": "no_contact_effect",
+   "band": "psychology of breakups",
+   "hook": "What actually changes in your brain after three weeks of not hearing from them?",
+   "term": "the no-contact reset",
+   "script": "This explains everything. What actually changes in your brain after three weeks of not hearing from them? You broke it off but kept watching the stories 'just to see.' That's a sip, not a goodbye. Space doesn't change them \u2014 it changes your chemistry. After a few weeks, the same memories start arriving with less voltage, because the bond is finally un-maintained. The pain you feel in silence isn't proof you belong together; it's the withdrawal curve doing its steep part. Contact with a person you're withdrawing from works like a drink for an alcoholic: one message resets the craving clock. In psychology, this is called the no-contact reset. Full silence, including the profile. The healing costs about thirty honest days; every check extends the invoice. Have you lived this? I read every comment. Subscribe for more tips like this.",
+   "words": 140,
+   "shash": "63c87a853d4ca3ef",
+   "scene": {
+    "emotion_a": "anxious",
+    "pose_a": "phone",
+    "emotion_b": "away",
+    "pose_b": "away"
+   }
+  },
+  {
+   "n": 3,
+   "concept": "heartbreak_brain",
+   "band": "psychology of breakups",
+   "hook": "Breakup pain isn't poetry \u2014 brain scans put it next to physical pain and drug withdrawal.",
+   "term": "heartbreak withdrawal",
+   "script": "Careful \u2014 this is accurate. Breakup pain isn't poetry \u2014 brain scans put it next to physical pain and drug withdrawal. Scans show rejection lighting up next to physical pain and craving. Your chest isn't being poetic. The appetite loss, the obsessive replay, the waves at night \u2014 they're symptoms, not weakness. When researchers scanned the recently rejected, the regions that lit up overlapped with those of physical pain and of craving during withdrawal. And like withdrawal, the intensity is time-limited if you stop relapsing. Your brain built its routines around a person who is now gone, and it protests like any addicted system. Psychologists call this heartbreak withdrawal. Run recovery, not sadness: routine, movement, sleep, people \u2014 and zero profile checks. The craving is the drug leaving. What's your version of this story? Tell me below. Subscribe for more tips like this.",
+   "words": 143,
+   "shash": "e52abd425a2b70e7",
+   "scene": {
+    "emotion_a": "sad",
+    "pose_a": "hands_face",
+    "emotion_b": "detached",
+    "pose_b": "away"
+   }
+  },
+  {
+   "n": 4,
+   "concept": "cortisol_bonding",
+   "band": "psychology of breakups",
+   "hook": "The relationship that stresses you out the most might be the one you can't stop thinking about \u2014 the glue is real, and so is the trap.",
+   "term": "cortisol bonding",
+   "script": "This changed how I see love. The relationship that stresses you out the most might be the one you can't stop thinking about \u2014 the glue is real, and so is the trap. Your friends ask what's so special about them. You can't answer, because the bond lives in your bloodstream. Unpredictable partners spike it constantly, and the relief that follows each good moment gets bonded to them. The intensity isn't proof of a deeper love \u2014 it's proof of a stressed system doing its job. Cortisol, the stress hormone, doesn't just wreck you \u2014 it also deepens memory and attachment under the right conditions. There is a term for this in psychology: cortisol bonding. Audit the relationship on ordinary weekdays, not on the intensity of reunions. Have you seen cortisol bonding up close? Tell me below. Subscribe for more tips like this.",
+   "words": 143,
+   "shash": "b233b35a099eb1ac",
+   "scene": {
+    "emotion_a": "anxious",
+    "pose_a": "stand",
+    "emotion_b": "detached",
+    "pose_b": "phone"
+   }
+  },
+  {
+   "n": 5,
+   "concept": "closure_myth",
+   "band": "psychology of breakups",
+   "hook": "You already know what happened. You're waiting for a co-signature from someone who left without signing.",
+   "term": "the closure myth",
+   "script": "You already know this feeling. You already know what happened. You're waiting for a co-signature from someone who left without signing. You rehearsed their apology for months. You could write it word for word \u2014 that's the tell. The reason it never arrives is that a clean explanation would require the other person to be more organized than their exit was. Most people waiting for closure already know what happened \u2014 they're waiting for the other person to co-sign the paperwork. There is a term for this in psychology: the closure myth. Write the ending letter you're waiting for \u2014 from them, then sign it yourself. It sounds silly. It works. Which one are you in this \u2014 be honest in the comments. Subscribe for more tips like this.",
+   "words": 129,
+   "shash": "68f1558e171eb9c4",
+   "scene": {
+    "emotion_a": "sad",
+    "pose_a": "stand",
+    "emotion_b": "away",
+    "pose_b": "away"
+   }
+  },
+  {
+   "n": 6,
+   "concept": "nostalgia_filter",
+   "band": "psychology of breakups",
+   "hook": "You're not missing the person. You're missing the director's cut your memory produced after the fact.",
+   "term": "rosy retrospection",
+   "script": "File this under 'oh'. You're not missing the person. You're missing the director's cut your memory produced after the fact. Six months out, the memory keeps only the montage. The diary remembers the fights. The person in your head is a curated version; the real one had scenes you paid to forget. Pain fades first from memory, which is merciful for trauma and treacherous for breakups. Six months out, your mind replays the trip and the laughing \u2014 the silent car rides and the Sunday dread rarely make the cut. There is a term for this in psychology: rosy retrospection. Add up the real last month before deciding it was love. The ending data is data too. Have you lived this? I read every comment. Subscribe for more tips like this.",
+   "words": 131,
+   "shash": "e0eb43431354f873",
+   "scene": {
+    "emotion_a": "sad",
+    "pose_a": "stand",
+    "emotion_b": "happy",
+    "pose_b": "phone"
+   }
+  }
+ ],
+ "short_hashes": [
+  "57eacf52e5523bb1",
+  "63c87a853d4ca3ef",
+  "e52abd425a2b70e7",
+  "b233b35a099eb1ac",
+  "68f1558e171eb9c4",
+  "e0eb43431354f873"
+ ],
+ "muse": "llm",
+ "muse_model": "nvidia/nemotron-3-ultra-550b-a55b:free"
+}
