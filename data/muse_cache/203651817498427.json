@@ -1,0 +1,387 @@
+{
+ "title": "Why You Can't Stop Thinking About Your Ex",
+ "topic": "ex_thinking",
+ "topic_label": "why you can't forget your ex",
+ "mood": "healing",
+ "series": "Psychology of Love",
+ "hook": "If they live in your head rent-free, it's not because they earned it \u2014 it's because your brain kept the file open.",
+ "words": 1198,
+ "hash": "3e034e6082a849a1",
+ "seed": 203651817498427,
+ "atoms": {
+  "topic": "Why You Can't Stop Thinking About Your Ex",
+  "concepts": [
+   "rumination",
+   "heartbreak withdrawal",
+   "intermittent reinforcement",
+   "rosy retrospection",
+   "the no-contact reset",
+   "the Zeigarnik effect",
+   "cortisol bonding",
+   "loss aversion"
+  ]
+ },
+ "question": "Did this one sting a little? Then comment 'felt'.",
+ "scenes": [
+  {
+   "n": 1,
+   "id": "open_card",
+   "narration": "If they live in your head rent free, it's not because they earned it. Your brain just kept the file open. Today you get eight quiet pieces of psychology about why you can't stop thinking about your ex. Stay till the end, because the one that lands won't be the one you expect.",
+   "image": {
+    "kind": "topic_card",
+    "topic": "Why You Can't Stop Thinking About Your Ex",
+    "band": "why you can't forget your ex",
+    "count": 8
+   }
+  },
+  {
+   "n": 2,
+   "id": "tip1_card",
+   "narration": "Replaying feels like processing, but processing ends in a decision. Rumination pretends to solve the problem while it just reruns the same scene. Each loop deepens the memory track, making the thought easier to summon, not easier to let go. That's why 'I just need to figure out what went wrong' can drag on for a year, the brain keeps chewing and never swallows. Real processing yields decisions; rumination only yields more loops.",
+   "image": {
+    "kind": "concept_card",
+    "tip": 1,
+    "total": 8,
+    "term": "rumination",
+    "headline": "Replaying feels like processing. The difference: processing ends in a decision.",
+    "accent_word": null
+   }
+  },
+  {
+   "n": 3,
+   "id": "tip1_scene",
+   "narration": "Hour three of the same montage, the message, the silence, the conversation you would rewrite. You know every line. You've learned nothing new since hour one. Interrupt it with your body. Walk, lift, cook, call someone. The loop can't run while your body is busy. Hold that thought because the next pattern explains why it keeps happening.",
+   "image": {
+    "kind": "couple_scene",
+    "emotion_a": "sad",
+    "pose_a": "hands_face",
+    "emotion_b": "detached",
+    "pose_b": "away",
+    "overlay": [
+     "psychologists call this",
+     "rumination"
+    ]
+   }
+  },
+  {
+   "n": 4,
+   "id": "tip2_card",
+   "narration": "Missing them feels like coming down with something because chemically that's what it is. Scans of people who were just rejected show the same regions lighting up as physical pain and craving during withdrawal. Your brain built routines around a person who's gone, and it protests like any addicted system. The appetite loss, the obsessive replay, the night waves are symptoms, not weakness. Like withdrawal, the intensity fades if you stop relapsing.",
+   "image": {
+    "kind": "concept_card",
+    "tip": 2,
+    "total": 8,
+    "term": "heartbreak withdrawal",
+    "headline": "Missing them feels like coming down with something because, chemically, that's exactly what it is.",
+    "accent_word": null
+   }
+  },
+  {
+   "n": 5,
+   "id": "tip2_scene",
+   "narration": "Day nine after the breakup, Seth feels it in the body like a flu at midnight every night. Nothing's wrong with Seth. His days were dosed with a person, and the dose stopped. Run recovery, not sadness. Routine, movement, sleep, people, and zero profile checks. The craving is the drug leaving. One more layer, because this pattern has a partner in crime.",
+   "image": {
+    "kind": "couple_scene",
+    "emotion_a": "sad",
+    "pose_a": "hands_face",
+    "emotion_b": "detached",
+    "pose_b": "away",
+    "overlay": [
+     "psychologists call this",
+     "heartbreak withdrawal"
+    ]
+   }
+  },
+  {
+   "n": 6,
+   "id": "tip3_card",
+   "narration": "Casinos figured out something about love before we did: unpredictable rewards hook deeper than sure ones. Psychologists call it intermittent reinforcement, the same schedule that keeps people glued to slot machines. When affection shows up unpredictably, your brain releases more dopamine than it does for reliable affection. The uncertainty itself becomes the hook, because a maybe demands constant attention. That's why an inconsistent person can feel more intense than a steady one.",
+   "image": {
+    "kind": "concept_card",
+    "tip": 3,
+    "total": 8,
+    "term": "intermittent reinforcement",
+    "headline": "Casinos discovered something about love before we did: unpredictable rewards hook deeper than certain ones.",
+    "accent_word": null
+   }
+  },
+  {
+   "n": 7,
+   "id": "tip3_scene",
+   "narration": "Every time Ivan decides to walk away, Ava resurfaces with a voice note at 3 a.m. and a reason. It's a schedule, not timing, that keeps the player seated. Consistency is the real green flag. If calm feels boring to you right now, that's a sign about your nervous system, not about the person offering it. Here comes the part your brain will want to argue with.",
+   "image": {
+    "kind": "couple_scene",
+    "emotion_a": "anxious",
+    "pose_a": "phone",
+    "emotion_b": "detached",
+    "pose_b": "phone",
+    "overlay": [
+     "psychologists call this",
+     "intermittent reinforcement"
+    ]
+   }
+  },
+  {
+   "n": 8,
+   "id": "tip4_card",
+   "narration": "Memory edits out the pain first, merciful for trauma but treacherous for breakups. Rosy retrospection is the documented tendency to remember the past more fondly than it was lived. Pain fades first from memory, which is merciful for trauma and treacherous for breakups. Six months out your mind replays the trip and the laughing, while the silent car rides and the Sunday dread rarely make the cut. The person in your head is a curated version; the real one had scenes you paid to forget.",
+   "image": {
+    "kind": "concept_card",
+    "tip": 4,
+    "total": 8,
+    "term": "rosy retrospection",
+    "headline": "Memory edits out the pain first \u2014 merciful for trauma, treacherous for breakups.",
+    "accent_word": null
+   }
+  },
+  {
+   "n": 9,
+   "id": "tip4_scene",
+   "narration": "Maya misses how it was with Finn, but at their happiest dinner at the beach she texted a best friend from the bathroom. The memory and the diary rarely agree. When nostalgia hits, read the diary, not the montage. Missing the good parts is human; rebuilding your week around them is optional. Almost nobody connects this next pattern to the last one. You're about to.",
+   "image": {
+    "kind": "couple_scene",
+    "emotion_a": "sad",
+    "pose_a": "stand",
+    "emotion_b": "happy",
+    "pose_b": "phone",
+    "overlay": [
+     "psychologists call this",
+     "rosy retrospection"
+    ]
+   }
+  },
+  {
+   "n": 10,
+   "id": "tip5_card",
+   "narration": "No contact isn't a game to win them back. It's the only setting where your brain gets to repair. Contact with a person you're withdrawing from works like a drink for an alcoholic; one message resets the craving clock. The pain you feel in silence isn't proof you belong together; it's the withdrawal curve doing its steep part. After a few weeks the same memories arrive with less voltage, because the bond is finally unmaintained. Space doesn't change them; it changes your chemistry.",
+   "image": {
+    "kind": "concept_card",
+    "tip": 5,
+    "total": 8,
+    "term": "the no-contact reset",
+    "headline": "No contact isn't a game to win them back. It's the only setting where your brain gets to repair.",
+    "accent_word": null
+   }
+  },
+  {
+   "n": 11,
+   "id": "tip5_scene",
+   "narration": "Cole ended it but kept watching Mira's stories just to see. At 2 a.m. every night Cole takes exactly enough to stay sick. Space doesn't change Mira; it changes Cole's chemistry. If you relapse, don't restart the shame spiral; restart the count. The curve forgives; consistency fixes. Before you file that away, the next lesson is the reason it keeps finding you.",
+   "image": {
+    "kind": "couple_scene",
+    "emotion_a": "anxious",
+    "pose_a": "phone",
+    "emotion_b": "away",
+    "pose_b": "away",
+    "overlay": [
+     "psychologists call this",
+     "the no-contact reset"
+    ]
+   }
+  },
+  {
+   "n": 12,
+   "id": "tip6_card",
+   "narration": "Your ex stays memorable because the story stayed unfinished; open files get no archive. The Zeigarnik effect is the mind's habit of holding open tasks in active memory while completed ones get filed away. A relationship that ended with silence or chaos stays open, so the brain keeps it loaded like a browser tab. The missing ending, not love, keeps them accessible. People who write their own closure report the tab finally closing.",
+   "image": {
+    "kind": "concept_card",
+    "tip": 6,
+    "total": 8,
+    "term": "the Zeigarnik effect",
+    "headline": "Your ex stays memorable because the story stayed unfinished \u2014 open files get no archive.",
+    "accent_word": null
+   }
+  },
+  {
+   "n": 13,
+   "id": "tip6_scene",
+   "narration": "If Amy had said a real goodbye, Theo would miss them like a finished book. Instead Theo misses them like a cliffhanger at 2 a.m. on random nights, because that's exactly how memory filed it. You don't need their participation to close the file. That's the whole trick; endings can be self-service. Stay with me; the next one is the one people replay.",
+   "image": {
+    "kind": "couple_scene",
+    "emotion_a": "sad",
+    "pose_a": "stand",
+    "emotion_b": "detached",
+    "pose_b": "away",
+    "overlay": [
+     "psychologists call this",
+     "the Zeigarnik effect"
+    ]
+   }
+  },
+  {
+   "n": 14,
+   "id": "tip7_card",
+   "narration": "A relationship that keeps you stressed can still keep you attached; stress itself builds the glue. Cortisol, the stress hormone, doesn't just wreck you; it also deepens memory and attachment under the right conditions. Unpredictable partners spike it constantly, and the relief after each good moment gets bonded to them. This is how up-down relationships tattoo themselves into your mind while calm ones barely leave a note. The intensity shows a stressed system doing its job, not deeper love.",
+   "image": {
+    "kind": "concept_card",
+    "tip": 7,
+    "total": 8,
+    "term": "cortisol bonding",
+    "headline": "A relationship that keeps you stressed can still keep you attached \u2014 stress itself builds the glue.",
+    "accent_word": null
+   }
+  },
+  {
+   "n": 15,
+   "id": "tip7_scene",
+   "narration": "The fights, the make-ups, the not knowing, and somehow they occupy your whole mind. You're not more bonded; you're more chemically booked. If the calm ones feel forgettable, check what you've been trained to call chemistry. It might just be your stress response in love's clothing. Keep that feeling; the next lesson will need it.",
+   "image": {
+    "kind": "couple_scene",
+    "emotion_a": "anxious",
+    "pose_a": "stand",
+    "emotion_b": "detached",
+    "pose_b": "phone",
+    "overlay": [
+     "psychologists call this",
+     "cortisol bonding"
+    ]
+   }
+  },
+  {
+   "n": 16,
+   "id": "tip8_card",
+   "narration": "There's a reason you want them back more after losing them than you ever wanted them while you had them. Loss aversion is the finding that losses hurt roughly twice as much as equivalent gains feel good. Apply it to love and the math turns dark; the moment someone withdraws, keeping them becomes the mission, regardless of whether they were right for you. The relationship's value inflates exactly as its probability drops. That's why people chase harder after the breakup than before it.",
+   "image": {
+    "kind": "concept_card",
+    "tip": 8,
+    "total": 8,
+    "term": "loss aversion",
+    "headline": "There's a reason you want them back more after losing them than you ever wanted them while you had them.",
+    "accent_word": null
+   }
+  },
+  {
+   "n": 17,
+   "id": "tip8_scene",
+   "narration": "Nina wasn't fighting for Jack during the relationship. Nina started fighting the moment losing became real. The heart grieves a property, not a person. Write why it ended while it still hurts. Loss aversion edits memory fast; the list keeps the truth.",
+   "image": {
+    "kind": "couple_scene",
+    "emotion_a": "sad",
+    "pose_a": "stand",
+    "emotion_b": "detached",
+    "pose_b": "away",
+    "overlay": [
+     "psychologists call this",
+     "loss aversion"
+    ]
+   }
+  },
+  {
+   "n": 18,
+   "id": "outro_card",
+   "narration": "That was eight pieces of psychology about why you can't stop thinking about your ex. If even one of them made your love life suddenly make sense, you already got your money's worth, this one was free. Did this one sting a little? Then comment 'felt'. Subscribe for more tips like this.",
+   "image": {
+    "kind": "outro_card",
+    "topic": "Why You Can't Stop Thinking About Your Ex"
+   }
+  }
+ ],
+ "shorts": [
+  {
+   "n": 1,
+   "concept": "loss_aversion",
+   "band": "why you can't forget your ex",
+   "hook": "The person who leaves becomes the one you chase the hardest now.",
+   "term": "loss aversion",
+   "script": "Three weeks gone. The person who leaves becomes the one you chase the hardest now. She stares at the empty chair across the kitchen table, rehearsing the fight that made them leave, then texts a joke they would have laughed at. When someone exits your life the brain treats the absence like a missing resource it once counted on so the value spikes to protect the investment. The doubts you carried while they stayed vanish behind a highlight reel the mind builds to justify the chase. Psychologists call this pattern loss aversion. Write down what you actually disliked before the silence started and keep the list where you can see it. Which memory do you keep rewriting since they walked away? Subscribe for more tips like this.",
+   "words": 127,
+   "shash": "beb6af6a85b38529",
+   "scene": {
+    "emotion_a": "sad",
+    "pose_a": "stand",
+    "emotion_b": "detached",
+    "pose_b": "away"
+   }
+  },
+  {
+   "n": 2,
+   "concept": "no_contact_effect",
+   "band": "why you can't forget your ex",
+   "hook": "No contact isn't a strategy to get them back \u2014 it's the only setting where your brain starts repairing.",
+   "term": "the no-contact reset",
+   "script": "Read this twice. No contact isn't a strategy to get them back \u2014 it's the only setting where your brain starts repairing. You broke it off but kept watching the stories 'just to see.' That's a sip, not a goodbye. The pain you feel in silence isn't proof you belong together; it's the withdrawal curve doing its steep part. Contact with a person you're withdrawing from works like a drink for an alcoholic: one message resets the craving clock. Space doesn't change them \u2014 it changes your chemistry. Psychologists have a name for this: the no-contact reset. Full silence, including the profile. The healing costs about thirty honest days; every check extends the invoice. Have you lived this? I read every comment. Subscribe for more tips like this.",
+   "words": 128,
+   "shash": "862565d8b0b50e0f",
+   "scene": {
+    "emotion_a": "anxious",
+    "pose_a": "phone",
+    "emotion_b": "away",
+    "pose_b": "away"
+   }
+  },
+  {
+   "n": 3,
+   "concept": "cortisol_bonding",
+   "band": "why you can't forget your ex",
+   "hook": "Anxiety around someone feels like chemistry because stress and attraction share the same doorway.",
+   "term": "cortisol bonding",
+   "script": "Chest tight again. Anxiety around someone feels like chemistry because stress and attraction share the same doorway. She paces the hallway while the typing dots pulse, exhales when the message lands, and mistakes the relief for proof this is the one. Unpredictable partners spike cortisol constantly and the calm that follows each good moment gets bonded to them instead of to safety. The intensity you read as depth is often a nervous system learning that love arrives only after a threat. The literature labels this dynamic cortisol bonding. Rate the connection by how you feel on a boring Tuesday, not by the rush after the makeup. When did you last feel calm and chosen at the same time? Subscribe for more tips like this.",
+   "words": 124,
+   "shash": "11d24b43fa6d2265",
+   "scene": {
+    "emotion_a": "anxious",
+    "pose_a": "stand",
+    "emotion_b": "detached",
+    "pose_b": "phone"
+   }
+  },
+  {
+   "n": 4,
+   "concept": "rumination_loop",
+   "band": "why you can't forget your ex",
+   "hook": "Replaying the ending is not processing - it is a loop pretending to be problem solving.",
+   "term": "rumination",
+   "script": "One a.m. replay. Replaying the ending is not processing - it is a loop pretending to be problem solving. He lies awake reconstructing the last conversation word for word, swapping his replies for sharper ones, and the scene never reaches a new ending. Each mental rerun deepens the neural groove so the thought becomes easier to trigger, not easier to release. The brain calls it analysis while it is actually chewing the same material without ever swallowing. Clinicians name this habit rumination. Interrupt the loop with your body - walk, lift, cook, call someone - because the story cannot run while the muscles hold the score. What is the scene you keep directing in the dark? Subscribe for more tips like this.",
+   "words": 122,
+   "shash": "1769a87b8ab2f2e7",
+   "scene": {
+    "emotion_a": "sad",
+    "pose_a": "hands_face",
+    "emotion_b": "detached",
+    "pose_b": "away"
+   }
+  },
+  {
+   "n": 5,
+   "concept": "heartbreak_brain",
+   "band": "why you can't forget your ex",
+   "hook": "The appetite loss, the 3 a.m. replays, the chest ache \u2014 that's not weakness. That's a system recalibrating.",
+   "term": "heartbreak withdrawal",
+   "script": "Careful \u2014 this is accurate. The appetite loss, the 3 a.m. replays, the chest ache \u2014 that's not weakness. That's a system recalibrating. Scans show rejection lighting up next to physical pain and craving. Your chest isn't being poetic. The appetite loss, the obsessive replay, the waves at night \u2014 they're symptoms, not weakness. When researchers scanned the recently rejected, the regions that lit up overlapped with those of physical pain and of craving during withdrawal. Your brain built its routines around a person who is now gone, and it protests like any addicted system. There is a term for this in psychology: heartbreak withdrawal. Expect waves, not a straight line. Week two is usually worse than week one; week six is usually the turn. One word in the comments: chaser or retreater? Subscribe for more tips like this.",
+   "words": 139,
+   "shash": "b6613175dd354c4a",
+   "scene": {
+    "emotion_a": "sad",
+    "pose_a": "hands_face",
+    "emotion_b": "detached",
+    "pose_b": "away"
+   }
+  },
+  {
+   "n": 6,
+   "concept": "intermittent_reinforcement",
+   "band": "why you can't forget your ex",
+   "hook": "Casinos discovered something about love before we did: unpredictable rewards hook deeper than certain ones.",
+   "term": "intermittent reinforcement",
+   "script": "Nobody warns you about this. Casinos discovered something about love before we did: unpredictable rewards hook deeper than certain ones. Uncertainty pays better than consistency, which is why the calm ones feel boring to you. That's why an inconsistent person can feel more intense than a consistent one. The uncertainty itself becomes the hook, because a maybe demands constant attention. When affection arrives unpredictably, your brain releases more dopamine than it would for affection that arrives reliably. There is a term for this in psychology: intermittent reinforcement. Consistency is the real green flag. If calm feels boring to you right now, that's a sign about your nervous system, not about the person offering it. Which one are you in this \u2014 be honest in the comments. Subscribe for more tips like this.",
+   "words": 132,
+   "shash": "c621a081e70390bb",
+   "scene": {
+    "emotion_a": "anxious",
+    "pose_a": "phone",
+    "emotion_b": "detached",
+    "pose_b": "phone"
+   }
+  }
+ ],
+ "short_hashes": [
+  "beb6af6a85b38529",
+  "862565d8b0b50e0f",
+  "11d24b43fa6d2265",
+  "1769a87b8ab2f2e7",
+  "b6613175dd354c4a",
+  "c621a081e70390bb"
+ ],
+ "muse": "llm",
+ "muse_model": "nvidia/nemotron-3-ultra-550b-a55b:free"
+}
