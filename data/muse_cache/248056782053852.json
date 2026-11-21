@@ -1,0 +1,387 @@
+{
+ "title": "Green Flags Everyone Misses",
+ "topic": "green_flags",
+ "topic_label": "psychology of green flags",
+ "mood": "warm",
+ "series": "Psychology of Love",
+ "hook": "Green flags are quiet \u2014 they never announce themselves. But once you can spot them, you'll never settle again.",
+ "words": 1076,
+ "hash": "d3bbf52ffb8767db",
+ "seed": 248056782053852,
+ "atoms": {
+  "topic": "Green Flags Everyone Misses",
+  "concepts": [
+   "green flags",
+   "secure attachment",
+   "repair attempts",
+   "slow love",
+   "bids for connection",
+   "the trust equation",
+   "the boundary filter",
+   "real apology"
+  ]
+ },
+ "question": "What's your version of this story? Tell me below.",
+ "scenes": [
+  {
+   "n": 1,
+   "id": "open_card",
+   "narration": "You know that quiet relief when someone just shows up? No fanfare. Just follows through. Today we're looking at eight of those quiet signals - the ones most people miss. Stay till the end. The one that lands won't be the one you're waiting for.",
+   "image": {
+    "kind": "topic_card",
+    "topic": "Green Flags Everyone Misses",
+    "band": "psychology of green flags",
+    "count": 8
+   }
+  },
+  {
+   "n": 2,
+   "id": "tip1_card",
+   "narration": "No fireworks. Just follow-through. That's the whole thing. Green flags don't announce themselves - they remember the small stuff, show up on time, apologize without the 'but', treat the waiter like a person. Drama trains your attention to chase noise, so steadiness feels flat at first. But the boring signals? They're the ones actually holding the weight. Someone whose presence calms your nervous system - that's not luck. That's rare.",
+   "image": {
+    "kind": "concept_card",
+    "tip": 1,
+    "total": 8,
+    "term": "green flags",
+    "headline": "No fireworks, just follow-through: the unsexy signs carrying the whole relationship.",
+    "accent_word": null
+   }
+  },
+  {
+   "n": 3,
+   "id": "tip1_scene",
+   "narration": "Sam texts when they say they will. Asks how your mom's test went. Tips the waiter at your cousin's wedding like it's nothing. No fireworks, no 3 a.m. crises - and you realize you're sleeping through the night for the first time in years. Your nervous system caught on before you did. This week, write down the boring ones: shows up, remembers, repairs. Then watch for those in people, not in the spark. Your brain's going to fight this next part.",
+   "image": {
+    "kind": "couple_scene",
+    "emotion_a": "happy",
+    "pose_a": "stand",
+    "emotion_b": "happy",
+    "pose_b": "stand",
+    "overlay": [
+     "psychologists call this",
+     "green flags"
+    ]
+   }
+  },
+  {
+   "n": 4,
+   "id": "tip2_card",
+   "narration": "Relief over rush - that's the tell. Secure people do something quiet and radical: they believe what you say. 'I'm busy' means busy. 'I love you' means Tuesday, not just the anniversary. Their calm isn't empty. It's just... no alarm system running in the background. The data keeps coming back to this: security is what lets every other skill work.",
+   "image": {
+    "kind": "concept_card",
+    "tip": 2,
+    "total": 8,
+    "term": "secure attachment",
+    "headline": "If a relationship feels like relief instead of a rush, you may have finally gotten it right.",
+    "accent_word": null
+   }
+  },
+  {
+   "n": 5,
+   "id": "tip2_scene",
+   "narration": "You say you're hurt. They don't defend, don't disappear, don't flip it. They just lean in - curious. That's not personality. That's thousands of moments where it was safe to stay soft. If calm feels like 'no chemistry', check your training. The adrenaline you're missing might be an alarm, not a spark. Next piece answers why that happens.",
+   "image": {
+    "kind": "couple_scene",
+    "emotion_a": "happy",
+    "pose_a": "stand",
+    "emotion_b": "happy",
+    "pose_b": "stand",
+    "overlay": [
+     "psychologists call this",
+     "secure attachment"
+    ]
+   }
+  },
+  {
+   "n": 6,
+   "id": "tip3_card",
+   "narration": "Strong couples don't fight less. They repair faster. The exit matters more than the entrance. Gottman tracked couples for decades - the predictor wasn't avoiding conflict. It was how fast and warm the repair came. A repair is anything that drops the temperature: a joke, a hand on an arm, 'this is hard for me too'. Healthy couples repair mid-fight, not after. What kills it isn't the spark - it's the fire that won't hear the extinguisher.",
+   "image": {
+    "kind": "concept_card",
+    "tip": 3,
+    "total": 8,
+    "term": "repair attempts",
+    "headline": "Strong couples don't fight less \u2014 they repair faster. The exit matters more than the entrance.",
+    "accent_word": null
+   }
+  },
+  {
+   "n": 7,
+   "id": "tip3_scene",
+   "narration": "Mid-argument, kitchen table, Ada drops eye contact: 'Can we sit closer?' Nothing's solved. But the war has a ceasefire now - and solutions only exist past ceasefires. Memorize one repair line. Use it before you're ready. 'We're on the same team' works even when it's a lie. There's a partner to this pattern - coming up.",
+   "image": {
+    "kind": "couple_scene",
+    "emotion_a": "annoyed",
+    "pose_a": "arms_crossed",
+    "emotion_b": "sad",
+    "pose_b": "stand",
+    "overlay": [
+     "psychologists call this",
+     "repair attempts"
+    ]
+   }
+  },
+  {
+   "n": 8,
+   "id": "tip4_card",
+   "narration": "Fast love happens in the dark. You fall for the montage, meet the person later. Sociologists call the alternative slow love - building before the fantasy, letting intimacy grow on months of real data instead of weeks of projection. Slow love moves at the speed of actual knowing. Affection builds on facts, not imagination. Less cinematic. Dramatically more durable.",
+   "image": {
+    "kind": "concept_card",
+    "tip": 4,
+    "total": 8,
+    "term": "slow love",
+    "headline": "Fast love happens in the dark: you fall for the montage and meet the person later.",
+    "accent_word": null
+   }
+  },
+  {
+   "n": 9,
+   "id": "tip4_scene",
+   "narration": "No labels by date three. No weekend trip by week two. Six months in, Cole knows Lena's money habits, her temper, her mother. Cole isn't less in love - just in love with a verified account. Trade month-one butterflies for month-six knowledge. That trade is the strategy. Hold it - the next pattern explains why you keep skipping it.",
+   "image": {
+    "kind": "couple_scene",
+    "emotion_a": "happy",
+    "pose_a": "stand",
+    "emotion_b": "neutral",
+    "pose_b": "stand",
+    "overlay": [
+     "psychologists call this",
+     "slow love"
+    ]
+   }
+  },
+  {
+   "n": 10,
+   "id": "tip5_card",
+   "narration": "When did someone last ask for your attention without asking? Gottman's team spotted it: couples make tiny bids constantly - a comment, a question, a finger pointed at the sunset. You turn toward, away, or against. The ratio predicts the future with scary accuracy. The masters turn toward nine times out of ten, even for the boring ones. Love isn't kept alive on anniversaries. It's Tuesdays. One small yes at a time.",
+   "image": {
+    "kind": "concept_card",
+    "tip": 5,
+    "total": 8,
+    "term": "bids for connection",
+    "headline": "When was the last time someone asked for your attention without actually asking?",
+    "accent_word": null
+   }
+  },
+  {
+   "n": 11,
+   "id": "tip5_scene",
+   "narration": "Kitchen, 6 a.m. Kai: 'Look at the moon.' Amy: 'Mm.' Keeps scrolling. Nothing happened - but a tiny withdrawal just hit an account nobody audits. The boring bids count double. The sillier the bid, the purer the test. File that - the next lesson explains why this keeps finding you.",
+   "image": {
+    "kind": "couple_scene",
+    "emotion_a": "happy",
+    "pose_a": "stand",
+    "emotion_b": "tired",
+    "pose_b": "phone",
+    "overlay": [
+     "psychologists call this",
+     "bids for connection"
+    ]
+   }
+  },
+  {
+   "n": 12,
+   "id": "tip6_card",
+   "narration": "Say 7, be there at 7. That's a deposit. 7:15 with flowers? Still a withdrawal. Trust researchers boil it down: consistency plus integrity over self-interest. People trust those whose words, actions, and motives line up - repeatedly. Grand gestures don't cover broken patterns. Trust compounds like a savings account: small, identical deposits. That's why betrayal takes forever to repair - you rebuild at the same boring rate it drained. No lottery version exists.",
+   "image": {
+    "kind": "concept_card",
+    "tip": 6,
+    "total": 8,
+    "term": "the trust equation",
+    "headline": "If you say 7, be there at 7. That's a deposit. 7:15 with flowers is still a withdrawal.",
+    "accent_word": null
+   }
+  },
+  {
+   "n": 13,
+   "id": "tip6_scene",
+   "narration": "Rami promised change with fireworks - relapsed. Sara texted 'landing now' at every arrival for two years. Guess whose word is currency now? Make fewer promises. Keep more. Overpromising is just debt in a romantic accent. That was the warm-up. The next one lands.",
+   "image": {
+    "kind": "couple_scene",
+    "emotion_a": "neutral",
+    "pose_a": "stand",
+    "emotion_b": "happy",
+    "pose_b": "stand",
+    "overlay": [
+     "psychologists call this",
+     "the trust equation"
+    ]
+   }
+  },
+  {
+   "n": 14,
+   "id": "tip7_card",
+   "narration": "A boundary isn't a wall to keep love out. It's a filter that makes love possible. Boundaries mark where you end and they begin - your time, body, money, your yes and no. Clear boundaries do something backwards: they make people feel safer. Visible rules are rules you can trust. People who resent your boundaries were only ever compatible with you not having them. The filter doesn't lose you people. It prices them accurately.",
+   "image": {
+    "kind": "concept_card",
+    "tip": 7,
+    "total": 8,
+    "term": "the boundary filter",
+    "headline": "A boundary isn't a wall to keep love out \u2014 it's a filter that makes love possible.",
+    "accent_word": null
+   }
+  },
+  {
+   "n": 15,
+   "id": "tip7_scene",
+   "narration": "'I can't do late-night calls on workdays.' Simple. Kind. Final. The one who respected it stayed. The one who called at 2 a.m. anyway - self-selected out. The filter isn't losing people. It's pricing them accurately. That serves everyone. Almost nobody connects this next pattern to the last one. You're about to.",
+   "image": {
+    "kind": "couple_scene",
+    "emotion_a": "neutral",
+    "pose_a": "stand",
+    "emotion_b": "neutral",
+    "pose_b": "phone",
+    "overlay": [
+     "psychologists call this",
+     "the boundary filter"
+    ]
+   }
+  },
+  {
+   "n": 16,
+   "id": "tip8_card",
+   "narration": "A real apology names what it did, owns it without excuses, and changes. Anything less is theater. Four load-bearing parts: the specific action, the impact acknowledged, zero excuses, a change plan. 'If' and 'but' cancel the whole thing - 'sorry if I hurt you' makes the hurt hypothetical. The strongest predictor of repair isn't warmth. It's the change that shows up within a week. Words settle the moment. Behavior settles the pattern.",
+   "image": {
+    "kind": "concept_card",
+    "tip": 8,
+    "total": 8,
+    "term": "real apology",
+    "headline": "An actual apology names what it did, owns it without excuses, and changes \u2014 anything less is theater.",
+    "accent_word": null
+   }
+  },
+  {
+   "n": 17,
+   "id": "tip8_scene",
+   "narration": "Ryan apologizes warmly for the same things, over and over. Warmth without change is a subscription to the apology, not the delivery. Judge it a week later. Words settle the moment. Behavior settles the pattern.",
+   "image": {
+    "kind": "couple_scene",
+    "emotion_a": "sad",
+    "pose_a": "stand",
+    "emotion_b": "neutral",
+    "pose_b": "stand",
+    "overlay": [
+     "psychologists call this",
+     "real apology"
+    ]
+   }
+  },
+  {
+   "n": 18,
+   "id": "outro_card",
+   "narration": "Eight quiet signals most people miss. If even one made your love life click - you got your money's worth, and this one was free. What's your version of this story? Tell me below. Subscribe for more like this.",
+   "image": {
+    "kind": "outro_card",
+    "topic": "Green Flags Everyone Misses"
+   }
+  }
+ ],
+ "shorts": [
+  {
+   "n": 1,
+   "concept": "trust_equation",
+   "band": "psychology of green flags",
+   "hook": "Trust grows in the boring minutes you keep, not the grand ones you promise.",
+   "term": "the trust equation",
+   "script": "Seven sharp. Trust grows in the boring minutes you keep, not the grand ones you promise. She sets the coffee down at the exact minute she said, then does it again tomorrow and the day after without fanfare. Reliability compounds because each small kept agreement signals safety to the nervous system, while a single dramatic gesture cannot overwrite a pattern of near misses. When a pattern breaks, the ledger reopens at the same slow rate it was built, so recovery demands identical deposits day after day instead of a lump sum. Psychologists call this the trust equation. Make fewer promises and show up for every single one, even when flowers feel easier. Which kept promise this week felt like a real deposit in your account? Subscribe for more tips like this.",
+   "words": 131,
+   "shash": "f5da779964d68c14",
+   "scene": {
+    "emotion_a": "neutral",
+    "pose_a": "stand",
+    "emotion_b": "happy",
+    "pose_b": "stand"
+   }
+  },
+  {
+   "n": 2,
+   "concept": "apology_languages",
+   "band": "psychology of green flags",
+   "hook": "An apology that names the action and changes the pattern is the only one that counts.",
+   "term": "real apology",
+   "script": "Sorry landed flat. An apology that names the action and changes the pattern is the only one that counts. He hears the words but watches the same missed deadline arrive next week with a new excuse wrapped in softer language. Language that centers the other person's reaction instead of the speaker's behavior leaves the original wound untouched and the dynamic unchanged. Lasting repair shows up in behavior within days, because the nervous system tracks what actually shifts, not what gets spoken in the moment. Psychologists call this real apology. Next time, say exactly what you did, skip the qualifiers, and let the next week prove it. What would a real apology sound like in the last fight you had? Subscribe for more tips like this.",
+   "words": 125,
+   "shash": "6f701a0011d415f8",
+   "scene": {
+    "emotion_a": "sad",
+    "pose_a": "stand",
+    "emotion_b": "neutral",
+    "pose_b": "stand"
+   }
+  },
+  {
+   "n": 3,
+   "concept": "slow_love",
+   "band": "psychology of green flags",
+   "hook": "Fast love happens in the dark: you fall for the montage and meet the person later.",
+   "term": "slow love",
+   "script": "Read this twice. Fast love happens in the dark: you fall for the montage and meet the person later. Weeks of projection are cheaper than months of information \u2014 but only one of them survives winter. It's less cinematic and dramatically more durable. Six months in, you know their money habits, their temper, their mother \u2014 because nobody rushed you past the inspections. Psychologists call this slow love. Let the timeline be a feature, not a bug. Depth is slow by design \u2014 anything moving too fast is skipping the inspections. Let the timeline be a feature, not a bug. Depth is slow by design \u2014 anything too fast is skipping the inspections. One word in the comments: chaser or retreater? Subscribe for more tips like this.",
+   "words": 127,
+   "shash": "92e1bc4be58bacb5",
+   "scene": {
+    "emotion_a": "happy",
+    "pose_a": "stand",
+    "emotion_b": "neutral",
+    "pose_b": "stand"
+   }
+  },
+  {
+   "n": 4,
+   "concept": "secure_attachment",
+   "band": "psychology of green flags",
+   "hook": "Taking words at face value makes every other relationship skill finally work as it was intended to work.",
+   "term": "secure attachment",
+   "script": "Calm feels boring. Taking words at face value makes every other relationship skill finally work as it was intended to work. She reads 'I am busy' on the screen and puts the phone down, untroubled, because the sentence means exactly what it says with no hidden cliff or trap. Security operates as a skill set because face-value listening, repair after fights, and words that predict behavior can all be learned and practiced over time with intention and patience. When the adrenaline of uncertainty drops away, the nervous system learns that safety is not the same thing as boredom but as reliability you can count on every day. Psychologists call this secure attachment. Practice reading one message today at face value and watch how much mental noise disappears when you stop translating and start trusting the words given. Who in your life speaks plain and shows up on Tuesday, not just on anniversaries, and never makes you guess or wait for proof of care? Subscribe for more tips like this.",
+   "words": 169,
+   "shash": "3e92fa430056d168",
+   "scene": {
+    "emotion_a": "happy",
+    "pose_a": "stand",
+    "emotion_b": "happy",
+    "pose_b": "stand"
+   }
+  },
+  {
+   "n": 5,
+   "concept": "repair_attempts",
+   "band": "psychology of green flags",
+   "hook": "Strong couples don't fight less \u2014 they repair faster. The exit matters more than the entrance.",
+   "term": "repair attempts",
+   "script": "This is your sign. Strong couples don't fight less \u2014 they repair faster. The exit matters more than the entrance. A joke at the right moment, a hand on the arm, a 'we're okay' \u2014 small moves that end wars early. The healthiest couples repair mid-fight, not after the verdict. A repair attempt is any move that lowers the temperature: a joke, a touch, 'this is hard for me too'. What kills relationships is not the spark but the fire's inability to hear an extinguisher. There is a term for this in psychology: repair attempts. Learn one repair phrase by heart and use it before you feel ready. 'We're on the same team' works even when it's the last thing you feel. Which one have you been \u2014 honestly? Tell me below. Subscribe for more tips like this.",
+   "words": 138,
+   "shash": "9f56c1f03c1f8a35",
+   "scene": {
+    "emotion_a": "annoyed",
+    "pose_a": "arms_crossed",
+    "emotion_b": "sad",
+    "pose_b": "stand"
+   }
+  },
+  {
+   "n": 6,
+   "concept": "bids_for_connection",
+   "band": "psychology of green flags",
+   "hook": "Love lives in the Tuesday yes to a pointless observation, not the anniversary dinner.",
+   "term": "bids for connection",
+   "script": "Dog ignored. Love lives in the Tuesday yes to a pointless observation, not the anniversary dinner. He points at the moon from the kitchen and she murmurs mm without looking up, and something quiet slips out of the room. Each tiny bid for attention is a request for emotional presence, and the ratio of turning toward versus away predicts the relationship's trajectory. Partners who consistently meet even the boring bids build a reserve of goodwill that buffers the inevitable hard days. Psychologists call this bids for connection. For one day, answer every bid with eye contact or laughter and watch the atmosphere shift. Which small bid did you miss this week that you wish you could take back? Subscribe for more tips like this.",
+   "words": 124,
+   "shash": "e13daf63140cffb5",
+   "scene": {
+    "emotion_a": "happy",
+    "pose_a": "stand",
+    "emotion_b": "tired",
+    "pose_b": "phone"
+   }
+  }
+ ],
+ "short_hashes": [
+  "f5da779964d68c14",
+  "6f701a0011d415f8",
+  "92e1bc4be58bacb5",
+  "3e92fa430056d168",
+  "9f56c1f03c1f8a35",
+  "e13daf63140cffb5"
+ ],
+ "muse": "llm",
+ "muse_model": "nvidia/nemotron-3-ultra-550b-a55b:free"
+}
