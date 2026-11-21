@@ -1,70 +1,9 @@
-[0;93m2026-11-20 20:40:34.217491225 [W:onnxruntime:Default, device_discovery.cc:95 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
-[stats] persisting detail for 230 of 269 videos (bounded memory: recent 200 + top 100)
-[stats] growth report 2026-11-20
-[stats]   total: 3159 views  (-2 since last report)
+[stats] persisting detail for 231 of 270 videos (bounded memory: recent 200 + top 100)
+[stats] growth report 2026-11-21
+[stats]   total: 3159 views  (+0 since last report)
 [stats]      189 views  ·  Subscribe for more tips like this #ep136 #psychology #relati
 [stats]      160 views  ·  Subscribe for more tips like this #ep278 #psychology #relati
 [stats]      120 views  ·  Subscribe for more tips like this #ep94 #psychology #relatio
-[verify] 47 video(s) confirmed public, 0 late past the 2-day grace window
-[grid] booking 1 short slot(s) in the next 24h (free: 2026-11-21T18:00:00+02:00)
-  [muse] long: 18/18 scenes rewritten (nvidia)
-  [muse] shorts: reply shape rejected - keeping drafts
-  [muse] shorts: retrying 6 reject(s)
-  [muse] shorts: 3/6 rewritten (nvidia)
-[63] script: Why You Can't Stop Thinking About Your Ex (1198 words, hash 3e034e6082)
-  [voice] human edge ON: variable pauses, breaths, room tone, pacing life
-  [voice] local neural narration: 140 chunks (Kokoro af_heart)
-  [voice] polished: presence EQ + gentle compression
-[63] narration: 454s, 140 caption chunks
-[63] long video: 466s, 42.7MB
-  [voice] human edge ON: variable pauses, breaths, room tone, pacing life
-  [voice] local neural narration: 21 chunks (Kokoro af_heart)
-  [voice] polished: presence EQ + gentle compression
-  [short 1] narration 42.3s < 45s floor — re-voicing slower (-11%), attempt 1
-  [voice] human edge ON: variable pauses, breaths, room tone, pacing life
-  [voice] local neural narration: 14 chunks (Kokoro af_heart)
-  [voice] polished: presence EQ + gentle compression
-  [short 1] 46s, 14 cards, 5.0MB
-  [voice] human edge ON: variable pauses, breaths, room tone, pacing life
-  [voice] local neural narration: 20 chunks (Kokoro af_heart)
-  [voice] polished: presence EQ + gentle compression
-  [short 2] 46s, 20 cards, 4.7MB
-  [voice] human edge ON: variable pauses, breaths, room tone, pacing life
-  [voice] local neural narration: 20 chunks (Kokoro af_heart)
-  [voice] polished: presence EQ + gentle compression
-  [short 3] narration 44.5s < 45s floor — re-voicing slower (-6%), attempt 1
-  [voice] human edge ON: variable pauses, breaths, room tone, pacing life
-  [voice] local neural narration: 14 chunks (Kokoro af_heart)
-  [voice] polished: presence EQ + gentle compression
-  [short 3] 47s, 14 cards, 5.2MB
-  [voice] human edge ON: variable pauses, breaths, room tone, pacing life
-  [voice] local neural narration: 22 chunks (Kokoro af_heart)
-  [voice] polished: presence EQ + gentle compression
-  [short 4] narration 43.6s < 45s floor — re-voicing slower (-8%), attempt 1
-  [voice] human edge ON: variable pauses, breaths, room tone, pacing life
-  [voice] local neural narration: 15 chunks (Kokoro af_heart)
-  [voice] polished: presence EQ + gentle compression
-  [short 4] 47s, 15 cards, 5.3MB
-  [voice] human edge ON: variable pauses, breaths, room tone, pacing life
-  [voice] local neural narration: 27 chunks (Kokoro af_heart)
-  [voice] polished: presence EQ + gentle compression
-  [short 5] 53s, 27 cards, 6.2MB
-  [voice] human edge ON: variable pauses, breaths, room tone, pacing life
-  [voice] local neural narration: 22 chunks (Kokoro af_heart)
-  [voice] polished: presence EQ + gentle compression
-  [short 6] 49s, 22 cards, 4.2MB
-[63] thumbnail audit: 3 words, 102px, 120px var 3890, 66KB — ok
-[63] thumbnail + 1 shorts ready
-[63] tells audit: reveal=3 vocab=0 filler=0 intensifier=0 (logged, not rewritten)
-[63] viral score: 59/100 (plain) too long; you-address; power word: stop
-  [youtube] uploaded long: q6BGtNsQcS4 (publishAt now)
-  [youtube] setting thumbnail thumbnail.png (66 KB) on q6BGtNsQcS4
-  [youtube] thumbnail set
-  [quota] 78 units left, need 1650 — deferring
-[63] text layer: {'captions_long': 'refused', 'comment': 'refused'}
-[playlist] 1 long video(s) not in the playlist yet
-[playlist] ep63 long added (q6BGtNsQcS4)
-[epnum] 1 video(s) still to rename — 21 units left, 50+100 per rename
-  [epnum] rename budget spent — resuming next cycle
-  ! episode 63: Why You Can't Stop Thinking About Your Ex — uploads deferred (quota); the next cycle resumes it
+[verify] 44 video(s) confirmed public, 0 late past the 2-day grace window
+[quota] only 20 units left — cannot even land the long (need 1650) — deferring today's uploads
 combination space: 273,308,412,123,694,080 stories — the factory never repeats
