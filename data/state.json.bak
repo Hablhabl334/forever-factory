@@ -2079,7 +2079,8 @@
    "verified": {
     "long": "2026-11-20T01:13:08+00:00",
     "shorts": {
-     "GTDYmbmtvtg": "2026-11-20T20:35:23+00:00"
+     "GTDYmbmtvtg": "2026-11-20T20:35:23+00:00",
+     "jWKEBXwcGwI": "2026-11-21T00:46:13+00:00"
     }
    }
   },
@@ -2118,6 +2119,9 @@
      "power word: stop",
      "emotion word: love"
     ]
+   },
+   "verified": {
+    "long": "2026-11-21T00:46:13+00:00"
    }
   }
  ],
