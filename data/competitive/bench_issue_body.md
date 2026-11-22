@@ -17,15 +17,15 @@ roster: 6 channels | their fresh uploads analyzed: 10 | quota spent: ~9 units
 
 | Title | Channel | Age | Views | V/day | Formula |
 |---|---|---|---|---|---|
-| Trisha Paytas' Redemption Arc: Healing from  | Psychology with  | 4.0d | 122,153 | 30,538 | PLAIN |
-| Unspoken Rules of Dating Someone Who’s Been  | Psych2Go | 2.5d | 74,012 | 29,604 | PLAIN |
-| Why Some People Love Anime or Fictional Char | Psych2Go | 0.5d | 13,320 | 26,640 | PLAIN |
-| The Unspoken Rules of Dating Someone with Th | Psych2Go | 1.6d | 37,550 | 23,468 | PLAIN |
-| You're NOT As BAD as You THINK You Are (Watc | Psych2Go | 7.1d | 159,817 | 22,509 | PLAIN |
-| Being Betrayed In Love   YT | The School of Li | 4.2d | 65,342 | 15,557 | PLAIN |
-| Billy Corgan demonstrates how to intellectua | Psychology with  | 6.0d | 92,370 | 15,395 | HOW_TO |
-| Why Heartbreake Can Be the Making of You | The School of Li | 0.5d | 4,357 | 8,714 | PLAIN |
-| The Importance of a Breakdown | The School of Li | 7.2d | 41,135 | 5,713 | PLAIN |
+| Trisha Paytas' Redemption Arc: Healing from  | Psychology with  | 4.0d | 122,389 | 30,597 | PLAIN |
+| Unspoken Rules of Dating Someone Who’s Been  | Psych2Go | 2.5d | 74,336 | 29,734 | PLAIN |
+| Why Some People Love Anime or Fictional Char | Psych2Go | 0.5d | 14,418 | 28,836 | PLAIN |
+| The Unspoken Rules of Dating Someone with Th | Psych2Go | 1.6d | 37,796 | 23,622 | PLAIN |
+| You're NOT As BAD as You THINK You Are (Watc | Psych2Go | 7.2d | 159,976 | 22,218 | PLAIN |
+| Being Betrayed In Love   YT | The School of Li | 4.2d | 65,450 | 15,583 | PLAIN |
+| Billy Corgan demonstrates how to intellectua | Psychology with  | 6.0d | 92,480 | 15,413 | HOW_TO |
+| Why Heartbreake Can Be the Making of You | The School of Li | 0.5d | 4,821 | 9,642 | PLAIN |
+| The Importance of a Breakdown | The School of Li | 7.2d | 41,095 | 5,707 | PLAIN |
 | You Are Living in the Greatest Museum in the | The School of Li | 4.2d | 12,572 | 2,993 | PLAIN |
 
 ## 3. What the niche shipped this week
@@ -37,7 +37,7 @@ roster: 6 channels | their fresh uploads analyzed: 10 | quota spent: ~9 units
 
 ## 4. Us vs the field
 
-- our fresh uploads average **1.1 views/day**; the niche fresh average is 18113.4 -> we run at **<1% of niche pace**
+- our fresh uploads average **1.1 views/day**; the niche fresh average is 18434.8 -> we run at **<1% of niche pace**
 - channel views gained this week: +281 (total 3,208 as of 2026-11-22)
 
 ## 5. Recommended angles for next week
