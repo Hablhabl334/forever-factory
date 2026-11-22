@@ -1,62 +1,57 @@
-[0;93m2026-11-22 13:28:29.618907434 [W:onnxruntime:Default, device_discovery.cc:95 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
-[stats] persisting detail for 236 of 275 videos (bounded memory: recent 200 + top 100)
+[0;93m2026-11-22 20:54:16.561840464 [W:onnxruntime:Default, device_discovery.cc:95 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
+[stats] persisting detail for 238 of 279 videos (bounded memory: recent 200 + top 100)
 [stats] growth report 2026-11-22
-[stats]   total: 3208 views  (+17 since last report)
+[stats]   total: 3204 views  (-4 since last report)
 [stats]      189 views  ·  Subscribe for more tips like this #ep136 #psychology #relati
 [stats]      160 views  ·  Subscribe for more tips like this #ep278 #psychology #relati
 [stats]      120 views  ·  Subscribe for more tips like this #ep94 #psychology #relatio
-[verify] 46 video(s) confirmed public, 0 late past the 2-day grace window
-  [muse] cache hit seed 248056782053852 - replay
-[64] script: Green Flags Everyone Misses (1076 words, hash d3bbf52ffb)
+[verify] 47 video(s) confirmed public, 0 late past the 2-day grace window
+[grid] booking 1 short slot(s) in the next 24h (free: 2026-11-23T18:00:00+02:00)
+  [muse] long: 18/18 scenes rewritten (nvidia)
+  [muse] shorts: retrying 5 reject(s)
+  [muse] shorts: 1/6 rewritten (nvidia)
+[65] script: The Love Bombing Trap (1082 words, hash d812cf1238)
   [voice] human edge ON: variable pauses, breaths, room tone, pacing life
-  [voice] local neural narration: 148 chunks (Kokoro af_heart)
+  [voice] local neural narration: 124 chunks (Kokoro af_heart)
   [voice] polished: presence EQ + gentle compression
-[64] narration: 425s, 148 caption chunks
-[64] long video: 437s, 40.9MB
+[65] narration: 417s, 124 caption chunks
+[65] long video: 429s, 38.8MB
   [voice] human edge ON: variable pauses, breaths, room tone, pacing life
-  [voice] local neural narration: 23 chunks (Kokoro af_heart)
+  [voice] local neural narration: 22 chunks (Kokoro af_heart)
   [voice] polished: presence EQ + gentle compression
-  [short 1] 47s, 23 cards, 4.6MB
+  [short 1] 48s, 22 cards, 4.0MB
   [voice] human edge ON: variable pauses, breaths, room tone, pacing life
-  [voice] local neural narration: 21 chunks (Kokoro af_heart)
+  [voice] local neural narration: 24 chunks (Kokoro af_heart)
   [voice] polished: presence EQ + gentle compression
-  [short 2] 46s, 21 cards, 4.5MB
-  [voice] human edge ON: variable pauses, breaths, room tone, pacing life
-  [voice] local neural narration: 20 chunks (Kokoro af_heart)
-  [voice] polished: presence EQ + gentle compression
-  [short 3] narration 44.1s < 45s floor — re-voicing slower (-7%), attempt 1
-  [voice] human edge ON: variable pauses, breaths, room tone, pacing life
-  [voice] local neural narration: 17 chunks (Kokoro af_heart)
-  [voice] polished: presence EQ + gentle compression
-  [short 3] 48s, 17 cards, 5.7MB
-  [voice] human edge ON: variable pauses, breaths, room tone, pacing life
-  [voice] local neural narration: 30 chunks (Kokoro af_heart)
-  [voice] polished: presence EQ + gentle compression
-  [short 4] 61s, 30 cards, 7.1MB
+  [short 2] 46s, 24 cards, 5.1MB
   [voice] human edge ON: variable pauses, breaths, room tone, pacing life
   [voice] local neural narration: 26 chunks (Kokoro af_heart)
   [voice] polished: presence EQ + gentle compression
-  [short 5] 47s, 26 cards, 5.6MB
+  [short 3] 50s, 26 cards, 5.2MB
   [voice] human edge ON: variable pauses, breaths, room tone, pacing life
-  [voice] local neural narration: 21 chunks (Kokoro af_heart)
+  [voice] local neural narration: 25 chunks (Kokoro af_heart)
   [voice] polished: presence EQ + gentle compression
-  [short 6] narration 44.3s < 45s floor — re-voicing slower (-7%), attempt 1
+  [short 4] 48s, 25 cards, 5.4MB
   [voice] human edge ON: variable pauses, breaths, room tone, pacing life
-  [voice] local neural narration: 14 chunks (Kokoro af_heart)
+  [voice] local neural narration: 23 chunks (Kokoro af_heart)
   [voice] polished: presence EQ + gentle compression
-  [short 6] 48s, 14 cards, 5.3MB
-[64] thumbnail audit: 4 words, 102px, 120px var 5453, 62KB — ok
-[64] thumbnail + 4 shorts ready
-[64] tells audit: reveal=4 vocab=0 filler=0 intensifier=0 (logged, not rewritten)
-[64] viral score: 51/100 (plain) too long; power word: everyone; emotion word: love
-  [youtube] uploaded long: 1it4nLTlDdw (publishAt 2026-11-24T20:00:00+02:00)
-  [youtube] setting thumbnail thumbnail.png (61 KB) on 1it4nLTlDdw
+  [short 5] 46s, 23 cards, 5.1MB
+  [voice] human edge ON: variable pauses, breaths, room tone, pacing life
+  [voice] local neural narration: 24 chunks (Kokoro af_heart)
+  [voice] polished: presence EQ + gentle compression
+  [short 6] 50s, 24 cards, 5.7MB
+[65] thumbnail audit: 4 words, 102px, 120px var 4260, 58KB — ok
+[65] thumbnail + 1 shorts ready
+[65] tells audit: reveal=2 vocab=0 filler=0 intensifier=3 (logged, not rewritten)
+[65] viral score: 61/100 (plain) power word: trap; emotion word: love
+  [youtube] uploaded long: raP7vAxvgUg (publishAt now)
+  [youtube] setting thumbnail thumbnail.png (57 KB) on raP7vAxvgUg
   [youtube] thumbnail set
-  [youtube] uploaded short: jRCsuquH2EU (publishAt 2026-11-22T18:00:00+02:00)
-  [youtube] uploaded short: 8gudOuKmVqg (publishAt 2026-11-23T00:00:00+02:00)
-  [youtube] uploaded short: a21KP-3i83Y (publishAt 2026-11-23T06:00:00+02:00)
-  [youtube] uploaded short: z397fRiy0AQ (publishAt 2026-11-23T12:00:00+02:00)
-[64] text layer: {'captions_long': 'refused', 'comment': 'refused'}
-[epnum] 4 video(s) still to rename — 1732 units left, 50+100 per rename
-  ✓ episode 64: Green Flags Everyone Misses
+  [quota] 78 units left, need 1650 — deferring
+[65] text layer: {'captions_long': 'refused', 'comment': 'refused'}
+[playlist] 1 long video(s) not in the playlist yet
+[playlist] ep65 long added (raP7vAxvgUg)
+[epnum] 1 video(s) still to rename — 21 units left, 50+100 per rename
+  [epnum] rename budget spent — resuming next cycle
+  ! episode 65: The Love Bombing Trap — uploads deferred (quota); the next cycle resumes it
 combination space: 273,308,412,123,694,080 stories — the factory never repeats
