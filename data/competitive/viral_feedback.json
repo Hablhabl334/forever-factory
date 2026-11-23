@@ -1,13 +1,13 @@
 {
- "week": "2026-11-22",
- "episodes": 19,
+ "week": "2026-11-23",
+ "episodes": 20,
  "generated": "src/viral.py",
- "median_first_week_views": 0,
+ "median_first_week_views": 0.0,
  "by_formula": [
   {
    "name": "PLAIN",
-   "n": 17,
-   "mean_views": 0.8,
+   "n": 18,
+   "mean_views": 0.4,
    "ratio": null
   }
  ],
@@ -15,23 +15,17 @@
   {
    "name": "mid(60-74)",
    "n": 10,
-   "mean_views": 0.6,
+   "mean_views": 0.2,
    "ratio": null
   },
   {
    "name": "low(<60)",
-   "n": 9,
-   "mean_views": 1,
+   "n": 10,
+   "mean_views": 0.7,
    "ratio": null
   }
  ],
  "best": [
-  {
-   "title": "The Love Bombing Trap",
-   "views": 5,
-   "score": 61,
-   "formula": "PLAIN"
-  },
   {
    "title": "Boundaries in Love",
    "views": 4,
@@ -39,23 +33,29 @@
    "formula": "PLAIN"
   },
   {
-   "title": "Green Flags Everyone Misses",
-   "views": 3,
-   "score": 56,
+   "title": "Chemistry vs Compatibility",
+   "views": 1,
+   "score": 59,
+   "formula": "VS_COMPARISON"
+  },
+  {
+   "title": "The Love Bombing Trap",
+   "views": 1,
+   "score": 61,
    "formula": "PLAIN"
   }
  ],
  "worst": [
   {
-   "title": "What Keeps Love Alive",
-   "views": 0,
-   "score": 61,
-   "formula": "PLAIN"
-  },
-  {
    "title": "Love Languages, Without the Hype",
    "views": 0,
    "score": 63,
+   "formula": "PLAIN"
+  },
+  {
+   "title": "Self-Love Before Love",
+   "views": 0,
+   "score": 55,
    "formula": "PLAIN"
   }
  ]
