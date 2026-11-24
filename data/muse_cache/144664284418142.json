@@ -1,0 +1,387 @@
+{
+ "title": "Self-Love Before Love",
+ "topic": "self_love",
+ "topic_label": "psychology of self love",
+ "mood": "warm",
+ "series": "Psychology of Love",
+ "hook": "You will accept the love you think you deserve \u2014 so the bar you set for yourself becomes the bar for everyone else.",
+ "words": 1105,
+ "hash": "a88645d705b836d9",
+ "seed": 144664284418142,
+ "atoms": {
+  "topic": "Self-Love Before Love",
+  "concepts": [
+   "green flags",
+   "secure attachment",
+   "rejection sensitivity",
+   "the worth baseline",
+   "anxious attachment",
+   "attachment styles",
+   "the boundary filter",
+   "slow love"
+  ]
+ },
+ "question": "Which one are you in this \u2014 be honest in the comments.",
+ "scenes": [
+  {
+   "n": 1,
+   "id": "open_card",
+   "narration": "You accept the love you think you deserve. The bar you set for yourself becomes the bar for everyone else. Today you get eight quiet pieces on self-love before love. Stay till the end - the one that hits you won't be the one you expect.",
+   "image": {
+    "kind": "topic_card",
+    "topic": "Self-Love Before Love",
+    "band": "psychology of self love",
+    "count": 8
+   }
+  },
+  {
+   "n": 2,
+   "id": "tip1_card",
+   "narration": "You've gotten so good at spotting red flags the good ones now look suspicious. Let's fix that. Green flags are boring on purpose - they remember the small things, show up on time, apologize like they mean it, treat waiters and exes with the same kindness. Drama trains your attention so steadiness feels flat, like a quiet engine you stop noticing. The trick is hunting for those boring signals. They carry the real weight. Someone whose presence calms you is doing something rare.",
+   "image": {
+    "kind": "concept_card",
+    "tip": 1,
+    "total": 8,
+    "term": "green flags",
+    "headline": "You've been trained to spot red flags so well that the good ones now look suspicious. Let's fix that.",
+    "accent_word": null
+   }
+  },
+  {
+   "n": 3,
+   "id": "tip1_scene",
+   "narration": "No fireworks. They text when they say they will. They ask how your mom's test went. You sleep better when they're around. Your nervous system noticed before your heart did. Rate people by how you feel two hours later, not two minutes. Calm is a green flag in disguise.",
+   "image": {
+    "kind": "couple_scene",
+    "emotion_a": "happy",
+    "pose_a": "stand",
+    "emotion_b": "happy",
+    "pose_b": "stand",
+    "overlay": [
+     "psychologists call this",
+     "green flags"
+    ]
+   }
+  },
+  {
+   "n": 4,
+   "id": "tip2_card",
+   "narration": "The most attractive sentence in a relationship is a calm okay, tell me more. It takes years of safety to say it naturally. People who feel secure do something quiet and radical - they take words at face value. Busy means busy. I love you means they act like it on a Tuesday. Their calm isn't empty. It's the absence of a constant alarm. The research keeps landing in the same place: security is the style that makes every other skill work.",
+   "image": {
+    "kind": "concept_card",
+    "tip": 2,
+    "total": 8,
+    "term": "secure attachment",
+    "headline": "The most attractive sentence in a relationship is a calm 'okay, tell me more' \u2014 and it takes years of safety to say it naturally.",
+    "accent_word": null
+   }
+  },
+  {
+   "n": 5,
+   "id": "tip2_scene",
+   "narration": "Iris says you hurt my feelings at the park. Ben doesn't defend, counterattack, or freeze. Ben says you're right, that was careless. Ninety seconds later it's over. Nothing escalates. If calm reads as chemistry-free to you, check your training. The adrenaline you miss might be an alarm, not a spark.",
+   "image": {
+    "kind": "couple_scene",
+    "emotion_a": "happy",
+    "pose_a": "stand",
+    "emotion_b": "happy",
+    "pose_b": "stand",
+    "overlay": [
+     "psychologists call this",
+     "secure attachment"
+    ]
+   }
+  },
+  {
+   "n": 6,
+   "id": "tip3_card",
+   "narration": "If K feels like a door slamming, your threat detector is calibrated to a war that's over. Rejection sensitivity means your system flags possible exclusion faster and harder. It usually comes from early moments where approval vanished without warning. The cost is heavy - you detect rejection that isn't there, react to protect yourself, and sometimes create the exact distance you feared. A self-fulfilling alarm.",
+   "image": {
+    "kind": "concept_card",
+    "tip": 3,
+    "total": 8,
+    "term": "rejection sensitivity",
+    "headline": "If 'K' feels like a door slamming, your threat detector is calibrated to a war that's over.",
+    "accent_word": null
+   }
+  },
+  {
+   "n": 7,
+   "id": "tip3_scene",
+   "narration": "Theo texts a paragraph. Nina answers with a thumbs-up at three a.m. Theo spends the office party quietly certain it's ending. Nothing happened. Theo's system answered a question nobody asked. Separate the trigger from the evidence. Two deep breaths and one honest question beat a three-hour silent investigation.",
+   "image": {
+    "kind": "couple_scene",
+    "emotion_a": "anxious",
+    "pose_a": "phone",
+    "emotion_b": "tired",
+    "pose_b": "phone",
+    "overlay": [
+     "psychologists call this",
+     "rejection sensitivity"
+    ]
+   }
+  },
+  {
+   "n": 8,
+   "id": "tip4_card",
+   "narration": "You don't attract what you deserve. You attract what you believe you can keep. Self-esteem acts like a price floor - it sets the minimum treatment you'll quietly tolerate. Raise the floor and bad offers stop being affordable. Lower it and mistreatment starts looking like luck. That's why the same person leaves a terrible relationship and walks straight into a similar one. The filter carried over. The market didn't change. Working on worth isn't vanity. It's the economics of who you let stay.",
+   "image": {
+    "kind": "concept_card",
+    "tip": 4,
+    "total": 8,
+    "term": "the worth baseline",
+    "headline": "You don't attract what you deserve. You attract what you believe you can keep.",
+    "accent_word": null
+   }
+  },
+  {
+   "n": 9,
+   "id": "tip4_scene",
+   "narration": "After the breakup Nina swore never again, with feeling. Six months later she's explaining the same patterns to a new best friend at a dinner party. The filter carried over. The market didn't change. Do the boring work - sleep, build, keep promises to yourself. Worth rises with kept commitments. Standards follow it.",
+   "image": {
+    "kind": "couple_scene",
+    "emotion_a": "neutral",
+    "pose_a": "stand",
+    "emotion_b": "neutral",
+    "pose_b": "stand",
+    "overlay": [
+     "psychologists call this",
+     "the worth baseline"
+    ]
+   }
+  },
+  {
+   "n": 10,
+   "id": "tip5_card",
+   "narration": "If you've ever counted minutes between texts, this one will feel uncomfortably familiar. Anxious attachment works like an overly sensitive smoke detector. It catches distance early and often correctly, but it can't measure how serious the fire is. A delayed reply becomes a possible breakup. A short answer becomes a possible ending. The exhaustion isn't from caring too much. It's from monitoring without rest. Reassurance helps for a moment. Predictability is what actually heals.",
+   "image": {
+    "kind": "concept_card",
+    "tip": 5,
+    "total": 8,
+    "term": "anxious attachment",
+    "headline": "If you've ever counted the minutes between texts, this one will feel uncomfortably familiar.",
+    "accent_word": null
+   }
+  },
+  {
+   "n": 11,
+   "id": "tip5_scene",
+   "narration": "Theo sends a message at noon. By eleven p.m. no reply, and Theo has already drafted the goodbye speech. The reply arrives hours later - sorry, crazy day. Nothing was ending except Theo's afternoon. Predictability heals what reassurance only sedates. Ask for patterns, not promises.",
+   "image": {
+    "kind": "couple_scene",
+    "emotion_a": "anxious",
+    "pose_a": "phone",
+    "emotion_b": "tired",
+    "pose_b": "stand",
+    "overlay": [
+     "psychologists call this",
+     "anxious attachment"
+    ]
+   }
+  },
+  {
+   "n": 12,
+   "id": "tip6_card",
+   "narration": "The way you love was decided before you could talk. It runs quietly in the background of every relationship. Research splits love habits into four broad styles - secure, anxious, avoidant, fearful. They're not personalities. They're strategies your younger self built to stay close to the people you depended on. Your style decides what feels normal - closeness, distance, or a nervous mix of both. The hopeful part: styles can change with safe people and honest practice.",
+   "image": {
+    "kind": "concept_card",
+    "tip": 6,
+    "total": 8,
+    "term": "attachment styles",
+    "headline": "The way you love was decided before you could talk \u2014 and it's running quietly in the background of every relationship.",
+    "accent_word": null
+   }
+  },
+  {
+   "n": 13,
+   "id": "tip6_scene",
+   "narration": "Zoe hears let's talk tonight and feels safe. Noah hears the same words and spends the afternoon rehearsing a defense. The sentence was identical. The systems reading it weren't. Learn your pattern first - it explains half the fights you keep mislabeling as character flaws.",
+   "image": {
+    "kind": "couple_scene",
+    "emotion_a": "neutral",
+    "pose_a": "stand",
+    "emotion_b": "surprised",
+    "pose_b": "stand",
+    "overlay": [
+     "psychologists call this",
+     "attachment styles"
+    ]
+   }
+  },
+  {
+   "n": 14,
+   "id": "tip7_card",
+   "narration": "A boundary isn't a wall to keep love out. It's a filter that makes love possible. Boundaries mark where you end and someone else begins - your time, your body, your money, your yes and no. Clear boundaries do something counterintuitive - they make people feel safer because rules you can see are rules you can trust. People who resent your boundaries were only ever compatible with your absence of them. The filter isn't losing you people. It's pricing them accurately.",
+   "image": {
+    "kind": "concept_card",
+    "tip": 7,
+    "total": 8,
+    "term": "the boundary filter",
+    "headline": "A boundary isn't a wall to keep love out \u2014 it's a filter that makes love possible.",
+    "accent_word": null
+   }
+  },
+  {
+   "n": 15,
+   "id": "tip7_scene",
+   "narration": "You said I can't do late-night calls on workdays - simple, kind, final. The person who respected it stayed. The person who called at two a.m. anyway self-selected out. State boundaries early, kindly, without apology. You're not asking permission. You're publishing the map.",
+   "image": {
+    "kind": "couple_scene",
+    "emotion_a": "neutral",
+    "pose_a": "stand",
+    "emotion_b": "neutral",
+    "pose_b": "phone",
+    "overlay": [
+     "psychologists call this",
+     "the boundary filter"
+    ]
+   }
+  },
+  {
+   "n": 16,
+   "id": "tip8_card",
+   "narration": "Fast love shows you the highlight reel. Going slow introduces you to the actual human. Sociologists call it slow love - building the relationship before the fantasy, letting intimacy develop over months of real information instead of weeks of projection. Fast love happens in the dark. You fall for the montage and meet the person later. Slow love keeps the pace of actual knowledge so affection grows on facts instead of imagination. Less cinematic. Dramatically more durable.",
+   "image": {
+    "kind": "concept_card",
+    "tip": 8,
+    "total": 8,
+    "term": "slow love",
+    "headline": "Fast love shows you the highlight reel. Going slow introduces you to the actual human.",
+    "accent_word": null
+   }
+  },
+  {
+   "n": 17,
+   "id": "tip8_scene",
+   "narration": "No labels by date three. No weekend trip by week two for Kai and Maya. Six months in Kai knows Maya's money habits, temper, and mother. Kai isn't less in love. Kai is in love with a verified account. Trade the butterflies of month one for the knowledge of month six. That trade is the whole strategy.",
+   "image": {
+    "kind": "couple_scene",
+    "emotion_a": "happy",
+    "pose_a": "stand",
+    "emotion_b": "neutral",
+    "pose_b": "stand",
+    "overlay": [
+     "psychologists call this",
+     "slow love"
+    ]
+   }
+  },
+  {
+   "n": 18,
+   "id": "outro_card",
+   "narration": "That was eight pieces on self-love before love. If even one made your own love life suddenly make sense, you already got your money's worth - this one was free. Which one are you in this - be honest in the comments. Subscribe for more like this.",
+   "image": {
+    "kind": "outro_card",
+    "topic": "Self-Love Before Love"
+   }
+  }
+ ],
+ "shorts": [
+  {
+   "n": 1,
+   "concept": "self_worth_reset",
+   "band": "psychology of self love",
+   "hook": "Self-esteem is a price floor \u2014 mistreatment below it stops being affordable.",
+   "term": "the worth baseline",
+   "script": "This one will sting. Self-esteem is a price floor \u2014 mistreatment below it stops being affordable. You tolerate exactly what you believe you deserve, and the belief was set long before this person. Psychologists find that self-esteem acts like a price floor: it sets the minimum treatment you'll quietly tolerate. That's why the same person can leave a terrible relationship and walk straight into a similar one \u2014 the filter, not the market, carried over. Working on worth isn't vanity; it's relationship economics. There is a term for this in psychology: the worth baseline. Watch your non-negotiables for one week. Not what you say they are \u2014 what you actually tolerate when it's inconvenient. Which side of this are you on? Say it below. Subscribe for more tips like this.",
+   "words": 130,
+   "shash": "0b127201314fcac4",
+   "scene": {
+    "emotion_a": "neutral",
+    "pose_a": "stand",
+    "emotion_b": "neutral",
+    "pose_b": "stand"
+   }
+  },
+  {
+   "n": 2,
+   "concept": "slow_love",
+   "band": "psychology of self love",
+   "hook": "Fast love happens in the dark: you fall for the montage and meet the person later.",
+   "term": "slow love",
+   "script": "Proof that love has logic. Fast love happens in the dark: you fall for the montage and meet the person later. Weeks of projection are cheaper than months of information \u2014 but only one of them survives winter. It's less cinematic and dramatically more durable. Six months in, you know their money habits, their temper, their mother \u2014 because nobody rushed you past the inspections. There is a term for this in psychology: slow love. Let the timeline be a feature, not a bug. Depth is slow by design \u2014 anything too fast is skipping the inspections. Trade the butterflies of month one for the knowledge of month six. That trade is the whole strategy. What's your version of this story? Tell me below. Subscribe for more tips like this.",
+   "words": 130,
+   "shash": "4d2f269fd7876be0",
+   "scene": {
+    "emotion_a": "happy",
+    "pose_a": "stand",
+    "emotion_b": "neutral",
+    "pose_b": "stand"
+   }
+  },
+  {
+   "n": 3,
+   "concept": "green_flags",
+   "band": "psychology of self love",
+   "hook": "Green flags are quiet \u2014 consistency never makes noise, and noise is all we're trained to notice.",
+   "term": "green flags",
+   "script": "You needed this today. Green flags are quiet \u2014 consistency never makes noise, and noise is all we're trained to notice. They remembered how your mom's test went. Steadiness has no theme music, so we miss it. Our attention systems are trained by drama, so steadiness registers as flat \u2014 the psychological version of a quiet engine. A person whose presence calms you is doing something biochemically rare. The trick is to actively look for the boring signals, because they're the ones carrying the relationship's actual weight. Psychologists call this green flags. Score people on how you feel two hours after seeing them, not two minutes. Calm is a green flag wearing a disguise. One word in the comments: chaser or retreater? Subscribe for more tips like this.",
+   "words": 128,
+   "shash": "e26ec339c5418c07",
+   "scene": {
+    "emotion_a": "happy",
+    "pose_a": "stand",
+    "emotion_b": "happy",
+    "pose_b": "stand"
+   }
+  },
+  {
+   "n": 4,
+   "concept": "attachment_styles",
+   "band": "psychology of self love",
+   "hook": "Six months of the right person can quietly rewrite what love felt like your whole life.",
+   "term": "attachment styles",
+   "script": "Nobody warns you about this. Six months of the right person can quietly rewrite what love felt like your whole life. 'I need space' sounds like freedom to you and abandonment to them. Your style decides what feels normal: closeness, or distance, or a nervous mix of both. They're not personalities, they're strategies your younger self built to stay close to the people it depended on. Attachment research splits love habits into four broad styles: secure, anxious, avoidant, and fearful. And here's the hopeful part \u2014 styles can change with safe people and honest practice. There is a term for this in psychology: attachment styles. Learn your style first \u2014 it explains half the fights you keep mislabeling as character flaws. Does this hit home? Tell me I'm not the only one. Subscribe for more tips like this.",
+   "words": 138,
+   "shash": "68d610be22c3b62f",
+   "scene": {
+    "emotion_a": "neutral",
+    "pose_a": "stand",
+    "emotion_b": "surprised",
+    "pose_b": "stand"
+   }
+  },
+  {
+   "n": 5,
+   "concept": "rejection_sensitivity",
+   "band": "psychology of self love",
+   "hook": "Your brain has a smoke detector for rejection \u2014 and somewhere along the way it got set to maximum.",
+   "term": "rejection sensitivity",
+   "script": "This is your brain on love. Your brain has a smoke detector for rejection \u2014 and somewhere along the way it got set to maximum. A one-word answer isn't a verdict. Your nervous system grew up where approval vanished without explanation. It's a self-fulfilling alarm. It often comes from early experiences where approval vanished without explanation. The cost is heavy: you detect rejection that isn't there, react to protect yourself, and sometimes create the distance you feared. They replied 'K' and you felt fired from the relationship. Nothing happened \u2014 your detector answered a question nobody asked. In psychology, this is called rejection sensitivity. Separate trigger from evidence: two slow breaths, then one honest question instead of a three-hour silent investigation. If this named your pattern, say 'same' below. Subscribe for more tips like this.",
+   "words": 135,
+   "shash": "8058a34314134050",
+   "scene": {
+    "emotion_a": "anxious",
+    "pose_a": "phone",
+    "emotion_b": "tired",
+    "pose_b": "phone"
+   }
+  },
+  {
+   "n": 6,
+   "concept": "boundaries_attract",
+   "band": "psychology of self love",
+   "hook": "A boundary isn't a wall to keep love out \u2014 it's a filter that makes love possible.",
+   "term": "the boundary filter",
+   "script": "Careful \u2014 this is accurate. A boundary isn't a wall to keep love out \u2014 it's a filter that makes love possible. You stopped explaining your no three times a week, and the right people didn't even flinch. Psychologically, clear boundaries do something counterintuitive \u2014 they make people feel safer, because rules you can see are rules you can trust. The filter isn't losing you people; it's pricing them accurately. People who resent your boundaries were only ever compatible with your absence of them. Psychologists have a name for this: the boundary filter. The filter isn't losing you people. It's pricing them accurately \u2014 and that's a service to everyone involved. What's your version of this story? Tell me below. Subscribe for more tips like this.",
+   "words": 126,
+   "shash": "4a35dfdb9c53c759",
+   "scene": {
+    "emotion_a": "neutral",
+    "pose_a": "stand",
+    "emotion_b": "neutral",
+    "pose_b": "phone"
+   }
+  }
+ ],
+ "short_hashes": [
+  "0b127201314fcac4",
+  "4d2f269fd7876be0",
+  "e26ec339c5418c07",
+  "68d610be22c3b62f",
+  "8058a34314134050",
+  "4a35dfdb9c53c759"
+ ],
+ "muse": "llm",
+ "muse_model": "nvidia/nemotron-3-ultra-550b-a55b:free"
+}
