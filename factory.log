@@ -1,68 +1,88 @@
-[0;93m2026-11-24 16:15:34.024470975 [W:onnxruntime:Default, device_discovery.cc:95 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
-[stats] persisting detail for 241 of 284 videos (bounded memory: recent 200 + top 100)
-[stats] growth report 2026-11-24
-[stats]   total: 3316 views  (+99 since last report)
+[0;93m2026-11-25 16:14:21.589383472 [W:onnxruntime:Default, device_discovery.cc:95 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
+[stats] persisting detail for 240 of 289 videos (bounded memory: recent 200 + top 100)
+[stats] growth report 2026-11-25
+[stats]   total: 3370 views  (+54 since last report)
 [stats]      189 views  ·  Subscribe for more tips like this #ep136 #psychology #relati
 [stats]      160 views  ·  Subscribe for more tips like this #ep278 #psychology #relati
 [stats]      120 views  ·  Subscribe for more tips like this #ep94 #psychology #relatio
-[verify] 45 video(s) confirmed public, 0 late past the 2-day grace window
-  [muse] long: 18/18 scenes rewritten (nvidia)
+[verify] 43 video(s) confirmed public, 0 late past the 2-day grace window
+[grid] booking 3 short slot(s) in the next 24h (free: 2026-11-26T00:00:00+02:00, 2026-11-26T06:00:00+02:00, 2026-11-26T12:00:00+02:00)
+  [muse] long: no reply - keeping drafts
   [muse] shorts: reply shape rejected - keeping drafts
   [muse] shorts: retrying 6 reject(s)
-  [muse] shorts: reply shape rejected - keeping drafts
-  [muse] shorts: 0/6 rewritten (nvidia)
-[66] script: Self-Love Before Love (1105 words, hash a88645d705)
+  [muse] shorts: 3/6 rewritten (nvidia)
+[67] script: The Love Bombing Trap (1226 words, hash 39026fbca4)
   [voice] human edge ON: variable pauses, breaths, room tone, pacing life
-  [voice] local neural narration: 141 chunks (Kokoro af_heart)
+  [voice] local neural narration: 137 chunks (Kokoro af_heart)
   [voice] polished: presence EQ + gentle compression
-[66] narration: 436s, 141 caption chunks
-[66] long video: 448s, 42.8MB
-  [voice] human edge ON: variable pauses, breaths, room tone, pacing life
-  [voice] local neural narration: 21 chunks (Kokoro af_heart)
-  [voice] polished: presence EQ + gentle compression
-  [short 1] 48s, 21 cards, 5.8MB
+[67] narration: 471s, 137 caption chunks
+[67] long video: 483s, 43.7MB
   [voice] human edge ON: variable pauses, breaths, room tone, pacing life
   [voice] local neural narration: 22 chunks (Kokoro af_heart)
   [voice] polished: presence EQ + gentle compression
-  [short 2] narration 44.6s < 45s floor — re-voicing slower (-6%), attempt 1
+  [short 1] narration 44.7s < 45s floor — re-voicing slower (-6%), attempt 1
   [voice] human edge ON: variable pauses, breaths, room tone, pacing life
-  [voice] local neural narration: 17 chunks (Kokoro af_heart)
+  [voice] local neural narration: 14 chunks (Kokoro af_heart)
   [voice] polished: presence EQ + gentle compression
-  [short 2] 47s, 17 cards, 5.5MB
+  [short 1] 48s, 14 cards, 5.1MB
   [voice] human edge ON: variable pauses, breaths, room tone, pacing life
-  [voice] local neural narration: 21 chunks (Kokoro af_heart)
+  [voice] local neural narration: 20 chunks (Kokoro af_heart)
   [voice] polished: presence EQ + gentle compression
-  [short 3] 46s, 21 cards, 5.4MB
+  [short 2] narration 43.6s < 45s floor — re-voicing slower (-8%), attempt 1
   [voice] human edge ON: variable pauses, breaths, room tone, pacing life
-  [voice] local neural narration: 25 chunks (Kokoro af_heart)
+  [voice] local neural narration: 14 chunks (Kokoro af_heart)
   [voice] polished: presence EQ + gentle compression
-  [short 4] 51s, 25 cards, 6.2MB
-  [voice] human edge ON: variable pauses, breaths, room tone, pacing life
-  [voice] local neural narration: 25 chunks (Kokoro af_heart)
-  [voice] polished: presence EQ + gentle compression
-  [short 5] 53s, 25 cards, 6.2MB
+  [short 2] 47s, 14 cards, 4.9MB
   [voice] human edge ON: variable pauses, breaths, room tone, pacing life
   [voice] local neural narration: 22 chunks (Kokoro af_heart)
   [voice] polished: presence EQ + gentle compression
-  [short 6] narration 44.9s < 45s floor — re-voicing slower (-6%), attempt 1
+  [short 3] narration 44.9s < 45s floor — re-voicing slower (-6%), attempt 1
   [voice] human edge ON: variable pauses, breaths, room tone, pacing life
-  [voice] local neural narration: 15 chunks (Kokoro af_heart)
+  [voice] local neural narration: 16 chunks (Kokoro af_heart)
   [voice] polished: presence EQ + gentle compression
-  [short 6] 47s, 15 cards, 4.3MB
-[66] thumbnail audit: 3 words, 102px, 120px var 4030, 57KB — ok
-[66] thumbnail + 4 shorts ready
-[66] tells audit: reveal=0 vocab=0 filler=0 intensifier=0 (logged, not rewritten)
-[66] viral score: 55/100 (plain) emotion word: love
-  [youtube] uploaded long: qzkhxz64Bzo (publishAt 2026-11-26T20:00:00+02:00)
-  [youtube] setting thumbnail thumbnail.png (56 KB) on qzkhxz64Bzo
+  [short 3] 48s, 16 cards, 4.8MB
+  [voice] human edge ON: variable pauses, breaths, room tone, pacing life
+  [voice] local neural narration: 20 chunks (Kokoro af_heart)
+  [voice] polished: presence EQ + gentle compression
+  [short 4] narration 41.1s < 45s floor — re-voicing slower (-15%), attempt 1
+  [voice] human edge ON: variable pauses, breaths, room tone, pacing life
+  [voice] local neural narration: 14 chunks (Kokoro af_heart)
+  [voice] polished: presence EQ + gentle compression
+  [short 4] 45s, 14 cards, 3.7MB
+  [voice] human edge ON: variable pauses, breaths, room tone, pacing life
+  [voice] local neural narration: 25 chunks (Kokoro af_heart)
+  [voice] polished: presence EQ + gentle compression
+  [short 5] 50s, 25 cards, 5.4MB
+  [voice] human edge ON: variable pauses, breaths, room tone, pacing life
+  [voice] local neural narration: 26 chunks (Kokoro af_heart)
+  [voice] polished: presence EQ + gentle compression
+  [short 6] 50s, 26 cards, 4.3MB
+[67] thumbnail audit: 4 words, 102px, 120px var 4279, 58KB — ok
+[67] thumbnail + 3 shorts ready
+[67] tells audit: reveal=5 vocab=0 filler=0 intensifier=3 (logged, not rewritten)
+[67] viral score: 61/100 (plain) power word: trap; emotion word: love
+  [youtube] uploaded long: fJbUl1aE2io (publishAt 2026-11-27T20:00:00+02:00)
+  [youtube] setting thumbnail thumbnail.png (58 KB) on fJbUl1aE2io
   [youtube] thumbnail set
-  [youtube] uploaded short: 5RdxP6KcSGE (publishAt 2026-11-25T00:00:00+02:00)
-  [youtube] uploaded short: Ea7Cfes2fQI (publishAt 2026-11-25T06:00:00+02:00)
-  [youtube] uploaded short: mRbYZu-0y1Y (publishAt 2026-11-25T12:00:00+02:00)
-  [youtube] uploaded short: paXZGmOeg-8 (publishAt 2026-11-25T18:00:00+02:00)
-[66] text layer: {'captions_long': 'refused', 'comment': 'refused'}
+  [youtube] uploaded short: Lt4t75uq9Bs (publishAt 2026-11-26T00:00:00+02:00)
+  [youtube] uploaded short: xX4pSEtkGDY (publishAt 2026-11-26T06:00:00+02:00)
+  [youtube] uploaded short: XMtTMJKjWk8 (publishAt 2026-11-26T12:00:00+02:00)
+[67] text layer: {'captions_long': 'refused', 'comment': 'refused'}
 [playlist] 1 long video(s) not in the playlist yet
-[playlist] ep66 long added (qzkhxz64Bzo)
-[epnum] 2 video(s) still to rename — 1681 units left, 50+100 per rename
-  ✓ episode 66: Self-Love Before Love
+[playlist] add failed for ep67: HTTP 404: {
+  "error": {
+    "code": 404,
+    "message": "Video not found.",
+    "errors": [
+      {
+        "message": "Video not found.",
+        "domain": "youtube.playlistItem",
+        "reason": "videoNotFound"
+      }
+    ]
+  }
+}
+
+[epnum] 3 video(s) still to rename — 3382 units left, 50+100 per rename
+  ✓ episode 67: The Love Bombing Trap
 combination space: 273,308,412,123,694,080 stories — the factory never repeats
