@@ -1,0 +1,387 @@
+{
+ "title": "Dating After Heartbreak",
+ "topic": "moving_on",
+ "topic_label": "psychology of moving on",
+ "mood": "healing",
+ "series": "Psychology of Love",
+ "hook": "Ready is not a feeling you wait for \u2014 it's a skill you rebuild. Here's what the research says about starting again.",
+ "words": 1204,
+ "hash": "d2976b4e55fdb387",
+ "seed": 87203946987801,
+ "atoms": {
+  "topic": "Dating After Heartbreak",
+  "concepts": [
+   "slow love",
+   "attachment styles",
+   "green flags",
+   "the boundary filter",
+   "the worth baseline",
+   "the rebound effect",
+   "misattribution of arousal",
+   "rosy retrospection"
+  ]
+ },
+ "question": "Did this one sting a little? Then comment 'felt'.",
+ "scenes": [
+  {
+   "n": 1,
+   "id": "open_card",
+   "narration": "Ready isn't a feeling you wait for; it's a skill you rebuild. Here's what the research says about starting again. Today you get eight quiet pieces of psychology on dating after heartbreak - stay till the end, because the one that lands won't be the one you expect.",
+   "image": {
+    "kind": "topic_card",
+    "topic": "Dating After Heartbreak",
+    "band": "psychology of moving on",
+    "count": 8
+   }
+  },
+  {
+   "n": 2,
+   "id": "tip1_card",
+   "narration": "Slow love isn't less intense, it's better funded. Fast love runs on credit, and sociologists call the alternative slow love, building the bond before the fantasy, letting intimacy grow over months of real information instead of weeks of projection, so affection rests on facts not imagination and ends up far more durable.",
+   "image": {
+    "kind": "concept_card",
+    "tip": 1,
+    "total": 8,
+    "term": "slow love",
+    "headline": "Slow love isn't less intense \u2014 it's better funded. Fast love runs on credit.",
+    "accent_word": null
+   }
+  },
+  {
+   "n": 3,
+   "id": "tip1_scene",
+   "narration": "Sara and Kai skip labels by the third date and a weekend trip by week two. Six months later Sara knows Kai's money habits, his temper, and his mother. She isn't less in love; she's in love with a verified account. Let the timeline be a feature, not a bug. Depth is slow by design, and anything moving too fast skips the inspections. Here comes the part your brain will want to argue with.",
+   "image": {
+    "kind": "couple_scene",
+    "emotion_a": "happy",
+    "pose_a": "stand",
+    "emotion_b": "neutral",
+    "pose_b": "stand",
+    "overlay": [
+     "psychologists call this",
+     "slow love"
+    ]
+   }
+  },
+  {
+   "n": 4,
+   "id": "tip2_card",
+   "narration": "Six months with the right person can quietly rewrite what love felt like your whole life. Attachment research maps four broad styles, secure, anxious, avoidant, fearful, not personalities but strategies your younger self built to stay close to the people it depended on, and your style decides whether closeness, distance, or a nervous mix feels normal, yet styles can shift with safe people and honest practice.",
+   "image": {
+    "kind": "concept_card",
+    "tip": 2,
+    "total": 8,
+    "term": "attachment styles",
+    "headline": "Six months of the right person can quietly rewrite what love felt like your whole life.",
+    "accent_word": null
+   }
+  },
+  {
+   "n": 5,
+   "id": "tip2_scene",
+   "narration": "Hana hears 'let's talk tonight' and feels safe. Kai hears the same words and spends the afternoon rehearsing a defense. The sentence was identical, but the internal systems reading it weren't. Learn your default before you blame your partner. When you know what your nervous system expects, you stop mistaking your history for their behavior. That was the warm-up; the next one lands harder.",
+   "image": {
+    "kind": "couple_scene",
+    "emotion_a": "neutral",
+    "pose_a": "stand",
+    "emotion_b": "surprised",
+    "pose_b": "stand",
+    "overlay": [
+     "psychologists call this",
+     "attachment styles"
+    ]
+   }
+  },
+  {
+   "n": 6,
+   "id": "tip3_card",
+   "narration": "You've been trained to spot red flags so well the good ones now look suspicious. Let's fix that. Green flags are unsexy, they remember small things, show up on time, apologize specifically, treat waiters and exes with the same kindness, and because our attention is tuned to drama steadiness reads as flat like a quiet engine, so the trick is to actively hunt for those boring signals since they carry the relationship's real weight, and a presence that calms you is biochemically rare.",
+   "image": {
+    "kind": "concept_card",
+    "tip": 3,
+    "total": 8,
+    "term": "green flags",
+    "headline": "You've been trained to spot red flags so well that the good ones now look suspicious. Let's fix that.",
+    "accent_word": null
+   }
+  },
+  {
+   "n": 7,
+   "id": "tip3_scene",
+   "narration": "Sara texts when she says she will, asks how Seth's mom's test went, and treats waiters kindly at a rooftop party. No drama, no electric highs, and Seth sleeps better around Sara than he has in years. The nervous system noticed before the heart did. Score people on how you feel two hours after seeing them, not two minutes. Calm is a green flag in disguise. That was the what; the why comes next.",
+   "image": {
+    "kind": "couple_scene",
+    "emotion_a": "happy",
+    "pose_a": "stand",
+    "emotion_b": "happy",
+    "pose_b": "stand",
+    "overlay": [
+     "psychologists call this",
+     "green flags"
+    ]
+   }
+  },
+  {
+   "n": 8,
+   "id": "tip4_card",
+   "narration": "A boundary isn't a wall to keep love out, it's a filter that makes love possible. Boundaries mark where you end and another person begins, your time, body, money, yes and no, and psychologically clear boundaries do something counterintuitive, they make people feel safer because visible rules are trustable rules, people who resent your boundaries were only ever compatible with your lack of them, the filter doesn't lose you people it prices them accurately.",
+   "image": {
+    "kind": "concept_card",
+    "tip": 4,
+    "total": 8,
+    "term": "the boundary filter",
+    "headline": "A boundary isn't a wall to keep love out \u2014 it's a filter that makes love possible.",
+    "accent_word": null
+   }
+  },
+  {
+   "n": 9,
+   "id": "tip4_scene",
+   "narration": "Chloe lays out the rules up front: weekends yes, emergencies always, guilt trips never. The relationship feels safer, not smaller. Visible rules are trustable rules. State boundaries early, kindly, without apology. You're not asking permission, you're publishing the map. Before you file that away, the next lesson explains why it keeps finding you.",
+   "image": {
+    "kind": "couple_scene",
+    "emotion_a": "neutral",
+    "pose_a": "stand",
+    "emotion_b": "neutral",
+    "pose_b": "phone",
+    "overlay": [
+     "psychologists call this",
+     "the boundary filter"
+    ]
+   }
+  },
+  {
+   "n": 10,
+   "id": "tip5_card",
+   "narration": "You don't attract what you deserve, you attract what you believe you can keep. Psychologists find self-esteem works like a price floor, setting the minimum treatment you'll quietly tolerate, raise the floor and bad offers stop being affordable, lower it and mistreatment starts looking like luck, that's why the same person can leave a terrible relationship and walk straight into a similar one, the filter not the market carries over, working on worth isn't vanity it's relationship economics.",
+   "image": {
+    "kind": "concept_card",
+    "tip": 5,
+    "total": 8,
+    "term": "the worth baseline",
+    "headline": "You don't attract what you deserve. You attract what you believe you can keep.",
+    "accent_word": null
+   }
+  },
+  {
+   "n": 11,
+   "id": "tip5_scene",
+   "narration": "After the breakup you swore never again, and six months later you're explaining the same red flags to a new best friend. The pattern follows the price floor, not the person. Watch your non-negotiables for a week, not what you say they are but what you actually tolerate when it's inconvenient. Hold that feeling, the next lesson will need it.",
+   "image": {
+    "kind": "couple_scene",
+    "emotion_a": "neutral",
+    "pose_a": "stand",
+    "emotion_b": "neutral",
+    "pose_b": "stand",
+    "overlay": [
+     "psychologists call this",
+     "the worth baseline"
+    ]
+   }
+  },
+  {
+   "n": 12,
+   "id": "tip6_card",
+   "narration": "Relief is real chemistry, just not the same chemistry as compatibility. Rebounds act like painkillers, the new attention suppresses withdrawal at full speed, the problem is dosage, the relief you feel gets attributed to the new person inflating what they actually mean to you, studies suggest people who rebound while still processing often pick for contrast not compatibility, whoever feels most opposite the ex, some rebounds do last and those usually started after the grief had already done most of its work.",
+   "image": {
+    "kind": "concept_card",
+    "tip": 6,
+    "total": 8,
+    "term": "the rebound effect",
+    "headline": "Relief is real chemistry. It's just not the same chemistry as compatibility.",
+    "accent_word": null
+   }
+  },
+  {
+   "n": 13,
+   "id": "tip6_scene",
+   "narration": "By Wednesday Rami tells friends Maya is the one. Maybe, or maybe the dosage is doing the talking. Painkillers feel like healing while the wound is still open and unexamined. The rebounds that last usually started after the grief did most of its work. Sequence matters more than speed. That raises a harder question, and the next piece answers it.",
+   "image": {
+    "kind": "couple_scene",
+    "emotion_a": "neutral",
+    "pose_a": "stand",
+    "emotion_b": "happy",
+    "pose_b": "stand",
+    "overlay": [
+     "psychologists call this",
+     "the rebound effect"
+    ]
+   }
+  },
+  {
+   "n": 14,
+   "id": "tip7_card",
+   "narration": "Your heart can't tell fear from falling, it just files the pounding under this must be love. In a famous study men who crossed a shaky suspension bridge rated the woman waiting on the other side as far more attractive than men who crossed a stable one, their hearts pounded from the height but their brains labeled the arousal as attraction, this is misattribution of arousal, excitement from any source gets billed to the nearest person, which is why first dates work better with rollercoasters than with coffee.",
+   "image": {
+    "kind": "concept_card",
+    "tip": 7,
+    "total": 8,
+    "term": "misattribution of arousal",
+    "headline": "Your heart can't tell fear from falling. It just files the pounding under 'this must be love.'",
+    "accent_word": null
+   }
+  },
+  {
+   "n": 15,
+   "id": "tip7_scene",
+   "narration": "Aya meets Noah in the middle of chaos at a downtown coffee shop, a deadline crisis, a storm, a packed night out. It feels destined. Some of it is real, a lot is adrenaline billing the nearest person. Plan first dates with a pulse, then plan the second one without it. You'll learn which feeling belongs to the person. Stay with me, the next one is the one people replay.",
+   "image": {
+    "kind": "couple_scene",
+    "emotion_a": "surprised",
+    "pose_a": "stand",
+    "emotion_b": "happy",
+    "pose_b": "stand",
+    "overlay": [
+     "psychologists call this",
+     "misattribution of arousal"
+    ]
+   }
+  },
+  {
+   "n": 16,
+   "id": "tip8_card",
+   "narration": "Memory edits out the pain first, merciful for trauma but treacherous for breakups. Rosy retrospection is the documented tendency to remember the past more fondly than it was lived, pain fades first from memory which is merciful for trauma and treacherous for breakups, six months out your mind replays the trip and the laughing while the silent car rides and the Sunday dread rarely make the cut, the person in your head is a curated version the real one had scenes you paid to forget.",
+   "image": {
+    "kind": "concept_card",
+    "tip": 8,
+    "total": 8,
+    "term": "rosy retrospection",
+    "headline": "Memory edits out the pain first \u2014 merciful for trauma, treacherous for breakups.",
+    "accent_word": null
+   }
+  },
+  {
+   "n": 17,
+   "id": "tip8_scene",
+   "narration": "Six months out Ava replays the trip, the laughing, the rain. The Sunday dread and the silent car rides never make the edit. Ava isn't remembering the relationship, she's remembering its trailer. Add up the real last month before deciding it was love. The ending data counts too.",
+   "image": {
+    "kind": "couple_scene",
+    "emotion_a": "sad",
+    "pose_a": "stand",
+    "emotion_b": "happy",
+    "pose_b": "phone",
+    "overlay": [
+     "psychologists call this",
+     "rosy retrospection"
+    ]
+   }
+  },
+  {
+   "n": 18,
+   "id": "outro_card",
+   "narration": "That was eight pieces of psychology on dating after heartbreak. If even one made your love life suddenly make sense you already got your money's worth, this one was free. Did this one sting a little? Then comment 'felt'. Subscribe for more tips like this.",
+   "image": {
+    "kind": "outro_card",
+    "topic": "Dating After Heartbreak"
+   }
+  }
+ ],
+ "shorts": [
+  {
+   "n": 1,
+   "concept": "green_flags",
+   "band": "psychology of moving on",
+   "hook": "The moments that feel like absolutely nothing are the ones proving someone will actually stay.",
+   "term": "green flags",
+   "script": "Ordinary Tuesday calm. The moments that feel like absolutely nothing are the ones proving someone will actually stay. She realizes he remembered her difficult anniversary without prompting, then watches him rearrange his entire weekend so she does not have to face it alone. Attention systems trained by conflict treat steadiness as background noise, so the rarest safety signals never trigger the alarm we have been conditioned to expect. A presence that quiets your nervous system without any fanfare is doing biochemical work that fireworks cannot replicate or sustain over time. Psychologists call this green flags. List three unremarkable things that made you feel completely safe this week, then look for those exact signals in whoever comes next. What is the quietest thing someone has done that told you more about them than any grand declaration ever could? Subscribe for more tips like this.",
+   "words": 143,
+   "shash": "e0e50a84d7241006",
+   "scene": {
+    "emotion_a": "happy",
+    "pose_a": "stand",
+    "emotion_b": "happy",
+    "pose_b": "stand"
+   }
+  },
+  {
+   "n": 2,
+   "concept": "self_worth_reset",
+   "band": "psychology of moving on",
+   "hook": "You do not attract what you deserve, you attract what you believe you are worth.",
+   "term": "the worth baseline",
+   "script": "Price floor set. You do not attract what you deserve, you attract what you believe you are worth. He cancels again with a vague excuse and she hears herself saying it is fine, the word automatic as a reflex she never chose. Self-esteem operates like a silent minimum wage for treatment, determining exactly how much disrespect you will absorb before your body finally says stop. The filter that let the last person stay too long does not vanish when they leave, it travels with you into the next introduction. Psychologists call this the worth baseline. Track what you actually tolerate when it costs you something to object, not what you claim you would never accept. Where have you noticed the gap between your stated standards and the behavior you quietly made room for? Subscribe for more tips like this.",
+   "words": 139,
+   "shash": "6e7667af5522a1de",
+   "scene": {
+    "emotion_a": "neutral",
+    "pose_a": "stand",
+    "emotion_b": "neutral",
+    "pose_b": "stand"
+   }
+  },
+  {
+   "n": 3,
+   "concept": "boundaries_attract",
+   "band": "psychology of moving on",
+   "hook": "A boundary isn't a wall to keep love out \u2014 it's a filter that makes love possible.",
+   "term": "the boundary filter",
+   "script": "You'll think about this later. A boundary isn't a wall to keep love out \u2014 it's a filter that makes love possible. The 2 a.m. caller didn't survive your rules. The rules made them visible. Psychologically, clear boundaries do something counterintuitive \u2014 they make people feel safer, because rules you can see are rules you can trust. People who resent your boundaries were only ever compatible with your absence of them. Boundaries define where you end and another person begins: your time, your body, your money, your yes and no. In psychology, this is called the boundary filter. The filter isn't losing you people. It's pricing them accurately \u2014 and that's a service to everyone involved. Did this one sting a little? Then comment 'felt'. Subscribe for more tips like this.",
+   "words": 131,
+   "shash": "6ce725f61c54194b",
+   "scene": {
+    "emotion_a": "neutral",
+    "pose_a": "stand",
+    "emotion_b": "neutral",
+    "pose_b": "phone"
+   }
+  },
+  {
+   "n": 4,
+   "concept": "nostalgia_filter",
+   "band": "psychology of moving on",
+   "hook": "You are not missing the person, you are missing the version your memory carefully edited for you.",
+   "term": "rosy retrospection",
+   "script": "Highlight reel lies. You are not missing the person, you are missing the version your memory carefully edited for you. Six months later the bathroom text to her best friend never surfaces in the replay, only the laughing dinner that preceded it. Pain fades from memory first as a mercy for survival, but that same mercy turns treacherous when it erases the evidence of why you left. The curated mental montage skips the silent car rides and the Sunday dread, leaving a highlight reel that feels truer than the life you lived. Psychologists call this rosy retrospection. Write down the real last month before you decide it was love, because the ending data counts as much as the peak. How many times has the memory of a relationship felt better than the daily reality of it actually was? Subscribe for more tips like this.",
+   "words": 144,
+   "shash": "52cdccfaaf994b0e",
+   "scene": {
+    "emotion_a": "sad",
+    "pose_a": "stand",
+    "emotion_b": "happy",
+    "pose_b": "phone"
+   }
+  },
+  {
+   "n": 5,
+   "concept": "slow_love",
+   "band": "psychology of moving on",
+   "hook": "Fast love runs on borrowed time while slow love pays its own way from the start.",
+   "term": "slow love",
+   "script": "Credit versus cash. Fast love runs on borrowed time while slow love pays its own way from the start. She learns his money habits and his temper and his mother over six unhurried months, because nobody rushed her past the inspections. Weeks of projection are cheaper than months of information, but only the version built on data survives the first real winter. Falling for the montage means meeting the actual person later, while letting the timeline breathe means meeting them before you commit. Psychologists call this slow love. Trade the butterflies of month one for the knowledge of month six, because depth is slow by design and anything faster skips the inspections. Which version are you living right now, the one that feels cinematic or the one that feels durable? Subscribe for more tips like this.",
+   "words": 136,
+   "shash": "dd7722f490e52fb9",
+   "scene": {
+    "emotion_a": "happy",
+    "pose_a": "stand",
+    "emotion_b": "neutral",
+    "pose_b": "stand"
+   }
+  },
+  {
+   "n": 6,
+   "concept": "attachment_styles",
+   "band": "psychology of moving on",
+   "hook": "The right person can quietly rewrite what love felt like for your entire life without trying.",
+   "term": "attachment styles",
+   "script": "Six months passes. The right person can quietly rewrite what love felt like for your entire life without trying. He says he needs space and she hears abandonment while he hears freedom, both sitting in the same quiet kitchen without speaking a word. Your early strategies for staying close to the people you depended on become the unconscious template for what feels normal in adult romance. Those templates aren't fixed traits because safe connection and honest practice can slowly reshape them at any point in life without asking permission. Psychologists call this attachment styles. When a familiar panic or withdrawal rises, name the pattern out loud to the person beside you instead of acting it out silently. Which side of the distance-closeness dance shows up most often when things feel uncertain between you and someone you care about? Subscribe for more tips like this.",
+   "words": 144,
+   "shash": "27380797638f80d9",
+   "scene": {
+    "emotion_a": "neutral",
+    "pose_a": "stand",
+    "emotion_b": "surprised",
+    "pose_b": "stand"
+   }
+  }
+ ],
+ "short_hashes": [
+  "e0e50a84d7241006",
+  "6e7667af5522a1de",
+  "6ce725f61c54194b",
+  "52cdccfaaf994b0e",
+  "dd7722f490e52fb9",
+  "27380797638f80d9"
+ ],
+ "muse": "llm",
+ "muse_model": "nvidia/nemotron-3-ultra-550b-a55b:free"
+}

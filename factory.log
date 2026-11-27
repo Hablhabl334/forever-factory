@@ -1,58 +1,58 @@
-[stats] persisting detail for 241 of 295 videos (bounded memory: recent 200 + top 100)
-[stats] growth report 2026-11-26
-[stats]   total: 3473 views  (+84 since last report)
+[0;93m2026-11-27 21:33:06.285852143 [W:onnxruntime:Default, device_discovery.cc:95 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
+[stats] persisting detail for 242 of 299 videos (bounded memory: recent 200 + top 100)
+[stats] growth report 2026-11-27
+[stats]   total: 3490 views  (+17 since last report)
 [stats]      189 views  ·  Subscribe for more tips like this #ep136 #psychology #relati
 [stats]      160 views  ·  Subscribe for more tips like this #ep278 #psychology #relati
 [stats]      120 views  ·  Subscribe for more tips like this #ep94 #psychology #relatio
-[verify] 44 video(s) confirmed public, 0 late past the 2-day grace window
-[grid] booking 3 short slot(s) in the next 24h (free: 2026-11-27T06:00:00+02:00, 2026-11-27T12:00:00+02:00, 2026-11-27T18:00:00+02:00)
+[verify] 43 video(s) confirmed public, 0 late past the 2-day grace window
   [muse] long: 18/18 scenes rewritten (nvidia)
-  [muse] shorts: retrying 3 reject(s)
-  [muse] shorts: 3/6 rewritten (nvidia)
-[69] script: What Keeps Love Alive (1150 words, hash 99793c5726)
+  [muse] shorts: retrying 2 reject(s)
+  [muse] shorts: 5/6 rewritten (nvidia)
+[70] script: Dating After Heartbreak (1204 words, hash d2976b4e55)
   [voice] human edge ON: variable pauses, breaths, room tone, pacing life
-  [voice] local neural narration: 145 chunks (Kokoro af_heart)
+  [voice] local neural narration: 135 chunks (Kokoro af_heart)
   [voice] polished: presence EQ + gentle compression
-[69] narration: 455s, 145 caption chunks
-[69] long video: 467s, 42.5MB
-  [voice] human edge ON: variable pauses, breaths, room tone, pacing life
-  [voice] local neural narration: 22 chunks (Kokoro af_heart)
-  [voice] polished: presence EQ + gentle compression
-  [short 1] 48s, 22 cards, 5.4MB
-  [voice] human edge ON: variable pauses, breaths, room tone, pacing life
-  [voice] local neural narration: 23 chunks (Kokoro af_heart)
-  [voice] polished: presence EQ + gentle compression
-  [short 2] 47s, 23 cards, 5.4MB
-  [voice] human edge ON: variable pauses, breaths, room tone, pacing life
-  [voice] local neural narration: 23 chunks (Kokoro af_heart)
-  [voice] polished: presence EQ + gentle compression
-  [short 3] 50s, 23 cards, 5.5MB
+[70] narration: 453s, 135 caption chunks
+[70] long video: 465s, 42.8MB
   [voice] human edge ON: variable pauses, breaths, room tone, pacing life
   [voice] local neural narration: 24 chunks (Kokoro af_heart)
   [voice] polished: presence EQ + gentle compression
-  [short 4] 50s, 24 cards, 4.3MB
+  [short 1] 55s, 24 cards, 5.1MB
+  [voice] human edge ON: variable pauses, breaths, room tone, pacing life
+  [voice] local neural narration: 21 chunks (Kokoro af_heart)
+  [voice] polished: presence EQ + gentle compression
+  [short 2] 47s, 21 cards, 4.3MB
   [voice] human edge ON: variable pauses, breaths, room tone, pacing life
   [voice] local neural narration: 24 chunks (Kokoro af_heart)
   [voice] polished: presence EQ + gentle compression
-  [short 5] 47s, 24 cards, 4.0MB
+  [short 3] 47s, 24 cards, 5.2MB
   [voice] human edge ON: variable pauses, breaths, room tone, pacing life
-  [voice] local neural narration: 22 chunks (Kokoro af_heart)
+  [voice] local neural narration: 24 chunks (Kokoro af_heart)
   [voice] polished: presence EQ + gentle compression
-  [short 6] 45s, 22 cards, 5.1MB
-[69] thumbnail audit: 4 words, 102px, 120px var 4327, 58KB — ok
-[69] thumbnail + 3 shorts ready
-[69] tells audit: reveal=4 vocab=0 filler=0 intensifier=2 (logged, not rewritten)
-[69] viral score: 55/100 (plain) emotion word: love
-  [youtube] uploaded long: CLuSwEGm1D4 (publishAt 2026-11-29T20:00:00+02:00)
-  [youtube] setting thumbnail thumbnail.png (58 KB) on CLuSwEGm1D4
+  [short 4] 49s, 24 cards, 5.4MB
+  [voice] human edge ON: variable pauses, breaths, room tone, pacing life
+  [voice] local neural narration: 23 chunks (Kokoro af_heart)
+  [voice] polished: presence EQ + gentle compression
+  [short 5] 47s, 23 cards, 5.7MB
+  [voice] human edge ON: variable pauses, breaths, room tone, pacing life
+  [voice] local neural narration: 25 chunks (Kokoro af_heart)
+  [voice] polished: presence EQ + gentle compression
+  [short 6] 53s, 25 cards, 6.3MB
+[70] thumbnail audit: 3 words, 102px, 120px var 4484, 58KB — ok
+[70] thumbnail + 4 shorts ready
+[70] tells audit: reveal=3 vocab=0 filler=0 intensifier=0 (logged, not rewritten)
+[70] viral score: 45/100 (plain) too long; emotion word: heartbreak
+  [youtube] uploaded long: IhCCTNfN1RY (publishAt now)
+  [youtube] setting thumbnail thumbnail.png (57 KB) on IhCCTNfN1RY
   [youtube] thumbnail set
-  [youtube] uploaded short: H90C1vuxqfY (publishAt 2026-11-27T06:00:00+02:00)
-  [youtube] uploaded short: YUp7zrdJieQ (publishAt 2026-11-27T12:00:00+02:00)
-  [youtube] uploaded short: xPqjaiuFMkQ (publishAt 2026-11-27T18:00:00+02:00)
-[69] text layer: {'captions_long': 'refused', 'comment': 'refused'}
-[playlist] 2 long video(s) not in the playlist yet
-[playlist] ep68 long added (LZKCQhjTuqI)
-[playlist] ep69 long added (CLuSwEGm1D4)
-[epnum] 3 video(s) still to rename — 3282 units left, 50+100 per rename
-  ✓ episode 69: What Keeps Love Alive
+  [youtube] uploaded short: JM4G_ZVp-No (publishAt 2026-11-28T06:00:00+02:00)
+  [youtube] uploaded short: D9q3x4Sitzo (publishAt 2026-11-28T12:00:00+02:00)
+  [youtube] uploaded short: OIpVFNVUpG0 (publishAt 2026-11-28T18:00:00+02:00)
+  [youtube] uploaded short: 0oZYudybXAY (publishAt 2026-11-29T00:00:00+02:00)
+[70] text layer: {'captions_long': 'refused', 'comment': 'refused'}
+[playlist] 1 long video(s) not in the playlist yet
+[playlist] ep70 long added (IhCCTNfN1RY)
+[epnum] 4 video(s) still to rename — 1680 units left, 50+100 per rename
+  ✓ episode 70: Dating After Heartbreak
 combination space: 273,308,412,123,694,080 stories — the factory never repeats
